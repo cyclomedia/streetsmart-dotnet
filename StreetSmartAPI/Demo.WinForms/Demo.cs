@@ -53,7 +53,7 @@ namespace Demo.WinForms
     private void OnFrameLoaded(object sender, EventArgs args)
     {
       IStreetSmartAPI api = sender as IStreetSmartAPI;
-      api?.Login("hbr", "MJUygv01");
+      api?.Login("", "");
     }
 
     private void OnRecordingClick(object sender, EventArgs args)
