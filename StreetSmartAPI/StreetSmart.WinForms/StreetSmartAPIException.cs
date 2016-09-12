@@ -18,16 +18,23 @@
 
 using System;
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms
 {
+  // ReSharper disable InconsistentNaming
+
+  /// <summary>
+  /// Exception occurs in the Street Smart API
+  /// </summary>
   public class StreetSmartAPIException : Exception
   {
+    /// <summary>
+    /// Constructor for create the exception.
+    /// </summary>
+    /// <param name="message">Exception message</param>
     public StreetSmartAPIException(string message) : base(message)
     {
     }
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

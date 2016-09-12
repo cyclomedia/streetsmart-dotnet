@@ -1,12 +1,12 @@
-﻿Versie maken van:
-- een dev en een productie versie maken (https://streetsmart.cyclomedia.com/api/v16.1/)
+﻿Todo:
 - Demo afmaken
 
 Vragen:
 - EventViewerArgs, hoe invullen?
 - EventTileLoadArgs, hoe invullen?
-- Configuratrion URL for init
 
+labs-api:
 https://labs.cyclomedia.com/streetsmart/api/api-dotnet.html
+
+prod-api:
 https://streetsmart.cyclomedia.com/api/v16.1/api-dotnet.html
-https://streetsmart.cyclomedia.com/api/v16.1/code_examples/api-dotnet.html

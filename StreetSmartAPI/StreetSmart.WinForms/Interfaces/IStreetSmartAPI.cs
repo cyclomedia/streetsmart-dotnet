@@ -21,10 +21,10 @@ using StreetSmart.WinForms.Events;
 using System;
 using System.Threading.Tasks;
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms.Interfaces
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// API used to use and modify various StreetSmart components.
   /// </summary>
@@ -147,6 +147,6 @@ namespace StreetSmart.WinForms.Interfaces
     /// <returns></returns>
     Task<string[]> getPermissionsAsync();
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

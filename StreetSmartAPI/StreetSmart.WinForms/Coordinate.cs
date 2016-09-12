@@ -16,10 +16,10 @@
  * License along with this library.
  */
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// Coordinate information.
   /// </summary>
@@ -40,6 +40,6 @@ namespace StreetSmart.WinForms
     /// </summary>
     public double? Z { get; set; }
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

@@ -16,10 +16,10 @@
  * License along with this library.
  */
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// Orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
   /// </summary>
@@ -40,6 +40,6 @@ namespace StreetSmart.WinForms
     /// </summary>    
     public double? hFov { get; set; }
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

@@ -18,10 +18,10 @@
 
 using System;
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// TileSchema of the recording.
   /// </summary>
@@ -149,6 +149,6 @@ namespace StreetSmart.WinForms
     /// </summary>
     public DateTime? ExpiredAt { get; set; }
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

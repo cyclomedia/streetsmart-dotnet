@@ -24,8 +24,15 @@ using System.Windows.Forms;
 
 namespace StreetSmart.WinForms
 {
+  /// <summary>
+  /// The GUI of StreetSmart
+  /// </summary>
   public sealed partial class StreetSmartGUI : UserControl
   {
+    /// <summary>
+    /// Create the GUI of StreetSmart
+    /// </summary>
+    /// <param name="browser">The browser</param>
     public StreetSmartGUI(ChromiumWebBrowser browser)
     {
       InitializeComponent();

@@ -22,10 +22,10 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms.Interfaces
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// PanoramaViewer component. Gets created by the StreetSmartAPI.
   /// </summary>
@@ -244,6 +244,6 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     void ZoomOut();
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

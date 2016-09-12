@@ -22,10 +22,10 @@ using StreetSmart.WinForms.Interfaces;
 
 using static StreetSmart.WinForms.Properties.Resources;
 
-// ReSharper disable InconsistentNaming
-
 namespace StreetSmart.WinForms
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
   /// Creates a new instance of the API.
   /// </summary>
@@ -55,6 +55,6 @@ namespace StreetSmart.WinForms
       return new StreetSmartAPI(streetSmartLocation);
     }
   }
-}
 
-// ReSharper restore InconsistentNaming
+  // ReSharper restore InconsistentNaming
+}

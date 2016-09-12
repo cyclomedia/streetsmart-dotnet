@@ -30,6 +30,7 @@ using System.Windows.Forms;
 namespace StreetSmart.WinForms
 {
   // ReSharper disable InconsistentNaming
+
   internal class StreetSmartAPI : IStreetSmartAPI
   {
     #region Members
