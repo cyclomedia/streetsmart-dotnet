@@ -32,6 +32,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,18 +100,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StreetSmart.WinForms\StreetSmart.WinForms.csproj">
+    <ProjectReference Include="..\StreetSmart.WinForms\StreetSmart.WinForms.x86.csproj">
       <Project>{11d8ce67-dc5b-4fc9-871b-968b97b5c990}</Project>
-      <Name>StreetSmart.WinForms</Name>
+      <Name>StreetSmart.WinForms.x86</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.dll" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.bin" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.dat" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.pak" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.exe" *
+    <PostBuildEvent>xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.dll" *
+xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.bin" *
+xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.dat" *
+xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.pak" *
+xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.exe" *
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

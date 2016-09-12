@@ -48,7 +48,8 @@ namespace Demo.WinForms
 
     private void btnLogin_Click(object sender, EventArgs e)
     {
-
+      IStreetSmartAPI api = sender as IStreetSmartAPI;
+      api?.Init(txtUsername.Text, txtPassword.Text, apiKey, srs, locale);
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -90,7 +91,7 @@ namespace Demo.WinForms
 
         string viewerObjectName = "viewer";
         IStreetSmartAPI api = sender as IStreetSmartAPI;
-//        _viewer = api?.RenderPanoramaViewer(viewerObjectName, true, true);
+//       _viewer = api?.AddPanoramaViewer(viewerObjectName, true, true);
         _viewer = api?.AddPanoramaViewer(viewerObjectName, true, true, domElementName, domElementScript);
 
         if (_viewer != null)

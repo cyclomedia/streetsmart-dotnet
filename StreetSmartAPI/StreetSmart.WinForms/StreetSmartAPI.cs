@@ -95,6 +95,15 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
+    public void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl)
+    {
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}', locale:'{locale}', configurationUrl:'{configurationUrl}'}}).then(function() {{streetSmartAPIEvents.onInitSuccess()}},
+           function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
+    }
+
     public IPanoramaViewer AddPanoramaViewer(string viewerObjectName)
     {
       PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName);

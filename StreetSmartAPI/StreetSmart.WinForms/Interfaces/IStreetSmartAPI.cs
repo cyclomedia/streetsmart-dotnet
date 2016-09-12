@@ -66,6 +66,17 @@ namespace StreetSmart.WinForms.Interfaces
     void Init(string username, string password, string apiKey, string srs, string locale);
 
     /// <summary>
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
+    /// </summary>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API.</param>
+    /// <param name="locale">Language used as default.</param>
+    /// <param name="configurationUrl">Alternate configuration url to use for all configuration services.</param>
+    void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl);
+
+    /// <summary>
     /// Adds a PanoramaViewer to a default DOM-element.
     /// </summary>
     /// <param name="viewerObjectName">The name of the panorama viewer.</param>

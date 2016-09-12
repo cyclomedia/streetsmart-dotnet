@@ -83,7 +83,7 @@ namespace StreetSmart.WinForms
            {DomElementName}.setAttribute('id', 'panorama{ViewerObjectName}Window');
            {DomElementName}.setAttribute('style', 'width:100%; height:100%;');
            document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.renderPanoramaViewer({DomElementName});";
+           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName});";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -98,7 +98,7 @@ namespace StreetSmart.WinForms
            {DomElementName}.setAttribute('id', 'panorama{ViewerObjectName}Window');
            {DomElementName}.setAttribute('style', 'width:100%; height:100%;')
            document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.renderPanoramaViewer({DomElementName},
+           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName},
            {{recordingsVisible: {recordingsVisible.ToString().ToLower()},
            timeTravelEnabled: {timeTravelEnabled.ToString().ToLower()}}});";
       _browser.ExecuteScriptAsync(script);

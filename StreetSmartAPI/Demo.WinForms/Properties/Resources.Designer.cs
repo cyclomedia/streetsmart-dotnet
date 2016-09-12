@@ -79,7 +79,7 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MJUygv01.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string password {
             get {
@@ -97,7 +97,7 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to hbr.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string username {
             get {

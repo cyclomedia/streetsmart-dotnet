@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://labs.cyclomedia.com/streetsmart/api/api-dotnet.html</value>
+    <value>https://streetsmart.cyclomedia.com/api/v16.1/api-dotnet.html</value>
   </data>
 </root>
