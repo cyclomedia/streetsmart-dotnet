@@ -16,44 +16,29 @@
  * License along with this library.
  */
 
-using CefSharp;
-
-using StreetSmart.WinForms.Interfaces;
-
-using static StreetSmart.WinForms.Properties.Resources;
-
 // ReSharper disable InconsistentNaming
 
 namespace StreetSmart.WinForms
 {
   /// <summary>
-  /// Creates a new instance of the API.
+  /// Coordinate information.
   /// </summary>
-  public class APIBuilder
+  public class Coordinate
   {
-    static APIBuilder()
-    {
-      Cef.Initialize(new CefSettings(), false, true);
-    }
+    /// <summary>
+    /// X value of the coordinate.
+    /// </summary>
+    public double X { get; set; }
 
     /// <summary>
-    /// Creates a new instance of the API.
+    /// Y value of the coordinate.
     /// </summary>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI()
-    {
-      return CreateAPI(StreetSmartLocation);
-    }
+    public double Y { get; set; }
 
     /// <summary>
-    /// Creates a new instance of the API
+    /// Z value of the coordinate.
     /// </summary>
-    /// <param name="streetSmartLocation">The location of StreetSmart</param>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI(string streetSmartLocation)
-    {
-      return new StreetSmartAPI(streetSmartLocation);
-    }
+    public double? Z { get; set; }
   }
 }
 

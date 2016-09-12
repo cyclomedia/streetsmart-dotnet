@@ -16,23 +16,19 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
+using System;
+using System.Collections.Generic;
 
-using System.Windows.Forms;
-
-// ReSharper disable InconsistentNaming
-
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.Events
 {
-  public sealed partial class StreetSmartGUI : UserControl
+  /// <summary>
+  /// Triggers when one or more tiles could not be loaded.
+  /// </summary>
+  public class EventTileLoadErrorArgs : EventArgs
   {
-    public StreetSmartGUI(ChromiumWebBrowser browser)
-    {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
-    }
+    /// <summary>
+    /// Contains the XMLHttpRequest which failed
+    /// </summary>
+    public Dictionary<string, object> Request { get; set; }
   }
 }
-
-// ReSharper restore InconsistentNaming

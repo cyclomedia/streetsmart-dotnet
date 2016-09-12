@@ -59,5 +59,50 @@ namespace Demo.WinForms.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 6vEZuXUl6PQRiPkp-XwROvENWPk56fA5-_wNKHEVSrQFifU5ebcd-PUFqfABOnAZ.
+        /// </summary>
+        internal static string apiKey {
+            get {
+                return ResourceManager.GetString("apiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-US.
+        /// </summary>
+        internal static string locale {
+            get {
+                return ResourceManager.GetString("locale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MJUygv01.
+        /// </summary>
+        internal static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EPSG:28992.
+        /// </summary>
+        internal static string srs {
+            get {
+                return ResourceManager.GetString("srs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hbr.
+        /// </summary>
+        internal static string username {
+            get {
+                return ResourceManager.GetString("username", resourceCulture);
+            }
+        }
     }
 }

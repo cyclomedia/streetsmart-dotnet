@@ -20,8 +20,20 @@ using System;
 
 namespace StreetSmart.WinForms.Events
 {
+  /// <summary>
+  /// Triggers when the init of the API is complete.
+  /// </summary>
   public class EventInitArgs : EventArgs
   {
+    /// <summary>
+    /// true = login success
+    /// false = login failed
+    /// </summary>
     public bool Success { get; set; }
+
+    /// <summary>
+    /// Error message in case of login is failed.
+    /// </summary>
+    public string ErrorMessage { get; set; }
   }
 }

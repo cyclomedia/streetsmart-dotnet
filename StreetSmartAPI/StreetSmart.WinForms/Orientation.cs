@@ -16,44 +16,29 @@
  * License along with this library.
  */
 
-using CefSharp;
-
-using StreetSmart.WinForms.Interfaces;
-
-using static StreetSmart.WinForms.Properties.Resources;
-
 // ReSharper disable InconsistentNaming
 
 namespace StreetSmart.WinForms
 {
   /// <summary>
-  /// Creates a new instance of the API.
+  /// Orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
   /// </summary>
-  public class APIBuilder
+  public class Orientation
   {
-    static APIBuilder()
-    {
-      Cef.Initialize(new CefSettings(), false, true);
-    }
+    /// <summary>
+    ///  	Optional value of the yaw.
+    /// </summary>
+    public double? Yaw { get; set; }
 
     /// <summary>
-    /// Creates a new instance of the API.
+    /// Optional value of the pitch.
     /// </summary>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI()
-    {
-      return CreateAPI(StreetSmartLocation);
-    }
+    public double? Pitch { get; set; }
 
     /// <summary>
-    /// Creates a new instance of the API
-    /// </summary>
-    /// <param name="streetSmartLocation">The location of StreetSmart</param>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI(string streetSmartLocation)
-    {
-      return new StreetSmartAPI(streetSmartLocation);
-    }
+    /// Optional value of the hFov.
+    /// </summary>    
+    public double? hFov { get; set; }
   }
 }
 

@@ -16,21 +16,16 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
-
-using System.Windows.Forms;
+using System;
 
 // ReSharper disable InconsistentNaming
 
 namespace StreetSmart.WinForms
 {
-  public sealed partial class StreetSmartGUI : UserControl
+  public class StreetSmartAPIException : Exception
   {
-    public StreetSmartGUI(ChromiumWebBrowser browser)
+    public StreetSmartAPIException(string message) : base(message)
     {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
     }
   }
 }

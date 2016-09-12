@@ -16,87 +16,213 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Interfaces;
+
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StreetSmart.WinForms
 {
   // ReSharper disable InconsistentNaming
   internal class StreetSmartAPI : IStreetSmartAPI
   {
+    #region Members
+
     private readonly ChromiumWebBrowser _browser;
-    private readonly CycloramaViewerEvents _cycloramaViewerEvents;
+    private readonly PanoramaViewerEvents _cycloramaViewerEvents;
+
+    #endregion
+
+    #region Tasks
+
+    private TaskCompletionSource<bool> _apiReadyStateTask;
+    private TaskCompletionSource<string> _applicationNameTask;
+    private TaskCompletionSource<string> _applicationVersionTask;
+    private TaskCompletionSource<object[]> _permissionsTask;
+
+    #endregion
+
+    #region Events
 
     public event EventHandler FrameLoaded;
     public event EventHandler<EventInitArgs> InitComplete;
-    public event EventHandler<EventLoginArgs> LoginComplete;
 
-    public StreetSmartGUI GUI { get; set; }
+    #endregion
+
+    #region GUI
+
+    public StreetSmartGUI GUI { get; }
+
+    #endregion
+
+    #region Constructor
 
     public StreetSmartAPI(string streetSmartLocation)
     {
       _browser = new ChromiumWebBrowser(streetSmartLocation) {Dock = DockStyle.Fill};
       _browser.RegisterJsObject("streetSmartAPIEvents", this);
-      _cycloramaViewerEvents = new CycloramaViewerEvents(_browser);
+      _cycloramaViewerEvents = new PanoramaViewerEvents(_browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
+      _browser.DownloadHandler = new DownloadHandler();
       GUI = new StreetSmartGUI(_browser);
     }
 
-    public ICycloramaViewer CreateCycloramaViewer(string viewerObjectName)
+    #endregion
+
+    #region Functions
+
+    public void Init(string username, string password, string apiKey, string srs)
     {
-      return new CycloramaViewer(_browser, _cycloramaViewerEvents, viewerObjectName);
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}'}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
+           function(e) {{streetSmartAPIEvents.onFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
     }
 
-    public void Login(string username, string password)
+    public void Init(string username, string password, string apiKey, string srs, string locale)
     {
-      _browser.ExecuteScriptAsync($"StreetSmartApi.init({{username:'{username}', password:'{password}'}});");
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}', locale:'{locale}'}}).then(function() {{streetSmartAPIEvents.onInitSuccess()}},
+           function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
     }
 
-    #region event handling ChromiumWebBrowser
+    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName)
+    {
+      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName);
+      _cycloramaViewerEvents.AddListener(viewer);
+      return viewer;
+    }
+
+    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, string domElementName, string domElementScript)
+    {
+      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, domElementName, domElementScript);
+      _cycloramaViewerEvents.AddListener(viewer);
+      return viewer;
+    }
+
+    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible,
+      bool timeTravelEnabled)
+    {
+      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, recordingsVisible, timeTravelEnabled);
+      _cycloramaViewerEvents.AddListener(viewer);
+      return viewer;
+    }
+
+    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible,
+      bool timeTravelEnabled, string domElementName, string domElementScript)
+    {
+      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, recordingsVisible, timeTravelEnabled,
+        domElementName, domElementScript);
+      _cycloramaViewerEvents.AddListener(viewer);
+      return viewer;
+    }
+
+    public void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
+    {
+      PanoramaViewer viewer = (PanoramaViewer) panoramaViewer;
+      _cycloramaViewerEvents.RemoveListener(viewer);
+      string objectName = viewer.ViewerObjectName;
+      string domElementName = viewer.DomElementName;
+      string script = $@"StreetSmartApi.destroyPanoramaViewer({objectName},{domElementName});";
+      _browser.ExecuteScriptAsync(script);
+    }
+
+    #endregion
+
+    #region Async Functions
+
+    public async Task<bool> getAPIReadyStateAsync()
+    {
+     _apiReadyStateTask = new TaskCompletionSource<bool>();
+      string script = "streetSmartAPIEvents.onAPIReadyState(StreetSmartApi.getAPIReadyState());";
+      _browser.ExecuteScriptAsync(script);
+      await _apiReadyStateTask.Task;
+      return _apiReadyStateTask.Task.Result;
+    }
+
+    public async Task<string> getApplicationNameAsync()
+    {
+      _applicationNameTask = new TaskCompletionSource<string>();
+      string script = "streetSmartAPIEvents.onApplicationName(StreetSmartApi.getApplicationName());";
+      _browser.ExecuteScriptAsync(script);
+      await _applicationNameTask.Task;
+      return _applicationNameTask.Task.Result;
+    }
+
+    public async Task<string> getApplicationVersionAsync()
+    {
+      _applicationVersionTask = new TaskCompletionSource<string>();
+      string script = "streetSmartAPIEvents.onApplicationVersion(StreetSmartApi.getApplicationVersion());";
+      _browser.ExecuteScriptAsync(script);
+      await _applicationVersionTask.Task;
+      return _applicationVersionTask.Task.Result;
+    }
+
+    public async Task<string[]> getPermissionsAsync()
+    {
+      _permissionsTask = new TaskCompletionSource<object[]>();
+      string script = "streetSmartAPIEvents.onPermissions(StreetSmartApi.getPermissions());";
+      _browser.ExecuteScriptAsync(script);
+      await _permissionsTask.Task;
+      object[] permissions = _permissionsTask.Task.Result;
+      return permissions.Cast<string>().ToArray();
+    }
+
+    #endregion
+
+    #region events ChromiumWebBrowser
 
     public void OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
     {
       if (e.Frame.IsMain)
       {
-        _browser.ExecuteScriptAsync(
-          @"window.addEventListener(StreetSmartApi.Events.stage.INIT, function(e) {streetSmartAPIEvents.onInit(e.detail);});
-            window.addEventListener(StreetSmartApi.Events.login.LOGIN, function(e) {streetSmartAPIEvents.onLogin(e.detail);});");
-        _cycloramaViewerEvents.RegisterEventHandlers();
         FrameLoaded?.Invoke(this, EventArgs.Empty);
       }
     }
 
     #endregion
 
-    #region event handling StreetSmart
+    #region Callbacks StreetSmartAPI
 
-    public void OnInit(Dictionary<string, object> args)
+    public void OnInitSuccess()
     {
-      EventInitArgs initArgs = new EventInitArgs();
-
-      if (args.ContainsKey("success"))
-      {
-        initArgs.Success = (bool) args["success"];
-      }
-
+      EventInitArgs initArgs = new EventInitArgs {Success = true, ErrorMessage = string.Empty};
       InitComplete?.Invoke(this, initArgs);
     }
 
-    public void OnLogin(Dictionary<string, object> args)
+    public void OnInitFailed(string message)
     {
-      EventLoginArgs loginArgs = new EventLoginArgs();
+      EventInitArgs initArgs = new EventInitArgs {Success = false, ErrorMessage = message};
+      InitComplete?.Invoke(this, initArgs);
+    }
 
-      if (args.ContainsKey("success"))
-      {
-        loginArgs.Success = (bool) args["success"];
-      }
+    public void OnAPIReadyState(bool state)
+    {
+      _apiReadyStateTask.TrySetResult(state);
+    }
 
-      LoginComplete?.Invoke(this, loginArgs);
+    public void OnApplicationName(string name)
+    {
+      _applicationNameTask.TrySetResult(name);
+    }
+
+    public void OnApplicationVersion(string version)
+    {
+      _applicationVersionTask.TrySetResult(version);
+    }
+
+    public void OnPermissions(object[] permissions)
+    {
+      _permissionsTask.TrySetResult(permissions);
     }
 
     #endregion

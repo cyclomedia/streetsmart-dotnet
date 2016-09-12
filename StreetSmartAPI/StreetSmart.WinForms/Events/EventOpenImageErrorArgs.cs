@@ -20,8 +20,14 @@ using System;
 
 namespace StreetSmart.WinForms.Events
 {
-  public class EventLoginArgs : EventArgs
+  /// <summary>
+  /// Triggers when open an image is failed.
+  /// </summary>
+  public class EventOpenImageErrorArgs : EventArgs
   {
-    public bool Success { get; set; }
+    /// <summary>
+    /// Error message
+    /// </summary>
+    public string Message { get; set; }
   }
 }

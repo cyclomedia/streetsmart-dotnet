@@ -16,23 +16,18 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
+using System;
 
-using System.Windows.Forms;
-
-// ReSharper disable InconsistentNaming
-
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.Events
 {
-  public sealed partial class StreetSmartGUI : UserControl
+  /// <summary>
+  /// Triggers when the view (pitch, hFov or yaw) of the panorama is altered.
+  /// </summary>
+  public class EventViewChangeArgs : EventArgs
   {
-    public StreetSmartGUI(ChromiumWebBrowser browser)
-    {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
-    }
+    /// <summary>
+    /// Contains the new yaw, pitch and hFov for the viewer
+    /// </summary>
+    public Orientation Orientation { get; set; }
   }
 }
-
-// ReSharper restore InconsistentNaming

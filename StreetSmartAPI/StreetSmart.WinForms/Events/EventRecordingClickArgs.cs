@@ -18,64 +18,34 @@
 
 using System;
 
-namespace StreetSmart.WinForms.Interfaces
+namespace StreetSmart.WinForms.Events
 {
   // ReSharper disable InconsistentNaming
-  public interface ICycloramaViewer
+
+  /// <summary>
+  /// Triggers when a recording is clicked inside the PanoramaViewer.
+  /// </summary>
+  public class EventRecordingClickArgs : EventArgs
   {
     /// <summary>
-    /// 
+    /// The Recording clicked
     /// </summary>
-    event EventHandler RecordingClick;
+    public Recording Recording { get; set; }
 
     /// <summary>
-    /// 
+    /// If ctrl-key is pressed
     /// </summary>
-    event EventHandler ImageChanged;
+    public bool ctrlKey { get; set; }
 
     /// <summary>
-    /// 
+    /// If shift-key is pressed
     /// </summary>
-    event EventHandler ViewChanged;
+    public bool shiftKey { get; set; }
 
     /// <summary>
-    /// 
+    /// If alt-key is pressed
     /// </summary>
-    event EventHandler ViewLoadStarted;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    event EventHandler ViewLoaded;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    event EventHandler TileLoadError;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="imageId"></param>
-    /// <param name="srsName"></param>
-    void OpenByImageId(string imageId, string srsName);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="deltaYaw"></param>
-    void RotateLeft(double deltaYaw);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="deltaYaw"></param>
-    void RotateRight(double deltaYaw);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    void GetRecording();
+    public bool altKey { get; set; }
   }
 
   // ReSharper restore InconsistentNaming

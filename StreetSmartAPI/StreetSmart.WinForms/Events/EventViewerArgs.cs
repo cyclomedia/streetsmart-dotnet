@@ -16,23 +16,21 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
+using System;
+using System.Collections.Generic;
 
-using System.Windows.Forms;
-
-// ReSharper disable InconsistentNaming
-
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.Events
 {
-  public sealed partial class StreetSmartGUI : UserControl
+  /// <summary>
+  /// - Triggers when the loaded panorama is altered.
+  /// - Triggers when everything that is needed for the view to dislay correctly is loaded.
+  /// - Triggers when the view is altered and needs to be (partly) reloaded.
+  /// </summary>
+  public class EventViewerArgs : EventArgs
   {
-    public StreetSmartGUI(ChromiumWebBrowser browser)
-    {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
-    }
+    /// <summary>
+    /// Custom event data
+    /// </summary>
+    public Dictionary<string, object> ViewerArgs { get; set; }
   }
 }
-
-// ReSharper restore InconsistentNaming

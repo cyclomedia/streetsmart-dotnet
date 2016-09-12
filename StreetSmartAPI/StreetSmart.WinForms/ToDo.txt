@@ -1,0 +1,10 @@
+﻿Versie maken van:
+- een dev en een productie versie maken (https://streetsmart.cyclomedia.com/api/v16.1/)
+- X86 en x64 maken
+- Signen van de API
+- Demo afmaken
+
+Vragen:
+- EventViewerArgs, hoe invullen?
+- EventTileLoadArgs, hoe invullen?
+- Configuratrion URL for init

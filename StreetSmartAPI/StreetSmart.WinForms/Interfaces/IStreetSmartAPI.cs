@@ -16,48 +16,126 @@
  * License along with this library.
  */
 
-using System;
 using StreetSmart.WinForms.Events;
+
+using System;
+using System.Threading.Tasks;
+
+// ReSharper disable InconsistentNaming
 
 namespace StreetSmart.WinForms.Interfaces
 {
-  // ReSharper disable InconsistentNaming
+  /// <summary>
+  /// API used to use and modify various StreetSmart components.
+  /// </summary>
   public interface IStreetSmartAPI
   {
     /// <summary>
-    /// 
+    /// Triggers when the frame is loaded.
+    /// After this trigger, you can login in the the API.
     /// </summary>
     event EventHandler FrameLoaded;
 
     /// <summary>
-    /// 
+    /// Triggers when the init of the API is complete.
     /// </summary>
     event EventHandler<EventInitArgs> InitComplete;
 
     /// <summary>
-    /// 
+    /// The GUI of StreetSmart
     /// </summary>
-    event EventHandler<EventLoginArgs> LoginComplete;
+    StreetSmartGUI GUI { get; }
 
     /// <summary>
-    /// 
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
-    /// <param name="username"></param>
-    /// <param name="password"></param>
-    void Login(string username, string password);
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API</param>
+    void Init(string username, string password, string apiKey, string srs);
 
     /// <summary>
-    /// 
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
-    StreetSmartGUI GUI { get; set; }
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API.</param>
+    /// <param name="locale">Language used as default.</param>
+    void Init(string username, string password, string apiKey, string srs, string locale);
 
     /// <summary>
-    /// 
+    /// Adds a PanoramaViewer to a default DOM-element.
     /// </summary>
-    /// <param name="viewerObjectName"></param>
+    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
     /// <returns></returns>
-    ICycloramaViewer CreateCycloramaViewer(string viewerObjectName);
-  }
+    IPanoramaViewer AddPanoramaViewer(string viewerObjectName);
 
-  // ReSharper restore InconsistentNaming
+    /// <summary>
+    /// Adds a PanoramaViewer to a specified DOM-element.
+    /// </summary>
+    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
+    /// <param name="domElementName">The name of the domElement.</param>
+    /// <param name="domElementScript">The javascript for create a domElement.</param>
+    /// <returns></returns>
+    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, string domElementName, string domElementScript);
+
+    /// <summary>
+    /// Adds a PanoramaViewer to a default DOM-element.
+    /// </summary>
+    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
+    /// <param name="recordingsVisible">If recordings should be visible.</param>
+    /// <param name="timeTravelEnabled">If time travel is enabled.</param>
+    /// <returns></returns>
+    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible, bool timeTravelEnabled);
+
+    /// <summary>
+    /// Adds a PanoramaViewer to a specified DOM-element.
+    /// </summary>
+    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
+    /// <param name="recordingsVisible">If recordings should be visible.</param>
+    /// <param name="timeTravelEnabled">If time travel is enabled.</param>
+    /// <param name="domElementName">The name of the domElement.</param>
+    /// <param name="domElementScript">The javascript for create a domElement.</param>
+    /// <returns></returns>
+    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible, bool timeTravelEnabled,
+      string domElementName, string domElementScript);
+
+    /// <summary>
+    /// Destroys panorama viewer
+    /// </summary>
+    /// <param name="panoramaViewer">Instance of the PanoramaViewer you want to destroy.</param>
+    void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer);
+
+    /// <summary>
+    /// Returns the current 'ready'-state of the API.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The current 'ready'-state of the API.</returns>
+    Task<bool> getAPIReadyStateAsync();
+
+    /// <summary>
+    /// Returns the application name of the API.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The application name of the API.</returns>
+    Task<string> getApplicationNameAsync();
+
+    /// <summary>
+    /// Returns the used version of the API.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns></returns>
+    Task<string> getApplicationVersionAsync();
+
+    /// <summary>
+    /// Returns the object containing functionalities that are currently permitted to use by the user.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns></returns>
+    Task<string[]> getPermissionsAsync();
+  }
 }
+
+// ReSharper restore InconsistentNaming

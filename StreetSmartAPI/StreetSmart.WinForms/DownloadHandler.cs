@@ -16,23 +16,25 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
-
-using System.Windows.Forms;
-
-// ReSharper disable InconsistentNaming
+using CefSharp;
 
 namespace StreetSmart.WinForms
 {
-  public sealed partial class StreetSmartGUI : UserControl
+  internal class DownloadHandler : IDownloadHandler
   {
-    public StreetSmartGUI(ChromiumWebBrowser browser)
+    public void OnBeforeDownload(IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
     {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
+      if (!callback.IsDisposed)
+      {
+        using (callback)
+        {
+          callback.Continue(downloadItem.SuggestedFileName, true);
+        }
+      }
+    }
+
+    public void OnDownloadUpdated(IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
+    {
     }
   }
 }
-
-// ReSharper restore InconsistentNaming
