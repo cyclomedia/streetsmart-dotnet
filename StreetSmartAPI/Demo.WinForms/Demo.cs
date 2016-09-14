@@ -184,7 +184,7 @@ namespace Demo.WinForms
     private void btnLogin_Click(object sender, EventArgs e)
     {
       AddressSettings addressSettings = new AddressSettings { Locale = "nl", Database = "CMDatabase" };
-      _api?.Init(txtUsername.Text, txtPassword.Text, apiKey, srs, locale, addressSettings);
+      _api?.Init(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale, addressSettings);
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -426,8 +426,9 @@ namespace Demo.WinForms
     private double ParseDouble(string text)
     {
       double result;
+      text = text.Replace(",", ".");
 
-      if (!double.TryParse(text, out result))
+      if (!double.TryParse(text, NumberStyles.Float, _ci, out result))
       {
         result = 0.0;
       }

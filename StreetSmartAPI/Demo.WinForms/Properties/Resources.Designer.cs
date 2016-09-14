@@ -61,15 +61,6 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 6vEZuXUl6PQRiPkp-XwROvENWPk56fA5-_wNKHEVSrQFifU5ebcd-PUFqfABOnAZ.
-        /// </summary>
-        internal static string apiKey {
-            get {
-                return ResourceManager.GetString("apiKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to en-US.
         /// </summary>
         internal static string locale {

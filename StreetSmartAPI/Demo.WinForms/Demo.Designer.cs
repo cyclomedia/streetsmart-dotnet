@@ -108,6 +108,8 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.lblAPIKey = new System.Windows.Forms.Label();
+      this.txtAPIKey = new System.Windows.Forms.TextBox();
       this.grOpenCloseViewer.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grEvents.SuspendLayout();
@@ -233,6 +235,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grRotationsZoomInOut);
       this.plControl.Controls.Add(this.grEvents);
       this.plControl.Controls.Add(this.grRecordingViewerColorPermissions);
       this.plControl.Controls.Add(this.grOrientation);
@@ -240,7 +243,6 @@
       this.plControl.Controls.Add(this.grCoordinate);
       this.plControl.Controls.Add(this.grOpenCloseViewer);
       this.plControl.Controls.Add(this.grAPIInfo);
-      this.plControl.Controls.Add(this.grRotationsZoomInOut);
       this.plControl.Controls.Add(this.grViewerToggles);
       this.plControl.Controls.Add(this.grOpenByAddress);
       this.plControl.Controls.Add(this.grLogin);
@@ -518,7 +520,7 @@
       this.txtX.Name = "txtX";
       this.txtX.Size = new System.Drawing.Size(90, 20);
       this.txtX.TabIndex = 30;
-      this.txtX.Text = "0.0";
+      this.txtX.Text = "160850.585";
       // 
       // txtY
       // 
@@ -526,7 +528,7 @@
       this.txtY.Name = "txtY";
       this.txtY.Size = new System.Drawing.Size(90, 20);
       this.txtY.TabIndex = 31;
-      this.txtY.Text = "0.0";
+      this.txtY.Text = "383923.326";
       // 
       // txtZ
       // 
@@ -652,9 +654,9 @@
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
       this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(160, 100);
+      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 135);
       this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(200, 190);
+      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 155);
       this.grRotationsZoomInOut.TabIndex = 0;
       this.grRotationsZoomInOut.TabStop = false;
       this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
@@ -662,7 +664,7 @@
       // lblDeltaYawPitch
       // 
       this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 155);
+      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 120);
       this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
       this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
       this.lblDeltaYawPitch.TabIndex = 20;
@@ -670,7 +672,7 @@
       // 
       // txtDeltaYawPitch
       // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(115, 155);
+      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 120);
       this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
       this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
       this.txtDeltaYawPitch.TabIndex = 21;
@@ -678,7 +680,7 @@
       // 
       // btnRotateDown
       // 
-      this.btnRotateDown.Location = new System.Drawing.Point(5, 15);
+      this.btnRotateDown.Location = new System.Drawing.Point(95, 15);
       this.btnRotateDown.Name = "btnRotateDown";
       this.btnRotateDown.Size = new System.Drawing.Size(80, 30);
       this.btnRotateDown.TabIndex = 19;
@@ -688,7 +690,7 @@
       // 
       // btnRotateUp
       // 
-      this.btnRotateUp.Location = new System.Drawing.Point(5, 50);
+      this.btnRotateUp.Location = new System.Drawing.Point(5, 15);
       this.btnRotateUp.Name = "btnRotateUp";
       this.btnRotateUp.Size = new System.Drawing.Size(80, 30);
       this.btnRotateUp.TabIndex = 18;
@@ -698,7 +700,7 @@
       // 
       // btnRotateRight
       // 
-      this.btnRotateRight.Location = new System.Drawing.Point(5, 85);
+      this.btnRotateRight.Location = new System.Drawing.Point(5, 50);
       this.btnRotateRight.Name = "btnRotateRight";
       this.btnRotateRight.Size = new System.Drawing.Size(80, 30);
       this.btnRotateRight.TabIndex = 6;
@@ -708,7 +710,7 @@
       // 
       // btnZoomOut
       // 
-      this.btnZoomOut.Location = new System.Drawing.Point(115, 50);
+      this.btnZoomOut.Location = new System.Drawing.Point(95, 85);
       this.btnZoomOut.Name = "btnZoomOut";
       this.btnZoomOut.Size = new System.Drawing.Size(80, 30);
       this.btnZoomOut.TabIndex = 46;
@@ -718,7 +720,7 @@
       // 
       // btRotateLeft
       // 
-      this.btRotateLeft.Location = new System.Drawing.Point(5, 120);
+      this.btRotateLeft.Location = new System.Drawing.Point(5, 85);
       this.btRotateLeft.Name = "btRotateLeft";
       this.btRotateLeft.Size = new System.Drawing.Size(80, 30);
       this.btRotateLeft.TabIndex = 0;
@@ -728,7 +730,7 @@
       // 
       // btnZoomIn
       // 
-      this.btnZoomIn.Location = new System.Drawing.Point(115, 15);
+      this.btnZoomIn.Location = new System.Drawing.Point(95, 50);
       this.btnZoomIn.Name = "btnZoomIn";
       this.btnZoomIn.Size = new System.Drawing.Size(80, 30);
       this.btnZoomIn.TabIndex = 45;
@@ -743,9 +745,9 @@
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarExpanded);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
-      this.grViewerToggles.Location = new System.Drawing.Point(0, 100);
+      this.grViewerToggles.Location = new System.Drawing.Point(180, 100);
       this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Size = new System.Drawing.Size(160, 190);
+      this.grViewerToggles.Size = new System.Drawing.Size(180, 190);
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
@@ -829,7 +831,7 @@
       this.txtAdress.Name = "txtAdress";
       this.txtAdress.Size = new System.Drawing.Size(230, 20);
       this.txtAdress.TabIndex = 14;
-      this.txtAdress.Text = "Van Voordenpark 1B, Zaltbommel";
+      this.txtAdress.Text = "Boschdijk 7, Eindhoven";
       // 
       // lblAddressSrs
       // 
@@ -860,6 +862,8 @@
       // 
       // grLogin
       // 
+      this.grLogin.Controls.Add(this.lblAPIKey);
+      this.grLogin.Controls.Add(this.txtAPIKey);
       this.grLogin.Controls.Add(this.lblUsername);
       this.grLogin.Controls.Add(this.lblPassword);
       this.grLogin.Controls.Add(this.txtUsername);
@@ -867,7 +871,7 @@
       this.grLogin.Controls.Add(this.btnLogin);
       this.grLogin.Location = new System.Drawing.Point(0, 0);
       this.grLogin.Name = "grLogin";
-      this.grLogin.Size = new System.Drawing.Size(180, 100);
+      this.grLogin.Size = new System.Drawing.Size(180, 135);
       this.grLogin.TabIndex = 49;
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
@@ -907,13 +911,29 @@
       // 
       // btnLogin
       // 
-      this.btnLogin.Location = new System.Drawing.Point(5, 65);
+      this.btnLogin.Location = new System.Drawing.Point(5, 100);
       this.btnLogin.Name = "btnLogin";
       this.btnLogin.Size = new System.Drawing.Size(170, 30);
       this.btnLogin.TabIndex = 5;
       this.btnLogin.Text = "Login";
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+      // 
+      // lblAPIKey
+      // 
+      this.lblAPIKey.AutoSize = true;
+      this.lblAPIKey.Location = new System.Drawing.Point(5, 65);
+      this.lblAPIKey.Name = "lblAPIKey";
+      this.lblAPIKey.Size = new System.Drawing.Size(45, 13);
+      this.lblAPIKey.TabIndex = 6;
+      this.lblAPIKey.Text = "API Key";
+      // 
+      // txtAPIKey
+      // 
+      this.txtAPIKey.Location = new System.Drawing.Point(65, 65);
+      this.txtAPIKey.Name = "txtAPIKey";
+      this.txtAPIKey.Size = new System.Drawing.Size(110, 20);
+      this.txtAPIKey.TabIndex = 7;
       // 
       // Demo
       // 
@@ -1033,6 +1053,8 @@
     private System.Windows.Forms.RadioButton rbDefault;
     private System.Windows.Forms.GroupBox grEvents;
     private System.Windows.Forms.ListBox lbViewerEvents;
+    private System.Windows.Forms.Label lblAPIKey;
+    private System.Windows.Forms.TextBox txtAPIKey;
   }
 }
 
