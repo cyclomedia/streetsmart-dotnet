@@ -112,6 +112,8 @@ xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.bin"
 xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.dat" *
 xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.pak" *
 xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.exe" *
+mkdir locales
+xcopy /Y  "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\locales\*.pak" "locales\*"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

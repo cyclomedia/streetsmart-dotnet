@@ -16,29 +16,24 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
-
-using System.Windows.Forms;
-
 namespace StreetSmart.WinForms
 {
   // ReSharper disable InconsistentNaming
 
   /// <summary>
-  /// The GUI of StreetSmart
+  /// Address settings configuration
   /// </summary>
-  public sealed partial class StreetSmartGUI : UserControl
+  public class AddressSettings
   {
     /// <summary>
-    /// Create the GUI of StreetSmart
+    /// Locale info
     /// </summary>
-    /// <param name="browser">The browser</param>
-    public StreetSmartGUI(ChromiumWebBrowser browser)
-    {
-      InitializeComponent();
-      Dock = browser.Dock;
-      Controls.Add(browser);      
-    }
+    public string Locale { get; set; }
+
+    /// <summary>
+    /// Address database
+    /// </summary>
+    public string Database { get; set; }
   }
 
   // ReSharper restore InconsistentNaming

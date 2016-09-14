@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressSettings.cs" />
     <Compile Include="APIBuilder.cs" />
     <Compile Include="Events\EventOpenImageErrorArgs.cs" />
     <Compile Include="Coordinate.cs" />

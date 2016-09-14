@@ -111,14 +111,6 @@ namespace StreetSmart.WinForms
 
     #region Events from StreetSmartAPI
 
-    public void OnRecordingClick(string viewerObjectName, Dictionary<string, object> args)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnRecordingClick(args);
-      }
-    }
-
     public void OnImageChange(string viewerObjectName, Dictionary<string, object> args)
     {
       if (_listeners.ContainsKey(viewerObjectName))
@@ -127,27 +119,11 @@ namespace StreetSmart.WinForms
       }
     }
 
-    public void OnViewChange(string viewerObjectName, Dictionary<string, object> args)
+    public void OnRecordingClick(string viewerObjectName, Dictionary<string, object> args)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnViewChange(args);
-      }
-    }
-
-    public void OnViewLoadStart(string viewerObjectName, Dictionary<string, object> args)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnViewLoadStart(args);
-      }
-    }
-
-    public void OnViewLoadEnd(string viewerObjectName, Dictionary<string, object> args)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnViewLoadEnd(args);
+        _listeners[viewerObjectName].OnRecordingClick(args);
       }
     }
 
@@ -159,23 +135,55 @@ namespace StreetSmart.WinForms
       }
     }
 
+    public void OnViewChange(string viewerObjectName, Dictionary<string, object> args)
+    {
+      if (_listeners.ContainsKey(viewerObjectName))
+      {
+        _listeners[viewerObjectName].OnViewChange(args);
+      }
+    }
+
+    public void OnViewLoadEnd(string viewerObjectName, Dictionary<string, object> args)
+    {
+      if (_listeners.ContainsKey(viewerObjectName))
+      {
+        _listeners[viewerObjectName].OnViewLoadEnd(args);
+      }
+    }
+
+    public void OnViewLoadStart(string viewerObjectName, Dictionary<string, object> args)
+    {
+      if (_listeners.ContainsKey(viewerObjectName))
+      {
+        _listeners[viewerObjectName].OnViewLoadStart(args);
+      }
+    }
+
     #endregion
 
     #region Callbacks PanoramaViewer
+
+    public void OnNavbarExpanded(string viewerObjectName, bool visible)
+    {
+      if (_listeners.ContainsKey(viewerObjectName))
+      {
+        _listeners[viewerObjectName].OnNavbarExpanded(visible);
+      }
+    }
+
+    public void OnNavbarVisible(string viewerObjectName, bool visible)
+    {
+      if (_listeners.ContainsKey(viewerObjectName))
+      {
+        _listeners[viewerObjectName].OnNavbarVisible(visible);
+      }
+    }
 
     public void OnOpenImageError(string viewerObjectName, string message)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
         _listeners[viewerObjectName].OnOpenImageError(message);
-      }
-    }
-
-    public void OnViewerColor(string viewerObjectName, object[] color)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnViewerColor(color);
       }
     }
 
@@ -203,19 +211,11 @@ namespace StreetSmart.WinForms
       }
     }
 
-    public void OnNavbarVisible(string viewerObjectName, bool visible)
+    public void OnTimeTravelExpanded(string viewerObjectName, bool expanded)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnNavbarVisible(visible);
-      }
-    }
-
-    public void OnNavbarExpanded(string viewerObjectName, bool visible)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnNavbarExpanded(visible);
+        _listeners[viewerObjectName].OnTimeTravelExpanded(expanded);
       }
     }
 
@@ -227,11 +227,11 @@ namespace StreetSmart.WinForms
       }
     }
 
-    public void OnTimeTravelExpanded(string viewerObjectName, bool expanded)
+    public void OnViewerColor(string viewerObjectName, object[] color)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnTimeTravelExpanded(expanded);
+        _listeners[viewerObjectName].OnViewerColor(color);
       }
     }
 

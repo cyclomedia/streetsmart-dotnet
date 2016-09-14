@@ -1,7 +1,4 @@
-﻿Todo:
-- Demo afmaken
-
-Vragen:
+﻿Vragen:
 - EventViewerArgs, hoe invullen?
 - EventTileLoadArgs, hoe invullen?
 

@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIBuilder.cs" />
+    <Compile Include="AddressSettings.cs" />
     <Compile Include="Events\EventOpenImageErrorArgs.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="Events\EventRecordingClickArgs.cs" />

@@ -23,6 +23,7 @@ using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Interfaces;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,6 +47,7 @@ namespace StreetSmart.WinForms
     private TaskCompletionSource<string> _applicationNameTask;
     private TaskCompletionSource<string> _applicationVersionTask;
     private TaskCompletionSource<object[]> _permissionsTask;
+    private TaskCompletionSource<AddressSettings> _addressSettingsTask; 
 
     #endregion
 
@@ -77,33 +79,6 @@ namespace StreetSmart.WinForms
     #endregion
 
     #region Functions
-
-    public void Init(string username, string password, string apiKey, string srs)
-    {
-      string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}'}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
-           function(e) {{streetSmartAPIEvents.onFailed(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void Init(string username, string password, string apiKey, string srs, string locale)
-    {
-      string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}', locale:'{locale}'}}).then(function() {{streetSmartAPIEvents.onInitSuccess()}},
-           function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl)
-    {
-      string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}', locale:'{locale}', configurationUrl:'{configurationUrl}'}}).then(function() {{streetSmartAPIEvents.onInitSuccess()}},
-           function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
 
     public IPanoramaViewer AddPanoramaViewer(string viewerObjectName)
     {
@@ -138,7 +113,7 @@ namespace StreetSmart.WinForms
 
     public void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
     {
-      PanoramaViewer viewer = (PanoramaViewer) panoramaViewer;
+      PanoramaViewer viewer = (PanoramaViewer)panoramaViewer;
       _cycloramaViewerEvents.RemoveListener(viewer);
       string objectName = viewer.ViewerObjectName;
       string domElementName = viewer.DomElementName;
@@ -146,13 +121,18 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
-    #endregion
-
-    #region Async Functions
+    public async Task<AddressSettings> getAddressSettingsAsync()
+    {
+      _addressSettingsTask = new TaskCompletionSource<AddressSettings>();
+      string script = "streetSmartAPIEvents.onAddressSettings(StreetSmartApi.getAddressSettings());";
+      _browser.ExecuteScriptAsync(script);
+      await _addressSettingsTask.Task;
+      return _addressSettingsTask.Task.Result;
+    }
 
     public async Task<bool> getAPIReadyStateAsync()
     {
-     _apiReadyStateTask = new TaskCompletionSource<bool>();
+      _apiReadyStateTask = new TaskCompletionSource<bool>();
       string script = "streetSmartAPIEvents.onAPIReadyState(StreetSmartApi.getAPIReadyState());";
       _browser.ExecuteScriptAsync(script);
       await _apiReadyStateTask.Task;
@@ -187,6 +167,35 @@ namespace StreetSmart.WinForms
       return permissions.Cast<string>().ToArray();
     }
 
+    public void Init(string username, string password, string apiKey, string srs, AddressSettings addressSettings = null)
+    {
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}'{getAddressDatabaseScript(addressSettings)}}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
+           function(e) {{streetSmartAPIEvents.onFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
+    }
+
+    public void Init(string username, string password, string apiKey, string srs, string locale,
+      AddressSettings addressSettings = null)
+    {
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}', locale:'{locale}'{getAddressDatabaseScript(addressSettings)}}}).then(function()
+           {{streetSmartAPIEvents.onInitSuccess()}}, function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
+    }
+
+    public void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl,
+      AddressSettings addressSettings = null)
+    {
+      string script =
+        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
+           srs:'{srs}', locale:'{locale}', configurationUrl:'{configurationUrl}'{getAddressDatabaseScript(addressSettings)}}}).then(function()
+           {{streetSmartAPIEvents.onInitSuccess()}}, function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
+      _browser.ExecuteScriptAsync(script);
+    }
+
     #endregion
 
     #region events ChromiumWebBrowser
@@ -201,18 +210,33 @@ namespace StreetSmart.WinForms
 
     #endregion
 
-    #region Callbacks StreetSmartAPI
-
-    public void OnInitSuccess()
-    {
-      EventInitArgs initArgs = new EventInitArgs {Success = true, ErrorMessage = string.Empty};
-      InitComplete?.Invoke(this, initArgs);
-    }
+    #region Callbacks StreetSmartAPI Init
 
     public void OnInitFailed(string message)
     {
       EventInitArgs initArgs = new EventInitArgs {Success = false, ErrorMessage = message};
       InitComplete?.Invoke(this, initArgs);
+    }
+
+    public void OnInitSuccess()
+    {
+      EventInitArgs initArgs = new EventInitArgs { Success = true, ErrorMessage = string.Empty };
+      InitComplete?.Invoke(this, initArgs);
+    }
+
+    #endregion
+
+    #region Callbacks StreetSmartAPI
+
+    public void OnAddressSettings(Dictionary<string, object> args)
+    {
+      AddressSettings addressSettings = new AddressSettings
+      {
+        Locale = (string) args["locale"],
+        Database = (string) args["database"]
+      };
+
+      _addressSettingsTask.TrySetResult(addressSettings);
     }
 
     public void OnAPIReadyState(bool state)
@@ -233,6 +257,17 @@ namespace StreetSmart.WinForms
     public void OnPermissions(object[] permissions)
     {
       _permissionsTask.TrySetResult(permissions);
+    }
+
+    #endregion
+
+    #region private functions
+
+    string getAddressDatabaseScript(AddressSettings addressSettings)
+    {
+      return (addressSettings == null)
+        ? string.Empty
+        : $@", addressSettings: {{locale: '{addressSettings.Locale}', database: '{addressSettings.Database}'}}";
     }
 
     #endregion

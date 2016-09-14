@@ -47,36 +47,6 @@ namespace StreetSmart.WinForms.Interfaces
     StreetSmartGUI GUI { get; }
 
     /// <summary>
-    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
-    /// </summary>
-    /// <param name="username">Username of the user.</param>
-    /// <param name="password">Password of the user.</param>
-    /// <param name="apiKey">ApiKey given to the user.</param>
-    /// <param name="srs">Coordinate system used in the API</param>
-    void Init(string username, string password, string apiKey, string srs);
-
-    /// <summary>
-    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
-    /// </summary>
-    /// <param name="username">Username of the user.</param>
-    /// <param name="password">Password of the user.</param>
-    /// <param name="apiKey">ApiKey given to the user.</param>
-    /// <param name="srs">Coordinate system used in the API.</param>
-    /// <param name="locale">Language used as default.</param>
-    void Init(string username, string password, string apiKey, string srs, string locale);
-
-    /// <summary>
-    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
-    /// </summary>
-    /// <param name="username">Username of the user.</param>
-    /// <param name="password">Password of the user.</param>
-    /// <param name="apiKey">ApiKey given to the user.</param>
-    /// <param name="srs">Coordinate system used in the API.</param>
-    /// <param name="locale">Language used as default.</param>
-    /// <param name="configurationUrl">Alternate configuration url to use for all configuration services.</param>
-    void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl);
-
-    /// <summary>
     /// Adds a PanoramaViewer to a default DOM-element.
     /// </summary>
     /// <param name="viewerObjectName">The name of the panorama viewer.</param>
@@ -120,6 +90,12 @@ namespace StreetSmart.WinForms.Interfaces
     void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer);
 
     /// <summary>
+    /// Returns the object containing the address search settings
+    /// </summary>
+    /// <returns>Object containing the address settings</returns>
+    Task<AddressSettings> getAddressSettingsAsync();
+
+    /// <summary>
     /// Returns the current 'ready'-state of the API.
     /// This is an asynchronous function.
     /// </summary>
@@ -146,6 +122,39 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <returns></returns>
     Task<string[]> getPermissionsAsync();
+
+    /// <summary>
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
+    /// </summary>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API</param>
+    /// <param name="addressSettings">Address search settings</param>
+    void Init(string username, string password, string apiKey, string srs, AddressSettings addressSettings = null);
+
+    /// <summary>
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
+    /// </summary>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API.</param>
+    /// <param name="locale">Language used as default.</param>
+    /// <param name="addressSettings">Address search settings</param>
+    void Init(string username, string password, string apiKey, string srs, string locale, AddressSettings addressSettings = null);
+
+    /// <summary>
+    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
+    /// </summary>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API.</param>
+    /// <param name="locale">Language used as default.</param>
+    /// <param name="configurationUrl">Alternate configuration url to use for all configuration services.</param>
+    /// <param name="addressSettings">Address search settings</param>
+    void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl, AddressSettings addressSettings = null);
   }
 
   // ReSharper restore InconsistentNaming

@@ -21,8 +21,10 @@ using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Interfaces;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 using static Demo.WinForms.Properties.Resources;
@@ -32,88 +34,99 @@ namespace Demo.WinForms
 {
   public partial class Demo : Form
   {
-    private readonly IStreetSmartAPI _api;
+    #region Members
 
-    private IPanoramaViewer _viewer;
-    private IPanoramaViewer _viewer2;
+    private readonly IStreetSmartAPI _api;
+    private readonly List<IPanoramaViewer> _viewers;
+    private readonly CultureInfo _ci;
+
+    #endregion
+
+    #region Properties
+
+    private IPanoramaViewer Viewer => (_viewers.Count == 0) ? null : _viewers[_viewers.Count - 1];
+
+    private int DeltaYawPitch
+    {
+      get
+      {
+        int result;
+
+        if (!int.TryParse(txtDeltaYawPitch.Text, out result))
+        {
+          result = 0;
+        }
+
+        return result;
+      }
+    }
+
+    #endregion
 
     public Demo()
     {
       InitializeComponent();
+      _ci = CultureInfo.InvariantCulture;
+      _viewers = new List<IPanoramaViewer>();
       _api = APIBuilder.CreateAPI();
       _api.FrameLoaded += OnFrameLoaded;
       _api.InitComplete += OnInitComplete;
       plStreetSmart.Controls.Add(_api.GUI);
-    }
+      grLogin.Enabled = false;
+      grOpenByAddress.Enabled = false;
+      grViewerToggles.Enabled = false;
+      grRotationsZoomInOut.Enabled = false;
+      grAPIInfo.Enabled = false;
+      grOpenCloseViewer.Enabled = false;
+      grCoordinate.Enabled = false;
+      grOrientation.Enabled = false;
+      grOpenByImageId.Enabled = false;
+      grRecordingViewerColorPermissions.Enabled = false;
 
-    private void btnLogin_Click(object sender, EventArgs e)
-    {
-      IStreetSmartAPI api = sender as IStreetSmartAPI;
-      api?.Init(txtUsername.Text, txtPassword.Text, apiKey, srs, locale);
-    }
-
-    private void btRotateLeft_Click(object sender, EventArgs e)
-    {
-      _viewer.RotateLeft(1);
-    }
-
-    private void btnRotateRight_Click(object sender, EventArgs e)
-    {
-      _viewer.RotateRight(1);
+      txtDomElementScript.Text =
+        @"var element1 = document.createElement('div');
+          element1.setAttribute('id', 'panoramaviewer1Window');
+          element1.setAttribute('style', 'width:40%; height:40%; position:absolute; top:300px; left:400px');";
+      txtDomElementName.Text = @"element1";
     }
 
     #region events api
 
     private void OnFrameLoaded(object sender, EventArgs args)
     {
-      IStreetSmartAPI api = sender as IStreetSmartAPI;
-      api?.Init(username, password, apiKey, srs, locale);
-    }
-
-    private void OnOpenImageError(object sender, EventOpenImageErrorArgs args)
-    {
-      MessageBox.Show(args.Message);
-    }
-
-    private void OnRecordingClick(object sender, EventRecordingClickArgs args)
-    {
-      MessageBox.Show("Click");
+      if (grLogin.InvokeRequired)
+      {
+        grLogin.Invoke(new MethodInvoker(() => grLogin.Enabled = true));
+      }
+      else
+      {
+        grLogin.Enabled = true;
+      }
     }
 
     private void OnInitComplete(object sender, EventInitArgs args)
     {
       if (args.Success)
       {
-        string domElementScript = @"var element1 = document.createElement('div');
-           element1.setAttribute('id', 'panoramaviewer1Window');
-           element1.setAttribute('style', 'width:40%; height:40%; position:absolute; top:300px; left:400px');";
-        string domElementName = "element1";
-
-        string viewerObjectName = "viewer";
-        IStreetSmartAPI api = sender as IStreetSmartAPI;
-//       _viewer = api?.AddPanoramaViewer(viewerObjectName, true, true);
-        _viewer = api?.AddPanoramaViewer(viewerObjectName, true, true, domElementName, domElementScript);
-
-        if (_viewer != null)
+        if (grAPIInfo.InvokeRequired)
         {
-          _viewer.OpenByImageId("5D123456", "EPSG:28992");
-          _viewer.RecordingClick += OnRecordingClick;
-          _viewer.OpenImageError += OnOpenImageError;
-/*
-          string domElementScript2 = @"var element2 = document.createElement('div');
-           element2.setAttribute('id', 'panoramaviewer1Window');
-           element2.setAttribute('style', 'width:40%; height:40%; position:absolute; top:0px; left:0px');";
-          string domElementName2 = "element2";
-
-          string viewerObjectName2 = "viewer2";
-          _viewer2 = _api?.RenderPanoramaViewer(viewerObjectName2, true, true, domElementName2, domElementScript2);
-
-          if (_viewer2 != null)
-          {
-            _viewer2.OpenByImageId("5D43HW1T", "EPSG:28992");
-          }
-*/
+          grAPIInfo.Invoke(new MethodInvoker(() => grAPIInfo.Enabled = true));
         }
+        else
+        {
+          grAPIInfo.Enabled = true;
+        }
+
+        if (grOpenCloseViewer.InvokeRequired)
+        {
+          grOpenCloseViewer.Invoke(new MethodInvoker(() => grOpenCloseViewer.Enabled = true));
+        }
+        else
+        {
+          grOpenCloseViewer.Enabled = true;
+        }
+
+        MessageBox.Show("Login successfully");
       }
       else
       {
@@ -121,187 +134,389 @@ namespace Demo.WinForms
       }
     }
 
+    private void OnImageChange(object sender, EventViewerArgs args)
+    {
+      string text = "Image change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnRecordingClick(object sender, EventRecordingClickArgs args)
+    {
+      string text = $"Recording click: {args.Recording.Id}";
+      AddViewerEventsText(text);
+    }
+
+    private void OnTileLoadError(object sender, EventTileLoadErrorArgs args)
+    {
+      string text = "Tile load error";
+      AddViewerEventsText(text);
+    }
+
+    private void OnViewChange(object sender, EventViewChangeArgs args)
+    {
+      Orientation orientation = args.Orientation;
+      string text = $"View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.hFov}";
+      AddViewerEventsText(text);
+    }
+
+    private void OnViewLoadEnd(object sender, EventViewerArgs args)
+    {
+      string text = "Image load end";
+      AddViewerEventsText(text);
+    }
+
+    private void OnViewLoadStart(object sender, EventViewerArgs args)
+    {
+      string text = "Image load start";
+      AddViewerEventsText(text);
+    }
+
+    private void OnOpenImageError(object sender, EventOpenImageErrorArgs args)
+    {
+      string text = $"Open image error, message: {args.Message}";
+      AddViewerEventsText(text);
+    }
+
     #endregion
+
+    #region events from user interface
+
+    private void btnLogin_Click(object sender, EventArgs e)
+    {
+      AddressSettings addressSettings = new AddressSettings { Locale = "nl", Database = "CMDatabase" };
+      _api?.Init(txtUsername.Text, txtPassword.Text, apiKey, srs, locale, addressSettings);
+    }
+
+    private void btRotateLeft_Click(object sender, EventArgs e)
+    {
+      Viewer?.RotateLeft(DeltaYawPitch);
+    }
+
+    private void btnRotateRight_Click(object sender, EventArgs e)
+    {
+      Viewer?.RotateRight(DeltaYawPitch);
+    }
 
     private void btnDestroyViewer_Click(object sender, EventArgs e)
     {
-      _api.DestroyPanoramaViewer(_viewer);
+      if (Viewer != null)
+      {
+        Viewer.ImageChange -= OnImageChange;
+        Viewer.RecordingClick -= OnRecordingClick;
+        Viewer.TileLoadError -= OnTileLoadError;
+        Viewer.ViewChange -= OnViewChange;
+        Viewer.ViewLoadEnd -= OnViewLoadEnd;
+        Viewer.ViewLoadStart -= OnViewLoadStart;
+        Viewer.OpenImageError -= OnOpenImageError;
+
+        _api?.DestroyPanoramaViewer(Viewer);
+        _viewers.RemoveAt(_viewers.Count - 1);
+
+        if (_viewers.Count == 0)
+        {
+          ToggleViewerEnables(false);
+          EnableImageEnables(false);
+        }
+      }
     }
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
     {
       bool apiReadyState = await _api.getAPIReadyStateAsync();
+      txtAPIResult.Text = apiReadyState.ToString();
     }
 
     private async void btnApplicationVersion_Click(object sender, EventArgs e)
     {
       string version = await _api.getApplicationVersionAsync();
+      txtAPIResult.Text = version;
     }
 
     private async void btnApplicationName_Click(object sender, EventArgs e)
     {
       string name = await _api.getApplicationNameAsync();
+      txtAPIResult.Text = name;
     }
 
     private async void btnPermissions_Click(object sender, EventArgs e)
     {
       string[] permissions = await _api.getPermissionsAsync();
+      string permissionsString = permissions.Aggregate(string.Empty,
+        (current, permission) => $"{current}{permission}{Environment.NewLine}");
+      txtRecordingViewerColorPermissions.Text = permissionsString;
     }
 
     private void btnOpenByAddress_Click(object sender, EventArgs e)
     {
-      if (string.IsNullOrEmpty(txtSrs.Text))
+      if (string.IsNullOrEmpty(txtAddressSrs.Text))
       {
-        _viewer.OpenByAddress(txtAdress.Text);
+        Viewer?.OpenByAddress(txtAdress.Text);
       }
       else
       {
-        _viewer.OpenByAddress(txtAdress.Text, txtSrs.Text);
+        Viewer?.OpenByAddress(txtAdress.Text, txtAddressSrs.Text);
       }
+
+      EnableImageEnables(true);
     }
 
     private async void btnGetViewerColor_Click(object sender, EventArgs e)
     {
-      Color color = await _viewer.GetViewerColorAsync();
+      Color color = await Viewer.GetViewerColorAsync();
+      string text = $"Alpha: {color.A}{Environment.NewLine}Red: {color.R}{Environment.NewLine}Green: {color.G}{Environment.NewLine}Blue: {color.B}";
+      txtRecordingViewerColorPermissions.Text = text;
     }
 
     private void btnRotateUp_Click(object sender, EventArgs e)
     {
-      _viewer.RotateUp(1);
+      Viewer.RotateUp(DeltaYawPitch);
     }
 
     private void btnRotateDown_Click(object sender, EventArgs e)
     {
-      _viewer.RotateDown(1);
+      Viewer.RotateDown(DeltaYawPitch);
     }
 
     private async void btnOrientation_Click(object sender, EventArgs e)
     {
-      Orientation orientation = await _viewer.GetOrientationAsync();
+      Orientation orientation = await Viewer.GetOrientationAsync();
+      txtYaw.Text = orientation.Yaw.ToString();
+      txtPitch.Text = orientation.Pitch.ToString();
+      txthFov.Text = orientation.hFov.ToString();
     }
 
     private void btnSetOrientation_Click(object sender, EventArgs e)
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?) double.Parse(txthFov.Text, ci);
-      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?) double.Parse(txtYaw.Text, ci);
-      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?) double.Parse(txtPitch.Text, ci);
-      _viewer.SetOrientation(new Orientation {hFov = hFov, Yaw = yaw, Pitch = pitch});
+      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?) ParseDouble(txthFov.Text);
+      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?) ParseDouble(txtYaw.Text);
+      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?) ParseDouble(txtPitch.Text);
+      Orientation orientation = new Orientation {hFov = hFov, Yaw = yaw, Pitch = pitch};
+      Viewer.SetOrientation(orientation);
     }
 
     private async void btnGetRecording_Click(object sender, EventArgs e)
     {
-      Recording recording = await _viewer.GetRecordingAsync();
+      Recording recording = await Viewer.GetRecordingAsync();
+      string text = $"Id: {recording.Id}{Environment.NewLine}recordedAt: {recording.RecordedAt}";
+      txtRecordingViewerColorPermissions.Text = text;
     }
 
     private void btnLookAtCoordinate_Click(object sender, EventArgs e)
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-
       Coordinate coordinate = new Coordinate
       {
-        X = double.Parse(txtX.Text, ci),
-        Y = double.Parse(txtY.Text, ci),
-        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) double.Parse(txtZ.Text, ci))
+        X = ParseDouble(txtX.Text),
+        Y = ParseDouble(txtY.Text),
+        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) ParseDouble(txtZ.Text))
       };
 
-      if (string.IsNullOrEmpty(txtSrs.Text))
+      if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
-        _viewer.LookAtCoordinate(coordinate);
+        Viewer.LookAtCoordinate(coordinate);
       }
       else
       {
-        _viewer.LookAtCoordinate(coordinate, txtSrs.Text);
+        Viewer.LookAtCoordinate(coordinate, txtCoordinateSrs.Text);
       }
     }
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await _viewer.GetRecordingsVisibleAsync();
-      _viewer.ToggleRecordingsVisible(!visible);
+      bool visible = await Viewer.GetRecordingsVisibleAsync();
+      Viewer.ToggleRecordingsVisible(!visible);
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await _viewer.getNavbarVisibleAsync();
-      _viewer.ToggleNavbarVisible(!visible);
+      bool visible = await Viewer.getNavbarVisibleAsync();
+      Viewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await _viewer.getNavbarExpandedAsync();
-      _viewer.ToggleNavbarExpanded(!expanded);
+      bool expanded = await Viewer.getNavbarExpandedAsync();
+      Viewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await _viewer.getTimeTravelVisibleAsync();
-      _viewer.ToggleTimeTravelVisible(!visible);
+      bool visible = await Viewer.getTimeTravelVisibleAsync();
+      Viewer.ToggleTimeTravelVisible(!visible);
     }
 
     private async void btnToggleTimeTravelExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await _viewer.getTimeTravelExpandedAsync();
-      _viewer.ToggleTimeTravelExpanded(!expanded);
+      bool expanded = await Viewer.getTimeTravelExpandedAsync();
+      Viewer.ToggleTimeTravelExpanded(!expanded);
     }
 
     private void btnOpenByImageId_Click(object sender, EventArgs e)
     {
-      if (string.IsNullOrEmpty(txtSrs.Text))
+      if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
       {
-        _viewer.OpenByImageId(txtImageId.Text);
+        Viewer.OpenByImageId(txtImageId.Text);
       }
       else
       {
-        _viewer.OpenByImageId(txtImageId.Text, txtSrs.Text);
+        Viewer.OpenByImageId(txtImageId.Text, txtOpenByImageSrs.Text);
       }
+
+      EnableImageEnables(true);
     }
 
     private void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-
       Coordinate coordinate = new Coordinate
       {
-        X = double.Parse(txtX.Text, ci),
-        Y = double.Parse(txtY.Text, ci),
-        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?)double.Parse(txtZ.Text, ci))
+        X = ParseDouble(txtX.Text),
+        Y = ParseDouble(txtY.Text),
+        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) ParseDouble(txtZ.Text))
       };
 
-      if (string.IsNullOrEmpty(txtSrs.Text))
+      if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
-        _viewer.OpenByCoordinate(coordinate);
+        Viewer.OpenByCoordinate(coordinate);
       }
       else
       {
-        _viewer.OpenByCoordinate(coordinate, txtSrs.Text);
+        Viewer.OpenByCoordinate(coordinate, txtCoordinateSrs.Text);
       }
+
+      EnableImageEnables(true);
     }
 
     private void btnZoomIn_Click(object sender, EventArgs e)
     {
-      _viewer.ZoomIn();
+      Viewer.ZoomIn();
     }
 
     private void btnZoomOut_Click(object sender, EventArgs e)
     {
-      _viewer.ZoomOut();
+      Viewer.ZoomOut();
     }
 
-    private void btnOpen2eViewer_Click(object sender, EventArgs e)
+    private void btnOpenViewer_Click(object sender, EventArgs e)
     {
-      string domElementScript2 = @"var element2 = document.createElement('div');
-           element2.setAttribute('id', 'panoramaviewer1Window');
-           element2.setAttribute('style', 'width:40%; height:40%; position:absolute; top:0px; left:0px');";
-      string domElementName2 = "element2";
+      _viewers.Add(rbDefault.Checked
+        ? _api.AddPanoramaViewer(txtViewerName.Text, true, true)
+        : _api.AddPanoramaViewer(txtViewerName.Text, true, true, txtDomElementName.Text, txtDomElementScript.Text));
 
-      string viewerObjectName2 = "viewer2";
-      _viewer2 = _api?.AddPanoramaViewer(viewerObjectName2, true, true, domElementName2, domElementScript2);
+      ToggleViewerEnables(true);
 
-      if (_viewer2 != null)
+      Viewer.ImageChange += OnImageChange;
+      Viewer.RecordingClick += OnRecordingClick;
+      Viewer.TileLoadError += OnTileLoadError;
+      Viewer.ViewChange += OnViewChange;
+      Viewer.ViewLoadEnd += OnViewLoadEnd;
+      Viewer.ViewLoadStart += OnViewLoadStart;
+      Viewer.OpenImageError += OnOpenImageError;
+    }
+
+    private async void btnGetAddress_Click(object sender, EventArgs e)
+    {
+      AddressSettings addressSettings = await _api.getAddressSettingsAsync();
+      string text = $"Locale: {addressSettings.Locale}{Environment.NewLine}Database: {addressSettings.Database}";
+      txtRecordingViewerColorPermissions.Text = text;
+    }
+
+    #endregion
+
+    #region Private Functions
+
+    private double ParseDouble(string text)
+    {
+      double result;
+
+      if (!double.TryParse(text, out result))
       {
-        _viewer2.OpenByImageId("5D43HW1T", "EPSG:28992");
+        result = 0.0;
+      }
+
+      return result;
+    }
+
+    private void AddViewerEventsText(string text)
+    {
+      if (lbViewerEvents.InvokeRequired)
+      {
+        lbViewerEvents.Invoke(new MethodInvoker(() => lbViewerEvents.Items.Add(text)));
+      }
+      else
+      {
+        lbViewerEvents.Items.Add(text);
       }
     }
+
+    private void ToggleViewerEnables(bool value)
+    {
+      if (grOpenByAddress.InvokeRequired)
+      {
+        grOpenByAddress.Invoke(new MethodInvoker(() => grOpenByAddress.Enabled = value));
+      }
+      else
+      {
+        grOpenByAddress.Enabled = value;
+      }
+
+      if (grCoordinate.InvokeRequired)
+      {
+        grCoordinate.Invoke(new MethodInvoker(() => grCoordinate.Enabled = value));
+      }
+      else
+      {
+        grCoordinate.Enabled = value;
+      }
+
+      if (grOpenByImageId.InvokeRequired)
+      {
+        grOpenByImageId.Invoke(new MethodInvoker(() => grOpenByImageId.Enabled = value));
+      }
+      else
+      {
+        grOpenByImageId.Enabled = value;
+      }
+    }
+
+    private void EnableImageEnables(bool value)
+    {
+      if (grViewerToggles.InvokeRequired)
+      {
+        grViewerToggles.Invoke(new MethodInvoker(() => grViewerToggles.Enabled = value));
+      }
+      else
+      {
+        grViewerToggles.Enabled = value;
+      }
+
+      if (grRotationsZoomInOut.InvokeRequired)
+      {
+        grRotationsZoomInOut.Invoke(new MethodInvoker(() => grRotationsZoomInOut.Enabled = value));
+      }
+      else
+      {
+        grRotationsZoomInOut.Enabled = value;
+      }
+
+      if (grOrientation.InvokeRequired)
+      {
+        grOrientation.Invoke(new MethodInvoker(() => grOrientation.Enabled = value));
+      }
+      else
+      {
+        grOrientation.Enabled = value;
+      }
+
+      if (grRecordingViewerColorPermissions.InvokeRequired)
+      {
+        grRecordingViewerColorPermissions.Invoke(
+          new MethodInvoker(() => grRecordingViewerColorPermissions.Enabled = value));
+      }
+      else
+      {
+        grRecordingViewerColorPermissions.Enabled = value;
+      }
+    }
+
+    #endregion
   }
 }

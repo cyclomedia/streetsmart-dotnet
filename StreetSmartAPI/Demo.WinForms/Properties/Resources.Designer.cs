@@ -79,29 +79,11 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string password {
-            get {
-                return ResourceManager.GetString("password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to EPSG:28992.
         /// </summary>
         internal static string srs {
             get {
                 return ResourceManager.GetString("srs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string username {
-            get {
-                return ResourceManager.GetString("username", resourceCulture);
             }
         }
     }

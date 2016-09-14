@@ -123,13 +123,7 @@
   <data name="locale" xml:space="preserve">
     <value>en-US</value>
   </data>
-  <data name="password" xml:space="preserve">
-    <value />
-  </data>
   <data name="srs" xml:space="preserve">
     <value>EPSG:28992</value>
-  </data>
-  <data name="username" xml:space="preserve">
-    <value />
   </data>
 </root>
