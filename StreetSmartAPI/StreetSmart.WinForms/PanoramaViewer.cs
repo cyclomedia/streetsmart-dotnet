@@ -40,14 +40,7 @@ namespace StreetSmart.WinForms
 
     #region Tasks
 
-    private TaskCompletionSource<object[]> _viewerColorTask;
-    private TaskCompletionSource<Dictionary<string, object>> _orientationTask;
-    private TaskCompletionSource<Dictionary<string, object>> _recordingTask;
-    private TaskCompletionSource<bool> _recordingsVisibleTask;
-    private TaskCompletionSource<bool> _navbarVisibleTask;
-    private TaskCompletionSource<bool> _navbarExpandedTask;
-    private TaskCompletionSource<bool> _timeTravelVisibleTask;
-    private TaskCompletionSource<bool> _timeTravelExpandedTask;
+    private TaskCompletionSource<object> _resultTask;
 
     #endregion
 
@@ -59,7 +52,6 @@ namespace StreetSmart.WinForms
     public event EventHandler<EventViewChangeArgs> ViewChange;
     public event EventHandler<EventViewerArgs> ViewLoadEnd;
     public event EventHandler<EventViewerArgs> ViewLoadStart;
-    public event EventHandler<EventOpenImageErrorArgs> OpenImageError;
 
     #endregion
 
@@ -138,154 +130,149 @@ namespace StreetSmart.WinForms
 
     public async Task<bool> getNavbarExpandedAsync()
     {
-      _navbarExpandedTask = new TaskCompletionSource<bool>();
-      string script =
-        $"panoramaViewerEvents.onNavbarExpanded('{ViewerObjectName}', {ViewerObjectName}.getNavbarExpanded());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarExpanded());";
       _browser.ExecuteScriptAsync(script);
-      await _navbarExpandedTask.Task;
-      return _navbarExpandedTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<bool> getNavbarVisibleAsync()
     {
-      _navbarVisibleTask = new TaskCompletionSource<bool>();
-      string script =
-        $"panoramaViewerEvents.onNavbarVisible('{ViewerObjectName}', {ViewerObjectName}.getNavbarVisible());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarVisible());";
       _browser.ExecuteScriptAsync(script);
-      await _navbarVisibleTask.Task;
-      return _navbarVisibleTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<Orientation> GetOrientationAsync()
     {
-      _orientationTask = new TaskCompletionSource<Dictionary<string, object>>();
-      string script = $@"panoramaViewerEvents.onOrientation('{ViewerObjectName}',{ViewerObjectName}.getOrientation());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $@"panoramaViewerEvents.onResult('{ViewerObjectName}',{ViewerObjectName}.getOrientation());";
       _browser.ExecuteScriptAsync(script);
-      await _orientationTask.Task;
-      Dictionary<string, object> orientation = _orientationTask.Task.Result;
-      return CreateOrientation(orientation);
+      await _resultTask.Task;
+      return new Orientation((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
     public async Task<Recording> GetRecordingAsync()
     {
-      _recordingTask = new TaskCompletionSource<Dictionary<string, object>>();
+      _resultTask = new TaskCompletionSource<object>();
       var script = $@"recording{ViewerObjectName} = {ViewerObjectName}.getRecording();
                       delete recording{ViewerObjectName}.thumbs;
-                      panoramaViewerEvents.onRecording('{ViewerObjectName}', recording{ViewerObjectName});";
+                      panoramaViewerEvents.onResult('{ViewerObjectName}', recording{ViewerObjectName});";
       _browser.ExecuteScriptAsync(script);
-      await _recordingTask.Task;
-      Dictionary<string, object> recording = _recordingTask.Task.Result;
-      return CreateRecording(recording);
+      await _resultTask.Task;
+      return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
     public async Task<bool> GetRecordingsVisibleAsync()
     {
-      _recordingsVisibleTask = new TaskCompletionSource<bool>();
-      string script =
-        $"panoramaViewerEvents.onRecordingsVisible('{ViewerObjectName}', {ViewerObjectName}.getRecordingsVisible());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getRecordingsVisible());";
       _browser.ExecuteScriptAsync(script);
-      await _recordingsVisibleTask.Task;
-      return _recordingsVisibleTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<bool> getTimeTravelExpandedAsync()
     {
-      _timeTravelExpandedTask = new TaskCompletionSource<bool>();
+      _resultTask = new TaskCompletionSource<object>();
       string script =
-        $"panoramaViewerEvents.onTimeTravelExpanded('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelExpanded());";
+        $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelExpanded());";
       _browser.ExecuteScriptAsync(script);
-      await _timeTravelExpandedTask.Task;
-      return _timeTravelExpandedTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<bool> getTimeTravelVisibleAsync()
     {
-      _timeTravelVisibleTask = new TaskCompletionSource<bool>();
-      string script =
-        $"panoramaViewerEvents.onTimeTravelVisible('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelVisible());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelVisible());";
       _browser.ExecuteScriptAsync(script);
-      await _timeTravelVisibleTask.Task;
-      return _timeTravelVisibleTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<Color> GetViewerColorAsync()
     {
-      _viewerColorTask = new TaskCompletionSource<object[]>();
-      string script = $@"panoramaViewerEvents.onViewerColor('{ViewerObjectName}',{ViewerObjectName}.getViewerColor());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = $@"panoramaViewerEvents.onResult('{ViewerObjectName}',{ViewerObjectName}.getViewerColor());";
       _browser.ExecuteScriptAsync(script);
-      await _viewerColorTask.Task;
-      object[] color = _viewerColorTask.Task.Result;
-      return Color.FromArgb((int)((double)color[3] * 255), (int)color[0], (int)color[1], (int)color[2]);
+      await _resultTask.Task;
+      object[] color = (object[]) _resultTask.Task.Result;
+      return Color.FromArgb((int) ((double) color[3]*255), (int) color[0], (int) color[1], (int) color[2]);
     }
 
-    public void LookAtCoordinate(Coordinate coordinate)
+    public void LookAtCoordinate(Coordinate coordinate, string srs = null)
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double)coordinate.Z).ToString(ci)}";
+      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
+      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       var script =
-        $"{ViewerObjectName}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]);";
+        $"{ViewerObjectName}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{srsComponent});";
       _browser.ExecuteScriptAsync(script);
     }
 
-    public void LookAtCoordinate(Coordinate coordinate, string srs)
+    public async Task<Recording> OpenByAddressAsync(string query, string srs = null)
     {
+      _resultTask = new TaskCompletionSource<object>();
+      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
+      string script =
+        $@"{ViewerObjectName}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onError('{
+          ViewerObjectName}', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{
+          ViewerObjectName}', r)}});";
+      _browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+
+      if (_resultTask.Task.Result is Exception)
+      {
+        throw (Exception) _resultTask.Task.Result;
+      }
+
+      return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
+    }
+
+    public async Task<Recording> OpenByCoordinateAsync(Coordinate coordinate, string srs = null)
+    {
+      _resultTask = new TaskCompletionSource<object>();
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double)coordinate.Z).ToString(ci)}";
+      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
+      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       var script =
-        $"{ViewerObjectName}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}], '{srs}');";
+        $@"{ViewerObjectName}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{
+          srsComponent}).catch(function(e){{panoramaViewerEvents.onError('{ViewerObjectName
+          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
+          }', r)}});";
       _browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+
+      if (_resultTask.Task.Result is Exception)
+      {
+        throw (Exception)_resultTask.Task.Result;
+      }
+
+      return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
-    public void OpenByAddress(string query)
+    public async Task<Recording> OpenByImageIdAsync(string imageId, string srs = null)
     {
+      _resultTask = new TaskCompletionSource<object>();
+      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       string script =
-        $@"{ViewerObjectName}.openByAddress('{query}').catch(function(e)
-           {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
+        $@"{ViewerObjectName}.openByImageId('{imageId}'{srsComponent
+          }).catch(function(e){{panoramaViewerEvents.onError('{ViewerObjectName
+          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
+          }', r)}});";
       _browser.ExecuteScriptAsync(script);
-    }
+      await _resultTask.Task;
 
-    public void OpenByAddress(string query, string srs)
-    {
-      string script =
-        $@"{ViewerObjectName}.openByAddress('{query}', '{srs}').catch(function(e)
-         {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      if (_resultTask.Task.Result is Exception)
+      {
+        throw (Exception)_resultTask.Task.Result;
+      }
 
-    public void OpenByCoordinate(Coordinate coordinate)
-    {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double)coordinate.Z).ToString(ci)}";
-      string script =
-        $@"{ViewerObjectName}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]).catch(function(e)
-           {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void OpenByCoordinate(Coordinate coordinate, string srs)
-    {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double)coordinate.Z).ToString(ci)}";
-      var script =
-        $@"{ViewerObjectName}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}], '{srs}').catch(function(e)
-           {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void OpenByImageId(string imageId)
-    {
-      string script =
-        $@"{ViewerObjectName}.openByImageId('{imageId}').catch(function(e)
-           {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void OpenByImageId(string imageId, string srs)
-    {
-      string script =
-        $@"{ViewerObjectName}.openByImageId('{imageId}', '{srs}').catch(function(e)
-           {{panoramaViewerEvents.onOpenImageError('{ViewerObjectName}', e.message)}});";
-      _browser.ExecuteScriptAsync(script);
+      return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
     public void RotateDown(double deltaPitch)
@@ -384,7 +371,7 @@ namespace StreetSmart.WinForms
 
       RecordingClick?.Invoke(this, new EventRecordingClickArgs
       {
-        Recording = CreateRecording(recording),
+        Recording = new Recording(recording),
         shiftKey = (bool) eventData["shiftKey"],
         altKey = (bool) eventData["altKey"],
         ctrlKey = (bool) eventData["ctrlKey"]
@@ -399,7 +386,7 @@ namespace StreetSmart.WinForms
 
     public void OnViewChange(Dictionary<string, object> args)
     {
-      Orientation orientation = CreateOrientation(args);
+      Orientation orientation = new Orientation(args);
       ViewChange?.Invoke(this, new EventViewChangeArgs {Orientation = orientation});
     }
 
@@ -417,94 +404,14 @@ namespace StreetSmart.WinForms
 
     #region Callbacks PanoramaViewer
 
-    public void OnNavbarExpanded(bool expanded)
+    public void OnResult(object result)
     {
-      _navbarExpandedTask.TrySetResult(expanded);
+      _resultTask.TrySetResult(result);
     }
 
-    public void OnNavbarVisible(bool visible)
+    public void OnError(string message)
     {
-      _navbarVisibleTask.TrySetResult(visible);
-    }
-
-    public void OnOpenImageError(string message)
-    {
-      OpenImageError?.Invoke(this, new EventOpenImageErrorArgs { Message = message });
-    }
-
-    public void OnOrientation(Dictionary<string, object> orientation)
-    {
-      _orientationTask.TrySetResult(orientation);
-    }
-
-    public void OnRecording(Dictionary<string, object> recording)
-    {
-      _recordingTask.TrySetResult(recording);
-    }
-
-    public void OnRecordingsVisible(bool visible)
-    {
-      _recordingsVisibleTask.TrySetResult(visible);
-    }
-
-    public void OnTimeTravelExpanded(bool expanded)
-    {
-      _timeTravelExpandedTask.TrySetResult(expanded);
-    }
-
-    public void OnTimeTravelVisible(bool visible)
-    {
-      _timeTravelVisibleTask.TrySetResult(visible);
-    }
-
-    public void OnViewerColor(object[] color)
-    {
-      _viewerColorTask.TrySetResult(color);
-    }
-
-    #endregion
-
-    #region private functions
-
-    private Orientation CreateOrientation(Dictionary<string, object> orientation)
-    {
-      return new Orientation
-      {
-        Yaw = double.Parse(orientation["yaw"].ToString()),
-        Pitch = double.Parse(orientation["pitch"].ToString()),
-        hFov = double.Parse(orientation["hFov"].ToString())
-      };
-    }
-
-    private Recording CreateRecording(Dictionary<string, object> recording)
-    {
-      Dictionary<string, object> xyz = (Dictionary<string, object>)recording["xyz"];
-
-      Coordinate coordinate = new Coordinate
-      {
-        X = (double)xyz["0"],
-        Y = (double)xyz["1"],
-        Z = (double)xyz["2"]
-      };
-
-      return new Recording
-      {
-        GroundLevelOffset = (double?) recording["groundLevelOffset"],
-        RecorderDirection = (double?) recording["recorderDirection"],
-        Orientation = (double?) recording["orientation"],
-        RecordedAt = (DateTime?) recording["recordedAt"],
-        Id = (string) recording["id"],
-        XYZ = coordinate,
-        SRS = (string) recording["srs"],
-        OrientationPrecision = (double?) recording["orientationPrecision"],
-        TileSchema = (TileSchema) Enum.Parse(typeof (TileSchema), (string) recording["tileSchema"]),
-        LongitudePrecision = (double?) recording["longitudePrecision"],
-        LatitudePrecision = (double?) recording["latitudePrecision"],
-        HeightPrecision = (double?) recording["heightPrecision"],
-        ProductType = (ProductType) Enum.Parse(typeof (ProductType), (string) recording["productType"]),
-        HeightSystem = (string) recording["heightSystem"],
-        ExpiredAt = (DateTime?) recording["expiredAt"]
-      };
+      _resultTask.TrySetResult(new StreetSmartAPIException(message));
     }
 
     #endregion

@@ -163,75 +163,19 @@ namespace StreetSmart.WinForms
 
     #region Callbacks PanoramaViewer
 
-    public void OnNavbarExpanded(string viewerObjectName, bool visible)
+    public void OnResult(string viewerObjectName, object result)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnNavbarExpanded(visible);
+        _listeners[viewerObjectName].OnResult(result);
       }
     }
 
-    public void OnNavbarVisible(string viewerObjectName, bool visible)
+    public void OnError(string viewerObjectName, string message)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnNavbarVisible(visible);
-      }
-    }
-
-    public void OnOpenImageError(string viewerObjectName, string message)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnOpenImageError(message);
-      }
-    }
-
-    public void OnOrientation(string viewerObjectName, Dictionary<string, object> orientation)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnOrientation(orientation);
-      }
-    }
-
-    public void OnRecording(string viewerObjectName, Dictionary<string, object> recording)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnRecording(recording);
-      }
-    }
-
-    public void OnRecordingsVisible(string viewerObjectName, bool visible)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnRecordingsVisible(visible);
-      }
-    }
-
-    public void OnTimeTravelExpanded(string viewerObjectName, bool expanded)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnTimeTravelExpanded(expanded);
-      }
-    }
-
-    public void OnTimeTravelVisible(string viewerObjectName, bool visible)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnTimeTravelVisible(visible);
-      }
-    }
-
-    public void OnViewerColor(string viewerObjectName, object[] color)
-    {
-      if (_listeners.ContainsKey(viewerObjectName))
-      {
-        _listeners[viewerObjectName].OnViewerColor(color);
+        _listeners[viewerObjectName].OnError(message);
       }
     }
 

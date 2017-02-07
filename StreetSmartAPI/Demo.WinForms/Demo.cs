@@ -171,12 +171,6 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnOpenImageError(object sender, EventOpenImageErrorArgs args)
-    {
-      string text = $"Open image error, message: {args.Message}";
-      AddViewerEventsText(text);
-    }
-
     #endregion
 
     #region events from user interface
@@ -207,7 +201,6 @@ namespace Demo.WinForms
         Viewer.ViewChange -= OnViewChange;
         Viewer.ViewLoadEnd -= OnViewLoadEnd;
         Viewer.ViewLoadStart -= OnViewLoadStart;
-        Viewer.OpenImageError -= OnOpenImageError;
 
         _api?.DestroyPanoramaViewer(Viewer);
         _viewers.RemoveAt(_viewers.Count - 1);
@@ -246,15 +239,17 @@ namespace Demo.WinForms
       txtRecordingViewerColorPermissions.Text = permissionsString;
     }
 
-    private void btnOpenByAddress_Click(object sender, EventArgs e)
+    private async void btnOpenByAddress_Click(object sender, EventArgs e)
     {
+      Recording recording;
+
       if (string.IsNullOrEmpty(txtAddressSrs.Text))
       {
-        Viewer?.OpenByAddress(txtAdress.Text);
+        recording = await Viewer.OpenByAddressAsync(txtAdress.Text);
       }
       else
       {
-        Viewer?.OpenByAddress(txtAdress.Text, txtAddressSrs.Text);
+        recording = await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
       }
 
       EnableImageEnables(true);
@@ -350,21 +345,23 @@ namespace Demo.WinForms
       Viewer.ToggleTimeTravelExpanded(!expanded);
     }
 
-    private void btnOpenByImageId_Click(object sender, EventArgs e)
+    private async void btnOpenByImageId_Click(object sender, EventArgs e)
     {
+      Recording recording;
+
       if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
       {
-        Viewer.OpenByImageId(txtImageId.Text);
+        recording = await Viewer.OpenByImageIdAsync(txtImageId.Text);
       }
       else
       {
-        Viewer.OpenByImageId(txtImageId.Text, txtOpenByImageSrs.Text);
+        recording = await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
       }
 
       EnableImageEnables(true);
     }
 
-    private void btnOpenByCoordinate_Click(object sender, EventArgs e)
+    private async void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
       Coordinate coordinate = new Coordinate
       {
@@ -373,13 +370,15 @@ namespace Demo.WinForms
         Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) ParseDouble(txtZ.Text))
       };
 
+      Recording recording;
+
       if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
-        Viewer.OpenByCoordinate(coordinate);
+        recording = await Viewer.OpenByCoordinateAsync(coordinate);
       }
       else
       {
-        Viewer.OpenByCoordinate(coordinate, txtCoordinateSrs.Text);
+        recording = await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
       }
 
       EnableImageEnables(true);
@@ -409,7 +408,6 @@ namespace Demo.WinForms
       Viewer.ViewChange += OnViewChange;
       Viewer.ViewLoadEnd += OnViewLoadEnd;
       Viewer.ViewLoadStart += OnViewLoadStart;
-      Viewer.OpenImageError += OnOpenImageError;
     }
 
     private async void btnGetAddress_Click(object sender, EventArgs e)

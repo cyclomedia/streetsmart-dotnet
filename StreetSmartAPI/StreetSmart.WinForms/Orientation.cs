@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
+
 namespace StreetSmart.WinForms
 {
   // ReSharper disable InconsistentNaming
@@ -25,6 +27,17 @@ namespace StreetSmart.WinForms
   /// </summary>
   public class Orientation
   {
+    public Orientation()
+    {
+    }
+
+    public Orientation(Dictionary<string, object> orientation)
+    {
+      Yaw = double.Parse(orientation["yaw"].ToString());
+      Pitch = double.Parse(orientation["pitch"].ToString());
+      hFov = double.Parse(orientation["hFov"].ToString());
+    }
+
     /// <summary>
     ///  	Optional value of the yaw.
     /// </summary>

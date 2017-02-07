@@ -62,11 +62,6 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<EventViewerArgs> ViewLoadStart;
 
     /// <summary>
-    /// Triggers when open an image is failed.
-    /// </summary>
-    event EventHandler<EventOpenImageErrorArgs> OpenImageError;
-
-    /// <summary>
     /// Returns the navbarExpanded state.
     /// This is an asynchronous function.
     /// </summary>
@@ -126,53 +121,29 @@ namespace StreetSmart.WinForms.Interfaces
     /// Sets the orientation of the PanoramaViewer to look at a certain coordinate.
     /// </summary>
     /// <param name="coordinate">Coordinate to look to.</param>
-    void LookAtCoordinate(Coordinate coordinate);
-
-    /// <summary>
-    /// Sets the orientation of the PanoramaViewer to look at a certain coordinate.
-    /// </summary>
-    /// <param name="coordinate">Coordinate to look to.</param>
-    /// <param name="srs">Will use to convert coordinate to viewer srs.</param>
-    void LookAtCoordinate(Coordinate coordinate, string srs);
+    /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
+    void LookAtCoordinate(Coordinate coordinate, string srs = null);
 
     /// <summary>
     /// Opens a panorama closest to the given address.
     /// </summary>
     /// <param name="query">Address you want to search.</param>
-    void OpenByAddress(string query);
-
-    /// <summary>
-    /// Opens a panorama closest to the given address.
-    /// </summary>
-    /// <param name="query">Address you want to search.</param>
-    /// <param name="srs">Coordinate system in which the panorama will be opened.</param>
-    void OpenByAddress(string query, string srs);
-
-    /// <summary>
-    /// Opens an image by coordinates and accompanying coordinate system.
-    /// </summary>
-    /// <param name="coordinate"></param>
-    void OpenByCoordinate(Coordinate coordinate);
+    /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
+    Task<Recording> OpenByAddressAsync(string query, string srs = null);
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="coordinate">Coordinate of location to open a panorama.</param>
-    /// <param name="srs">Will use to convert coordinate to viewer srs.</param>
-    void OpenByCoordinate(Coordinate coordinate, string srs);
+    /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
+    Task<Recording> OpenByCoordinateAsync(Coordinate coordinate, string srs = null);
 
     /// <summary>
     /// Opens an image by imageId.
     /// </summary>
     /// <param name="imageId">ID of the image that needs to be opened.</param>
-    void OpenByImageId(string imageId);
-
-    /// <summary>
-    /// Opens an image by imageId.
-    /// </summary>
-    /// <param name="imageId">ID of the image that needs to be opened.</param>
-    /// <param name="srs">Coordinate system in which the panorama will be opened.</param>
-    void OpenByImageId(string imageId, string srs);
+    /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
+    Task<Recording> OpenByImageIdAsync(string imageId, string srs = null);
 
     /// <summary>
     /// Rotates the panorama vertically by a certain amount, as if the camera is turning to the ground.

@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms
 {
@@ -74,6 +75,33 @@ namespace StreetSmart.WinForms
   /// </summary>
   public class Recording
   {
+    public Recording(Dictionary<string, object> recording)
+    {
+      Dictionary<string, object> xyz = (Dictionary<string, object>) recording["xyz"];
+
+      XYZ = new Coordinate
+      {
+        X = (double) xyz["0"],
+        Y = (double) xyz["1"],
+        Z = (double) xyz["2"]
+      };
+
+      GroundLevelOffset = (double?) recording["groundLevelOffset"];
+      RecorderDirection = (double?) recording["recorderDirection"];
+      Orientation = (double?) recording["orientation"];
+      RecordedAt = (DateTime?) recording["recordedAt"];
+      Id = (string) recording["id"];
+      SRS = (string) recording["srs"];
+      OrientationPrecision = (double?) recording["orientationPrecision"];
+      TileSchema = (TileSchema) Enum.Parse(typeof (TileSchema), (string) recording["tileSchema"]);
+      LongitudePrecision = (double?) recording["longitudePrecision"];
+      LatitudePrecision = (double?) recording["latitudePrecision"];
+      HeightPrecision = (double?) recording["heightPrecision"];
+      ProductType = (ProductType) Enum.Parse(typeof (ProductType), (string) recording["productType"]);
+      HeightSystem = (string) recording["heightSystem"];
+      ExpiredAt = (DateTime?) recording["expiredAt"];
+    }
+
     /// <summary>
     /// Ground level offset
     /// </summary>

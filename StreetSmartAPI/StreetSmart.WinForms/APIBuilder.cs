@@ -33,7 +33,7 @@ namespace StreetSmart.WinForms
   {
     static APIBuilder()
     {
-      Cef.Initialize(new CefSettings(), false, true);
+      Cef.Initialize(new CefSettings());
     }
 
     /// <summary>
