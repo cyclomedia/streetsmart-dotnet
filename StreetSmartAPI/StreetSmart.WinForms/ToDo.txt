@@ -1,6 +1,15 @@
-﻿Vragen:
-- EventViewerArgs, hoe invullen?
-- EventTileLoadArgs, hoe invullen?
+﻿Aanpassen:
+- Vragen:
+	- EventViewerArgs, hoe invullen?
+	- EventTileLoadArgs, hoe invullen?
+- Refactoring:
+	- Resources => naar app.settings
+	- Events => moet anders
+	- Interfaces => uitbreiden
+	- Data classes => naar data classes map
+	- Namen van de viewers => intern GUID genereren
+	- Geen javascript om viewer te genereren, maar via een aparte class doen
+
 
 labs-api:
 https://labs.cyclomedia.com/streetsmart/api/api-dotnet.html

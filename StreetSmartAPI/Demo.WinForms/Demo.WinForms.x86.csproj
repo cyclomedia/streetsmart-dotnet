@@ -65,39 +65,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Demo.cs">
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.cs">
+      <Link>Demo.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Demo.Designer.cs">
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.designer.cs">
+      <Link>Demo.designer.cs</Link>
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Demo.resx">
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs">
+      <Link>Program.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
+      <Link>Demo.resx</Link>
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.resx">
+      <Link>Properties\Resources.resx</Link>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.Designer.cs">
+      <Link>Properties\Resources.cs</Link>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    <None Include="..\..\DemoAPI\Demo.WinForms\App.config">
+      <Link>App.config</Link>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StreetSmart.WinForms\StreetSmart.WinForms.x86.csproj">

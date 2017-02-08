@@ -51,6 +51,10 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StreetSmart.WinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=27f0251e46fddaf9, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>x64\StreetSmart.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,39 +67,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.cs">
+    <Compile Include="Demo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.Designer.cs">
+    <Compile Include="Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs" />
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
-      <Link>Properties\AssemblyInfo.cs</Link>
-    </Compile>
-    <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-      <Link>Properties\Resources.resx</Link>
     </EmbeddedResource>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.Designer.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
-      <Link>Properties\Resources.Designer.cs</Link>
     </Compile>
+    <None Include="x64\cef.pak" />
+    <None Include="x64\cef_100_percent.pak" />
+    <None Include="x64\cef_200_percent.pak" />
+    <None Include="x64\cef_extensions.pak" />
+    <None Include="x64\devtools_resources.pak" />
+    <None Include="x64\icudtl.dat" />
+    <None Include="x64\locales\am.pak" />
+    <None Include="x64\locales\ar.pak" />
+    <None Include="x64\locales\bg.pak" />
+    <None Include="x64\locales\bn.pak" />
+    <None Include="x64\locales\ca.pak" />
+    <None Include="x64\locales\cs.pak" />
+    <None Include="x64\locales\da.pak" />
+    <None Include="x64\locales\de.pak" />
+    <None Include="x64\locales\el.pak" />
+    <None Include="x64\locales\en-GB.pak" />
+    <None Include="x64\locales\en-US.pak" />
+    <None Include="x64\locales\es-419.pak" />
+    <None Include="x64\locales\es.pak" />
+    <None Include="x64\locales\et.pak" />
+    <None Include="x64\locales\fa.pak" />
+    <None Include="x64\locales\fi.pak" />
+    <None Include="x64\locales\fil.pak" />
+    <None Include="x64\locales\fr.pak" />
+    <None Include="x64\locales\gu.pak" />
+    <None Include="x64\locales\he.pak" />
+    <None Include="x64\locales\hi.pak" />
+    <None Include="x64\locales\hr.pak" />
+    <None Include="x64\locales\hu.pak" />
+    <None Include="x64\locales\id.pak" />
+    <None Include="x64\locales\it.pak" />
+    <None Include="x64\locales\ja.pak" />
+    <None Include="x64\locales\kn.pak" />
+    <None Include="x64\locales\ko.pak" />
+    <None Include="x64\locales\lt.pak" />
+    <None Include="x64\locales\lv.pak" />
+    <None Include="x64\locales\ml.pak" />
+    <None Include="x64\locales\mr.pak" />
+    <None Include="x64\locales\ms.pak" />
+    <None Include="x64\locales\nb.pak" />
+    <None Include="x64\locales\nl.pak" />
+    <None Include="x64\locales\pl.pak" />
+    <None Include="x64\locales\pt-BR.pak" />
+    <None Include="x64\locales\pt-PT.pak" />
+    <None Include="x64\locales\ro.pak" />
+    <None Include="x64\locales\ru.pak" />
+    <None Include="x64\locales\sk.pak" />
+    <None Include="x64\locales\sl.pak" />
+    <None Include="x64\locales\sr.pak" />
+    <None Include="x64\locales\sv.pak" />
+    <None Include="x64\locales\sw.pak" />
+    <None Include="x64\locales\ta.pak" />
+    <None Include="x64\locales\te.pak" />
+    <None Include="x64\locales\th.pak" />
+    <None Include="x64\locales\tr.pak" />
+    <None Include="x64\locales\uk.pak" />
+    <None Include="x64\locales\vi.pak" />
+    <None Include="x64\locales\zh-CN.pak" />
+    <None Include="x64\locales\zh-TW.pak" />
+    <None Include="x64\natives_blob.bin" />
+    <None Include="x64\snapshot_blob.bin" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\DemoAPI\Demo.WinForms\App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StreetSmart.WinForms\StreetSmart.WinForms.x64.csproj">
-      <Project>{11d8ce67-dc5b-4fc9-871b-968b97b5c990}</Project>
-      <Name>StreetSmart.WinForms.x64</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -109,16 +165,28 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="x64\CefSharp.BrowserSubprocess.Core.dll" />
+    <Content Include="x64\CefSharp.BrowserSubprocess.exe" />
+    <Content Include="x64\CefSharp.Core.dll" />
+    <Content Include="x64\CefSharp.Core.xml" />
+    <Content Include="x64\CefSharp.dll" />
+    <Content Include="x64\CefSharp.WinForms.dll" />
+    <Content Include="x64\CefSharp.WinForms.xml" />
+    <Content Include="x64\CefSharp.xml" />
+    <Content Include="x64\chrome_elf.dll" />
+    <Content Include="x64\d3dcompiler_43.dll" />
+    <Content Include="x64\d3dcompiler_47.dll" />
+    <Content Include="x64\libcef.dll" />
+    <Content Include="x64\libEGL.dll" />
+    <Content Include="x64\libGLESv2.dll" />
+    <Content Include="x64\StreetSmart.WinForms.XML" />
+    <Content Include="x64\widevinecdmadapter.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.dll" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.bin" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.dat" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.pak" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\*.exe" *
-mkdir locales
-xcopy /Y  "$(SolutionDir)StreetSmart.WinForms\bin\x64\$(ConfigurationName)\locales\*.pak" "locales\*"
-</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(ProjectDir)x64\*.*" *</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
