@@ -34,7 +34,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\..\DemoAPI\Demo.WinForms\Debug\x86\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -43,7 +43,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>..\..\DemoAPI\Demo.WinForms\Release\x86\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -107,13 +107,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.dll" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.bin" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.dat" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.pak" *
-xcopy /Y "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\*.exe" *
+    <PostBuildEvent>xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.dll" *
+xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.bin" *
+xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.dat" *
+xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.pak" *
+xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.exe" *
 mkdir locales
-xcopy /Y  "$(SolutionDir)StreetSmart.WinForms\bin\x86\$(ConfigurationName)\locales\*.pak" "locales\*"
+xcopy /Y  "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\locales\*.pak" "locales\*"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
