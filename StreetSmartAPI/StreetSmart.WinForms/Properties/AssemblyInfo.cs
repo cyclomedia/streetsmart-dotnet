@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CycloMedia")]
 [assembly: AssemblyProduct("StreetSmart API")]
-[assembly: AssemblyCopyright("Copyright © CycloMedia 2016")]
+[assembly: AssemblyCopyright("Copyright © CycloMedia 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

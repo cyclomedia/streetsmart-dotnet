@@ -46,12 +46,12 @@ namespace StreetSmart.WinForms
 
     #region Events
 
-    public event EventHandler<EventViewerArgs> ImageChange;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
     public event EventHandler<EventRecordingClickArgs> RecordingClick;
-    public event EventHandler<EventTileLoadErrorArgs> TileLoadError;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<EventViewChangeArgs> ViewChange;
-    public event EventHandler<EventViewerArgs> ViewLoadEnd;
-    public event EventHandler<EventViewerArgs> ViewLoadStart;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
 
     #endregion
 
@@ -361,7 +361,7 @@ namespace StreetSmart.WinForms
 
     public void OnImageChange(Dictionary<string, object> args)
     {
-      ImageChange?.Invoke(this, new EventViewerArgs { ViewerArgs = args });
+      ImageChange?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
     }
 
     public void OnRecordingClick(Dictionary<string, object> args)
@@ -381,7 +381,7 @@ namespace StreetSmart.WinForms
     public void OnTileLoadError(Dictionary<string, object> args)
     {
       Dictionary<string, object> request = (Dictionary<string, object>) args["request"];
-      TileLoadError?.Invoke(this, new EventTileLoadErrorArgs { Request = request });
+      TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>(request));
     }
 
     public void OnViewChange(Dictionary<string, object> args)
@@ -392,12 +392,12 @@ namespace StreetSmart.WinForms
 
     public void OnViewLoadEnd(Dictionary<string, object> args)
     {
-      ViewLoadEnd?.Invoke(this, new EventViewerArgs { ViewerArgs = args });
+      ViewLoadEnd?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
     }
 
     public void OnViewLoadStart(Dictionary<string, object> args)
     {
-      ViewLoadStart?.Invoke(this, new EventViewerArgs { ViewerArgs = args });
+      ViewLoadStart?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
     }
 
     #endregion

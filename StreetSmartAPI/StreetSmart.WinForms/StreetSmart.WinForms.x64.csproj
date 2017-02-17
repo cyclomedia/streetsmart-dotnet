@@ -75,14 +75,14 @@
     <Compile Include="APIBuilder.cs" />
     <Compile Include="AddressSettings.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="EventArgs.cs" />
     <Compile Include="Events\EventRecordingClickArgs.cs" />
     <Compile Include="Events\EventViewChangeArgs.cs" />
-    <Compile Include="Events\EventTileLoadErrorArgs.cs" />
+    <Compile Include="Interfaces\IEventArgs.cs" />
     <Compile Include="Orientation.cs" />
     <Compile Include="PanoramaViewer.cs" />
     <Compile Include="PanoramaViewerEvents.cs" />
     <Compile Include="DownloadHandler.cs" />
-    <Compile Include="Events\EventViewerArgs.cs" />
     <Compile Include="Interfaces\IPanoramaViewer.cs" />
     <Compile Include="Interfaces\IStreetSmartAPI.cs" />
     <Compile Include="Events\EventInitArgs.cs" />

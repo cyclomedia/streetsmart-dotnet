@@ -134,7 +134,7 @@ namespace Demo.WinForms
       }
     }
 
-    private void OnImageChange(object sender, EventViewerArgs args)
+    private void OnImageChange(object sender, IEventArgs<IDictionary<string, object>>  args)
     {
       string text = "Image change";
       AddViewerEventsText(text);
@@ -146,7 +146,7 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnTileLoadError(object sender, EventTileLoadErrorArgs args)
+    private void OnTileLoadError(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Tile load error";
       AddViewerEventsText(text);
@@ -159,13 +159,13 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadEnd(object sender, EventViewerArgs args)
+    private void OnViewLoadEnd(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Image load end";
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadStart(object sender, EventViewerArgs args)
+    private void OnViewLoadStart(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Image load start";
       AddViewerEventsText(text);

@@ -17,20 +17,17 @@
  */
 
 using System;
-using System.Collections.Generic;
+using StreetSmart.WinForms.Interfaces;
 
-namespace StreetSmart.WinForms.Events
+namespace StreetSmart.WinForms
 {
-  /// <summary>
-  /// - Triggers when the loaded panorama is altered.
-  /// - Triggers when everything that is needed for the view to dislay correctly is loaded.
-  /// - Triggers when the view is altered and needs to be (partly) reloaded.
-  /// </summary>
-  public class EventViewerArgs : EventArgs
+  internal class EventArgs<T> : EventArgs, IEventArgs<T>
   {
-    /// <summary>
-    /// Custom event data
-    /// </summary>
-    public Dictionary<string, object> ViewerArgs { get; set; }
+    public T Value { get; }
+
+    public EventArgs(T value)
+    {
+      Value = value;
+    }
   }
 }

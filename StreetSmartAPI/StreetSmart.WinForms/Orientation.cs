@@ -27,10 +27,17 @@ namespace StreetSmart.WinForms
   /// </summary>
   public class Orientation
   {
+    /// <summary>
+    /// 
+    /// </summary>
     public Orientation()
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="orientation"></param>
     public Orientation(Dictionary<string, object> orientation)
     {
       Yaw = double.Parse(orientation["yaw"].ToString());

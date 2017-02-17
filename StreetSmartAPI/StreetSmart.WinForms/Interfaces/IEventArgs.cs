@@ -16,19 +16,17 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-
-namespace StreetSmart.WinForms.Events
+namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Triggers when one or more tiles could not be loaded.
+  /// 
   /// </summary>
-  public class EventTileLoadErrorArgs : EventArgs
+  /// <typeparam name="T"></typeparam>
+  public interface IEventArgs<out T>
   {
     /// <summary>
-    /// Contains the XMLHttpRequest which failed
+    /// 
     /// </summary>
-    public Dictionary<string, object> Request { get; set; }
+    T Value { get; }
   }
 }

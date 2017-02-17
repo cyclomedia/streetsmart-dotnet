@@ -75,6 +75,10 @@ namespace StreetSmart.WinForms
   /// </summary>
   public class Recording
   {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="recording"></param>
     public Recording(Dictionary<string, object> recording)
     {
       Dictionary<string, object> xyz = (Dictionary<string, object>) recording["xyz"];

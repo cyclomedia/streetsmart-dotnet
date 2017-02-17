@@ -19,6 +19,7 @@
 using StreetSmart.WinForms.Events;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Triggers when the loaded panorama is altered.
     /// </summary>
-    event EventHandler<EventViewerArgs> ImageChange;
+    event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
 
     /// <summary>
     /// Triggers when a recording is clicked inside the PanoramaViewer.
@@ -44,7 +45,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Triggers when one or more tiles could not be loaded.
     /// </summary>
-    event EventHandler<EventTileLoadErrorArgs> TileLoadError;
+    event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
 
     /// <summary>
     /// Triggers when the view (pitch, hFov or yaw) of the panorama is altered.
@@ -54,12 +55,12 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Triggers when everything that is needed for the view to dislay correctly is loaded.
     /// </summary>
-    event EventHandler<EventViewerArgs> ViewLoadEnd;
+    event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
 
     /// <summary>
     /// Triggers when the view is altered and needs to be (partly) reloaded.
     /// </summary>
-    event EventHandler<EventViewerArgs> ViewLoadStart;
+    event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
 
     /// <summary>
     /// Returns the navbarExpanded state.
