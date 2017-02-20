@@ -16,43 +16,50 @@
  * License along with this library.
  */
 
-using CefSharp;
+using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.WinForms.Interfaces;
 
-using static StreetSmart.WinForms.Properties.Resources;
-
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.Data
 {
   // ReSharper disable InconsistentNaming
 
-  /// <summary>
-  /// Creates a new instance of the API.
-  /// </summary>
-  public class APIBuilder
+  internal class AddressSettings : NotifyPropertyChanged, IAddressSettings
   {
-    static APIBuilder()
+    private CultureInfo _locale;
+    private string _database;
+
+    public AddressSettings(CultureInfo locale, string database)
     {
-      Cef.Initialize(new CefSettings());
+      Locale = locale;
+      Database = database;
     }
 
-    /// <summary>
-    /// Creates a new instance of the API.
-    /// </summary>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI()
+    public AddressSettings(Dictionary<string, object> addressSettings)
     {
-      return CreateAPI(StreetSmartLocation);
+      Locale = new CultureInfo((string) addressSettings["locale"]);
+      Database = (string) addressSettings["database"];
     }
 
-    /// <summary>
-    /// Creates a new instance of the API
-    /// </summary>
-    /// <param name="streetSmartLocation">The location of StreetSmart</param>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI CreateAPI(string streetSmartLocation)
+    public CultureInfo Locale
     {
-      return new StreetSmartAPI(streetSmartLocation);
+      get { return _locale; }
+      set
+      {
+        _locale = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Database
+    {
+      get { return _database; }
+      set
+      {
+        _database = value;
+        RaisePropertyChanged();
+      }
     }
   }
 

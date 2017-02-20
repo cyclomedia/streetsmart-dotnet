@@ -18,6 +18,7 @@
 
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Events;
+using StreetSmart.WinForms.Factories;
 using StreetSmart.WinForms.Interfaces;
 
 using System;
@@ -28,6 +29,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using static Demo.WinForms.Properties.Resources;
+
 using Orientation = StreetSmart.WinForms.Orientation;
 
 namespace Demo.WinForms
@@ -68,9 +70,8 @@ namespace Demo.WinForms
       InitializeComponent();
       _ci = CultureInfo.InvariantCulture;
       _viewers = new List<IPanoramaViewer>();
-      _api = APIBuilder.CreateAPI();
-      _api.FrameLoaded += OnFrameLoaded;
-      _api.InitComplete += OnInitComplete;
+      _api = APIFactory.Create();
+      _api.APIReady += OnAPIReady;
       plStreetSmart.Controls.Add(_api.GUI);
       grLogin.Enabled = false;
       grOpenByAddress.Enabled = false;
@@ -92,7 +93,8 @@ namespace Demo.WinForms
 
     #region events api
 
-    private void OnFrameLoaded(object sender, EventArgs args)
+    // ReSharper disable once InconsistentNaming
+    private void OnAPIReady(object sender, EventArgs args)
     {
       if (grLogin.InvokeRequired)
       {
@@ -101,36 +103,6 @@ namespace Demo.WinForms
       else
       {
         grLogin.Enabled = true;
-      }
-    }
-
-    private void OnInitComplete(object sender, EventInitArgs args)
-    {
-      if (args.Success)
-      {
-        if (grAPIInfo.InvokeRequired)
-        {
-          grAPIInfo.Invoke(new MethodInvoker(() => grAPIInfo.Enabled = true));
-        }
-        else
-        {
-          grAPIInfo.Enabled = true;
-        }
-
-        if (grOpenCloseViewer.InvokeRequired)
-        {
-          grOpenCloseViewer.Invoke(new MethodInvoker(() => grOpenCloseViewer.Enabled = true));
-        }
-        else
-        {
-          grOpenCloseViewer.Enabled = true;
-        }
-
-        MessageBox.Show("Login successfully");
-      }
-      else
-      {
-        MessageBox.Show(args.ErrorMessage);
       }
     }
 
@@ -175,10 +147,39 @@ namespace Demo.WinForms
 
     #region events from user interface
 
-    private void btnLogin_Click(object sender, EventArgs e)
+    private async void btnLogin_Click(object sender, EventArgs e)
     {
-      AddressSettings addressSettings = new AddressSettings { Locale = "nl", Database = "CMDatabase" };
-      _api?.Init(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale, addressSettings);
+      IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
+      IOptions options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale, addressSettings);
+
+      try
+      {
+        await _api.Init(options);
+
+        if (grAPIInfo.InvokeRequired)
+        {
+          grAPIInfo.Invoke(new MethodInvoker(() => grAPIInfo.Enabled = true));
+        }
+        else
+        {
+          grAPIInfo.Enabled = true;
+        }
+
+        if (grOpenCloseViewer.InvokeRequired)
+        {
+          grOpenCloseViewer.Invoke(new MethodInvoker(() => grOpenCloseViewer.Enabled = true));
+        }
+        else
+        {
+          grOpenCloseViewer.Enabled = true;
+        }
+
+        MessageBox.Show("Login successfully");
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -412,7 +413,7 @@ namespace Demo.WinForms
 
     private async void btnGetAddress_Click(object sender, EventArgs e)
     {
-      AddressSettings addressSettings = await _api.getAddressSettingsAsync();
+      IAddressSettings addressSettings = await _api.getAddressSettingsAsync();
       string text = $"Locale: {addressSettings.Locale}{Environment.NewLine}Database: {addressSettings.Database}";
       txtRecordingViewerColorPermissions.Text = text;
     }

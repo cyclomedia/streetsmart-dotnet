@@ -16,25 +16,33 @@
  * License along with this library.
  */
 
-using CefSharp;
+using System.Runtime.InteropServices;
 
-namespace StreetSmart.WinForms
+// ReSharper disable once CheckNamespace
+namespace System.Security
 {
-  internal class DownloadHandler : IDownloadHandler
+  internal static class SecureStringExtensions
   {
-    public void OnBeforeDownload(IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+    public static string ConvertToUnsecureString(this SecureString secureString)
     {
-      if (!callback.IsDisposed)
+      string result = string.Empty;
+
+      if (secureString != null)
       {
-        using (callback)
+        IntPtr unmanagedString = IntPtr.Zero;
+
+        try
         {
-          callback.Continue(downloadItem.SuggestedFileName, true);
+          unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+          result = Marshal.PtrToStringUni(unmanagedString);
+        }
+        finally
+        {
+          Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
         }
       }
-    }
 
-    public void OnDownloadUpdated(IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
-    {
+      return result;
     }
   }
 }

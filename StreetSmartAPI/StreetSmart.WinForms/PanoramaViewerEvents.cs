@@ -82,10 +82,6 @@ namespace StreetSmart.WinForms
 
         _browser.ExecuteScriptAsync(script);
       }
-      else
-      {
-        throw new StreetSmartAPIException("Viewer is added already");
-      }
     }
 
     public void RemoveListener(PanoramaViewer cycloramaViewer)
@@ -171,11 +167,11 @@ namespace StreetSmart.WinForms
       }
     }
 
-    public void OnError(string viewerObjectName, string message)
+    public void OnImageNotFoundException(string viewerObjectName, string message)
     {
       if (_listeners.ContainsKey(viewerObjectName))
       {
-        _listeners[viewerObjectName].OnError(message);
+        _listeners[viewerObjectName].OnImageNotFoundException(message);
       }
     }
 

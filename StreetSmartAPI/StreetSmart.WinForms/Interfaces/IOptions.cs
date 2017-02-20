@@ -16,24 +16,53 @@
  * License along with this library.
  */
 
-namespace StreetSmart.WinForms
+using System;
+using System.Globalization;
+using System.Security;
+
+namespace StreetSmart.WinForms.Interfaces
 {
   // ReSharper disable InconsistentNaming
 
   /// <summary>
-  /// Address settings configuration
+  /// Options for initialize the API
   /// </summary>
-  public class AddressSettings
+  public interface IOptions
   {
     /// <summary>
-    /// Locale info
+    /// Username of the user
     /// </summary>
-    public string Locale { get; set; }
+    string Username { get; set; }
 
     /// <summary>
-    /// Address database
+    /// Password of the user
     /// </summary>
-    public string Database { get; set; }
+    SecureString Password { get; set; }
+
+    /// <summary>
+    /// ApiKey given to the user
+    /// </summary>
+    string APIKey { get; set; }
+
+    /// <summary>
+    /// Coordinate system used in the API
+    /// </summary>
+    string SRS { get; set; }
+
+    /// <summary>
+    /// Language used as default
+    /// </summary>
+    CultureInfo Locale { get; set; }
+
+    /// <summary>
+    /// Alternate configuration URL to use for all configuration services
+    /// </summary>
+    Uri ConfigurationURL { get; set; }
+
+    /// <summary>
+    /// Address search settings
+    /// </summary>
+    IAddressSettings AddressSettings { get; set; }
   }
 
   // ReSharper restore InconsistentNaming

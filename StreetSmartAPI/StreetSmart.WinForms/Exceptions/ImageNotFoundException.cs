@@ -17,17 +17,21 @@
  */
 
 using System;
-using StreetSmart.WinForms.Interfaces;
 
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.Exceptions
 {
-  internal class EventArgs<T> : EventArgs, IEventArgs<T>
+  internal class ImageNotFoundException : Exception
   {
-    public T Value { get; }
-
-    public EventArgs(T value)
+    public ImageNotFoundException()
     {
-      Value = value;
+    }
+
+    public ImageNotFoundException(string message) : base(message)
+    {
+    }
+
+    public ImageNotFoundException(string message, Exception inner) : base(message, inner)
+    {
     }
   }
 }

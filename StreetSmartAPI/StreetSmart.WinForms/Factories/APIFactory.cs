@@ -16,23 +16,43 @@
  * License along with this library.
  */
 
-using System;
+using CefSharp;
 
-namespace StreetSmart.WinForms
+using StreetSmart.WinForms.Handlers;
+using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Properties;
+
+namespace StreetSmart.WinForms.Factories
 {
   // ReSharper disable InconsistentNaming
 
   /// <summary>
-  /// Exception occurs in the Street Smart API
+  /// Creates a new instance of the API.
   /// </summary>
-  public class StreetSmartAPIException : Exception
+  public static class APIFactory
   {
-    /// <summary>
-    /// Constructor for create the exception.
-    /// </summary>
-    /// <param name="message">Exception message</param>
-    public StreetSmartAPIException(string message) : base(message)
+    static APIFactory()
     {
+      Cef.Initialize(new CefSettings(), true, new BrowserProcessHandler());
+    }
+
+    /// <summary>
+    /// Creates a new instance of the API.
+    /// </summary>
+    /// <returns>A new instance of the API.</returns>
+    public static IStreetSmartAPI Create()
+    {
+      return Create(Resources.StreetSmartLocation);
+    }
+
+    /// <summary>
+    /// Creates a new instance of the API
+    /// </summary>
+    /// <param name="streetSmartLocation">The location of StreetSmart</param>
+    /// <returns>A new instance of the API.</returns>
+    public static IStreetSmartAPI Create(string streetSmartLocation)
+    {
+      return new StreetSmartAPI(streetSmartLocation);
     }
   }
 

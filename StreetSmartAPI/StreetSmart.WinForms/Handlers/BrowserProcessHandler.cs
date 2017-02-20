@@ -16,24 +16,22 @@
  * License along with this library.
  */
 
-using System;
+using CefSharp;
 
-namespace StreetSmart.WinForms.Events
+namespace StreetSmart.WinForms.Handlers
 {
-  /// <summary>
-  /// Triggers when the init of the API is complete.
-  /// </summary>
-  public class EventInitArgs : EventArgs
+  internal class BrowserProcessHandler : IBrowserProcessHandler
   {
-    /// <summary>
-    /// true = login success
-    /// false = login failed
-    /// </summary>
-    public bool Success { get; set; }
+    public virtual void Dispose()
+    {
+    }
 
-    /// <summary>
-    /// Error message in case of login is failed.
-    /// </summary>
-    public string ErrorMessage { get; set; }
+    public virtual void OnContextInitialized()
+    {
+    }
+
+    public virtual void OnScheduleMessagePumpWork(long delay)
+    {
+    }
   }
 }

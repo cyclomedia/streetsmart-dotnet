@@ -19,8 +19,9 @@
 using CefSharp;
 using CefSharp.WinForms;
 
-using StreetSmart.WinForms.Interfaces;
 using StreetSmart.WinForms.Events;
+using StreetSmart.WinForms.Exceptions;
+using StreetSmart.WinForms.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -219,7 +220,7 @@ namespace StreetSmart.WinForms
       _resultTask = new TaskCompletionSource<object>();
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       string script =
-        $@"{ViewerObjectName}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onError('{
+        $@"{ViewerObjectName}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{
           ViewerObjectName}', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{
           ViewerObjectName}', r)}});";
       _browser.ExecuteScriptAsync(script);
@@ -241,7 +242,7 @@ namespace StreetSmart.WinForms
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       var script =
         $@"{ViewerObjectName}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{
-          srsComponent}).catch(function(e){{panoramaViewerEvents.onError('{ViewerObjectName
+          srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{ViewerObjectName
           }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
           }', r)}});";
       _browser.ExecuteScriptAsync(script);
@@ -261,7 +262,7 @@ namespace StreetSmart.WinForms
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       string script =
         $@"{ViewerObjectName}.openByImageId('{imageId}'{srsComponent
-          }).catch(function(e){{panoramaViewerEvents.onError('{ViewerObjectName
+          }).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{ViewerObjectName
           }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
           }', r)}});";
       _browser.ExecuteScriptAsync(script);
@@ -269,7 +270,7 @@ namespace StreetSmart.WinForms
 
       if (_resultTask.Task.Result is Exception)
       {
-        throw (Exception)_resultTask.Task.Result;
+        throw (Exception) _resultTask.Task.Result;
       }
 
       return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
@@ -409,9 +410,9 @@ namespace StreetSmart.WinForms
       _resultTask.TrySetResult(result);
     }
 
-    public void OnError(string message)
+    public void OnImageNotFoundException(string message)
     {
-      _resultTask.TrySetResult(new StreetSmartAPIException(message));
+      _resultTask.TrySetResult(new ImageNotFoundException(message));
     }
 
     #endregion

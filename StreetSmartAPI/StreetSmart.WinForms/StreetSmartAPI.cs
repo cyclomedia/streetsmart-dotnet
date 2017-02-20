@@ -19,14 +19,17 @@
 using CefSharp;
 using CefSharp.WinForms;
 
-using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StreetSmart.WinForms.Data;
+using StreetSmart.WinForms.Exceptions;
+using StreetSmart.WinForms.Handlers;
 
 namespace StreetSmart.WinForms
 {
@@ -43,18 +46,13 @@ namespace StreetSmart.WinForms
 
     #region Tasks
 
-    private TaskCompletionSource<bool> _apiReadyStateTask;
-    private TaskCompletionSource<string> _applicationNameTask;
-    private TaskCompletionSource<string> _applicationVersionTask;
-    private TaskCompletionSource<object[]> _permissionsTask;
-    private TaskCompletionSource<AddressSettings> _addressSettingsTask; 
+    private TaskCompletionSource<object> _resultTask;
 
     #endregion
 
     #region Events
 
-    public event EventHandler FrameLoaded;
-    public event EventHandler<EventInitArgs> InitComplete;
+    public event EventHandler APIReady;
 
     #endregion
 
@@ -121,79 +119,74 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
-    public async Task<AddressSettings> getAddressSettingsAsync()
+    public async Task<IAddressSettings> getAddressSettingsAsync()
     {
-      _addressSettingsTask = new TaskCompletionSource<AddressSettings>();
-      string script = "streetSmartAPIEvents.onAddressSettings(StreetSmartApi.getAddressSettings());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAddressSettings());";
       _browser.ExecuteScriptAsync(script);
-      await _addressSettingsTask.Task;
-      return _addressSettingsTask.Task.Result;
+      await _resultTask.Task;
+      return new AddressSettings((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
     public async Task<bool> getAPIReadyStateAsync()
     {
-      _apiReadyStateTask = new TaskCompletionSource<bool>();
-      string script = "streetSmartAPIEvents.onAPIReadyState(StreetSmartApi.getAPIReadyState());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAPIReadyState());";
       _browser.ExecuteScriptAsync(script);
-      await _apiReadyStateTask.Task;
-      return _apiReadyStateTask.Task.Result;
+      await _resultTask.Task;
+      return (bool) _resultTask.Task.Result;
     }
 
     public async Task<string> getApplicationNameAsync()
     {
-      _applicationNameTask = new TaskCompletionSource<string>();
-      string script = "streetSmartAPIEvents.onApplicationName(StreetSmartApi.getApplicationName());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationName());";
       _browser.ExecuteScriptAsync(script);
-      await _applicationNameTask.Task;
-      return _applicationNameTask.Task.Result;
+      await _resultTask.Task;
+      return (string) _resultTask.Task.Result;
     }
 
     public async Task<string> getApplicationVersionAsync()
     {
-      _applicationVersionTask = new TaskCompletionSource<string>();
-      string script = "streetSmartAPIEvents.onApplicationVersion(StreetSmartApi.getApplicationVersion());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationVersion());";
       _browser.ExecuteScriptAsync(script);
-      await _applicationVersionTask.Task;
-      return _applicationVersionTask.Task.Result;
+      await _resultTask.Task;
+      return (string) _resultTask.Task.Result;
     }
 
     public async Task<string[]> getPermissionsAsync()
     {
-      _permissionsTask = new TaskCompletionSource<object[]>();
-      string script = "streetSmartAPIEvents.onPermissions(StreetSmartApi.getPermissions());";
+      _resultTask = new TaskCompletionSource<object>();
+      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getPermissions());";
       _browser.ExecuteScriptAsync(script);
-      await _permissionsTask.Task;
-      object[] permissions = _permissionsTask.Task.Result;
-      return permissions.Cast<string>().ToArray();
+      await _resultTask.Task;
+      return ((object[])_resultTask.Task.Result).Cast<string>().ToArray();
     }
 
-    public void Init(string username, string password, string apiKey, string srs, AddressSettings addressSettings = null)
+    public async Task Init(IOptions options)
     {
-      string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}'{getAddressDatabaseScript(addressSettings)}}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
-           function(e) {{streetSmartAPIEvents.onFailed(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      _resultTask = new TaskCompletionSource<object>();
+      string locale = (options.Locale == null) ? string.Empty : $", locale:'{options.Locale}'";
+      string configurationURL = (options.ConfigurationURL == null)
+        ? string.Empty
+        : $", configurationUrl:'{options.ConfigurationURL}'";
 
-    public void Init(string username, string password, string apiKey, string srs, string locale,
-      AddressSettings addressSettings = null)
-    {
-      string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}', locale:'{locale}'{getAddressDatabaseScript(addressSettings)}}}).then(function()
-           {{streetSmartAPIEvents.onInitSuccess()}}, function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      string addressSettings = (options.AddressSettings == null)
+        ? string.Empty
+        : $", addressSettings: {{locale: '{options.AddressSettings.Locale}', database: '{options.AddressSettings.Database}'}}";
 
-    public void Init(string username, string password, string apiKey, string srs, string locale, string configurationUrl,
-      AddressSettings addressSettings = null)
-    {
       string script =
-        $@"StreetSmartApi.init({{username:'{username}', password:'{password}', apiKey:'{apiKey}',
-           srs:'{srs}', locale:'{locale}', configurationUrl:'{configurationUrl}'{getAddressDatabaseScript(addressSettings)}}}).then(function()
-           {{streetSmartAPIEvents.onInitSuccess()}}, function(e) {{streetSmartAPIEvents.onInitFailed(e.message)}});";
+        $@"StreetSmartApi.init({{username:'{options.Username}', password:'{options.Password.ConvertToUnsecureString()}', apiKey:'{options.APIKey}',
+           srs:'{options.SRS}'{locale}{configurationURL}{addressSettings}}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
+           function(e) {{streetSmartAPIEvents.onError(e.message)}});";
       _browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+
+      if (_resultTask.Task.Result is Exception)
+      {
+        throw (Exception) _resultTask.Task.Result;
+      }
     }
 
     #endregion
@@ -204,70 +197,27 @@ namespace StreetSmart.WinForms
     {
       if (e.Frame.IsMain)
       {
-        FrameLoaded?.Invoke(this, EventArgs.Empty);
+        APIReady?.Invoke(this, EventArgs.Empty);
       }
-    }
-
-    #endregion
-
-    #region Callbacks StreetSmartAPI Init
-
-    public void OnInitFailed(string message)
-    {
-      EventInitArgs initArgs = new EventInitArgs {Success = false, ErrorMessage = message};
-      InitComplete?.Invoke(this, initArgs);
-    }
-
-    public void OnInitSuccess()
-    {
-      EventInitArgs initArgs = new EventInitArgs { Success = true, ErrorMessage = string.Empty };
-      InitComplete?.Invoke(this, initArgs);
     }
 
     #endregion
 
     #region Callbacks StreetSmartAPI
 
-    public void OnAddressSettings(Dictionary<string, object> args)
+    public void OnResult(object result)
     {
-      AddressSettings addressSettings = new AddressSettings
-      {
-        Locale = (string) args["locale"],
-        Database = (string) args["database"]
-      };
-
-      _addressSettingsTask.TrySetResult(addressSettings);
+      _resultTask.TrySetResult(result);
     }
 
-    public void OnAPIReadyState(bool state)
+    public void OnSuccess()
     {
-      _apiReadyStateTask.TrySetResult(state);
+      _resultTask.TrySetResult(true);
     }
 
-    public void OnApplicationName(string name)
+    public void OnError(string message)
     {
-      _applicationNameTask.TrySetResult(name);
-    }
-
-    public void OnApplicationVersion(string version)
-    {
-      _applicationVersionTask.TrySetResult(version);
-    }
-
-    public void OnPermissions(object[] permissions)
-    {
-      _permissionsTask.TrySetResult(permissions);
-    }
-
-    #endregion
-
-    #region private functions
-
-    string getAddressDatabaseScript(AddressSettings addressSettings)
-    {
-      return (addressSettings == null)
-        ? string.Empty
-        : $@", addressSettings: {{locale: '{addressSettings.Locale}', database: '{addressSettings.Database}'}}";
+      _resultTask.TrySetResult(new LoginFailedException(message));
     }
 
     #endregion
