@@ -119,7 +119,7 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
-    public async Task<IAddressSettings> getAddressSettingsAsync()
+    public async Task<IAddressSettings> GetAddressSettingsAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAddressSettings());";
@@ -128,7 +128,7 @@ namespace StreetSmart.WinForms
       return new AddressSettings((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
-    public async Task<bool> getAPIReadyStateAsync()
+    public async Task<bool> GetAPIReadyStateAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAPIReadyState());";
@@ -137,7 +137,7 @@ namespace StreetSmart.WinForms
       return (bool) _resultTask.Task.Result;
     }
 
-    public async Task<string> getApplicationNameAsync()
+    public async Task<string> GetApplicationNameAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationName());";
@@ -146,7 +146,7 @@ namespace StreetSmart.WinForms
       return (string) _resultTask.Task.Result;
     }
 
-    public async Task<string> getApplicationVersionAsync()
+    public async Task<string> GetApplicationVersionAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationVersion());";
@@ -155,7 +155,7 @@ namespace StreetSmart.WinForms
       return (string) _resultTask.Task.Result;
     }
 
-    public async Task<string[]> getPermissionsAsync()
+    public async Task<string[]> GetPermissionsAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getPermissions());";

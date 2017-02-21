@@ -24,17 +24,17 @@ using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
 {
-  // ReSharper disable InconsistentNaming
-
   internal class Options : NotifyPropertyChanged, IOptions
   {
-    public string _userName;
-    public SecureString _password;
-    public string _apiKey;
-    public string _srs;
-    public CultureInfo _locale;
-    public Uri _configurationURL;
-    public IAddressSettings _addressSettings;
+    // ReSharper disable InconsistentNaming
+
+    private string _userName;
+    private SecureString _password;
+    private string _apiKey;
+    private string _srs;
+    private CultureInfo _locale;
+    private Uri _configurationURL;
+    private IAddressSettings _addressSettings;
 
     public Options(string userName, SecureString password, string apiKey, string srs, CultureInfo locale,
       Uri configurationURL, IAddressSettings addressSettings)
@@ -47,6 +47,8 @@ namespace StreetSmart.WinForms.Data
       ConfigurationURL = configurationURL;
       AddressSettings = addressSettings;
     }
+
+    // ReSharper restore InconsistentNaming
 
     public string Username
     {
@@ -121,6 +123,4 @@ namespace StreetSmart.WinForms.Data
       }
     }
   }
-
-  // ReSharper restore InconsistentNaming
 }

@@ -16,45 +16,31 @@
  * License along with this library.
  */
 
-using CefSharp;
-
-using StreetSmart.WinForms.Handlers;
+using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Interfaces;
-using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.Factories
 {
-  // ReSharper disable InconsistentNaming
-
   /// <summary>
-  /// Creates a new instance of the API.
+  /// 
   /// </summary>
-  public static class APIFactory
+  public static class CoordinateFactory
   {
-    static APIFactory()
-    {
-      Cef.Initialize(new CefSettings(), true, new BrowserProcessHandler());
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public static ICoordinate Create(double x, double y) => new Coordinate(x, y);
 
     /// <summary>
-    /// Creates a new instance of the API.
+    /// 
     /// </summary>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI Create()
-    {
-      return Create(Resources.StreetSmartLocation);
-    }
-
-    /// <summary>
-    /// Creates a new instance of the API
-    /// </summary>
-    /// <param name="streetSmartLocation">The location of StreetSmart</param>
-    /// <returns>A new instance of the API.</returns>
-    public static IStreetSmartAPI Create(string streetSmartLocation)
-    {
-      return new StreetSmartAPI(streetSmartLocation);
-    }
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
+    public static ICoordinate Create(double x, double y, double z) => new Coordinate(x, y, z);
   }
-
-  // ReSharper restore InconsistentNaming
 }

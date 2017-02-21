@@ -16,23 +16,26 @@
  * License along with this library.
  */
 
-using System.Globalization;
-
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Address settings configuration
+  /// Coordinate information.
   /// </summary>
-  public interface IAddressSettings
+  public interface ICoordinate
   {
     /// <summary>
-    /// Locale info
+    /// X value of the coordinate.
     /// </summary>
-    CultureInfo Locale { get; set; }
+    double X { get; set; }
 
     /// <summary>
-    /// Address database
+    /// Y value of the coordinate.
     /// </summary>
-    string Database { get; set; }
+    double Y { get; set; }
+
+    /// <summary>
+    /// Z value of the coordinate.
+    /// </summary>
+    double? Z { get; set; }
   }
 }

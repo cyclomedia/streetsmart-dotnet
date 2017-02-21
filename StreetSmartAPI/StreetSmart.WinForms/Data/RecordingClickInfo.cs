@@ -17,45 +17,62 @@
  */
 
 using System.Collections.Generic;
-using System.Globalization;
 
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
 {
-  internal class AddressSettings : NotifyPropertyChanged, IAddressSettings
+  internal class RecordingClickInfo : NotifyPropertyChanged, IRecordingClickInfo
   {
-    private CultureInfo _locale;
-    private string _database;
+    private IRecording _recording;
+    private bool _ctrlKey;
+    private bool _shiftKey;
+    private bool _altKey;
 
-    public AddressSettings(CultureInfo locale, string database)
+    public RecordingClickInfo(Dictionary<string, object> recording, Dictionary<string, object> eventData)
     {
-      Locale = locale;
-      Database = database;
+      Recording = new Recording(recording);
+      ShiftKey = (bool) eventData["shiftKey"];
+      AltKey = (bool) eventData["altKey"];
+      CtrlKey = (bool) eventData["ctrlKey"];
     }
 
-    public AddressSettings(Dictionary<string, object> addressSettings)
+    public IRecording Recording
     {
-      Locale = new CultureInfo((string) addressSettings["locale"]);
-      Database = (string) addressSettings["database"];
-    }
-
-    public CultureInfo Locale
-    {
-      get { return _locale; }
+      get { return _recording; }
       set
       {
-        _locale = value;
+        _recording = value;
         RaisePropertyChanged();
       }
     }
 
-    public string Database
+    public bool CtrlKey
     {
-      get { return _database; }
+      get { return _ctrlKey; }
       set
       {
-        _database = value;
+        _ctrlKey = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool ShiftKey
+    {
+      get { return _shiftKey; }
+      set
+      {
+        _shiftKey = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool AltKey
+    {
+      get { return _altKey; }
+      set
+      {
+        _altKey = value;
         RaisePropertyChanged();
       }
     }

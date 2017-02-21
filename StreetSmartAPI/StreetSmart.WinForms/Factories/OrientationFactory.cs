@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using System.Globalization;
-
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Interfaces;
 
@@ -26,29 +24,36 @@ namespace StreetSmart.WinForms.Factories
   /// <summary>
   /// 
   /// </summary>
-  public static class AddressSettingsFactory
+  public static class OrientationFactory
   {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="database"></param>
+    /// <param name="hFov"></param>
     /// <returns></returns>
-    public static IAddressSettings Create(string database) => Create(CultureInfo.CurrentCulture, database);
+    public static IOrientation CreatehFov(double hFov) => Create(null, null, hFov);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="locale"></param>
-    /// <param name="database"></param>
+    /// <param name="pitch"></param>
     /// <returns></returns>
-    public static IAddressSettings Create(string locale, string database) => Create(new CultureInfo(locale), database);
+    public static IOrientation CreatePitch(double pitch) => Create(null, pitch, null);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="locale"></param>
-    /// <param name="database"></param>
+    /// <param name="yaw"></param>
     /// <returns></returns>
-    public static IAddressSettings Create(CultureInfo locale, string database) => new AddressSettings(locale, database);
+    public static IOrientation CreateYaw(double yaw) => Create(yaw, null, null);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="yaw"></param>
+    /// <param name="pitch"></param>
+    /// <param name="hFov"></param>
+    /// <returns></returns>
+    public static IOrientation Create(double? yaw, double? pitch, double? hFov) => new Orientation(yaw, pitch, hFov);
   }
 }

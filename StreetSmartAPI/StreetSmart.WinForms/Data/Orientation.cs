@@ -18,48 +18,58 @@
 
 using System.Collections.Generic;
 
-namespace StreetSmart.WinForms
-{
-  // ReSharper disable InconsistentNaming
+using StreetSmart.WinForms.Interfaces;
 
-  /// <summary>
-  /// Orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
-  /// </summary>
-  public class Orientation
+namespace StreetSmart.WinForms.Data
+{
+  internal class Orientation : NotifyPropertyChanged, IOrientation
   {
-    /// <summary>
-    /// 
-    /// </summary>
-    public Orientation()
+    private double? _yaw;
+    private double? _pitch;
+    private double? _hFov;
+
+    public Orientation(double? yaw, double? pitch, double? hFov)
     {
+      Yaw = yaw;
+      Pitch = pitch;
+      HFov = hFov;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="orientation"></param>
     public Orientation(Dictionary<string, object> orientation)
     {
       Yaw = double.Parse(orientation["yaw"].ToString());
       Pitch = double.Parse(orientation["pitch"].ToString());
-      hFov = double.Parse(orientation["hFov"].ToString());
+      HFov = double.Parse(orientation["hFov"].ToString());
     }
 
-    /// <summary>
-    ///  	Optional value of the yaw.
-    /// </summary>
-    public double? Yaw { get; set; }
+    public double? Yaw
+    {
+      get { return _yaw; }
+      set
+      {
+        _yaw = value;
+        RaisePropertyChanged();
+      }
+    }
 
-    /// <summary>
-    /// Optional value of the pitch.
-    /// </summary>
-    public double? Pitch { get; set; }
+    public double? Pitch
+    {
+      get { return _pitch; }
+      set
+      {
+        _pitch = value;
+        RaisePropertyChanged();
+      }
+    }
 
-    /// <summary>
-    /// Optional value of the hFov.
-    /// </summary>    
-    public double? hFov { get; set; }
+    public double? HFov
+    {
+      get { return _hFov; }
+      set
+      {
+        _hFov = value;
+        RaisePropertyChanged();
+      }
+    }
   }
-
-  // ReSharper restore InconsistentNaming
 }

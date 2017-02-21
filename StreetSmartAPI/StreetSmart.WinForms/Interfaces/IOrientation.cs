@@ -16,37 +16,26 @@
  * License along with this library.
  */
 
-using System;
-
-namespace StreetSmart.WinForms.Events
+namespace StreetSmart.WinForms.Interfaces
 {
-  // ReSharper disable InconsistentNaming
-
   /// <summary>
-  /// Triggers when a recording is clicked inside the PanoramaViewer.
+  /// Orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
   /// </summary>
-  public class EventRecordingClickArgs : EventArgs
+  public interface IOrientation
   {
     /// <summary>
-    /// The Recording clicked
+    ///  	Optional value of the yaw.
     /// </summary>
-    public Recording Recording { get; set; }
+    double? Yaw { get; set; }
 
     /// <summary>
-    /// If ctrl-key is pressed
+    /// Optional value of the pitch.
     /// </summary>
-    public bool ctrlKey { get; set; }
+    double? Pitch { get; set; }
 
     /// <summary>
-    /// If shift-key is pressed
-    /// </summary>
-    public bool shiftKey { get; set; }
-
-    /// <summary>
-    /// If alt-key is pressed
-    /// </summary>
-    public bool altKey { get; set; }
+    /// Optional value of the hFov.
+    /// </summary>    
+    double? HFov { get; set; }
   }
-
-  // ReSharper restore InconsistentNaming
 }

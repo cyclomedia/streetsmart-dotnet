@@ -22,8 +22,6 @@ using System.Security;
 
 namespace StreetSmart.WinForms.Interfaces
 {
-  // ReSharper disable InconsistentNaming
-
   /// <summary>
   /// Options for initialize the API
   /// </summary>
@@ -38,6 +36,8 @@ namespace StreetSmart.WinForms.Interfaces
     /// Password of the user
     /// </summary>
     SecureString Password { get; set; }
+
+    // ReSharper disable InconsistentNaming
 
     /// <summary>
     /// ApiKey given to the user
@@ -59,11 +59,11 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     Uri ConfigurationURL { get; set; }
 
+    // ReSharper restore InconsistentNaming
+
     /// <summary>
     /// Address search settings
     /// </summary>
     IAddressSettings AddressSettings { get; set; }
   }
-
-  // ReSharper restore InconsistentNaming
 }

@@ -86,35 +86,35 @@ namespace StreetSmart.WinForms.Interfaces
     /// Returns the object containing the address search settings
     /// </summary>
     /// <returns>Object containing the address settings</returns>
-    Task<IAddressSettings> getAddressSettingsAsync();
+    Task<IAddressSettings> GetAddressSettingsAsync();
 
     /// <summary>
     /// Returns the current 'ready'-state of the API.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The current 'ready'-state of the API.</returns>
-    Task<bool> getAPIReadyStateAsync();
+    Task<bool> GetAPIReadyStateAsync();
 
     /// <summary>
     /// Returns the application name of the API.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The application name of the API.</returns>
-    Task<string> getApplicationNameAsync();
+    Task<string> GetApplicationNameAsync();
 
     /// <summary>
     /// Returns the used version of the API.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns></returns>
-    Task<string> getApplicationVersionAsync();
+    Task<string> GetApplicationVersionAsync();
 
     /// <summary>
     /// Returns the object containing functionalities that are currently permitted to use by the user.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns></returns>
-    Task<string[]> getPermissionsAsync();
+    Task<string[]> GetPermissionsAsync();
 
     /// <summary>
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.

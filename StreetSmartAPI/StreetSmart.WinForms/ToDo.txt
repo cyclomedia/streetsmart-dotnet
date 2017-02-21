@@ -3,12 +3,9 @@
 	- EventViewerArgs, hoe invullen?
 	- EventTileLoadArgs, hoe invullen?
 - Refactoring:
-	- Resources => naar app.settings
-	- Events => moet anders
-	- Interfaces => uitbreiden
-	- Data classes => naar data classes map
 	- Namen van de viewers => intern GUID genereren
 	- Geen javascript om viewer te genereren, maar via een aparte class doen
+	- Error message op een betere manier parsen uit het error bericht wat we terug krijgen van javascript
 
 
 labs-api:

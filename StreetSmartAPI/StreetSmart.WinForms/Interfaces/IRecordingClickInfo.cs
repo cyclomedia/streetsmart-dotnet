@@ -16,18 +16,31 @@
  * License along with this library.
  */
 
-using System;
-
-namespace StreetSmart.WinForms.Events
+namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Triggers when the view (pitch, hFov or yaw) of the panorama is altered.
+  /// Triggers when a recording is clicked inside the PanoramaViewer.
   /// </summary>
-  public class EventViewChangeArgs : EventArgs
+  public interface IRecordingClickInfo
   {
     /// <summary>
-    /// Contains the new yaw, pitch and hFov for the viewer
+    /// The Recording clicked
     /// </summary>
-    public Orientation Orientation { get; set; }
+    IRecording Recording { get; set; }
+
+    /// <summary>
+    /// If ctrl-key is pressed
+    /// </summary>
+    bool CtrlKey { get; set; }
+
+    /// <summary>
+    /// If shift-key is pressed
+    /// </summary>
+    bool ShiftKey { get; set; }
+
+    /// <summary>
+    /// If alt-key is pressed
+    /// </summary>
+    bool AltKey { get; set; }
   }
 }

@@ -41,9 +41,7 @@ namespace StreetSmart.WinForms.Factories
     /// <param name="srs"></param>
     /// <returns></returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs)
-    {
-      return Create(userName, password, apiKey, srs, null);
-    }
+      => Create(userName, password, apiKey, srs, null);
 
     /// <summary>
     /// 
@@ -56,9 +54,7 @@ namespace StreetSmart.WinForms.Factories
     /// <returns></returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs,
       IAddressSettings addressSettings)
-    {
-      return Create(userName, password, apiKey, srs, string.Empty, string.Empty, addressSettings);
-    }
+      => Create(userName, password, apiKey, srs, string.Empty, string.Empty, addressSettings);
 
     /// <summary>
     /// 
@@ -72,10 +68,8 @@ namespace StreetSmart.WinForms.Factories
     /// <returns></returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       IAddressSettings addressSettings)
-    {
-      return Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
+      => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
         string.Empty, addressSettings);
-    }
 
     /// <summary>
     /// 
@@ -89,9 +83,7 @@ namespace StreetSmart.WinForms.Factories
     /// <returns></returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, CultureInfo locale,
       IAddressSettings addressSettings)
-    {
-      return Create(userName, password, apiKey, srs, locale, string.Empty, addressSettings);
-    }
+      => Create(userName, password, apiKey, srs, locale, string.Empty, addressSettings);
 
     /// <summary>
     /// 
@@ -106,10 +98,8 @@ namespace StreetSmart.WinForms.Factories
     /// <returns></returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       string configurationURL, IAddressSettings addressSettings)
-    {
-      return Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
+      => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
         configurationURL, addressSettings);
-    }
 
     /// <summary>
     /// 

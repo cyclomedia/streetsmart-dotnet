@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms;
-using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Factories;
 using StreetSmart.WinForms.Interfaces;
 
@@ -29,8 +27,6 @@ using System.Linq;
 using System.Windows.Forms;
 
 using static Demo.WinForms.Properties.Resources;
-
-using Orientation = StreetSmart.WinForms.Orientation;
 
 namespace Demo.WinForms
 {
@@ -70,7 +66,7 @@ namespace Demo.WinForms
       InitializeComponent();
       _ci = CultureInfo.InvariantCulture;
       _viewers = new List<IPanoramaViewer>();
-      _api = APIFactory.Create();
+      _api = StreetSmartAPIFactory.Create();
       _api.APIReady += OnAPIReady;
       plStreetSmart.Controls.Add(_api.GUI);
       grLogin.Enabled = false;
@@ -112,9 +108,9 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnRecordingClick(object sender, EventRecordingClickArgs args)
+    private void OnRecordingClick(object sender, IEventArgs<IRecordingClickInfo> args)
     {
-      string text = $"Recording click: {args.Recording.Id}";
+      string text = $"Recording click: {args.Value.Recording.Id}";
       AddViewerEventsText(text);
     }
 
@@ -124,10 +120,10 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewChange(object sender, EventViewChangeArgs args)
+    private void OnViewChange(object sender, IEventArgs<IOrientation> args)
     {
-      Orientation orientation = args.Orientation;
-      string text = $"View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.hFov}";
+      IOrientation orientation = args.Value;
+      string text = $"View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
       AddViewerEventsText(text);
     }
 
@@ -216,25 +212,25 @@ namespace Demo.WinForms
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
     {
-      bool apiReadyState = await _api.getAPIReadyStateAsync();
+      bool apiReadyState = await _api.GetAPIReadyStateAsync();
       txtAPIResult.Text = apiReadyState.ToString();
     }
 
     private async void btnApplicationVersion_Click(object sender, EventArgs e)
     {
-      string version = await _api.getApplicationVersionAsync();
+      string version = await _api.GetApplicationVersionAsync();
       txtAPIResult.Text = version;
     }
 
     private async void btnApplicationName_Click(object sender, EventArgs e)
     {
-      string name = await _api.getApplicationNameAsync();
+      string name = await _api.GetApplicationNameAsync();
       txtAPIResult.Text = name;
     }
 
     private async void btnPermissions_Click(object sender, EventArgs e)
     {
-      string[] permissions = await _api.getPermissionsAsync();
+      string[] permissions = await _api.GetPermissionsAsync();
       string permissionsString = permissions.Aggregate(string.Empty,
         (current, permission) => $"{current}{permission}{Environment.NewLine}");
       txtRecordingViewerColorPermissions.Text = permissionsString;
@@ -242,7 +238,7 @@ namespace Demo.WinForms
 
     private async void btnOpenByAddress_Click(object sender, EventArgs e)
     {
-      Recording recording;
+      IRecording recording;
 
       if (string.IsNullOrEmpty(txtAddressSrs.Text))
       {
@@ -275,10 +271,10 @@ namespace Demo.WinForms
 
     private async void btnOrientation_Click(object sender, EventArgs e)
     {
-      Orientation orientation = await Viewer.GetOrientationAsync();
+      IOrientation orientation = await Viewer.GetOrientationAsync();
       txtYaw.Text = orientation.Yaw.ToString();
       txtPitch.Text = orientation.Pitch.ToString();
-      txthFov.Text = orientation.hFov.ToString();
+      txthFov.Text = orientation.HFov.ToString();
     }
 
     private void btnSetOrientation_Click(object sender, EventArgs e)
@@ -286,25 +282,22 @@ namespace Demo.WinForms
       double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?) ParseDouble(txthFov.Text);
       double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?) ParseDouble(txtYaw.Text);
       double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?) ParseDouble(txtPitch.Text);
-      Orientation orientation = new Orientation {hFov = hFov, Yaw = yaw, Pitch = pitch};
+      IOrientation orientation = OrientationFactory.Create(yaw, pitch, hFov);
       Viewer.SetOrientation(orientation);
     }
 
     private async void btnGetRecording_Click(object sender, EventArgs e)
     {
-      Recording recording = await Viewer.GetRecordingAsync();
+      IRecording recording = await Viewer.GetRecordingAsync();
       string text = $"Id: {recording.Id}{Environment.NewLine}recordedAt: {recording.RecordedAt}";
       txtRecordingViewerColorPermissions.Text = text;
     }
 
     private void btnLookAtCoordinate_Click(object sender, EventArgs e)
     {
-      Coordinate coordinate = new Coordinate
-      {
-        X = ParseDouble(txtX.Text),
-        Y = ParseDouble(txtY.Text),
-        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) ParseDouble(txtZ.Text))
-      };
+      ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
+        ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
+        : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
 
       if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
@@ -324,31 +317,31 @@ namespace Demo.WinForms
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.getNavbarVisibleAsync();
+      bool visible = await Viewer.GetNavbarVisibleAsync();
       Viewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.getNavbarExpandedAsync();
+      bool expanded = await Viewer.GetNavbarExpandedAsync();
       Viewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.getTimeTravelVisibleAsync();
+      bool visible = await Viewer.GetTimeTravelVisibleAsync();
       Viewer.ToggleTimeTravelVisible(!visible);
     }
 
     private async void btnToggleTimeTravelExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.getTimeTravelExpandedAsync();
+      bool expanded = await Viewer.GetTimeTravelExpandedAsync();
       Viewer.ToggleTimeTravelExpanded(!expanded);
     }
 
     private async void btnOpenByImageId_Click(object sender, EventArgs e)
     {
-      Recording recording;
+      IRecording recording;
 
       if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
       {
@@ -364,14 +357,11 @@ namespace Demo.WinForms
 
     private async void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
-      Coordinate coordinate = new Coordinate
-      {
-        X = ParseDouble(txtX.Text),
-        Y = ParseDouble(txtY.Text),
-        Z = string.IsNullOrEmpty(txtZ.Text) ? null : ((double?) ParseDouble(txtZ.Text))
-      };
+      ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
+        ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
+        : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
 
-      Recording recording;
+      IRecording recording;
 
       if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
@@ -413,7 +403,7 @@ namespace Demo.WinForms
 
     private async void btnGetAddress_Click(object sender, EventArgs e)
     {
-      IAddressSettings addressSettings = await _api.getAddressSettingsAsync();
+      IAddressSettings addressSettings = await _api.GetAddressSettingsAsync();
       string text = $"Locale: {addressSettings.Locale}{Environment.NewLine}Database: {addressSettings.Database}";
       txtRecordingViewerColorPermissions.Text = text;
     }

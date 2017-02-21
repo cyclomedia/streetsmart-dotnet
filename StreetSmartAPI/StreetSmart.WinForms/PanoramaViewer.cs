@@ -28,6 +28,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Threading.Tasks;
+using StreetSmart.WinForms.Data;
+
+using Orientation = StreetSmart.WinForms.Data.Orientation;
 
 namespace StreetSmart.WinForms
 {
@@ -48,9 +51,9 @@ namespace StreetSmart.WinForms
     #region Events
 
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
-    public event EventHandler<EventRecordingClickArgs> RecordingClick;
+    public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
-    public event EventHandler<EventViewChangeArgs> ViewChange;
+    public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
 
@@ -129,7 +132,7 @@ namespace StreetSmart.WinForms
 
     #region Functions
 
-    public async Task<bool> getNavbarExpandedAsync()
+    public async Task<bool> GetNavbarExpandedAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarExpanded());";
@@ -138,7 +141,7 @@ namespace StreetSmart.WinForms
       return (bool) _resultTask.Task.Result;
     }
 
-    public async Task<bool> getNavbarVisibleAsync()
+    public async Task<bool> GetNavbarVisibleAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarVisible());";
@@ -147,7 +150,7 @@ namespace StreetSmart.WinForms
       return (bool) _resultTask.Task.Result;
     }
 
-    public async Task<Orientation> GetOrientationAsync()
+    public async Task<IOrientation> GetOrientationAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = $@"panoramaViewerEvents.onResult('{ViewerObjectName}',{ViewerObjectName}.getOrientation());";
@@ -156,7 +159,7 @@ namespace StreetSmart.WinForms
       return new Orientation((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
-    public async Task<Recording> GetRecordingAsync()
+    public async Task<IRecording> GetRecordingAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       var script = $@"recording{ViewerObjectName} = {ViewerObjectName}.getRecording();
@@ -176,7 +179,7 @@ namespace StreetSmart.WinForms
       return (bool) _resultTask.Task.Result;
     }
 
-    public async Task<bool> getTimeTravelExpandedAsync()
+    public async Task<bool> GetTimeTravelExpandedAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script =
@@ -186,7 +189,7 @@ namespace StreetSmart.WinForms
       return (bool) _resultTask.Task.Result;
     }
 
-    public async Task<bool> getTimeTravelVisibleAsync()
+    public async Task<bool> GetTimeTravelVisibleAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
       string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelVisible());";
@@ -205,7 +208,7 @@ namespace StreetSmart.WinForms
       return Color.FromArgb((int) ((double) color[3]*255), (int) color[0], (int) color[1], (int) color[2]);
     }
 
-    public void LookAtCoordinate(Coordinate coordinate, string srs = null)
+    public void LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
@@ -215,7 +218,7 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
-    public async Task<Recording> OpenByAddressAsync(string query, string srs = null)
+    public async Task<IRecording> OpenByAddressAsync(string query, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
@@ -234,7 +237,7 @@ namespace StreetSmart.WinForms
       return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
-    public async Task<Recording> OpenByCoordinateAsync(Coordinate coordinate, string srs = null)
+    public async Task<IRecording> OpenByCoordinateAsync(ICoordinate coordinate, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
       CultureInfo ci = CultureInfo.InvariantCulture;
@@ -256,7 +259,7 @@ namespace StreetSmart.WinForms
       return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
     }
 
-    public async Task<Recording> OpenByImageIdAsync(string imageId, string srs = null)
+    public async Task<IRecording> OpenByImageIdAsync(string imageId, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
@@ -300,16 +303,16 @@ namespace StreetSmart.WinForms
       _browser.ExecuteScriptAsync(script);
     }
 
-    public void SetOrientation(Orientation orientation)
+    public void SetOrientation(IOrientation orientation)
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       string partYaw = (orientation.Yaw == null) ? string.Empty : $"yaw:{((double) orientation.Yaw).ToString(ci)}";
       string partPitch = partYaw + ((orientation.Pitch == null) ? string.Empty
         : string.Concat((string.IsNullOrEmpty(partYaw) ? string.Empty : ","),
           $"pitch:{((double) orientation.Pitch).ToString(ci)}"));
-      string parthFov = partPitch + ((orientation.hFov == null) ? string.Empty
+      string parthFov = partPitch + ((orientation.HFov == null) ? string.Empty
         : string.Concat((string.IsNullOrEmpty(partPitch) ? string.Empty : ","),
-          $"hFov:{((double) orientation.hFov).ToString(ci)}"));
+          $"hFov:{((double) orientation.HFov).ToString(ci)}"));
       string script = $@"{ViewerObjectName}.setOrientation({{{parthFov}}});";
       _browser.ExecuteScriptAsync(script);
     }
@@ -362,21 +365,14 @@ namespace StreetSmart.WinForms
 
     public void OnImageChange(Dictionary<string, object> args)
     {
-      ImageChange?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
+      ImageChange?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
     }
 
     public void OnRecordingClick(Dictionary<string, object> args)
     {
-      Dictionary<string, object> recording = (Dictionary<string, object>)args["recording"];
-      Dictionary<string, object> eventData = (Dictionary<string, object>)args["eventData"];
-
-      RecordingClick?.Invoke(this, new EventRecordingClickArgs
-      {
-        Recording = new Recording(recording),
-        shiftKey = (bool) eventData["shiftKey"],
-        altKey = (bool) eventData["altKey"],
-        ctrlKey = (bool) eventData["ctrlKey"]
-      });
+      Dictionary<string, object> recording = (Dictionary<string, object>) args["recording"];
+      Dictionary<string, object> eventData = (Dictionary<string, object>) args["eventData"];
+      RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
     public void OnTileLoadError(Dictionary<string, object> args)
@@ -388,17 +384,17 @@ namespace StreetSmart.WinForms
     public void OnViewChange(Dictionary<string, object> args)
     {
       Orientation orientation = new Orientation(args);
-      ViewChange?.Invoke(this, new EventViewChangeArgs {Orientation = orientation});
+      ViewChange?.Invoke(this, new EventArgs<Orientation>(orientation));
     }
 
     public void OnViewLoadEnd(Dictionary<string, object> args)
     {
-      ViewLoadEnd?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
+      ViewLoadEnd?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
     }
 
     public void OnViewLoadStart(Dictionary<string, object> args)
     {
-      ViewLoadStart?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
+      ViewLoadStart?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
     }
 
     #endregion

@@ -16,46 +16,56 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-using System.Globalization;
-
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
 {
-  internal class AddressSettings : NotifyPropertyChanged, IAddressSettings
+  internal class Coordinate : NotifyPropertyChanged, ICoordinate
   {
-    private CultureInfo _locale;
-    private string _database;
+    private double _x;
+    private double _y;
+    private double? _z;
 
-    public AddressSettings(CultureInfo locale, string database)
+    public Coordinate(double x, double y)
     {
-      Locale = locale;
-      Database = database;
+      X = x;
+      Y = y;
+      Z = null;
     }
 
-    public AddressSettings(Dictionary<string, object> addressSettings)
+    public Coordinate(double x, double y, double z)
     {
-      Locale = new CultureInfo((string) addressSettings["locale"]);
-      Database = (string) addressSettings["database"];
+      X = x;
+      Y = y;
+      Z = z;
     }
 
-    public CultureInfo Locale
+    public double X
     {
-      get { return _locale; }
+      get { return _x; }
       set
       {
-        _locale = value;
+        _x = value;
         RaisePropertyChanged();
       }
     }
 
-    public string Database
+    public double Y
     {
-      get { return _database; }
+      get { return _y; }
       set
       {
-        _database = value;
+        _y = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public double? Z
+    {
+      get { return _z; }
+      set
+      {
+        _z = value;
         RaisePropertyChanged();
       }
     }
