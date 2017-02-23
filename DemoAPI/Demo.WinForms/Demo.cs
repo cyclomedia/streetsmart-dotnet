@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Factories;
 using StreetSmart.WinForms.Interfaces;
 
@@ -79,12 +80,6 @@ namespace Demo.WinForms
       grOrientation.Enabled = false;
       grOpenByImageId.Enabled = false;
       grRecordingViewerColorPermissions.Enabled = false;
-
-      txtDomElementScript.Text =
-        @"var element1 = document.createElement('div');
-          element1.setAttribute('id', 'panoramaviewer1Window');
-          element1.setAttribute('style', 'width:40%; height:40%; position:absolute; top:300px; left:400px');";
-      txtDomElementName.Text = @"element1";
     }
 
     #region events api
@@ -150,7 +145,7 @@ namespace Demo.WinForms
 
       try
       {
-        await _api.Init(options);
+        await _api.InitAsync(options);
 
         if (grAPIInfo.InvokeRequired)
         {
@@ -172,7 +167,7 @@ namespace Demo.WinForms
 
         MessageBox.Show("Login successfully");
       }
-      catch (Exception ex)
+      catch (StreetSmartLoginFailedException ex)
       {
         MessageBox.Show(ex.Message);
       }
@@ -238,15 +233,22 @@ namespace Demo.WinForms
 
     private async void btnOpenByAddress_Click(object sender, EventArgs e)
     {
-      IRecording recording;
+      try
+      {
+        IRecording recording;
 
-      if (string.IsNullOrEmpty(txtAddressSrs.Text))
-      {
-        recording = await Viewer.OpenByAddressAsync(txtAdress.Text);
+        if (string.IsNullOrEmpty(txtAddressSrs.Text))
+        {
+          recording = await Viewer.OpenByAddressAsync(txtAdress.Text);
+        }
+        else
+        {
+          recording = await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
+        }
       }
-      else
+      catch (StreetSmartImageNotFoundException ex)
       {
-        recording = await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
+        MessageBox.Show(ex.Message);
       }
 
       EnableImageEnables(true);
@@ -341,15 +343,22 @@ namespace Demo.WinForms
 
     private async void btnOpenByImageId_Click(object sender, EventArgs e)
     {
-      IRecording recording;
+      try
+      {
+        IRecording recording;
 
-      if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
-      {
-        recording = await Viewer.OpenByImageIdAsync(txtImageId.Text);
+        if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
+        {
+          recording = await Viewer.OpenByImageIdAsync(txtImageId.Text);
+        }
+        else
+        {
+          recording = await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
+        }
       }
-      else
+      catch (StreetSmartImageNotFoundException ex)
       {
-        recording = await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
+        MessageBox.Show(ex.Message);
       }
 
       EnableImageEnables(true);
@@ -357,19 +366,26 @@ namespace Demo.WinForms
 
     private async void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
-      ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
-        ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
-        : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
-
-      IRecording recording;
-
-      if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
+      try
       {
-        recording = await Viewer.OpenByCoordinateAsync(coordinate);
+        ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
+          ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
+          : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
+
+        IRecording recording;
+
+        if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
+        {
+          recording = await Viewer.OpenByCoordinateAsync(coordinate);
+        }
+        else
+        {
+          recording = await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
+        }
       }
-      else
+      catch (StreetSmartImageNotFoundException ex)
       {
-        recording = await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
+        MessageBox.Show(ex.Message);
       }
 
       EnableImageEnables(true);
@@ -387,18 +403,33 @@ namespace Demo.WinForms
 
     private void btnOpenViewer_Click(object sender, EventArgs e)
     {
-      _viewers.Add(rbDefault.Checked
-        ? _api.AddPanoramaViewer(txtViewerName.Text, true, true)
-        : _api.AddPanoramaViewer(txtViewerName.Text, true, true, txtDomElementName.Text, txtDomElementScript.Text));
+      int width, height, top, left;
+      bool result = int.TryParse(txtWidth.Text, out width);
+      result = int.TryParse(txtHeight.Text, out height) && result;
+      result = int.TryParse(txtTop.Text, out top) && result;
+      result = int.TryParse(txtLeft.Text, out left) && result;
 
-      ToggleViewerEnables(true);
+      if (result || rbDefault.Checked)
+      {
+        IPanoramaViewerOptions options = PanoramaViewerOptionsFactory.Create(true, true, true);
+        IDomElement element = rbDefault.Checked
+          ? DomElementFactory.Create()
+          : DomElementFactory.Create(width, height, top, left);
 
-      Viewer.ImageChange += OnImageChange;
-      Viewer.RecordingClick += OnRecordingClick;
-      Viewer.TileLoadError += OnTileLoadError;
-      Viewer.ViewChange += OnViewChange;
-      Viewer.ViewLoadEnd += OnViewLoadEnd;
-      Viewer.ViewLoadStart += OnViewLoadStart;
+        _viewers.Add(_api.AddPanoramaViewer(element, options));
+        ToggleViewerEnables(true);
+
+        Viewer.ImageChange += OnImageChange;
+        Viewer.RecordingClick += OnRecordingClick;
+        Viewer.TileLoadError += OnTileLoadError;
+        Viewer.ViewChange += OnViewChange;
+        Viewer.ViewLoadEnd += OnViewLoadEnd;
+        Viewer.ViewLoadStart += OnViewLoadStart;
+      }
+      else
+      {
+        MessageBox.Show("Can not parse parameters");
+      }
     }
 
     private async void btnGetAddress_Click(object sender, EventArgs e)
@@ -406,6 +437,16 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = await _api.GetAddressSettingsAsync();
       string text = $"Locale: {addressSettings.Locale}{Environment.NewLine}Database: {addressSettings.Database}";
       txtRecordingViewerColorPermissions.Text = text;
+    }
+
+    private void btnShowDefTools_Click(object sender, EventArgs e)
+    {
+      _api?.ShowDefTools();
+    }
+
+    private void btnCloseDefTools_Click(object sender, EventArgs e)
+    {
+      _api?.CloseDefTools();
     }
 
     #endregion

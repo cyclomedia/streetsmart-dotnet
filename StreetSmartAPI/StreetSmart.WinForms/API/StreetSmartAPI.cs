@@ -16,31 +16,30 @@
  * License along with this library.
  */
 
-using CefSharp;
-using CefSharp.WinForms;
-
-using StreetSmart.WinForms.Interfaces;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using CefSharp;
+using CefSharp.WinForms;
+
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
+using StreetSmart.WinForms.Interfaces;
 
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.API
 {
-  // ReSharper disable InconsistentNaming
-
+  // ReSharper disable once InconsistentNaming
   internal class StreetSmartAPI : IStreetSmartAPI
   {
     #region Members
 
     private readonly ChromiumWebBrowser _browser;
-    private readonly PanoramaViewerEvents _cycloramaViewerEvents;
+    private readonly PanoramaViewerList _cycloramaViewerList;
 
     #endregion
 
@@ -68,7 +67,7 @@ namespace StreetSmart.WinForms
     {
       _browser = new ChromiumWebBrowser(streetSmartLocation) {Dock = DockStyle.Fill};
       _browser.RegisterJsObject("streetSmartAPIEvents", this);
-      _cycloramaViewerEvents = new PanoramaViewerEvents(_browser);
+      _cycloramaViewerList = new PanoramaViewerList(_browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
       GUI = new StreetSmartGUI(_browser);
@@ -76,47 +75,36 @@ namespace StreetSmart.WinForms
 
     #endregion
 
+    #region CefSharp Functions
+
+    public void ShowDefTools()
+    {
+      if (_browser.Created)
+      {
+        _browser?.ShowDevTools();
+      }
+    }
+
+    public void CloseDefTools()
+    {
+      if (_browser.Created)
+      {
+        _browser?.CloseDevTools();
+      }
+    }
+
+    #endregion
+
     #region Functions
 
-    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName)
+    public IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions)
     {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName);
-      _cycloramaViewerEvents.AddListener(viewer);
-      return viewer;
-    }
-
-    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, string domElementName, string domElementScript)
-    {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, domElementName, domElementScript);
-      _cycloramaViewerEvents.AddListener(viewer);
-      return viewer;
-    }
-
-    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible,
-      bool timeTravelEnabled)
-    {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, recordingsVisible, timeTravelEnabled);
-      _cycloramaViewerEvents.AddListener(viewer);
-      return viewer;
-    }
-
-    public IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible,
-      bool timeTravelEnabled, string domElementName, string domElementScript)
-    {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, viewerObjectName, recordingsVisible, timeTravelEnabled,
-        domElementName, domElementScript);
-      _cycloramaViewerEvents.AddListener(viewer);
-      return viewer;
+      return _cycloramaViewerList.AddViewer(domElement, viewerOptions);
     }
 
     public void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
     {
-      PanoramaViewer viewer = (PanoramaViewer)panoramaViewer;
-      _cycloramaViewerEvents.RemoveListener(viewer);
-      string objectName = viewer.ViewerObjectName;
-      string domElementName = viewer.DomElementName;
-      string script = $@"StreetSmartApi.destroyPanoramaViewer({objectName},{domElementName});";
-      _browser.ExecuteScriptAsync(script);
+      _cycloramaViewerList.DestroyViewer((PanoramaViewer) panoramaViewer);
     }
 
     public async Task<IAddressSettings> GetAddressSettingsAsync()
@@ -164,10 +152,12 @@ namespace StreetSmart.WinForms
       return ((object[])_resultTask.Task.Result).Cast<string>().ToArray();
     }
 
-    public async Task Init(IOptions options)
+    public async Task InitAsync(IOptions options)
     {
       _resultTask = new TaskCompletionSource<object>();
       string locale = (options.Locale == null) ? string.Empty : $", locale:'{options.Locale}'";
+
+      // ReSharper disable once InconsistentNaming
       string configurationURL = (options.ConfigurationURL == null)
         ? string.Empty
         : $", configurationUrl:'{options.ConfigurationURL}'";
@@ -217,11 +207,9 @@ namespace StreetSmart.WinForms
 
     public void OnError(string message)
     {
-      _resultTask.TrySetResult(new LoginFailedException(message));
+      _resultTask.TrySetResult(new StreetSmartLoginFailedException(message));
     }
 
     #endregion
   }
-
-  // ReSharper restore InconsistentNaming
 }

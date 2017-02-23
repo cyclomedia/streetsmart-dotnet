@@ -18,6 +18,7 @@
 
 using CefSharp;
 
+using StreetSmart.WinForms.API;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces;
 using StreetSmart.WinForms.Properties;

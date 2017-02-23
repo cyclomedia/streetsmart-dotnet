@@ -24,36 +24,46 @@ namespace StreetSmart.WinForms.Factories
   /// <summary>
   /// 
   /// </summary>
-  public static class OrientationFactory
+  public static class PanoramaViewerOptionsFactory
   {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="hFov"></param>
+    /// <param name="recordingsVisible"></param>
     /// <returns></returns>
-    public static IOrientation CreatehFov(double hFov) => new Orientation(null, null, hFov);
+    public static IPanoramaViewerOptions CreateRecordingsVisible(bool recordingsVisible)
+      => new PanoramaViewerOptions(recordingsVisible, null, null);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="pitch"></param>
+    /// <param name="timeTravelVisible"></param>
     /// <returns></returns>
-    public static IOrientation CreatePitch(double pitch) => new Orientation(null, pitch, null);
+    public static IPanoramaViewerOptions CreateTimeTravelVisible(bool timeTravelVisible)
+      => new PanoramaViewerOptions(null, timeTravelVisible, null);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
+    /// <param name="navBarVisible"></param>
     /// <returns></returns>
-    public static IOrientation CreateYaw(double yaw) => new Orientation(yaw, null, null);
+    public static IPanoramaViewerOptions CreateNavBarVisible(bool navBarVisible)
+      => new PanoramaViewerOptions(null, null, navBarVisible);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <param name="pitch"></param>
-    /// <param name="hFov"></param>
     /// <returns></returns>
-    public static IOrientation Create(double? yaw, double? pitch, double? hFov) => new Orientation(yaw, pitch, hFov);
+    public static IPanoramaViewerOptions Create() => new PanoramaViewerOptions(null, null, null);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="recordingsVisible"></param>
+    /// <param name="timeTravelVisible"></param>
+    /// <param name="navBarVisible"></param>
+    /// <returns></returns>
+    public static IPanoramaViewerOptions Create(bool recordingsVisible, bool timeTravelVisible, bool navBarVisible)
+      => new PanoramaViewerOptions(recordingsVisible, timeTravelVisible, navBarVisible);
   }
 }

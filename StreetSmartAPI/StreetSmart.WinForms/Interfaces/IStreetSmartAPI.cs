@@ -40,41 +40,22 @@ namespace StreetSmart.WinForms.Interfaces
     StreetSmartGUI GUI { get; }
 
     /// <summary>
-    /// Adds a PanoramaViewer to a default DOM-element.
+    /// 
     /// </summary>
-    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
-    /// <returns></returns>
-    IPanoramaViewer AddPanoramaViewer(string viewerObjectName);
+    void ShowDefTools();
 
     /// <summary>
-    /// Adds a PanoramaViewer to a specified DOM-element.
+    /// 
     /// </summary>
-    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
-    /// <param name="domElementName">The name of the domElement.</param>
-    /// <param name="domElementScript">The javascript for create a domElement.</param>
-    /// <returns></returns>
-    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, string domElementName, string domElementScript);
+    void CloseDefTools();
 
     /// <summary>
-    /// Adds a PanoramaViewer to a default DOM-element.
+    /// 
     /// </summary>
-    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
-    /// <param name="recordingsVisible">If recordings should be visible.</param>
-    /// <param name="timeTravelEnabled">If time travel is enabled.</param>
+    /// <param name="domElement"></param>
+    /// <param name="viewerOptions"></param>
     /// <returns></returns>
-    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible, bool timeTravelEnabled);
-
-    /// <summary>
-    /// Adds a PanoramaViewer to a specified DOM-element.
-    /// </summary>
-    /// <param name="viewerObjectName">The name of the panorama viewer.</param>
-    /// <param name="recordingsVisible">If recordings should be visible.</param>
-    /// <param name="timeTravelEnabled">If time travel is enabled.</param>
-    /// <param name="domElementName">The name of the domElement.</param>
-    /// <param name="domElementScript">The javascript for create a domElement.</param>
-    /// <returns></returns>
-    IPanoramaViewer AddPanoramaViewer(string viewerObjectName, bool recordingsVisible, bool timeTravelEnabled,
-      string domElementName, string domElementScript);
+    IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions);
 
     /// <summary>
     /// Destroys panorama viewer
@@ -120,7 +101,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
     /// <param name="options">Object containing the options used for initializing the API.</param>
-    Task Init(IOptions options);
+    Task InitAsync(IOptions options);
   }
 
   // ReSharper restore InconsistentNaming

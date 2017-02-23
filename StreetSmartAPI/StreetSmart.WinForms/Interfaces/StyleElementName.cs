@@ -16,44 +16,43 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Data;
-using StreetSmart.WinForms.Interfaces;
+using System.ComponentModel;
 
-namespace StreetSmart.WinForms.Factories
+namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
   /// 
   /// </summary>
-  public static class OrientationFactory
+  public enum StyleElementName
   {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
-    public static IOrientation CreatehFov(double hFov) => new Orientation(null, null, hFov);
+    [Description("width")]
+    Width = 1,
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="pitch"></param>
-    /// <returns></returns>
-    public static IOrientation CreatePitch(double pitch) => new Orientation(null, pitch, null);
+    [Description("height")]
+    Height = 2,
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <returns></returns>
-    public static IOrientation CreateYaw(double yaw) => new Orientation(yaw, null, null);
+    [Description("position")]
+    Position = 3,
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <param name="pitch"></param>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
-    public static IOrientation Create(double? yaw, double? pitch, double? hFov) => new Orientation(yaw, pitch, hFov);
+    [Description("top")]
+    Top = 4,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Description("left")]
+    Left = 5
   }
 }

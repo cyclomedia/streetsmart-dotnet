@@ -16,29 +16,31 @@
  * License along with this library.
  */
 
-using CefSharp;
-using CefSharp.WinForms;
-
-using StreetSmart.WinForms.Events;
-using StreetSmart.WinForms.Exceptions;
-using StreetSmart.WinForms.Interfaces;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
+
+using CefSharp;
+using CefSharp.WinForms;
+
 using StreetSmart.WinForms.Data;
+using StreetSmart.WinForms.Events;
+using StreetSmart.WinForms.Exceptions;
+using StreetSmart.WinForms.Interfaces;
 
 using Orientation = StreetSmart.WinForms.Data.Orientation;
 
-namespace StreetSmart.WinForms
+namespace StreetSmart.WinForms.API
 {
   internal class PanoramaViewer : IPanoramaViewer
   {
     #region Members
 
     private readonly ChromiumWebBrowser _browser;
+    private readonly IDomElement _domElement;
 
     #endregion
 
@@ -61,81 +63,65 @@ namespace StreetSmart.WinForms
 
     #region Properties
 
-    public string ViewerObjectName { get; }
-
-    public string DomElementName { get; }
+    public string Name { get; }
 
     #endregion
 
     #region Constructors
 
-    public PanoramaViewer(ChromiumWebBrowser browser, string viewerObjectName)
+    public PanoramaViewer(ChromiumWebBrowser browser, IDomElement element, IPanoramaViewerOptions options)
     {
       _browser = browser;
-      ViewerObjectName = viewerObjectName;
-      DomElementName = $@"dom{ViewerObjectName}Element";
-      string script =
-        $@"var {DomElementName} = document.createElement('div');
-           {DomElementName}.setAttribute('id', 'panorama{ViewerObjectName}Window');
-           {DomElementName}.setAttribute('style', 'width:100%; height:100%;');
-           document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      _domElement = element;
+      Name = $"pan{Guid.NewGuid().ToString("N")}";
+      List<string> totalString = new List<string>();
 
-    public PanoramaViewer(ChromiumWebBrowser browser, string viewerObjectName, bool recordingsVisible,
-      bool timeTravelEnabled)
-    {
-      _browser = browser;
-      ViewerObjectName = viewerObjectName;
-      DomElementName = $@"dom{ViewerObjectName}Element";
-      string script =
-        $@"var {DomElementName} = document.createElement('div');
-           {DomElementName}.setAttribute('id', 'panorama{ViewerObjectName}Window');
-           {DomElementName}.setAttribute('style', 'width:100%; height:100%;')
-           document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName},
-           {{recordingsVisible: {recordingsVisible.ToString().ToLower()},
-           timeTravelEnabled: {timeTravelEnabled.ToString().ToLower()}}});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      if (options.RecordingsVisible != null)
+      {
+        totalString.Add($"recordingsVisible: {options.RecordingsVisible.ToString().ToLower()}");
+      }
 
-    public PanoramaViewer(ChromiumWebBrowser browser, string viewerObjectName, string domElementName,
-      string domElementScript)
-    {
-      _browser = browser;
-      ViewerObjectName = viewerObjectName;
-      DomElementName = domElementName;
-      string script =
-        $@"{domElementScript}
-           document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName});";
-      _browser.ExecuteScriptAsync(script);
-    }
+      if (options.TimeTravelVisible != null)
+      {
+        totalString.Add($"timeTravelVisible: {options.TimeTravelVisible.ToString().ToLower()}");
+      }
 
-    public PanoramaViewer(ChromiumWebBrowser browser, string viewerObjectName, bool recordingsVisible,
-      bool timeTravelEnabled, string domElementName, string domElementScript)
-    {
-      _browser = browser;
-      ViewerObjectName = viewerObjectName;
-      DomElementName = domElementName;
-      string script =
-        $@"{domElementScript}
-           document.body.appendChild({DomElementName});
-           var {ViewerObjectName} = StreetSmartApi.addPanoramaViewer({DomElementName},
-           {{recordingsVisible: {recordingsVisible.ToString().ToLower()},
-           timeTravelEnabled: {timeTravelEnabled.ToString().ToLower()}}});";
+      if (options.NavbarVisible != null)
+      {
+        totalString.Add($"navbarVisible: {options.NavbarVisible.ToString().ToLower()}");
+      }
+
+      string totalOptions = totalString.Aggregate(string.Empty, (current, part) => $"{current}, {part}");
+      string optionsString = (totalString.Count == 0)
+        ? string.Empty
+        : $"{{{totalOptions.Substring(Math.Min(totalOptions.Length, 2))}}}";
+
+      string script = $@"{element} document.body.appendChild({element.Name});
+                      var {Name} = StreetSmartApi.addPanoramaViewer({element.Name}, {optionsString});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.RECORDING_CLICK, onRecordingClick{Name} = function(e)
+                      {{ delete e.detail.recording.thumbs; panoramaViewerEvents.onRecordingClick('{Name}', e.detail); }});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.IMAGE_CHANGE, onImageChange{Name} = function(e)
+                      {{ panoramaViewerEvents.onImageChange('{Name}', e); }});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.VIEW_CHANGE, onViewChange{Name} = function(e)
+                      {{ panoramaViewerEvents.onViewChange('{Name}', e.detail); }});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.VIEW_LOAD_START, onViewLoadStart{Name} = function(e)
+                      {{ panoramaViewerEvents.onViewLoadStart('{Name}', e); }});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.VIEW_LOAD_END, onViewLoadEnd{Name} = function(e)
+                      {{ panoramaViewerEvents.onViewLoadEnd('{Name}', e); }});
+                      {Name}.on(StreetSmartApi.Events.panoramaViewer.TILE_LOAD_ERROR, onTileLoadError{Name} = function(e)
+                      {{ panoramaViewerEvents.onTileLoadError('{Name}', e.detail); }});";
+
       _browser.ExecuteScriptAsync(script);
     }
 
     #endregion
 
-    #region Functions
+    #region Interface Functions
 
     public async Task<bool> GetNavbarExpandedAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarExpanded());";
+      string script = $"panoramaViewerEvents.onResult('{Name}', {Name}.getNavbarExpanded());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -144,7 +130,7 @@ namespace StreetSmart.WinForms
     public async Task<bool> GetNavbarVisibleAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getNavbarVisible());";
+      string script = $"panoramaViewerEvents.onResult('{Name}', {Name}.getNavbarVisible());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -153,7 +139,7 @@ namespace StreetSmart.WinForms
     public async Task<IOrientation> GetOrientationAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $@"panoramaViewerEvents.onResult('{ViewerObjectName}',{ViewerObjectName}.getOrientation());";
+      string script = $@"panoramaViewerEvents.onResult('{Name}',{Name}.getOrientation());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return new Orientation((Dictionary<string, object>) _resultTask.Task.Result);
@@ -162,9 +148,9 @@ namespace StreetSmart.WinForms
     public async Task<IRecording> GetRecordingAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      var script = $@"recording{ViewerObjectName} = {ViewerObjectName}.getRecording();
-                      delete recording{ViewerObjectName}.thumbs;
-                      panoramaViewerEvents.onResult('{ViewerObjectName}', recording{ViewerObjectName});";
+      var script = $@"recording{Name} = {Name}.getRecording();
+                      delete recording{Name}.thumbs;
+                      panoramaViewerEvents.onResult('{Name}', recording{Name});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
@@ -173,7 +159,7 @@ namespace StreetSmart.WinForms
     public async Task<bool> GetRecordingsVisibleAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getRecordingsVisible());";
+      string script = $"panoramaViewerEvents.onResult('{Name}', {Name}.getRecordingsVisible());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -183,7 +169,7 @@ namespace StreetSmart.WinForms
     {
       _resultTask = new TaskCompletionSource<object>();
       string script =
-        $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelExpanded());";
+        $"panoramaViewerEvents.onResult('{Name}', {Name}.getTimeTravelExpanded());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -192,7 +178,7 @@ namespace StreetSmart.WinForms
     public async Task<bool> GetTimeTravelVisibleAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $"panoramaViewerEvents.onResult('{ViewerObjectName}', {ViewerObjectName}.getTimeTravelVisible());";
+      string script = $"panoramaViewerEvents.onResult('{Name}', {Name}.getTimeTravelVisible());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -201,7 +187,7 @@ namespace StreetSmart.WinForms
     public async Task<Color> GetViewerColorAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script = $@"panoramaViewerEvents.onResult('{ViewerObjectName}',{ViewerObjectName}.getViewerColor());";
+      string script = $@"panoramaViewerEvents.onResult('{Name}',{Name}.getViewerColor());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       object[] color = (object[]) _resultTask.Task.Result;
@@ -214,7 +200,7 @@ namespace StreetSmart.WinForms
       string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       var script =
-        $"{ViewerObjectName}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{srsComponent});";
+        $"{Name}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{srsComponent});";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -223,9 +209,9 @@ namespace StreetSmart.WinForms
       _resultTask = new TaskCompletionSource<object>();
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       string script =
-        $@"{ViewerObjectName}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{
-          ViewerObjectName}', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{
-          ViewerObjectName}', r)}});";
+        $@"{Name}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{
+          Name}', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{
+          Name}', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
 
@@ -244,9 +230,9 @@ namespace StreetSmart.WinForms
       string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       var script =
-        $@"{ViewerObjectName}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{
-          srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{ViewerObjectName
-          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
+        $@"{Name}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{
+          srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{Name
+          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name
           }', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
@@ -264,9 +250,9 @@ namespace StreetSmart.WinForms
       _resultTask = new TaskCompletionSource<object>();
       string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
       string script =
-        $@"{ViewerObjectName}.openByImageId('{imageId}'{srsComponent
-          }).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{ViewerObjectName
-          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{ViewerObjectName
+        $@"{Name}.openByImageId('{imageId}'{srsComponent
+          }).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{Name
+          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name
           }', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
@@ -281,25 +267,25 @@ namespace StreetSmart.WinForms
 
     public void RotateDown(double deltaPitch)
     {
-      var script = $"{ViewerObjectName}.rotateDown({deltaPitch});";
+      var script = $"{Name}.rotateDown({deltaPitch});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void RotateLeft(double deltaYaw)
     {
-      var script = $"{ViewerObjectName}.rotateLeft({deltaYaw});";
+      var script = $"{Name}.rotateLeft({deltaYaw});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void RotateRight(double deltaYaw)
     {
-      var script = $"{ViewerObjectName}.rotateRight({deltaYaw});";
+      var script = $"{Name}.rotateRight({deltaYaw});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void RotateUp(double deltaPitch)
     {
-      var script = $"{ViewerObjectName}.rotateUp({deltaPitch});";
+      var script = $"{Name}.rotateUp({deltaPitch});";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -313,49 +299,49 @@ namespace StreetSmart.WinForms
       string parthFov = partPitch + ((orientation.HFov == null) ? string.Empty
         : string.Concat((string.IsNullOrEmpty(partPitch) ? string.Empty : ","),
           $"hFov:{((double) orientation.HFov).ToString(ci)}"));
-      string script = $@"{ViewerObjectName}.setOrientation({{{parthFov}}});";
+      string script = $@"{Name}.setOrientation({{{parthFov}}});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ToggleNavbarExpanded(bool expanded)
     {
-      var script = $"{ViewerObjectName}.toggleNavbarExpanded({expanded.ToString().ToLower()});";
+      var script = $"{Name}.toggleNavbarExpanded({expanded.ToString().ToLower()});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ToggleNavbarVisible(bool visible)
     {
-      var script = $"{ViewerObjectName}.toggleNavbarVisible({visible.ToString().ToLower()});";
+      var script = $"{Name}.toggleNavbarVisible({visible.ToString().ToLower()});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ToggleRecordingsVisible(bool visible)
     {
-      var script = $"{ViewerObjectName}.toggleRecordingsVisible({visible.ToString().ToLower()});";
+      var script = $"{Name}.toggleRecordingsVisible({visible.ToString().ToLower()});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ToggleTimeTravelExpanded(bool expanded)
     {
-      var script = $"{ViewerObjectName}.toggleTimeTravelExpanded({expanded.ToString().ToLower()});";
+      var script = $"{Name}.toggleTimeTravelExpanded({expanded.ToString().ToLower()});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ToggleTimeTravelVisible(bool visible)
     {
-      var script = $"{ViewerObjectName}.toggleTimeTravelVisible({visible.ToString().ToLower()});";
+      var script = $"{Name}.toggleTimeTravelVisible({visible.ToString().ToLower()});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ZoomIn()
     {
-      string script = $@"{ViewerObjectName}.zoomIn();";
+      string script = $@"{Name}.zoomIn();";
       _browser.ExecuteScriptAsync(script);
     }
 
     public void ZoomOut()
     {
-      string script = $@"{ViewerObjectName}.zoomOut();";
+      string script = $@"{Name}.zoomOut();";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -408,7 +394,23 @@ namespace StreetSmart.WinForms
 
     public void OnImageNotFoundException(string message)
     {
-      _resultTask.TrySetResult(new ImageNotFoundException(message));
+      _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
+    }
+
+    #endregion
+
+    #region Functions with no interface
+
+    public void DestroyPanoramaViewer()
+    {
+      string script = $@"{Name}.off(StreetSmartApi.Events.panoramaViewer.RECORDING_CLICK, onRecordingClick{Name});
+                      {Name}.off(StreetSmartApi.Events.panoramaViewer.IMAGE_CHANGE, onImageChange{Name});
+                      {Name}.off(StreetSmartApi.Events.panoramaViewer.VIEW_CHANGE, onViewChange{Name});
+                      {Name}.off(StreetSmartApi.Events.panoramaViewer.VIEW_LOAD_START, onViewLoadStart{Name});
+                      {Name}.off(StreetSmartApi.Events.panoramaViewer.VIEW_LOAD_END, onViewLoadEnd{Name});
+                      {Name}.off(StreetSmartApi.Events.panoramaViewer.TILE_LOAD_ERROR, onTileLoadError{Name});
+                      StreetSmartApi.destroyPanoramaViewer({Name},{_domElement.Name});";
+      _browser.ExecuteScriptAsync(script);
     }
 
     #endregion

@@ -16,44 +16,47 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Data;
-using StreetSmart.WinForms.Interfaces;
-
-namespace StreetSmart.WinForms.Factories
+namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
   /// 
   /// </summary>
-  public static class OrientationFactory
+  public interface IStyle
   {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
-    public static IOrientation CreatehFov(double hFov) => new Orientation(null, null, hFov);
+    /// <param name="name"></param>
+    /// <param name="value"></param>
+    void AddStyle(StyleElementName name, string value);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="pitch"></param>
-    /// <returns></returns>
-    public static IOrientation CreatePitch(double pitch) => new Orientation(null, pitch, null);
+    /// <param name="name"></param>
+    /// <param name="value"></param>
+    /// <param name="type"></param>
+    void AddStyle(StyleElementName name, int value, StyleElementNumberType type);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <returns></returns>
-    public static IOrientation CreateYaw(double yaw) => new Orientation(yaw, null, null);
+    /// <param name="name"></param>
+    void RemoveStyle(StyleElementName name);
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <param name="pitch"></param>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
-    public static IOrientation Create(double? yaw, double? pitch, double? hFov) => new Orientation(yaw, pitch, hFov);
+    /// <param name="name"></param>
+    /// <param name="value"></param>
+    void UpdateStyle(StyleElementName name, string value);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="value"></param>
+    /// <param name="type"></param>
+    void UpdateStyle(StyleElementName name, int value, StyleElementNumberType type);
   }
 }

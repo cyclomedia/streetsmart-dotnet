@@ -2,10 +2,14 @@
 - Vragen:
 	- EventViewerArgs, hoe invullen?
 	- EventTileLoadArgs, hoe invullen?
-- Refactoring:
-	- Namen van de viewers => intern GUID genereren
-	- Geen javascript om viewer te genereren, maar via een aparte class doen
 	- Error message op een betere manier parsen uit het error bericht wat we terug krijgen van javascript
+- Refactoring:
+	- javascripts via een aparte file inladen, omdat steeds dezelfde programeer structuur
+	- Unit testen
+	- WPF API
+	- DOM style uitbreiden (+ testen demo app uitbreiden)
+	- Commentaar uitbreiden van interface / factory / exceptions / enums objecten
+
 
 
 labs-api:

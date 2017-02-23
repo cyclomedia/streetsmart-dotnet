@@ -31,16 +31,20 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenCloseViewer = new System.Windows.Forms.GroupBox();
-      this.rbScript = new System.Windows.Forms.RadioButton();
+      this.rbParameters = new System.Windows.Forms.RadioButton();
       this.rbDefault = new System.Windows.Forms.RadioButton();
-      this.lblDomElementName = new System.Windows.Forms.Label();
-      this.txtDomElementName = new System.Windows.Forms.TextBox();
-      this.lblViewerName = new System.Windows.Forms.Label();
-      this.txtViewerName = new System.Windows.Forms.TextBox();
-      this.txtDomElementScript = new System.Windows.Forms.TextBox();
       this.btnOpenViewer = new System.Windows.Forms.Button();
       this.btnDestroyViewer = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
+      this.lblDeltaYawPitch = new System.Windows.Forms.Label();
+      this.txtDeltaYawPitch = new System.Windows.Forms.TextBox();
+      this.btnRotateDown = new System.Windows.Forms.Button();
+      this.btnRotateUp = new System.Windows.Forms.Button();
+      this.btnRotateRight = new System.Windows.Forms.Button();
+      this.btnZoomOut = new System.Windows.Forms.Button();
+      this.btRotateLeft = new System.Windows.Forms.Button();
+      this.btnZoomIn = new System.Windows.Forms.Button();
       this.grEvents = new System.Windows.Forms.GroupBox();
       this.lbViewerEvents = new System.Windows.Forms.ListBox();
       this.grRecordingViewerColorPermissions = new System.Windows.Forms.GroupBox();
@@ -81,15 +85,6 @@
       this.btnApiReadyState = new System.Windows.Forms.Button();
       this.btnApplicationVersion = new System.Windows.Forms.Button();
       this.btnApplicationName = new System.Windows.Forms.Button();
-      this.grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
-      this.lblDeltaYawPitch = new System.Windows.Forms.Label();
-      this.txtDeltaYawPitch = new System.Windows.Forms.TextBox();
-      this.btnRotateDown = new System.Windows.Forms.Button();
-      this.btnRotateUp = new System.Windows.Forms.Button();
-      this.btnRotateRight = new System.Windows.Forms.Button();
-      this.btnZoomOut = new System.Windows.Forms.Button();
-      this.btRotateLeft = new System.Windows.Forms.Button();
-      this.btnZoomIn = new System.Windows.Forms.Button();
       this.grViewerToggles = new System.Windows.Forms.GroupBox();
       this.btnToggleRecordingsVisible = new System.Windows.Forms.Button();
       this.btnToggleTimeTravelExpanded = new System.Windows.Forms.Button();
@@ -103,25 +98,37 @@
       this.txtAddressSrs = new System.Windows.Forms.TextBox();
       this.btnOpenByAddress = new System.Windows.Forms.Button();
       this.grLogin = new System.Windows.Forms.GroupBox();
+      this.lblAPIKey = new System.Windows.Forms.Label();
+      this.txtAPIKey = new System.Windows.Forms.TextBox();
       this.lblUsername = new System.Windows.Forms.Label();
       this.lblPassword = new System.Windows.Forms.Label();
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.lblAPIKey = new System.Windows.Forms.Label();
-      this.txtAPIKey = new System.Windows.Forms.TextBox();
+      this.grDevTools = new System.Windows.Forms.GroupBox();
+      this.btnShowDefTools = new System.Windows.Forms.Button();
+      this.btnCloseDefTools = new System.Windows.Forms.Button();
+      this.txtWidth = new System.Windows.Forms.TextBox();
+      this.txtHeight = new System.Windows.Forms.TextBox();
+      this.txtTop = new System.Windows.Forms.TextBox();
+      this.lblWidth = new System.Windows.Forms.Label();
+      this.lblHeight = new System.Windows.Forms.Label();
+      this.lblTop = new System.Windows.Forms.Label();
+      this.txtLeft = new System.Windows.Forms.TextBox();
+      this.lblLeft = new System.Windows.Forms.Label();
       this.grOpenCloseViewer.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grRotationsZoomInOut.SuspendLayout();
       this.grEvents.SuspendLayout();
       this.grRecordingViewerColorPermissions.SuspendLayout();
       this.grOrientation.SuspendLayout();
       this.grOpenByImageId.SuspendLayout();
       this.grCoordinate.SuspendLayout();
       this.grAPIInfo.SuspendLayout();
-      this.grRotationsZoomInOut.SuspendLayout();
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.grDevTools.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -134,31 +141,34 @@
       // 
       // grOpenCloseViewer
       // 
-      this.grOpenCloseViewer.Controls.Add(this.rbScript);
+      this.grOpenCloseViewer.Controls.Add(this.txtLeft);
+      this.grOpenCloseViewer.Controls.Add(this.lblLeft);
+      this.grOpenCloseViewer.Controls.Add(this.txtWidth);
+      this.grOpenCloseViewer.Controls.Add(this.txtHeight);
+      this.grOpenCloseViewer.Controls.Add(this.txtTop);
+      this.grOpenCloseViewer.Controls.Add(this.lblWidth);
+      this.grOpenCloseViewer.Controls.Add(this.lblHeight);
+      this.grOpenCloseViewer.Controls.Add(this.lblTop);
+      this.grOpenCloseViewer.Controls.Add(this.rbParameters);
       this.grOpenCloseViewer.Controls.Add(this.rbDefault);
-      this.grOpenCloseViewer.Controls.Add(this.lblDomElementName);
-      this.grOpenCloseViewer.Controls.Add(this.txtDomElementName);
-      this.grOpenCloseViewer.Controls.Add(this.lblViewerName);
-      this.grOpenCloseViewer.Controls.Add(this.txtViewerName);
-      this.grOpenCloseViewer.Controls.Add(this.txtDomElementScript);
       this.grOpenCloseViewer.Controls.Add(this.btnOpenViewer);
       this.grOpenCloseViewer.Controls.Add(this.btnDestroyViewer);
       this.grOpenCloseViewer.Location = new System.Drawing.Point(0, 290);
       this.grOpenCloseViewer.Name = "grOpenCloseViewer";
-      this.grOpenCloseViewer.Size = new System.Drawing.Size(480, 120);
+      this.grOpenCloseViewer.Size = new System.Drawing.Size(360, 120);
       this.grOpenCloseViewer.TabIndex = 0;
       this.grOpenCloseViewer.TabStop = false;
       this.grOpenCloseViewer.Text = "Open / Close Viewer";
       // 
-      // rbScript
+      // rbParameters
       // 
-      this.rbScript.AutoSize = true;
-      this.rbScript.Location = new System.Drawing.Point(10, 65);
-      this.rbScript.Name = "rbScript";
-      this.rbScript.Size = new System.Drawing.Size(52, 17);
-      this.rbScript.TabIndex = 55;
-      this.rbScript.Text = "Script";
-      this.rbScript.UseVisualStyleBackColor = true;
+      this.rbParameters.AutoSize = true;
+      this.rbParameters.Location = new System.Drawing.Point(10, 65);
+      this.rbParameters.Name = "rbParameters";
+      this.rbParameters.Size = new System.Drawing.Size(78, 17);
+      this.rbParameters.TabIndex = 55;
+      this.rbParameters.Text = "Parameters";
+      this.rbParameters.UseVisualStyleBackColor = true;
       // 
       // rbDefault
       // 
@@ -171,47 +181,6 @@
       this.rbDefault.TabStop = true;
       this.rbDefault.Text = "Default";
       this.rbDefault.UseVisualStyleBackColor = true;
-      // 
-      // lblDomElementName
-      // 
-      this.lblDomElementName.AutoSize = true;
-      this.lblDomElementName.Location = new System.Drawing.Point(290, 90);
-      this.lblDomElementName.Name = "lblDomElementName";
-      this.lblDomElementName.Size = new System.Drawing.Size(98, 13);
-      this.lblDomElementName.TabIndex = 52;
-      this.lblDomElementName.Text = "Dom element name";
-      // 
-      // txtDomElementName
-      // 
-      this.txtDomElementName.Location = new System.Drawing.Point(395, 90);
-      this.txtDomElementName.Name = "txtDomElementName";
-      this.txtDomElementName.Size = new System.Drawing.Size(80, 20);
-      this.txtDomElementName.TabIndex = 53;
-      // 
-      // lblViewerName
-      // 
-      this.lblViewerName.AutoSize = true;
-      this.lblViewerName.Location = new System.Drawing.Point(110, 90);
-      this.lblViewerName.Name = "lblViewerName";
-      this.lblViewerName.Size = new System.Drawing.Size(68, 13);
-      this.lblViewerName.TabIndex = 50;
-      this.lblViewerName.Text = "Viewer name";
-      // 
-      // txtViewerName
-      // 
-      this.txtViewerName.Location = new System.Drawing.Point(180, 90);
-      this.txtViewerName.Name = "txtViewerName";
-      this.txtViewerName.Size = new System.Drawing.Size(80, 20);
-      this.txtViewerName.TabIndex = 51;
-      this.txtViewerName.Text = "Viewer";
-      // 
-      // txtDomElementScript
-      // 
-      this.txtDomElementScript.Location = new System.Drawing.Point(110, 15);
-      this.txtDomElementScript.Multiline = true;
-      this.txtDomElementScript.Name = "txtDomElementScript";
-      this.txtDomElementScript.Size = new System.Drawing.Size(365, 70);
-      this.txtDomElementScript.TabIndex = 48;
       // 
       // btnOpenViewer
       // 
@@ -235,6 +204,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grDevTools);
       this.plControl.Controls.Add(this.grRotationsZoomInOut);
       this.plControl.Controls.Add(this.grEvents);
       this.plControl.Controls.Add(this.grRecordingViewerColorPermissions);
@@ -251,6 +221,100 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 762);
       this.plControl.TabIndex = 1;
+      // 
+      // grRotationsZoomInOut
+      // 
+      this.grRotationsZoomInOut.Controls.Add(this.lblDeltaYawPitch);
+      this.grRotationsZoomInOut.Controls.Add(this.txtDeltaYawPitch);
+      this.grRotationsZoomInOut.Controls.Add(this.btnRotateDown);
+      this.grRotationsZoomInOut.Controls.Add(this.btnRotateUp);
+      this.grRotationsZoomInOut.Controls.Add(this.btnRotateRight);
+      this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
+      this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
+      this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
+      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 135);
+      this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
+      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 155);
+      this.grRotationsZoomInOut.TabIndex = 0;
+      this.grRotationsZoomInOut.TabStop = false;
+      this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
+      // 
+      // lblDeltaYawPitch
+      // 
+      this.lblDeltaYawPitch.AutoSize = true;
+      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 120);
+      this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
+      this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
+      this.lblDeltaYawPitch.TabIndex = 20;
+      this.lblDeltaYawPitch.Text = "delta yaw / pitch";
+      // 
+      // txtDeltaYawPitch
+      // 
+      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 120);
+      this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
+      this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
+      this.txtDeltaYawPitch.TabIndex = 21;
+      this.txtDeltaYawPitch.Text = "1";
+      // 
+      // btnRotateDown
+      // 
+      this.btnRotateDown.Location = new System.Drawing.Point(95, 15);
+      this.btnRotateDown.Name = "btnRotateDown";
+      this.btnRotateDown.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateDown.TabIndex = 19;
+      this.btnRotateDown.Text = "Rotate down";
+      this.btnRotateDown.UseVisualStyleBackColor = true;
+      this.btnRotateDown.Click += new System.EventHandler(this.btnRotateDown_Click);
+      // 
+      // btnRotateUp
+      // 
+      this.btnRotateUp.Location = new System.Drawing.Point(5, 15);
+      this.btnRotateUp.Name = "btnRotateUp";
+      this.btnRotateUp.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateUp.TabIndex = 18;
+      this.btnRotateUp.Text = "Rotate up";
+      this.btnRotateUp.UseVisualStyleBackColor = true;
+      this.btnRotateUp.Click += new System.EventHandler(this.btnRotateUp_Click);
+      // 
+      // btnRotateRight
+      // 
+      this.btnRotateRight.Location = new System.Drawing.Point(5, 50);
+      this.btnRotateRight.Name = "btnRotateRight";
+      this.btnRotateRight.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateRight.TabIndex = 6;
+      this.btnRotateRight.Text = "Rotate right";
+      this.btnRotateRight.UseVisualStyleBackColor = true;
+      this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
+      // 
+      // btnZoomOut
+      // 
+      this.btnZoomOut.Location = new System.Drawing.Point(95, 85);
+      this.btnZoomOut.Name = "btnZoomOut";
+      this.btnZoomOut.Size = new System.Drawing.Size(80, 30);
+      this.btnZoomOut.TabIndex = 46;
+      this.btnZoomOut.Text = "Zoom out";
+      this.btnZoomOut.UseVisualStyleBackColor = true;
+      this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
+      // 
+      // btRotateLeft
+      // 
+      this.btRotateLeft.Location = new System.Drawing.Point(5, 85);
+      this.btRotateLeft.Name = "btRotateLeft";
+      this.btRotateLeft.Size = new System.Drawing.Size(80, 30);
+      this.btRotateLeft.TabIndex = 0;
+      this.btRotateLeft.Text = "Rotate left";
+      this.btRotateLeft.UseVisualStyleBackColor = true;
+      this.btRotateLeft.Click += new System.EventHandler(this.btRotateLeft_Click);
+      // 
+      // btnZoomIn
+      // 
+      this.btnZoomIn.Location = new System.Drawing.Point(95, 50);
+      this.btnZoomIn.Name = "btnZoomIn";
+      this.btnZoomIn.Size = new System.Drawing.Size(80, 30);
+      this.btnZoomIn.TabIndex = 45;
+      this.btnZoomIn.Text = "Zoom in";
+      this.btnZoomIn.UseVisualStyleBackColor = true;
+      this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
       // 
       // grEvents
       // 
@@ -644,100 +708,6 @@
       this.btnApplicationName.UseVisualStyleBackColor = true;
       this.btnApplicationName.Click += new System.EventHandler(this.btnApplicationName_Click);
       // 
-      // grRotationsZoomInOut
-      // 
-      this.grRotationsZoomInOut.Controls.Add(this.lblDeltaYawPitch);
-      this.grRotationsZoomInOut.Controls.Add(this.txtDeltaYawPitch);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateDown);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateUp);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateRight);
-      this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
-      this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
-      this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 135);
-      this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 155);
-      this.grRotationsZoomInOut.TabIndex = 0;
-      this.grRotationsZoomInOut.TabStop = false;
-      this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
-      // 
-      // lblDeltaYawPitch
-      // 
-      this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 120);
-      this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
-      this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
-      this.lblDeltaYawPitch.TabIndex = 20;
-      this.lblDeltaYawPitch.Text = "delta yaw / pitch";
-      // 
-      // txtDeltaYawPitch
-      // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 120);
-      this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
-      this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
-      this.txtDeltaYawPitch.TabIndex = 21;
-      this.txtDeltaYawPitch.Text = "1";
-      // 
-      // btnRotateDown
-      // 
-      this.btnRotateDown.Location = new System.Drawing.Point(95, 15);
-      this.btnRotateDown.Name = "btnRotateDown";
-      this.btnRotateDown.Size = new System.Drawing.Size(80, 30);
-      this.btnRotateDown.TabIndex = 19;
-      this.btnRotateDown.Text = "Rotate down";
-      this.btnRotateDown.UseVisualStyleBackColor = true;
-      this.btnRotateDown.Click += new System.EventHandler(this.btnRotateDown_Click);
-      // 
-      // btnRotateUp
-      // 
-      this.btnRotateUp.Location = new System.Drawing.Point(5, 15);
-      this.btnRotateUp.Name = "btnRotateUp";
-      this.btnRotateUp.Size = new System.Drawing.Size(80, 30);
-      this.btnRotateUp.TabIndex = 18;
-      this.btnRotateUp.Text = "Rotate up";
-      this.btnRotateUp.UseVisualStyleBackColor = true;
-      this.btnRotateUp.Click += new System.EventHandler(this.btnRotateUp_Click);
-      // 
-      // btnRotateRight
-      // 
-      this.btnRotateRight.Location = new System.Drawing.Point(5, 50);
-      this.btnRotateRight.Name = "btnRotateRight";
-      this.btnRotateRight.Size = new System.Drawing.Size(80, 30);
-      this.btnRotateRight.TabIndex = 6;
-      this.btnRotateRight.Text = "Rotate right";
-      this.btnRotateRight.UseVisualStyleBackColor = true;
-      this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
-      // 
-      // btnZoomOut
-      // 
-      this.btnZoomOut.Location = new System.Drawing.Point(95, 85);
-      this.btnZoomOut.Name = "btnZoomOut";
-      this.btnZoomOut.Size = new System.Drawing.Size(80, 30);
-      this.btnZoomOut.TabIndex = 46;
-      this.btnZoomOut.Text = "Zoom out";
-      this.btnZoomOut.UseVisualStyleBackColor = true;
-      this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
-      // 
-      // btRotateLeft
-      // 
-      this.btRotateLeft.Location = new System.Drawing.Point(5, 85);
-      this.btRotateLeft.Name = "btRotateLeft";
-      this.btRotateLeft.Size = new System.Drawing.Size(80, 30);
-      this.btRotateLeft.TabIndex = 0;
-      this.btRotateLeft.Text = "Rotate left";
-      this.btRotateLeft.UseVisualStyleBackColor = true;
-      this.btRotateLeft.Click += new System.EventHandler(this.btRotateLeft_Click);
-      // 
-      // btnZoomIn
-      // 
-      this.btnZoomIn.Location = new System.Drawing.Point(95, 50);
-      this.btnZoomIn.Name = "btnZoomIn";
-      this.btnZoomIn.Size = new System.Drawing.Size(80, 30);
-      this.btnZoomIn.TabIndex = 45;
-      this.btnZoomIn.Text = "Zoom in";
-      this.btnZoomIn.UseVisualStyleBackColor = true;
-      this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
-      // 
       // grViewerToggles
       // 
       this.grViewerToggles.Controls.Add(this.btnToggleRecordingsVisible);
@@ -876,6 +846,22 @@
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
       // 
+      // lblAPIKey
+      // 
+      this.lblAPIKey.AutoSize = true;
+      this.lblAPIKey.Location = new System.Drawing.Point(5, 65);
+      this.lblAPIKey.Name = "lblAPIKey";
+      this.lblAPIKey.Size = new System.Drawing.Size(45, 13);
+      this.lblAPIKey.TabIndex = 6;
+      this.lblAPIKey.Text = "API Key";
+      // 
+      // txtAPIKey
+      // 
+      this.txtAPIKey.Location = new System.Drawing.Point(65, 65);
+      this.txtAPIKey.Name = "txtAPIKey";
+      this.txtAPIKey.Size = new System.Drawing.Size(110, 20);
+      this.txtAPIKey.TabIndex = 7;
+      // 
       // lblUsername
       // 
       this.lblUsername.AutoSize = true;
@@ -919,21 +905,104 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // lblAPIKey
+      // grDevTools
       // 
-      this.lblAPIKey.AutoSize = true;
-      this.lblAPIKey.Location = new System.Drawing.Point(5, 65);
-      this.lblAPIKey.Name = "lblAPIKey";
-      this.lblAPIKey.Size = new System.Drawing.Size(45, 13);
-      this.lblAPIKey.TabIndex = 6;
-      this.lblAPIKey.Text = "API Key";
+      this.grDevTools.Controls.Add(this.btnCloseDefTools);
+      this.grDevTools.Controls.Add(this.btnShowDefTools);
+      this.grDevTools.Location = new System.Drawing.Point(360, 290);
+      this.grDevTools.Name = "grDevTools";
+      this.grDevTools.Size = new System.Drawing.Size(120, 120);
+      this.grDevTools.TabIndex = 51;
+      this.grDevTools.TabStop = false;
+      this.grDevTools.Text = "Dev tools";
       // 
-      // txtAPIKey
+      // btnShowDefTools
       // 
-      this.txtAPIKey.Location = new System.Drawing.Point(65, 65);
-      this.txtAPIKey.Name = "txtAPIKey";
-      this.txtAPIKey.Size = new System.Drawing.Size(110, 20);
-      this.txtAPIKey.TabIndex = 7;
+      this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
+      this.btnShowDefTools.Name = "btnShowDefTools";
+      this.btnShowDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnShowDefTools.TabIndex = 48;
+      this.btnShowDefTools.Text = "Show def tools";
+      this.btnShowDefTools.UseVisualStyleBackColor = true;
+      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDefTools_Click);
+      // 
+      // btnCloseDefTools
+      // 
+      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 85);
+      this.btnCloseDefTools.Name = "btnCloseDefTools";
+      this.btnCloseDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnCloseDefTools.TabIndex = 49;
+      this.btnCloseDefTools.Text = "Close def tools";
+      this.btnCloseDefTools.UseVisualStyleBackColor = true;
+      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDefTools_Click);
+      // 
+      // txtWidth
+      // 
+      this.txtWidth.Location = new System.Drawing.Point(145, 15);
+      this.txtWidth.Name = "txtWidth";
+      this.txtWidth.Size = new System.Drawing.Size(90, 20);
+      this.txtWidth.TabIndex = 56;
+      this.txtWidth.Text = "40";
+      // 
+      // txtHeight
+      // 
+      this.txtHeight.Location = new System.Drawing.Point(145, 40);
+      this.txtHeight.Name = "txtHeight";
+      this.txtHeight.Size = new System.Drawing.Size(90, 20);
+      this.txtHeight.TabIndex = 57;
+      this.txtHeight.Text = "40";
+      // 
+      // txtTop
+      // 
+      this.txtTop.Location = new System.Drawing.Point(145, 65);
+      this.txtTop.Name = "txtTop";
+      this.txtTop.Size = new System.Drawing.Size(90, 20);
+      this.txtTop.TabIndex = 58;
+      this.txtTop.Text = "300";
+      // 
+      // lblWidth
+      // 
+      this.lblWidth.AutoSize = true;
+      this.lblWidth.Location = new System.Drawing.Point(105, 20);
+      this.lblWidth.Name = "lblWidth";
+      this.lblWidth.Size = new System.Drawing.Size(35, 13);
+      this.lblWidth.TabIndex = 59;
+      this.lblWidth.Text = "Width";
+      // 
+      // lblHeight
+      // 
+      this.lblHeight.AutoSize = true;
+      this.lblHeight.Location = new System.Drawing.Point(105, 45);
+      this.lblHeight.Name = "lblHeight";
+      this.lblHeight.Size = new System.Drawing.Size(38, 13);
+      this.lblHeight.TabIndex = 60;
+      this.lblHeight.Text = "Height";
+      // 
+      // lblTop
+      // 
+      this.lblTop.AutoSize = true;
+      this.lblTop.Location = new System.Drawing.Point(105, 70);
+      this.lblTop.Name = "lblTop";
+      this.lblTop.Size = new System.Drawing.Size(26, 13);
+      this.lblTop.TabIndex = 61;
+      this.lblTop.Text = "Top";
+      // 
+      // txtLeft
+      // 
+      this.txtLeft.Location = new System.Drawing.Point(145, 90);
+      this.txtLeft.Name = "txtLeft";
+      this.txtLeft.Size = new System.Drawing.Size(90, 20);
+      this.txtLeft.TabIndex = 62;
+      this.txtLeft.Text = "400";
+      // 
+      // lblLeft
+      // 
+      this.lblLeft.AutoSize = true;
+      this.lblLeft.Location = new System.Drawing.Point(105, 95);
+      this.lblLeft.Name = "lblLeft";
+      this.lblLeft.Size = new System.Drawing.Size(25, 13);
+      this.lblLeft.TabIndex = 63;
+      this.lblLeft.Text = "Left";
       // 
       // Demo
       // 
@@ -950,6 +1019,8 @@
       this.grOpenCloseViewer.ResumeLayout(false);
       this.grOpenCloseViewer.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grRotationsZoomInOut.ResumeLayout(false);
+      this.grRotationsZoomInOut.PerformLayout();
       this.grEvents.ResumeLayout(false);
       this.grRecordingViewerColorPermissions.ResumeLayout(false);
       this.grRecordingViewerColorPermissions.PerformLayout();
@@ -961,13 +1032,12 @@
       this.grCoordinate.PerformLayout();
       this.grAPIInfo.ResumeLayout(false);
       this.grAPIInfo.PerformLayout();
-      this.grRotationsZoomInOut.ResumeLayout(false);
-      this.grRotationsZoomInOut.PerformLayout();
       this.grViewerToggles.ResumeLayout(false);
       this.grOpenByAddress.ResumeLayout(false);
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.grDevTools.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1024,7 +1094,6 @@
     private System.Windows.Forms.Button btnZoomOut;
     private System.Windows.Forms.Button btnZoomIn;
     private System.Windows.Forms.Button btnOpenViewer;
-    private System.Windows.Forms.TextBox txtDomElementScript;
     private System.Windows.Forms.GroupBox grLogin;
     private System.Windows.Forms.GroupBox grViewerToggles;
     private System.Windows.Forms.GroupBox grOpenByAddress;
@@ -1044,17 +1113,24 @@
     private System.Windows.Forms.GroupBox grOrientation;
     private System.Windows.Forms.GroupBox grRecordingViewerColorPermissions;
     private System.Windows.Forms.TextBox txtRecordingViewerColorPermissions;
-    private System.Windows.Forms.Label lblDomElementName;
-    private System.Windows.Forms.TextBox txtDomElementName;
-    private System.Windows.Forms.Label lblViewerName;
-    private System.Windows.Forms.TextBox txtViewerName;
     private System.Windows.Forms.Button btnGetAddress;
-    private System.Windows.Forms.RadioButton rbScript;
+    private System.Windows.Forms.RadioButton rbParameters;
     private System.Windows.Forms.RadioButton rbDefault;
     private System.Windows.Forms.GroupBox grEvents;
     private System.Windows.Forms.ListBox lbViewerEvents;
     private System.Windows.Forms.Label lblAPIKey;
     private System.Windows.Forms.TextBox txtAPIKey;
+    private System.Windows.Forms.GroupBox grDevTools;
+    private System.Windows.Forms.Button btnShowDefTools;
+    private System.Windows.Forms.Button btnCloseDefTools;
+    private System.Windows.Forms.TextBox txtWidth;
+    private System.Windows.Forms.TextBox txtHeight;
+    private System.Windows.Forms.TextBox txtTop;
+    private System.Windows.Forms.Label lblWidth;
+    private System.Windows.Forms.Label lblHeight;
+    private System.Windows.Forms.Label lblTop;
+    private System.Windows.Forms.TextBox txtLeft;
+    private System.Windows.Forms.Label lblLeft;
   }
 }
 

@@ -16,22 +16,26 @@
  * License along with this library.
  */
 
-using System;
-
-namespace StreetSmart.WinForms.Exceptions
+namespace StreetSmart.WinForms.Interfaces
 {
-  internal class LoginFailedException : Exception
+  /// <summary>
+  /// 
+  /// </summary>
+  public interface IPanoramaViewerOptions
   {
-    public LoginFailedException()
-    {
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    bool? RecordingsVisible { get; set; }
 
-    public LoginFailedException(string message) : base(message)
-    {
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    bool? TimeTravelVisible { get; set; }
 
-    public LoginFailedException(string message, Exception inner) : base(message, inner)
-    {
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    bool? NavbarVisible { get; set; }
   }
 }

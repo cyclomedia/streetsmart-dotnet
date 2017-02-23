@@ -20,17 +20,25 @@ using System;
 
 namespace StreetSmart.WinForms.Exceptions
 {
-  internal class ImageNotFoundException : Exception
+  /// <summary>
+  /// 
+  /// </summary>
+  public class StreetSmartImageNotFoundException : Exception
   {
-    public ImageNotFoundException()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
+    public StreetSmartImageNotFoundException(string message) : base(message)
     {
     }
 
-    public ImageNotFoundException(string message) : base(message)
-    {
-    }
-
-    public ImageNotFoundException(string message, Exception inner) : base(message, inner)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="inner"></param>
+    public StreetSmartImageNotFoundException(string message, Exception inner) : base(message, inner)
     {
     }
   }
