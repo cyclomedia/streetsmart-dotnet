@@ -16,6 +16,9 @@
  * License along with this library.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
@@ -61,6 +64,29 @@ namespace StreetSmart.WinForms.Data
         _navBarVisible = value;
         RaisePropertyChanged();
       }
+    }
+
+    public override string ToString()
+    {
+      List<string> options = new List<string>();
+
+      if (RecordingsVisible != null)
+      {
+        options.Add($"recordingsVisible: {RecordingsVisible.ToString().ToLower()}");
+      }
+
+      if (TimeTravelVisible != null)
+      {
+        options.Add($"timeTravelVisible: {TimeTravelVisible.ToString().ToLower()}");
+      }
+
+      if (NavbarVisible != null)
+      {
+        options.Add($"navbarVisible: {NavbarVisible.ToString().ToLower()}");
+      }
+
+      string result = options.Aggregate(string.Empty, (current, part) => $"{current}, {part}");
+      return (options.Count == 0) ? string.Empty : $"{{{result.Substring(Math.Min(result.Length, 2))}}}";
     }
   }
 }

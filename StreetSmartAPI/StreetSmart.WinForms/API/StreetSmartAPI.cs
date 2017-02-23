@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -155,21 +154,8 @@ namespace StreetSmart.WinForms.API
     public async Task InitAsync(IOptions options)
     {
       _resultTask = new TaskCompletionSource<object>();
-      string locale = (options.Locale == null) ? string.Empty : $", locale:'{options.Locale}'";
-
-      // ReSharper disable once InconsistentNaming
-      string configurationURL = (options.ConfigurationURL == null)
-        ? string.Empty
-        : $", configurationUrl:'{options.ConfigurationURL}'";
-
-      string addressSettings = (options.AddressSettings == null)
-        ? string.Empty
-        : $", addressSettings: {{locale: '{options.AddressSettings.Locale}', database: '{options.AddressSettings.Database}'}}";
-
-      string script =
-        $@"StreetSmartApi.init({{username:'{options.Username}', password:'{options.Password.ConvertToUnsecureString()}', apiKey:'{options.APIKey}',
-           srs:'{options.SRS}'{locale}{configurationURL}{addressSettings}}}).then(function() {{streetSmartAPIEvents.onSuccess()}},
-           function(e) {{streetSmartAPIEvents.onError(e.message)}});";
+      string script = $@"StreetSmartApi.init({options}).then(function(){{streetSmartAPIEvents.onSuccess()}},
+                      function(e){{streetSmartAPIEvents.onError(e.message)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
 

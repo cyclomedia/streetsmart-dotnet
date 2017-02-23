@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.Globalization;
+
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
@@ -68,6 +70,13 @@ namespace StreetSmart.WinForms.Data
         _z = value;
         RaisePropertyChanged();
       }
+    }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string zComponent = (Z == null) ? string.Empty : $", {((double) Z).ToString(ci)}";
+      return $"[{X.ToString(ci)}, {Y.ToString(ci)}{zComponent}]";
     }
   }
 }

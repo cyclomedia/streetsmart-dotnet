@@ -59,5 +59,10 @@ namespace StreetSmart.WinForms.Data
         RaisePropertyChanged();
       }
     }
+
+    public override string ToString()
+    {
+      return $", addressSettings: {{locale: '{Locale}', database: '{Database}'}}";
+    }
   }
 }

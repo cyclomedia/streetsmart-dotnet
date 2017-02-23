@@ -16,8 +16,10 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
-
+using System.Globalization;
+using System.Linq;
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
@@ -70,6 +72,30 @@ namespace StreetSmart.WinForms.Data
         _hFov = value;
         RaisePropertyChanged();
       }
+    }
+
+    public override string ToString()
+    {
+      List<string> orientation = new List<string>();
+      CultureInfo ci = CultureInfo.InvariantCulture;
+
+      if (Yaw != null)
+      {
+        orientation.Add($"yaw:{((double) Yaw).ToString(ci)}");
+      }
+
+      if (Pitch != null)
+      {
+        orientation.Add($"pitch:{((double) Pitch).ToString(ci)}");
+      }
+
+      if (HFov != null)
+      {
+        orientation.Add($"hFov:{((double) HFov).ToString(ci)}");
+      }
+
+      string result = orientation.Aggregate(string.Empty, (current, part) => $"{current},{part}");
+      return $"{{{result.Substring(Math.Min(result.Length, 1))}}}";
     }
   }
 }

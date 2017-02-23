@@ -19,8 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -74,30 +72,9 @@ namespace StreetSmart.WinForms.API
       _browser = browser;
       _domElement = element;
       Name = $"pan{Guid.NewGuid().ToString("N")}";
-      List<string> totalString = new List<string>();
-
-      if (options.RecordingsVisible != null)
-      {
-        totalString.Add($"recordingsVisible: {options.RecordingsVisible.ToString().ToLower()}");
-      }
-
-      if (options.TimeTravelVisible != null)
-      {
-        totalString.Add($"timeTravelVisible: {options.TimeTravelVisible.ToString().ToLower()}");
-      }
-
-      if (options.NavbarVisible != null)
-      {
-        totalString.Add($"navbarVisible: {options.NavbarVisible.ToString().ToLower()}");
-      }
-
-      string totalOptions = totalString.Aggregate(string.Empty, (current, part) => $"{current}, {part}");
-      string optionsString = (totalString.Count == 0)
-        ? string.Empty
-        : $"{{{totalOptions.Substring(Math.Min(totalOptions.Length, 2))}}}";
 
       string script = $@"{element} document.body.appendChild({element.Name});
-                      var {Name} = StreetSmartApi.addPanoramaViewer({element.Name}, {optionsString});
+                      var {Name} = StreetSmartApi.addPanoramaViewer({element.Name}, {options});
                       {Name}.on(StreetSmartApi.Events.panoramaViewer.RECORDING_CLICK, onRecordingClick{Name} = function(e)
                       {{ delete e.detail.recording.thumbs; panoramaViewerEvents.onRecordingClick('{Name}', e.detail); }});
                       {Name}.on(StreetSmartApi.Events.panoramaViewer.IMAGE_CHANGE, onImageChange{Name} = function(e)
@@ -148,9 +125,8 @@ namespace StreetSmart.WinForms.API
     public async Task<IRecording> GetRecordingAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      var script = $@"recording{Name} = {Name}.getRecording();
-                      delete recording{Name}.thumbs;
-                      panoramaViewerEvents.onResult('{Name}', recording{Name});";
+      var script = $@"recording{Name} = {Name}.getRecording(); delete recording{Name}.thumbs;
+                   panoramaViewerEvents.onResult('{Name}', recording{Name});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return new Recording((Dictionary<string, object>) _resultTask.Task.Result);
@@ -168,8 +144,7 @@ namespace StreetSmart.WinForms.API
     public async Task<bool> GetTimeTravelExpandedAsync()
     {
       _resultTask = new TaskCompletionSource<object>();
-      string script =
-        $"panoramaViewerEvents.onResult('{Name}', {Name}.getTimeTravelExpanded());";
+      string script = $"panoramaViewerEvents.onResult('{Name}', {Name}.getTimeTravelExpanded());";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
       return (bool) _resultTask.Task.Result;
@@ -196,22 +171,16 @@ namespace StreetSmart.WinForms.API
 
     public void LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
-      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
-      var script =
-        $"{Name}.lookAtCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{srsComponent});";
+      var script = $"{Name}.lookAtCoordinate({coordinate}{SrsComponent(srs)});";
       _browser.ExecuteScriptAsync(script);
     }
 
     public async Task<IRecording> OpenByAddressAsync(string query, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
-      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
-      string script =
-        $@"{Name}.openByAddress('{query}'{srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{
-          Name}', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{
-          Name}', r)}});";
+      string script = $@"{Name}.openByAddress('{query}'{SrsComponent(srs)}).catch(function(e)
+                      {{panoramaViewerEvents.onImageNotFoundException('{Name}', e.message)}}).then
+                      (function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name}', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
 
@@ -226,14 +195,9 @@ namespace StreetSmart.WinForms.API
     public async Task<IRecording> OpenByCoordinateAsync(ICoordinate coordinate, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (coordinate.Z == null) ? string.Empty : $", {((double) coordinate.Z).ToString(ci)}";
-      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
-      var script =
-        $@"{Name}.openByCoordinate([{coordinate.X.ToString(ci)}, {coordinate.Y.ToString(ci)}{zComponent}]{
-          srsComponent}).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{Name
-          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name
-          }', r)}});";
+      var script = $@"{Name}.openByCoordinate({coordinate}{SrsComponent(srs)}).catch(function(e)
+                   {{panoramaViewerEvents.onImageNotFoundException('{Name}', e.message)}}).then
+                   (function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name}', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
 
@@ -248,12 +212,9 @@ namespace StreetSmart.WinForms.API
     public async Task<IRecording> OpenByImageIdAsync(string imageId, string srs = null)
     {
       _resultTask = new TaskCompletionSource<object>();
-      string srsComponent = (srs == null) ? string.Empty : $", '{srs}'";
-      string script =
-        $@"{Name}.openByImageId('{imageId}'{srsComponent
-          }).catch(function(e){{panoramaViewerEvents.onImageNotFoundException('{Name
-          }', e.message)}}).then(function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name
-          }', r)}});";
+      string script = $@"{Name}.openByImageId('{imageId}'{SrsComponent(srs)}).catch(function(e)
+                      {{panoramaViewerEvents.onImageNotFoundException('{Name}', e.message)}}).then
+                      (function(r){{delete r.thumbs; panoramaViewerEvents.onResult('{Name}', r)}});";
       _browser.ExecuteScriptAsync(script);
       await _resultTask.Task;
 
@@ -291,15 +252,7 @@ namespace StreetSmart.WinForms.API
 
     public void SetOrientation(IOrientation orientation)
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string partYaw = (orientation.Yaw == null) ? string.Empty : $"yaw:{((double) orientation.Yaw).ToString(ci)}";
-      string partPitch = partYaw + ((orientation.Pitch == null) ? string.Empty
-        : string.Concat((string.IsNullOrEmpty(partYaw) ? string.Empty : ","),
-          $"pitch:{((double) orientation.Pitch).ToString(ci)}"));
-      string parthFov = partPitch + ((orientation.HFov == null) ? string.Empty
-        : string.Concat((string.IsNullOrEmpty(partPitch) ? string.Empty : ","),
-          $"hFov:{((double) orientation.HFov).ToString(ci)}"));
-      string script = $@"{Name}.setOrientation({{{parthFov}}});";
+      string script = $@"{Name}.setOrientation({orientation});";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -411,6 +364,11 @@ namespace StreetSmart.WinForms.API
                       {Name}.off(StreetSmartApi.Events.panoramaViewer.TILE_LOAD_ERROR, onTileLoadError{Name});
                       StreetSmartApi.destroyPanoramaViewer({Name},{_domElement.Name});";
       _browser.ExecuteScriptAsync(script);
+    }
+
+    private string SrsComponent(string srs)
+    {
+      return (srs == null) ? string.Empty : $", '{srs}'";
     }
 
     #endregion
