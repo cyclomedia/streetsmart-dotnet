@@ -85,8 +85,8 @@ namespace StreetSmart.WinForms.Data
         options.Add($"navbarVisible: {NavbarVisible.ToString().ToLower()}");
       }
 
-      string result = options.Aggregate(string.Empty, (current, part) => $"{current}, {part}");
-      return (options.Count == 0) ? string.Empty : $"{{{result.Substring(Math.Min(result.Length, 2))}}}";
+      string result = options.Aggregate(string.Empty, (current, part) => $"{current},{part}");
+      return (options.Count == 0) ? string.Empty : $"{{{result.Substring(Math.Min(result.Length, 1))}}}";
     }
   }
 }

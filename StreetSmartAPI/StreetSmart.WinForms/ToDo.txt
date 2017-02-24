@@ -4,12 +4,14 @@
 	- EventTileLoadArgs, hoe invullen?
 	- Error message op een betere manier parsen uit het error bericht wat we terug krijgen van javascript
 - Refactoring:
-	- javascripts via een aparte file inladen, omdat steeds dezelfde programeer structuur
 	- Unit testen
 	- WPF API
 	- DOM style uitbreiden (+ testen demo app uitbreiden)
 	- Commentaar uitbreiden van interface / factory / exceptions / enums objecten
 	- Documentatie van de API
+	- Event listners met als 1 basis class
+	- srs component in extention
+	- Nuget package
 
 
 labs-api:

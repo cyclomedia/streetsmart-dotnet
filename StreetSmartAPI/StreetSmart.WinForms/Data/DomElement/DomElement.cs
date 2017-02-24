@@ -65,9 +65,8 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public override string ToString()
     {
-      return $@"var {Name} = document.createElement('div');
-             {Name}.setAttribute('id', '{Id}');
-             {Name}.setAttribute('style', '{Style}');";
+      return $@"var {Name}=document.createElement('div');{Name}.setAttribute('id','{Id}');
+             {Name}.setAttribute('style','{Style}');";
     }
   }
 }

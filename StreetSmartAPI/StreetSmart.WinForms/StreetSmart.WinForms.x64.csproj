@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\PanoramaViewerOptions.cs" />
+    <Compile Include="Extensions\BoolExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DomElementFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
     <Compile Include="Interfaces\IPanoramaViewerOptions.cs" />

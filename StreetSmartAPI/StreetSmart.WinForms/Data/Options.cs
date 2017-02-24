@@ -126,11 +126,11 @@ namespace StreetSmart.WinForms.Data
     public override string ToString()
     {
       // ReSharper disable once InconsistentNaming
-      string configurationURL = (ConfigurationURL == null) ? string.Empty : $", configurationUrl:'{ConfigurationURL}'";
-      string locale = (Locale == null) ? string.Empty : $", locale:'{Locale}'";
+      string configurationURL = (ConfigurationURL == null) ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
+      string locale = (Locale == null) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
-      return $@"{{username:'{Username}', password:'{Password.ConvertToUnsecureString()}', apiKey:'{APIKey}'
-             , srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
+      return $@"{{username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
+             ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }
 }

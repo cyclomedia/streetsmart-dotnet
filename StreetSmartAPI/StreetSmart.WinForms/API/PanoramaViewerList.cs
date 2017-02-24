@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 
 using CefSharp.WinForms;
@@ -33,13 +34,35 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
+    #region Properties
+
+    public string JsThis => $"{GetType().Name}Events";
+
+    public string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
+
+    public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
+
+    public string JsImChange => $"{nameof(OnImageChange).FirstCharacterToLower()}";
+
+    public string JsRecClick => $"{nameof(OnRecordingClick).FirstCharacterToLower()}";
+
+    public string JsTileLoadError => $"{nameof(OnTileLoadError).FirstCharacterToLower()}";
+
+    public string JsViewChange => $"{nameof(OnViewChange).FirstCharacterToLower()}";
+
+    public string JsViewLoadEnd => $"{nameof(OnViewLoadEnd).FirstCharacterToLower()}";
+
+    public string JsViewLoadStart => $"{nameof(OnViewLoadStart).FirstCharacterToLower()}";
+
+    #endregion
+
     #region Constructor
 
     public PanoramaViewerList(ChromiumWebBrowser browser)
     {
       _browser = browser;
       _viewers = new Dictionary<string, PanoramaViewer>();
-      browser.RegisterJsObject("panoramaViewerEvents", this);
+      browser.RegisterJsObject(JsThis, this);
     }
 
     #endregion
@@ -48,7 +71,7 @@ namespace StreetSmart.WinForms.API
 
     public PanoramaViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, element, options);
+      PanoramaViewer viewer = new PanoramaViewer(_browser, element, options, this);
 
       if (!_viewers.ContainsKey(viewer.Name))
       {

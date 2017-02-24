@@ -62,7 +62,7 @@ namespace StreetSmart.WinForms.Data
 
     public override string ToString()
     {
-      return $", addressSettings: {{locale: '{Locale}', database: '{Database}'}}";
+      return $",addressSettings:{{locale:'{Locale}',database:'{Database}'}}";
     }
   }
 }

@@ -73,8 +73,8 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public override string ToString()
     {
-      string result = this.Aggregate(string.Empty, (current, element) => $"{current}; {element}");
-      return result.Substring(Math.Min(result.Length, 2));
+      string result = this.Aggregate(string.Empty, (current, element) => $"{current};{element}");
+      return result.Substring(Math.Min(result.Length, 1));
     }
   }
 }

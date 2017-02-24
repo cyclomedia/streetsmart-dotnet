@@ -29,6 +29,7 @@ using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.API
 {
@@ -60,12 +61,24 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
+    #region Properties
+
+    private string JsThis => $"{GetType().Name}Events";
+
+    private string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
+
+    private string JsSuccess => $"{nameof(OnSuccess).FirstCharacterToLower()}";
+
+    private string JsError => $"{nameof(OnError).FirstCharacterToLower()}";
+
+    #endregion
+
     #region Constructor
 
     public StreetSmartAPI(string streetSmartLocation)
     {
       _browser = new ChromiumWebBrowser(streetSmartLocation) {Dock = DockStyle.Fill};
-      _browser.RegisterJsObject("streetSmartAPIEvents", this);
+      _browser.RegisterJsObject(JsThis, this);
       _cycloramaViewerList = new PanoramaViewerList(_browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
@@ -108,60 +121,38 @@ namespace StreetSmart.WinForms.API
 
     public async Task<IAddressSettings> GetAddressSettingsAsync()
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAddressSettings());";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return new AddressSettings((Dictionary<string, object>) _resultTask.Task.Result);
+      return new AddressSettings((Dictionary<string, object>) await CallJsAsync(GetScript("getAddressSettings()")));
     }
 
     public async Task<bool> GetAPIReadyStateAsync()
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getAPIReadyState());";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return (bool) _resultTask.Task.Result;
+      return (bool) await CallJsAsync(GetScript("getAPIReadyState()"));
     }
 
     public async Task<string> GetApplicationNameAsync()
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationName());";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return (string) _resultTask.Task.Result;
+      return (string) await CallJsAsync(GetScript("getApplicationName()"));
     }
 
     public async Task<string> GetApplicationVersionAsync()
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getApplicationVersion());";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return (string) _resultTask.Task.Result;
+      return (string) await CallJsAsync(GetScript("getApplicationVersion()"));
     }
 
     public async Task<string[]> GetPermissionsAsync()
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = "streetSmartAPIEvents.onResult(StreetSmartApi.getPermissions());";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return ((object[])_resultTask.Task.Result).Cast<string>().ToArray();
+      return ((object[]) await CallJsAsync(GetScript("getPermissions()"))).Cast<string>().ToArray();
     }
 
     public async Task InitAsync(IOptions options)
     {
-      _resultTask = new TaskCompletionSource<object>();
-      string script = $@"StreetSmartApi.init({options}).then(function(){{streetSmartAPIEvents.onSuccess()}},
-                      function(e){{streetSmartAPIEvents.onError(e.message)}});";
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
+      string script = $@"{Resources.JsApi}.init({options}).then(function(){{{JsThis}.{JsSuccess}()}},
+                      function(e){{{JsThis}.{JsError}(e.message)}});";
+      object result = await CallJsAsync(script);
 
-      if (_resultTask.Task.Result is Exception)
+      if (result is Exception)
       {
-        throw (Exception) _resultTask.Task.Result;
+        throw (Exception) result;
       }
     }
 
@@ -194,6 +185,23 @@ namespace StreetSmart.WinForms.API
     public void OnError(string message)
     {
       _resultTask.TrySetResult(new StreetSmartLoginFailedException(message));
+    }
+
+    #endregion
+
+    #region Functions no interface
+
+    private async Task<object> CallJsAsync(string script)
+    {
+      _resultTask = new TaskCompletionSource<object>();
+      _browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+      return _resultTask.Task.Result;
+    }
+
+    private string GetScript(string funcName)
+    {
+      return $"{JsThis}.{JsResult}({Resources.JsApi}.{funcName});";
     }
 
     #endregion
