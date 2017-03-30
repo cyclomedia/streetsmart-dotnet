@@ -65,6 +65,8 @@ namespace StreetSmart.WinForms.API
 
     private string JsThis => $"{GetType().Name}Events";
 
+    public string JsApi => Resources.JsApi;
+
     private string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
 
     private string JsSuccess => $"{nameof(OnSuccess).FirstCharacterToLower()}";
@@ -107,7 +109,7 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
-    #region Functions
+    #region Interface Functions
 
     public IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions)
     {
@@ -146,7 +148,7 @@ namespace StreetSmart.WinForms.API
 
     public async Task InitAsync(IOptions options)
     {
-      string script = $@"{Resources.JsApi}.init({options}).then(function(){{{JsThis}.{JsSuccess}()}},
+      string script = $@"{JsApi}.init({options}).then(function(){{{JsThis}.{JsSuccess}()}},
                       function(e){{{JsThis}.{JsError}(e.message)}});";
       object result = await CallJsAsync(script);
 
@@ -189,7 +191,7 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
-    #region Functions no interface
+    #region Functions
 
     private async Task<object> CallJsAsync(string script)
     {
@@ -201,7 +203,7 @@ namespace StreetSmart.WinForms.API
 
     private string GetScript(string funcName)
     {
-      return $"{JsThis}.{JsResult}({Resources.JsApi}.{funcName});";
+      return $"{JsThis}.{JsResult}({JsApi}.{funcName});";
     }
 
     #endregion

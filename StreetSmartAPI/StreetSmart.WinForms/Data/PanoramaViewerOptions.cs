@@ -72,17 +72,17 @@ namespace StreetSmart.WinForms.Data
 
       if (RecordingsVisible != null)
       {
-        options.Add($"recordingsVisible: {RecordingsVisible.ToString().ToLower()}");
+        options.Add($"recordingsVisible:{RecordingsVisible.ToString().ToLower()}");
       }
 
       if (TimeTravelVisible != null)
       {
-        options.Add($"timeTravelVisible: {TimeTravelVisible.ToString().ToLower()}");
+        options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
       }
 
       if (NavbarVisible != null)
       {
-        options.Add($"navbarVisible: {NavbarVisible.ToString().ToLower()}");
+        options.Add($"navbarVisible:{NavbarVisible.ToString().ToLower()}");
       }
 
       string result = options.Aggregate(string.Empty, (current, part) => $"{current},{part}");

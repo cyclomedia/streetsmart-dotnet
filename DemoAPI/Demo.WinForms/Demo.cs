@@ -33,6 +33,8 @@ namespace Demo.WinForms
 {
   public partial class Demo : Form
   {
+    private const string ApiLocation = null; // "http://labs.cyclomedia.com/streetsmart/api/api-dotnet.html";
+
     #region Members
 
     private readonly IStreetSmartAPI _api;
@@ -67,7 +69,9 @@ namespace Demo.WinForms
       InitializeComponent();
       _ci = CultureInfo.InvariantCulture;
       _viewers = new List<IPanoramaViewer>();
-      _api = StreetSmartAPIFactory.Create();
+      _api = string.IsNullOrEmpty(ApiLocation)
+        ? StreetSmartAPIFactory.Create()
+        : StreetSmartAPIFactory.Create(ApiLocation);
       _api.APIReady += OnAPIReady;
       plStreetSmart.Controls.Add(_api.GUI);
       grLogin.Enabled = false;
@@ -97,7 +101,7 @@ namespace Demo.WinForms
       }
     }
 
-    private void OnImageChange(object sender, IEventArgs<IDictionary<string, object>>  args)
+    private void OnImageChange(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Image change";
       AddViewerEventsText(text);
@@ -235,16 +239,10 @@ namespace Demo.WinForms
     {
       try
       {
-        IRecording recording;
-
-        if (string.IsNullOrEmpty(txtAddressSrs.Text))
-        {
-          recording = await Viewer.OpenByAddressAsync(txtAdress.Text);
-        }
-        else
-        {
-          recording = await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
-        }
+        IRecording recording = (string.IsNullOrEmpty(txtAddressSrs.Text))
+          ? await Viewer.OpenByAddressAsync(txtAdress.Text)
+          : await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
+        PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -281,9 +279,9 @@ namespace Demo.WinForms
 
     private void btnSetOrientation_Click(object sender, EventArgs e)
     {
-      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?) ParseDouble(txthFov.Text);
-      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?) ParseDouble(txtYaw.Text);
-      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?) ParseDouble(txtPitch.Text);
+      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?)ParseDouble(txthFov.Text);
+      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?)ParseDouble(txtYaw.Text);
+      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?)ParseDouble(txtPitch.Text);
       IOrientation orientation = OrientationFactory.Create(yaw, pitch, hFov);
       Viewer.SetOrientation(orientation);
     }
@@ -291,8 +289,7 @@ namespace Demo.WinForms
     private async void btnGetRecording_Click(object sender, EventArgs e)
     {
       IRecording recording = await Viewer.GetRecordingAsync();
-      string text = $"Id: {recording.Id}{Environment.NewLine}recordedAt: {recording.RecordedAt}";
-      txtRecordingViewerColorPermissions.Text = text;
+      PrintRecordingText(recording);
     }
 
     private void btnLookAtCoordinate_Click(object sender, EventArgs e)
@@ -345,16 +342,10 @@ namespace Demo.WinForms
     {
       try
       {
-        IRecording recording;
-
-        if (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
-        {
-          recording = await Viewer.OpenByImageIdAsync(txtImageId.Text);
-        }
-        else
-        {
-          recording = await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
-        }
+        IRecording recording = (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
+          ? await Viewer.OpenByImageIdAsync(txtImageId.Text)
+          : await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
+        PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -372,16 +363,10 @@ namespace Demo.WinForms
           ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
           : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
 
-        IRecording recording;
-
-        if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
-        {
-          recording = await Viewer.OpenByCoordinateAsync(coordinate);
-        }
-        else
-        {
-          recording = await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
-        }
+        IRecording recording = (string.IsNullOrEmpty(txtCoordinateSrs.Text))
+          ? await Viewer.OpenByCoordinateAsync(coordinate)
+          : await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
+        PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -546,6 +531,26 @@ namespace Demo.WinForms
       {
         grRecordingViewerColorPermissions.Enabled = value;
       }
+    }
+
+    private void PrintRecordingText(IRecording recording)
+    {
+      string text = $"GroundLevelOffset: {recording.GroundLevelOffset}{Environment.NewLine}";
+      text += $"Recorderirection: {recording.RecorderDirection}{Environment.NewLine}";
+      text += $"Orientation: {recording.Orientation}{Environment.NewLine}";
+      text += $"RecordedAt: {recording.RecordedAt}{Environment.NewLine}";
+      text += $"Id: {recording.Id}{Environment.NewLine}";
+      text += $"Coordinate: {recording.XYZ.X}, {recording.XYZ.Y}, {recording.XYZ.Z}{Environment.NewLine}";
+      text += $"SRS: {recording.SRS}{Environment.NewLine}";
+      text += $"OrientationPrecision: {recording.OrientationPrecision}{Environment.NewLine}";
+      text += $"TileSchema: {recording.TileSchema}{Environment.NewLine}";
+      text += $"LongitudePrecision: {recording.LongitudePrecision}{Environment.NewLine}";
+      text += $"LatitudePrecision: {recording.LatitudePrecision}{Environment.NewLine}";
+      text += $"HeightPrecision: {recording.HeightPrecision}{Environment.NewLine}";
+      text += $"ProductType: {recording.ProductType}{Environment.NewLine}";
+      text += $"HeightSystem: {recording.HeightSystem}{Environment.NewLine}";
+      text += $"ExpiredAt: {recording.ExpiredAt}{Environment.NewLine}";
+      txtRecordingViewerColorPermissions.Text = text;
     }
 
     #endregion

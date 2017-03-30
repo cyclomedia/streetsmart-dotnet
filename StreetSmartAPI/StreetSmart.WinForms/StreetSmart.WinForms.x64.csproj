@@ -72,6 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Events\PanoramaRecordingClickViewerEvent.cs" />
+    <Compile Include="API\Events\PanoramaViewerEventList.cs" />
+    <Compile Include="API\Events\PanoramaViewerEvent.cs" />
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\PanoramaViewerOptions.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />

@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 using CefSharp;
 using CefSharp.WinForms;
-
+using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
@@ -41,6 +41,7 @@ namespace StreetSmart.WinForms.API
     private readonly ChromiumWebBrowser _browser;
     private readonly IDomElement _domElement;
     private readonly PanoramaViewerList _panoramaViewerList;
+    private readonly PanoramaViewerEventList _panoramaViewerEventList;
 
     #endregion
 
@@ -67,6 +68,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsThis => _panoramaViewerList.JsThis;
 
+    public string JsApi => Resources.JsApi;
+
     public string JsResult => _panoramaViewerList.JsResult;
 
     public string JsImNotFound => _panoramaViewerList.JsImNotFound;
@@ -83,6 +86,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsViewLoadStart => _panoramaViewerList.JsViewLoadStart;
 
+    public string DomName => _domElement.Name;
+
     #endregion
 
     #region Constructors
@@ -95,21 +100,19 @@ namespace StreetSmart.WinForms.API
       _panoramaViewerList = panoramaViewerList;
       Name = $"pan{Guid.NewGuid().ToString("N")}";
 
+      _panoramaViewerEventList = new PanoramaViewerEventList
+      {
+        new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
+        new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
+        new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
+        new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
+        new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
+        new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError)
+      };
+
       string script =
-        $@"{element}document.body.appendChild({element.Name});
-        var {Name}={Resources.JsApi}.addPanoramaViewer({element.Name},{options});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.RECORDING_CLICK,{JsRecClick}{Name}=
-        function(e){{delete e.detail.recording.thumbs;{JsThis}.{JsRecClick}('{Name}',e.detail);}});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.IMAGE_CHANGE,{JsImChange}{Name}=
-        function(e){{{JsThis}.{JsImChange}('{Name}',e);}});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.VIEW_CHANGE,{JsViewChange}{Name}=
-        function(e){{{JsThis}.{JsViewChange}('{Name}',e.detail);}});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.VIEW_LOAD_START,{JsViewLoadStart}{Name}=
-        function(e){{{JsThis}.{JsViewLoadStart}('{Name}',e);}});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.VIEW_LOAD_END,{JsViewLoadEnd}{Name}=
-        function(e){{{JsThis}.{JsViewLoadEnd}('{Name}',e);}});
-        {Name}.on({Resources.JsApi}.Events.panoramaViewer.TILE_LOAD_ERROR,{JsTileLoadError}{Name}=
-        function(e){{{JsThis}.{JsTileLoadError}('{Name}',e.detail);}});";
+        $@"{element}document.body.appendChild({DomName});
+        var {Name}={JsApi}.addPanoramaViewer({DomName},{options});{_panoramaViewerEventList}";
       _browser.ExecuteScriptAsync(script);
     }
 
@@ -161,12 +164,12 @@ namespace StreetSmart.WinForms.API
 
     public void LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
-      _browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{SrsComponent(srs)});");
+      _browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{srs.SrsComponent()});");
     }
 
     public async Task<IRecording> OpenByAddressAsync(string query, string srs = null)
     {
-      return await SearchRecordingAsync("openByAddress", query, srs);
+      return await SearchRecordingAsync("openByAddress", query.ToQuote(), srs);
     }
 
     public async Task<IRecording> OpenByCoordinateAsync(ICoordinate coordinate, string srs = null)
@@ -176,7 +179,7 @@ namespace StreetSmart.WinForms.API
 
     public async Task<IRecording> OpenByImageIdAsync(string imageId, string srs = null)
     {
-      return await SearchRecordingAsync("openByImageId", imageId, srs);
+      return await SearchRecordingAsync("openByImageId", imageId.ToQuote(), srs);
     }
 
     public void RotateDown(double deltaPitch)
@@ -250,20 +253,23 @@ namespace StreetSmart.WinForms.API
 
     public void OnRecordingClick(Dictionary<string, object> args)
     {
-      Dictionary<string, object> recording = (Dictionary<string, object>) args["recording"];
-      Dictionary<string, object> eventData = (Dictionary<string, object>) args["eventData"];
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> recording = (Dictionary<string, object>) detail["recording"];
+      Dictionary<string, object> eventData = (Dictionary<string, object>) detail["eventData"];
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
     public void OnTileLoadError(Dictionary<string, object> args)
     {
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
       TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>
-        ((Dictionary<string, object>) args["request"]));
+        ((Dictionary<string, object>) detail["request"]));
     }
 
     public void OnViewChange(Dictionary<string, object> args)
     {
-      ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(args)));
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
     public void OnViewLoadEnd(Dictionary<string, object> args)
@@ -292,24 +298,12 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
-    #region Functions with no interface
+    #region Functions
 
     public void DestroyPanoramaViewer()
     {
-      string script =
-        $@"{Name}.off({Resources.JsApi}.Events.panoramaViewer.RECORDING_CLICK,{JsRecClick}{Name});
-        {Name}.off({Resources.JsApi}.Events.panoramaViewer.IMAGE_CHANGE,{JsImChange}{Name});
-        {Name}.off({Resources.JsApi}.Events.panoramaViewer.VIEW_CHANGE,{JsViewChange}{Name});
-        {Name}.off({Resources.JsApi}.Events.panoramaViewer.VIEW_LOAD_START,{JsViewLoadStart}{Name});
-        {Name}.off({Resources.JsApi}.Events.panoramaViewer.VIEW_LOAD_END,{JsViewLoadEnd}{Name});
-        {Name}.off({Resources.JsApi}.Events.panoramaViewer.TILE_LOAD_ERROR,{JsTileLoadError}{Name});
-        {Resources.JsApi}.destroyPanoramaViewer({Name},{_domElement.Name});";
+      string script = $"{_panoramaViewerEventList.Destroy}{JsApi}.destroyPanoramaViewer({Name},{DomName});";
       _browser.ExecuteScriptAsync(script);
-    }
-
-    private string SrsComponent(string srs)
-    {
-      return (srs == null) ? string.Empty : $", '{srs}'";
     }
 
     private async Task<object> CallJsAsync(string script)
@@ -330,9 +324,9 @@ namespace StreetSmart.WinForms.API
       return Color.FromArgb((int) ((double) color[3]*255), (int) color[0], (int) color[1], (int) color[2]);
     }
 
-    public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs = null)
+    public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs)
     {
-      string script = $@"{Name}.{func}('{query}'{SrsComponent(srs)}).catch
+      string script = $@"{Name}.{func}({query}{srs.SrsComponent()}).catch
                       (function(e){{{JsThis}.{JsImNotFound}('{Name}',e.message)}}).then
                       (function(r){{delete r.thumbs;{JsThis}.{JsResult}('{Name}',r)}});";
       object result = await CallJsAsync(script);

@@ -31,11 +31,22 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenCloseViewer = new System.Windows.Forms.GroupBox();
+      this.txtLeft = new System.Windows.Forms.TextBox();
+      this.lblLeft = new System.Windows.Forms.Label();
+      this.txtWidth = new System.Windows.Forms.TextBox();
+      this.txtHeight = new System.Windows.Forms.TextBox();
+      this.txtTop = new System.Windows.Forms.TextBox();
+      this.lblWidth = new System.Windows.Forms.Label();
+      this.lblHeight = new System.Windows.Forms.Label();
+      this.lblTop = new System.Windows.Forms.Label();
       this.rbParameters = new System.Windows.Forms.RadioButton();
       this.rbDefault = new System.Windows.Forms.RadioButton();
       this.btnOpenViewer = new System.Windows.Forms.Button();
       this.btnDestroyViewer = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grDevTools = new System.Windows.Forms.GroupBox();
+      this.btnCloseDefTools = new System.Windows.Forms.Button();
+      this.btnShowDefTools = new System.Windows.Forms.Button();
       this.grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
       this.lblDeltaYawPitch = new System.Windows.Forms.Label();
       this.txtDeltaYawPitch = new System.Windows.Forms.TextBox();
@@ -105,19 +116,9 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.grDevTools = new System.Windows.Forms.GroupBox();
-      this.btnShowDefTools = new System.Windows.Forms.Button();
-      this.btnCloseDefTools = new System.Windows.Forms.Button();
-      this.txtWidth = new System.Windows.Forms.TextBox();
-      this.txtHeight = new System.Windows.Forms.TextBox();
-      this.txtTop = new System.Windows.Forms.TextBox();
-      this.lblWidth = new System.Windows.Forms.Label();
-      this.lblHeight = new System.Windows.Forms.Label();
-      this.lblTop = new System.Windows.Forms.Label();
-      this.txtLeft = new System.Windows.Forms.TextBox();
-      this.lblLeft = new System.Windows.Forms.Label();
       this.grOpenCloseViewer.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grDevTools.SuspendLayout();
       this.grRotationsZoomInOut.SuspendLayout();
       this.grEvents.SuspendLayout();
       this.grRecordingViewerColorPermissions.SuspendLayout();
@@ -128,7 +129,6 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
-      this.grDevTools.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -159,6 +159,74 @@
       this.grOpenCloseViewer.TabIndex = 0;
       this.grOpenCloseViewer.TabStop = false;
       this.grOpenCloseViewer.Text = "Open / Close Viewer";
+      // 
+      // txtLeft
+      // 
+      this.txtLeft.Location = new System.Drawing.Point(145, 90);
+      this.txtLeft.Name = "txtLeft";
+      this.txtLeft.Size = new System.Drawing.Size(90, 20);
+      this.txtLeft.TabIndex = 62;
+      this.txtLeft.Text = "400";
+      // 
+      // lblLeft
+      // 
+      this.lblLeft.AutoSize = true;
+      this.lblLeft.Location = new System.Drawing.Point(105, 95);
+      this.lblLeft.Name = "lblLeft";
+      this.lblLeft.Size = new System.Drawing.Size(25, 13);
+      this.lblLeft.TabIndex = 63;
+      this.lblLeft.Text = "Left";
+      // 
+      // txtWidth
+      // 
+      this.txtWidth.Location = new System.Drawing.Point(145, 15);
+      this.txtWidth.Name = "txtWidth";
+      this.txtWidth.Size = new System.Drawing.Size(90, 20);
+      this.txtWidth.TabIndex = 56;
+      this.txtWidth.Text = "40";
+      // 
+      // txtHeight
+      // 
+      this.txtHeight.Location = new System.Drawing.Point(145, 40);
+      this.txtHeight.Name = "txtHeight";
+      this.txtHeight.Size = new System.Drawing.Size(90, 20);
+      this.txtHeight.TabIndex = 57;
+      this.txtHeight.Text = "40";
+      // 
+      // txtTop
+      // 
+      this.txtTop.Location = new System.Drawing.Point(145, 65);
+      this.txtTop.Name = "txtTop";
+      this.txtTop.Size = new System.Drawing.Size(90, 20);
+      this.txtTop.TabIndex = 58;
+      this.txtTop.Text = "300";
+      // 
+      // lblWidth
+      // 
+      this.lblWidth.AutoSize = true;
+      this.lblWidth.Location = new System.Drawing.Point(105, 20);
+      this.lblWidth.Name = "lblWidth";
+      this.lblWidth.Size = new System.Drawing.Size(35, 13);
+      this.lblWidth.TabIndex = 59;
+      this.lblWidth.Text = "Width";
+      // 
+      // lblHeight
+      // 
+      this.lblHeight.AutoSize = true;
+      this.lblHeight.Location = new System.Drawing.Point(105, 45);
+      this.lblHeight.Name = "lblHeight";
+      this.lblHeight.Size = new System.Drawing.Size(38, 13);
+      this.lblHeight.TabIndex = 60;
+      this.lblHeight.Text = "Height";
+      // 
+      // lblTop
+      // 
+      this.lblTop.AutoSize = true;
+      this.lblTop.Location = new System.Drawing.Point(105, 70);
+      this.lblTop.Name = "lblTop";
+      this.lblTop.Size = new System.Drawing.Size(26, 13);
+      this.lblTop.TabIndex = 61;
+      this.lblTop.Text = "Top";
       // 
       // rbParameters
       // 
@@ -221,6 +289,37 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 762);
       this.plControl.TabIndex = 1;
+      // 
+      // grDevTools
+      // 
+      this.grDevTools.Controls.Add(this.btnCloseDefTools);
+      this.grDevTools.Controls.Add(this.btnShowDefTools);
+      this.grDevTools.Location = new System.Drawing.Point(360, 290);
+      this.grDevTools.Name = "grDevTools";
+      this.grDevTools.Size = new System.Drawing.Size(120, 120);
+      this.grDevTools.TabIndex = 51;
+      this.grDevTools.TabStop = false;
+      this.grDevTools.Text = "Dev tools";
+      // 
+      // btnCloseDefTools
+      // 
+      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 85);
+      this.btnCloseDefTools.Name = "btnCloseDefTools";
+      this.btnCloseDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnCloseDefTools.TabIndex = 49;
+      this.btnCloseDefTools.Text = "Close def tools";
+      this.btnCloseDefTools.UseVisualStyleBackColor = true;
+      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDefTools_Click);
+      // 
+      // btnShowDefTools
+      // 
+      this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
+      this.btnShowDefTools.Name = "btnShowDefTools";
+      this.btnShowDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnShowDefTools.TabIndex = 48;
+      this.btnShowDefTools.Text = "Show def tools";
+      this.btnShowDefTools.UseVisualStyleBackColor = true;
+      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDefTools_Click);
       // 
       // grRotationsZoomInOut
       // 
@@ -329,7 +428,7 @@
       // lbViewerEvents
       // 
       this.lbViewerEvents.FormattingEnabled = true;
-      this.lbViewerEvents.Location = new System.Drawing.Point(5, 15);
+      this.lbViewerEvents.Location = new System.Drawing.Point(14, 17);
       this.lbViewerEvents.Name = "lbViewerEvents";
       this.lbViewerEvents.Size = new System.Drawing.Size(470, 82);
       this.lbViewerEvents.TabIndex = 0;
@@ -352,6 +451,7 @@
       this.txtRecordingViewerColorPermissions.Location = new System.Drawing.Point(110, 15);
       this.txtRecordingViewerColorPermissions.Multiline = true;
       this.txtRecordingViewerColorPermissions.Name = "txtRecordingViewerColorPermissions";
+      this.txtRecordingViewerColorPermissions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
       this.txtRecordingViewerColorPermissions.Size = new System.Drawing.Size(205, 115);
       this.txtRecordingViewerColorPermissions.TabIndex = 49;
       // 
@@ -905,105 +1005,6 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // grDevTools
-      // 
-      this.grDevTools.Controls.Add(this.btnCloseDefTools);
-      this.grDevTools.Controls.Add(this.btnShowDefTools);
-      this.grDevTools.Location = new System.Drawing.Point(360, 290);
-      this.grDevTools.Name = "grDevTools";
-      this.grDevTools.Size = new System.Drawing.Size(120, 120);
-      this.grDevTools.TabIndex = 51;
-      this.grDevTools.TabStop = false;
-      this.grDevTools.Text = "Dev tools";
-      // 
-      // btnShowDefTools
-      // 
-      this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
-      this.btnShowDefTools.Name = "btnShowDefTools";
-      this.btnShowDefTools.Size = new System.Drawing.Size(100, 30);
-      this.btnShowDefTools.TabIndex = 48;
-      this.btnShowDefTools.Text = "Show def tools";
-      this.btnShowDefTools.UseVisualStyleBackColor = true;
-      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDefTools_Click);
-      // 
-      // btnCloseDefTools
-      // 
-      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 85);
-      this.btnCloseDefTools.Name = "btnCloseDefTools";
-      this.btnCloseDefTools.Size = new System.Drawing.Size(100, 30);
-      this.btnCloseDefTools.TabIndex = 49;
-      this.btnCloseDefTools.Text = "Close def tools";
-      this.btnCloseDefTools.UseVisualStyleBackColor = true;
-      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDefTools_Click);
-      // 
-      // txtWidth
-      // 
-      this.txtWidth.Location = new System.Drawing.Point(145, 15);
-      this.txtWidth.Name = "txtWidth";
-      this.txtWidth.Size = new System.Drawing.Size(90, 20);
-      this.txtWidth.TabIndex = 56;
-      this.txtWidth.Text = "40";
-      // 
-      // txtHeight
-      // 
-      this.txtHeight.Location = new System.Drawing.Point(145, 40);
-      this.txtHeight.Name = "txtHeight";
-      this.txtHeight.Size = new System.Drawing.Size(90, 20);
-      this.txtHeight.TabIndex = 57;
-      this.txtHeight.Text = "40";
-      // 
-      // txtTop
-      // 
-      this.txtTop.Location = new System.Drawing.Point(145, 65);
-      this.txtTop.Name = "txtTop";
-      this.txtTop.Size = new System.Drawing.Size(90, 20);
-      this.txtTop.TabIndex = 58;
-      this.txtTop.Text = "300";
-      // 
-      // lblWidth
-      // 
-      this.lblWidth.AutoSize = true;
-      this.lblWidth.Location = new System.Drawing.Point(105, 20);
-      this.lblWidth.Name = "lblWidth";
-      this.lblWidth.Size = new System.Drawing.Size(35, 13);
-      this.lblWidth.TabIndex = 59;
-      this.lblWidth.Text = "Width";
-      // 
-      // lblHeight
-      // 
-      this.lblHeight.AutoSize = true;
-      this.lblHeight.Location = new System.Drawing.Point(105, 45);
-      this.lblHeight.Name = "lblHeight";
-      this.lblHeight.Size = new System.Drawing.Size(38, 13);
-      this.lblHeight.TabIndex = 60;
-      this.lblHeight.Text = "Height";
-      // 
-      // lblTop
-      // 
-      this.lblTop.AutoSize = true;
-      this.lblTop.Location = new System.Drawing.Point(105, 70);
-      this.lblTop.Name = "lblTop";
-      this.lblTop.Size = new System.Drawing.Size(26, 13);
-      this.lblTop.TabIndex = 61;
-      this.lblTop.Text = "Top";
-      // 
-      // txtLeft
-      // 
-      this.txtLeft.Location = new System.Drawing.Point(145, 90);
-      this.txtLeft.Name = "txtLeft";
-      this.txtLeft.Size = new System.Drawing.Size(90, 20);
-      this.txtLeft.TabIndex = 62;
-      this.txtLeft.Text = "400";
-      // 
-      // lblLeft
-      // 
-      this.lblLeft.AutoSize = true;
-      this.lblLeft.Location = new System.Drawing.Point(105, 95);
-      this.lblLeft.Name = "lblLeft";
-      this.lblLeft.Size = new System.Drawing.Size(25, 13);
-      this.lblLeft.TabIndex = 63;
-      this.lblLeft.Text = "Left";
-      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1019,6 +1020,7 @@
       this.grOpenCloseViewer.ResumeLayout(false);
       this.grOpenCloseViewer.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grDevTools.ResumeLayout(false);
       this.grRotationsZoomInOut.ResumeLayout(false);
       this.grRotationsZoomInOut.PerformLayout();
       this.grEvents.ResumeLayout(false);
@@ -1037,7 +1039,6 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
-      this.grDevTools.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
