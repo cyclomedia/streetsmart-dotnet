@@ -40,20 +40,20 @@ namespace StreetSmart.WinForms.Interfaces
     StreetSmartGUI GUI { get; }
 
     /// <summary>
-    /// 
+    /// Show the developer tools
     /// </summary>
     void ShowDefTools();
 
     /// <summary>
-    /// 
+    /// Close the developer tools
     /// </summary>
     void CloseDefTools();
 
     /// <summary>
-    /// 
+    /// Adds a PanoramaViewer to a specified DOM-element
     /// </summary>
-    /// <param name="domElement"></param>
-    /// <param name="viewerOptions"></param>
+    /// <param name="domElement">DOM-element the PanoramaViewer gets rendered to.</param>
+    /// <param name="viewerOptions">Options to initialize the panorama viewer with.</param>
     /// <returns></returns>
     IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions);
 
@@ -67,41 +67,41 @@ namespace StreetSmart.WinForms.Interfaces
     /// Returns the object containing the address search settings
     /// </summary>
     /// <returns>Object containing the address settings</returns>
-    Task<IAddressSettings> GetAddressSettingsAsync();
+    Task<IAddressSettings> GetAddressSettings();
 
     /// <summary>
     /// Returns the current 'ready'-state of the API.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The current 'ready'-state of the API.</returns>
-    Task<bool> GetAPIReadyStateAsync();
+    Task<bool> GetAPIReadyState();
 
     /// <summary>
     /// Returns the application name of the API.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The application name of the API.</returns>
-    Task<string> GetApplicationNameAsync();
+    Task<string> GetApplicationName();
 
     /// <summary>
     /// Returns the used version of the API.
     /// This is an asynchronous function.
     /// </summary>
-    /// <returns></returns>
-    Task<string> GetApplicationVersionAsync();
+    /// <returns>API version number.</returns>
+    Task<string> GetApplicationVersion();
 
     /// <summary>
     /// Returns the object containing functionalities that are currently permitted to use by the user.
     /// This is an asynchronous function.
     /// </summary>
-    /// <returns></returns>
-    Task<string[]> GetPermissionsAsync();
+    /// <returns>Array containing the permissions</returns>
+    Task<string[]> GetPermissions();
 
     /// <summary>
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
     /// <param name="options">Object containing the options used for initializing the API.</param>
-    Task InitAsync(IOptions options);
+    Task Init(IOptions options);
   }
 
   // ReSharper restore InconsistentNaming

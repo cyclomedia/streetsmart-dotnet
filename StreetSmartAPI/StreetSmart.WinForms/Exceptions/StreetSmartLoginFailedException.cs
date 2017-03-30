@@ -21,23 +21,23 @@ using System;
 namespace StreetSmart.WinForms.Exceptions
 {
   /// <summary>
-  /// 
+  /// Exception when Login failed
   /// </summary>
   public class StreetSmartLoginFailedException : Exception
   {
     /// <summary>
-    /// 
+    /// Create StreetSmartLoginFailedException class
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message of the exception</param>
     public StreetSmartLoginFailedException(string message) : base(message)
     {
     }
 
     /// <summary>
-    /// 
+    /// Create StreetSmartLoginFailedException class
     /// </summary>
-    /// <param name="message"></param>
-    /// <param name="inner"></param>
+    /// <param name="message">The message of the exception</param>
+    /// <param name="inner">The inner exception</param>
     public StreetSmartLoginFailedException(string message, Exception inner) : base(message, inner)
     {
     }

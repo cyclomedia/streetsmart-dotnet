@@ -26,92 +26,92 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// 
+  /// Factory for create a object which containing the options used for initializing the API
   /// </summary>
   public static class OptionsFactory
   {
     // ReSharper disable InconsistentNaming
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs)
       => Create(userName, password, apiKey, srs, null);
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <param name="addressSettings"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs,
       IAddressSettings addressSettings)
       => Create(userName, password, apiKey, srs, string.Empty, string.Empty, addressSettings);
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <param name="locale"></param>
-    /// <param name="addressSettings"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="locale">Language used as default in the API.</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       IAddressSettings addressSettings)
       => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
         string.Empty, addressSettings);
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <param name="locale"></param>
-    /// <param name="addressSettings"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="locale">Language used as default in the API.</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, CultureInfo locale,
       IAddressSettings addressSettings)
       => Create(userName, password, apiKey, srs, locale, string.Empty, addressSettings);
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <param name="locale"></param>
-    /// <param name="configurationURL"></param>
-    /// <param name="addressSettings"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="locale">Language used as default in the API.</param>
+    /// <param name="configurationURL">Alternate configuration url to use for all configuration services.</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       string configurationURL, IAddressSettings addressSettings)
       => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
         configurationURL, addressSettings);
 
     /// <summary>
-    /// 
+    /// Create the options object which used for initializing the API
     /// </summary>
-    /// <param name="userName"></param>
-    /// <param name="password"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="srs"></param>
-    /// <param name="locale"></param>
-    /// <param name="configurationURL"></param>
-    /// <param name="addressSettings"></param>
-    /// <returns></returns>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="locale">Language used as default in the API.</param>
+    /// <param name="configurationURL">Alternate configuration url to use for all configuration services.</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
     /// <exception cref="ArgumentNullException"></exception>
     public static IOptions Create(string userName, string password, string apiKey, string srs, CultureInfo locale,
       string configurationURL, IAddressSettings addressSettings)

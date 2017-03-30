@@ -120,44 +120,44 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
-    public async Task<bool> GetNavbarExpandedAsync()
+    public async Task<bool> GetNavbarExpanded()
     {
       return (bool) await CallJsAsync(GetScript("getNavbarExpanded()"));
     }
 
-    public async Task<bool> GetNavbarVisibleAsync()
+    public async Task<bool> GetNavbarVisible()
     {
       return (bool) await CallJsAsync(GetScript("getNavbarVisible()"));
     }
 
-    public async Task<IOrientation> GetOrientationAsync()
+    public async Task<IOrientation> GetOrientation()
     {
       return new Orientation((Dictionary<string, object>) await CallJsAsync(GetScript("getOrientation()")));
     }
 
-    public async Task<IRecording> GetRecordingAsync()
+    public async Task<IRecording> GetRecording()
     {
       var script = $@"recording{Name}={Name}.getRecording();delete recording{Name}.thumbs;
                    {JsThis}.{JsResult}('{Name}',recording{Name});";
       return new Recording((Dictionary<string, object>) await CallJsAsync(script));
     }
 
-    public async Task<bool> GetRecordingsVisibleAsync()
+    public async Task<bool> GetRecordingsVisible()
     {
       return (bool) await CallJsAsync(GetScript("getRecordingsVisible()"));
     }
 
-    public async Task<bool> GetTimeTravelExpandedAsync()
+    public async Task<bool> GetTimeTravelExpanded()
     {
       return (bool) await CallJsAsync(GetScript("getTimeTravelExpanded()"));
     }
 
-    public async Task<bool> GetTimeTravelVisibleAsync()
+    public async Task<bool> GetTimeTravelVisible()
     {
       return (bool) await CallJsAsync(GetScript("getTimeTravelVisible()"));
     }
 
-    public async Task<Color> GetViewerColorAsync()
+    public async Task<Color> GetViewerColor()
     {
       return GetColor((object[]) await CallJsAsync(GetScript("getViewerColor()")));
     }
@@ -167,17 +167,17 @@ namespace StreetSmart.WinForms.API
       _browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{srs.SrsComponent()});");
     }
 
-    public async Task<IRecording> OpenByAddressAsync(string query, string srs = null)
+    public async Task<IRecording> OpenByAddress(string query, string srs = null)
     {
       return await SearchRecordingAsync("openByAddress", query.ToQuote(), srs);
     }
 
-    public async Task<IRecording> OpenByCoordinateAsync(ICoordinate coordinate, string srs = null)
+    public async Task<IRecording> OpenByCoordinate(ICoordinate coordinate, string srs = null)
     {
       return await SearchRecordingAsync("openByCoordinate", coordinate.ToString(), srs);
     }
 
-    public async Task<IRecording> OpenByImageIdAsync(string imageId, string srs = null)
+    public async Task<IRecording> OpenByImageId(string imageId, string srs = null)
     {
       return await SearchRecordingAsync("openByImageId", imageId.ToQuote(), srs);
     }

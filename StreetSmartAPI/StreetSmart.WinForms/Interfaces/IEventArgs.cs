@@ -19,13 +19,13 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// 
+  /// Generic event implementation
   /// </summary>
-  /// <typeparam name="T"></typeparam>
+  /// <typeparam name="T">Event type</typeparam>
   public interface IEventArgs<out T>
   {
     /// <summary>
-    /// 
+    /// The event value
     /// </summary>
     T Value { get; }
   }

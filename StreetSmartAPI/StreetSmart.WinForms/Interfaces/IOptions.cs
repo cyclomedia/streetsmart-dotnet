@@ -23,46 +23,46 @@ using System.Security;
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Options for initialize the API
+  /// Object containing the options used for initializing the API
   /// </summary>
   public interface IOptions
   {
     /// <summary>
-    /// Username of the user
+    /// Username of the user.
     /// </summary>
     string Username { get; set; }
 
     /// <summary>
-    /// Password of the user
+    /// Password of the user.
     /// </summary>
     SecureString Password { get; set; }
 
     // ReSharper disable InconsistentNaming
 
     /// <summary>
-    /// ApiKey given to the user
+    /// ApiKey given to the user.
     /// </summary>
     string APIKey { get; set; }
 
     /// <summary>
-    /// Coordinate system used in the API
+    /// Coordinate system used in the API. E.g. "EPSG:29882".
     /// </summary>
     string SRS { get; set; }
 
     /// <summary>
-    /// Language used as default
+    /// Language used as default in the API.
     /// </summary>
     CultureInfo Locale { get; set; }
 
     /// <summary>
-    /// Alternate configuration URL to use for all configuration services
+    /// Alternate configuration url to use for all configuration services
     /// </summary>
     Uri ConfigurationURL { get; set; }
 
     // ReSharper restore InconsistentNaming
 
     /// <summary>
-    /// Address search settings
+    /// The address settings to use for address searches.
     /// </summary>
     IAddressSettings AddressSettings { get; set; }
   }

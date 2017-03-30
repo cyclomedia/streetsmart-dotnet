@@ -121,32 +121,32 @@ namespace StreetSmart.WinForms.API
       _cycloramaViewerList.DestroyViewer((PanoramaViewer) panoramaViewer);
     }
 
-    public async Task<IAddressSettings> GetAddressSettingsAsync()
+    public async Task<IAddressSettings> GetAddressSettings()
     {
       return new AddressSettings((Dictionary<string, object>) await CallJsAsync(GetScript("getAddressSettings()")));
     }
 
-    public async Task<bool> GetAPIReadyStateAsync()
+    public async Task<bool> GetAPIReadyState()
     {
       return (bool) await CallJsAsync(GetScript("getAPIReadyState()"));
     }
 
-    public async Task<string> GetApplicationNameAsync()
+    public async Task<string> GetApplicationName()
     {
       return (string) await CallJsAsync(GetScript("getApplicationName()"));
     }
 
-    public async Task<string> GetApplicationVersionAsync()
+    public async Task<string> GetApplicationVersion()
     {
       return (string) await CallJsAsync(GetScript("getApplicationVersion()"));
     }
 
-    public async Task<string[]> GetPermissionsAsync()
+    public async Task<string[]> GetPermissions()
     {
       return ((object[]) await CallJsAsync(GetScript("getPermissions()"))).Cast<string>().ToArray();
     }
 
-    public async Task InitAsync(IOptions options)
+    public async Task Init(IOptions options)
     {
       string script = $@"{JsApi}.init({options}).then(function(){{{JsThis}.{JsSuccess}()}},
                       function(e){{{JsThis}.{JsError}(e.message)}});";

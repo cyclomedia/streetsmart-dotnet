@@ -21,7 +21,7 @@ using System;
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Recording information
+  /// Information about the Recording
   /// </summary>
   public interface IRecording
   {

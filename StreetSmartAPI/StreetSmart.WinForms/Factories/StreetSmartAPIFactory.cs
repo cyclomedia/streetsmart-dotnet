@@ -28,7 +28,7 @@ namespace StreetSmart.WinForms.Factories
   // ReSharper disable InconsistentNaming
 
   /// <summary>
-  /// Creates a new instance of the API.
+  /// Factory for creates a new instance of the API. API used to use and modify various StreetSmart components.
   /// </summary>
   public static class StreetSmartAPIFactory
   {
@@ -38,16 +38,16 @@ namespace StreetSmart.WinForms.Factories
     }
 
     /// <summary>
-    /// Creates a new instance of the API.
+    /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
-    /// <returns>A new instance of the API.</returns>
+    /// <returns>API used to use and modify various StreetSmart components.</returns>
     public static IStreetSmartAPI Create() => Create(Resources.StreetSmartLocation);
 
     /// <summary>
-    /// Creates a new instance of the API
+    /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
-    /// <param name="streetSmartLocation">The location of StreetSmart</param>
-    /// <returns>A new instance of the API.</returns>
+    /// <param name="streetSmartLocation">The location Uri of StreetSmart</param>
+    /// <returns>API used to use and modify various StreetSmart components.</returns>
     public static IStreetSmartAPI Create(string streetSmartLocation) => new StreetSmartAPI(streetSmartLocation);
   }
 

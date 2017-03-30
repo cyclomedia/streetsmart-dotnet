@@ -19,12 +19,12 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
+  /// Orientation Object that contains values.
   /// </summary>
   public interface IOrientation
   {
     /// <summary>
-    ///  	Optional value of the yaw.
+    /// Optional value of the yaw.
     /// </summary>
     double? Yaw { get; set; }
 

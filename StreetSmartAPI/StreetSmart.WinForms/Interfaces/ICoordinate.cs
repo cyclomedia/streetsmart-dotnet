@@ -19,22 +19,22 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Coordinate information.
+  /// Coordinate definition
   /// </summary>
   public interface ICoordinate
   {
     /// <summary>
-    /// X value of the coordinate.
+    ///  X value of the coordinate
     /// </summary>
     double X { get; set; }
 
     /// <summary>
-    /// Y value of the coordinate.
+    /// Y value of the coordinate
     /// </summary>
     double Y { get; set; }
 
     /// <summary>
-    /// Z value of the coordinate.
+    /// Z value of the coordinate
     /// </summary>
     double? Z { get; set; }
   }

@@ -22,47 +22,47 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// 
+  /// Factory for create Options which are used to initialize the panorama viewer
   /// </summary>
   public static class PanoramaViewerOptionsFactory
   {
     /// <summary>
-    /// 
+    /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <param name="recordingsVisible"></param>
-    /// <returns></returns>
+    /// <param name="recordingsVisible">If recordings should be visible</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions CreateRecordingsVisible(bool recordingsVisible)
       => new PanoramaViewerOptions(recordingsVisible, null, null);
 
     /// <summary>
-    /// 
+    /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <param name="timeTravelVisible"></param>
-    /// <returns></returns>
+    /// <param name="timeTravelVisible">If time travel is enabled</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions CreateTimeTravelVisible(bool timeTravelVisible)
       => new PanoramaViewerOptions(null, timeTravelVisible, null);
 
     /// <summary>
-    /// 
+    /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <param name="navBarVisible"></param>
-    /// <returns></returns>
+    /// <param name="navBarVisible">If navbar is enabled</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions CreateNavBarVisible(bool navBarVisible)
       => new PanoramaViewerOptions(null, null, navBarVisible);
 
     /// <summary>
-    /// 
+    /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions Create() => new PanoramaViewerOptions(null, null, null);
 
     /// <summary>
-    /// 
+    /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <param name="recordingsVisible"></param>
-    /// <param name="timeTravelVisible"></param>
-    /// <param name="navBarVisible"></param>
-    /// <returns></returns>
+    /// <param name="recordingsVisible">If recordings should be visible</param>
+    /// <param name="timeTravelVisible">If time travel is enabled</param>
+    /// <param name="navBarVisible">If nav bar is enabled</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions Create(bool recordingsVisible, bool timeTravelVisible, bool navBarVisible)
       => new PanoramaViewerOptions(recordingsVisible, timeTravelVisible, navBarVisible);
   }

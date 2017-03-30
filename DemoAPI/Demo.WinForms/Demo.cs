@@ -149,7 +149,7 @@ namespace Demo.WinForms
 
       try
       {
-        await _api.InitAsync(options);
+        await _api.Init(options);
 
         if (grAPIInfo.InvokeRequired)
         {
@@ -211,25 +211,25 @@ namespace Demo.WinForms
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
     {
-      bool apiReadyState = await _api.GetAPIReadyStateAsync();
+      bool apiReadyState = await _api.GetAPIReadyState();
       txtAPIResult.Text = apiReadyState.ToString();
     }
 
     private async void btnApplicationVersion_Click(object sender, EventArgs e)
     {
-      string version = await _api.GetApplicationVersionAsync();
+      string version = await _api.GetApplicationVersion();
       txtAPIResult.Text = version;
     }
 
     private async void btnApplicationName_Click(object sender, EventArgs e)
     {
-      string name = await _api.GetApplicationNameAsync();
+      string name = await _api.GetApplicationName();
       txtAPIResult.Text = name;
     }
 
     private async void btnPermissions_Click(object sender, EventArgs e)
     {
-      string[] permissions = await _api.GetPermissionsAsync();
+      string[] permissions = await _api.GetPermissions();
       string permissionsString = permissions.Aggregate(string.Empty,
         (current, permission) => $"{current}{permission}{Environment.NewLine}");
       txtRecordingViewerColorPermissions.Text = permissionsString;
@@ -240,8 +240,8 @@ namespace Demo.WinForms
       try
       {
         IRecording recording = (string.IsNullOrEmpty(txtAddressSrs.Text))
-          ? await Viewer.OpenByAddressAsync(txtAdress.Text)
-          : await Viewer.OpenByAddressAsync(txtAdress.Text, txtAddressSrs.Text);
+          ? await Viewer.OpenByAddress(txtAdress.Text)
+          : await Viewer.OpenByAddress(txtAdress.Text, txtAddressSrs.Text);
         PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
@@ -254,7 +254,7 @@ namespace Demo.WinForms
 
     private async void btnGetViewerColor_Click(object sender, EventArgs e)
     {
-      Color color = await Viewer.GetViewerColorAsync();
+      Color color = await Viewer.GetViewerColor();
       string text = $"Alpha: {color.A}{Environment.NewLine}Red: {color.R}{Environment.NewLine}Green: {color.G}{Environment.NewLine}Blue: {color.B}";
       txtRecordingViewerColorPermissions.Text = text;
     }
@@ -271,7 +271,7 @@ namespace Demo.WinForms
 
     private async void btnOrientation_Click(object sender, EventArgs e)
     {
-      IOrientation orientation = await Viewer.GetOrientationAsync();
+      IOrientation orientation = await Viewer.GetOrientation();
       txtYaw.Text = orientation.Yaw.ToString();
       txtPitch.Text = orientation.Pitch.ToString();
       txthFov.Text = orientation.HFov.ToString();
@@ -288,7 +288,7 @@ namespace Demo.WinForms
 
     private async void btnGetRecording_Click(object sender, EventArgs e)
     {
-      IRecording recording = await Viewer.GetRecordingAsync();
+      IRecording recording = await Viewer.GetRecording();
       PrintRecordingText(recording);
     }
 
@@ -310,31 +310,31 @@ namespace Demo.WinForms
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetRecordingsVisibleAsync();
+      bool visible = await Viewer.GetRecordingsVisible();
       Viewer.ToggleRecordingsVisible(!visible);
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetNavbarVisibleAsync();
+      bool visible = await Viewer.GetNavbarVisible();
       Viewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.GetNavbarExpandedAsync();
+      bool expanded = await Viewer.GetNavbarExpanded();
       Viewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetTimeTravelVisibleAsync();
+      bool visible = await Viewer.GetTimeTravelVisible();
       Viewer.ToggleTimeTravelVisible(!visible);
     }
 
     private async void btnToggleTimeTravelExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.GetTimeTravelExpandedAsync();
+      bool expanded = await Viewer.GetTimeTravelExpanded();
       Viewer.ToggleTimeTravelExpanded(!expanded);
     }
 
@@ -343,8 +343,8 @@ namespace Demo.WinForms
       try
       {
         IRecording recording = (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
-          ? await Viewer.OpenByImageIdAsync(txtImageId.Text)
-          : await Viewer.OpenByImageIdAsync(txtImageId.Text, txtOpenByImageSrs.Text);
+          ? await Viewer.OpenByImageId(txtImageId.Text)
+          : await Viewer.OpenByImageId(txtImageId.Text, txtOpenByImageSrs.Text);
         PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
@@ -364,8 +364,8 @@ namespace Demo.WinForms
           : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
 
         IRecording recording = (string.IsNullOrEmpty(txtCoordinateSrs.Text))
-          ? await Viewer.OpenByCoordinateAsync(coordinate)
-          : await Viewer.OpenByCoordinateAsync(coordinate, txtCoordinateSrs.Text);
+          ? await Viewer.OpenByCoordinate(coordinate)
+          : await Viewer.OpenByCoordinate(coordinate, txtCoordinateSrs.Text);
         PrintRecordingText(recording);
       }
       catch (StreetSmartImageNotFoundException ex)
@@ -419,7 +419,7 @@ namespace Demo.WinForms
 
     private async void btnGetAddress_Click(object sender, EventArgs e)
     {
-      IAddressSettings addressSettings = await _api.GetAddressSettingsAsync();
+      IAddressSettings addressSettings = await _api.GetAddressSettings();
       string text = $"Locale: {addressSettings.Locale}{Environment.NewLine}Database: {addressSettings.Database}";
       txtRecordingViewerColorPermissions.Text = text;
     }

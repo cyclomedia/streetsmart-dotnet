@@ -19,23 +19,22 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Coordinate information.
+  /// Represents an object which takes a panorama viewer.
   /// </summary>
   public interface IDomElement
   {
     /// <summary>
-    /// Id
+    /// The Id of the element
     /// </summary>
     string Id { get; set; }
 
     /// <summary>
-    /// Style 
-    /// 
+    /// The Style of the element
     /// </summary>
     IStyle Style { get; set; }
 
     /// <summary>
-    /// Name
+    /// The name of the element
     /// </summary>
     string Name { get; }
   }

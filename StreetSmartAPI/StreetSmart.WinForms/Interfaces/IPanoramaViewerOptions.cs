@@ -19,22 +19,22 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// 
+  /// Options to initialize the panorama viewer with
   /// </summary>
   public interface IPanoramaViewerOptions
   {
     /// <summary>
-    /// 
+    /// If recordings should be visible
     /// </summary>
     bool? RecordingsVisible { get; set; }
 
     /// <summary>
-    /// 
+    /// If time travel is enabled
     /// </summary>
     bool? TimeTravelVisible { get; set; }
 
     /// <summary>
-    /// 
+    /// If navbar is enabled
     /// </summary>
     bool? NavbarVisible { get; set; }
   }

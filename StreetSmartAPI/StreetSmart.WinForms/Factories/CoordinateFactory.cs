@@ -22,25 +22,25 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// 
+  /// Factory for create coordinates
   /// </summary>
   public static class CoordinateFactory
   {
     /// <summary>
-    /// 
+    /// Create coordinates
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <returns></returns>
+    /// <param name="x">X value of the coordinate</param>
+    /// <param name="y">Y value of the coordinate</param>
+    /// <returns>Coordinate definition</returns>
     public static ICoordinate Create(double x, double y) => new Coordinate(x, y);
 
     /// <summary>
-    /// 
+    /// Create coordinates
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <returns></returns>
+    /// <param name="x">X value of the coordinate</param>
+    /// <param name="y">Y value of the coordinate</param>
+    /// <param name="z">Z value of the coordinate</param>
+    /// <returns>Coordinate definition</returns>
     public static ICoordinate Create(double x, double y, double z) => new Coordinate(x, y, z);
   }
 }

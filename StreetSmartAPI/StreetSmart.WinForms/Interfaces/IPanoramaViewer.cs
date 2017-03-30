@@ -63,56 +63,56 @@ namespace StreetSmart.WinForms.Interfaces
     /// This is an asynchronous function.
     /// </summary>
     /// <returns> The navbarExpanded state.</returns>
-    Task<bool> GetNavbarExpandedAsync();
+    Task<bool> GetNavbarExpanded();
 
     /// <summary>
     /// Returns the visibility state of the navbar.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The visibility state of the navbar.</returns>
-    Task<bool> GetNavbarVisibleAsync();
+    Task<bool> GetNavbarVisible();
 
     /// <summary>
     /// Returns the orientation in degrees (yaw, pitch, hFov) for this CycloramaViewer.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The orientation in degrees (yaw, pitch, hFov) for this CycloramaViewer.</returns>
-    Task<IOrientation> GetOrientationAsync();
+    Task<IOrientation> GetOrientation();
 
     /// <summary>
     /// Gets the current active recording of the PanoramaViewer.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The current active recording of the PanoramaViewer.</returns>
-    Task<IRecording> GetRecordingAsync();
+    Task<IRecording> GetRecording();
 
     /// <summary>
     /// Returns whether recordings are visible.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>Whether recordings are visible.</returns>
-    Task<bool> GetRecordingsVisibleAsync();
+    Task<bool> GetRecordingsVisible();
 
     /// <summary>
     /// Returns whether the timetravel component is visible or hidden.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>Whether the timetravel component is visible or hidden.</returns>
-    Task<bool> GetTimeTravelExpandedAsync();
+    Task<bool> GetTimeTravelExpanded();
 
     /// <summary>
     /// Returns whether timetravel is enabled for the viewer.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>Whether timetravel is enabled for the viewer.</returns>
-    Task<bool> GetTimeTravelVisibleAsync();
+    Task<bool> GetTimeTravelVisible();
 
     /// <summary>
     /// Gets the viewer color.
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The current viewer color.</returns>
-    Task<Color> GetViewerColorAsync();
+    Task<Color> GetViewerColor();
 
     /// <summary>
     /// Sets the orientation of the PanoramaViewer to look at a certain coordinate.
@@ -126,21 +126,21 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="query">Address you want to search.</param>
     /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
-    Task<IRecording> OpenByAddressAsync(string query, string srs = null);
+    Task<IRecording> OpenByAddress(string query, string srs = null);
 
     /// <summary>
-    /// 
+    /// Opens an image by coordinates and accompanying coordinate system.
     /// </summary>
     /// <param name="coordinate">Coordinate of location to open a panorama.</param>
     /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
-    Task<IRecording> OpenByCoordinateAsync(ICoordinate coordinate, string srs = null);
+    Task<IRecording> OpenByCoordinate(ICoordinate coordinate, string srs = null);
 
     /// <summary>
     /// Opens an image by imageId.
     /// </summary>
     /// <param name="imageId">ID of the image that needs to be opened.</param>
     /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
-    Task<IRecording> OpenByImageIdAsync(string imageId, string srs = null);
+    Task<IRecording> OpenByImageId(string imageId, string srs = null);
 
     /// <summary>
     /// Rotates the panorama vertically by a certain amount, as if the camera is turning to the ground.

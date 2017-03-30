@@ -21,36 +21,36 @@ using System.ComponentModel;
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// 
+  /// Name of the style element
   /// </summary>
   public enum StyleElementName
   {
     /// <summary>
-    /// 
+    /// Width valueof the style element
     /// </summary>
     [Description("width")]
     Width = 1,
 
     /// <summary>
-    /// 
+    /// Height value of the style element
     /// </summary>
     [Description("height")]
     Height = 2,
 
     /// <summary>
-    /// 
+    /// Position of the style element
     /// </summary>
     [Description("position")]
     Position = 3,
 
     /// <summary>
-    /// 
+    /// Top value of the style element
     /// </summary>
     [Description("top")]
     Top = 4,
 
     /// <summary>
-    /// 
+    /// Left value of the style element
     /// </summary>
     [Description("left")]
     Left = 5

@@ -22,38 +22,38 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// 
+  /// Factory for create a orientation object
   /// </summary>
   public static class OrientationFactory
   {
     /// <summary>
-    /// 
+    /// Create the orientation Object
     /// </summary>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
+    /// <param name="hFov">Value of the hFov.</param>
+    /// <returns>Orientation Object that contains values.</returns>
     public static IOrientation CreatehFov(double hFov) => new Orientation(null, null, hFov);
 
     /// <summary>
-    /// 
+    /// Create the orientation Object
     /// </summary>
-    /// <param name="pitch"></param>
-    /// <returns></returns>
+    /// <param name="pitch">Value of the pitch.</param>
+    /// <returns>Orientation Object that contains values.</returns>
     public static IOrientation CreatePitch(double pitch) => new Orientation(null, pitch, null);
 
     /// <summary>
-    /// 
+    /// Create the orientation Object
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <returns></returns>
+    /// <param name="yaw">Value of the yaw.</param>
+    /// <returns>Orientation Object that contains values.</returns>
     public static IOrientation CreateYaw(double yaw) => new Orientation(yaw, null, null);
 
     /// <summary>
-    /// 
+    /// Create the orientation Object
     /// </summary>
-    /// <param name="yaw"></param>
-    /// <param name="pitch"></param>
-    /// <param name="hFov"></param>
-    /// <returns></returns>
+    /// <param name="yaw">Value of the yaw.</param>
+    /// <param name="pitch">Value of the pitch.</param>
+    /// <param name="hFov">Value of the hFov.</param>
+    /// <returns>Orientation Object that contains values.</returns>
     public static IOrientation Create(double? yaw, double? pitch, double? hFov) => new Orientation(yaw, pitch, hFov);
   }
 }

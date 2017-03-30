@@ -19,44 +19,44 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// 
+  /// Style element of the domElement
   /// </summary>
   public interface IStyle
   {
     /// <summary>
-    /// 
+    /// Add a style element
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="value"></param>
+    /// <param name="name">Name of the style element</param>
+    /// <param name="value">Value of the style element</param>
     void AddStyle(StyleElementName name, string value);
 
     /// <summary>
-    /// 
+    /// Add a style element
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="value"></param>
-    /// <param name="type"></param>
+    /// <param name="name">Name of the style element</param>
+    /// <param name="value">Value of the style element</param>
+    /// <param name="type">Type of the style element</param>
     void AddStyle(StyleElementName name, int value, StyleElementNumberType type);
 
     /// <summary>
-    /// 
+    /// Remove a style element
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="name">Name of the style element</param>
     void RemoveStyle(StyleElementName name);
 
     /// <summary>
-    /// 
+    /// Update a style element
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="value"></param>
+    /// <param name="name">Name of the style element</param>
+    /// <param name="value">Value of the style element</param>
     void UpdateStyle(StyleElementName name, string value);
 
     /// <summary>
-    /// 
+    /// Update a style element
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="value"></param>
-    /// <param name="type"></param>
+    /// <param name="name">Name of the style element</param>
+    /// <param name="value">Value of the style element</param>
+    /// <param name="type">Type of the style element</param>
     void UpdateStyle(StyleElementName name, int value, StyleElementNumberType type);
   }
 }

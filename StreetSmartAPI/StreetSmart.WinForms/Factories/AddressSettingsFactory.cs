@@ -24,31 +24,31 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// 
+  /// Factory for create address settings to use for address searches
   /// </summary>
   public static class AddressSettingsFactory
   {
     /// <summary>
-    /// 
+    /// Create address settings to use for address searches
     /// </summary>
-    /// <param name="database"></param>
-    /// <returns></returns>
+    /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
+    /// <returns>The address settings to use for address searches</returns>
     public static IAddressSettings Create(string database) => Create(CultureInfo.CurrentCulture, database);
 
     /// <summary>
-    /// 
+    /// Create address settings to use for address searches
     /// </summary>
-    /// <param name="locale"></param>
-    /// <param name="database"></param>
-    /// <returns></returns>
+    /// <param name="locale">The locale to use. e.g. 'nl'</param>
+    /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
+    /// <returns>The address settings to use for address searches</returns>
     public static IAddressSettings Create(string locale, string database) => Create(new CultureInfo(locale), database);
 
     /// <summary>
-    /// 
+    /// Create address settings to use for address searches
     /// </summary>
-    /// <param name="locale"></param>
-    /// <param name="database"></param>
-    /// <returns></returns>
+    /// <param name="locale">The locale to use. e.g. 'nl'</param>
+    /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
+    /// <returns>The address settings to use for address searches</returns>
     public static IAddressSettings Create(CultureInfo locale, string database) => new AddressSettings(locale, database);
   }
 }

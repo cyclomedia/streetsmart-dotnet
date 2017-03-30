@@ -21,18 +21,18 @@ using System.ComponentModel;
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// 
+  /// Type of the style element number
   /// </summary>
   public enum StyleElementNumberType
   {
     /// <summary>
-    /// 
+    /// The number in percent
     /// </summary>
     [Description("%")]
     Percent = 1,
 
     /// <summary>
-    /// 
+    /// The number in pixels
     /// </summary>
     [Description("px")]
     Pixels = 2,

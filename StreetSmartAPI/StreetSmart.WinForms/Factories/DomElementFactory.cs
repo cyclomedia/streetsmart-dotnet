@@ -22,14 +22,14 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// This Factory creates DomElements
+  /// Factory for create a object which takes a panorama viewer
   /// </summary>
   public static class DomElementFactory
   {
     /// <summary>
-    /// Creates a default DOMElement
+    /// Creates a default DomElement which takes a panorama viewer
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Represents an object which takes a panorama viewer.</returns>
     public static IDomElement Create()
     {
       Style style = new Style();
@@ -39,13 +39,13 @@ namespace StreetSmart.WinForms.Factories
     }
 
     /// <summary>
-    /// Creates a DOMElement
+    /// Creates a default DomElement which takes a panorama viewer
     /// </summary>
-    /// <param name="width">width in percent</param>
-    /// <param name="height">height in percent</param>
-    /// <param name="top">top in pixels</param>
-    /// <param name="left">left in pixels</param>
-    /// <returns></returns>
+    /// <param name="width">Width in percent</param>
+    /// <param name="height">Height in percent</param>
+    /// <param name="top">Top in pixels</param>
+    /// <param name="left">Left in pixels</param>
+    /// <returns>Represents an object which takes a panorama viewer.</returns>
     public static IDomElement Create(int width, int height, int top, int left)
     {
       Style style = new Style();

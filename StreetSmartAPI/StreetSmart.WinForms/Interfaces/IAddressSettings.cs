@@ -21,17 +21,17 @@ using System.Globalization;
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Address settings configuration
+  /// The address settings to use for address searches
   /// </summary>
   public interface IAddressSettings
   {
     /// <summary>
-    /// Locale info
+    /// The locale to use. e.g. 'nl'
     /// </summary>
     CultureInfo Locale { get; set; }
 
     /// <summary>
-    /// Address database
+    /// The name of the database. e.g. 'CMDatabase'
     /// </summary>
     string Database { get; set; }
   }

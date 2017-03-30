@@ -21,23 +21,23 @@ using System;
 namespace StreetSmart.WinForms.Exceptions
 {
   /// <summary>
-  /// 
+  /// Exception when no images can not be found
   /// </summary>
   public class StreetSmartImageNotFoundException : Exception
   {
     /// <summary>
-    /// 
+    /// Create StreetSmartImageNotFoundException class
     /// </summary>
-    /// <param name="message"></param>
+    /// <param name="message">The message of the exception</param>
     public StreetSmartImageNotFoundException(string message) : base(message)
     {
     }
 
     /// <summary>
-    /// 
+    ///  Create StreetSmartImageNotFoundException class
     /// </summary>
-    /// <param name="message"></param>
-    /// <param name="inner"></param>
+    /// <param name="message">The message of the exception</param>
+    /// <param name="inner">The inner exception</param>
     public StreetSmartImageNotFoundException(string message, Exception inner) : base(message, inner)
     {
     }

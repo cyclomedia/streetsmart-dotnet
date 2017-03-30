@@ -7,7 +7,6 @@
 	- Unit testen
 	- WPF API
 	- DOM style uitbreiden (+ testen demo app uitbreiden)
-	- Commentaar uitbreiden van interface / factory / exceptions / enums objecten
 	- Documentatie van de API
 	- Nuget package
 
