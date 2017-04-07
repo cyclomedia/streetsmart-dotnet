@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StreetSmart.WinForms.Interfaces
@@ -74,7 +75,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// This is an asynchronous function.
     /// </summary>
     /// <returns>The current 'ready'-state of the API.</returns>
-    Task<bool> GetAPIReadyState();
+    Task<bool> GetApiReadyState();
 
     /// <summary>
     /// Returns the application name of the API.
@@ -102,6 +103,14 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="options">Object containing the options used for initializing the API.</param>
     Task Init(IOptions options);
+
+    /// <summary>
+    /// Open a image by a query
+    /// </summary>
+    /// <param name="query">query for open a panoramic image</param>
+    /// <param name="viewerOptions">viewer options for open the panoramic image</param>
+    /// <returns></returns>
+    Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions viewerOptions);
   }
 
   // ReSharper restore InconsistentNaming

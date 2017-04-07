@@ -17,56 +17,45 @@
  */
 
 using System;
+using System.Collections.Generic;
 using StreetSmart.WinForms.Interfaces;
 
-namespace StreetSmart.WinForms.Data.DomElement
+namespace StreetSmart.WinForms.Data
 {
-  internal class DomElement : NotifyPropertyChanged, IDomElement
+  internal class ViewerOptions : NotifyPropertyChanged, IViewerOptions
   {
-    private string _id;
-    private IStyle _style;
+    private IViewerTypes _viewerTypes;
+    private string _srs;
 
-    public DomElement(Style style)
+    public ViewerOptions(IList<ViewerType> viewerTypes, string srs)
     {
-      Guid guid = Guid.NewGuid();
-      Id = guid.ToString();
-      Style = style;
-      Name = $"dom{guid.ToString("N")}";
+      ViewerTypes = new ViewerTypes(viewerTypes);
+      Srs = srs;
     }
 
-    public DomElement(string id, Style style)
+    public IViewerTypes ViewerTypes
     {
-      Id = id;
-      Style = style;
-      Name = $"dom{Guid.NewGuid().ToString("N")}";
-    }
-
-    public string Id
-    {
-      get { return _id; }
+      get { return _viewerTypes; }
       set
       {
-        _id = value;
+        _viewerTypes = value;
         RaisePropertyChanged();
       }
     }
 
-    public IStyle Style
+    public string Srs
     {
-      get { return _style; }
+      get { return _srs; }
       set
       {
-        _style = value;
+        _srs = value;
         RaisePropertyChanged();
       }
     }
-
-    public string Name { get; }
 
     public override string ToString()
     {
-      return $@"var {Name}=document.createElement('div');{Name}.setAttribute('id','{Id}');
-             {Name}.setAttribute('style','{Style}');document.body.appendChild({Name});";
+      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()}}}";
     }
   }
 }

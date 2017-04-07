@@ -33,7 +33,7 @@ namespace Demo.WinForms
 {
   public partial class Demo : Form
   {
-    private const string ApiLocation = null; // "http://labs.cyclomedia.com/streetsmart/api/api-dotnet.html";
+    private const string ApiLocation = "http://localhost:8081/api-dotnet.html"; // "https://labs.cyclomedia.com/streetsmart/api/v17.1/api-dotnet.html"; // null;
 
     #region Members
 
@@ -145,7 +145,9 @@ namespace Demo.WinForms
     private async void btnLogin_Click(object sender, EventArgs e)
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
-      IOptions options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale, addressSettings);
+      IDomElement element = DomElementFactory.Create();
+      IOptions options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
+        addressSettings, element);
 
       try
       {
@@ -211,7 +213,7 @@ namespace Demo.WinForms
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
     {
-      bool apiReadyState = await _api.GetAPIReadyState();
+      bool apiReadyState = await _api.GetApiReadyState();
       txtAPIResult.Text = apiReadyState.ToString();
     }
 
@@ -415,6 +417,49 @@ namespace Demo.WinForms
       {
         MessageBox.Show("Can not parse parameters");
       }
+    }
+
+    private async void btnOpenViewerByQuery_Click(object sender, EventArgs e)
+    {
+      IList<ViewerType> viewerTypes = new List<ViewerType>();
+
+      if (cbOblique.Checked)
+      {
+        viewerTypes.Add(ViewerType.Oblique);
+      }
+
+      if (cbPanorama.Checked)
+      {
+        viewerTypes.Add(ViewerType.Panorama);
+      }
+
+      try
+      {
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
+        IList<IViewer> viewers = await _api.OpenByQuery(txtOpenByQuery.Text, viewerOptions);
+
+        foreach (IViewer viewer in viewers)
+        {
+          if (viewer is IPanoramaViewer)
+          {
+            _viewers.Add(viewer as IPanoramaViewer);
+            ToggleViewerEnables(true);
+
+            Viewer.ImageChange += OnImageChange;
+            Viewer.RecordingClick += OnRecordingClick;
+            Viewer.TileLoadError += OnTileLoadError;
+            Viewer.ViewChange += OnViewChange;
+            Viewer.ViewLoadEnd += OnViewLoadEnd;
+            Viewer.ViewLoadStart += OnViewLoadStart;
+          }
+        }
+      }
+      catch (StreetSmartImageNotFoundException ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
+
+      EnableImageEnables(true);
     }
 
     private async void btnGetAddress_Click(object sender, EventArgs e)

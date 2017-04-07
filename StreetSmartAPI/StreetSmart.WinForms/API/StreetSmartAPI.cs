@@ -30,6 +30,7 @@ using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces;
 using StreetSmart.WinForms.Properties;
+using StreetSmart.WinForms.Utils;
 
 namespace StreetSmart.WinForms.API
 {
@@ -39,7 +40,6 @@ namespace StreetSmart.WinForms.API
     #region Members
 
     private readonly ChromiumWebBrowser _browser;
-    private readonly PanoramaViewerList _cycloramaViewerList;
 
     #endregion
 
@@ -69,9 +69,11 @@ namespace StreetSmart.WinForms.API
 
     private string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
 
-    private string JsSuccess => $"{nameof(OnSuccess).FirstCharacterToLower()}";
+    private string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
 
-    private string JsError => $"{nameof(OnError).FirstCharacterToLower()}";
+    private string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
+
+    public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
     #endregion
 
@@ -81,7 +83,7 @@ namespace StreetSmart.WinForms.API
     {
       _browser = new ChromiumWebBrowser(streetSmartLocation) {Dock = DockStyle.Fill};
       _browser.RegisterJsObject(JsThis, this);
-      _cycloramaViewerList = new PanoramaViewerList(_browser);
+      ViewerList.RegisterJsObjects(_browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
       GUI = new StreetSmartGUI(_browser);
@@ -113,12 +115,12 @@ namespace StreetSmart.WinForms.API
 
     public IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions)
     {
-      return _cycloramaViewerList.AddViewer(domElement, viewerOptions);
+      return ViewerList.AddPanoramaViewer(domElement, viewerOptions);
     }
 
-    public void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
+    public void DestroyPanoramaViewer(IPanoramaViewer viewer)
     {
-      _cycloramaViewerList.DestroyViewer((PanoramaViewer) panoramaViewer);
+      ViewerList.DestroyPanoramaViewer(viewer);
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -126,9 +128,9 @@ namespace StreetSmart.WinForms.API
       return new AddressSettings((Dictionary<string, object>) await CallJsAsync(GetScript("getAddressSettings()")));
     }
 
-    public async Task<bool> GetAPIReadyState()
+    public async Task<bool> GetApiReadyState()
     {
-      return (bool) await CallJsAsync(GetScript("getAPIReadyState()"));
+      return (bool) await CallJsAsync(GetScript("getApiReadyState()"));
     }
 
     public async Task<string> GetApplicationName()
@@ -148,14 +150,34 @@ namespace StreetSmart.WinForms.API
 
     public async Task Init(IOptions options)
     {
-      string script = $@"{JsApi}.init({options}).then(function(){{{JsThis}.{JsSuccess}()}},
-                      function(e){{{JsThis}.{JsError}(e.message)}});";
+      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}()}},
+                      function(e){{{JsThis}.{JsLoginFailed}(e.message)}});";
       object result = await CallJsAsync(script);
 
       if (result is Exception)
       {
         throw (Exception) result;
       }
+    }
+
+    public async Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions viewerOptions)
+    {
+      string typeResult = "r";      
+      string resultType = "result";
+      JsNameGenerator names = new JsNameGenerator(viewerOptions.ViewerTypes.GetTypes().Count);
+
+      string script = $@"{names.JsGetTypeDef()}{JsApi}.open({query.ToQuote()}{viewerOptions}).catch
+                      (function(e){{{JsThis}.{JsImNotFound}(e.message)}}).then
+                      (function({typeResult}){{{names.JsAssignToNames(typeResult)}
+                      {names.JsToResultTypes(resultType)}{JsThis}.{JsResult}({resultType});}});";
+      object result = await CallJsAsync(script);
+
+      if (result is Exception)
+      {
+        throw (Exception) result;
+      }
+
+      return ViewerList.ToViewerList((Dictionary<string, object>) result);
     }
 
     #endregion
@@ -179,14 +201,19 @@ namespace StreetSmart.WinForms.API
       _resultTask.TrySetResult(result);
     }
 
-    public void OnSuccess()
+    public void OnLoginSuccess()
     {
       _resultTask.TrySetResult(true);
     }
 
-    public void OnError(string message)
+    public void OnLoginFailedException(string message)
     {
       _resultTask.TrySetResult(new StreetSmartLoginFailedException(message));
+    }
+
+    public void OnImageNotFoundException(string message)
+    {
+      _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
     }
 
     #endregion

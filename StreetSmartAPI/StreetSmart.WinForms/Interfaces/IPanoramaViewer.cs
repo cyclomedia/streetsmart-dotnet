@@ -26,7 +26,7 @@ namespace StreetSmart.WinForms.Interfaces
   /// <summary>
   /// PanoramaViewer component. Gets created by the StreetSmartAPI.
   /// </summary>
-  public interface IPanoramaViewer
+  public interface IPanoramaViewer : IViewer
   {
     /// <summary>
     /// Triggers when the loaded panorama is altered.

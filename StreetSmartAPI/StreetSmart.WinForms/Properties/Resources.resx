@@ -121,6 +121,6 @@
     <value>StreetSmartApi</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://streetsmart.cyclomedia.com/api/v16.1/api-dotnet.html</value>
+    <value>https://streetsmart.cyclomedia.com/api/v17.1/api-dotnet.html</value>
   </data>
 </root>

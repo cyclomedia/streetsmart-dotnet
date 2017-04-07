@@ -23,12 +23,14 @@ using System.Threading.Tasks;
 
 using CefSharp;
 using CefSharp.WinForms;
+
 using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Interfaces;
 using StreetSmart.WinForms.Properties;
+using StreetSmart.WinForms.Utils;
 
 using Orientation = StreetSmart.WinForms.Data.Orientation;
 
@@ -41,7 +43,7 @@ namespace StreetSmart.WinForms.API
     private readonly ChromiumWebBrowser _browser;
     private readonly IDomElement _domElement;
     private readonly PanoramaViewerList _panoramaViewerList;
-    private readonly PanoramaViewerEventList _panoramaViewerEventList;
+    private PanoramaViewerEventList _panoramaViewerEventList;
 
     #endregion
 
@@ -86,34 +88,29 @@ namespace StreetSmart.WinForms.API
 
     public string JsViewLoadStart => _panoramaViewerList.JsViewLoadStart;
 
-    public string DomName => _domElement.Name;
+    public string DomName => _domElement?.Name ?? string.Empty;
 
     #endregion
 
     #region Constructors
 
-    public PanoramaViewer(ChromiumWebBrowser browser, IDomElement element, IPanoramaViewerOptions options,
-      PanoramaViewerList panoramaViewerList)
+    public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, IDomElement element,
+      IPanoramaViewerOptions options)
     {
       _browser = browser;
-      _domElement = element;
       _panoramaViewerList = panoramaViewerList;
-      Name = $"pan{Guid.NewGuid().ToString("N")}";
+      _domElement = element;
+      Name = new JsNameGenerator(1)[0];
+      _browser.ExecuteScriptAsync($"{element}var {Name}={JsApi}.addPanoramaViewer({DomName},{options});");
+      ConnectEvents();
+    }
 
-      _panoramaViewerEventList = new PanoramaViewerEventList
-      {
-        new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
-        new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
-        new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
-        new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
-        new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
-        new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError)
-      };
-
-      string script =
-        $@"{element}document.body.appendChild({DomName});
-        var {Name}={JsApi}.addPanoramaViewer({DomName},{options});{_panoramaViewerEventList}";
-      _browser.ExecuteScriptAsync(script);
+    public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
+    {
+      _browser = browser;
+      _panoramaViewerList = panoramaViewerList;
+      Name = name;
+      ConnectEvents();
     }
 
     #endregion
@@ -300,7 +297,22 @@ namespace StreetSmart.WinForms.API
 
     #region Functions
 
-    public void DestroyPanoramaViewer()
+    public void ConnectEvents()
+    {
+      _panoramaViewerEventList = new PanoramaViewerEventList
+      {
+        new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
+        new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
+        new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
+        new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
+        new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
+        new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError)
+      };
+
+      _browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
+    }
+
+    public void DestroyViewer()
     {
       string script = $"{_panoramaViewerEventList.Destroy}{JsApi}.destroyPanoramaViewer({Name},{DomName});";
       _browser.ExecuteScriptAsync(script);

@@ -65,5 +65,10 @@ namespace StreetSmart.WinForms.Interfaces
     /// The address settings to use for address searches.
     /// </summary>
     IAddressSettings AddressSettings { get; set; }
+
+    /// <summary>
+    /// DomElement where in the panoramic viewer is rendered
+    /// </summary>
+    IDomElement Element { get; set; }
   }
 }

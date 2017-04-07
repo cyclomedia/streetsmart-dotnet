@@ -17,56 +17,50 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+
 using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Properties;
 
-namespace StreetSmart.WinForms.Data.DomElement
+namespace StreetSmart.WinForms.Data
 {
-  internal class DomElement : NotifyPropertyChanged, IDomElement
+  internal class ViewerTypes : ObservableCollection<ViewerType>, IViewerTypes
   {
-    private string _id;
-    private IStyle _style;
-
-    public DomElement(Style style)
+    public ViewerTypes(IList<ViewerType> viewerTypes)
     {
-      Guid guid = Guid.NewGuid();
-      Id = guid.ToString();
-      Style = style;
-      Name = $"dom{guid.ToString("N")}";
-    }
-
-    public DomElement(string id, Style style)
-    {
-      Id = id;
-      Style = style;
-      Name = $"dom{Guid.NewGuid().ToString("N")}";
-    }
-
-    public string Id
-    {
-      get { return _id; }
-      set
+      foreach (var viewerType in viewerTypes)
       {
-        _id = value;
-        RaisePropertyChanged();
+        Add(viewerType);
       }
     }
 
-    public IStyle Style
+    public IList<ViewerType> GetTypes()
     {
-      get { return _style; }
-      set
+      return this.ToList();
+    }
+
+    public void AddType(ViewerType type)
+    {
+      if (!Contains(type))
       {
-        _style = value;
-        RaisePropertyChanged();
+        Add(type);
       }
     }
 
-    public string Name { get; }
+    public void RemoveType(ViewerType type)
+    {
+      if (Contains(type))
+      {
+        Remove(type);
+      }
+    }
 
     public override string ToString()
     {
-      return $@"var {Name}=document.createElement('div');{Name}.setAttribute('id','{Id}');
-             {Name}.setAttribute('style','{Style}');document.body.appendChild({Name});";
+      string viewerTypes = this.Aggregate("[", (current, type) => $"{current}{Resources.JsApi}.{type.Description()},");
+      return $"{viewerTypes.Substring(0, Math.Max((viewerTypes.Length - 1), 1))}]";
     }
   }
 }

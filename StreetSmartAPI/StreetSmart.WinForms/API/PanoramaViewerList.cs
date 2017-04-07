@@ -20,21 +20,22 @@ using System;
 using System.Collections.Generic;
 
 using CefSharp.WinForms;
-
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.API
 {
-  internal class PanoramaViewerList
+  internal class PanoramaViewerList: ViewerList
   {
     #region Members
 
-    private readonly ChromiumWebBrowser _browser;
+    private ChromiumWebBrowser _browser;
     private readonly Dictionary<string, PanoramaViewer> _viewers;
 
     #endregion
 
     #region Properties
+
+    public static string Type => "@@ViewerType/PANORAMA";
 
     public string JsThis => $"{GetType().Name}Events";
 
@@ -58,21 +59,33 @@ namespace StreetSmart.WinForms.API
 
     #region Constructor
 
-    public PanoramaViewerList(ChromiumWebBrowser browser)
+    public PanoramaViewerList()
     {
-      _browser = browser;
       _viewers = new Dictionary<string, PanoramaViewer>();
-      browser.RegisterJsObject(JsThis, this);
     }
 
     #endregion
 
     #region Functions
 
-    public PanoramaViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
+    public override void RegisterJsObject(ChromiumWebBrowser browser)
     {
-      PanoramaViewer viewer = new PanoramaViewer(_browser, element, options, this);
+      _browser = browser;
+      browser.RegisterJsObject(JsThis, this);
+    }
 
+    public override IViewer AddViewer(string name)
+    {
+      return RegisterViewer(new PanoramaViewer(_browser, this, name));
+    }
+
+    public override IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
+    {
+      return RegisterViewer(new PanoramaViewer(_browser, this, element, options));
+    }
+
+    public IViewer RegisterViewer(PanoramaViewer viewer)
+    {
       if (!_viewers.ContainsKey(viewer.Name))
       {
         _viewers.Add(viewer.Name, viewer);
@@ -81,12 +94,14 @@ namespace StreetSmart.WinForms.API
       return viewer;
     }
 
-    public void DestroyViewer(PanoramaViewer viewer)
+    public override void DestroyViewer(IViewer viewer)
     {
-      if (_viewers.ContainsKey(viewer.Name))
+      PanoramaViewer panoramaViewer = (PanoramaViewer) viewer;
+
+      if (_viewers.ContainsKey(panoramaViewer?.Name ?? string.Empty))
       {
-        _viewers.Remove(viewer.Name);
-        viewer.DestroyPanoramaViewer();
+        _viewers.Remove(panoramaViewer?.Name ?? string.Empty);
+        panoramaViewer?.DestroyViewer();
       }
     }
 

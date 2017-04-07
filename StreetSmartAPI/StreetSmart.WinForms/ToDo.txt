@@ -7,7 +7,7 @@
 	- Unit testen
 	- WPF API
 	- DOM style uitbreiden (+ testen demo app uitbreiden)
-	- Documentatie van de API
+	- Documentatie / code voorbeelden van de API
 	- Nuget package
 
 
@@ -16,3 +16,12 @@ https://labs.cyclomedia.com/streetsmart/api/api-dotnet.html
 
 prod-api:
 https://streetsmart.cyclomedia.com/api/v16.1/api-dotnet.html
+
+Na te vragen:
+	- Panorama viewer openen met opties, is dat mogelijk?
+	- Met welke queries kun je een panorama viewer openen?
+
+
+
+- Extra opties zoals openen oblique of starten meting toevoegen
+- Testen vanaf de labs

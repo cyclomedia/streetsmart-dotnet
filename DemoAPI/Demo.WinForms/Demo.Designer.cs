@@ -31,6 +31,10 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenCloseViewer = new System.Windows.Forms.GroupBox();
+      this.txtOpenByQuery = new System.Windows.Forms.TextBox();
+      this.cbPanorama = new System.Windows.Forms.CheckBox();
+      this.cbOblique = new System.Windows.Forms.CheckBox();
+      this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.txtLeft = new System.Windows.Forms.TextBox();
       this.lblLeft = new System.Windows.Forms.Label();
       this.txtWidth = new System.Windows.Forms.TextBox();
@@ -141,6 +145,10 @@
       // 
       // grOpenCloseViewer
       // 
+      this.grOpenCloseViewer.Controls.Add(this.txtOpenByQuery);
+      this.grOpenCloseViewer.Controls.Add(this.cbPanorama);
+      this.grOpenCloseViewer.Controls.Add(this.cbOblique);
+      this.grOpenCloseViewer.Controls.Add(this.btnOpenViewerByQuery);
       this.grOpenCloseViewer.Controls.Add(this.txtLeft);
       this.grOpenCloseViewer.Controls.Add(this.lblLeft);
       this.grOpenCloseViewer.Controls.Add(this.txtWidth);
@@ -159,6 +167,49 @@
       this.grOpenCloseViewer.TabIndex = 0;
       this.grOpenCloseViewer.TabStop = false;
       this.grOpenCloseViewer.Text = "Open / Close Viewer";
+      // 
+      // txtOpenByQuery
+      // 
+      this.txtOpenByQuery.Location = new System.Drawing.Point(240, 50);
+      this.txtOpenByQuery.Multiline = true;
+      this.txtOpenByQuery.Name = "txtOpenByQuery";
+      this.txtOpenByQuery.Size = new System.Drawing.Size(100, 40);
+      this.txtOpenByQuery.TabIndex = 67;
+      this.txtOpenByQuery.Text = "5D123456";
+      // 
+      // cbPanorama
+      // 
+      this.cbPanorama.AutoSize = true;
+      this.cbPanorama.Checked = true;
+      this.cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.cbPanorama.Location = new System.Drawing.Point(305, 95);
+      this.cbPanorama.Name = "cbPanorama";
+      this.cbPanorama.Size = new System.Drawing.Size(45, 17);
+      this.cbPanorama.TabIndex = 66;
+      this.cbPanorama.Text = "Pan";
+      this.cbPanorama.UseVisualStyleBackColor = true;
+      // 
+      // cbOblique
+      // 
+      this.cbOblique.AutoSize = true;
+      this.cbOblique.Checked = true;
+      this.cbOblique.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.cbOblique.Location = new System.Drawing.Point(240, 95);
+      this.cbOblique.Name = "cbOblique";
+      this.cbOblique.Size = new System.Drawing.Size(62, 17);
+      this.cbOblique.TabIndex = 65;
+      this.cbOblique.Text = "Oblique";
+      this.cbOblique.UseVisualStyleBackColor = true;
+      // 
+      // btnOpenViewerByQuery
+      // 
+      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(240, 15);
+      this.btnOpenViewerByQuery.Name = "btnOpenViewerByQuery";
+      this.btnOpenViewerByQuery.Size = new System.Drawing.Size(100, 30);
+      this.btnOpenViewerByQuery.TabIndex = 64;
+      this.btnOpenViewerByQuery.Text = "Open by query";
+      this.btnOpenViewerByQuery.UseVisualStyleBackColor = true;
+      this.btnOpenViewerByQuery.Click += new System.EventHandler(this.btnOpenViewerByQuery_Click);
       // 
       // txtLeft
       // 
@@ -1132,6 +1183,10 @@
     private System.Windows.Forms.Label lblTop;
     private System.Windows.Forms.TextBox txtLeft;
     private System.Windows.Forms.Label lblLeft;
+    private System.Windows.Forms.TextBox txtOpenByQuery;
+    private System.Windows.Forms.CheckBox cbPanorama;
+    private System.Windows.Forms.CheckBox cbOblique;
+    private System.Windows.Forms.Button btnOpenViewerByQuery;
   }
 }
 

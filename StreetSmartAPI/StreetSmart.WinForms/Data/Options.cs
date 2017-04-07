@@ -19,7 +19,6 @@
 using System;
 using System.Globalization;
 using System.Security;
-
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
@@ -35,9 +34,10 @@ namespace StreetSmart.WinForms.Data
     private CultureInfo _locale;
     private Uri _configurationURL;
     private IAddressSettings _addressSettings;
+    private IDomElement _element;
 
     public Options(string userName, SecureString password, string apiKey, string srs, CultureInfo locale,
-      Uri configurationURL, IAddressSettings addressSettings)
+      Uri configurationURL, IAddressSettings addressSettings, IDomElement element)
     {
       Username = userName;
       Password = password;
@@ -46,6 +46,7 @@ namespace StreetSmart.WinForms.Data
       Locale = locale;
       ConfigurationURL = configurationURL;
       AddressSettings = addressSettings;
+      Element = element;
     }
 
     // ReSharper restore InconsistentNaming
@@ -123,13 +124,23 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
+    public IDomElement Element
+    {
+      get { return _element; }
+      set
+      {
+        _element = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
       // ReSharper disable once InconsistentNaming
       string configurationURL = (ConfigurationURL == null) ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
       string locale = (Locale == null) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
-      return $@"{{username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
+      return $@"{{targetElement:{_element.Name},username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
              ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }
