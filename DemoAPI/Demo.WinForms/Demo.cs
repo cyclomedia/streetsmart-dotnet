@@ -396,12 +396,10 @@ namespace Demo.WinForms
       result = int.TryParse(txtTop.Text, out top) && result;
       result = int.TryParse(txtLeft.Text, out left) && result;
 
-      if (result || rbDefault.Checked)
+      if (result)
       {
         IPanoramaViewerOptions options = PanoramaViewerOptionsFactory.Create(true, true, true);
-        IDomElement element = rbDefault.Checked
-          ? DomElementFactory.Create()
-          : DomElementFactory.Create(width, height, top, left);
+        IDomElement element = DomElementFactory.Create(width, height, top, left);
 
         _viewers.Add(_api.AddPanoramaViewer(element, options));
         ToggleViewerEnables(true);
@@ -599,5 +597,34 @@ namespace Demo.WinForms
     }
 
     #endregion
+
+    private void btnStartMeasurementMode_Click(object sender, EventArgs e)
+    {
+      MeasurementGeometryType? type = null;
+
+      if (rbMeasPoint.Checked)
+      {
+        type = MeasurementGeometryType.Point;
+      }
+      else if (rbMeasLineString.Checked)
+      {
+        type = MeasurementGeometryType.LineString;
+      }
+      else if (rbMeasPolygon.Checked)
+      {
+        type = MeasurementGeometryType.Polygon;
+      }
+
+      IMeasurementOptions options = (type == null)
+        ? MeasurementOptionsFactory.Create()
+        : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
+
+      _api.StartMeasurementMode(Viewer, options);
+    }
+
+    private void btnStopMeasurementMode_Click(object sender, EventArgs e)
+    {
+      _api.StopMeasurementMode();
+    }
   }
 }

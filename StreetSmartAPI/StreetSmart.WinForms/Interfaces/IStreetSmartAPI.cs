@@ -53,16 +53,16 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Adds a PanoramaViewer to a specified DOM-element
     /// </summary>
-    /// <param name="domElement">DOM-element the PanoramaViewer gets rendered to.</param>
-    /// <param name="viewerOptions">Options to initialize the panorama viewer with.</param>
+    /// <param name="element">DOM-element the PanoramaViewer gets rendered to.</param>
+    /// <param name="options">Options to initialize the panorama viewer with.</param>
     /// <returns></returns>
-    IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions);
+    IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options);
 
     /// <summary>
     /// Destroys panorama viewer
     /// </summary>
-    /// <param name="panoramaViewer">Instance of the PanoramaViewer you want to destroy.</param>
-    void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer);
+    /// <param name="viewer">Instance of the PanoramaViewer you want to destroy.</param>
+    void DestroyPanoramaViewer(IPanoramaViewer viewer);
 
     /// <summary>
     /// Returns the object containing the address search settings
@@ -108,9 +108,21 @@ namespace StreetSmart.WinForms.Interfaces
     /// Open a image by a query
     /// </summary>
     /// <param name="query">query for open a panoramic image</param>
-    /// <param name="viewerOptions">viewer options for open the panoramic image</param>
+    /// <param name="options">viewer options for open the panoramic image</param>
     /// <returns></returns>
-    Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions viewerOptions);
+    Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions options);
+
+    /// <summary>
+    /// Starts the measurement
+    /// </summary>
+    /// <param name="viewer">Panorama viewer for start the measurement inside</param>
+    /// <param name="options">Measurement options</param>
+    void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options);
+
+    /// <summary>
+    /// Stops the measurement
+    /// </summary>
+    void StopMeasurementMode();
   }
 
   // ReSharper restore InconsistentNaming

@@ -113,9 +113,9 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
-    public IPanoramaViewer AddPanoramaViewer(IDomElement domElement, IPanoramaViewerOptions viewerOptions)
+    public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      return ViewerList.AddPanoramaViewer(domElement, viewerOptions);
+      return ViewerList.AddPanoramaViewer(element, options);
     }
 
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
@@ -160,13 +160,13 @@ namespace StreetSmart.WinForms.API
       }
     }
 
-    public async Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions viewerOptions)
+    public async Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions options)
     {
       string typeResult = "r";      
       string resultType = "result";
-      JsNameGenerator names = new JsNameGenerator(viewerOptions.ViewerTypes.GetTypes().Count);
+      JsNameGenerator names = new JsNameGenerator(options.ViewerTypes.GetTypes().Count);
 
-      string script = $@"{names.JsGetTypeDef()}{JsApi}.open({query.ToQuote()}{viewerOptions}).catch
+      string script = $@"{names.JsGetTypeDef()}{JsApi}.open({query.ToQuote()}{options}).catch
                       (function(e){{{JsThis}.{JsImNotFound}(e.message)}}).then
                       (function({typeResult}){{{names.JsAssignToNames(typeResult)}
                       {names.JsToResultTypes(resultType)}{JsThis}.{JsResult}({resultType});}});";
@@ -178,6 +178,16 @@ namespace StreetSmart.WinForms.API
       }
 
       return ViewerList.ToViewerList((Dictionary<string, object>) result);
+    }
+
+    public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
+    {
+      _browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
+    }
+
+    public void StopMeasurementMode()
+    {
+      _browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
     }
 
     #endregion

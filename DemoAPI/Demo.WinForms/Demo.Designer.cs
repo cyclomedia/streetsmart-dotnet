@@ -43,11 +43,16 @@
       this.lblWidth = new System.Windows.Forms.Label();
       this.lblHeight = new System.Windows.Forms.Label();
       this.lblTop = new System.Windows.Forms.Label();
-      this.rbParameters = new System.Windows.Forms.RadioButton();
-      this.rbDefault = new System.Windows.Forms.RadioButton();
       this.btnOpenViewer = new System.Windows.Forms.Button();
       this.btnDestroyViewer = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grMeasurement = new System.Windows.Forms.GroupBox();
+      this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
+      this.rbMeasLineString = new System.Windows.Forms.RadioButton();
+      this.rbMeasPoint = new System.Windows.Forms.RadioButton();
+      this.rbMeasDefault = new System.Windows.Forms.RadioButton();
+      this.btnStartMeasurementMode = new System.Windows.Forms.Button();
+      this.btnStopMeasurementMode = new System.Windows.Forms.Button();
       this.grDevTools = new System.Windows.Forms.GroupBox();
       this.btnCloseDefTools = new System.Windows.Forms.Button();
       this.btnShowDefTools = new System.Windows.Forms.Button();
@@ -120,8 +125,13 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.lblWPer = new System.Windows.Forms.Label();
+      this.lblHPer = new System.Windows.Forms.Label();
+      this.lblTPx = new System.Windows.Forms.Label();
+      this.lblLPx = new System.Windows.Forms.Label();
       this.grOpenCloseViewer.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grMeasurement.SuspendLayout();
       this.grDevTools.SuspendLayout();
       this.grRotationsZoomInOut.SuspendLayout();
       this.grEvents.SuspendLayout();
@@ -140,11 +150,15 @@
       this.plStreetSmart.Dock = System.Windows.Forms.DockStyle.Left;
       this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
       this.plStreetSmart.Name = "plStreetSmart";
-      this.plStreetSmart.Size = new System.Drawing.Size(900, 762);
+      this.plStreetSmart.Size = new System.Drawing.Size(900, 861);
       this.plStreetSmart.TabIndex = 0;
       // 
       // grOpenCloseViewer
       // 
+      this.grOpenCloseViewer.Controls.Add(this.lblLPx);
+      this.grOpenCloseViewer.Controls.Add(this.lblTPx);
+      this.grOpenCloseViewer.Controls.Add(this.lblHPer);
+      this.grOpenCloseViewer.Controls.Add(this.lblWPer);
       this.grOpenCloseViewer.Controls.Add(this.txtOpenByQuery);
       this.grOpenCloseViewer.Controls.Add(this.cbPanorama);
       this.grOpenCloseViewer.Controls.Add(this.cbOblique);
@@ -157,8 +171,6 @@
       this.grOpenCloseViewer.Controls.Add(this.lblWidth);
       this.grOpenCloseViewer.Controls.Add(this.lblHeight);
       this.grOpenCloseViewer.Controls.Add(this.lblTop);
-      this.grOpenCloseViewer.Controls.Add(this.rbParameters);
-      this.grOpenCloseViewer.Controls.Add(this.rbDefault);
       this.grOpenCloseViewer.Controls.Add(this.btnOpenViewer);
       this.grOpenCloseViewer.Controls.Add(this.btnDestroyViewer);
       this.grOpenCloseViewer.Location = new System.Drawing.Point(0, 290);
@@ -215,9 +227,9 @@
       // 
       this.txtLeft.Location = new System.Drawing.Point(145, 90);
       this.txtLeft.Name = "txtLeft";
-      this.txtLeft.Size = new System.Drawing.Size(90, 20);
+      this.txtLeft.Size = new System.Drawing.Size(50, 20);
       this.txtLeft.TabIndex = 62;
-      this.txtLeft.Text = "400";
+      this.txtLeft.Text = "0";
       // 
       // lblLeft
       // 
@@ -232,25 +244,25 @@
       // 
       this.txtWidth.Location = new System.Drawing.Point(145, 15);
       this.txtWidth.Name = "txtWidth";
-      this.txtWidth.Size = new System.Drawing.Size(90, 20);
+      this.txtWidth.Size = new System.Drawing.Size(50, 20);
       this.txtWidth.TabIndex = 56;
-      this.txtWidth.Text = "40";
+      this.txtWidth.Text = "100";
       // 
       // txtHeight
       // 
       this.txtHeight.Location = new System.Drawing.Point(145, 40);
       this.txtHeight.Name = "txtHeight";
-      this.txtHeight.Size = new System.Drawing.Size(90, 20);
+      this.txtHeight.Size = new System.Drawing.Size(50, 20);
       this.txtHeight.TabIndex = 57;
-      this.txtHeight.Text = "40";
+      this.txtHeight.Text = "100";
       // 
       // txtTop
       // 
       this.txtTop.Location = new System.Drawing.Point(145, 65);
       this.txtTop.Name = "txtTop";
-      this.txtTop.Size = new System.Drawing.Size(90, 20);
+      this.txtTop.Size = new System.Drawing.Size(50, 20);
       this.txtTop.TabIndex = 58;
-      this.txtTop.Text = "300";
+      this.txtTop.Text = "0";
       // 
       // lblWidth
       // 
@@ -279,28 +291,6 @@
       this.lblTop.TabIndex = 61;
       this.lblTop.Text = "Top";
       // 
-      // rbParameters
-      // 
-      this.rbParameters.AutoSize = true;
-      this.rbParameters.Location = new System.Drawing.Point(10, 65);
-      this.rbParameters.Name = "rbParameters";
-      this.rbParameters.Size = new System.Drawing.Size(78, 17);
-      this.rbParameters.TabIndex = 55;
-      this.rbParameters.Text = "Parameters";
-      this.rbParameters.UseVisualStyleBackColor = true;
-      // 
-      // rbDefault
-      // 
-      this.rbDefault.AutoSize = true;
-      this.rbDefault.Checked = true;
-      this.rbDefault.Location = new System.Drawing.Point(10, 45);
-      this.rbDefault.Name = "rbDefault";
-      this.rbDefault.Size = new System.Drawing.Size(59, 17);
-      this.rbDefault.TabIndex = 54;
-      this.rbDefault.TabStop = true;
-      this.rbDefault.Text = "Default";
-      this.rbDefault.UseVisualStyleBackColor = true;
-      // 
       // btnOpenViewer
       // 
       this.btnOpenViewer.Location = new System.Drawing.Point(5, 15);
@@ -323,6 +313,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grMeasurement);
       this.plControl.Controls.Add(this.grDevTools);
       this.plControl.Controls.Add(this.grRotationsZoomInOut);
       this.plControl.Controls.Add(this.grEvents);
@@ -338,8 +329,85 @@
       this.plControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.plControl.Location = new System.Drawing.Point(900, 0);
       this.plControl.Name = "plControl";
-      this.plControl.Size = new System.Drawing.Size(484, 762);
+      this.plControl.Size = new System.Drawing.Size(484, 861);
       this.plControl.TabIndex = 1;
+      // 
+      // grMeasurement
+      // 
+      this.grMeasurement.Controls.Add(this.rbMeasPolygon);
+      this.grMeasurement.Controls.Add(this.rbMeasLineString);
+      this.grMeasurement.Controls.Add(this.rbMeasPoint);
+      this.grMeasurement.Controls.Add(this.rbMeasDefault);
+      this.grMeasurement.Controls.Add(this.btnStartMeasurementMode);
+      this.grMeasurement.Controls.Add(this.btnStopMeasurementMode);
+      this.grMeasurement.Location = new System.Drawing.Point(0, 760);
+      this.grMeasurement.Name = "grMeasurement";
+      this.grMeasurement.Size = new System.Drawing.Size(480, 100);
+      this.grMeasurement.TabIndex = 52;
+      this.grMeasurement.TabStop = false;
+      this.grMeasurement.Text = "Measurement";
+      // 
+      // rbMeasPolygon
+      // 
+      this.rbMeasPolygon.AutoSize = true;
+      this.rbMeasPolygon.Location = new System.Drawing.Point(215, 60);
+      this.rbMeasPolygon.Name = "rbMeasPolygon";
+      this.rbMeasPolygon.Size = new System.Drawing.Size(63, 17);
+      this.rbMeasPolygon.TabIndex = 61;
+      this.rbMeasPolygon.Text = "Polygon";
+      this.rbMeasPolygon.UseVisualStyleBackColor = true;
+      // 
+      // rbMeasLineString
+      // 
+      this.rbMeasLineString.AutoSize = true;
+      this.rbMeasLineString.Location = new System.Drawing.Point(145, 60);
+      this.rbMeasLineString.Name = "rbMeasLineString";
+      this.rbMeasLineString.Size = new System.Drawing.Size(73, 17);
+      this.rbMeasLineString.TabIndex = 60;
+      this.rbMeasLineString.Text = "Line string";
+      this.rbMeasLineString.UseVisualStyleBackColor = true;
+      // 
+      // rbMeasPoint
+      // 
+      this.rbMeasPoint.AutoSize = true;
+      this.rbMeasPoint.Location = new System.Drawing.Point(75, 60);
+      this.rbMeasPoint.Name = "rbMeasPoint";
+      this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
+      this.rbMeasPoint.TabIndex = 59;
+      this.rbMeasPoint.Text = "Point";
+      this.rbMeasPoint.UseVisualStyleBackColor = true;
+      // 
+      // rbMeasDefault
+      // 
+      this.rbMeasDefault.AutoSize = true;
+      this.rbMeasDefault.Checked = true;
+      this.rbMeasDefault.Location = new System.Drawing.Point(5, 60);
+      this.rbMeasDefault.Name = "rbMeasDefault";
+      this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
+      this.rbMeasDefault.TabIndex = 58;
+      this.rbMeasDefault.TabStop = true;
+      this.rbMeasDefault.Text = "Default";
+      this.rbMeasDefault.UseVisualStyleBackColor = true;
+      // 
+      // btnStartMeasurementMode
+      // 
+      this.btnStartMeasurementMode.Location = new System.Drawing.Point(5, 15);
+      this.btnStartMeasurementMode.Name = "btnStartMeasurementMode";
+      this.btnStartMeasurementMode.Size = new System.Drawing.Size(150, 30);
+      this.btnStartMeasurementMode.TabIndex = 57;
+      this.btnStartMeasurementMode.Text = "Start Measurement Mode";
+      this.btnStartMeasurementMode.UseVisualStyleBackColor = true;
+      this.btnStartMeasurementMode.Click += new System.EventHandler(this.btnStartMeasurementMode_Click);
+      // 
+      // btnStopMeasurementMode
+      // 
+      this.btnStopMeasurementMode.Location = new System.Drawing.Point(160, 15);
+      this.btnStopMeasurementMode.Name = "btnStopMeasurementMode";
+      this.btnStopMeasurementMode.Size = new System.Drawing.Size(150, 30);
+      this.btnStopMeasurementMode.TabIndex = 56;
+      this.btnStopMeasurementMode.Text = "Stop Measurement Mode";
+      this.btnStopMeasurementMode.UseVisualStyleBackColor = true;
+      this.btnStopMeasurementMode.Click += new System.EventHandler(this.btnStopMeasurementMode_Click);
       // 
       // grDevTools
       // 
@@ -479,7 +547,7 @@
       // lbViewerEvents
       // 
       this.lbViewerEvents.FormattingEnabled = true;
-      this.lbViewerEvents.Location = new System.Drawing.Point(14, 17);
+      this.lbViewerEvents.Location = new System.Drawing.Point(5, 15);
       this.lbViewerEvents.Name = "lbViewerEvents";
       this.lbViewerEvents.Size = new System.Drawing.Size(470, 82);
       this.lbViewerEvents.TabIndex = 0;
@@ -1056,11 +1124,47 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
+      // lblWPer
+      // 
+      this.lblWPer.AutoSize = true;
+      this.lblWPer.Location = new System.Drawing.Point(200, 20);
+      this.lblWPer.Name = "lblWPer";
+      this.lblWPer.Size = new System.Drawing.Size(15, 13);
+      this.lblWPer.TabIndex = 68;
+      this.lblWPer.Text = "%";
+      // 
+      // lblHPer
+      // 
+      this.lblHPer.AutoSize = true;
+      this.lblHPer.Location = new System.Drawing.Point(200, 45);
+      this.lblHPer.Name = "lblHPer";
+      this.lblHPer.Size = new System.Drawing.Size(15, 13);
+      this.lblHPer.TabIndex = 69;
+      this.lblHPer.Text = "%";
+      // 
+      // lblTPx
+      // 
+      this.lblTPx.AutoSize = true;
+      this.lblTPx.Location = new System.Drawing.Point(200, 70);
+      this.lblTPx.Name = "lblTPx";
+      this.lblTPx.Size = new System.Drawing.Size(18, 13);
+      this.lblTPx.TabIndex = 70;
+      this.lblTPx.Text = "px";
+      // 
+      // lblLPx
+      // 
+      this.lblLPx.AutoSize = true;
+      this.lblLPx.Location = new System.Drawing.Point(200, 95);
+      this.lblLPx.Name = "lblLPx";
+      this.lblLPx.Size = new System.Drawing.Size(18, 13);
+      this.lblLPx.TabIndex = 71;
+      this.lblLPx.Text = "px";
+      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1384, 762);
+      this.ClientSize = new System.Drawing.Size(1384, 861);
       this.Controls.Add(this.plControl);
       this.Controls.Add(this.plStreetSmart);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1071,6 +1175,8 @@
       this.grOpenCloseViewer.ResumeLayout(false);
       this.grOpenCloseViewer.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grMeasurement.ResumeLayout(false);
+      this.grMeasurement.PerformLayout();
       this.grDevTools.ResumeLayout(false);
       this.grRotationsZoomInOut.ResumeLayout(false);
       this.grRotationsZoomInOut.PerformLayout();
@@ -1166,8 +1272,6 @@
     private System.Windows.Forms.GroupBox grRecordingViewerColorPermissions;
     private System.Windows.Forms.TextBox txtRecordingViewerColorPermissions;
     private System.Windows.Forms.Button btnGetAddress;
-    private System.Windows.Forms.RadioButton rbParameters;
-    private System.Windows.Forms.RadioButton rbDefault;
     private System.Windows.Forms.GroupBox grEvents;
     private System.Windows.Forms.ListBox lbViewerEvents;
     private System.Windows.Forms.Label lblAPIKey;
@@ -1187,6 +1291,17 @@
     private System.Windows.Forms.CheckBox cbPanorama;
     private System.Windows.Forms.CheckBox cbOblique;
     private System.Windows.Forms.Button btnOpenViewerByQuery;
+    private System.Windows.Forms.GroupBox grMeasurement;
+    private System.Windows.Forms.RadioButton rbMeasPoint;
+    private System.Windows.Forms.RadioButton rbMeasDefault;
+    private System.Windows.Forms.Button btnStartMeasurementMode;
+    private System.Windows.Forms.Button btnStopMeasurementMode;
+    private System.Windows.Forms.RadioButton rbMeasPolygon;
+    private System.Windows.Forms.RadioButton rbMeasLineString;
+    private System.Windows.Forms.Label lblLPx;
+    private System.Windows.Forms.Label lblTPx;
+    private System.Windows.Forms.Label lblHPer;
+    private System.Windows.Forms.Label lblWPer;
   }
 }
 

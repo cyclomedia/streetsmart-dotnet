@@ -78,15 +78,18 @@
     <Compile Include="API\ObliqueViewerList.cs" />
     <Compile Include="API\ObliqueViewer.cs" />
     <Compile Include="API\ViewerList.cs" />
+    <Compile Include="Data\MeasurementOptions.cs" />
     <Compile Include="Data\ViewerTypes.cs" />
     <Compile Include="Data\ViewerOptions.cs" />
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\PanoramaViewerOptions.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Factories\MeasurementOptionsFactory.cs" />
     <Compile Include="Factories\ViewerOptionsFactory.cs" />
     <Compile Include="Factories\DomElementFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
+    <Compile Include="Interfaces\IMeasurementOptions.cs" />
     <Compile Include="Interfaces\IObliqueViewer.cs" />
     <Compile Include="Interfaces\IViewer.cs" />
     <Compile Include="Interfaces\IViewerTypes.cs" />
@@ -131,6 +134,7 @@
     <Compile Include="Handlers\DownloadHandler.cs" />
     <Compile Include="Interfaces\IPanoramaViewer.cs" />
     <Compile Include="Interfaces\IStreetSmartAPI.cs" />
+    <Compile Include="Interfaces\MeasurementGeometryType.cs" />
     <Compile Include="Interfaces\ViewerType.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
