@@ -33,7 +33,7 @@ namespace Demo.WinForms
 {
   public partial class Demo : Form
   {
-    private const string ApiLocation = "http://localhost:8081/api-dotnet.html"; // "https://labs.cyclomedia.com/streetsmart/api/v17.1/api-dotnet.html"; // null;
+    private const string ApiLocation = null;
 
     #region Members
 
@@ -79,7 +79,7 @@ namespace Demo.WinForms
       grViewerToggles.Enabled = false;
       grRotationsZoomInOut.Enabled = false;
       grAPIInfo.Enabled = false;
-      grOpenCloseViewer.Enabled = false;
+      grOpenByQuery.Enabled = false;
       grCoordinate.Enabled = false;
       grOrientation.Enabled = false;
       grOpenByImageId.Enabled = false;
@@ -162,13 +162,40 @@ namespace Demo.WinForms
           grAPIInfo.Enabled = true;
         }
 
-        if (grOpenCloseViewer.InvokeRequired)
+        if (grOpenByQuery.InvokeRequired)
         {
-          grOpenCloseViewer.Invoke(new MethodInvoker(() => grOpenCloseViewer.Enabled = true));
+          grOpenByQuery.Invoke(new MethodInvoker(() => grOpenByQuery.Enabled = true));
         }
         else
         {
-          grOpenCloseViewer.Enabled = true;
+          grOpenByQuery.Enabled = true;
+        }
+
+        if (grOpenByAddress.InvokeRequired)
+        {
+          grOpenByAddress.Invoke(new MethodInvoker(() => grOpenByAddress.Enabled = true));
+        }
+        else
+        {
+          grOpenByAddress.Enabled = true;
+        }
+
+        if (grCoordinate.InvokeRequired)
+        {
+          grCoordinate.Invoke(new MethodInvoker(() => grCoordinate.Enabled = true));
+        }
+        else
+        {
+          grCoordinate.Enabled = true;
+        }
+
+        if (grOpenByImageId.InvokeRequired)
+        {
+          grOpenByImageId.Invoke(new MethodInvoker(() => grOpenByImageId.Enabled = true));
+        }
+        else
+        {
+          grOpenByImageId.Enabled = true;
         }
 
         MessageBox.Show("Login successfully");
@@ -187,28 +214,6 @@ namespace Demo.WinForms
     private void btnRotateRight_Click(object sender, EventArgs e)
     {
       Viewer?.RotateRight(DeltaYawPitch);
-    }
-
-    private void btnDestroyViewer_Click(object sender, EventArgs e)
-    {
-      if (Viewer != null)
-      {
-        Viewer.ImageChange -= OnImageChange;
-        Viewer.RecordingClick -= OnRecordingClick;
-        Viewer.TileLoadError -= OnTileLoadError;
-        Viewer.ViewChange -= OnViewChange;
-        Viewer.ViewLoadEnd -= OnViewLoadEnd;
-        Viewer.ViewLoadStart -= OnViewLoadStart;
-
-        _api?.DestroyPanoramaViewer(Viewer);
-        _viewers.RemoveAt(_viewers.Count - 1);
-
-        if (_viewers.Count == 0)
-        {
-          ToggleViewerEnables(false);
-          EnableImageEnables(false);
-        }
-      }
     }
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
@@ -239,12 +244,37 @@ namespace Demo.WinForms
 
     private async void btnOpenByAddress_Click(object sender, EventArgs e)
     {
+      IList<ViewerType> viewerTypes = new List<ViewerType>();
+
+      if (cbOblique.Checked)
+      {
+        viewerTypes.Add(ViewerType.Oblique);
+      }
+
+      if (cbPanorama.Checked)
+      {
+        viewerTypes.Add(ViewerType.Panorama);
+      }
+
       try
       {
-        IRecording recording = (string.IsNullOrEmpty(txtAddressSrs.Text))
-          ? await Viewer.OpenByAddress(txtAdress.Text)
-          : await Viewer.OpenByAddress(txtAdress.Text, txtAddressSrs.Text);
-        PrintRecordingText(recording);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text);
+        IList<IViewer> viewers = await _api.OpenByQuery(txtAdress.Text, viewerOptions);
+
+        foreach (IViewer viewer in viewers)
+        {
+          if (viewer is IPanoramaViewer)
+          {
+            _viewers.Add(viewer as IPanoramaViewer);
+
+            Viewer.ImageChange += OnImageChange;
+            Viewer.RecordingClick += OnRecordingClick;
+            Viewer.TileLoadError += OnTileLoadError;
+            Viewer.ViewChange += OnViewChange;
+            Viewer.ViewLoadEnd += OnViewLoadEnd;
+            Viewer.ViewLoadStart += OnViewLoadStart;
+          }
+        }
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -342,12 +372,37 @@ namespace Demo.WinForms
 
     private async void btnOpenByImageId_Click(object sender, EventArgs e)
     {
+      IList<ViewerType> viewerTypes = new List<ViewerType>();
+
+      if (cbOblique.Checked)
+      {
+        viewerTypes.Add(ViewerType.Oblique);
+      }
+
+      if (cbPanorama.Checked)
+      {
+        viewerTypes.Add(ViewerType.Panorama);
+      }
+
       try
       {
-        IRecording recording = (string.IsNullOrEmpty(txtOpenByImageSrs.Text))
-          ? await Viewer.OpenByImageId(txtImageId.Text)
-          : await Viewer.OpenByImageId(txtImageId.Text, txtOpenByImageSrs.Text);
-        PrintRecordingText(recording);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
+        IList<IViewer> viewers = await _api.OpenByQuery(txtImageId.Text, viewerOptions);
+
+        foreach (IViewer viewer in viewers)
+        {
+          if (viewer is IPanoramaViewer)
+          {
+            _viewers.Add(viewer as IPanoramaViewer);
+
+            Viewer.ImageChange += OnImageChange;
+            Viewer.RecordingClick += OnRecordingClick;
+            Viewer.TileLoadError += OnTileLoadError;
+            Viewer.ViewChange += OnViewChange;
+            Viewer.ViewLoadEnd += OnViewLoadEnd;
+            Viewer.ViewLoadStart += OnViewLoadStart;
+          }
+        }
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -359,16 +414,41 @@ namespace Demo.WinForms
 
     private async void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
+      IList<ViewerType> viewerTypes = new List<ViewerType>();
+
+      if (cbOblique.Checked)
+      {
+        viewerTypes.Add(ViewerType.Oblique);
+      }
+
+      if (cbPanorama.Checked)
+      {
+        viewerTypes.Add(ViewerType.Panorama);
+      }
+
       try
       {
-        ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
-          ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
-          : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
+        string txtcoordinate = string.IsNullOrEmpty(txtZ.Text)
+          ? $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}"
+          : $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}, {ParseDouble(txtZ.Text).ToString(_ci)}";
 
-        IRecording recording = (string.IsNullOrEmpty(txtCoordinateSrs.Text))
-          ? await Viewer.OpenByCoordinate(coordinate)
-          : await Viewer.OpenByCoordinate(coordinate, txtCoordinateSrs.Text);
-        PrintRecordingText(recording);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text);
+        IList<IViewer> viewers = await _api.OpenByQuery(txtcoordinate, viewerOptions);
+
+        foreach (IViewer viewer in viewers)
+        {
+          if (viewer is IPanoramaViewer)
+          {
+            _viewers.Add(viewer as IPanoramaViewer);
+
+            Viewer.ImageChange += OnImageChange;
+            Viewer.RecordingClick += OnRecordingClick;
+            Viewer.TileLoadError += OnTileLoadError;
+            Viewer.ViewChange += OnViewChange;
+            Viewer.ViewLoadEnd += OnViewLoadEnd;
+            Viewer.ViewLoadStart += OnViewLoadStart;
+          }
+        }
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -386,35 +466,6 @@ namespace Demo.WinForms
     private void btnZoomOut_Click(object sender, EventArgs e)
     {
       Viewer.ZoomOut();
-    }
-
-    private void btnOpenViewer_Click(object sender, EventArgs e)
-    {
-      int width, height, top, left;
-      bool result = int.TryParse(txtWidth.Text, out width);
-      result = int.TryParse(txtHeight.Text, out height) && result;
-      result = int.TryParse(txtTop.Text, out top) && result;
-      result = int.TryParse(txtLeft.Text, out left) && result;
-
-      if (result)
-      {
-        IPanoramaViewerOptions options = PanoramaViewerOptionsFactory.Create(true, true, true);
-        IDomElement element = DomElementFactory.Create(width, height, top, left);
-
-        _viewers.Add(_api.AddPanoramaViewer(element, options));
-        ToggleViewerEnables(true);
-
-        Viewer.ImageChange += OnImageChange;
-        Viewer.RecordingClick += OnRecordingClick;
-        Viewer.TileLoadError += OnTileLoadError;
-        Viewer.ViewChange += OnViewChange;
-        Viewer.ViewLoadEnd += OnViewLoadEnd;
-        Viewer.ViewLoadStart += OnViewLoadStart;
-      }
-      else
-      {
-        MessageBox.Show("Can not parse parameters");
-      }
     }
 
     private async void btnOpenViewerByQuery_Click(object sender, EventArgs e)
@@ -441,7 +492,6 @@ namespace Demo.WinForms
           if (viewer is IPanoramaViewer)
           {
             _viewers.Add(viewer as IPanoramaViewer);
-            ToggleViewerEnables(true);
 
             Viewer.ImageChange += OnImageChange;
             Viewer.RecordingClick += OnRecordingClick;
@@ -503,36 +553,6 @@ namespace Demo.WinForms
       else
       {
         lbViewerEvents.Items.Add(text);
-      }
-    }
-
-    private void ToggleViewerEnables(bool value)
-    {
-      if (grOpenByAddress.InvokeRequired)
-      {
-        grOpenByAddress.Invoke(new MethodInvoker(() => grOpenByAddress.Enabled = value));
-      }
-      else
-      {
-        grOpenByAddress.Enabled = value;
-      }
-
-      if (grCoordinate.InvokeRequired)
-      {
-        grCoordinate.Invoke(new MethodInvoker(() => grCoordinate.Enabled = value));
-      }
-      else
-      {
-        grCoordinate.Enabled = value;
-      }
-
-      if (grOpenByImageId.InvokeRequired)
-      {
-        grOpenByImageId.Invoke(new MethodInvoker(() => grOpenByImageId.Enabled = value));
-      }
-      else
-      {
-        grOpenByImageId.Enabled = value;
       }
     }
 

@@ -30,21 +30,11 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
-      this.grOpenCloseViewer = new System.Windows.Forms.GroupBox();
+      this.grOpenByQuery = new System.Windows.Forms.GroupBox();
       this.txtOpenByQuery = new System.Windows.Forms.TextBox();
       this.cbPanorama = new System.Windows.Forms.CheckBox();
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
-      this.txtLeft = new System.Windows.Forms.TextBox();
-      this.lblLeft = new System.Windows.Forms.Label();
-      this.txtWidth = new System.Windows.Forms.TextBox();
-      this.txtHeight = new System.Windows.Forms.TextBox();
-      this.txtTop = new System.Windows.Forms.TextBox();
-      this.lblWidth = new System.Windows.Forms.Label();
-      this.lblHeight = new System.Windows.Forms.Label();
-      this.lblTop = new System.Windows.Forms.Label();
-      this.btnOpenViewer = new System.Windows.Forms.Button();
-      this.btnDestroyViewer = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
@@ -125,11 +115,7 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.lblWPer = new System.Windows.Forms.Label();
-      this.lblHPer = new System.Windows.Forms.Label();
-      this.lblTPx = new System.Windows.Forms.Label();
-      this.lblLPx = new System.Windows.Forms.Label();
-      this.grOpenCloseViewer.SuspendLayout();
+      this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grMeasurement.SuspendLayout();
       this.grDevTools.SuspendLayout();
@@ -153,52 +139,38 @@
       this.plStreetSmart.Size = new System.Drawing.Size(900, 861);
       this.plStreetSmart.TabIndex = 0;
       // 
-      // grOpenCloseViewer
+      // grOpenByQuery
       // 
-      this.grOpenCloseViewer.Controls.Add(this.lblLPx);
-      this.grOpenCloseViewer.Controls.Add(this.lblTPx);
-      this.grOpenCloseViewer.Controls.Add(this.lblHPer);
-      this.grOpenCloseViewer.Controls.Add(this.lblWPer);
-      this.grOpenCloseViewer.Controls.Add(this.txtOpenByQuery);
-      this.grOpenCloseViewer.Controls.Add(this.cbPanorama);
-      this.grOpenCloseViewer.Controls.Add(this.cbOblique);
-      this.grOpenCloseViewer.Controls.Add(this.btnOpenViewerByQuery);
-      this.grOpenCloseViewer.Controls.Add(this.txtLeft);
-      this.grOpenCloseViewer.Controls.Add(this.lblLeft);
-      this.grOpenCloseViewer.Controls.Add(this.txtWidth);
-      this.grOpenCloseViewer.Controls.Add(this.txtHeight);
-      this.grOpenCloseViewer.Controls.Add(this.txtTop);
-      this.grOpenCloseViewer.Controls.Add(this.lblWidth);
-      this.grOpenCloseViewer.Controls.Add(this.lblHeight);
-      this.grOpenCloseViewer.Controls.Add(this.lblTop);
-      this.grOpenCloseViewer.Controls.Add(this.btnOpenViewer);
-      this.grOpenCloseViewer.Controls.Add(this.btnDestroyViewer);
-      this.grOpenCloseViewer.Location = new System.Drawing.Point(0, 290);
-      this.grOpenCloseViewer.Name = "grOpenCloseViewer";
-      this.grOpenCloseViewer.Size = new System.Drawing.Size(360, 120);
-      this.grOpenCloseViewer.TabIndex = 0;
-      this.grOpenCloseViewer.TabStop = false;
-      this.grOpenCloseViewer.Text = "Open / Close Viewer";
+      this.grOpenByQuery.Controls.Add(this.txtOpenByQuery);
+      this.grOpenByQuery.Controls.Add(this.cbPanorama);
+      this.grOpenByQuery.Controls.Add(this.cbOblique);
+      this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
+      this.grOpenByQuery.Location = new System.Drawing.Point(0, 290);
+      this.grOpenByQuery.Name = "grOpenByQuery";
+      this.grOpenByQuery.Size = new System.Drawing.Size(360, 120);
+      this.grOpenByQuery.TabIndex = 0;
+      this.grOpenByQuery.TabStop = false;
+      this.grOpenByQuery.Text = "Open / Close Viewer";
       // 
       // txtOpenByQuery
       // 
-      this.txtOpenByQuery.Location = new System.Drawing.Point(240, 50);
+      this.txtOpenByQuery.Location = new System.Drawing.Point(15, 50);
       this.txtOpenByQuery.Multiline = true;
       this.txtOpenByQuery.Name = "txtOpenByQuery";
-      this.txtOpenByQuery.Size = new System.Drawing.Size(100, 40);
+      this.txtOpenByQuery.Size = new System.Drawing.Size(200, 40);
       this.txtOpenByQuery.TabIndex = 67;
-      this.txtOpenByQuery.Text = "5D123456";
+      this.txtOpenByQuery.Text = "Boschdijk 7, Eindhoven";
       // 
       // cbPanorama
       // 
       this.cbPanorama.AutoSize = true;
       this.cbPanorama.Checked = true;
       this.cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbPanorama.Location = new System.Drawing.Point(305, 95);
+      this.cbPanorama.Location = new System.Drawing.Point(100, 95);
       this.cbPanorama.Name = "cbPanorama";
-      this.cbPanorama.Size = new System.Drawing.Size(45, 17);
+      this.cbPanorama.Size = new System.Drawing.Size(74, 17);
       this.cbPanorama.TabIndex = 66;
-      this.cbPanorama.Text = "Pan";
+      this.cbPanorama.Text = "Panorama";
       this.cbPanorama.UseVisualStyleBackColor = true;
       // 
       // cbOblique
@@ -206,7 +178,7 @@
       this.cbOblique.AutoSize = true;
       this.cbOblique.Checked = true;
       this.cbOblique.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbOblique.Location = new System.Drawing.Point(240, 95);
+      this.cbOblique.Location = new System.Drawing.Point(15, 95);
       this.cbOblique.Name = "cbOblique";
       this.cbOblique.Size = new System.Drawing.Size(62, 17);
       this.cbOblique.TabIndex = 65;
@@ -215,101 +187,13 @@
       // 
       // btnOpenViewerByQuery
       // 
-      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(240, 15);
+      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(15, 15);
       this.btnOpenViewerByQuery.Name = "btnOpenViewerByQuery";
       this.btnOpenViewerByQuery.Size = new System.Drawing.Size(100, 30);
       this.btnOpenViewerByQuery.TabIndex = 64;
       this.btnOpenViewerByQuery.Text = "Open by query";
       this.btnOpenViewerByQuery.UseVisualStyleBackColor = true;
       this.btnOpenViewerByQuery.Click += new System.EventHandler(this.btnOpenViewerByQuery_Click);
-      // 
-      // txtLeft
-      // 
-      this.txtLeft.Location = new System.Drawing.Point(145, 90);
-      this.txtLeft.Name = "txtLeft";
-      this.txtLeft.Size = new System.Drawing.Size(50, 20);
-      this.txtLeft.TabIndex = 62;
-      this.txtLeft.Text = "0";
-      // 
-      // lblLeft
-      // 
-      this.lblLeft.AutoSize = true;
-      this.lblLeft.Location = new System.Drawing.Point(105, 95);
-      this.lblLeft.Name = "lblLeft";
-      this.lblLeft.Size = new System.Drawing.Size(25, 13);
-      this.lblLeft.TabIndex = 63;
-      this.lblLeft.Text = "Left";
-      // 
-      // txtWidth
-      // 
-      this.txtWidth.Location = new System.Drawing.Point(145, 15);
-      this.txtWidth.Name = "txtWidth";
-      this.txtWidth.Size = new System.Drawing.Size(50, 20);
-      this.txtWidth.TabIndex = 56;
-      this.txtWidth.Text = "100";
-      // 
-      // txtHeight
-      // 
-      this.txtHeight.Location = new System.Drawing.Point(145, 40);
-      this.txtHeight.Name = "txtHeight";
-      this.txtHeight.Size = new System.Drawing.Size(50, 20);
-      this.txtHeight.TabIndex = 57;
-      this.txtHeight.Text = "100";
-      // 
-      // txtTop
-      // 
-      this.txtTop.Location = new System.Drawing.Point(145, 65);
-      this.txtTop.Name = "txtTop";
-      this.txtTop.Size = new System.Drawing.Size(50, 20);
-      this.txtTop.TabIndex = 58;
-      this.txtTop.Text = "0";
-      // 
-      // lblWidth
-      // 
-      this.lblWidth.AutoSize = true;
-      this.lblWidth.Location = new System.Drawing.Point(105, 20);
-      this.lblWidth.Name = "lblWidth";
-      this.lblWidth.Size = new System.Drawing.Size(35, 13);
-      this.lblWidth.TabIndex = 59;
-      this.lblWidth.Text = "Width";
-      // 
-      // lblHeight
-      // 
-      this.lblHeight.AutoSize = true;
-      this.lblHeight.Location = new System.Drawing.Point(105, 45);
-      this.lblHeight.Name = "lblHeight";
-      this.lblHeight.Size = new System.Drawing.Size(38, 13);
-      this.lblHeight.TabIndex = 60;
-      this.lblHeight.Text = "Height";
-      // 
-      // lblTop
-      // 
-      this.lblTop.AutoSize = true;
-      this.lblTop.Location = new System.Drawing.Point(105, 70);
-      this.lblTop.Name = "lblTop";
-      this.lblTop.Size = new System.Drawing.Size(26, 13);
-      this.lblTop.TabIndex = 61;
-      this.lblTop.Text = "Top";
-      // 
-      // btnOpenViewer
-      // 
-      this.btnOpenViewer.Location = new System.Drawing.Point(5, 15);
-      this.btnOpenViewer.Name = "btnOpenViewer";
-      this.btnOpenViewer.Size = new System.Drawing.Size(100, 30);
-      this.btnOpenViewer.TabIndex = 47;
-      this.btnOpenViewer.Text = "Open viewer";
-      this.btnOpenViewer.UseVisualStyleBackColor = true;
-      this.btnOpenViewer.Click += new System.EventHandler(this.btnOpenViewer_Click);
-      // 
-      // btnDestroyViewer
-      // 
-      this.btnDestroyViewer.Location = new System.Drawing.Point(5, 85);
-      this.btnDestroyViewer.Name = "btnDestroyViewer";
-      this.btnDestroyViewer.Size = new System.Drawing.Size(100, 30);
-      this.btnDestroyViewer.TabIndex = 7;
-      this.btnDestroyViewer.Text = "Destroy viewer";
-      this.btnDestroyViewer.UseVisualStyleBackColor = true;
-      this.btnDestroyViewer.Click += new System.EventHandler(this.btnDestroyViewer_Click);
       // 
       // plControl
       // 
@@ -321,7 +205,7 @@
       this.plControl.Controls.Add(this.grOrientation);
       this.plControl.Controls.Add(this.grOpenByImageId);
       this.plControl.Controls.Add(this.grCoordinate);
-      this.plControl.Controls.Add(this.grOpenCloseViewer);
+      this.plControl.Controls.Add(this.grOpenByQuery);
       this.plControl.Controls.Add(this.grAPIInfo);
       this.plControl.Controls.Add(this.grViewerToggles);
       this.plControl.Controls.Add(this.grOpenByAddress);
@@ -1124,42 +1008,6 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // lblWPer
-      // 
-      this.lblWPer.AutoSize = true;
-      this.lblWPer.Location = new System.Drawing.Point(200, 20);
-      this.lblWPer.Name = "lblWPer";
-      this.lblWPer.Size = new System.Drawing.Size(15, 13);
-      this.lblWPer.TabIndex = 68;
-      this.lblWPer.Text = "%";
-      // 
-      // lblHPer
-      // 
-      this.lblHPer.AutoSize = true;
-      this.lblHPer.Location = new System.Drawing.Point(200, 45);
-      this.lblHPer.Name = "lblHPer";
-      this.lblHPer.Size = new System.Drawing.Size(15, 13);
-      this.lblHPer.TabIndex = 69;
-      this.lblHPer.Text = "%";
-      // 
-      // lblTPx
-      // 
-      this.lblTPx.AutoSize = true;
-      this.lblTPx.Location = new System.Drawing.Point(200, 70);
-      this.lblTPx.Name = "lblTPx";
-      this.lblTPx.Size = new System.Drawing.Size(18, 13);
-      this.lblTPx.TabIndex = 70;
-      this.lblTPx.Text = "px";
-      // 
-      // lblLPx
-      // 
-      this.lblLPx.AutoSize = true;
-      this.lblLPx.Location = new System.Drawing.Point(200, 95);
-      this.lblLPx.Name = "lblLPx";
-      this.lblLPx.Size = new System.Drawing.Size(18, 13);
-      this.lblLPx.TabIndex = 71;
-      this.lblLPx.Text = "px";
-      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1172,8 +1020,8 @@
       this.MinimizeBox = false;
       this.Name = "Demo";
       this.Text = "Demo StreetSmart";
-      this.grOpenCloseViewer.ResumeLayout(false);
-      this.grOpenCloseViewer.PerformLayout();
+      this.grOpenByQuery.ResumeLayout(false);
+      this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
       this.grMeasurement.ResumeLayout(false);
       this.grMeasurement.PerformLayout();
@@ -1211,7 +1059,6 @@
     private System.Windows.Forms.Label lblPassword;
     private System.Windows.Forms.Label lblUsername;
     private System.Windows.Forms.Button btnRotateRight;
-    private System.Windows.Forms.Button btnDestroyViewer;
     private System.Windows.Forms.Button btnApiReadyState;
     private System.Windows.Forms.Button btnGetPermissions;
     private System.Windows.Forms.Button btnApplicationName;
@@ -1251,14 +1098,13 @@
     private System.Windows.Forms.Button btnOpenByCoordinate;
     private System.Windows.Forms.Button btnZoomOut;
     private System.Windows.Forms.Button btnZoomIn;
-    private System.Windows.Forms.Button btnOpenViewer;
     private System.Windows.Forms.GroupBox grLogin;
     private System.Windows.Forms.GroupBox grViewerToggles;
     private System.Windows.Forms.GroupBox grOpenByAddress;
     private System.Windows.Forms.GroupBox grRotationsZoomInOut;
     private System.Windows.Forms.Label lblDeltaYawPitch;
     private System.Windows.Forms.TextBox txtDeltaYawPitch;
-    private System.Windows.Forms.GroupBox grOpenCloseViewer;
+    private System.Windows.Forms.GroupBox grOpenByQuery;
     private System.Windows.Forms.GroupBox grAPIInfo;
     private System.Windows.Forms.Label lblResult;
     private System.Windows.Forms.TextBox txtAPIResult;
@@ -1279,14 +1125,6 @@
     private System.Windows.Forms.GroupBox grDevTools;
     private System.Windows.Forms.Button btnShowDefTools;
     private System.Windows.Forms.Button btnCloseDefTools;
-    private System.Windows.Forms.TextBox txtWidth;
-    private System.Windows.Forms.TextBox txtHeight;
-    private System.Windows.Forms.TextBox txtTop;
-    private System.Windows.Forms.Label lblWidth;
-    private System.Windows.Forms.Label lblHeight;
-    private System.Windows.Forms.Label lblTop;
-    private System.Windows.Forms.TextBox txtLeft;
-    private System.Windows.Forms.Label lblLeft;
     private System.Windows.Forms.TextBox txtOpenByQuery;
     private System.Windows.Forms.CheckBox cbPanorama;
     private System.Windows.Forms.CheckBox cbOblique;
@@ -1298,10 +1136,6 @@
     private System.Windows.Forms.Button btnStopMeasurementMode;
     private System.Windows.Forms.RadioButton rbMeasPolygon;
     private System.Windows.Forms.RadioButton rbMeasLineString;
-    private System.Windows.Forms.Label lblLPx;
-    private System.Windows.Forms.Label lblTPx;
-    private System.Windows.Forms.Label lblHPer;
-    private System.Windows.Forms.Label lblWPer;
   }
 }
 
