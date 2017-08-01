@@ -116,6 +116,9 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.grOverlay = new System.Windows.Forms.GroupBox();
+      this.btnAddOverlay = new System.Windows.Forms.Button();
+      this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grMeasurement.SuspendLayout();
@@ -130,6 +133,7 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.grOverlay.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -137,7 +141,7 @@
       this.plStreetSmart.Dock = System.Windows.Forms.DockStyle.Left;
       this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
       this.plStreetSmart.Name = "plStreetSmart";
-      this.plStreetSmart.Size = new System.Drawing.Size(900, 861);
+      this.plStreetSmart.Size = new System.Drawing.Size(900, 925);
       this.plStreetSmart.TabIndex = 0;
       // 
       // grOpenByQuery
@@ -160,7 +164,7 @@
       this.txtOpenByQuery.Name = "txtOpenByQuery";
       this.txtOpenByQuery.Size = new System.Drawing.Size(200, 40);
       this.txtOpenByQuery.TabIndex = 67;
-      this.txtOpenByQuery.Text = "Boschdijk 7, Eindhoven";
+      this.txtOpenByQuery.Text = "Lange Haven 145, Schiedam";
       // 
       // cbPanorama
       // 
@@ -198,6 +202,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grOverlay);
       this.plControl.Controls.Add(this.grMeasurement);
       this.plControl.Controls.Add(this.grDevTools);
       this.plControl.Controls.Add(this.grRotationsZoomInOut);
@@ -214,7 +219,7 @@
       this.plControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.plControl.Location = new System.Drawing.Point(900, 0);
       this.plControl.Name = "plControl";
-      this.plControl.Size = new System.Drawing.Size(484, 861);
+      this.plControl.Size = new System.Drawing.Size(484, 925);
       this.plControl.TabIndex = 1;
       // 
       // grMeasurement
@@ -228,7 +233,7 @@
       this.grMeasurement.Controls.Add(this.btnStopMeasurementMode);
       this.grMeasurement.Location = new System.Drawing.Point(0, 760);
       this.grMeasurement.Name = "grMeasurement";
-      this.grMeasurement.Size = new System.Drawing.Size(480, 100);
+      this.grMeasurement.Size = new System.Drawing.Size(480, 82);
       this.grMeasurement.TabIndex = 52;
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
@@ -246,7 +251,7 @@
       // rbMeasPolygon
       // 
       this.rbMeasPolygon.AutoSize = true;
-      this.rbMeasPolygon.Location = new System.Drawing.Point(215, 60);
+      this.rbMeasPolygon.Location = new System.Drawing.Point(202, 51);
       this.rbMeasPolygon.Name = "rbMeasPolygon";
       this.rbMeasPolygon.Size = new System.Drawing.Size(63, 17);
       this.rbMeasPolygon.TabIndex = 61;
@@ -256,7 +261,7 @@
       // rbMeasLineString
       // 
       this.rbMeasLineString.AutoSize = true;
-      this.rbMeasLineString.Location = new System.Drawing.Point(145, 60);
+      this.rbMeasLineString.Location = new System.Drawing.Point(123, 51);
       this.rbMeasLineString.Name = "rbMeasLineString";
       this.rbMeasLineString.Size = new System.Drawing.Size(73, 17);
       this.rbMeasLineString.TabIndex = 60;
@@ -266,7 +271,7 @@
       // rbMeasPoint
       // 
       this.rbMeasPoint.AutoSize = true;
-      this.rbMeasPoint.Location = new System.Drawing.Point(75, 60);
+      this.rbMeasPoint.Location = new System.Drawing.Point(73, 51);
       this.rbMeasPoint.Name = "rbMeasPoint";
       this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
       this.rbMeasPoint.TabIndex = 59;
@@ -277,7 +282,7 @@
       // 
       this.rbMeasDefault.AutoSize = true;
       this.rbMeasDefault.Checked = true;
-      this.rbMeasDefault.Location = new System.Drawing.Point(5, 60);
+      this.rbMeasDefault.Location = new System.Drawing.Point(8, 51);
       this.rbMeasDefault.Name = "rbMeasDefault";
       this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
       this.rbMeasDefault.TabIndex = 58;
@@ -1020,11 +1025,40 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
+      // grOverlay
+      // 
+      this.grOverlay.Controls.Add(this.txtOverlayGeoJson);
+      this.grOverlay.Controls.Add(this.btnAddOverlay);
+      this.grOverlay.Location = new System.Drawing.Point(0, 848);
+      this.grOverlay.Name = "grOverlay";
+      this.grOverlay.Size = new System.Drawing.Size(480, 74);
+      this.grOverlay.TabIndex = 53;
+      this.grOverlay.TabStop = false;
+      this.grOverlay.Text = "Load GeoJSON overlay";
+      // 
+      // btnAddOverlay
+      // 
+      this.btnAddOverlay.Location = new System.Drawing.Point(377, 42);
+      this.btnAddOverlay.Name = "btnAddOverlay";
+      this.btnAddOverlay.Size = new System.Drawing.Size(75, 23);
+      this.btnAddOverlay.TabIndex = 0;
+      this.btnAddOverlay.Text = "Add overlay";
+      this.btnAddOverlay.UseVisualStyleBackColor = true;
+      this.btnAddOverlay.Click += new System.EventHandler(this.btnAddOverlay_Click);
+      // 
+      // txtOverlayGeoJson
+      // 
+      this.txtOverlayGeoJson.Location = new System.Drawing.Point(6, 19);
+      this.txtOverlayGeoJson.Multiline = true;
+      this.txtOverlayGeoJson.Name = "txtOverlayGeoJson";
+      this.txtOverlayGeoJson.Size = new System.Drawing.Size(364, 46);
+      this.txtOverlayGeoJson.TabIndex = 1;
+      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1384, 861);
+      this.ClientSize = new System.Drawing.Size(1384, 925);
       this.Controls.Add(this.plControl);
       this.Controls.Add(this.plStreetSmart);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1056,6 +1090,8 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.grOverlay.ResumeLayout(false);
+      this.grOverlay.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -1149,6 +1185,9 @@
     private System.Windows.Forms.RadioButton rbMeasPolygon;
     private System.Windows.Forms.RadioButton rbMeasLineString;
     private System.Windows.Forms.Button btnGetMeasurementInfo;
+    private System.Windows.Forms.GroupBox grOverlay;
+    private System.Windows.Forms.TextBox txtOverlayGeoJson;
+    private System.Windows.Forms.Button btnAddOverlay;
   }
 }
 

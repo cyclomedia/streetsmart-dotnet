@@ -658,5 +658,10 @@ namespace Demo.WinForms
           json.Length
         ));
     }
+
+    private void btnAddOverlay_Click(object sender, EventArgs e)
+    {
+      _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
+    }
   }
 }

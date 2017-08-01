@@ -125,6 +125,22 @@ namespace StreetSmart.WinForms.Interfaces
     void StopMeasurementMode();
 
     /// <summary>
+    /// Add a GeoJSON overlay to the panorama viewer
+    /// </summary>
+    /// <param name="name">Name of the layer</param>
+    /// <param name="geoJson">GeoJSON object containing the layer data</param>
+    /// <param name="sourceSrs">EPSG code (srs) for the source GeoJSON</param>
+    void AddOverlay(string name, string geoJson, string sourceSrs);
+
+    /// <summary>
+    /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
+    /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
+    /// </summary>
+    /// <param name="name">Name of the layer</param>
+    /// <param name="geoJson">GeoJSON object containing the layer data</param>
+    void AddOverlay(string name, string geoJson);
+
+    /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
     Task<dynamic> GetMeasurementInfo();

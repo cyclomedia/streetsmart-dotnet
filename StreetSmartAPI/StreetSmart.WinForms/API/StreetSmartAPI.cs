@@ -182,7 +182,8 @@ namespace StreetSmart.WinForms.API
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
     {
-      _browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
+      var script = GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})");
+      _browser.ExecuteScriptAsync(script);
     }
 
     public void StopMeasurementMode()
@@ -231,6 +232,19 @@ namespace StreetSmart.WinForms.API
     public void OnImageNotFoundException(string message)
     {
       _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
+    }
+
+    public void AddOverlay(string name, string geoJson, string sourceSrs)
+    {
+      var script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {sourceSrs.ToQuote()})");
+      _browser.ExecuteScriptAsync(script);
+    }
+
+    public void AddOverlay(string name, string geoJson)
+    {
+      var json = JObject.Parse(geoJson);
+      var script = GetScript($"addOverlay({name.ToQuote()}, {json})");
+      _browser.ExecuteScriptAsync(script);
     }
 
     #endregion
