@@ -34,7 +34,9 @@ namespace StreetSmart.WinForms.Factories
   {
     static StreetSmartAPIFactory()
     {
-      Cef.Initialize(new CefSettings(), true, new BrowserProcessHandler());
+      var settings = new CefSettings();
+      settings.BrowserSubprocessPath = @"x86\CefSharp.BrowserSubprocess.exe";
+      Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
     }
 
     /// <summary>
