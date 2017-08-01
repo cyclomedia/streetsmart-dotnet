@@ -26,7 +26,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-
+using Newtonsoft.Json;
 using static Demo.WinForms.Properties.Resources;
 
 namespace Demo.WinForms
@@ -645,6 +645,18 @@ namespace Demo.WinForms
     private void btnStopMeasurementMode_Click(object sender, EventArgs e)
     {
       _api.StopMeasurementMode();
+    }
+
+    private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
+    {
+      var measurement = await _api.GetMeasurementInfo();
+      string json = JsonConvert.SerializeObject(measurement);
+      const int maxLength = 128;
+      AddViewerEventsText(
+        json.Substring(0, json.Length > maxLength ? 
+          maxLength : 
+          json.Length
+        ));
     }
   }
 }

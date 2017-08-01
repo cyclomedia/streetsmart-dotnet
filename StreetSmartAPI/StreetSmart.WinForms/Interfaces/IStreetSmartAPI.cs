@@ -123,6 +123,11 @@ namespace StreetSmart.WinForms.Interfaces
     /// Stops the measurement
     /// </summary>
     void StopMeasurementMode();
+
+    /// <summary>
+    /// Returns the active measurement in GeoJSON format
+    /// </summary>
+    Task<dynamic> GetMeasurementInfo();
   }
 
   // ReSharper restore InconsistentNaming

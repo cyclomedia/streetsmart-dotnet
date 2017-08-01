@@ -24,7 +24,7 @@ using System.Windows.Forms;
 
 using CefSharp;
 using CefSharp.WinForms;
-
+using Newtonsoft.Json.Linq;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
@@ -190,6 +190,13 @@ namespace StreetSmart.WinForms.API
       _browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
     }
 
+    public async Task<dynamic> GetMeasurementInfo()
+    {
+      var script = GetScriptStringify("getActiveMeasurement()");
+      var measurement = (string)await CallJsAsync(script);
+      return JObject.Parse(measurement);
+    }
+
     #endregion
 
     #region events ChromiumWebBrowser
@@ -241,6 +248,11 @@ namespace StreetSmart.WinForms.API
     private string GetScript(string funcName)
     {
       return $"{JsThis}.{JsResult}({JsApi}.{funcName});";
+    }
+
+    private string GetScriptStringify(string funcName)
+    {
+      return $"{JsThis}.{JsResult}(JSON.stringify({JsApi}.{funcName}));";
     }
 
     #endregion

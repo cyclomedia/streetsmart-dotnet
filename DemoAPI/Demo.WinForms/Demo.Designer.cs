@@ -37,6 +37,7 @@
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
+      this.btnGetMeasurementInfo = new System.Windows.Forms.Button();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
       this.rbMeasLineString = new System.Windows.Forms.RadioButton();
       this.rbMeasPoint = new System.Windows.Forms.RadioButton();
@@ -218,6 +219,7 @@
       // 
       // grMeasurement
       // 
+      this.grMeasurement.Controls.Add(this.btnGetMeasurementInfo);
       this.grMeasurement.Controls.Add(this.rbMeasPolygon);
       this.grMeasurement.Controls.Add(this.rbMeasLineString);
       this.grMeasurement.Controls.Add(this.rbMeasPoint);
@@ -230,6 +232,16 @@
       this.grMeasurement.TabIndex = 52;
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
+      // 
+      // btnGetMeasurementInfo
+      // 
+      this.btnGetMeasurementInfo.Location = new System.Drawing.Point(316, 15);
+      this.btnGetMeasurementInfo.Name = "btnGetMeasurementInfo";
+      this.btnGetMeasurementInfo.Size = new System.Drawing.Size(150, 30);
+      this.btnGetMeasurementInfo.TabIndex = 62;
+      this.btnGetMeasurementInfo.Text = "Get Measurement Info";
+      this.btnGetMeasurementInfo.UseVisualStyleBackColor = true;
+      this.btnGetMeasurementInfo.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
       // 
       // rbMeasPolygon
       // 
@@ -1136,6 +1148,7 @@
     private System.Windows.Forms.Button btnStopMeasurementMode;
     private System.Windows.Forms.RadioButton rbMeasPolygon;
     private System.Windows.Forms.RadioButton rbMeasLineString;
+    private System.Windows.Forms.Button btnGetMeasurementInfo;
   }
 }
 
