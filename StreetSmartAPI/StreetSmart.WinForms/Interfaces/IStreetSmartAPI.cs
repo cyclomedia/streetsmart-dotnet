@@ -36,6 +36,11 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler APIReady;
 
     /// <summary>
+    /// Measurement changed or added.
+    /// </summary>
+    event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
+
+    /// <summary>
     /// The GUI of StreetSmart
     /// </summary>
     StreetSmartGUI GUI { get; }

@@ -26,6 +26,7 @@ using CefSharp;
 using CefSharp.WinForms;
 using Newtonsoft.Json.Linq;
 using StreetSmart.WinForms.Data;
+using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces;
@@ -52,6 +53,8 @@ namespace StreetSmart.WinForms.API
     #region Events
 
     public event EventHandler APIReady;
+
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
 
     #endregion
 
@@ -177,6 +180,10 @@ namespace StreetSmart.WinForms.API
         throw (Exception) result;
       }
 
+      string measurementChangedScript =
+        $"{JsApi}.on({JsApi}.Events.measurement.MEASUREMENT_CHANGED, measurementChangedFunction = function(e) {{delete e.detail.panoramaViewer; {JsThis}.onMeasurementChanged(e)}});";
+      _browser.ExecuteScriptAsync(measurementChangedScript);
+
       return ViewerList.ToViewerList((Dictionary<string, object>) result);
     }
 
@@ -245,6 +252,11 @@ namespace StreetSmart.WinForms.API
       var json = JObject.Parse(geoJson);
       var script = GetScript($"addOverlay({name.ToQuote()}, {json})");
       _browser.ExecuteScriptAsync(script);
+    }
+
+    public void OnMeasurementChanged(Dictionary<string, object> args)
+    {
+      MeasurementChanged?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
     }
 
     #endregion

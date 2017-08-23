@@ -55,6 +55,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsViewLoadStart => $"{nameof(OnViewLoadStart).FirstCharacterToLower()}";
 
+    public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
+
     #endregion
 
     #region Constructor
@@ -154,6 +156,14 @@ namespace StreetSmart.WinForms.API
       if (_viewers.ContainsKey(name))
       {
         _viewers[name].OnViewLoadStart(args);
+      }
+    }
+
+    public void OnTimeTravelChange(string name, Dictionary<string, object> args)
+    {
+      if (_viewers.ContainsKey(name))
+      {
+        _viewers[name].OnTimeTravelChange(args);
       }
     }
 

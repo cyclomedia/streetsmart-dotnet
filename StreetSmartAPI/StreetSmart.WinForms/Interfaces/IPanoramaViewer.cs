@@ -59,6 +59,11 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
 
     /// <summary>
+    /// Triggers when time travel date is changed
+    /// </summary>
+    event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+
+    /// <summary>
     /// Returns the navbarExpanded state.
     /// This is an asynchronous function.
     /// </summary>

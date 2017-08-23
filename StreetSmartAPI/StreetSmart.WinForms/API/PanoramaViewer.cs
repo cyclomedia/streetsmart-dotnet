@@ -61,6 +61,7 @@ namespace StreetSmart.WinForms.API
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
 
     #endregion
 
@@ -87,6 +88,8 @@ namespace StreetSmart.WinForms.API
     public string JsViewLoadEnd => _panoramaViewerList.JsViewLoadEnd;
 
     public string JsViewLoadStart => _panoramaViewerList.JsViewLoadStart;
+
+    public string JsTimeTravelChange => _panoramaViewerList.JsTimeTravelChange;
 
     public string DomName => _domElement?.Name ?? string.Empty;
 
@@ -279,6 +282,11 @@ namespace StreetSmart.WinForms.API
       ViewLoadStart?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
     }
 
+    public void OnTimeTravelChange(Dictionary<string, object> args)
+    {
+      TimeTravelChange?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+    }
+
     #endregion
 
     #region Callbacks PanoramaViewer
@@ -306,7 +314,8 @@ namespace StreetSmart.WinForms.API
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
         new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
         new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
-        new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError)
+        new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError),
+        new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange)
       };
 
       _browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");

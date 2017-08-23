@@ -138,6 +138,20 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
+
+    private void OnTimeTravelChange(object sender, IEventArgs<IDictionary<string, object>> args)
+    {
+      string text = "Time travel change";
+      AddViewerEventsText(text);
+    }
+
+
+    private void OnMeasurementChanged(object sender, IEventArgs<IDictionary<string, object>> args)
+    {
+      string text = "Measurement changed";
+      AddViewerEventsText(text);
+    }
+
     #endregion
 
     #region events from user interface
@@ -275,6 +289,8 @@ namespace Demo.WinForms
             Viewer.ViewLoadStart += OnViewLoadStart;
           }
         }
+
+        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -401,8 +417,11 @@ namespace Demo.WinForms
             Viewer.ViewChange += OnViewChange;
             Viewer.ViewLoadEnd += OnViewLoadEnd;
             Viewer.ViewLoadStart += OnViewLoadStart;
+            Viewer.TimeTravelChange += OnTimeTravelChange;
           }
         }
+
+        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -449,6 +468,8 @@ namespace Demo.WinForms
             Viewer.ViewLoadStart += OnViewLoadStart;
           }
         }
+
+        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -499,8 +520,11 @@ namespace Demo.WinForms
             Viewer.ViewChange += OnViewChange;
             Viewer.ViewLoadEnd += OnViewLoadEnd;
             Viewer.ViewLoadStart += OnViewLoadStart;
+            Viewer.TimeTravelChange += OnTimeTravelChange;
           }
         }
+
+        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
