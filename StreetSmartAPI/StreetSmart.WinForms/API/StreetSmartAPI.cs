@@ -24,7 +24,9 @@ using System.Windows.Forms;
 
 using CefSharp;
 using CefSharp.WinForms;
+
 using Newtonsoft.Json.Linq;
+
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
@@ -189,8 +191,7 @@ namespace StreetSmart.WinForms.API
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
     {
-      var script = GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})");
-      _browser.ExecuteScriptAsync(script);
+      _browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
     }
 
     public void StopMeasurementMode()
@@ -201,7 +202,7 @@ namespace StreetSmart.WinForms.API
     public async Task<dynamic> GetMeasurementInfo()
     {
       var script = GetScriptStringify("getActiveMeasurement()");
-      var measurement = (string)await CallJsAsync(script);
+      var measurement = (string) await CallJsAsync(script);
       return JObject.Parse(measurement);
     }
 

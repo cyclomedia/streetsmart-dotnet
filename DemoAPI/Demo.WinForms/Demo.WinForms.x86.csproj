@@ -53,6 +53,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>x86\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="StreetSmart.WinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=27f0251e46fddaf9, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>x86\StreetSmart.WinForms.dll</HintPath>
@@ -166,11 +171,11 @@
     <Content Include="x86\CefSharp.WinForms.xml" />
     <Content Include="x86\CefSharp.xml" />
     <Content Include="x86\chrome_elf.dll" />
-    <Content Include="x86\d3dcompiler_43.dll" />
     <Content Include="x86\d3dcompiler_47.dll" />
     <Content Include="x86\libcef.dll" />
     <Content Include="x86\libEGL.dll" />
     <Content Include="x86\libGLESv2.dll" />
+    <Content Include="x86\Newtonsoft.Json.dll" />
     <Content Include="x86\StreetSmart.WinForms.XML" />
     <Content Include="x86\widevinecdmadapter.dll" />
   </ItemGroup>

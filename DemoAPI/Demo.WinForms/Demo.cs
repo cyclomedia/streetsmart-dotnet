@@ -26,7 +26,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+
 using Newtonsoft.Json;
+
 using static Demo.WinForms.Properties.Resources;
 
 namespace Demo.WinForms
@@ -138,13 +140,11 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-
     private void OnTimeTravelChange(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Time travel change";
       AddViewerEventsText(text);
     }
-
 
     private void OnMeasurementChanged(object sender, IEventArgs<IDictionary<string, object>> args)
     {
@@ -287,6 +287,7 @@ namespace Demo.WinForms
             Viewer.ViewChange += OnViewChange;
             Viewer.ViewLoadEnd += OnViewLoadEnd;
             Viewer.ViewLoadStart += OnViewLoadStart;
+            Viewer.TimeTravelChange += OnTimeTravelChange;
           }
         }
 
@@ -466,6 +467,7 @@ namespace Demo.WinForms
             Viewer.ViewChange += OnViewChange;
             Viewer.ViewLoadEnd += OnViewLoadEnd;
             Viewer.ViewLoadStart += OnViewLoadStart;
+            Viewer.TimeTravelChange += OnTimeTravelChange;
           }
         }
 
@@ -676,11 +678,7 @@ namespace Demo.WinForms
       var measurement = await _api.GetMeasurementInfo();
       string json = JsonConvert.SerializeObject(measurement);
       const int maxLength = 128;
-      AddViewerEventsText(
-        json.Substring(0, json.Length > maxLength ? 
-          maxLength : 
-          json.Length
-        ));
+      AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
     }
 
     private void btnAddOverlay_Click(object sender, EventArgs e)
