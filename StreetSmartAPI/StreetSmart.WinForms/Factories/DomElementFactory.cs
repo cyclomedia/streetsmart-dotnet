@@ -35,6 +35,9 @@ namespace StreetSmart.WinForms.Factories
       Style style = new Style();
       style.AddStyle(StyleElementName.Width, 100, StyleElementNumberType.Percent);
       style.AddStyle(StyleElementName.Height, 100, StyleElementNumberType.Percent);
+      style.AddStyle(StyleElementName.Position, "absolute");
+      style.AddStyle(StyleElementName.Top, 0, StyleElementNumberType.Pixels);
+      style.AddStyle(StyleElementName.Left, 0, StyleElementNumberType.Pixels);
       return new DomElement(style);
     }
 
