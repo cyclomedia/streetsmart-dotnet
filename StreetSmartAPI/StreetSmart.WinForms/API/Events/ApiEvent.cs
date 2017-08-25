@@ -16,18 +16,31 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-using System.Linq;
+using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.API.Events
 {
-  internal class PanoramaViewerEventList : List<PanoramaViewerEvent>
+  internal class ApiEvent
   {
-    public string Destroy => this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent.Destroy}");
+    protected string JsApi => Resources.JsApi;
+
+    protected string Type { get; }
+
+    protected string FuncName { get; }
+
+    protected virtual string Events => "Events";
+
+    public virtual string Destroy => string.Empty;
+
+    public ApiEvent(string type, string funcName)
+    {
+      Type = type;
+      FuncName = funcName;
+    }
 
     public override string ToString()
     {
-      return this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent}");
+      return string.Empty;
     }
   }
 }

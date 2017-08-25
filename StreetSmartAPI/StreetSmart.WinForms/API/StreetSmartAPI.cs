@@ -27,6 +27,7 @@ using CefSharp.WinForms;
 
 using Newtonsoft.Json.Linq;
 
+using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
@@ -43,6 +44,7 @@ namespace StreetSmart.WinForms.API
     #region Members
 
     private readonly ChromiumWebBrowser _browser;
+    private ApiEventList _apiEventList;
 
     #endregion
 
@@ -68,7 +70,7 @@ namespace StreetSmart.WinForms.API
 
     #region Properties
 
-    private string JsThis => $"{GetType().Name}Events";
+    public string JsThis => $"{GetType().Name}Events";
 
     public string JsApi => Resources.JsApi;
 
@@ -79,6 +81,8 @@ namespace StreetSmart.WinForms.API
     private string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
 
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
 
     #endregion
 
@@ -120,7 +124,9 @@ namespace StreetSmart.WinForms.API
 
     public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      return ViewerList.AddPanoramaViewer(element, options);
+      IPanoramaViewer panoramaViewer = ViewerList.AddPanoramaViewer(element, options);
+      AddMeasurementEvents();
+      return panoramaViewer;
     }
 
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
@@ -182,11 +188,9 @@ namespace StreetSmart.WinForms.API
         throw (Exception) result;
       }
 
-      string measurementChangedScript =
-        $"{JsApi}.on({JsApi}.Events.measurement.MEASUREMENT_CHANGED, measurementChangedFunction = function(e) {{delete e.detail.panoramaViewer; {JsThis}.onMeasurementChanged(e)}});";
-      _browser.ExecuteScriptAsync(measurementChangedScript);
-
-      return ViewerList.ToViewerList((Dictionary<string, object>) result);
+      IList<IViewer> viewers = ViewerList.ToViewerList((Dictionary<string, object>) result);
+      AddMeasurementEvents();
+      return viewers;
     }
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
@@ -280,6 +284,19 @@ namespace StreetSmart.WinForms.API
     private string GetScriptStringify(string funcName)
     {
       return $"{JsThis}.{JsResult}(JSON.stringify({JsApi}.{funcName}));";
+    }
+
+    public void AddMeasurementEvents()
+    {
+      if (_apiEventList == null)
+      {
+        _apiEventList = new ApiEventList
+        {
+          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+        };
+
+        _browser.ExecuteScriptAsync($"{_apiEventList}");
+      }
     }
 
     #endregion

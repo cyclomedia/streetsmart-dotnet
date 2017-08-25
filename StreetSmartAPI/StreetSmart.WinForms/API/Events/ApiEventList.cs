@@ -16,30 +16,18 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace StreetSmart.WinForms.API.Events
 {
-  internal class PanoramaViewerEvent: ApiEvent
+  internal class ApiEventList : List<ApiEvent>
   {
-    private readonly PanoramaViewer _viewer;
-
-    protected string Name => _viewer.Name;
-
-    protected string JsThis => _viewer.JsThis;
-
-    protected override string Events => "Events.panoramaViewer";
-
-    public override string Destroy => $@"{Name}.off({JsApi}.{Events}.{Type},{FuncName}{Name});";
-
-    public PanoramaViewerEvent(PanoramaViewer viewer, string type, string funcName)
-      : base(type, funcName)
-    {
-      _viewer = viewer;
-    }
+    public string Destroy => this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent.Destroy}");
 
     public override string ToString()
     {
-      return $@"{Name}.on({JsApi}.{Events}.{Type},{FuncName}{Name}=function(e)
-             {{{JsThis}.{FuncName}('{Name}',e);}});";
+      return this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent}");
     }
   }
 }

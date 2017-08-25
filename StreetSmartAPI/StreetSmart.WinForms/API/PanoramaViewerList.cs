@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using CefSharp.WinForms;
 using StreetSmart.WinForms.Interfaces;
@@ -84,6 +85,21 @@ namespace StreetSmart.WinForms.API
     public override IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
     {
       return RegisterViewer(new PanoramaViewer(_browser, this, element, options));
+    }
+
+    public string ReAssignPanoramaViewer(string newViewer)
+    {
+      return _viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{viewer.Value.Name}={newViewer};");
+    }
+
+    public string DisconnectEvents()
+    {
+      return _viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{viewer.Value.DisconnectEventsScript}");
+    }
+
+    public string ConnectEvents()
+    {
+      return _viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{viewer.Value.ConnectEventsScript}");
     }
 
     public IViewer RegisterViewer(PanoramaViewer viewer)

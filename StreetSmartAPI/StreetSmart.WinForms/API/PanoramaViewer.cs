@@ -43,7 +43,7 @@ namespace StreetSmart.WinForms.API
     private readonly ChromiumWebBrowser _browser;
     private readonly IDomElement _domElement;
     private readonly PanoramaViewerList _panoramaViewerList;
-    private PanoramaViewerEventList _panoramaViewerEventList;
+    private ApiEventList _panoramaViewerEventList;
 
     #endregion
 
@@ -92,6 +92,10 @@ namespace StreetSmart.WinForms.API
     public string JsTimeTravelChange => _panoramaViewerList.JsTimeTravelChange;
 
     public string DomName => _domElement?.Name ?? string.Empty;
+
+    public string DisconnectEventsScript => _panoramaViewerEventList.Destroy;
+
+    public string ConnectEventsScript => $"{_panoramaViewerEventList}";
 
     #endregion
 
@@ -307,7 +311,7 @@ namespace StreetSmart.WinForms.API
 
     public void ConnectEvents()
     {
-      _panoramaViewerEventList = new PanoramaViewerEventList
+      _panoramaViewerEventList = new ApiEventList
       {
         new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),

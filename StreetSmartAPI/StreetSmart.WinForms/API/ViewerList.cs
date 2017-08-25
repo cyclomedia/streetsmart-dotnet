@@ -33,6 +33,8 @@ namespace StreetSmart.WinForms.API
       {ObliqueViewerList.Type, new ObliqueViewerList()}
     };
 
+    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList) Viewers[PanoramaViewerList.Type];
+
     public static void RegisterJsObjects(ChromiumWebBrowser browser)
     {
       foreach (var viewerList in Viewers)
