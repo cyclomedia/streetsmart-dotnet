@@ -124,9 +124,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Events\ApiEvent.cs" />
+    <Compile Include="API\Events\ApiEventList.cs" />
+    <Compile Include="API\Events\MeasurementEvent.cs" />
     <Compile Include="API\Events\PanoramaRecordingClickViewerEvent.cs" />
     <Compile Include="API\Events\PanoramaViewerEvent.cs" />
-    <Compile Include="API\Events\PanoramaViewerEventList.cs" />
     <Compile Include="API\ObliqueViewer.cs" />
     <Compile Include="API\ObliqueViewerList.cs" />
     <Compile Include="API\ViewerList.cs" />
