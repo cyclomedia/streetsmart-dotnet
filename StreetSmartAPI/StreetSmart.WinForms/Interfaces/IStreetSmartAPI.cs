@@ -1,5 +1,5 @@
 ﻿/*
- * Integration in ArcMap for Cycloramas
+ * Street Smart .NET integration
  * Copyright (c) 2016, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
