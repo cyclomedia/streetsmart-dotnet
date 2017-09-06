@@ -28,7 +28,7 @@ namespace StreetSmart.WinForms.Utils
     {
       for (int i = 0; i < numberItems; i++)
       {
-        Add($"type{Guid.NewGuid().ToString("N")}");
+        Add($"type{Guid.NewGuid():N}");
       }
     }
 

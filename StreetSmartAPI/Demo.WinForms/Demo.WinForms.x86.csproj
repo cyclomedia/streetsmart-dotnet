@@ -102,11 +102,11 @@
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.resx">
       <Link>Properties\Resources.resx</Link>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.Designer.cs">
-      <Link>Properties\Resources.cs</Link>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources1.Designer.cs">
+      <Link>Properties\Resources1.Designer.cs</Link>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>

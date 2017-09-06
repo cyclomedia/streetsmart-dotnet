@@ -46,7 +46,7 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public StyleElementName Name
     {
-      get { return _name; }
+      get => _name;
       set
       {
         _name = value;
@@ -56,7 +56,7 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public StyleElementValue Value
     {
-      get { return _value; }
+      get => _value;
       set
       {
         _value = value;

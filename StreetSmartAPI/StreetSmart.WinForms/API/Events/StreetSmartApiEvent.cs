@@ -18,23 +18,23 @@
 
 namespace StreetSmart.WinForms.API.Events
 {
-  internal class MeasurementEvent: StreetSmartApiEvent
+  internal class StreetSmartApiEvent: ApiEvent
   {
-    public MeasurementEvent(StreetSmartAPI api, string type, string funcName)
-      : base(api, type, funcName, "measurement")
-    {
-    }
+    private readonly StreetSmartAPI _api;
 
-    public override string ToString()
-    {
-      PanoramaViewerList panViewerList = ViewerList.PanoramaViewerList;
-      string reAssignPanoramaViewer = panViewerList.ReAssignPanoramaViewer("e.detail.panoramaViewer");
-      string disconnectScript = panViewerList.DisconnectEvents();
-      string connectScript = panViewerList.ConnectEvents();
+    protected string JsThis => _api.JsThis;
 
-      return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{disconnectScript}{reAssignPanoramaViewer}{connectScript}
-             {JsThis}.{FuncName}(e.detail.activeMeasurement);}});";
+    protected string Category { get; }
+
+    protected override string Events => $"Events.{Category}";
+
+    public override string Destroy => $@"{JsApi}.off({JsApi}.{Events}.{Type},{FuncName}{Category});";
+
+    public StreetSmartApiEvent(StreetSmartAPI api, string type, string funcName, string category)
+      : base(type, funcName)
+    {
+      _api = api;
+      Category = category;
     }
   }
 }

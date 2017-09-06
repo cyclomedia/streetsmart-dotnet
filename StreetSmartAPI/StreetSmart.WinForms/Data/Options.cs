@@ -53,7 +53,7 @@ namespace StreetSmart.WinForms.Data
 
     public string Username
     {
-      get { return _userName; }
+      get => _userName;
       set
       {
         _userName = value;
@@ -63,7 +63,7 @@ namespace StreetSmart.WinForms.Data
 
     public SecureString Password
     {
-      get { return _password; }
+      get => _password;
       set
       {
         _password = value;
@@ -73,10 +73,7 @@ namespace StreetSmart.WinForms.Data
 
     public string APIKey
     {
-      get
-      {
-        return _apiKey;
-      }
+      get => _apiKey;
       set
       {
         _apiKey = value;
@@ -86,7 +83,7 @@ namespace StreetSmart.WinForms.Data
 
     public string SRS
     {
-      get { return _srs; }
+      get => _srs;
       set
       {
         _srs = value;
@@ -96,7 +93,7 @@ namespace StreetSmart.WinForms.Data
 
     public CultureInfo Locale
     {
-      get { return _locale; }
+      get => _locale;
       set
       {
         _locale = value;
@@ -106,7 +103,7 @@ namespace StreetSmart.WinForms.Data
 
     public Uri ConfigurationURL
     {
-      get { return _configurationURL; }
+      get => _configurationURL;
       set
       {
         _configurationURL = value;
@@ -116,7 +113,7 @@ namespace StreetSmart.WinForms.Data
 
     public IAddressSettings AddressSettings
     {
-      get { return _addressSettings; }
+      get => _addressSettings;
       set
       {
         _addressSettings = value;
@@ -126,7 +123,7 @@ namespace StreetSmart.WinForms.Data
 
     public IDomElement Element
     {
-      get { return _element; }
+      get => _element;
       set
       {
         _element = value;

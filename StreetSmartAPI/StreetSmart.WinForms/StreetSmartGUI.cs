@@ -24,11 +24,13 @@ namespace StreetSmart.WinForms
 {
   // ReSharper disable InconsistentNaming
 
+  /// <inheritdoc />
   /// <summary>
   /// The GUI of StreetSmart
   /// </summary>
   public sealed partial class StreetSmartGUI : UserControl
   {
+    /// <inheritdoc />
     /// <summary>
     /// Create the GUI of StreetSmart
     /// </summary>

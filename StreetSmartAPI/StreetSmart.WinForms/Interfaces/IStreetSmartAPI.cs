@@ -41,6 +41,16 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
 
     /// <summary>
+    /// Viewer is added (panoramic or oblique)
+    /// </summary>
+    event EventHandler<IEventArgs<IViewer>> ViewerAdded;
+
+    /// <summary>
+    /// Viewer is removed (panoramic of oblique)
+    /// </summary>
+    event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
+
+    /// <summary>
     /// The GUI of StreetSmart
     /// </summary>
     StreetSmartGUI GUI { get; }

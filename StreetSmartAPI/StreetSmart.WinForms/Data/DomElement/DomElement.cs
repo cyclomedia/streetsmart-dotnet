@@ -31,19 +31,19 @@ namespace StreetSmart.WinForms.Data.DomElement
       Guid guid = Guid.NewGuid();
       Id = guid.ToString();
       Style = style;
-      Name = $"dom{guid.ToString("N")}";
+      Name = $"dom{guid:N}";
     }
 
     public DomElement(string id, Style style)
     {
       Id = id;
       Style = style;
-      Name = $"dom{Guid.NewGuid().ToString("N")}";
+      Name = $"dom{Guid.NewGuid():N}";
     }
 
     public string Id
     {
-      get { return _id; }
+      get => _id;
       set
       {
         _id = value;
@@ -53,7 +53,7 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public IStyle Style
     {
-      get { return _style; }
+      get => _style;
       set
       {
         _style = value;

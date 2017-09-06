@@ -44,7 +44,7 @@ namespace StreetSmart.WinForms.Data
 
     public double X
     {
-      get { return _x; }
+      get => _x;
       set
       {
         _x = value;
@@ -54,7 +54,7 @@ namespace StreetSmart.WinForms.Data
 
     public double Y
     {
-      get { return _y; }
+      get => _y;
       set
       {
         _y = value;
@@ -64,7 +64,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? Z
     {
-      get { return _z; }
+      get => _z;
       set
       {
         _z = value;

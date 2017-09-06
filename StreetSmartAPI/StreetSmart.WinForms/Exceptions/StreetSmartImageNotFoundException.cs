@@ -20,11 +20,13 @@ using System;
 
 namespace StreetSmart.WinForms.Exceptions
 {
+  /// <inheritdoc />
   /// <summary>
   /// Exception when no images can not be found
   /// </summary>
   public class StreetSmartImageNotFoundException : Exception
   {
+    /// <inheritdoc />
     /// <summary>
     /// Create StreetSmartImageNotFoundException class
     /// </summary>
@@ -33,6 +35,7 @@ namespace StreetSmart.WinForms.Exceptions
     {
     }
 
+    /// <inheritdoc />
     /// <summary>
     ///  Create StreetSmartImageNotFoundException class
     /// </summary>

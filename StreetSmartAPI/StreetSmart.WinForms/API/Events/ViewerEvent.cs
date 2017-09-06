@@ -16,42 +16,21 @@
  * License along with this library.
  */
 
-using System;
-
-using StreetSmart.WinForms.Interfaces;
-using StreetSmart.WinForms.Properties;
-
-namespace StreetSmart.WinForms.Data
+namespace StreetSmart.WinForms.API.Events
 {
-  internal class MeasurementOptions : NotifyPropertyChanged, IMeasurementOptions
+  internal class ViewerEvent: StreetSmartApiEvent
   {
-    private MeasurementGeometryType? _geometryType;
+    private string TempType => $"temp{Type}";
 
-    public MeasurementOptions()
+    public ViewerEvent(StreetSmartAPI api, string type, string funcName)
+      : base(api, type, funcName, "viewer")
     {
-      _geometryType = null;
-    }
-
-    public MeasurementOptions(MeasurementGeometryType geometryType)
-    {
-      _geometryType = geometryType;
-    }
-
-    public MeasurementGeometryType? GeometryType
-    {
-      get => _geometryType;
-      set
-      {
-        _geometryType = value;
-        RaisePropertyChanged();
-      }
     }
 
     public override string ToString()
     {
-      return (GeometryType == null)
-        ? string.Empty
-        : $",{{geometry:{Resources.JsApi}.{((MeasurementGeometryType) GeometryType).Description()}}}";
+      return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
+             {{{TempType} = e.detail.viewer;{JsThis}.{FuncName}('{TempType}', {TempType}.getType());}});";
     }
   }
 }

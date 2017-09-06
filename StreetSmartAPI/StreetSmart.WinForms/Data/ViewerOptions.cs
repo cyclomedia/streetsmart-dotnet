@@ -35,7 +35,7 @@ namespace StreetSmart.WinForms.Data
 
     public IViewerTypes ViewerTypes
     {
-      get { return _viewerTypes; }
+      get => _viewerTypes;
       set
       {
         _viewerTypes = value;
@@ -45,7 +45,7 @@ namespace StreetSmart.WinForms.Data
 
     public string Srs
     {
-      get { return _srs; }
+      get => _srs;
       set
       {
         _srs = value;

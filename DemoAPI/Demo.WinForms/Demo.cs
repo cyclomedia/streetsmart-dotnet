@@ -35,27 +35,24 @@ namespace Demo.WinForms
 {
   public partial class Demo : Form
   {
-    private const string ApiLocation = null;
-
     #region Members
 
     private readonly IStreetSmartAPI _api;
-    private readonly List<IPanoramaViewer> _viewers;
+    private readonly List<IPanoramaViewer> _panoramaViewers;
+    private readonly List<IObliqueViewer> _obliqueViewers;
     private readonly CultureInfo _ci;
 
     #endregion
 
     #region Properties
 
-    private IPanoramaViewer Viewer => (_viewers.Count == 0) ? null : _viewers[_viewers.Count - 1];
+    private IPanoramaViewer PanoramaViewer => (_panoramaViewers.Count == 0) ? null : _panoramaViewers[_panoramaViewers.Count - 1];
 
     private int DeltaYawPitch
     {
       get
       {
-        int result;
-
-        if (!int.TryParse(txtDeltaYawPitch.Text, out result))
+        if (!int.TryParse(txtDeltaYawPitch.Text, out var result))
         {
           result = 0;
         }
@@ -70,12 +67,18 @@ namespace Demo.WinForms
     {
       InitializeComponent();
       _ci = CultureInfo.InvariantCulture;
-      _viewers = new List<IPanoramaViewer>();
-      _api = string.IsNullOrEmpty(ApiLocation)
+      _panoramaViewers = new List<IPanoramaViewer>();
+      _obliqueViewers = new List<IObliqueViewer>();
+
+      _api = string.IsNullOrEmpty(StreetSmartLocation)
         ? StreetSmartAPIFactory.Create()
-        : StreetSmartAPIFactory.Create(ApiLocation);
+        : StreetSmartAPIFactory.Create(StreetSmartLocation);
       _api.APIReady += OnAPIReady;
+      _api.MeasurementChanged += OnMeasurementChanged;
+      _api.ViewerAdded += OnViewerAdded;
+      _api.ViewerRemoved += OnViewerRemoved;
       plStreetSmart.Controls.Add(_api.GUI);
+
       grLogin.Enabled = false;
       grOpenByAddress.Enabled = false;
       grViewerToggles.Enabled = false;
@@ -102,6 +105,70 @@ namespace Demo.WinForms
         grLogin.Enabled = true;
       }
     }
+
+    private void OnMeasurementChanged(object sender, IEventArgs<IDictionary<string, object>> args)
+    {
+      string text = "Measurement changed";
+      AddViewerEventsText(text);
+    }
+
+    private void OnViewerAdded(object sender, IEventArgs<IViewer> args)
+    {
+      string text = "Viewer added";
+      AddViewerEventsText(text);
+      IViewer viewer = args.Value;
+
+      if (viewer is IPanoramaViewer)
+      {
+        IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
+        _panoramaViewers.Add(panoramaViewer);
+
+        panoramaViewer.ImageChange += OnImageChange;
+        panoramaViewer.RecordingClick += OnRecordingClick;
+        panoramaViewer.TileLoadError += OnTileLoadError;
+        panoramaViewer.ViewChange += OnViewChange;
+        panoramaViewer.ViewLoadEnd += OnViewLoadEnd;
+        panoramaViewer.ViewLoadStart += OnViewLoadStart;
+        panoramaViewer.TimeTravelChange += OnTimeTravelChange;
+      }
+
+      if (viewer is IObliqueViewer)
+      {
+        IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+        _obliqueViewers.Add(obliqueViewer);
+      }
+    }
+
+    private void OnViewerRemoved(object sender, IEventArgs<IViewer> args)
+    {
+      string text = "Viewer removed";
+      AddViewerEventsText(text);
+      IViewer viewer = args.Value;
+
+      if (viewer is IPanoramaViewer)
+      {
+        IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
+        _panoramaViewers.Remove(panoramaViewer);
+
+        panoramaViewer.ImageChange -= OnImageChange;
+        panoramaViewer.RecordingClick -= OnRecordingClick;
+        panoramaViewer.TileLoadError -= OnTileLoadError;
+        panoramaViewer.ViewChange -= OnViewChange;
+        panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
+        panoramaViewer.ViewLoadStart -= OnViewLoadStart;
+        panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
+      }
+
+      if (viewer is IObliqueViewer)
+      {
+        IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+        _obliqueViewers.Remove(obliqueViewer);
+      }
+    }
+
+    #endregion
+
+    #region events panorama viewer 
 
     private void OnImageChange(object sender, IEventArgs<IDictionary<string, object>> args)
     {
@@ -143,12 +210,6 @@ namespace Demo.WinForms
     private void OnTimeTravelChange(object sender, IEventArgs<IDictionary<string, object>> args)
     {
       string text = "Time travel change";
-      AddViewerEventsText(text);
-    }
-
-    private void OnMeasurementChanged(object sender, IEventArgs<IDictionary<string, object>> args)
-    {
-      string text = "Measurement changed";
       AddViewerEventsText(text);
     }
 
@@ -222,12 +283,12 @@ namespace Demo.WinForms
 
     private void btRotateLeft_Click(object sender, EventArgs e)
     {
-      Viewer?.RotateLeft(DeltaYawPitch);
+      PanoramaViewer?.RotateLeft(DeltaYawPitch);
     }
 
     private void btnRotateRight_Click(object sender, EventArgs e)
     {
-      Viewer?.RotateRight(DeltaYawPitch);
+      PanoramaViewer?.RotateRight(DeltaYawPitch);
     }
 
     private async void btnApiReadyState_Click(object sender, EventArgs e)
@@ -279,19 +340,24 @@ namespace Demo.WinForms
         {
           if (viewer is IPanoramaViewer)
           {
-            _viewers.Add(viewer as IPanoramaViewer);
+            IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
 
-            Viewer.ImageChange += OnImageChange;
-            Viewer.RecordingClick += OnRecordingClick;
-            Viewer.TileLoadError += OnTileLoadError;
-            Viewer.ViewChange += OnViewChange;
-            Viewer.ViewLoadEnd += OnViewLoadEnd;
-            Viewer.ViewLoadStart += OnViewLoadStart;
-            Viewer.TimeTravelChange += OnTimeTravelChange;
+            if (!_panoramaViewers.Contains(panoramaViewer))
+            {
+              MessageBox.Show("panorama viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IObliqueViewer)
+          {
+            IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+
+            if (!_obliqueViewers.Contains(obliqueViewer))
+            {
+              MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
           }
         }
-
-        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -303,24 +369,24 @@ namespace Demo.WinForms
 
     private async void btnGetViewerColor_Click(object sender, EventArgs e)
     {
-      Color color = await Viewer.GetViewerColor();
+      Color color = await PanoramaViewer.GetViewerColor();
       string text = $"Alpha: {color.A}{Environment.NewLine}Red: {color.R}{Environment.NewLine}Green: {color.G}{Environment.NewLine}Blue: {color.B}";
       txtRecordingViewerColorPermissions.Text = text;
     }
 
     private void btnRotateUp_Click(object sender, EventArgs e)
     {
-      Viewer.RotateUp(DeltaYawPitch);
+      PanoramaViewer.RotateUp(DeltaYawPitch);
     }
 
     private void btnRotateDown_Click(object sender, EventArgs e)
     {
-      Viewer.RotateDown(DeltaYawPitch);
+      PanoramaViewer.RotateDown(DeltaYawPitch);
     }
 
     private async void btnOrientation_Click(object sender, EventArgs e)
     {
-      IOrientation orientation = await Viewer.GetOrientation();
+      IOrientation orientation = await PanoramaViewer.GetOrientation();
       txtYaw.Text = orientation.Yaw.ToString();
       txtPitch.Text = orientation.Pitch.ToString();
       txthFov.Text = orientation.HFov.ToString();
@@ -332,12 +398,12 @@ namespace Demo.WinForms
       double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?)ParseDouble(txtYaw.Text);
       double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?)ParseDouble(txtPitch.Text);
       IOrientation orientation = OrientationFactory.Create(yaw, pitch, hFov);
-      Viewer.SetOrientation(orientation);
+      PanoramaViewer.SetOrientation(orientation);
     }
 
     private async void btnGetRecording_Click(object sender, EventArgs e)
     {
-      IRecording recording = await Viewer.GetRecording();
+      IRecording recording = await PanoramaViewer.GetRecording();
       PrintRecordingText(recording);
     }
 
@@ -349,42 +415,42 @@ namespace Demo.WinForms
 
       if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
       {
-        Viewer.LookAtCoordinate(coordinate);
+        PanoramaViewer.LookAtCoordinate(coordinate);
       }
       else
       {
-        Viewer.LookAtCoordinate(coordinate, txtCoordinateSrs.Text);
+        PanoramaViewer.LookAtCoordinate(coordinate, txtCoordinateSrs.Text);
       }
     }
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetRecordingsVisible();
-      Viewer.ToggleRecordingsVisible(!visible);
+      bool visible = await PanoramaViewer.GetRecordingsVisible();
+      PanoramaViewer.ToggleRecordingsVisible(!visible);
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetNavbarVisible();
-      Viewer.ToggleNavbarVisible(!visible);
+      bool visible = await PanoramaViewer.GetNavbarVisible();
+      PanoramaViewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.GetNavbarExpanded();
-      Viewer.ToggleNavbarExpanded(!expanded);
+      bool expanded = await PanoramaViewer.GetNavbarExpanded();
+      PanoramaViewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await Viewer.GetTimeTravelVisible();
-      Viewer.ToggleTimeTravelVisible(!visible);
+      bool visible = await PanoramaViewer.GetTimeTravelVisible();
+      PanoramaViewer.ToggleTimeTravelVisible(!visible);
     }
 
     private async void btnToggleTimeTravelExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await Viewer.GetTimeTravelExpanded();
-      Viewer.ToggleTimeTravelExpanded(!expanded);
+      bool expanded = await PanoramaViewer.GetTimeTravelExpanded();
+      PanoramaViewer.ToggleTimeTravelExpanded(!expanded);
     }
 
     private async void btnOpenByImageId_Click(object sender, EventArgs e)
@@ -410,19 +476,24 @@ namespace Demo.WinForms
         {
           if (viewer is IPanoramaViewer)
           {
-            _viewers.Add(viewer as IPanoramaViewer);
+            IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
 
-            Viewer.ImageChange += OnImageChange;
-            Viewer.RecordingClick += OnRecordingClick;
-            Viewer.TileLoadError += OnTileLoadError;
-            Viewer.ViewChange += OnViewChange;
-            Viewer.ViewLoadEnd += OnViewLoadEnd;
-            Viewer.ViewLoadStart += OnViewLoadStart;
-            Viewer.TimeTravelChange += OnTimeTravelChange;
+            if (!_panoramaViewers.Contains(panoramaViewer))
+            {
+              MessageBox.Show("panorama viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IObliqueViewer)
+          {
+            IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+
+            if (!_obliqueViewers.Contains(obliqueViewer))
+            {
+              MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
           }
         }
-
-        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -459,19 +530,24 @@ namespace Demo.WinForms
         {
           if (viewer is IPanoramaViewer)
           {
-            _viewers.Add(viewer as IPanoramaViewer);
+            IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
 
-            Viewer.ImageChange += OnImageChange;
-            Viewer.RecordingClick += OnRecordingClick;
-            Viewer.TileLoadError += OnTileLoadError;
-            Viewer.ViewChange += OnViewChange;
-            Viewer.ViewLoadEnd += OnViewLoadEnd;
-            Viewer.ViewLoadStart += OnViewLoadStart;
-            Viewer.TimeTravelChange += OnTimeTravelChange;
+            if (!_panoramaViewers.Contains(panoramaViewer))
+            {
+              MessageBox.Show("panorama viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IObliqueViewer)
+          {
+            IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+
+            if (!_obliqueViewers.Contains(obliqueViewer))
+            {
+              MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
           }
         }
-
-        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -483,12 +559,12 @@ namespace Demo.WinForms
 
     private void btnZoomIn_Click(object sender, EventArgs e)
     {
-      Viewer.ZoomIn();
+      PanoramaViewer.ZoomIn();
     }
 
     private void btnZoomOut_Click(object sender, EventArgs e)
     {
-      Viewer.ZoomOut();
+      PanoramaViewer.ZoomOut();
     }
 
     private async void btnOpenViewerByQuery_Click(object sender, EventArgs e)
@@ -514,19 +590,24 @@ namespace Demo.WinForms
         {
           if (viewer is IPanoramaViewer)
           {
-            _viewers.Add(viewer as IPanoramaViewer);
+            IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
 
-            Viewer.ImageChange += OnImageChange;
-            Viewer.RecordingClick += OnRecordingClick;
-            Viewer.TileLoadError += OnTileLoadError;
-            Viewer.ViewChange += OnViewChange;
-            Viewer.ViewLoadEnd += OnViewLoadEnd;
-            Viewer.ViewLoadStart += OnViewLoadStart;
-            Viewer.TimeTravelChange += OnTimeTravelChange;
+            if (!_panoramaViewers.Contains(panoramaViewer))
+            {
+              MessageBox.Show("panorama viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IObliqueViewer)
+          {
+            IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+
+            if (!_obliqueViewers.Contains(obliqueViewer))
+            {
+              MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
           }
         }
-
-        _api.MeasurementChanged += OnMeasurementChanged;
       }
       catch (StreetSmartImageNotFoundException ex)
       {
@@ -559,10 +640,9 @@ namespace Demo.WinForms
 
     private double ParseDouble(string text)
     {
-      double result;
       text = text.Replace(",", ".");
 
-      if (!double.TryParse(text, NumberStyles.Float, _ci, out result))
+      if (!double.TryParse(text, NumberStyles.Float, _ci, out var result))
       {
         result = 0.0;
       }
@@ -665,7 +745,7 @@ namespace Demo.WinForms
         ? MeasurementOptionsFactory.Create()
         : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
 
-      _api.StartMeasurementMode(Viewer, options);
+      _api.StartMeasurementMode(PanoramaViewer, options);
     }
 
     private void btnStopMeasurementMode_Click(object sender, EventArgs e)

@@ -29,7 +29,7 @@ namespace StreetSmart.WinForms.Data.DomElement
 
     public string Value
     {
-      get { return _value; }
+      get => _value;
       set
       {
         _value = value;

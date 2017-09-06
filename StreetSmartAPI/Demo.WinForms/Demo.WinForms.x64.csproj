@@ -77,6 +77,12 @@
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources1.Designer.cs">
+      <Link>Properties\Resources1.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,13 +90,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <Link>Properties\Resources.resx</Link>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <Link>Properties\Resources.Designer.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\DemoAPI\Demo.WinForms\App.config" />

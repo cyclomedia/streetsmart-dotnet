@@ -23,6 +23,7 @@ using System.Threading.Tasks;
 
 namespace StreetSmart.WinForms.Interfaces
 {
+  /// <inheritdoc />
   /// <summary>
   /// PanoramaViewer component. Gets created by the StreetSmartAPI.
   /// </summary>

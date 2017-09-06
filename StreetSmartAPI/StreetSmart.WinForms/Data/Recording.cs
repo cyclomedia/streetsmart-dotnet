@@ -64,7 +64,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? GroundLevelOffset
     {
-      get { return _groundLevelOffset; }
+      get => _groundLevelOffset;
       set
       {
         _groundLevelOffset = value;
@@ -74,7 +74,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? RecorderDirection
     {
-      get { return _recorderDirection; }
+      get => _recorderDirection;
       set
       {
         _recorderDirection = value;
@@ -84,7 +84,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? Orientation
     {
-      get { return _orientation; }
+      get => _orientation;
       set
       {
         _orientation = value;
@@ -94,7 +94,7 @@ namespace StreetSmart.WinForms.Data
 
     public DateTime? RecordedAt
     {
-      get { return _recordedAt; }
+      get => _recordedAt;
       set
       {
         _recordedAt = value;
@@ -104,7 +104,7 @@ namespace StreetSmart.WinForms.Data
 
     public string Id
     {
-      get { return _id; }
+      get => _id;
       set
       {
         _id = value;
@@ -114,7 +114,7 @@ namespace StreetSmart.WinForms.Data
 
     public ICoordinate XYZ
     {
-      get { return _xyz; }
+      get => _xyz;
       set
       {
         _xyz = value;
@@ -124,7 +124,7 @@ namespace StreetSmart.WinForms.Data
 
     public string SRS
     {
-      get { return _srs; }
+      get => _srs;
       set
       {
         _srs = value;
@@ -134,7 +134,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? OrientationPrecision
     {
-      get { return _orientationPrecision; }
+      get => _orientationPrecision;
       set
       {
         _orientationPrecision = value;
@@ -144,7 +144,7 @@ namespace StreetSmart.WinForms.Data
 
     public TileSchema TileSchema
     {
-      get { return _tileSchema; }
+      get => _tileSchema;
       set
       {
         _tileSchema = value;
@@ -154,7 +154,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? LongitudePrecision
     {
-      get { return _longitudePrecision; }
+      get => _longitudePrecision;
       set
       {
         _longitudePrecision = value;
@@ -164,7 +164,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? LatitudePrecision
     {
-      get { return _latitudePrecision; }
+      get => _latitudePrecision;
       set
       {
         _latitudePrecision = value;
@@ -174,7 +174,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? HeightPrecision
     {
-      get { return _heightPrecision; }
+      get => _heightPrecision;
       set
       {
         _heightPrecision = value;
@@ -184,7 +184,7 @@ namespace StreetSmart.WinForms.Data
 
     public ProductType ProductType
     {
-      get { return _productType; }
+      get => _productType;
       set
       {
         _productType = value;
@@ -194,7 +194,7 @@ namespace StreetSmart.WinForms.Data
 
     public string HeightSystem
     {
-      get { return _heightSystem; }
+      get => _heightSystem;
       set
       {
         _heightSystem = value;
@@ -204,7 +204,7 @@ namespace StreetSmart.WinForms.Data
 
     public DateTime? ExpiredAt
     {
-      get { return _expiredAt; }
+      get => _expiredAt;
       set
       {
         _expiredAt = value;

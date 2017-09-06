@@ -1,13 +1,6 @@
 ﻿Release notes:
 ==============
 
-Version: 1.0.0.0
+Version: 17.2.2.0
 ================
-- Initial release
-
-Version: 1.1.0.0
-================
-- Fixed recording object in functions:
-    - OpenByAddressAsync
-	- OpenByCoordinateAsync
-	- OpenByImageIdAsync
+- Start release notes

@@ -18,6 +18,7 @@
 
 namespace StreetSmart.WinForms.Interfaces
 {
+  /// <inheritdoc />
   /// <summary>
   /// ObliqueViewer component. Gets created by the StreetSmartAPI.
   /// </summary>

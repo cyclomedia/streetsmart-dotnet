@@ -46,7 +46,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? Yaw
     {
-      get { return _yaw; }
+      get => _yaw;
       set
       {
         _yaw = value;
@@ -56,7 +56,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? Pitch
     {
-      get { return _pitch; }
+      get => _pitch;
       set
       {
         _pitch = value;
@@ -66,7 +66,7 @@ namespace StreetSmart.WinForms.Data
 
     public double? HFov
     {
-      get { return _hFov; }
+      get => _hFov;
       set
       {
         _hFov = value;

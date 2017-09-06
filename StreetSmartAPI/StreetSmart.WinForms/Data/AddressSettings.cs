@@ -42,7 +42,7 @@ namespace StreetSmart.WinForms.Data
 
     public CultureInfo Locale
     {
-      get { return _locale; }
+      get => _locale;
       set
       {
         _locale = value;
@@ -52,7 +52,7 @@ namespace StreetSmart.WinForms.Data
 
     public string Database
     {
-      get { return _database; }
+      get => _database;
       set
       {
         _database = value;

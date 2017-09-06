@@ -129,6 +129,8 @@
     <Compile Include="API\Events\MeasurementEvent.cs" />
     <Compile Include="API\Events\PanoramaRecordingClickViewerEvent.cs" />
     <Compile Include="API\Events\PanoramaViewerEvent.cs" />
+    <Compile Include="API\Events\StreetSmartApiEvent.cs" />
+    <Compile Include="API\Events\ViewerEvent.cs" />
     <Compile Include="API\ObliqueViewer.cs" />
     <Compile Include="API\ObliqueViewerList.cs" />
     <Compile Include="API\ViewerList.cs" />

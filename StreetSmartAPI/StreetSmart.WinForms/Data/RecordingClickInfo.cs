@@ -39,7 +39,7 @@ namespace StreetSmart.WinForms.Data
 
     public IRecording Recording
     {
-      get { return _recording; }
+      get => _recording;
       set
       {
         _recording = value;
@@ -49,7 +49,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool CtrlKey
     {
-      get { return _ctrlKey; }
+      get => _ctrlKey;
       set
       {
         _ctrlKey = value;
@@ -59,7 +59,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool ShiftKey
     {
-      get { return _shiftKey; }
+      get => _shiftKey;
       set
       {
         _shiftKey = value;
@@ -69,7 +69,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool AltKey
     {
-      get { return _altKey; }
+      get => _altKey;
       set
       {
         _altKey = value;

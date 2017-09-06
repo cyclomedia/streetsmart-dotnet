@@ -20,11 +20,13 @@ using System;
 
 namespace StreetSmart.WinForms.Exceptions
 {
+  /// <inheritdoc />
   /// <summary>
   /// Exception when Login failed
   /// </summary>
   public class StreetSmartLoginFailedException : Exception
   {
+    /// <inheritdoc />
     /// <summary>
     /// Create StreetSmartLoginFailedException class
     /// </summary>
@@ -33,6 +35,7 @@ namespace StreetSmart.WinForms.Exceptions
     {
     }
 
+    /// <inheritdoc />
     /// <summary>
     /// Create StreetSmartLoginFailedException class
     /// </summary>

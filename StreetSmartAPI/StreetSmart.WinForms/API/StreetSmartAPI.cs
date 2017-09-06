@@ -44,7 +44,8 @@ namespace StreetSmart.WinForms.API
     #region Members
 
     private readonly ChromiumWebBrowser _browser;
-    private ApiEventList _apiEventList;
+    private ApiEventList _apiMeasurementEventList;
+    private ApiEventList _apiViewerEventList;
 
     #endregion
 
@@ -59,6 +60,10 @@ namespace StreetSmart.WinForms.API
     public event EventHandler APIReady;
 
     public event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
+
+    public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
+
+    public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
 
     #endregion
 
@@ -83,6 +88,10 @@ namespace StreetSmart.WinForms.API
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
     public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
+
+    public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
+
+    public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
 
     #endregion
 
@@ -124,9 +133,7 @@ namespace StreetSmart.WinForms.API
 
     public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      IPanoramaViewer panoramaViewer = ViewerList.AddPanoramaViewer(element, options);
-      AddMeasurementEvents();
-      return panoramaViewer;
+      return ViewerList.AddPanoramaViewer(element, options);
     }
 
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
@@ -169,18 +176,19 @@ namespace StreetSmart.WinForms.API
       {
         throw (Exception) result;
       }
+
+      AddViewerEvents();
     }
 
     public async Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions options)
     {
       string typeResult = "r";      
-      string resultType = "result";
-      JsNameGenerator names = new JsNameGenerator(options.ViewerTypes.GetTypes().Count);
+      string resultType = "resultOpenByQuery";
 
-      string script = $@"{names.JsGetTypeDef()}{JsApi}.open({query.ToQuote()}{options}).catch
+      string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
                       (function(e){{{JsThis}.{JsImNotFound}(e.message)}}).then
-                      (function({typeResult}){{{names.JsAssignToNames(typeResult)}
-                      {names.JsToResultTypes(resultType)}{JsThis}.{JsResult}({resultType});}});";
+                      (function({typeResult}){{{resultType}={typeResult};{JsThis}.{JsResult}('{resultType}');}});";
+
       object result = await CallJsAsync(script);
 
       if (result is Exception)
@@ -188,9 +196,7 @@ namespace StreetSmart.WinForms.API
         throw (Exception) result;
       }
 
-      IList<IViewer> viewers = ViewerList.ToViewerList((Dictionary<string, object>) result);
-      AddMeasurementEvents();
-      return viewers;
+      return await ViewerList.ToViewersFromJsValue(options.ViewerTypes.GetTypes(), (string) result);
     }
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
@@ -208,6 +214,19 @@ namespace StreetSmart.WinForms.API
       var script = GetScriptStringify("getActiveMeasurement()");
       var measurement = (string) await CallJsAsync(script);
       return JObject.Parse(measurement);
+    }
+
+    public void AddOverlay(string name, string geoJson, string sourceSrs)
+    {
+      var script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {sourceSrs.ToQuote()})");
+      _browser.ExecuteScriptAsync(script);
+    }
+
+    public void AddOverlay(string name, string geoJson)
+    {
+      var json = JObject.Parse(geoJson);
+      var script = GetScript($"addOverlay({name.ToQuote()}, {json})");
+      _browser.ExecuteScriptAsync(script);
     }
 
     #endregion
@@ -246,22 +265,28 @@ namespace StreetSmart.WinForms.API
       _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
     }
 
-    public void AddOverlay(string name, string geoJson, string sourceSrs)
-    {
-      var script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {sourceSrs.ToQuote()})");
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void AddOverlay(string name, string geoJson)
-    {
-      var json = JObject.Parse(geoJson);
-      var script = GetScript($"addOverlay({name.ToQuote()}, {json})");
-      _browser.ExecuteScriptAsync(script);
-    }
-
     public void OnMeasurementChanged(Dictionary<string, object> args)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+    }
+
+    public void OnViewerAdded(string name, string type)
+    {
+      string jsName = new JsNameGenerator(1)[0];
+      _browser.ExecuteScriptAsync($"var {jsName}={name};");
+      IViewer viewer = ViewerList.ToViewer(type, jsName);
+      ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
+
+      if (viewer is PanoramaViewer)
+      {
+        ReAssignMeasurementEvents();
+      }
+    }
+
+    public async void OnViewerRemoved(string name, string type)
+    {
+      IViewer viewer = await ViewerList.RemoveViewerFromJsValue(type, name);
+      ViewerRemoved?.Invoke(this, new EventArgs<IViewer>(viewer));
     }
 
     #endregion
@@ -286,16 +311,32 @@ namespace StreetSmart.WinForms.API
       return $"{JsThis}.{JsResult}(JSON.stringify({JsApi}.{funcName}));";
     }
 
-    public void AddMeasurementEvents()
+    private void ReAssignMeasurementEvents()
     {
-      if (_apiEventList == null)
+      if (_apiMeasurementEventList != null)
       {
-        _apiEventList = new ApiEventList
+        _browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
+      }
+
+      _apiMeasurementEventList = new ApiEventList
+      {
+        new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+      };
+
+      _browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+    }
+
+    private void AddViewerEvents()
+    {
+      if (_apiViewerEventList == null)
+      {
+        _apiViewerEventList = new ApiEventList
         {
-          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+          new ViewerEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
+          new ViewerEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved)
         };
 
-        _browser.ExecuteScriptAsync($"{_apiEventList}");
+        _browser.ExecuteScriptAsync($"{_apiViewerEventList}");
       }
     }
 

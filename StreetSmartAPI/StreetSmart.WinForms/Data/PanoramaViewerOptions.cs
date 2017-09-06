@@ -39,7 +39,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool? RecordingsVisible
     {
-      get { return _recordingsVisible; }
+      get => _recordingsVisible;
       set
       {
         _recordingsVisible = value;
@@ -49,7 +49,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool? TimeTravelVisible
     {
-      get { return _timeTravelVisible; }
+      get => _timeTravelVisible;
       set
       {
         _timeTravelVisible = value;
@@ -59,7 +59,7 @@ namespace StreetSmart.WinForms.Data
 
     public bool? NavbarVisible
     {
-      get { return _navBarVisible; }
+      get => _navBarVisible;
       set
       {
         _navBarVisible = value;

@@ -19,7 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using CefSharp;
 using CefSharp.WinForms;
 using StreetSmart.WinForms.Interfaces;
 
@@ -34,6 +35,12 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
+    #region Tasks
+
+    private TaskCompletionSource<object> _resultTask;
+
+    #endregion
+
     #region Properties
 
     public static string Type => "@@ViewerType/PANORAMA";
@@ -41,6 +48,8 @@ namespace StreetSmart.WinForms.API
     public string JsThis => $"{GetType().Name}Events";
 
     public string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
+
+    public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
 
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
@@ -102,6 +111,51 @@ namespace StreetSmart.WinForms.API
       return _viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{viewer.Value.ConnectEventsScript}");
     }
 
+    protected override async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
+    {
+      IViewer result = null;
+      string key = null;
+
+      foreach (var viewer in _viewers)
+      {
+        string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
+                        {{result=true;}};{JsThis}.{JsThisResult}(result);}}";
+        bool exists = (bool) await CallJsAsync(script);
+
+        if (exists)
+        {
+          result = viewer.Value;
+          key = viewer.Key;
+        }
+      }
+
+      if (key != null)
+      {
+        _viewers.Remove(key);
+      }
+
+      return result;
+    }
+
+    protected override async Task<IList<IViewer>> GetViewersFromJsValue(string jsValue)
+    {
+      IList<IViewer> result = new List<IViewer>();
+
+      foreach (var viewer in _viewers)
+      {
+        string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
+                        {{result=true;}}}});{JsThis}.{JsThisResult}(result);}}";
+        bool exists = (bool) await CallJsAsync(script);
+
+        if (exists)
+        {
+          result.Add(viewer.Value);
+        }
+      }
+
+      return result;
+    }
+
     public IViewer RegisterViewer(PanoramaViewer viewer)
     {
       if (!_viewers.ContainsKey(viewer.Name))
@@ -121,6 +175,14 @@ namespace StreetSmart.WinForms.API
         _viewers.Remove(panoramaViewer?.Name ?? string.Empty);
         panoramaViewer?.DestroyViewer();
       }
+    }
+
+    private async Task<object> CallJsAsync(string script)
+    {
+      _resultTask = new TaskCompletionSource<object>();
+      _browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+      return _resultTask.Task.Result;
     }
 
     #endregion
@@ -193,6 +255,11 @@ namespace StreetSmart.WinForms.API
       {
         _viewers[name].OnResult(result);
       }
+    }
+
+    public void OnThisResult(bool result)
+    {
+      _resultTask.TrySetResult(result);
     }
 
     public void OnImageNotFoundException(string name, string message)
