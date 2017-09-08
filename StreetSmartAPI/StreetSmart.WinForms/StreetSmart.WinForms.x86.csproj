@@ -133,6 +133,7 @@
     <Compile Include="API\Events\ViewerEvent.cs" />
     <Compile Include="API\ObliqueViewer.cs" />
     <Compile Include="API\ObliqueViewerList.cs" />
+    <Compile Include="API\Viewer.cs" />
     <Compile Include="API\ViewerList.cs" />
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\MeasurementOptions.cs" />

@@ -20,8 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using CefSharp.WinForms;
-
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.API
@@ -31,8 +29,6 @@ namespace StreetSmart.WinForms.API
     #region Properties
 
     public static string Type => "@@ViewerType/PANORAMA";
-
-    public override string JsThis => $"{GetType().Name}Events";
 
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
@@ -53,12 +49,6 @@ namespace StreetSmart.WinForms.API
     #endregion
 
     #region Functions
-
-    public override void RegisterJsObject(ChromiumWebBrowser browser)
-    {
-      Browser = browser;
-      browser.RegisterJsObject(JsThis, this);
-    }
 
     public override IViewer AddViewer(string name)
     {

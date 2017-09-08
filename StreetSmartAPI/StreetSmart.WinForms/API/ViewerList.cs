@@ -42,7 +42,7 @@ namespace StreetSmart.WinForms.API
 
     protected Dictionary<string, Viewer> Viewers { get; }
 
-    public abstract string JsThis { get; }
+    public string JsThis => $"{GetType().Name}Events";
 
     public string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
 
@@ -61,7 +61,11 @@ namespace StreetSmart.WinForms.API
 
     #region Functions
 
-    public abstract void RegisterJsObject(ChromiumWebBrowser browser);
+    public void RegisterJsObject(ChromiumWebBrowser browser)
+    {
+      Browser = browser;
+      browser.RegisterJsObject(JsThis, this);
+    }
 
     public abstract IViewer AddViewer(string name);
 

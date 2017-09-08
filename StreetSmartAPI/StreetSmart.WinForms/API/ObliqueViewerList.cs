@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
-
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.API
@@ -28,17 +26,9 @@ namespace StreetSmart.WinForms.API
 
     public static string Type => "@@ViewerType/OBLIQUE";
 
-    public override string JsThis => $"{GetType().Name}Events";
-
     #endregion
 
     #region Functions
-
-    public override void RegisterJsObject(ChromiumWebBrowser browser)
-    {
-      Browser = browser;
-      browser.RegisterJsObject(JsThis, this);
-    }
 
     public override IViewer AddViewer(string name)
     {
