@@ -85,6 +85,7 @@
     <Compile Include="API\Events\PanoramaViewerEvent.cs" />
     <Compile Include="API\ObliqueViewerList.cs" />
     <Compile Include="API\ObliqueViewer.cs" />
+    <Compile Include="API\Viewer.cs" />
     <Compile Include="API\ViewerList.cs" />
     <Compile Include="Data\MeasurementOptions.cs" />
     <Compile Include="Data\ViewerTypes.cs" />

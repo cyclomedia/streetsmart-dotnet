@@ -16,9 +16,12 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using CefSharp;
 using CefSharp.WinForms;
 
 using StreetSmart.WinForms.Interfaces;
@@ -27,7 +30,131 @@ namespace StreetSmart.WinForms.API
 {
   abstract class ViewerList
   {
-    private static readonly Dictionary<string, ViewerList> Viewers = new Dictionary<string, ViewerList>
+    #region Tasks
+
+    private TaskCompletionSource<object> _resultTask;
+
+    #endregion
+
+    #region Properties
+
+    protected ChromiumWebBrowser Browser { get; set; }
+
+    protected Dictionary<string, Viewer> Viewers { get; }
+
+    public abstract string JsThis { get; }
+
+    public string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
+
+    public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
+
+    #endregion
+
+    #region Constructor
+
+    protected ViewerList()
+    {
+      Viewers = new Dictionary<string, Viewer>();
+    }
+
+    #endregion
+
+    #region Functions
+
+    public abstract void RegisterJsObject(ChromiumWebBrowser browser);
+
+    public abstract IViewer AddViewer(string name);
+
+    public virtual IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
+    {
+      return null;
+    }
+
+    protected async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
+    {
+      IViewer result = null;
+      string key = null;
+
+      foreach (var viewer in Viewers)
+      {
+        string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
+                        {{result=true;}};{JsThis}.{JsThisResult}(result);}}";
+        bool exists = (bool)await CallJsAsync(script);
+
+        if (exists)
+        {
+          result = viewer.Value;
+          key = viewer.Key;
+        }
+      }
+
+      if (key != null)
+      {
+        Viewers.Remove(key);
+      }
+
+      return result;
+    }
+
+    protected async Task<IList<IViewer>> GetViewersFromJsValue(string jsValue)
+    {
+      IList<IViewer> result = new List<IViewer>();
+
+      foreach (var viewer in Viewers)
+      {
+        string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
+                        {{result=true;}}}});{JsThis}.{JsThisResult}(result);}}";
+        bool exists = (bool) await CallJsAsync(script);
+
+        if (exists)
+        {
+          result.Add(viewer.Value);
+        }
+      }
+
+      return result;
+    }
+
+    public IViewer RegisterViewer(Viewer viewer)
+    {
+      if (!Viewers.ContainsKey(viewer.Name))
+      {
+        Viewers.Add(viewer.Name, viewer);
+      }
+
+      return viewer;
+    }
+
+    private async Task<object> CallJsAsync(string script)
+    {
+      _resultTask = new TaskCompletionSource<object>();
+      Browser.ExecuteScriptAsync(script);
+      await _resultTask.Task;
+      return _resultTask.Task.Result;
+    }
+
+    #endregion
+
+    #region Callbacks viewer
+
+    public void OnResult(string name, object result)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        Viewers[name].OnResult(result);
+      }
+    }
+
+    public void OnThisResult(bool result)
+    {
+      _resultTask.TrySetResult(result);
+    }
+
+    #endregion
+
+    #region Viewer lists / types
+
+    private static readonly Dictionary<string, ViewerList> ViewerLists = new Dictionary<string, ViewerList>
     {
       {PanoramaViewerList.Type, new PanoramaViewerList()},
       {ObliqueViewerList.Type, new ObliqueViewerList()}
@@ -39,11 +166,15 @@ namespace StreetSmart.WinForms.API
       { ViewerType.Oblique, ObliqueViewerList.Type }
     };
 
-    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList) Viewers[PanoramaViewerList.Type];
+    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList)ViewerLists[PanoramaViewerList.Type];
+
+    #endregion
+
+    #region Viewer functions
 
     public static void RegisterJsObjects(ChromiumWebBrowser browser)
     {
-      foreach (var viewerList in Viewers)
+      foreach (var viewerList in ViewerLists)
       {
         viewerList.Value.RegisterJsObject(browser);
       }
@@ -51,7 +182,7 @@ namespace StreetSmart.WinForms.API
 
     public static async Task<IViewer> RemoveViewerFromJsValue(string viewerType, string jsValue)
     {
-      return await Viewers[viewerType].RemoveViewerFromJsValue(jsValue);
+      return await ViewerLists[viewerType].RemoveViewerFromJsValue(jsValue);
     }
 
     public static async Task<IList<IViewer>> ToViewersFromJsValue(IList<ViewerType> viewerTypes, string jsValue)
@@ -60,45 +191,36 @@ namespace StreetSmart.WinForms.API
 
       foreach (var viewerType in viewerTypes)
       {
-        result.AddRange(await Viewers[ToViewerTypes[viewerType]].GetViewersFromJsValue(jsValue));
+        result.AddRange(await ViewerLists[ToViewerTypes[viewerType]].GetViewersFromJsValue(jsValue));
       }
 
       return result;
     }
 
-    public static void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
-    {
-      Viewers[PanoramaViewerList.Type].DestroyViewer(panoramaViewer);
-    }
-
-    public static IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
-    {
-      return (IPanoramaViewer) Viewers[PanoramaViewerList.Type].AddViewer(element, options);
-    }
-
     public static IList<IViewer> ToViewerList(Dictionary<string, object> viewers)
     {
-      return viewers.Select(viewer => Viewers[viewer.Key].AddViewer(viewer.Value.ToString())).ToList();
+      return viewers.Select(viewer => ViewerLists[viewer.Key].AddViewer(viewer.Value.ToString())).ToList();
     }
 
     public static IViewer ToViewer(string type, string name)
     {
-      return Viewers[type].AddViewer(name);
+      return ViewerLists[type].AddViewer(name);
     }
 
-    public abstract void RegisterJsObject(ChromiumWebBrowser browser);
+    #endregion
 
-    public abstract void DestroyViewer(IViewer viewer);
+    #region Panorama viewer functions
 
-    public abstract IViewer AddViewer(string name);
-
-    public virtual IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
+    public static void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
     {
-      return null;
+      (ViewerLists[PanoramaViewerList.Type] as PanoramaViewerList)?.DestroyViewer(panoramaViewer);
     }
 
-    protected abstract Task<IList<IViewer>> GetViewersFromJsValue(string jsValue);
+    public static IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
+    {
+      return (IPanoramaViewer)ViewerLists[PanoramaViewerList.Type].AddViewer(element, options);
+    }
 
-    protected abstract Task<IViewer> RemoveViewerFromJsValue(string jsValue);
+    #endregion
   }
 }

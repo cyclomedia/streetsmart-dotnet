@@ -27,29 +27,19 @@ using CefSharp.WinForms;
 using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
-using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Interfaces;
-using StreetSmart.WinForms.Properties;
 using StreetSmart.WinForms.Utils;
 
 using Orientation = StreetSmart.WinForms.Data.Orientation;
 
 namespace StreetSmart.WinForms.API
 {
-  internal class PanoramaViewer : IPanoramaViewer
+  internal class PanoramaViewer : Viewer, IPanoramaViewer
   {
     #region Members
 
-    private readonly ChromiumWebBrowser _browser;
     private readonly IDomElement _domElement;
-    private readonly PanoramaViewerList _panoramaViewerList;
     private ApiEventList _panoramaViewerEventList;
-
-    #endregion
-
-    #region Tasks
-
-    private TaskCompletionSource<object> _resultTask;
 
     #endregion
 
@@ -67,29 +57,19 @@ namespace StreetSmart.WinForms.API
 
     #region Properties
 
-    public string Name { get; }
+    public string JsImChange => (ViewerList as PanoramaViewerList)?.JsImChange;
 
-    public string JsThis => _panoramaViewerList.JsThis;
+    public string JsRecClick => (ViewerList as PanoramaViewerList)?.JsRecClick;
 
-    public string JsApi => Resources.JsApi;
+    public string JsTileLoadError => (ViewerList as PanoramaViewerList)?.JsTileLoadError;
 
-    public string JsResult => _panoramaViewerList.JsResult;
+    public string JsViewChange => (ViewerList as PanoramaViewerList)?.JsViewChange;
 
-    public string JsImNotFound => _panoramaViewerList.JsImNotFound;
+    public string JsViewLoadEnd => (ViewerList as PanoramaViewerList)?.JsViewLoadEnd;
 
-    public string JsImChange => _panoramaViewerList.JsImChange;
+    public string JsViewLoadStart => (ViewerList as PanoramaViewerList)?.JsViewLoadStart;
 
-    public string JsRecClick => _panoramaViewerList.JsRecClick;
-
-    public string JsTileLoadError => _panoramaViewerList.JsTileLoadError;
-
-    public string JsViewChange => _panoramaViewerList.JsViewChange;
-
-    public string JsViewLoadEnd => _panoramaViewerList.JsViewLoadEnd;
-
-    public string JsViewLoadStart => _panoramaViewerList.JsViewLoadStart;
-
-    public string JsTimeTravelChange => _panoramaViewerList.JsTimeTravelChange;
+    public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
     public string DomName => _domElement?.Name ?? string.Empty;
 
@@ -102,20 +82,17 @@ namespace StreetSmart.WinForms.API
     #region Constructors
 
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, IDomElement element,
-      IPanoramaViewerOptions options)
+      IPanoramaViewerOptions options) : base(browser, panoramaViewerList)
     {
-      _browser = browser;
-      _panoramaViewerList = panoramaViewerList;
       _domElement = element;
       Name = new JsNameGenerator(1)[0];
-      _browser.ExecuteScriptAsync($"{element}var {Name}={JsApi}.addPanoramaViewer({DomName},{options});");
+      browser.ExecuteScriptAsync($"{element}var {Name}={JsApi}.addPanoramaViewer({DomName},{options});");
       ConnectEvents();
     }
 
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
+      : base(browser, panoramaViewerList)
     {
-      _browser = browser;
-      _panoramaViewerList = panoramaViewerList;
       Name = name;
       ConnectEvents();
     }
@@ -123,16 +100,6 @@ namespace StreetSmart.WinForms.API
     #endregion
 
     #region Interface Functions
-
-    public async Task<bool> GetNavbarExpanded()
-    {
-      return (bool) await CallJsAsync(GetScript("getNavbarExpanded()"));
-    }
-
-    public async Task<bool> GetNavbarVisible()
-    {
-      return (bool) await CallJsAsync(GetScript("getNavbarVisible()"));
-    }
 
     public async Task<IOrientation> GetOrientation()
     {
@@ -151,16 +118,6 @@ namespace StreetSmart.WinForms.API
       return (bool) await CallJsAsync(GetScript("getRecordingsVisible()"));
     }
 
-    public async Task<bool> GetTimeTravelExpanded()
-    {
-      return (bool) await CallJsAsync(GetScript("getTimeTravelExpanded()"));
-    }
-
-    public async Task<bool> GetTimeTravelVisible()
-    {
-      return (bool) await CallJsAsync(GetScript("getTimeTravelVisible()"));
-    }
-
     public async Task<Color> GetViewerColor()
     {
       return GetColor((object[]) await CallJsAsync(GetScript("getViewerColor()")));
@@ -168,7 +125,7 @@ namespace StreetSmart.WinForms.API
 
     public void LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
-      _browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{srs.SrsComponent()});");
+      Browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{srs.SrsComponent()});");
     }
 
     public async Task<IRecording> OpenByAddress(string query, string srs = null)
@@ -188,62 +145,32 @@ namespace StreetSmart.WinForms.API
 
     public void RotateDown(double deltaPitch)
     {
-      _browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch});");
     }
 
     public void RotateLeft(double deltaYaw)
     {
-      _browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw});");
     }
 
     public void RotateRight(double deltaYaw)
     {
-      _browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw});");
     }
 
     public void RotateUp(double deltaPitch)
     {
-      _browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch});");
     }
 
     public void SetOrientation(IOrientation orientation)
     {
-      _browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
-    }
-
-    public void ToggleNavbarExpanded(bool expanded)
-    {
-      _browser.ExecuteScriptAsync($"{Name}.toggleNavbarExpanded({expanded.ToJsBool()});");
-    }
-
-    public void ToggleNavbarVisible(bool visible)
-    {
-      _browser.ExecuteScriptAsync($"{Name}.toggleNavbarVisible({visible.ToJsBool()});");
+      Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
     }
 
     public void ToggleRecordingsVisible(bool visible)
     {
-      _browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
-    }
-
-    public void ToggleTimeTravelExpanded(bool expanded)
-    {
-      _browser.ExecuteScriptAsync($"{Name}.toggleTimeTravelExpanded({expanded.ToJsBool()});");
-    }
-
-    public void ToggleTimeTravelVisible(bool visible)
-    {
-      _browser.ExecuteScriptAsync($"{Name}.toggleTimeTravelVisible({visible.ToJsBool()});");
-    }
-
-    public void ZoomIn()
-    {
-      _browser.ExecuteScriptAsync($"{Name}.zoomIn();");
-    }
-
-    public void ZoomOut()
-    {
-      _browser.ExecuteScriptAsync($"{Name}.zoomOut();");
+      Browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
     }
 
     #endregion
@@ -293,20 +220,6 @@ namespace StreetSmart.WinForms.API
 
     #endregion
 
-    #region Callbacks PanoramaViewer
-
-    public void OnResult(object result)
-    {
-      _resultTask.TrySetResult(result);
-    }
-
-    public void OnImageNotFoundException(string message)
-    {
-      _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
-    }
-
-    #endregion
-
     #region Functions
 
     public void ConnectEvents()
@@ -322,31 +235,18 @@ namespace StreetSmart.WinForms.API
         new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange)
       };
 
-      _browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
+      Browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
     }
 
     public void DestroyViewer()
     {
       string script = $"{_panoramaViewerEventList.Destroy}{JsApi}.destroyPanoramaViewer({Name},{DomName});";
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    private async Task<object> CallJsAsync(string script)
-    {
-      _resultTask = new TaskCompletionSource<object>();
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return _resultTask.Task.Result;
-    }
-
-    private string GetScript(string funcName)
-    {
-      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName});";
+      Browser.ExecuteScriptAsync(script);
     }
 
     private Color GetColor(object[] color)
     {
-      return Color.FromArgb((int) ((double) color[3]*255), (int) color[0], (int) color[1], (int) color[2]);
+      return Color.FromArgb((int) ((double) color[3] * 255), (int) color[0], (int) color[1], (int) color[2]);
     }
 
     public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs)

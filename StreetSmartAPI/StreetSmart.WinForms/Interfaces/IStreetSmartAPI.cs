@@ -29,11 +29,17 @@ namespace StreetSmart.WinForms.Interfaces
   /// </summary>
   public interface IStreetSmartAPI
   {
+    #region API events
+
     /// <summary>
     /// Triggers when the frame is loaded.
     /// After this trigger, you can login in the the API.
     /// </summary>
     event EventHandler APIReady;
+
+    #endregion
+
+    #region Interface events
 
     /// <summary>
     /// Measurement changed or added.
@@ -50,10 +56,18 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
 
+    #endregion
+
+    #region StreetSmartAPI
+
     /// <summary>
     /// The GUI of StreetSmart
     /// </summary>
     StreetSmartGUI GUI { get; }
+
+    #endregion
+
+    #region CefSharp functions
 
     /// <summary>
     /// Show the developer tools
@@ -64,6 +78,26 @@ namespace StreetSmart.WinForms.Interfaces
     /// Close the developer tools
     /// </summary>
     void CloseDefTools();
+
+    #endregion
+
+    #region Interface functions
+
+    /// <summary>
+    /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
+    /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
+    /// </summary>
+    /// <param name="name">Name of the layer</param>
+    /// <param name="geoJson">GeoJSON object containing the layer data</param>
+    void AddOverlay(string name, string geoJson);
+
+    /// <summary>
+    /// Add a GeoJSON overlay to the panorama viewer
+    /// </summary>
+    /// <param name="name">Name of the layer</param>
+    /// <param name="geoJson">GeoJSON object containing the layer data</param>
+    /// <param name="sourceSrs">EPSG code (srs) for the source GeoJSON</param>
+    void AddOverlay(string name, string geoJson, string sourceSrs);
 
     /// <summary>
     /// Adds a PanoramaViewer to a specified DOM-element
@@ -78,6 +112,11 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="viewer">Instance of the PanoramaViewer you want to destroy.</param>
     void DestroyPanoramaViewer(IPanoramaViewer viewer);
+
+    /// <summary>
+    /// Returns the active measurement in GeoJSON format
+    /// </summary>
+    Task<dynamic> GetMeasurementInfo();
 
     /// <summary>
     /// Returns the object containing the address search settings
@@ -139,26 +178,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     void StopMeasurementMode();
 
-    /// <summary>
-    /// Add a GeoJSON overlay to the panorama viewer
-    /// </summary>
-    /// <param name="name">Name of the layer</param>
-    /// <param name="geoJson">GeoJSON object containing the layer data</param>
-    /// <param name="sourceSrs">EPSG code (srs) for the source GeoJSON</param>
-    void AddOverlay(string name, string geoJson, string sourceSrs);
-
-    /// <summary>
-    /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
-    /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
-    /// </summary>
-    /// <param name="name">Name of the layer</param>
-    /// <param name="geoJson">GeoJSON object containing the layer data</param>
-    void AddOverlay(string name, string geoJson);
-
-    /// <summary>
-    /// Returns the active measurement in GeoJSON format
-    /// </summary>
-    Task<dynamic> GetMeasurementInfo();
+    #endregion
   }
 
   // ReSharper restore InconsistentNaming

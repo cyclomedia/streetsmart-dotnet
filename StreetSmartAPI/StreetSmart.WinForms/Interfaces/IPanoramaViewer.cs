@@ -29,6 +29,8 @@ namespace StreetSmart.WinForms.Interfaces
   /// </summary>
   public interface IPanoramaViewer : IViewer
   {
+    #region Interface events
+
     /// <summary>
     /// Triggers when the loaded panorama is altered.
     /// </summary>
@@ -45,6 +47,11 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
 
     /// <summary>
+    /// Triggers when time travel date is changed
+    /// </summary>
+    event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+
+    /// <summary>
     /// Triggers when the view (pitch, hFov or yaw) of the panorama is altered.
     /// </summary>
     event EventHandler<IEventArgs<IOrientation>> ViewChange;
@@ -59,24 +66,9 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
 
-    /// <summary>
-    /// Triggers when time travel date is changed
-    /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+    #endregion
 
-    /// <summary>
-    /// Returns the navbarExpanded state.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns> The navbarExpanded state.</returns>
-    Task<bool> GetNavbarExpanded();
-
-    /// <summary>
-    /// Returns the visibility state of the navbar.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>The visibility state of the navbar.</returns>
-    Task<bool> GetNavbarVisible();
+    #region Interface functions
 
     /// <summary>
     /// Returns the orientation in degrees (yaw, pitch, hFov) for this CycloramaViewer.
@@ -98,20 +90,6 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <returns>Whether recordings are visible.</returns>
     Task<bool> GetRecordingsVisible();
-
-    /// <summary>
-    /// Returns whether the timetravel component is visible or hidden.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>Whether the timetravel component is visible or hidden.</returns>
-    Task<bool> GetTimeTravelExpanded();
-
-    /// <summary>
-    /// Returns whether timetravel is enabled for the viewer.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>Whether timetravel is enabled for the viewer.</returns>
-    Task<bool> GetTimeTravelVisible();
 
     /// <summary>
     /// Gets the viewer color.
@@ -179,43 +157,11 @@ namespace StreetSmart.WinForms.Interfaces
     void SetOrientation(IOrientation orientation);
 
     /// <summary>
-    /// Modify the state of navbar expanded in the panorama viewer store.
-    /// </summary>
-    /// <param name="expanded">Sets expanded to this value.</param>
-    void ToggleNavbarExpanded(bool expanded);
-
-    /// <summary>
-    /// Toggles the visibility of the navbar in the PanoramaViewer.
-    /// </summary>
-    /// <param name="visible">Sets visibility to this value.</param>
-    void ToggleNavbarVisible(bool visible);
-
-    /// <summary>
     /// Toggles the visibility of the recording features in the PanoramaViewer.
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleRecordingsVisible(bool visible);
 
-    /// <summary>
-    /// Expands or hides the timetravel components.
-    /// </summary>
-    /// <param name="expanded">Value for expanding or hiding time travel.</param>
-    void ToggleTimeTravelExpanded(bool expanded);
-
-    /// <summary>
-    /// Enables or disables timeTravel in the viewer.
-    /// </summary>
-    /// <param name="visible">Value for enabling or disablingtoggles time travel.</param>
-    void ToggleTimeTravelVisible(bool visible);
-
-    /// <summary>
-    /// Zoom in in the Panorama. This will alter the hFov.
-    /// </summary>
-    void ZoomIn();
-
-    /// <summary>
-    /// Zoom out in the Panorama. This will alter the hFov.
-    /// </summary>
-    void ZoomOut();
+    #endregion
   }
 }

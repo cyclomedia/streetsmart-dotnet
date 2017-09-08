@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.Threading.Tasks;
+
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
@@ -23,5 +25,70 @@ namespace StreetSmart.WinForms.Interfaces
   /// </summary>
   public interface IViewer
   {
+    #region Interface functions
+
+    /// <summary>
+    /// Returns the navbarExpanded state.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns> The navbarExpanded state.</returns>
+    Task<bool> GetNavbarExpanded();
+
+    /// <summary>
+    /// Returns the visibility state of the navbar.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The visibility state of the navbar.</returns>
+    Task<bool> GetNavbarVisible();
+
+    /// <summary>
+    /// Returns whether the timetravel component is visible or hidden.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>Whether the timetravel component is visible or hidden.</returns>
+    Task<bool> GetTimeTravelExpanded();
+
+    /// <summary>
+    /// Returns whether timetravel is enabled for the viewer.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>Whether timetravel is enabled for the viewer.</returns>
+    Task<bool> GetTimeTravelVisible();
+
+    /// <summary>
+    /// Modify the state of navbar expanded in the panorama viewer store.
+    /// </summary>
+    /// <param name="expanded">Sets expanded to this value.</param>
+    void ToggleNavbarExpanded(bool expanded);
+
+    /// <summary>
+    /// Toggles the visibility of the navbar in the PanoramaViewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleNavbarVisible(bool visible);
+
+    /// <summary>
+    /// Expands or hides the timetravel components.
+    /// </summary>
+    /// <param name="expanded">Value for expanding or hiding time travel.</param>
+    void ToggleTimeTravelExpanded(bool expanded);
+
+    /// <summary>
+    /// Enables or disables timeTravel in the viewer.
+    /// </summary>
+    /// <param name="visible">Value for enabling or disablingtoggles time travel.</param>
+    void ToggleTimeTravelVisible(bool visible);
+
+    /// <summary>
+    /// Zoom in in the Panorama. This will alter the hFov.
+    /// </summary>
+    void ZoomIn();
+
+    /// <summary>
+    /// Zoom out in the Panorama. This will alter the hFov.
+    /// </summary>
+    void ZoomOut();
+
+    #endregion
   }
 }

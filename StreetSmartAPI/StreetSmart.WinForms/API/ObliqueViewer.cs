@@ -22,28 +22,13 @@ using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.API
 {
-  internal class ObliqueViewer : IObliqueViewer
+  internal class ObliqueViewer : Viewer, IObliqueViewer
   {
-    #region Members
-
-    private readonly ChromiumWebBrowser _browser;
-    private readonly ObliqueViewerList _obliqueViewerList;
-
-    #endregion
-
-    #region Properties
-
-    public string Name { get; }
-
-    #endregion
-
     #region Constructors
 
     public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
+      : base(browser, obliqueViewerList, name)
     {
-      _browser = browser;
-      _obliqueViewerList = obliqueViewerList;
-      Name = name;
     }
 
     #endregion
