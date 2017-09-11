@@ -24,7 +24,7 @@ using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.API
 {
-  internal class PanoramaViewerList: ViewerList
+  internal class PanoramaViewerList : ViewerList
   {
     #region Properties
 
@@ -78,12 +78,14 @@ namespace StreetSmart.WinForms.API
 
     public string DisconnectEvents()
     {
-      return Viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{(viewer.Value as PanoramaViewer)?.DisconnectEventsScript}");
+      return Viewers.Aggregate(string.Empty,
+        (current, viewer) => $"{current}{(viewer.Value as PanoramaViewer)?.DisconnectEventsScript}");
     }
 
     public string ConnectEvents()
     {
-      return Viewers.Aggregate(string.Empty, (current, viewer) => $"{current}{(viewer.Value as PanoramaViewer)?.ConnectEventsScript}");
+      return Viewers.Aggregate(string.Empty,
+        (current, viewer) => $"{current}{(viewer.Value as PanoramaViewer)?.ConnectEventsScript}");
     }
 
     #endregion

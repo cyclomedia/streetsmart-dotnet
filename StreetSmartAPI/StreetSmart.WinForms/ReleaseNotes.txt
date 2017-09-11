@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
-Version: 17.2.2.0
-================
+Version: 17.2.0
+===============
 - Start release notes
+
+Version: 17.3.0
+===============
+- Add the ViewerAdded and ViewerRemoved events to the StreetSmartApi
+- Expand the oblique viewer with the same functions as the panorama viewer

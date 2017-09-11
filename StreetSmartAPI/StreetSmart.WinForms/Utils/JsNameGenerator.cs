@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace StreetSmart.WinForms.Utils
 {
@@ -30,29 +29,6 @@ namespace StreetSmart.WinForms.Utils
       {
         Add($"type{Guid.NewGuid():N}");
       }
-    }
-
-    public string JsGetTypeDef()
-    {
-      return this.Aggregate(string.Empty, (current, name) => $"{current}var {name};");
-    }
-
-    public string JsAssignToNames(string typeName)
-    {
-      string result = string.Empty;
-
-      for (int i = 0; i < Count; i++)
-      {
-        result = $"{result}{this[i]}={typeName}[{i}];";
-      }
-
-      return result;
-    }
-
-    public string JsToResultTypes(string resultType)
-    {
-      return this.Aggregate($"let {resultType}={{}};",
-        (current, type) => $"{current}{resultType}[{type}.getType()]={type.ToQuote()};");
     }
   }
 }
