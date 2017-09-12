@@ -77,6 +77,11 @@ namespace StreetSmart.WinForms.API
       browser.RegisterJsObject(JsThis, this);
     }
 
+    public override void Clear()
+    {
+      _viewers.Clear();
+    }
+
     public override IViewer AddViewer(string name)
     {
       return RegisterViewer(new PanoramaViewer(_browser, this, name));

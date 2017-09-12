@@ -58,6 +58,11 @@ namespace StreetSmart.WinForms.API
       browser.RegisterJsObject(JsThis, this);
     }
 
+    public override void Clear()
+    {
+      _viewers.Clear();
+    }
+
     public override IViewer AddViewer(string name)
     {
       ObliqueViewer viewer = new ObliqueViewer(_browser, this, name);

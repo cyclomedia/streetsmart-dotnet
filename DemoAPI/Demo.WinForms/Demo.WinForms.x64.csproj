@@ -78,6 +78,7 @@
     <Compile Include="Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Demo.resx">
@@ -93,6 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="x64\cef.pak" />
     <None Include="x64\cef_100_percent.pak" />
     <None Include="x64\cef_200_percent.pak" />

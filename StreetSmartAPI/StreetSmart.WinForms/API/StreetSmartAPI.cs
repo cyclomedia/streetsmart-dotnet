@@ -129,6 +129,13 @@ namespace StreetSmart.WinForms.API
       return panoramaViewer;
     }
 
+    public void Destroy(IOptions options)
+    {
+      RemoveMeasurementEvents();
+      _browser.ExecuteScriptAsync(GetScript($"destroy({options})"));
+      ViewerList.ClearViewers();
+    }
+
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
     {
       ViewerList.DestroyPanoramaViewer(viewer);
@@ -296,6 +303,15 @@ namespace StreetSmart.WinForms.API
         };
 
         _browser.ExecuteScriptAsync($"{_apiEventList}");
+      }
+    }
+
+    public void RemoveMeasurementEvents()
+    {
+      if (_apiEventList != null)
+      {
+        _browser.ExecuteScriptAsync($"{_apiEventList.Destroy}");
+        _apiEventList = null;
       }
     }
 

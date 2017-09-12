@@ -43,6 +43,14 @@ namespace StreetSmart.WinForms.API
       }
     }
 
+    public static void ClearViewers()
+    {
+      foreach (var viewerList in Viewers)
+      {
+        viewerList.Value.Clear();
+      }
+    }
+
     public static void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
     {
       Viewers[PanoramaViewerList.Type].DestroyViewer(panoramaViewer);
@@ -59,6 +67,8 @@ namespace StreetSmart.WinForms.API
     }
 
     public abstract void RegisterJsObject(ChromiumWebBrowser browser);
+
+    public abstract void Clear();
 
     public abstract void DestroyViewer(IViewer viewer);
 

@@ -89,6 +89,9 @@
       <Link>Demo.designer.cs</Link>
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs">
+      <Link>Login.cs</Link>
+    </Compile>
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs">
       <Link>Program.cs</Link>
     </Compile>
@@ -113,6 +116,9 @@
     </Compile>
     <None Include="..\..\DemoAPI\Demo.WinForms\App.config">
       <Link>App.config</Link>
+    </None>
+    <None Include="..\..\DemoAPI\Demo.WinForms\packages.config">
+      <Link>packages.config</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
