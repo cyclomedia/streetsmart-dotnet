@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -207,11 +206,6 @@ namespace StreetSmart.WinForms.API
       }
 
       return result;
-    }
-
-    public static IList<IViewer> ToViewerList(Dictionary<string, object> viewers)
-    {
-      return viewers.Select(viewer => ViewerLists[viewer.Key].AddViewer(viewer.Value.ToString())).ToList();
     }
 
     public static IViewer ToViewer(string type, string name)
