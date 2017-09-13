@@ -41,6 +41,9 @@ namespace Demo.WinForms
     private readonly List<IPanoramaViewer> _panoramaViewers;
     private readonly List<IObliqueViewer> _obliqueViewers;
     private readonly CultureInfo _ci;
+    private readonly Login _login;
+
+    private IOptions _options;
 
     #endregion
 
@@ -66,6 +69,7 @@ namespace Demo.WinForms
     public Demo()
     {
       InitializeComponent();
+      _login = Login.Instance;
       _ci = CultureInfo.InvariantCulture;
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
@@ -80,15 +84,11 @@ namespace Demo.WinForms
       plStreetSmart.Controls.Add(_api.GUI);
 
       grLogin.Enabled = false;
-      grOpenByAddress.Enabled = false;
-      grViewerToggles.Enabled = false;
-      grRotationsZoomInOut.Enabled = false;
-      grAPIInfo.Enabled = false;
-      grOpenByQuery.Enabled = false;
-      grCoordinate.Enabled = false;
-      grOrientation.Enabled = false;
-      grOpenByImageId.Enabled = false;
-      grRecordingViewerColorPermissions.Enabled = false;
+      DisableGroups();
+
+      txtUsername.Text = _login.Username;
+      txtPassword.Text = _login.Password;
+      txtAPIKey.Text = _login.ApiKey;
     }
 
     #region events api
@@ -103,6 +103,7 @@ namespace Demo.WinForms
       else
       {
         grLogin.Enabled = true;
+        btnLogin.Enabled = true;
       }
     }
 
@@ -221,12 +222,12 @@ namespace Demo.WinForms
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
       IDomElement element = DomElementFactory.Create();
-      IOptions options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
+      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
         addressSettings, element);
 
       try
       {
-        await _api.Init(options);
+        await _api.Init(_options);
 
         if (grAPIInfo.InvokeRequired)
         {
@@ -273,12 +274,60 @@ namespace Demo.WinForms
           grOpenByImageId.Enabled = true;
         }
 
+        if (btnLogin.InvokeRequired)
+        {
+          btnLogin.Invoke(new MethodInvoker(() => btnLogin.Enabled = false));
+        }
+        else
+        {
+          btnLogin.Enabled = false;
+        }
+
         MessageBox.Show("Login successfully");
       }
       catch (StreetSmartLoginFailedException ex)
       {
         MessageBox.Show(ex.Message);
       }
+    }
+
+    private void btnLogout_Click(object sender, EventArgs e)
+    {
+      if (_options != null)
+      {
+        _api.Destroy(_options);
+        _panoramaViewers.Clear();
+        _obliqueViewers.Clear();
+
+        btnLogin.Enabled = true;
+        DisableGroups();
+      }
+    }
+
+    private void btnSave_Click(object sender, EventArgs e)
+    {
+      _login.Save();
+      MessageBox.Show("The username, password and API Key have been saved.");
+    }
+
+    private void btnLogin_EnabledChanged(object sender, EventArgs e)
+    {
+      btnLogout.Enabled = !btnLogin.Enabled;
+    }
+
+    private void txtUsername_TextChanged(object sender, EventArgs e)
+    {
+      _login.Username = txtUsername.Text;
+    }
+
+    private void txtPassword_TextChanged(object sender, EventArgs e)
+    {
+      _login.Password = txtPassword.Text;
+    }
+
+    private void txtAPIKey_TextChanged(object sender, EventArgs e)
+    {
+      _login.ApiKey = txtAPIKey.Text;
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -634,6 +683,48 @@ namespace Demo.WinForms
       _api?.CloseDefTools();
     }
 
+    private void btnStartMeasurementMode_Click(object sender, EventArgs e)
+    {
+      MeasurementGeometryType? type = null;
+
+      if (rbMeasPoint.Checked)
+      {
+        type = MeasurementGeometryType.Point;
+      }
+      else if (rbMeasLineString.Checked)
+      {
+        type = MeasurementGeometryType.LineString;
+      }
+      else if (rbMeasPolygon.Checked)
+      {
+        type = MeasurementGeometryType.Polygon;
+      }
+
+      IMeasurementOptions options = (type == null)
+        ? MeasurementOptionsFactory.Create()
+        : MeasurementOptionsFactory.Create((MeasurementGeometryType)type);
+
+      _api.StartMeasurementMode(PanoramaViewer, options);
+    }
+
+    private void btnStopMeasurementMode_Click(object sender, EventArgs e)
+    {
+      _api.StopMeasurementMode();
+    }
+
+    private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
+    {
+      var measurement = await _api.GetMeasurementInfo();
+      string json = JsonConvert.SerializeObject(measurement);
+      const int maxLength = 128;
+      AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
+    }
+
+    private void btnAddOverlay_Click(object sender, EventArgs e)
+    {
+      _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
+    }
+
     #endregion
 
     #region Private Functions
@@ -700,6 +791,15 @@ namespace Demo.WinForms
       {
         grRecordingViewerColorPermissions.Enabled = value;
       }
+
+      if (grMeasurement.InvokeRequired)
+      {
+        grMeasurement.Invoke(new MethodInvoker(() => grMeasurement.Enabled = value));
+      }
+      else
+      {
+        grMeasurement.Enabled = value;
+      }
     }
 
     private void PrintRecordingText(IRecording recording)
@@ -722,48 +822,20 @@ namespace Demo.WinForms
       txtRecordingViewerColorPermissions.Text = text;
     }
 
+    private void DisableGroups()
+    {
+      grOpenByAddress.Enabled = false;
+      grViewerToggles.Enabled = false;
+      grRotationsZoomInOut.Enabled = false;
+      grAPIInfo.Enabled = false;
+      grOpenByQuery.Enabled = false;
+      grCoordinate.Enabled = false;
+      grOrientation.Enabled = false;
+      grOpenByImageId.Enabled = false;
+      grRecordingViewerColorPermissions.Enabled = false;
+      grMeasurement.Enabled = false;
+    }
+
     #endregion
-
-    private void btnStartMeasurementMode_Click(object sender, EventArgs e)
-    {
-      MeasurementGeometryType? type = null;
-
-      if (rbMeasPoint.Checked)
-      {
-        type = MeasurementGeometryType.Point;
-      }
-      else if (rbMeasLineString.Checked)
-      {
-        type = MeasurementGeometryType.LineString;
-      }
-      else if (rbMeasPolygon.Checked)
-      {
-        type = MeasurementGeometryType.Polygon;
-      }
-
-      IMeasurementOptions options = (type == null)
-        ? MeasurementOptionsFactory.Create()
-        : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
-
-      _api.StartMeasurementMode(PanoramaViewer, options);
-    }
-
-    private void btnStopMeasurementMode_Click(object sender, EventArgs e)
-    {
-      _api.StopMeasurementMode();
-    }
-
-    private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
-    {
-      var measurement = await _api.GetMeasurementInfo();
-      string json = JsonConvert.SerializeObject(measurement);
-      const int maxLength = 128;
-      AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
-    }
-
-    private void btnAddOverlay_Click(object sender, EventArgs e)
-    {
-      _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
-    }
   }
 }

@@ -184,6 +184,14 @@ namespace StreetSmart.WinForms.API
       }
     }
 
+    public static void ClearViewers()
+    {
+      foreach (var viewerList in ViewerLists)
+      {
+        viewerList.Value.Clear();
+      }
+    }
+
     public static async Task<IViewer> RemoveViewerFromJsValue(string viewerType, string jsValue)
     {
       return await ViewerLists[viewerType].RemoveViewerFromJsValue(jsValue);
@@ -209,6 +217,11 @@ namespace StreetSmart.WinForms.API
     public static IViewer ToViewer(string type, string name)
     {
       return ViewerLists[type].AddViewer(name);
+    }
+
+    public void Clear()
+    {
+      Viewers.Clear();
     }
 
     #endregion

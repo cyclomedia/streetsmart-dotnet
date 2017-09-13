@@ -108,6 +108,12 @@ namespace StreetSmart.WinForms.Interfaces
     IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options);
 
     /// <summary>
+    /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
+    /// </summary>
+    /// <param name="options">Object containing the options used for destroying the API.</param>
+    void Destroy(IOptions options);
+
+    /// <summary>
     /// Destroys panorama viewer
     /// </summary>
     /// <param name="viewer">Instance of the PanoramaViewer you want to destroy.</param>

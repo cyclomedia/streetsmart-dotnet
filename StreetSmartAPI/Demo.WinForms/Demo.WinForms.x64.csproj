@@ -73,6 +73,9 @@
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs">
+      <Link>Login.cs</Link>
+    </Compile>
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs" />
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
@@ -95,7 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\DemoAPI\Demo.WinForms\App.config" />
-    <None Include="packages.config" />
+    <None Include="..\..\DemoAPI\Demo.WinForms\packages.config">
+      <Link>packages.config</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StreetSmart.WinForms\StreetSmart.WinForms.x64.csproj">

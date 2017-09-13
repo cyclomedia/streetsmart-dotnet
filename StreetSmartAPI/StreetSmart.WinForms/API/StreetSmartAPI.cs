@@ -136,6 +136,14 @@ namespace StreetSmart.WinForms.API
       return ViewerList.AddPanoramaViewer(element, options);
     }
 
+    public void Destroy(IOptions options)
+    {
+      RemoveMeasurementEvents();
+      RemoveViewerEvents();
+      _browser.ExecuteScriptAsync(GetScript($"destroy({options})"));
+      ViewerList.ClearViewers();
+    }
+
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
     {
       ViewerList.DestroyPanoramaViewer(viewer);
@@ -313,17 +321,8 @@ namespace StreetSmart.WinForms.API
 
     private void ReAssignMeasurementEvents()
     {
-      if (_apiMeasurementEventList != null)
-      {
-        _browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
-      }
-
-      _apiMeasurementEventList = new ApiEventList
-      {
-        new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
-      };
-
-      _browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+      RemoveMeasurementEvents();
+      AddMeasurementEvents();
     }
 
     private void AddViewerEvents()
@@ -337,6 +336,37 @@ namespace StreetSmart.WinForms.API
         };
 
         _browser.ExecuteScriptAsync($"{_apiViewerEventList}");
+      }
+    }
+
+    public void AddMeasurementEvents()
+    {
+      if (_apiMeasurementEventList == null)
+      {
+        _apiMeasurementEventList = new ApiEventList
+        {
+          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+        };
+
+        _browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+      }
+    }
+
+    public void RemoveViewerEvents()
+    {
+      if (_apiViewerEventList != null)
+      {
+        _browser.ExecuteScriptAsync(_apiViewerEventList.Destroy);
+        _apiViewerEventList = null;
+      }
+    }
+
+    public void RemoveMeasurementEvents()
+    {
+      if (_apiMeasurementEventList != null)
+      {
+        _browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
+        _apiMeasurementEventList = null;
       }
     }
 
