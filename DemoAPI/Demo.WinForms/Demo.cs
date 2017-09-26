@@ -51,6 +51,8 @@ namespace Demo.WinForms
 
     private IPanoramaViewer PanoramaViewer => (_panoramaViewers.Count == 0) ? null : _panoramaViewers[_panoramaViewers.Count - 1];
 
+    private IObliqueViewer ObliqueViewer => (_obliqueViewers.Count == 0) ? null : _obliqueViewers[_obliqueViewers.Count - 1];
+
     private int DeltaYawPitch
     {
       get
@@ -89,6 +91,30 @@ namespace Demo.WinForms
       txtUsername.Text = _login.Username;
       txtPassword.Text = _login.Password;
       txtAPIKey.Text = _login.ApiKey;
+
+      ObliqueViewerButtons[] obButtons =
+      {
+        ObliqueViewerButtons.CenterMap, ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.CopyLink,
+        ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+        ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+      };
+
+      foreach (var obButton in obButtons)
+      {
+        cbViewerButton.Items.Add(new ViewerButtonsBox(obButton));
+      }
+
+      PanoramaViewerButtons[] pnButtons =
+      {
+        PanoramaViewerButtons.CenterMap, PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.CopyLink,
+        PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
+        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+      };
+
+      foreach (var pnButton in pnButtons)
+      {
+        cbViewerButton.Items.Add(new ViewerButtonsBox(pnButton));
+      }
     }
 
     #region events api
@@ -383,7 +409,7 @@ namespace Demo.WinForms
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text);
-        IList<IViewer> viewers = await _api.OpenByQuery(txtAdress.Text, viewerOptions);
+        IList<IViewer> viewers = await _api.Open(txtAdress.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
         {
@@ -519,7 +545,7 @@ namespace Demo.WinForms
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
-        IList<IViewer> viewers = await _api.OpenByQuery(txtImageId.Text, viewerOptions);
+        IList<IViewer> viewers = await _api.Open(txtImageId.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
         {
@@ -573,7 +599,7 @@ namespace Demo.WinForms
           : $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}, {ParseDouble(txtZ.Text).ToString(_ci)}";
 
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text);
-        IList<IViewer> viewers = await _api.OpenByQuery(txtcoordinate, viewerOptions);
+        IList<IViewer> viewers = await _api.Open(txtcoordinate, viewerOptions);
 
         foreach (IViewer viewer in viewers)
         {
@@ -633,7 +659,7 @@ namespace Demo.WinForms
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
-        IList<IViewer> viewers = await _api.OpenByQuery(txtOpenByQuery.Text, viewerOptions);
+        IList<IViewer> viewers = await _api.Open(txtOpenByQuery.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
         {
@@ -714,7 +740,7 @@ namespace Demo.WinForms
 
     private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
     {
-      var measurement = await _api.GetMeasurementInfo();
+      var measurement = await _api.GetActiveMeasurement();
       string json = JsonConvert.SerializeObject(measurement);
       const int maxLength = 128;
       AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
@@ -723,6 +749,69 @@ namespace Demo.WinForms
     private void btnAddOverlay_Click(object sender, EventArgs e)
     {
       _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
+    }
+
+    private async void btnGetButtonEnabled_Click(object sender, EventArgs e)
+    {
+      txtRecordingViewerColorPermissions.Text = string.Empty;
+
+      if (ObliqueViewer != null)
+      {
+        ObliqueViewerButtons[] buttons =
+        {
+          ObliqueViewerButtons.CenterMap, ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.CopyLink,
+          ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+          ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+        };
+
+        foreach (var button in buttons)
+        {
+          bool enabled = await ObliqueViewer.GetButtonEnabled(button);
+          txtRecordingViewerColorPermissions.Text += $@"Oblique viewer: {button}: {enabled}{Environment.NewLine}";
+        }
+      }
+
+      if (PanoramaViewer != null)
+      {
+        PanoramaViewerButtons[] buttons =
+        {
+          PanoramaViewerButtons.CenterMap, PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.CopyLink,
+          PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
+          PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+        };
+
+        foreach (var button in buttons)
+        {
+          bool enabled = await PanoramaViewer.GetButtonEnabled(button);
+          txtRecordingViewerColorPermissions.Text += $@"Panorama viewer: {button}: {enabled}{Environment.NewLine}";
+        }
+      }
+    }
+
+    private async void btnSetButtonVisibility_Click(object sender, EventArgs e)
+    {
+      var selectedItem = ((ViewerButtonsBox) cbViewerButton.SelectedItem).ButtonId;
+
+      if (selectedItem is ObliqueViewerButtons ovButtons && ObliqueViewer != null)
+      {
+        bool enabled = await ObliqueViewer.GetButtonEnabled(ovButtons);
+        ObliqueViewer.ToggleButtonEnabled(ovButtons, !enabled);
+      }
+
+      if (selectedItem is PanoramaViewerButtons pvButtons && PanoramaViewer != null)
+      {
+        bool enabled = await PanoramaViewer.GetButtonEnabled(pvButtons);
+        PanoramaViewer.ToggleButtonEnabled(pvButtons, !enabled);
+      }
+    }
+
+    private async void btnGetDebugLogs_Click(object sender, EventArgs e)
+    {
+      string[] debugLogs = await _api.GetDebugLogs();
+      txtRecordingViewerColorPermissions.Text = string.Empty;
+      string permissionsString = debugLogs.Aggregate(string.Empty,
+        (current, permission) => $"{current}{permission}{Environment.NewLine}");
+      txtRecordingViewerColorPermissions.Text = permissionsString;
     }
 
     #endregion

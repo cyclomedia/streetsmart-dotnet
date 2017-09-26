@@ -141,6 +141,16 @@ namespace StreetSmart.WinForms.API
 
     #region Functions
 
+    protected async Task<bool> GetButtonEnabled(Enum buttonId)
+    {
+      return (bool) await CallJsAsync(GetScript($"getButtonEnabled({buttonId.Description()})"));
+    }
+
+    protected void ToggleButtonEnabled(Enum buttonId, bool enabled)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleButtonEnabled({buttonId.Description()},{enabled.ToJsBool()})");
+    }
+
     protected async Task<object> CallJsAsync(string script)
     {
       _resultTask = new TaskCompletionSource<object>();

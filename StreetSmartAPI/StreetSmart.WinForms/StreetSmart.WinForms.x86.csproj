@@ -153,6 +153,8 @@
     <Compile Include="Interfaces\IViewerOptions.cs" />
     <Compile Include="Interfaces\IViewerTypes.cs" />
     <Compile Include="Interfaces\MeasurementGeometryType.cs" />
+    <Compile Include="Interfaces\ObliqueViewerButtons.cs" />
+    <Compile Include="Interfaces\PanoramaViewerButtons.cs" />
     <Compile Include="Interfaces\StyleElementNumberType.cs" />
     <Compile Include="Data\DomElement\StyleElementNumberValue.cs" />
     <Compile Include="Data\DomElement\StyleElementValue.cs" />

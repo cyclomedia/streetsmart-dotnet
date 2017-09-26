@@ -101,6 +101,11 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
+    public async Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId)
+    {
+      return await base.GetButtonEnabled(buttonId);
+    }
+
     public async Task<IOrientation> GetOrientation()
     {
       return new Orientation((Dictionary<string, object>) await CallJsAsync(GetScript("getOrientation()")));
@@ -166,6 +171,11 @@ namespace StreetSmart.WinForms.API
     public void SetOrientation(IOrientation orientation)
     {
       Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
+    }
+
+    public void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled)
+    {
+      base.ToggleButtonEnabled(buttonId, enabled);
     }
 
     public void ToggleRecordingsVisible(bool visible)

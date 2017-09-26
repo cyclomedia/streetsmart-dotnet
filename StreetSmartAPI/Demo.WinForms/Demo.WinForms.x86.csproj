@@ -98,6 +98,9 @@
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\viewerButtonsBox.cs">
+      <Link>viewerButtonsBox.cs</Link>
+    </Compile>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
       <Link>Demo.resx</Link>
       <DependentUpon>Demo.cs</DependentUpon>

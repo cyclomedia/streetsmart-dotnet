@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System.Threading.Tasks;
 using CefSharp.WinForms;
 
 using StreetSmart.WinForms.Interfaces;
@@ -29,6 +30,20 @@ namespace StreetSmart.WinForms.API
     public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
       : base(browser, obliqueViewerList, name)
     {
+    }
+
+    #endregion
+
+    #region Interface Functions
+
+    public async Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId)
+    {
+      return await base.GetButtonEnabled(buttonId);
+    }
+
+    public void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled)
+    {
+      base.ToggleButtonEnabled(buttonId, enabled);
     }
 
     #endregion

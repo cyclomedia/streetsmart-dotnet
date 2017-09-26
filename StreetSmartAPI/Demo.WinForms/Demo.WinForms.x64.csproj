@@ -86,6 +86,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\viewerButtonsBox.cs">
+      <Link>viewerButtonsBox.cs</Link>
+    </Compile>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>

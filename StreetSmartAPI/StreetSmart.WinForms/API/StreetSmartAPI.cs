@@ -131,6 +131,23 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
+    public void AddOverlay(string name, string geoJson, string srs = null)
+    {
+      string script;
+
+      if (srs == null)
+      {
+        var json = JObject.Parse(geoJson);
+        script = GetScript($"addOverlay({name.ToQuote()}, {json})");
+      }
+      else
+      {
+        script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {srs.ToQuote()})");
+      }
+
+      _browser.ExecuteScriptAsync(script);
+    }
+
     public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
       return ViewerList.AddPanoramaViewer(element, options);
@@ -147,6 +164,13 @@ namespace StreetSmart.WinForms.API
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
     {
       ViewerList.DestroyPanoramaViewer(viewer);
+    }
+
+    public async Task<dynamic> GetActiveMeasurement()
+    {
+      var script = GetScriptStringify("getActiveMeasurement()");
+      var measurement = (string)await CallJsAsync(script);
+      return JObject.Parse(measurement);
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -169,6 +193,11 @@ namespace StreetSmart.WinForms.API
       return (string) await CallJsAsync(GetScript("getApplicationVersion()"));
     }
 
+    public async Task<string[]> GetDebugLogs()
+    {
+      return ((object[]) await CallJsAsync(GetScript("getDebugLogs()"))).Cast<string>().ToArray();
+    }
+
     public async Task<string[]> GetPermissions()
     {
       return ((object[]) await CallJsAsync(GetScript("getPermissions()"))).Cast<string>().ToArray();
@@ -188,7 +217,7 @@ namespace StreetSmart.WinForms.API
       AddViewerEvents();
     }
 
-    public async Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions options)
+    public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
     {
       string typeResult = "r";      
       string resultType = "resultOpenByQuery";
@@ -215,26 +244,6 @@ namespace StreetSmart.WinForms.API
     public void StopMeasurementMode()
     {
       _browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
-    }
-
-    public async Task<dynamic> GetMeasurementInfo()
-    {
-      var script = GetScriptStringify("getActiveMeasurement()");
-      var measurement = (string) await CallJsAsync(script);
-      return JObject.Parse(measurement);
-    }
-
-    public void AddOverlay(string name, string geoJson, string sourceSrs)
-    {
-      var script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {sourceSrs.ToQuote()})");
-      _browser.ExecuteScriptAsync(script);
-    }
-
-    public void AddOverlay(string name, string geoJson)
-    {
-      var json = JObject.Parse(geoJson);
-      var script = GetScript($"addOverlay({name.ToQuote()}, {json})");
-      _browser.ExecuteScriptAsync(script);
     }
 
     #endregion

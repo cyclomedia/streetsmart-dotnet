@@ -89,15 +89,8 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="name">Name of the layer</param>
     /// <param name="geoJson">GeoJSON object containing the layer data</param>
-    void AddOverlay(string name, string geoJson);
-
-    /// <summary>
-    /// Add a GeoJSON overlay to the panorama viewer
-    /// </summary>
-    /// <param name="name">Name of the layer</param>
-    /// <param name="geoJson">GeoJSON object containing the layer data</param>
-    /// <param name="sourceSrs">EPSG code (srs) for the source GeoJSON</param>
-    void AddOverlay(string name, string geoJson, string sourceSrs);
+    /// <param name="srs">EPSG code (srs) for the source GeoJSON</param>
+    void AddOverlay(string name, string geoJson, string srs = null);
 
     /// <summary>
     /// Adds a PanoramaViewer to a specified DOM-element
@@ -122,7 +115,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
-    Task<dynamic> GetMeasurementInfo();
+    Task<dynamic> GetActiveMeasurement();
 
     /// <summary>
     /// Returns the object containing the address search settings
@@ -152,6 +145,12 @@ namespace StreetSmart.WinForms.Interfaces
     Task<string> GetApplicationVersion();
 
     /// <summary>
+    /// Returns all logs, including ones invisible to integrators.
+    /// </summary>
+    /// <returns>Array of console logs.</returns>
+    Task<string[]> GetDebugLogs();
+
+    /// <summary>
     /// Returns the object containing functionalities that are currently permitted to use by the user.
     /// This is an asynchronous function.
     /// </summary>
@@ -165,12 +164,13 @@ namespace StreetSmart.WinForms.Interfaces
     Task Init(IOptions options);
 
     /// <summary>
-    /// Open a image by a query
+    /// Open a panorama and/or oblique viewer using a query. The query can be a coordinate,
+    /// an extent, an address or a panorama/oblique ID.
     /// </summary>
     /// <param name="query">query for open a panoramic image</param>
     /// <param name="options">viewer options for open the panoramic image</param>
     /// <returns></returns>
-    Task<IList<IViewer>> OpenByQuery(string query, IViewerOptions options);
+    Task<IList<IViewer>> Open(string query, IViewerOptions options);
 
     /// <summary>
     /// Starts the measurement

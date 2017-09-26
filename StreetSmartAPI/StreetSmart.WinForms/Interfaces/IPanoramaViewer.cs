@@ -71,6 +71,13 @@ namespace StreetSmart.WinForms.Interfaces
     #region Interface functions
 
     /// <summary>
+    /// Get the visibility of a button
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <returns></returns>
+    Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId);
+
+    /// <summary>
     /// Returns the orientation in degrees (yaw, pitch, hFov) for this CycloramaViewer.
     /// This is an asynchronous function.
     /// </summary>
@@ -155,6 +162,13 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="orientation">Orientation object that contains values to change.</param>
     void SetOrientation(IOrientation orientation);
+
+    /// <summary>
+    /// Toggle the visibility of a button.
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <param name="enabled">if available, sets enabled to this value</param>
+    void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled);
 
     /// <summary>
     /// Toggles the visibility of the recording features in the PanoramaViewer.

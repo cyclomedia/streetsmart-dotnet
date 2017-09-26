@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.Threading.Tasks;
+
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <inheritdoc />
@@ -24,5 +26,18 @@ namespace StreetSmart.WinForms.Interfaces
   /// </summary>
   public interface IObliqueViewer : IViewer
   {
+    /// <summary>
+    /// Get the visibility of a button
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <returns></returns>
+    Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId);
+
+    /// <summary>
+    /// Toggle the visibility of a button.
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <param name="enabled">if available, sets enabled to this value</param>
+    void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled);
   }
 }

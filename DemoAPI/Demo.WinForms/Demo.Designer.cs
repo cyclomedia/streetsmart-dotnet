@@ -36,11 +36,14 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grButtonVisibility = new System.Windows.Forms.GroupBox();
+      this.btnSetButtonVisibility = new System.Windows.Forms.Button();
+      this.btnGetButtonEnabled = new System.Windows.Forms.Button();
       this.grOverlay = new System.Windows.Forms.GroupBox();
       this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.btnAddOverlay = new System.Windows.Forms.Button();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
-      this.btnGetMeasurementInfo = new System.Windows.Forms.Button();
+      this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
       this.rbMeasLineString = new System.Windows.Forms.RadioButton();
       this.rbMeasPoint = new System.Windows.Forms.RadioButton();
@@ -121,8 +124,11 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.cbViewerButton = new System.Windows.Forms.ComboBox();
+      this.btnGetDebugLogs = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grButtonVisibility.SuspendLayout();
       this.grOverlay.SuspendLayout();
       this.grMeasurement.SuspendLayout();
       this.grDevTools.SuspendLayout();
@@ -154,7 +160,7 @@
       this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
       this.grOpenByQuery.Location = new System.Drawing.Point(0, 290);
       this.grOpenByQuery.Name = "grOpenByQuery";
-      this.grOpenByQuery.Size = new System.Drawing.Size(360, 120);
+      this.grOpenByQuery.Size = new System.Drawing.Size(220, 120);
       this.grOpenByQuery.TabIndex = 0;
       this.grOpenByQuery.TabStop = false;
       this.grOpenByQuery.Text = "Open / Close Viewer";
@@ -204,6 +210,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grButtonVisibility);
       this.plControl.Controls.Add(this.grOverlay);
       this.plControl.Controls.Add(this.grMeasurement);
       this.plControl.Controls.Add(this.grDevTools);
@@ -223,6 +230,38 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 925);
       this.plControl.TabIndex = 1;
+      // 
+      // grButtonVisibility
+      // 
+      this.grButtonVisibility.Controls.Add(this.cbViewerButton);
+      this.grButtonVisibility.Controls.Add(this.btnSetButtonVisibility);
+      this.grButtonVisibility.Controls.Add(this.btnGetButtonEnabled);
+      this.grButtonVisibility.Location = new System.Drawing.Point(220, 290);
+      this.grButtonVisibility.Name = "grButtonVisibility";
+      this.grButtonVisibility.Size = new System.Drawing.Size(140, 120);
+      this.grButtonVisibility.TabIndex = 54;
+      this.grButtonVisibility.TabStop = false;
+      this.grButtonVisibility.Text = "Button visibility";
+      // 
+      // btnSetButtonVisibility
+      // 
+      this.btnSetButtonVisibility.Location = new System.Drawing.Point(5, 45);
+      this.btnSetButtonVisibility.Name = "btnSetButtonVisibility";
+      this.btnSetButtonVisibility.Size = new System.Drawing.Size(130, 30);
+      this.btnSetButtonVisibility.TabIndex = 50;
+      this.btnSetButtonVisibility.Text = "Toggle button enabled";
+      this.btnSetButtonVisibility.UseVisualStyleBackColor = true;
+      this.btnSetButtonVisibility.Click += new System.EventHandler(this.btnSetButtonVisibility_Click);
+      // 
+      // btnGetButtonEnabled
+      // 
+      this.btnGetButtonEnabled.Location = new System.Drawing.Point(5, 15);
+      this.btnGetButtonEnabled.Name = "btnGetButtonEnabled";
+      this.btnGetButtonEnabled.Size = new System.Drawing.Size(130, 30);
+      this.btnGetButtonEnabled.TabIndex = 49;
+      this.btnGetButtonEnabled.Text = "Get button enabled";
+      this.btnGetButtonEnabled.UseVisualStyleBackColor = true;
+      this.btnGetButtonEnabled.Click += new System.EventHandler(this.btnGetButtonEnabled_Click);
       // 
       // grOverlay
       // 
@@ -255,7 +294,7 @@
       // 
       // grMeasurement
       // 
-      this.grMeasurement.Controls.Add(this.btnGetMeasurementInfo);
+      this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
       this.grMeasurement.Controls.Add(this.rbMeasPolygon);
       this.grMeasurement.Controls.Add(this.rbMeasLineString);
       this.grMeasurement.Controls.Add(this.rbMeasPoint);
@@ -269,15 +308,15 @@
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
       // 
-      // btnGetMeasurementInfo
+      // btnGetActiveMeasurement
       // 
-      this.btnGetMeasurementInfo.Location = new System.Drawing.Point(316, 15);
-      this.btnGetMeasurementInfo.Name = "btnGetMeasurementInfo";
-      this.btnGetMeasurementInfo.Size = new System.Drawing.Size(150, 30);
-      this.btnGetMeasurementInfo.TabIndex = 62;
-      this.btnGetMeasurementInfo.Text = "Get Measurement Info";
-      this.btnGetMeasurementInfo.UseVisualStyleBackColor = true;
-      this.btnGetMeasurementInfo.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
+      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(316, 15);
+      this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
+      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(150, 30);
+      this.btnGetActiveMeasurement.TabIndex = 62;
+      this.btnGetActiveMeasurement.Text = "Get Active Measurement";
+      this.btnGetActiveMeasurement.UseVisualStyleBackColor = true;
+      this.btnGetActiveMeasurement.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
       // 
       // rbMeasPolygon
       // 
@@ -538,6 +577,7 @@
       // 
       // grOrientation
       // 
+      this.grOrientation.Controls.Add(this.btnGetDebugLogs);
       this.grOrientation.Controls.Add(this.txtYaw);
       this.grOrientation.Controls.Add(this.lblYaw);
       this.grOrientation.Controls.Add(this.lblPitch);
@@ -1082,6 +1122,24 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
+      // cbViewerButton
+      // 
+      this.cbViewerButton.FormattingEnabled = true;
+      this.cbViewerButton.Location = new System.Drawing.Point(5, 85);
+      this.cbViewerButton.Name = "cbViewerButton";
+      this.cbViewerButton.Size = new System.Drawing.Size(130, 21);
+      this.cbViewerButton.TabIndex = 51;
+      // 
+      // btnGetDebugLogs
+      // 
+      this.btnGetDebugLogs.Location = new System.Drawing.Point(5, 45);
+      this.btnGetDebugLogs.Name = "btnGetDebugLogs";
+      this.btnGetDebugLogs.Size = new System.Drawing.Size(100, 30);
+      this.btnGetDebugLogs.TabIndex = 28;
+      this.btnGetDebugLogs.Text = "Get Debug logs";
+      this.btnGetDebugLogs.UseVisualStyleBackColor = true;
+      this.btnGetDebugLogs.Click += new System.EventHandler(this.btnGetDebugLogs_Click);
+      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1097,6 +1155,7 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grButtonVisibility.ResumeLayout(false);
       this.grOverlay.ResumeLayout(false);
       this.grOverlay.PerformLayout();
       this.grMeasurement.ResumeLayout(false);
@@ -1212,12 +1271,17 @@
     private System.Windows.Forms.Button btnStopMeasurementMode;
     private System.Windows.Forms.RadioButton rbMeasPolygon;
     private System.Windows.Forms.RadioButton rbMeasLineString;
-    private System.Windows.Forms.Button btnGetMeasurementInfo;
+    private System.Windows.Forms.Button btnGetActiveMeasurement;
     private System.Windows.Forms.GroupBox grOverlay;
     private System.Windows.Forms.TextBox txtOverlayGeoJson;
     private System.Windows.Forms.Button btnAddOverlay;
     private System.Windows.Forms.Button btnLogout;
     private System.Windows.Forms.Button btnSave;
+    private System.Windows.Forms.GroupBox grButtonVisibility;
+    private System.Windows.Forms.Button btnGetButtonEnabled;
+    private System.Windows.Forms.Button btnSetButtonVisibility;
+    private System.Windows.Forms.ComboBox cbViewerButton;
+    private System.Windows.Forms.Button btnGetDebugLogs;
   }
 }
 

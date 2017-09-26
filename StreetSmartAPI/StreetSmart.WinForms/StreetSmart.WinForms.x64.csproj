@@ -98,12 +98,14 @@
     <Compile Include="Factories\ViewerOptionsFactory.cs" />
     <Compile Include="Factories\DomElementFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
+    <Compile Include="Interfaces\PanoramaViewerButtons.cs" />
     <Compile Include="Interfaces\IMeasurementOptions.cs" />
     <Compile Include="Interfaces\IObliqueViewer.cs" />
     <Compile Include="Interfaces\IViewer.cs" />
     <Compile Include="Interfaces\IViewerTypes.cs" />
     <Compile Include="Interfaces\IViewerOptions.cs" />
     <Compile Include="Interfaces\IPanoramaViewerOptions.cs" />
+    <Compile Include="Interfaces\ObliqueViewerButtons.cs" />
     <Compile Include="Interfaces\StyleElementNumberType.cs" />
     <Compile Include="Data\DomElement\StyleElementNumberValue.cs" />
     <Compile Include="Data\DomElement\StyleElementValue.cs" />
