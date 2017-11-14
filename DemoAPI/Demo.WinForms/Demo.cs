@@ -44,6 +44,7 @@ namespace Demo.WinForms
     private readonly Login _login;
 
     private IOptions _options;
+    private IOverlay _overlay;
 
     #endregion
 
@@ -746,9 +747,15 @@ namespace Demo.WinForms
       AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
     }
 
-    private void btnAddOverlay_Click(object sender, EventArgs e)
+    private async void btnAddOverlay_Click(object sender, EventArgs e)
     {
-      _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
+      _overlay = await _api.AddOverlay("My GeoJSON", txtOverlayGeoJson.Text);
+    }
+
+    private void btnRemoveOverlay_Click(object sender, EventArgs e)
+    {
+      _api.RemoveOverlay(_overlay.Id);
+      txtOverlayGeoJson.Text = string.Empty;
     }
 
     private async void btnGetButtonEnabled_Click(object sender, EventArgs e)

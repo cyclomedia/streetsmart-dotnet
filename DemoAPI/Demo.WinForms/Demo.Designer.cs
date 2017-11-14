@@ -37,6 +37,7 @@
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
       this.grButtonVisibility = new System.Windows.Forms.GroupBox();
+      this.cbViewerButton = new System.Windows.Forms.ComboBox();
       this.btnSetButtonVisibility = new System.Windows.Forms.Button();
       this.btnGetButtonEnabled = new System.Windows.Forms.Button();
       this.grOverlay = new System.Windows.Forms.GroupBox();
@@ -70,6 +71,7 @@
       this.btnGetRecording = new System.Windows.Forms.Button();
       this.btnGetViewerColor = new System.Windows.Forms.Button();
       this.grOrientation = new System.Windows.Forms.GroupBox();
+      this.btnGetDebugLogs = new System.Windows.Forms.Button();
       this.txtYaw = new System.Windows.Forms.TextBox();
       this.lblYaw = new System.Windows.Forms.Label();
       this.lblPitch = new System.Windows.Forms.Label();
@@ -124,8 +126,7 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.cbViewerButton = new System.Windows.Forms.ComboBox();
-      this.btnGetDebugLogs = new System.Windows.Forms.Button();
+      this.btnRemoveOverlay = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
@@ -243,6 +244,14 @@
       this.grButtonVisibility.TabStop = false;
       this.grButtonVisibility.Text = "Button visibility";
       // 
+      // cbViewerButton
+      // 
+      this.cbViewerButton.FormattingEnabled = true;
+      this.cbViewerButton.Location = new System.Drawing.Point(5, 85);
+      this.cbViewerButton.Name = "cbViewerButton";
+      this.cbViewerButton.Size = new System.Drawing.Size(130, 21);
+      this.cbViewerButton.TabIndex = 51;
+      // 
       // btnSetButtonVisibility
       // 
       this.btnSetButtonVisibility.Location = new System.Drawing.Point(5, 45);
@@ -265,6 +274,7 @@
       // 
       // grOverlay
       // 
+      this.grOverlay.Controls.Add(this.btnRemoveOverlay);
       this.grOverlay.Controls.Add(this.txtOverlayGeoJson);
       this.grOverlay.Controls.Add(this.btnAddOverlay);
       this.grOverlay.Location = new System.Drawing.Point(0, 848);
@@ -286,7 +296,7 @@
       // 
       this.btnAddOverlay.Location = new System.Drawing.Point(377, 42);
       this.btnAddOverlay.Name = "btnAddOverlay";
-      this.btnAddOverlay.Size = new System.Drawing.Size(75, 23);
+      this.btnAddOverlay.Size = new System.Drawing.Size(100, 23);
       this.btnAddOverlay.TabIndex = 0;
       this.btnAddOverlay.Text = "Add overlay";
       this.btnAddOverlay.UseVisualStyleBackColor = true;
@@ -592,6 +602,16 @@
       this.grOrientation.TabIndex = 0;
       this.grOrientation.TabStop = false;
       this.grOrientation.Text = "Orientation";
+      // 
+      // btnGetDebugLogs
+      // 
+      this.btnGetDebugLogs.Location = new System.Drawing.Point(5, 45);
+      this.btnGetDebugLogs.Name = "btnGetDebugLogs";
+      this.btnGetDebugLogs.Size = new System.Drawing.Size(100, 30);
+      this.btnGetDebugLogs.TabIndex = 28;
+      this.btnGetDebugLogs.Text = "Get Debug logs";
+      this.btnGetDebugLogs.UseVisualStyleBackColor = true;
+      this.btnGetDebugLogs.Click += new System.EventHandler(this.btnGetDebugLogs_Click);
       // 
       // txtYaw
       // 
@@ -1122,23 +1142,15 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // cbViewerButton
+      // btnRemoveOverlay
       // 
-      this.cbViewerButton.FormattingEnabled = true;
-      this.cbViewerButton.Location = new System.Drawing.Point(5, 85);
-      this.cbViewerButton.Name = "cbViewerButton";
-      this.cbViewerButton.Size = new System.Drawing.Size(130, 21);
-      this.cbViewerButton.TabIndex = 51;
-      // 
-      // btnGetDebugLogs
-      // 
-      this.btnGetDebugLogs.Location = new System.Drawing.Point(5, 45);
-      this.btnGetDebugLogs.Name = "btnGetDebugLogs";
-      this.btnGetDebugLogs.Size = new System.Drawing.Size(100, 30);
-      this.btnGetDebugLogs.TabIndex = 28;
-      this.btnGetDebugLogs.Text = "Get Debug logs";
-      this.btnGetDebugLogs.UseVisualStyleBackColor = true;
-      this.btnGetDebugLogs.Click += new System.EventHandler(this.btnGetDebugLogs_Click);
+      this.btnRemoveOverlay.Location = new System.Drawing.Point(377, 17);
+      this.btnRemoveOverlay.Name = "btnRemoveOverlay";
+      this.btnRemoveOverlay.Size = new System.Drawing.Size(100, 23);
+      this.btnRemoveOverlay.TabIndex = 2;
+      this.btnRemoveOverlay.Text = "Remove overlay";
+      this.btnRemoveOverlay.UseVisualStyleBackColor = true;
+      this.btnRemoveOverlay.Click += new System.EventHandler(this.btnRemoveOverlay_Click);
       // 
       // Demo
       // 
@@ -1282,6 +1294,7 @@
     private System.Windows.Forms.Button btnSetButtonVisibility;
     private System.Windows.Forms.ComboBox cbViewerButton;
     private System.Windows.Forms.Button btnGetDebugLogs;
+    private System.Windows.Forms.Button btnRemoveOverlay;
   }
 }
 

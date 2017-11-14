@@ -131,7 +131,7 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
-    public void AddOverlay(string name, string geoJson, string srs = null)
+    public async Task<IOverlay> AddOverlay(string name, string geoJson, string srs = null)
     {
       string script;
 
@@ -145,7 +145,12 @@ namespace StreetSmart.WinForms.API
         script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {srs.ToQuote()})");
       }
 
-      _browser.ExecuteScriptAsync(script);
+      return new Overlay((Dictionary<string, object>) await CallJsAsync(script));
+    }
+
+    public void RemoveOverlay(string layerId)
+    {
+      _browser.ExecuteScriptAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
     }
 
     public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)

@@ -90,7 +90,8 @@ namespace StreetSmart.WinForms.Interfaces
     /// <param name="name">Name of the layer</param>
     /// <param name="geoJson">GeoJSON object containing the layer data</param>
     /// <param name="srs">EPSG code (srs) for the source GeoJSON</param>
-    void AddOverlay(string name, string geoJson, string srs = null);
+    /// <returns>Object containing the overlay id</returns>
+    Task<IOverlay> AddOverlay(string name, string geoJson, string srs = null);
 
     /// <summary>
     /// Adds a PanoramaViewer to a specified DOM-element
@@ -171,6 +172,12 @@ namespace StreetSmart.WinForms.Interfaces
     /// <param name="options">viewer options for open the panoramic image</param>
     /// <returns></returns>
     Task<IList<IViewer>> Open(string query, IViewerOptions options);
+
+    /// <summary>
+    /// Removes a GeoJSON overlay from the panorama viewer.
+    /// </summary>
+    /// <param name="id">The id of the overlay</param>
+    void RemoveOverlay(string id);
 
     /// <summary>
     /// Starts the measurement

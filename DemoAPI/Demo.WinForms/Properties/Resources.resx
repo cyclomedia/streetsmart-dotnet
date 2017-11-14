@@ -124,6 +124,6 @@
     <value>EPSG:28992</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>http://localhost:8081/api-dotnet.html</value>
+    <value>https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html</value>
   </data>
 </root>
