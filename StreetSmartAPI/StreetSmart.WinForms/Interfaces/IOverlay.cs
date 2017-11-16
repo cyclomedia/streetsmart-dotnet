@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using System;
-
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
@@ -29,5 +27,26 @@ namespace StreetSmart.WinForms.Interfaces
     /// Id of the overlay
     /// </summary>
     string Id { get; set; }
+
+    /// <summary>
+    /// Name of the layer
+    /// </summary>
+    string Name { get; set; }
+
+    /// <summary>
+    /// GeoJSON object containing the layer data
+    /// </summary>
+    // ReSharper disable once InconsistentNaming
+    string GeoJson { get; set; }
+
+    /// <summary>
+    /// Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.
+    /// </summary>
+    string Srs { get; set; }
+
+    /// <summary>
+    /// Optional XML string for Styled Layer Descriptor.
+    /// </summary>
+    string Sld { get; set; }
   }
 }

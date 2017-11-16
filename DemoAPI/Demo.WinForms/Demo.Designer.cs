@@ -41,6 +41,7 @@
       this.btnSetButtonVisibility = new System.Windows.Forms.Button();
       this.btnGetButtonEnabled = new System.Windows.Forms.Button();
       this.grOverlay = new System.Windows.Forms.GroupBox();
+      this.btnRemoveOverlay = new System.Windows.Forms.Button();
       this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.btnAddOverlay = new System.Windows.Forms.Button();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
@@ -126,7 +127,8 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.btnRemoveOverlay = new System.Windows.Forms.Button();
+      this.grSld = new System.Windows.Forms.GroupBox();
+      this.txtSld = new System.Windows.Forms.TextBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
@@ -143,6 +145,7 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.grSld.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -211,6 +214,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grSld);
       this.plControl.Controls.Add(this.grButtonVisibility);
       this.plControl.Controls.Add(this.grOverlay);
       this.plControl.Controls.Add(this.grMeasurement);
@@ -279,24 +283,34 @@
       this.grOverlay.Controls.Add(this.btnAddOverlay);
       this.grOverlay.Location = new System.Drawing.Point(0, 848);
       this.grOverlay.Name = "grOverlay";
-      this.grOverlay.Size = new System.Drawing.Size(480, 74);
+      this.grOverlay.Size = new System.Drawing.Size(310, 74);
       this.grOverlay.TabIndex = 53;
       this.grOverlay.TabStop = false;
       this.grOverlay.Text = "Load GeoJSON overlay";
+      // 
+      // btnRemoveOverlay
+      // 
+      this.btnRemoveOverlay.Location = new System.Drawing.Point(210, 17);
+      this.btnRemoveOverlay.Name = "btnRemoveOverlay";
+      this.btnRemoveOverlay.Size = new System.Drawing.Size(95, 23);
+      this.btnRemoveOverlay.TabIndex = 2;
+      this.btnRemoveOverlay.Text = "Remove overlay";
+      this.btnRemoveOverlay.UseVisualStyleBackColor = true;
+      this.btnRemoveOverlay.Click += new System.EventHandler(this.btnRemoveOverlay_Click);
       // 
       // txtOverlayGeoJson
       // 
       this.txtOverlayGeoJson.Location = new System.Drawing.Point(6, 19);
       this.txtOverlayGeoJson.Multiline = true;
       this.txtOverlayGeoJson.Name = "txtOverlayGeoJson";
-      this.txtOverlayGeoJson.Size = new System.Drawing.Size(364, 46);
+      this.txtOverlayGeoJson.Size = new System.Drawing.Size(200, 46);
       this.txtOverlayGeoJson.TabIndex = 1;
       // 
       // btnAddOverlay
       // 
-      this.btnAddOverlay.Location = new System.Drawing.Point(377, 42);
+      this.btnAddOverlay.Location = new System.Drawing.Point(210, 42);
       this.btnAddOverlay.Name = "btnAddOverlay";
-      this.btnAddOverlay.Size = new System.Drawing.Size(100, 23);
+      this.btnAddOverlay.Size = new System.Drawing.Size(95, 23);
       this.btnAddOverlay.TabIndex = 0;
       this.btnAddOverlay.Text = "Add overlay";
       this.btnAddOverlay.UseVisualStyleBackColor = true;
@@ -1142,15 +1156,23 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // btnRemoveOverlay
+      // grSld
       // 
-      this.btnRemoveOverlay.Location = new System.Drawing.Point(377, 17);
-      this.btnRemoveOverlay.Name = "btnRemoveOverlay";
-      this.btnRemoveOverlay.Size = new System.Drawing.Size(100, 23);
-      this.btnRemoveOverlay.TabIndex = 2;
-      this.btnRemoveOverlay.Text = "Remove overlay";
-      this.btnRemoveOverlay.UseVisualStyleBackColor = true;
-      this.btnRemoveOverlay.Click += new System.EventHandler(this.btnRemoveOverlay_Click);
+      this.grSld.Controls.Add(this.txtSld);
+      this.grSld.Location = new System.Drawing.Point(310, 848);
+      this.grSld.Name = "grSld";
+      this.grSld.Size = new System.Drawing.Size(170, 74);
+      this.grSld.TabIndex = 55;
+      this.grSld.TabStop = false;
+      this.grSld.Text = "Sld";
+      // 
+      // txtSld
+      // 
+      this.txtSld.Location = new System.Drawing.Point(6, 19);
+      this.txtSld.Multiline = true;
+      this.txtSld.Name = "txtSld";
+      this.txtSld.Size = new System.Drawing.Size(160, 46);
+      this.txtSld.TabIndex = 1;
       // 
       // Demo
       // 
@@ -1191,6 +1213,8 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.grSld.ResumeLayout(false);
+      this.grSld.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -1295,6 +1319,8 @@
     private System.Windows.Forms.ComboBox cbViewerButton;
     private System.Windows.Forms.Button btnGetDebugLogs;
     private System.Windows.Forms.Button btnRemoveOverlay;
+    private System.Windows.Forms.GroupBox grSld;
+    private System.Windows.Forms.TextBox txtSld;
   }
 }
 

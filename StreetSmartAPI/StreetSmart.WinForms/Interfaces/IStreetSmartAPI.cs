@@ -87,11 +87,9 @@ namespace StreetSmart.WinForms.Interfaces
     /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
     /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
     /// </summary>
-    /// <param name="name">Name of the layer</param>
-    /// <param name="geoJson">GeoJSON object containing the layer data</param>
-    /// <param name="srs">EPSG code (srs) for the source GeoJSON</param>
-    /// <returns>Object containing the overlay id</returns>
-    Task<IOverlay> AddOverlay(string name, string geoJson, string srs = null);
+    /// <param name="overlay">The overlay to add</param>
+    /// <returns>the overlay object</returns>
+    Task<IOverlay> AddOverlay(IOverlay overlay);
 
     /// <summary>
     /// Adds a PanoramaViewer to a specified DOM-element

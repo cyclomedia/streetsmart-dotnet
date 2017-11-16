@@ -95,6 +95,7 @@
     <Compile Include="Data\PanoramaViewerOptions.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Factories\OverlayFactory.cs" />
     <Compile Include="Factories\MeasurementOptionsFactory.cs" />
     <Compile Include="Factories\ViewerOptionsFactory.cs" />
     <Compile Include="Factories\DomElementFactory.cs" />

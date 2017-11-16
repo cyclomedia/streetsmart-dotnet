@@ -131,21 +131,11 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
-    public async Task<IOverlay> AddOverlay(string name, string geoJson, string srs = null)
+    public async Task<IOverlay> AddOverlay(IOverlay overlay)
     {
-      string script;
-
-      if (srs == null)
-      {
-        var json = JObject.Parse(geoJson);
-        script = GetScript($"addOverlay({name.ToQuote()}, {json})");
-      }
-      else
-      {
-        script = GetScript($"addOverlay({name.ToQuote()}, {geoJson.ToQuote()}, {srs.ToQuote()})");
-      }
-
-      return new Overlay((Dictionary<string, object>) await CallJsAsync(script));
+      string script = GetScript($"addOverlay({overlay})");
+      ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script));
+      return overlay;
     }
 
     public void RemoveOverlay(string layerId)

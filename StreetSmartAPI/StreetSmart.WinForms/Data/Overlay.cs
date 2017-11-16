@@ -26,8 +26,20 @@ namespace StreetSmart.WinForms.Data
   internal class Overlay : NotifyPropertyChanged, IOverlay
   {
     private string _id;
+    private string _geoJson;
+    private string _name;
+    private string _srs;
+    private string _sld;
 
-    public Overlay(Dictionary<string, object> overlay)
+    public Overlay(string geoJson, string name, string srs, string sld)
+    {
+      GeoJson = geoJson;
+      Name = name;
+      Srs = srs;
+      Sld = sld;
+    }
+
+    public void FillInParameters(Dictionary<string, object> overlay)
     {
       Id = (string) overlay["id"];
     }
@@ -40,6 +52,53 @@ namespace StreetSmart.WinForms.Data
         _id = value;
         RaisePropertyChanged();
       }
+    }
+
+    public string GeoJson
+    {
+      get => _geoJson;
+      set
+      {
+        _geoJson = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Name
+    {
+      get => _name;
+      set
+      {
+        _name = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Srs
+    {
+      get => _srs;
+      set
+      {
+        _srs = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Sld
+    {
+      get => _sld;
+      set
+      {
+        _sld = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public override string ToString()
+    {
+      string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
+      string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
+      return $"{{name:{Name.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
     }
   }
 }
