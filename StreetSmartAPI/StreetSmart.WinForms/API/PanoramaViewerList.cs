@@ -55,20 +55,15 @@ namespace StreetSmart.WinForms.API
       return RegisterViewer(new PanoramaViewer(Browser, this, name));
     }
 
+    [Obsolete("Obsolete.Use StreetSmartApi.open instead.",  true)]
     public override IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      return RegisterViewer(new PanoramaViewer(Browser, this, element, options));
+      return null;
     }
 
+    [Obsolete("", true)]
     public void DestroyViewer(IViewer viewer)
     {
-      PanoramaViewer panoramaViewer = viewer as PanoramaViewer;
-
-      if (Viewers.ContainsKey(panoramaViewer?.Name ?? string.Empty))
-      {
-        Viewers.Remove(panoramaViewer?.Name ?? string.Empty);
-        panoramaViewer?.DestroyViewer();
-      }
     }
 
     public string ReAssignPanoramaViewer(string newViewer)

@@ -143,9 +143,10 @@ namespace StreetSmart.WinForms.API
       _browser.ExecuteScriptAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
     }
 
+    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
     public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      return ViewerList.AddPanoramaViewer(element, options);
+      return null;
     }
 
     public void Destroy(IOptions options)
@@ -156,9 +157,9 @@ namespace StreetSmart.WinForms.API
       ViewerList.ClearViewers();
     }
 
+    [Obsolete("", true)]
     public void DestroyPanoramaViewer(IPanoramaViewer viewer)
     {
-      ViewerList.DestroyPanoramaViewer(viewer);
     }
 
     public async Task<dynamic> GetActiveMeasurement()

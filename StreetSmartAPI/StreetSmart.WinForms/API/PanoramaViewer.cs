@@ -38,7 +38,6 @@ namespace StreetSmart.WinForms.API
   {
     #region Members
 
-    private readonly IDomElement _domElement;
     private ApiEventList _panoramaViewerEventList;
 
     #endregion
@@ -71,8 +70,6 @@ namespace StreetSmart.WinForms.API
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
-    public string DomName => _domElement?.Name ?? string.Empty;
-
     public string DisconnectEventsScript => _panoramaViewerEventList.Destroy;
 
     public string ConnectEventsScript => $"{_panoramaViewerEventList}";
@@ -81,13 +78,10 @@ namespace StreetSmart.WinForms.API
 
     #region Constructors
 
+    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, IDomElement element,
       IPanoramaViewerOptions options) : base(browser, panoramaViewerList)
     {
-      _domElement = element;
-      Name = new JsNameGenerator(1)[0];
-      browser.ExecuteScriptAsync($"{element}var {Name}={JsApi}.addPanoramaViewer({DomName},{options});");
-      ConnectEvents();
     }
 
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
@@ -248,10 +242,9 @@ namespace StreetSmart.WinForms.API
       Browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
     }
 
+    [Obsolete("", true)]
     public void DestroyViewer()
     {
-      string script = $"{_panoramaViewerEventList.Destroy}{JsApi}.destroyPanoramaViewer({Name},{DomName});";
-      Browser.ExecuteScriptAsync(script);
     }
 
     private Color GetColor(object[] color)

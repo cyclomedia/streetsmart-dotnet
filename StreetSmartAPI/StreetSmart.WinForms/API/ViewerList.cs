@@ -222,9 +222,9 @@ namespace StreetSmart.WinForms.API
 
     #region Panorama viewer functions
 
+    [Obsolete("", true)]
     public static void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
     {
-      (ViewerLists[PanoramaViewerList.Type] as PanoramaViewerList)?.DestroyViewer(panoramaViewer);
     }
 
     public static IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
