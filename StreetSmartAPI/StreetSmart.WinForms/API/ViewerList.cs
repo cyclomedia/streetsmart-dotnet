@@ -227,9 +227,10 @@ namespace StreetSmart.WinForms.API
     {
     }
 
+    [Obsolete("", true)]
     public static IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
     {
-      return (IPanoramaViewer)ViewerLists[PanoramaViewerList.Type].AddViewer(element, options);
+      return null;
     }
 
     #endregion
