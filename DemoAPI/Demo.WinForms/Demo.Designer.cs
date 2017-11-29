@@ -36,6 +36,8 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grSld = new System.Windows.Forms.GroupBox();
+      this.txtSld = new System.Windows.Forms.TextBox();
       this.grButtonVisibility = new System.Windows.Forms.GroupBox();
       this.cbViewerButton = new System.Windows.Forms.ComboBox();
       this.btnSetButtonVisibility = new System.Windows.Forms.Button();
@@ -127,10 +129,10 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.grSld = new System.Windows.Forms.GroupBox();
-      this.txtSld = new System.Windows.Forms.TextBox();
+      this.ckReplace = new System.Windows.Forms.CheckBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grSld.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
       this.grOverlay.SuspendLayout();
       this.grMeasurement.SuspendLayout();
@@ -145,7 +147,6 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
-      this.grSld.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -158,6 +159,7 @@
       // 
       // grOpenByQuery
       // 
+      this.grOpenByQuery.Controls.Add(this.ckReplace);
       this.grOpenByQuery.Controls.Add(this.txtOpenByQuery);
       this.grOpenByQuery.Controls.Add(this.cbPanorama);
       this.grOpenByQuery.Controls.Add(this.cbOblique);
@@ -235,6 +237,24 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 925);
       this.plControl.TabIndex = 1;
+      // 
+      // grSld
+      // 
+      this.grSld.Controls.Add(this.txtSld);
+      this.grSld.Location = new System.Drawing.Point(310, 848);
+      this.grSld.Name = "grSld";
+      this.grSld.Size = new System.Drawing.Size(170, 74);
+      this.grSld.TabIndex = 55;
+      this.grSld.TabStop = false;
+      this.grSld.Text = "Sld";
+      // 
+      // txtSld
+      // 
+      this.txtSld.Location = new System.Drawing.Point(6, 19);
+      this.txtSld.Multiline = true;
+      this.txtSld.Name = "txtSld";
+      this.txtSld.Size = new System.Drawing.Size(160, 46);
+      this.txtSld.TabIndex = 1;
       // 
       // grButtonVisibility
       // 
@@ -1156,23 +1176,17 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // grSld
+      // ckReplace
       // 
-      this.grSld.Controls.Add(this.txtSld);
-      this.grSld.Location = new System.Drawing.Point(310, 848);
-      this.grSld.Name = "grSld";
-      this.grSld.Size = new System.Drawing.Size(170, 74);
-      this.grSld.TabIndex = 55;
-      this.grSld.TabStop = false;
-      this.grSld.Text = "Sld";
-      // 
-      // txtSld
-      // 
-      this.txtSld.Location = new System.Drawing.Point(6, 19);
-      this.txtSld.Multiline = true;
-      this.txtSld.Name = "txtSld";
-      this.txtSld.Size = new System.Drawing.Size(160, 46);
-      this.txtSld.TabIndex = 1;
+      this.ckReplace.AutoSize = true;
+      this.ckReplace.Checked = true;
+      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckReplace.Location = new System.Drawing.Point(125, 15);
+      this.ckReplace.Name = "ckReplace";
+      this.ckReplace.Size = new System.Drawing.Size(66, 17);
+      this.ckReplace.TabIndex = 68;
+      this.ckReplace.Text = "Replace";
+      this.ckReplace.UseVisualStyleBackColor = true;
       // 
       // Demo
       // 
@@ -1189,6 +1203,8 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grSld.ResumeLayout(false);
+      this.grSld.PerformLayout();
       this.grButtonVisibility.ResumeLayout(false);
       this.grOverlay.ResumeLayout(false);
       this.grOverlay.PerformLayout();
@@ -1213,8 +1229,6 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
-      this.grSld.ResumeLayout(false);
-      this.grSld.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -1321,6 +1335,7 @@
     private System.Windows.Forms.Button btnRemoveOverlay;
     private System.Windows.Forms.GroupBox grSld;
     private System.Windows.Forms.TextBox txtSld;
+    private System.Windows.Forms.CheckBox ckReplace;
   }
 }
 

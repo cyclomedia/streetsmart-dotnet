@@ -34,6 +34,16 @@ namespace StreetSmart.WinForms.Factories
     /// <param name="viewerType">An collection of viewerTypes</param>
     /// <param name="srs">The SRS of the viewer</param>
     /// <returns>The viewer options used for open viewers</returns>
-    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs) => new ViewerOptions(viewerType, srs);
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs) => Create(viewerType, srs, true);
+
+    /// <summary>
+    /// Creates a viewer options object
+    /// </summary>
+    /// <param name="viewerType">An collection of viewerTypes</param>
+    /// <param name="srs">The SRS of the viewer</param>
+    /// <param name="replace">Whether the panorama viewer window should be replace</param>
+    /// <returns>The viewer options used for open viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, bool replace) =>
+      new ViewerOptions(viewerType, srs, replace);
   }
 }

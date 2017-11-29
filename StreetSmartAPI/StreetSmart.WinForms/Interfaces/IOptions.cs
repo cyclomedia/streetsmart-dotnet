@@ -70,5 +70,10 @@ namespace StreetSmart.WinForms.Interfaces
     /// DomElement where in the panoramic viewer is rendered
     /// </summary>
     IDomElement Element { get; set; }
+
+    /// <summary>
+    /// Maximum number of panorama viewers that can be open at the same time
+    /// </summary>
+    int? MaxWindows { get; set; }
   }
 }

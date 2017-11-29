@@ -77,12 +77,6 @@ namespace StreetSmart.WinForms.API
 
     #region Constructors
 
-    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
-    public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, IDomElement element,
-      IPanoramaViewerOptions options) : base(browser, panoramaViewerList)
-    {
-    }
-
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
       : base(browser, panoramaViewerList)
     {
@@ -239,11 +233,6 @@ namespace StreetSmart.WinForms.API
       };
 
       Browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
-    }
-
-    [Obsolete("", true)]
-    public void DestroyViewer()
-    {
     }
 
     private Color GetColor(object[] color)

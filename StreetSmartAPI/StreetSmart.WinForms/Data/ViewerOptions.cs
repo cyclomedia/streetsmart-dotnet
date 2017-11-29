@@ -26,11 +26,13 @@ namespace StreetSmart.WinForms.Data
   {
     private IViewerTypes _viewerTypes;
     private string _srs;
+    private bool _replace;
 
-    public ViewerOptions(IList<ViewerType> viewerTypes, string srs)
+    public ViewerOptions(IList<ViewerType> viewerTypes, string srs, bool replace)
     {
       ViewerTypes = new ViewerTypes(viewerTypes);
       Srs = srs;
+      Replace = replace;
     }
 
     public IViewerTypes ViewerTypes
@@ -53,9 +55,19 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
+    public bool Replace
+    {
+      get => _replace;
+      set
+      {
+        _replace = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
-      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()}}}";
+      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()},replace:{Replace.ToJsBool()}}}";
     }
   }
 }

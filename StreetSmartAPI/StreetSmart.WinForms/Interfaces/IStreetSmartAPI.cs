@@ -97,6 +97,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// <param name="element">DOM-element the PanoramaViewer gets rendered to.</param>
     /// <param name="options">Options to initialize the panorama viewer with.</param>
     /// <returns></returns>
+    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
     IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options);
 
     /// <summary>
@@ -109,6 +110,7 @@ namespace StreetSmart.WinForms.Interfaces
     /// Destroys panorama viewer
     /// </summary>
     /// <param name="viewer">Instance of the PanoramaViewer you want to destroy.</param>
+    [Obsolete("", true)]
     void DestroyPanoramaViewer(IPanoramaViewer viewer);
 
     /// <summary>

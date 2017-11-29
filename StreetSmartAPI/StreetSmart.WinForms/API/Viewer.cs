@@ -24,7 +24,6 @@ using CefSharp.WinForms;
 
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Interfaces;
-using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.API
 {
@@ -45,8 +44,6 @@ namespace StreetSmart.WinForms.API
     public string Name { get; protected set; }
 
     public string JsThis => ViewerList.JsThis;
-
-    public string JsApi => Resources.JsApi;
 
     public string JsResult => ViewerList.JsResult;
 

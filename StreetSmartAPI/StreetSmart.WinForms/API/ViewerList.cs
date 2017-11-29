@@ -68,11 +68,6 @@ namespace StreetSmart.WinForms.API
 
     public abstract IViewer AddViewer(string name);
 
-    public virtual IViewer AddViewer(IDomElement element, IPanoramaViewerOptions options)
-    {
-      return null;
-    }
-
     protected async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
     {
       IViewer result = null;
@@ -216,21 +211,6 @@ namespace StreetSmart.WinForms.API
     public void Clear()
     {
       Viewers.Clear();
-    }
-
-    #endregion
-
-    #region Panorama viewer functions
-
-    [Obsolete("", true)]
-    public static void DestroyPanoramaViewer(IPanoramaViewer panoramaViewer)
-    {
-    }
-
-    [Obsolete("", true)]
-    public static IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
-    {
-      return null;
     }
 
     #endregion

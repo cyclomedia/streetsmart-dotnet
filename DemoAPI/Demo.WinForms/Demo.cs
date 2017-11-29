@@ -250,7 +250,7 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
       IDomElement element = DomElementFactory.Create();
       _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
-        addressSettings, element);
+        addressSettings, element, int.Parse(maxWindows));
 
       try
       {
@@ -409,7 +409,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text, ckReplace.Checked);
         IList<IViewer> viewers = await _api.Open(txtAdress.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -545,7 +545,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text, ckReplace.Checked);
         IList<IViewer> viewers = await _api.Open(txtImageId.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -599,7 +599,7 @@ namespace Demo.WinForms
           ? $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}"
           : $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}, {ParseDouble(txtZ.Text).ToString(_ci)}";
 
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text, ckReplace.Checked);
         IList<IViewer> viewers = await _api.Open(txtcoordinate, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -659,7 +659,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text, ckReplace.Checked);
         IList<IViewer> viewers = await _api.Open(txtOpenByQuery.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)

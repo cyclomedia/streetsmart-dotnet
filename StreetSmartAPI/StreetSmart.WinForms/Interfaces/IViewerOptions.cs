@@ -32,5 +32,10 @@ namespace StreetSmart.WinForms.Interfaces
     /// The Srs of the open viewer
     /// </summary>
     string Srs { get; set; }
+
+    /// <summary>
+    /// Whether the panorama viewer window should be replace.
+    /// </summary>
+    bool Replace { get; set; }
   }
 }
