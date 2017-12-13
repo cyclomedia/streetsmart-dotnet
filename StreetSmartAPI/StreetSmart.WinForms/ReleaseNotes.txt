@@ -1,11 +1,27 @@
 ﻿Release notes:
 ==============
 
+Version: 17.3.0
+===============
+- IStreetsmartAPI:
+	- Added events: ViewerAdded and ViewerRemoved
+	- Added functions: DestroyApi, GetDebugLogs, removeOverlays
+	- Renamed: GetMeasurementInfo => GetActiveMeasurement, OpenByQuery => Open
+	- Updated function:
+		- AddOverlay: returns now a Id, can now used for add a SLD to the overlay
+	- Remove deprecated functions:
+		- AddPanoramaViewer, DestroyPanoramaViewer
+
+- IObliqueViewer:
+	- Expand with the same functions as in the IPanoramaViewer interace
+	- Added functions: getButtonEnabled and toggleButtonEnabled
+
+- IPanoramaViewer:
+	- Added functions: getButtonEnabled and toggleButtonEnabled
+
+- Added support for multiple cyclorama viewers
+
+
 Version: 17.2.0
 ===============
 - Start release notes
-
-Version: 17.3.0
-===============
-- Add the ViewerAdded and ViewerRemoved events to the StreetSmartApi
-- Expand the oblique viewer with the same functions as the panorama viewer
