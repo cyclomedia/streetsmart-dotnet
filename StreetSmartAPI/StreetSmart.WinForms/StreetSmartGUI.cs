@@ -64,12 +64,7 @@ namespace StreetSmart.WinForms
   // ReSharper disable once InconsistentNaming
   public sealed partial class StreetSmartGUI : UserControl
   {
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates the StreetSmart GUI
-    /// </summary>
-    /// <param name="browser">The chromium web browser</param>
-    public StreetSmartGUI(ChromiumWebBrowser browser)
+    internal StreetSmartGUI(ChromiumWebBrowser browser)
     {
       InitializeComponent();
       Dock = browser.Dock;

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2017, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,26 +22,60 @@ namespace StreetSmart.WinForms.Exceptions
 {
   /// <inheritdoc />
   /// <summary>
-  /// Exception when Login failed
+  /// This exception is thrown when loggin fails.
   /// </summary>
+  /// <example>
+  /// This sample shows how to use the <see cref="StreetSmartLoginFailedException"/> Exception.
+  /// <code>
+  /// using System;
+  /// using StreetSmart.WinForms.Exceptions;
+  /// using StreetSmart.WinForms.Factories;
+  /// using StreetSmart.WinForms.Interfaces;
+  ///
+  /// namespace Demo
+  /// {
+  ///   public class Example
+  ///   {
+  ///     private IStreetSmartAPI _api;
+  ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+  ///
+  ///     public void StartAPI()
+  ///     {
+  ///       _api = StreetSmartAPIFactory.Create();
+  ///       _api.APIReady += OnAPIReady;
+  ///       plStreetSmart.Controls.Add(_api.GUI);
+  ///     }
+  ///
+  ///     private async void OnAPIReady(object sender, EventArgs args)
+  ///     {
+  ///       // The dom element within the api must be rendered.
+  ///       IDomElement element = DomElementFactory.Create();
+  ///
+  ///       // The initialisation options of the api.
+  ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+  ///
+  ///       try
+  ///       {
+  ///         // Initialize the api.
+  ///         await _api.Init(options);
+  ///         // Todo: add functionality
+  ///       }
+  ///       catch (StreetSmartLoginFailedException ex)
+  ///       {
+  ///         // login failed exception (ex)
+  ///       }
+  ///     }
+  ///   }
+  /// }
+  /// </code>
+  /// </example>
   public class StreetSmartLoginFailedException : Exception
   {
-    /// <inheritdoc />
-    /// <summary>
-    /// Create StreetSmartLoginFailedException class
-    /// </summary>
-    /// <param name="message">The message of the exception</param>
-    public StreetSmartLoginFailedException(string message) : base(message)
+    internal StreetSmartLoginFailedException(string message) : base(message)
     {
     }
 
-    /// <inheritdoc />
-    /// <summary>
-    /// Create StreetSmartLoginFailedException class
-    /// </summary>
-    /// <param name="message">The message of the exception</param>
-    /// <param name="inner">The inner exception</param>
-    public StreetSmartLoginFailedException(string message, Exception inner) : base(message, inner)
+    internal StreetSmartLoginFailedException(string message, Exception inner) : base(message, inner)
     {
     }
   }
