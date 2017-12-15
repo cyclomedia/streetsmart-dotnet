@@ -51,7 +51,9 @@ The &lt;c&gt;StreetSmartGUI&lt;/c&gt; class is the &lt;c&gt;UserControl&lt;/c&gt
 This class must be added to a &lt;c&gt;Panel&lt;/c&gt; within your application.
 &lt;/summary&gt;</NamespaceSummaryItem>
 <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="StreetSmart.WinForms.Factories" isDocumented="True" />
+<NamespaceSummaryItem name="StreetSmart.WinForms.Factories" isDocumented="True">&lt;summary&gt;
+This namespace contains factories that are used to generate the different objects.
+&lt;/summary&gt;</NamespaceSummaryItem>
 <NamespaceSummaryItem name="StreetSmart.WinForms.Exceptions" isDocumented="True">&lt;summary&gt;
 This namespace contains the exceptions that can occur in the Street Smart API.
 &lt;/summary&gt;</NamespaceSummaryItem></NamespaceSummaries>
