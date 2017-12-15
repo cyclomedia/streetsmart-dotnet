@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StreetSmart.WinForms.Exceptions;
 
 namespace StreetSmart.WinForms.Interfaces
 {
@@ -161,16 +162,115 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
+    /// <example>
+    /// This sample shows how to use the <see cref="IStreetSmartAPI.Init"/> function.
+    /// <code>
+    /// using System;
+    /// using StreetSmart.WinForms.Exceptions;
+    /// using StreetSmart.WinForms.Factories;
+    /// using StreetSmart.WinForms.Interfaces;
+    ///
+    /// namespace Demo
+    /// {
+    ///   public class Example
+    ///   {
+    ///     private IStreetSmartAPI _api;
+    ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+    ///
+    ///     public void StartAPI()
+    ///     {
+    ///       _api = StreetSmartAPIFactory.Create();
+    ///       _api.APIReady += OnAPIReady;
+    ///       plStreetSmart.Controls.Add(_api.GUI);
+    ///     }
+    ///
+    ///     private async void OnAPIReady(object sender, EventArgs args)
+    ///     {
+    ///       // The dom element within the api must be rendered.
+    ///       IDomElement element = DomElementFactory.Create();
+    ///
+    ///       // The initialisation options of the api.
+    ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+    ///
+    ///       try
+    ///       {
+    ///         // Initialize the api.
+    ///         await _api.Init(options);
+    ///         // Todo: add functionality
+    ///       }
+    ///       catch (StreetSmartLoginFailedException ex)
+    ///       {
+    ///         // login failed exception (ex)
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </example>
     /// <param name="options">Object containing the options used for initializing the API.</param>
+    /// <exception cref="StreetSmartLoginFailedException">Thrown when the login is failed</exception>
+    /// <returns>Asynchronous function</returns>
     Task Init(IOptions options);
 
     /// <summary>
     /// Open a panorama and/or oblique viewer using a query. The query can be a coordinate,
     /// an extent, an address or a panorama/oblique ID.
     /// </summary>
+    /// <example>
+    /// This sample shows how to use the <see cref="IStreetSmartAPI.Open"/> function.
+    /// <code>
+    /// using System;
+    /// using System.Collections.Generic;
+    /// using StreetSmart.WinForms.Exceptions;
+    /// using StreetSmart.WinForms.Factories;
+    /// using StreetSmart.WinForms.Interfaces;
+    ///
+    /// namespace Demo
+    /// {
+    ///   public class Example
+    ///   {
+    ///     private IStreetSmartAPI _api;
+    ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+    ///
+    ///     public void StartAPI()
+    ///     {
+    ///       _api = StreetSmartAPIFactory.Create();
+    ///       _api.APIReady += OnAPIReady;
+    ///       plStreetSmart.Controls.Add(_api.GUI);
+    ///     }
+    ///
+    ///     private async void OnAPIReady(object sender, EventArgs args)
+    ///     {
+    ///       // The dom element within the api must be rendered.
+    ///       IDomElement element = DomElementFactory.Create();
+    ///
+    ///       // The initialisation options of the api
+    ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+    ///
+    ///       // Initialize the api.
+    ///       await _api.Init(options);
+    /// 
+    ///       // The open viewer options for open a new panorama viewer in EPSG:28992.
+    ///       IViewerOptions viewerOpt = ViewerOptionsFactory.Create(new List&lt;ViewerType&gt; {ViewerType.Panorama}, "EPSG:28992");
+    ///
+    ///       try
+    ///       {
+    ///         IList&lt;IViewer&gt; viewers = await _api.Open("Lange Haven 145, Schiedam", viewerOpt);
+    ///         // Todo: add functionality
+    ///       }
+    ///       catch (StreetSmartImageNotFoundException ex)
+    ///       {
+    ///         // image not found exception (ex)
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </example>
     /// <param name="query">query for open a panoramic image</param>
     /// <param name="options">viewer options for open the panoramic image</param>
-    /// <returns></returns>
+    /// <exception cref="StreetSmartImageNotFoundException">Thrown when no image is found</exception>
+    /// <returns>Asynchronous function, A list of opened viewers</returns>
     Task<IList<IViewer>> Open(string query, IViewerOptions options);
 
     /// <summary>

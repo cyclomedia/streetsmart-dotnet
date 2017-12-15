@@ -22,14 +22,57 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// Factory for create a object which takes a panorama viewer
+  /// Factory that creates a dom element where inside the api runs.
   /// </summary>
+  /// <example>
+  /// This sample shows how to use the <see cref="DomElementFactory"/>.
+  /// <code>
+  /// using System;
+  /// using StreetSmart.WinForms.Factories;
+  /// using StreetSmart.WinForms.Interfaces;
+  ///
+  /// namespace Demo
+  /// {
+  ///   public class Example
+  ///   {
+  ///     private IStreetSmartAPI _api;
+  ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+  ///
+  ///     public void StartAPI()
+  ///     {
+  ///       _api = StreetSmartAPIFactory.Create();
+  ///       _api.APIReady += OnAPIReady;
+  ///       plStreetSmart.Controls.Add(_api.GUI);
+  ///     }
+  ///
+  ///     private async void OnAPIReady(object sender, EventArgs args)
+  ///     {
+  ///       // The dom element within the api must be rendered.
+  ///       IDomElement element = DomElementFactory.Create();
+  ///
+  ///       // The initialisation options of the api.
+  ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+  /// 
+  ///       // Initialize the api.
+  ///       await _api.Init(options);
+  ///     }
+  ///   }
+  /// }
+  /// </code>
+  /// </example>
   public static class DomElementFactory
   {
     /// <summary>
-    /// Creates a default DomElement which takes a panorama viewer
+    /// Creates a default dom element
     /// </summary>
-    /// <returns>Represents an object which takes a panorama viewer.</returns>
+    /// <example> 
+    /// This sample shows how to use the <see cref="DomElementFactory.Create()"/> method.
+    /// <code>
+    /// // Create a dom element
+    /// IDomElement element = DomElementFactory.Create();
+    /// </code>
+    /// </example>
+    /// <returns>Represents a dom element.</returns>
     public static IDomElement Create()
     {
       Style style = new Style();
@@ -42,13 +85,24 @@ namespace StreetSmart.WinForms.Factories
     }
 
     /// <summary>
-    /// Creates a default DomElement which takes a panorama viewer
+    /// Creates a dom element with a width and height in percents and a top and a left in pixels
     /// </summary>
+    /// <example> 
+    /// This sample shows how to use the <see cref="DomElementFactory.Create(int, int, int, int)"/> method.
+    /// <code>
+    /// // Create a dom element
+    /// int width = 75; // width in percents
+    /// int height = 75; // height in percents
+    /// int top = 50; // 50 pixels from top
+    /// int left = 50; // 50 pixels from left
+    /// IDomElement element = DomElementFactory.Create(width, height, top, left);
+    /// </code>
+    /// </example>
     /// <param name="width">Width in percent</param>
     /// <param name="height">Height in percent</param>
     /// <param name="top">Top in pixels</param>
     /// <param name="left">Left in pixels</param>
-    /// <returns>Represents an object which takes a panorama viewer.</returns>
+    /// <returns>Represents a dom element.</returns>
     public static IDomElement Create(int width, int height, int top, int left)
     {
       Style style = new Style();

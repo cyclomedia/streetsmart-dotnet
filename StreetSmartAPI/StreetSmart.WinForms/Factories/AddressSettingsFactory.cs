@@ -74,9 +74,9 @@ namespace StreetSmart.WinForms.Factories
     /// Create address settings to use for address searches, based on the current culture settings and the address database.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="Create(string)"/> method.
+    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(string)"/> method.
     /// <code>
-    /// // Create a address settings that are used in the application
+    /// // Create an address settings that are used in the application
     /// string database = "CMDatabase";
     /// IAddressSettings addressSettings = AddressSettingsFactory.Create(database);
     /// </code>
@@ -89,9 +89,9 @@ namespace StreetSmart.WinForms.Factories
     /// Create address settings to use for address searches, based on the locale string and the address database.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="Create(string, string)"/> method.
+    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(string, string)"/> method.
     /// <code>
-    /// // Create a address settings that are used in the application
+    /// // Create an address settings that are used in the application
     /// string locale = "nl";
     /// string database = "CMDatabase";
     /// IAddressSettings addressSettings = AddressSettingsFactory.Create(locale, database);
@@ -106,9 +106,9 @@ namespace StreetSmart.WinForms.Factories
     /// Create address settings to use for address searches, based on the locale culture and the address database.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="Create(CultureInfo, string)"/> method.
+    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(CultureInfo, string)"/> method.
     /// <code>
-    /// // Create a address settings that are used in the application
+    /// // Create an address settings that are used in the application
     /// CultureInfo ci = new CultureInfo("en-US");
     /// string database = "CMDatabase";
     /// IAddressSettings addressSettings = AddressSettingsFactory.Create(ci, database);
