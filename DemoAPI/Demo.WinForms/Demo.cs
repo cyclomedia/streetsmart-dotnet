@@ -702,12 +702,12 @@ namespace Demo.WinForms
 
     private void btnShowDefTools_Click(object sender, EventArgs e)
     {
-      _api?.ShowDefTools();
+      _api?.ShowDevTools();
     }
 
     private void btnCloseDefTools_Click(object sender, EventArgs e)
     {
-      _api?.CloseDefTools();
+      _api?.CloseDevTools();
     }
 
     private void btnStartMeasurementMode_Click(object sender, EventArgs e)

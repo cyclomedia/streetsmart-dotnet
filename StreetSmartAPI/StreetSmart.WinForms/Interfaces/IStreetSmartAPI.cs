@@ -73,12 +73,12 @@ namespace StreetSmart.WinForms.Interfaces
     /// <summary>
     /// Show the developer tools
     /// </summary>
-    void ShowDefTools();
+    void ShowDevTools();
 
     /// <summary>
     /// Close the developer tools
     /// </summary>
-    void CloseDefTools();
+    void CloseDevTools();
 
     #endregion
 

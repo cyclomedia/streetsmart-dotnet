@@ -111,7 +111,7 @@ namespace StreetSmart.WinForms.API
 
     #region CefSharp Functions
 
-    public void ShowDefTools()
+    public void ShowDevTools()
     {
       if (_browser.Created)
       {
@@ -119,7 +119,7 @@ namespace StreetSmart.WinForms.API
       }
     }
 
-    public void CloseDefTools()
+    public void CloseDevTools()
     {
       if (_browser.Created)
       {
