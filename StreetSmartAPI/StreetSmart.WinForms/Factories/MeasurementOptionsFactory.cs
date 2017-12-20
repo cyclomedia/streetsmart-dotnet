@@ -22,21 +22,77 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// Factory for create measurement options to use for create a measurement
+  /// Factory for create measurement options which are used to create a measurement. We need the measurement options object to create a measurement.
   /// </summary>
+  /// <example>
+  /// This sample uses the <see cref="MeasurementOptionsFactory"/>, to show how you can start a line measurement in a cyclorama.
+  /// <code>
+  /// using System.Collections.Generic;
+  /// using StreetSmart.WinForms.Factories;
+  /// using StreetSmart.WinForms.Interfaces;
+  ///
+  /// namespace Demo
+  /// {
+  ///   public class Example
+  ///   {
+  ///     private IStreetSmartAPI _api;
+  ///     // Todo: Add a function to initialize the api.
+  ///
+  ///     private async void OpenImageAndStartMeasurement()
+  ///     {
+  ///       // The open viewer options for open a new panorama viewer in EPSG:28992.
+  ///       IViewerOptions viewerOpt = ViewerOptionsFactory.Create(new List&lt;ViewerType&gt; { ViewerType.Panorama }, "EPSG:28992");
+  ///
+  ///       // open a panorama viewer
+  ///       IList&lt;IViewer&gt; viewers = await _api.Open("Boschdijk 7, Eindhoven", viewerOpt);
+  ///
+  ///       if (viewers.Count == 1)
+  ///       {
+  ///         // Get the panorama viewer object
+  ///         IPanoramaViewer viewer = (IPanoramaViewer)viewers[0];
+  ///
+  ///         // The geometry type of the measurement
+  ///         MeasurementGeometryType geometryType = MeasurementGeometryType.LineString;
+  ///
+  ///         // Create a measurement options object
+  ///         IMeasurementOptions measurementOptions = MeasurementOptionsFactory.Create(geometryType);
+  ///
+  ///         // Start line measurement in the opened viewer
+  ///         _api.StartMeasurementMode(viewer, measurementOptions);
+  ///       }
+  ///     }
+  ///   }
+  /// }
+  /// </code>
+  /// </example>
   public static class MeasurementOptionsFactory
   {
     /// <summary>
-    /// Create measurement options to use for create a measurement
+    /// Create a default measurement options object.
     /// </summary>
-    /// <returns>The measurement options to use for create a measurement</returns>
+    /// <example> 
+    /// This sample shows how to use the <see cref="MeasurementOptionsFactory.Create()"/> method.
+    /// <code>
+    /// // Create a measurement options object
+    /// IMeasurementOptions measurementOptions = MeasurementOptionsFactory.Create();
+    /// </code>
+    /// </example>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create() => new MeasurementOptions();
 
     /// <summary>
-    /// Create measurement options to use for create a measurement
+    /// Create a measurement options object with a specific geometry type.
     /// </summary>
-    /// <param name="geometryType">The geometryType of the measurement</param>
-    /// <returns>The measurement options to use for create a measurement</returns>
+    /// <example> 
+    /// This sample shows how to use the <see cref="MeasurementOptionsFactory.Create(MeasurementGeometryType)"/> method.
+    /// <code>
+    /// // Create a measurement options object which can be used for start a surface measurement
+    /// MeasurementGeometryType geometryType = MeasurementGeometryType.Polygon;
+    /// IMeasurementOptions measurementOptions = MeasurementOptionsFactory.Create(geometryType);
+    /// </code>
+    /// </example>
+    /// <param name="geometryType">The <c>MeasurementGeometryType</c> of the measurement</param>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create(MeasurementGeometryType geometryType) => new MeasurementOptions(geometryType);
   }
 }

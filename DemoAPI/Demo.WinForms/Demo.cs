@@ -749,20 +749,27 @@ namespace Demo.WinForms
 
     private async void btnAddOverlay_Click(object sender, EventArgs e)
     {
-      string name = "My GeoJSON";
-      string geoJson = txtOverlayGeoJson.Text;
-      string sld = txtSld.Text;
+      if (_overlay == null)
+      {
+        string name = "My GeoJSON";
+        string geoJson = txtOverlayGeoJson.Text;
+        string sld = txtSld.Text;
 
-      _overlay = string.IsNullOrEmpty(sld)
-        ? OverlayFactory.Create(geoJson, name)
-        : OverlayFactory.Create(geoJson, name, srs, sld);
+        _overlay = string.IsNullOrEmpty(sld)
+          ? OverlayFactory.Create(geoJson, name)
+          : OverlayFactory.Create(geoJson, name, srs, sld);
 
-      _overlay = await _api.AddOverlay(_overlay);
+        _overlay = await _api.AddOverlay(_overlay);
+      }
     }
 
     private void btnRemoveOverlay_Click(object sender, EventArgs e)
     {
-      _api.RemoveOverlay(_overlay.Id);
+      if (_overlay != null)
+      {
+        _api.RemoveOverlay(_overlay.Id);
+        _overlay = null;
+      }
     }
 
     private async void btnGetButtonEnabled_Click(object sender, EventArgs e)

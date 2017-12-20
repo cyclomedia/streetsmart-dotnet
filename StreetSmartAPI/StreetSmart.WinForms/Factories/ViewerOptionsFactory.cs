@@ -24,7 +24,7 @@ using StreetSmart.WinForms.Interfaces;
 namespace StreetSmart.WinForms.Factories
 {
   /// <summary>
-  /// Factory for create address settings to use for address searches
+  /// Factory for the viewer options which are used as options when a cyclorama viewer is opened.
   /// </summary>
   public static class ViewerOptionsFactory
   {

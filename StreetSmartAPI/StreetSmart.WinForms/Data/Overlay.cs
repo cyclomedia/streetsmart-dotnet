@@ -96,8 +96,9 @@ namespace StreetSmart.WinForms.Data
 
     public override string ToString()
     {
+      string sldString = Sld.Replace(Environment.NewLine, string.Empty);
       string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
-      string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
+      string sld = Sld == null ? string.Empty : $",sldXMLtext:{sldString.ToQuote()}";
       return $"{{name:{Name.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
     }
   }
