@@ -155,6 +155,7 @@ namespace Demo.WinForms
         panoramaViewer.RecordingClick += OnRecordingClick;
         panoramaViewer.TileLoadError += OnTileLoadError;
         panoramaViewer.ViewChange += OnViewChange;
+        panoramaViewer.SurfaceCursorChange += OnSurfaceCursorChange;
         panoramaViewer.ViewLoadEnd += OnViewLoadEnd;
         panoramaViewer.ViewLoadStart += OnViewLoadStart;
         panoramaViewer.TimeTravelChange += OnTimeTravelChange;
@@ -182,6 +183,7 @@ namespace Demo.WinForms
         panoramaViewer.RecordingClick -= OnRecordingClick;
         panoramaViewer.TileLoadError -= OnTileLoadError;
         panoramaViewer.ViewChange -= OnViewChange;
+        panoramaViewer.SurfaceCursorChange -= OnSurfaceCursorChange;
         panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
         panoramaViewer.ViewLoadStart -= OnViewLoadStart;
         panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
@@ -220,6 +222,15 @@ namespace Demo.WinForms
     {
       IOrientation orientation = args.Value;
       string text = $"View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
+      AddViewerEventsText(text);
+    }
+
+    private void OnSurfaceCursorChange(object sender, IEventArgs<IDepthInfo> args)
+    {
+      IDepthInfo depthInfo = args.Value;
+      string text = $"Surface cursor change" +
+                    $", depth: {depthInfo.Depth}, depth in meters: {depthInfo.DepthInMeters}" +
+                    $", SRS: {depthInfo.SRS}, X: {depthInfo.XYZ.X}, Y: {depthInfo.XYZ.Y}, Z: {depthInfo.XYZ.Z}";
       AddViewerEventsText(text);
     }
 

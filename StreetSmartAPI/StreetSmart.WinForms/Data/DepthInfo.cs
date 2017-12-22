@@ -17,74 +17,64 @@
  */
 
 using System.Collections.Generic;
-using System.Globalization;
 
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
 {
-  internal class Coordinate : NotifyPropertyChanged, ICoordinate
+  internal class DepthInfo : NotifyPropertyChanged, IDepthInfo
   {
-    private double _x;
-    private double _y;
-    private double? _z;
+    private double _depth;
+    private double _depthInMeters;
+    private ICoordinate _xyz;
+    private string _srs;
 
-    public Coordinate(Dictionary<string, object> coordinate)
+    public DepthInfo(Dictionary<string, object> depthInfo)
     {
-      X = (double) coordinate["0"];
-      Y = (double) coordinate["1"];
-      Z = (double) coordinate["2"];
+      Depth = double.Parse(depthInfo["depth"].ToString());
+      DepthInMeters = double.Parse(depthInfo["depthInMeters"].ToString());
+      XYZ = new Coordinate((Dictionary<string, object>) depthInfo["xyz"]);
+      SRS = (string) depthInfo["srs"];
     }
 
-    public Coordinate(double x, double y)
+    public double Depth
     {
-      X = x;
-      Y = y;
-      Z = null;
-    }
-
-    public Coordinate(double x, double y, double z)
-    {
-      X = x;
-      Y = y;
-      Z = z;
-    }
-
-    public double X
-    {
-      get => _x;
+      get => _depth;
       set
       {
-        _x = value;
+        _depth = value;
         RaisePropertyChanged();
       }
     }
 
-    public double Y
+    public double DepthInMeters
     {
-      get => _y;
+      get => _depthInMeters;
       set
       {
-        _y = value;
+        _depthInMeters = value;
         RaisePropertyChanged();
       }
     }
 
-    public double? Z
+    public ICoordinate XYZ
     {
-      get => _z;
+      get => _xyz;
       set
       {
-        _z = value;
+        _xyz = value;
         RaisePropertyChanged();
       }
     }
 
-    public override string ToString()
+    public string SRS
     {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = (Z == null) ? string.Empty : $",{((double) Z).ToString(ci)}";
-      return $"[{X.ToString(ci)},{Y.ToString(ci)}{zComponent}]";
+      get => _srs;
+      set
+      {
+        _srs = value;
+        RaisePropertyChanged();
+      }
     }
   }
 }

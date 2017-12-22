@@ -47,6 +47,7 @@ namespace StreetSmart.WinForms.API
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
+    public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
@@ -56,6 +57,8 @@ namespace StreetSmart.WinForms.API
     #region Properties
 
     public string JsImChange => (ViewerList as PanoramaViewerList)?.JsImChange;
+
+    public string JsSurfaceCursorChange => (ViewerList as PanoramaViewerList)?.JsSurfaceCursorChange;
 
     public string JsRecClick => (ViewerList as PanoramaViewerList)?.JsRecClick;
 
@@ -200,6 +203,12 @@ namespace StreetSmart.WinForms.API
       ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
+    public void OnSurfaceCursorChange(Dictionary<string, object> args)
+    {
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      SurfaceCursorChange?.Invoke(this, new EventArgs<IDepthInfo>(new DepthInfo(detail)));
+    }
+
     public void OnViewLoadEnd(Dictionary<string, object> args)
     {
       ViewLoadEnd?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
@@ -225,6 +234,7 @@ namespace StreetSmart.WinForms.API
       {
         new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
+        new PanoramaViewerEvent(this, "SURFACE_CURSOR_CHANGE", JsSurfaceCursorChange),
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
         new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
         new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),

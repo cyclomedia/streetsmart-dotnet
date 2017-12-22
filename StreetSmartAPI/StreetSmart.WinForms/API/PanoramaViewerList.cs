@@ -34,6 +34,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsImChange => $"{nameof(OnImageChange).FirstCharacterToLower()}";
 
+    public string JsSurfaceCursorChange => $"{nameof(OnSurfaceCursorChange).FirstCharacterToLower()}";
+
     public string JsRecClick => $"{nameof(OnRecordingClick).FirstCharacterToLower()}";
 
     public string JsTileLoadError => $"{nameof(OnTileLoadError).FirstCharacterToLower()}";
@@ -105,6 +107,14 @@ namespace StreetSmart.WinForms.API
       if (Viewers.ContainsKey(name))
       {
         (Viewers[name] as PanoramaViewer)?.OnViewChange(args);
+      }
+    }
+
+    public void OnSurfaceCursorChange(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        (Viewers[name] as PanoramaViewer)?.OnSurfaceCursorChange(args);
       }
     }
 

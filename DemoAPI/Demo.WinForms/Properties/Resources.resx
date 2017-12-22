@@ -124,7 +124,7 @@
     <value>EPSG:28992</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value />
+    <value>https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html</value>
   </data>
   <data name="maxWindows" xml:space="preserve">
     <value>3</value>

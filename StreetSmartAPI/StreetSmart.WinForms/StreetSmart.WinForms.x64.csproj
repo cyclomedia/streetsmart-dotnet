@@ -88,6 +88,7 @@
     <Compile Include="API\Viewer.cs" />
     <Compile Include="API\ViewerList.cs" />
     <Compile Include="Data\MeasurementOptions.cs" />
+    <Compile Include="Data\DepthInfo.cs" />
     <Compile Include="Data\Overlay.cs" />
     <Compile Include="Data\ViewerTypes.cs" />
     <Compile Include="Data\ViewerOptions.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Factories\DomElementFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
     <Compile Include="Interfaces\IOverlay.cs" />
+    <Compile Include="Interfaces\IDepthInfo.cs" />
     <Compile Include="Interfaces\PanoramaViewerButtons.cs" />
     <Compile Include="Interfaces\IMeasurementOptions.cs" />
     <Compile Include="Interfaces\IObliqueViewer.cs" />

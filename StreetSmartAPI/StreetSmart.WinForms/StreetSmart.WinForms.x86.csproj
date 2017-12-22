@@ -135,6 +135,7 @@
     <Compile Include="API\ObliqueViewerList.cs" />
     <Compile Include="API\Viewer.cs" />
     <Compile Include="API\ViewerList.cs" />
+    <Compile Include="Data\DepthInfo.cs" />
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\MeasurementOptions.cs" />
     <Compile Include="Data\Overlay.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Factories\OverlayFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
     <Compile Include="Factories\ViewerOptionsFactory.cs" />
+    <Compile Include="Interfaces\IDepthInfo.cs" />
     <Compile Include="Interfaces\IMeasurementOptions.cs" />
     <Compile Include="Interfaces\IObliqueViewer.cs" />
     <Compile Include="Interfaces\IOverlay.cs" />

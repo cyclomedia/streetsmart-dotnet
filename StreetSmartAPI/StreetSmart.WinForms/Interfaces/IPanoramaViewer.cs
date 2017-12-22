@@ -57,6 +57,11 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IOrientation>> ViewChange;
 
     /// <summary>
+    /// Triggers when the surface cursor is changed
+    /// </summary>
+    event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
+
+    /// <summary>
     /// Triggers when everything that is needed for the view to dislay correctly is loaded.
     /// </summary>
     event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
