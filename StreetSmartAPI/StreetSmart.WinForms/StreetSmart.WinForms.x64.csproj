@@ -166,7 +166,6 @@
     <Compile Include="StreetSmartGUI.Designer.cs">
       <DependentUpon>StreetSmartGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\JsNameGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

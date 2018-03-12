@@ -1,6 +1,12 @@
 ﻿Release notes:
 ==============
 
+Version: 18.1.0
+===============
+- Added the buttons: Elevation, report blurring and measure to the panorama viewer button list, now you can turn on / off these buttons also
+- Fixed: .NET API crashed on .GetRecording() with old images
+
+
 Version: 17.3.0
 ===============
 - IStreetsmartAPI:

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2017, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,6 @@ using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces;
 using StreetSmart.WinForms.Properties;
-using StreetSmart.WinForms.Utils;
 
 namespace StreetSmart.WinForms.API
 {
@@ -143,12 +142,6 @@ namespace StreetSmart.WinForms.API
       _browser.ExecuteScriptAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
     }
 
-    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
-    public IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options)
-    {
-      return null;
-    }
-
     public void Destroy(IOptions options)
     {
       RemoveMeasurementEvents();
@@ -157,15 +150,10 @@ namespace StreetSmart.WinForms.API
       ViewerList.ClearViewers();
     }
 
-    [Obsolete("", true)]
-    public void DestroyPanoramaViewer(IPanoramaViewer viewer)
-    {
-    }
-
     public async Task<dynamic> GetActiveMeasurement()
     {
       var script = GetScriptStringify("getActiveMeasurement()");
-      var measurement = (string)await CallJsAsync(script);
+      var measurement = (string) await CallJsAsync(script);
       return JObject.Parse(measurement);
     }
 
@@ -285,7 +273,7 @@ namespace StreetSmart.WinForms.API
 
     public void OnViewerAdded(string name, string type)
     {
-      string jsName = new JsNameGenerator(1)[0];
+      string jsName = $"type{Guid.NewGuid():N}";
       _browser.ExecuteScriptAsync($"var {jsName}={name};");
       IViewer viewer = ViewerList.ToViewer(type, jsName);
       ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));

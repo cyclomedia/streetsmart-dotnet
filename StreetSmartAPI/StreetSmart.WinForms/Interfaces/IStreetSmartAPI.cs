@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2017, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -93,26 +93,10 @@ namespace StreetSmart.WinForms.Interfaces
     Task<IOverlay> AddOverlay(IOverlay overlay);
 
     /// <summary>
-    /// Adds a PanoramaViewer to a specified DOM-element
-    /// </summary>
-    /// <param name="element">DOM-element the PanoramaViewer gets rendered to.</param>
-    /// <param name="options">Options to initialize the panorama viewer with.</param>
-    /// <returns></returns>
-    [Obsolete("Obsolete. Use StreetSmartApi.open instead.", true)]
-    IPanoramaViewer AddPanoramaViewer(IDomElement element, IPanoramaViewerOptions options);
-
-    /// <summary>
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>
     void Destroy(IOptions options);
-
-    /// <summary>
-    /// Destroys panorama viewer
-    /// </summary>
-    /// <param name="viewer">Instance of the PanoramaViewer you want to destroy.</param>
-    [Obsolete("", true)]
-    void DestroyPanoramaViewer(IPanoramaViewer viewer);
 
     /// <summary>
     /// Returns the active measurement in GeoJSON format

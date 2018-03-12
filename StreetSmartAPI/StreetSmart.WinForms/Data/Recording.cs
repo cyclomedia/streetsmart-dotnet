@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2017, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -46,17 +46,22 @@ namespace StreetSmart.WinForms.Data
       Dictionary<string, object> xyz = (Dictionary<string, object>) recording["xyz"];
       XYZ = new Coordinate((double) xyz["0"], (double) xyz["1"], (double) xyz["2"]);
 
+      string orPrec = recording["orientationPrecision"].ToString();
+      string longPrec = recording["longitudePrecision"].ToString();
+      string latPrec = recording["latitudePrecision"].ToString();
+      string heightPrec = recording["heightPrecision"].ToString();
+
       GroundLevelOffset = (double?) recording["groundLevelOffset"];
       RecorderDirection = (double?) recording["recorderDirection"];
       Orientation = (double?) recording["orientation"];
       RecordedAt = (DateTime?) recording["recordedAt"];
       Id = (string) recording["id"];
       SRS = (string) recording["srs"];
-      OrientationPrecision = (double?) recording["orientationPrecision"];
+      OrientationPrecision = string.IsNullOrEmpty(orPrec) ? null : (double?) double.Parse(orPrec);
       TileSchema = (TileSchema) Enum.Parse(typeof (TileSchema), (string) recording["tileSchema"]);
-      LongitudePrecision = (double?) recording["longitudePrecision"];
-      LatitudePrecision = (double?) recording["latitudePrecision"];
-      HeightPrecision = (double?) recording["heightPrecision"];
+      LongitudePrecision = string.IsNullOrEmpty(longPrec) ? null : (double?) double.Parse(longPrec);
+      LatitudePrecision = string.IsNullOrEmpty(latPrec) ? null : (double?) double.Parse(latPrec);
+      HeightPrecision = string.IsNullOrEmpty(heightPrec) ? null : (double?) double.Parse(heightPrec);
       ProductType = (ProductType) Enum.Parse(typeof (ProductType), (string) recording["productType"]);
       HeightSystem = (string) recording["heightSystem"];
       ExpiredAt = (DateTime?) recording["expiredAt"];

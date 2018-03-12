@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2017, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -77,7 +77,7 @@ namespace StreetSmart.WinForms.API
       {
         string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
                         {{result=true;}};{JsThis}.{JsThisResult}(result);}}";
-        bool exists = (bool)await CallJsAsync(script);
+        bool exists = (bool) await CallJsAsync(script);
 
         if (exists)
         {
@@ -164,7 +164,7 @@ namespace StreetSmart.WinForms.API
       { ViewerType.Oblique, ObliqueViewerList.Type }
     };
 
-    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList)ViewerLists[PanoramaViewerList.Type];
+    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList) ViewerLists[PanoramaViewerList.Type];
 
     #endregion
 
