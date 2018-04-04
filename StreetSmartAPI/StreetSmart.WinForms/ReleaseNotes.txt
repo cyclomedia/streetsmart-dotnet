@@ -1,10 +1,16 @@
 ﻿Release notes:
 ==============
 
-Version: 18.1.0
+Version: 18.4.0
 ===============
-- Added the buttons: Elevation, report blurring and measure to the panorama viewer button list, now you can turn on / off these buttons also
-- Fixed: .NET API crashed on .GetRecording() with old images
+- Added the folowing buttons to the panorama viewer button list. now you can turn these buttons also on and off.
+	+ Elevation button
+	+ report blurring button
+	+ measure button
+- Bug fixed: crashed on .GetRecording() with old images
+- Build with Cefsharp version 0.63. First we used CefSharp version 0.57 to version 0.63. This new build fixed the next problem:
+    + Fixed running API on older operationg systems.
+- Changed the open image options, now there are oblique viewer options and panorama viewer options
 
 
 Version: 17.3.0

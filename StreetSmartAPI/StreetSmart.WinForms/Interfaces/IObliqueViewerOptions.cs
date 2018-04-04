@@ -19,18 +19,9 @@
 namespace StreetSmart.WinForms.Interfaces
 {
   /// <summary>
-  /// Options to initialize the panorama viewer with
+  /// Options to initialize the oblique viewer with
   /// </summary>
-  public interface IPanoramaViewerOptions : IBaseViewerOptions
+  public interface IObliqueViewerOptions : IBaseViewerOptions
   {
-    /// <summary>
-    /// Whether the panorama viewer window should be replace.
-    /// </summary>
-    bool? Replace { get; set; }
-
-    /// <summary>
-    /// If recordings should be visible
-    /// </summary>
-    bool? RecordingsVisible { get; set; }
   }
 }

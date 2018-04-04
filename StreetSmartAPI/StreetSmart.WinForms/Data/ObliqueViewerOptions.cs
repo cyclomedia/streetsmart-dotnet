@@ -16,21 +16,21 @@
  * License along with this library.
  */
 
-namespace StreetSmart.WinForms.Interfaces
-{
-  /// <summary>
-  /// Options to initialize the panorama viewer with
-  /// </summary>
-  public interface IPanoramaViewerOptions : IBaseViewerOptions
-  {
-    /// <summary>
-    /// Whether the panorama viewer window should be replace.
-    /// </summary>
-    bool? Replace { get; set; }
+using StreetSmart.WinForms.Interfaces;
 
-    /// <summary>
-    /// If recordings should be visible
-    /// </summary>
-    bool? RecordingsVisible { get; set; }
+namespace StreetSmart.WinForms.Data
+{
+  internal class ObliqueViewerOptions : BaseViewerOptions, IObliqueViewerOptions
+  {
+    public ObliqueViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible) :
+      base(closable, maximizable, timeTravelVisible, navBarVisible)
+    {
+    }
+
+    public override string ToString()
+    {
+      string baseOptions = base.ToString();
+      return string.IsNullOrEmpty(baseOptions) ? string.Empty : $",obliqueViewer:{{{baseOptions}}}";
+    }
   }
 }

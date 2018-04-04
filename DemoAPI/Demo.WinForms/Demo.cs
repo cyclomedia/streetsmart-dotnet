@@ -407,20 +407,25 @@ namespace Demo.WinForms
     private async void btnOpenByAddress_Click(object sender, EventArgs e)
     {
       IList<ViewerType> viewerTypes = new List<ViewerType>();
+      IPanoramaViewerOptions panoramaViewerOptions = null;
+      IObliqueViewerOptions obliqueViewerOptions = null;
 
       if (cbOblique.Checked)
       {
         viewerTypes.Add(ViewerType.Oblique);
+        obliqueViewerOptions = ObliqueViewerOptionsFactory.Create(true, true, true, true);
       }
 
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text, ckReplace.Checked);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text,
+          panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtAdress.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -543,20 +548,25 @@ namespace Demo.WinForms
     private async void btnOpenByImageId_Click(object sender, EventArgs e)
     {
       IList<ViewerType> viewerTypes = new List<ViewerType>();
+      IPanoramaViewerOptions panoramaViewerOptions = null;
+      IObliqueViewerOptions obliqueViewerOptions = null;
 
       if (cbOblique.Checked)
       {
         viewerTypes.Add(ViewerType.Oblique);
+        obliqueViewerOptions = ObliqueViewerOptionsFactory.Create(true, true, true, true);
       }
 
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text, ckReplace.Checked);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text,
+          panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtImageId.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -593,15 +603,19 @@ namespace Demo.WinForms
     private async void btnOpenByCoordinate_Click(object sender, EventArgs e)
     {
       IList<ViewerType> viewerTypes = new List<ViewerType>();
+      IPanoramaViewerOptions panoramaViewerOptions = null;
+      IObliqueViewerOptions obliqueViewerOptions = null;
 
       if (cbOblique.Checked)
       {
         viewerTypes.Add(ViewerType.Oblique);
+        obliqueViewerOptions = ObliqueViewerOptionsFactory.Create(true, true, true, true);
       }
 
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
       try
@@ -610,7 +624,8 @@ namespace Demo.WinForms
           ? $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}"
           : $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}, {ParseDouble(txtZ.Text).ToString(_ci)}";
 
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text, ckReplace.Checked);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text,
+          panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtcoordinate, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -657,20 +672,25 @@ namespace Demo.WinForms
     private async void btnOpenViewerByQuery_Click(object sender, EventArgs e)
     {
       IList<ViewerType> viewerTypes = new List<ViewerType>();
+      IPanoramaViewerOptions panoramaViewerOptions = null;
+      IObliqueViewerOptions obliqueViewerOptions = null;
 
       if (cbOblique.Checked)
       {
         viewerTypes.Add(ViewerType.Oblique);
+        obliqueViewerOptions = ObliqueViewerOptionsFactory.Create(true, true, true, true);
       }
 
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text, ckReplace.Checked);
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text,
+          panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtOpenByQuery.Text, viewerOptions);
 
         foreach (IViewer viewer in viewers)
@@ -822,7 +842,7 @@ namespace Demo.WinForms
 
     private async void btnSetButtonVisibility_Click(object sender, EventArgs e)
     {
-      var selectedItem = ((ViewerButtonsBox) cbViewerButton.SelectedItem).ButtonId;
+      var selectedItem = ((ViewerButtonsBox) cbViewerButton.SelectedItem)?.ButtonId;
 
       if (selectedItem is ObliqueViewerButtons ovButtons && ObliqueViewer != null)
       {

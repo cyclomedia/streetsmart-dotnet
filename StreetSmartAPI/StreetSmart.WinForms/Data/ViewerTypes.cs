@@ -60,7 +60,7 @@ namespace StreetSmart.WinForms.Data
     public override string ToString()
     {
       string viewerTypes = this.Aggregate("[", (current, type) => $"{current}{Resources.JsApi}.{type.Description()},");
-      return $"{viewerTypes.Substring(0, Math.Max((viewerTypes.Length - 1), 1))}]";
+      return $"{viewerTypes.Substring(0, Math.Max(viewerTypes.Length - 1, 1))}]";
     }
   }
 }

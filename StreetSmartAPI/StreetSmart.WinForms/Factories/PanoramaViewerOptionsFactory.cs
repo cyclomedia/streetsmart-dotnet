@@ -29,10 +29,18 @@ namespace StreetSmart.WinForms.Factories
     /// <summary>
     /// Create options to initialize the panorama viewer with
     /// </summary>
-    /// <param name="recordingsVisible">If recordings should be visible</param>
+    /// <param name="closable">If the panorama viewer should be closable</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
-    public static IPanoramaViewerOptions CreateRecordingsVisible(bool recordingsVisible)
-      => new PanoramaViewerOptions(recordingsVisible, null, null);
+    public static IPanoramaViewerOptions CreateClosable(bool closable)
+      => new PanoramaViewerOptions(closable, null, null, null, null, null);
+
+    /// <summary>
+    /// Create options to initialize the panorama viewer with
+    /// </summary>
+    /// <param name="maximizable">If the panorama viewer should be maximizable</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
+    public static IPanoramaViewerOptions CreateMaximizable(bool maximizable)
+      => new PanoramaViewerOptions(null, maximizable, null, null, null, null);
 
     /// <summary>
     /// Create options to initialize the panorama viewer with
@@ -40,7 +48,7 @@ namespace StreetSmart.WinForms.Factories
     /// <param name="timeTravelVisible">If time travel is enabled</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions CreateTimeTravelVisible(bool timeTravelVisible)
-      => new PanoramaViewerOptions(null, timeTravelVisible, null);
+      => new PanoramaViewerOptions(null, null, timeTravelVisible, null, null, null);
 
     /// <summary>
     /// Create options to initialize the panorama viewer with
@@ -48,22 +56,42 @@ namespace StreetSmart.WinForms.Factories
     /// <param name="navBarVisible">If navbar is enabled</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions CreateNavBarVisible(bool navBarVisible)
-      => new PanoramaViewerOptions(null, null, navBarVisible);
+      => new PanoramaViewerOptions(null, null, null, navBarVisible, null, null);
 
     /// <summary>
     /// Create options to initialize the panorama viewer with
     /// </summary>
+    /// <param name="replace">Replace the panorama viewer</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
-    public static IPanoramaViewerOptions Create() => new PanoramaViewerOptions(null, null, null);
+    public static IPanoramaViewerOptions CreateReplace(bool replace)
+      => new PanoramaViewerOptions(null, null, null, null, replace, null);
 
     /// <summary>
     /// Create options to initialize the panorama viewer with
     /// </summary>
     /// <param name="recordingsVisible">If recordings should be visible</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
+    public static IPanoramaViewerOptions CreateRecordingsVisible(bool recordingsVisible)
+      => new PanoramaViewerOptions(null, null, null, null, null, recordingsVisible);
+
+    /// <summary>
+    /// Create options to initialize the panorama viewer with
+    /// </summary>
+    /// <returns>Options to initialize the panorama viewer with</returns>
+    public static IPanoramaViewerOptions Create() => new PanoramaViewerOptions(null, null, null, null, null, null);
+
+    /// <summary>
+    /// Create options to initialize the panorama viewer with
+    /// </summary>
+    /// <param name="closable">If the panorama viewer is closable</param>
+    /// <param name="maximizable">If the panorama viewer is maximizable</param>
     /// <param name="timeTravelVisible">If time travel is enabled</param>
     /// <param name="navBarVisible">If nav bar is enabled</param>
+    /// <param name="replace">Replace the panorama viewer</param>
+    /// <param name="recordingsVisible">If recordings should be visible</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
-    public static IPanoramaViewerOptions Create(bool recordingsVisible, bool timeTravelVisible, bool navBarVisible)
-      => new PanoramaViewerOptions(recordingsVisible, timeTravelVisible, navBarVisible);
+    public static IPanoramaViewerOptions Create(bool closable, bool maximizable, bool timeTravelVisible,
+      bool navBarVisible, bool replace, bool recordingsVisible)
+      => new PanoramaViewerOptions(closable, maximizable, timeTravelVisible, navBarVisible, replace, recordingsVisible);
   }
 }

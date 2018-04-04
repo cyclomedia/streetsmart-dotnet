@@ -24,17 +24,26 @@ using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
 {
-  internal class PanoramaViewerOptions : NotifyPropertyChanged, IPanoramaViewerOptions
+  internal class PanoramaViewerOptions : BaseViewerOptions, IPanoramaViewerOptions
   {
+    private bool? _replace;
     private bool? _recordingsVisible;
-    private bool? _timeTravelVisible;
-    private bool? _navBarVisible;
 
-    public PanoramaViewerOptions(bool? recordingsVisible, bool? timeTravelVisible, bool? navBarVisible)
+    public PanoramaViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible,
+      bool? replace, bool? recordingsVisible) : base(closable, maximizable, timeTravelVisible, navBarVisible)
     {
+      Replace = replace;
       RecordingsVisible = recordingsVisible;
-      TimeTravelVisible = timeTravelVisible;
-      NavbarVisible = navBarVisible;
+    }
+
+    public bool? Replace
+    {
+      get => _replace;
+      set
+      {
+        _replace = value;
+        RaisePropertyChanged();
+      }
     }
 
     public bool? RecordingsVisible
@@ -47,47 +56,25 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
-    public bool? TimeTravelVisible
-    {
-      get => _timeTravelVisible;
-      set
-      {
-        _timeTravelVisible = value;
-        RaisePropertyChanged();
-      }
-    }
-
-    public bool? NavbarVisible
-    {
-      get => _navBarVisible;
-      set
-      {
-        _navBarVisible = value;
-        RaisePropertyChanged();
-      }
-    }
-
     public override string ToString()
     {
       List<string> options = new List<string>();
+
+      if (Replace != null)
+      {
+        options.Add($"replace:{Replace.ToString().ToLower()}");
+      }
 
       if (RecordingsVisible != null)
       {
         options.Add($"recordingsVisible:{RecordingsVisible.ToString().ToLower()}");
       }
 
-      if (TimeTravelVisible != null)
-      {
-        options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
-      }
-
-      if (NavbarVisible != null)
-      {
-        options.Add($"navbarVisible:{NavbarVisible.ToString().ToLower()}");
-      }
-
-      string result = options.Aggregate(string.Empty, (current, part) => $"{current},{part}");
-      return (options.Count == 0) ? string.Empty : $"{{{result.Substring(Math.Min(result.Length, 1))}}}";
+      string baseOptions = base.ToString();
+      string result = options.Aggregate(baseOptions, (current, part) => $"{current},{part}");
+      return options.Count == 0 && string.IsNullOrEmpty(baseOptions)
+        ? string.Empty
+        : $",panoramaViewer:{{{result.Substring(Math.Min(result.Length, 1))}}}";
     }
   }
 }

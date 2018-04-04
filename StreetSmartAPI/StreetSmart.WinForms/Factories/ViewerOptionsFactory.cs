@@ -34,16 +34,29 @@ namespace StreetSmart.WinForms.Factories
     /// <param name="viewerType">An collection of viewerTypes</param>
     /// <param name="srs">The SRS of the viewer</param>
     /// <returns>The viewer options used for open viewers</returns>
-    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs) => Create(viewerType, srs, true);
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs)
+      => Create(viewerType, srs, null, null);
 
     /// <summary>
     /// Creates a viewer options object
     /// </summary>
     /// <param name="viewerType">An collection of viewerTypes</param>
     /// <param name="srs">The SRS of the viewer</param>
-    /// <param name="replace">Whether the panorama viewer window should be replace</param>
-    /// <returns>The viewer options used for open viewers</returns>
-    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, bool replace) =>
-      new ViewerOptions(viewerType, srs, replace);
+    /// <param name="panoramaViewer">The panorama viewer options</param>
+    /// <returns>The viewer options used for open the viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, IPanoramaViewerOptions panoramaViewer)
+      => Create(viewerType, srs, panoramaViewer, null);
+
+    /// <summary>
+    /// Creates a viewer options object
+    /// </summary>
+    /// <param name="viewerType">An collection of viewerTypes</param>
+    /// <param name="srs">The SRS of the viewer</param>
+    /// <param name="panoramaViewer">The panorama viewer options</param>
+    /// <param name="obliqueViewer">The oblique viewer options</param>
+    /// <returns>The viewer options used for open the viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, IPanoramaViewerOptions panoramaViewer,
+      IObliqueViewerOptions obliqueViewer)
+      => new ViewerOptions(viewerType, srs, panoramaViewer, obliqueViewer);
   }
 }

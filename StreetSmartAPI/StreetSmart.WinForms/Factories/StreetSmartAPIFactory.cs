@@ -34,6 +34,7 @@ namespace StreetSmart.WinForms.Factories
   {
     static StreetSmartAPIFactory()
     {
+      CefSharpSettings.LegacyJavascriptBindingEnabled = true;
       Cef.Initialize(new CefSettings(), true, new BrowserProcessHandler());
     }
 

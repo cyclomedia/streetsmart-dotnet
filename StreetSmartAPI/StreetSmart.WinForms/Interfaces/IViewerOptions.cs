@@ -34,8 +34,13 @@ namespace StreetSmart.WinForms.Interfaces
     string Srs { get; set; }
 
     /// <summary>
-    /// Whether the panorama viewer window should be replace.
+    /// Options to initialize the panorama viewer with
     /// </summary>
-    bool Replace { get; set; }
+    IPanoramaViewerOptions PanoramaViewer { get; set; }
+
+    /// <summary>
+    /// Options to initialize the oblique viewer with
+    /// </summary>
+    IObliqueViewerOptions ObliqueViewer { get; set; }
   }
 }

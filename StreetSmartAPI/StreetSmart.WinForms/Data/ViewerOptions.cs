@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using StreetSmart.WinForms.Interfaces;
 
 namespace StreetSmart.WinForms.Data
@@ -26,13 +27,16 @@ namespace StreetSmart.WinForms.Data
   {
     private IViewerTypes _viewerTypes;
     private string _srs;
-    private bool _replace;
+    private IPanoramaViewerOptions _panoramaViewer;
+    private IObliqueViewerOptions _obliqueViewer;
 
-    public ViewerOptions(IList<ViewerType> viewerTypes, string srs, bool replace)
+    public ViewerOptions(IList<ViewerType> viewerTypes, string srs, IPanoramaViewerOptions panoramaViewer,
+      IObliqueViewerOptions obliqueViewer)
     {
       ViewerTypes = new ViewerTypes(viewerTypes);
       Srs = srs;
-      Replace = replace;
+      PanoramaViewer = panoramaViewer;
+      ObliqueViewer = obliqueViewer;
     }
 
     public IViewerTypes ViewerTypes
@@ -55,19 +59,29 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
-    public bool Replace
+    public IPanoramaViewerOptions PanoramaViewer
     {
-      get => _replace;
+      get => _panoramaViewer;
       set
       {
-        _replace = value;
+        _panoramaViewer = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public IObliqueViewerOptions ObliqueViewer
+    {
+      get => _obliqueViewer;
+      set
+      {
+        _obliqueViewer = value;
         RaisePropertyChanged();
       }
     }
 
     public override string ToString()
     {
-      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()},replace:{Replace.ToJsBool()}}}";
+      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()}{PanoramaViewer}{ObliqueViewer}}}";
     }
   }
 }
