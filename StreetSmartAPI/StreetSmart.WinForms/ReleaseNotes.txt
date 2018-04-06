@@ -11,6 +11,7 @@ Version: 18.4.0
 - Build with Cefsharp version 0.63. First we used CefSharp version 0.57 to version 0.63. This new build fixed the next problem:
     + Fixed running API on older operationg systems.
 - Changed the open image options, now there are oblique viewer options and panorama viewer options
+- Fixed adding geoJson layer with an empty SLD
 
 
 Version: 17.3.0
