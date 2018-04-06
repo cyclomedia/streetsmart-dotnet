@@ -3,14 +3,15 @@
 
 Version: 18.4.0
 ===============
-- Added the folowing buttons to the panorama viewer button list. now you can turn these buttons also on and off.
+- Added the folowing buttons to the panorama viewer button list. Now you can turn these buttons on and off.
 	+ Elevation button
 	+ report blurring button
 	+ measure button
 - Bug fixed: crashed on .GetRecording() with old images
-- Build with Cefsharp version 0.63. First we used CefSharp version 0.57 to version 0.63. This new build fixed the next problem:
-    + Fixed running API on older operationg systems.
+- Build with Cefsharp version 0.63. (Previous we CefSharp version 0.57). This new build fixed the next problem:
+    + Fixed running API on older operationg systems. (For example windows server 2008)
 - Changed the open image options, now there are oblique viewer options and panorama viewer options
+- Implemented: Remove cross from panoramic viewer
 - Fixed adding geoJson layer with an empty SLD
 
 
