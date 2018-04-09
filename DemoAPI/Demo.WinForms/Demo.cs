@@ -109,7 +109,8 @@ namespace Demo.WinForms
       {
         PanoramaViewerButtons.CenterMap, PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.CopyLink,
         PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
-        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.Elevation,
+        PanoramaViewerButtons.Measure, PanoramaViewerButtons.ReportBlurring
       };
 
       foreach (var pnButton in pnButtons)
@@ -130,7 +131,7 @@ namespace Demo.WinForms
       else
       {
         grLogin.Enabled = true;
-        logInOut(true);
+        LogInOut(true);
       }
     }
 
@@ -312,7 +313,7 @@ namespace Demo.WinForms
           grOpenByImageId.Enabled = true;
         }
 
-        logInOut(false);
+        LogInOut(false);
         MessageBox.Show("Login successfully");
       }
       catch (StreetSmartLoginFailedException ex)
@@ -321,7 +322,7 @@ namespace Demo.WinForms
       }
     }
 
-    private void logInOut(bool enabled)
+    private void LogInOut(bool enabled)
     {
       if (btnLogin.InvokeRequired)
       {
@@ -377,7 +378,7 @@ namespace Demo.WinForms
         _panoramaViewers.Clear();
         _obliqueViewers.Clear();
 
-        logInOut(true);
+        LogInOut(true);
         DisableGroups();
       }
     }
