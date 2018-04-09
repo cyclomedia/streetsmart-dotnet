@@ -130,7 +130,7 @@ namespace Demo.WinForms
       else
       {
         grLogin.Enabled = true;
-        btnLogin.Enabled = true;
+        logInOut(true);
       }
     }
 
@@ -260,7 +260,7 @@ namespace Demo.WinForms
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
       IDomElement element = DomElementFactory.Create();
-      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
+      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
         addressSettings, element, int.Parse(maxWindows));
 
       try
@@ -312,20 +312,60 @@ namespace Demo.WinForms
           grOpenByImageId.Enabled = true;
         }
 
-        if (btnLogin.InvokeRequired)
-        {
-          btnLogin.Invoke(new MethodInvoker(() => btnLogin.Enabled = false));
-        }
-        else
-        {
-          btnLogin.Enabled = false;
-        }
-
+        logInOut(false);
         MessageBox.Show("Login successfully");
       }
       catch (StreetSmartLoginFailedException ex)
       {
         MessageBox.Show(ex.Message);
+      }
+    }
+
+    private void logInOut(bool enabled)
+    {
+      if (btnLogin.InvokeRequired)
+      {
+        btnLogin.Invoke(new MethodInvoker(() => btnLogin.Enabled = enabled));
+      }
+      else
+      {
+        btnLogin.Enabled = enabled;
+      }
+
+      if (txtUsername.InvokeRequired)
+      {
+        txtUsername.Invoke(new MethodInvoker(() => txtUsername.Enabled = enabled));
+      }
+      else
+      {
+        txtUsername.Enabled = enabled;
+      }
+
+      if (txtPassword.InvokeRequired)
+      {
+        txtPassword.Invoke(new MethodInvoker(() => txtPassword.Enabled = enabled));
+      }
+      else
+      {
+        txtPassword.Enabled = enabled;
+      }
+
+      if (txtAPIKey.InvokeRequired)
+      {
+        txtAPIKey.Invoke(new MethodInvoker(() => txtAPIKey.Enabled = enabled));
+      }
+      else
+      {
+        txtAPIKey.Enabled = enabled;
+      }
+
+      if (txtSrs.InvokeRequired)
+      {
+        txtSrs.Invoke(new MethodInvoker(() => txtSrs.Enabled = enabled));
+      }
+      else
+      {
+        txtSrs.Enabled = enabled;
       }
     }
 
@@ -337,7 +377,7 @@ namespace Demo.WinForms
         _panoramaViewers.Clear();
         _obliqueViewers.Clear();
 
-        btnLogin.Enabled = true;
+        logInOut(true);
         DisableGroups();
       }
     }
@@ -424,7 +464,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtAddressSrs.Text,
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
           panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtAdress.Text, viewerOptions);
 
@@ -505,13 +545,13 @@ namespace Demo.WinForms
         ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
         : CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
 
-      if (string.IsNullOrEmpty(txtCoordinateSrs.Text))
+      if (string.IsNullOrEmpty(txtSrs.Text))
       {
         PanoramaViewer.LookAtCoordinate(coordinate);
       }
       else
       {
-        PanoramaViewer.LookAtCoordinate(coordinate, txtCoordinateSrs.Text);
+        PanoramaViewer.LookAtCoordinate(coordinate, txtSrs.Text);
       }
     }
 
@@ -565,7 +605,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text,
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
           panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtImageId.Text, viewerOptions);
 
@@ -624,7 +664,7 @@ namespace Demo.WinForms
           ? $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}"
           : $"{ParseDouble(txtX.Text).ToString(_ci)}, {ParseDouble(txtY.Text).ToString(_ci)}, {ParseDouble(txtZ.Text).ToString(_ci)}";
 
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtCoordinateSrs.Text,
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
           panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtcoordinate, viewerOptions);
 
@@ -689,7 +729,7 @@ namespace Demo.WinForms
 
       try
       {
-        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtOpenByImageSrs.Text,
+        IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
           panoramaViewerOptions, obliqueViewerOptions);
         IList<IViewer> viewers = await _api.Open(txtOpenByQuery.Text, viewerOptions);
 
@@ -788,7 +828,7 @@ namespace Demo.WinForms
 
         _overlay = string.IsNullOrEmpty(sld)
           ? OverlayFactory.Create(geoJson, name)
-          : OverlayFactory.Create(geoJson, name, srs, sld);
+          : OverlayFactory.Create(geoJson, name, txtSrs.Text, sld);
 
         _overlay = await _api.AddOverlay(_overlay);
       }

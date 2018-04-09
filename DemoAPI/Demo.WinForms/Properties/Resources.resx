@@ -120,11 +120,8 @@
   <data name="locale" xml:space="preserve">
     <value>en-US</value>
   </data>
-  <data name="srs" xml:space="preserve">
-    <value>EPSG:28992</value>
-  </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html</value>
+    <value />
   </data>
   <data name="maxWindows" xml:space="preserve">
     <value>3</value>

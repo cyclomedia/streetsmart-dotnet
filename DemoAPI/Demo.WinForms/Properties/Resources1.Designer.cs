@@ -79,16 +79,7 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EPSG:28992.
-        /// </summary>
-        internal static string srs {
-            get {
-                return ResourceManager.GetString("srs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string StreetSmartLocation {
             get {

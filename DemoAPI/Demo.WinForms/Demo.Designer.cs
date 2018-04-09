@@ -31,6 +31,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenByQuery = new System.Windows.Forms.GroupBox();
+      this.ckReplace = new System.Windows.Forms.CheckBox();
       this.txtOpenByQuery = new System.Windows.Forms.TextBox();
       this.cbPanorama = new System.Windows.Forms.CheckBox();
       this.cbOblique = new System.Windows.Forms.CheckBox();
@@ -85,14 +86,10 @@
       this.btnSetOrientation = new System.Windows.Forms.Button();
       this.grOpenByImageId = new System.Windows.Forms.GroupBox();
       this.btnGetAddress = new System.Windows.Forms.Button();
-      this.lblOpenByImageSrs = new System.Windows.Forms.Label();
-      this.txtOpenByImageSrs = new System.Windows.Forms.TextBox();
       this.btnOpenByImageId = new System.Windows.Forms.Button();
       this.lblImageId = new System.Windows.Forms.Label();
       this.txtImageId = new System.Windows.Forms.TextBox();
       this.grCoordinate = new System.Windows.Forms.GroupBox();
-      this.lblCoordinateSrs = new System.Windows.Forms.Label();
-      this.txtCoordinateSrs = new System.Windows.Forms.TextBox();
       this.txtX = new System.Windows.Forms.TextBox();
       this.txtY = new System.Windows.Forms.TextBox();
       this.txtZ = new System.Windows.Forms.TextBox();
@@ -116,10 +113,10 @@
       this.grOpenByAddress = new System.Windows.Forms.GroupBox();
       this.lblAddress = new System.Windows.Forms.Label();
       this.txtAdress = new System.Windows.Forms.TextBox();
-      this.lblAddressSrs = new System.Windows.Forms.Label();
-      this.txtAddressSrs = new System.Windows.Forms.TextBox();
       this.btnOpenByAddress = new System.Windows.Forms.Button();
       this.grLogin = new System.Windows.Forms.GroupBox();
+      this.lblSRS = new System.Windows.Forms.Label();
+      this.txtSrs = new System.Windows.Forms.TextBox();
       this.btnSave = new System.Windows.Forms.Button();
       this.btnLogout = new System.Windows.Forms.Button();
       this.lblAPIKey = new System.Windows.Forms.Label();
@@ -129,7 +126,6 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.ckReplace = new System.Windows.Forms.CheckBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grSld.SuspendLayout();
@@ -164,12 +160,24 @@
       this.grOpenByQuery.Controls.Add(this.cbPanorama);
       this.grOpenByQuery.Controls.Add(this.cbOblique);
       this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
-      this.grOpenByQuery.Location = new System.Drawing.Point(0, 290);
+      this.grOpenByQuery.Location = new System.Drawing.Point(0, 315);
       this.grOpenByQuery.Name = "grOpenByQuery";
       this.grOpenByQuery.Size = new System.Drawing.Size(220, 120);
       this.grOpenByQuery.TabIndex = 0;
       this.grOpenByQuery.TabStop = false;
       this.grOpenByQuery.Text = "Open / Close Viewer";
+      // 
+      // ckReplace
+      // 
+      this.ckReplace.AutoSize = true;
+      this.ckReplace.Checked = true;
+      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckReplace.Location = new System.Drawing.Point(125, 15);
+      this.ckReplace.Name = "ckReplace";
+      this.ckReplace.Size = new System.Drawing.Size(66, 17);
+      this.ckReplace.TabIndex = 68;
+      this.ckReplace.Text = "Replace";
+      this.ckReplace.UseVisualStyleBackColor = true;
       // 
       // txtOpenByQuery
       // 
@@ -465,7 +473,7 @@
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
       this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 135);
+      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 160);
       this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
       this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 155);
       this.grRotationsZoomInOut.TabIndex = 0;
@@ -721,21 +729,19 @@
       // grOpenByImageId
       // 
       this.grOpenByImageId.Controls.Add(this.btnGetAddress);
-      this.grOpenByImageId.Controls.Add(this.lblOpenByImageSrs);
-      this.grOpenByImageId.Controls.Add(this.txtOpenByImageSrs);
       this.grOpenByImageId.Controls.Add(this.btnOpenByImageId);
       this.grOpenByImageId.Controls.Add(this.lblImageId);
       this.grOpenByImageId.Controls.Add(this.txtImageId);
       this.grOpenByImageId.Location = new System.Drawing.Point(0, 525);
       this.grOpenByImageId.Name = "grOpenByImageId";
-      this.grOpenByImageId.Size = new System.Drawing.Size(160, 130);
+      this.grOpenByImageId.Size = new System.Drawing.Size(160, 105);
       this.grOpenByImageId.TabIndex = 44;
       this.grOpenByImageId.TabStop = false;
       this.grOpenByImageId.Text = "Open by imageId";
       // 
       // btnGetAddress
       // 
-      this.btnGetAddress.Location = new System.Drawing.Point(5, 100);
+      this.btnGetAddress.Location = new System.Drawing.Point(5, 75);
       this.btnGetAddress.Name = "btnGetAddress";
       this.btnGetAddress.Size = new System.Drawing.Size(150, 30);
       this.btnGetAddress.TabIndex = 49;
@@ -743,26 +749,9 @@
       this.btnGetAddress.UseVisualStyleBackColor = true;
       this.btnGetAddress.Click += new System.EventHandler(this.btnGetAddress_Click);
       // 
-      // lblOpenByImageSrs
-      // 
-      this.lblOpenByImageSrs.AutoSize = true;
-      this.lblOpenByImageSrs.Location = new System.Drawing.Point(5, 40);
-      this.lblOpenByImageSrs.Name = "lblOpenByImageSrs";
-      this.lblOpenByImageSrs.Size = new System.Drawing.Size(20, 13);
-      this.lblOpenByImageSrs.TabIndex = 47;
-      this.lblOpenByImageSrs.Text = "srs";
-      // 
-      // txtOpenByImageSrs
-      // 
-      this.txtOpenByImageSrs.Location = new System.Drawing.Point(55, 40);
-      this.txtOpenByImageSrs.Name = "txtOpenByImageSrs";
-      this.txtOpenByImageSrs.Size = new System.Drawing.Size(100, 20);
-      this.txtOpenByImageSrs.TabIndex = 48;
-      this.txtOpenByImageSrs.Text = "EPSG:28992";
-      // 
       // btnOpenByImageId
       // 
-      this.btnOpenByImageId.Location = new System.Drawing.Point(5, 65);
+      this.btnOpenByImageId.Location = new System.Drawing.Point(5, 40);
       this.btnOpenByImageId.Name = "btnOpenByImageId";
       this.btnOpenByImageId.Size = new System.Drawing.Size(150, 30);
       this.btnOpenByImageId.TabIndex = 43;
@@ -789,8 +778,6 @@
       // 
       // grCoordinate
       // 
-      this.grCoordinate.Controls.Add(this.lblCoordinateSrs);
-      this.grCoordinate.Controls.Add(this.txtCoordinateSrs);
       this.grCoordinate.Controls.Add(this.txtX);
       this.grCoordinate.Controls.Add(this.txtY);
       this.grCoordinate.Controls.Add(this.txtZ);
@@ -799,29 +786,12 @@
       this.grCoordinate.Controls.Add(this.lblZ);
       this.grCoordinate.Controls.Add(this.btnOpenByCoordinate);
       this.grCoordinate.Controls.Add(this.btnLookAtCoordinate);
-      this.grCoordinate.Location = new System.Drawing.Point(0, 410);
+      this.grCoordinate.Location = new System.Drawing.Point(0, 435);
       this.grCoordinate.Name = "grCoordinate";
-      this.grCoordinate.Size = new System.Drawing.Size(240, 115);
+      this.grCoordinate.Size = new System.Drawing.Size(240, 90);
       this.grCoordinate.TabIndex = 0;
       this.grCoordinate.TabStop = false;
       this.grCoordinate.Text = "Coordinate";
-      // 
-      // lblCoordinateSrs
-      // 
-      this.lblCoordinateSrs.AutoSize = true;
-      this.lblCoordinateSrs.Location = new System.Drawing.Point(120, 90);
-      this.lblCoordinateSrs.Name = "lblCoordinateSrs";
-      this.lblCoordinateSrs.Size = new System.Drawing.Size(20, 13);
-      this.lblCoordinateSrs.TabIndex = 45;
-      this.lblCoordinateSrs.Text = "srs";
-      // 
-      // txtCoordinateSrs
-      // 
-      this.txtCoordinateSrs.Location = new System.Drawing.Point(145, 90);
-      this.txtCoordinateSrs.Name = "txtCoordinateSrs";
-      this.txtCoordinateSrs.Size = new System.Drawing.Size(90, 20);
-      this.txtCoordinateSrs.TabIndex = 46;
-      this.txtCoordinateSrs.Text = "EPSG:28992";
       // 
       // txtX
       // 
@@ -885,7 +855,7 @@
       // 
       // btnLookAtCoordinate
       // 
-      this.btnLookAtCoordinate.Location = new System.Drawing.Point(5, 80);
+      this.btnLookAtCoordinate.Location = new System.Drawing.Point(5, 50);
       this.btnLookAtCoordinate.Name = "btnLookAtCoordinate";
       this.btnLookAtCoordinate.Size = new System.Drawing.Size(110, 30);
       this.btnLookAtCoordinate.TabIndex = 29;
@@ -1021,12 +991,10 @@
       // 
       this.grOpenByAddress.Controls.Add(this.lblAddress);
       this.grOpenByAddress.Controls.Add(this.txtAdress);
-      this.grOpenByAddress.Controls.Add(this.lblAddressSrs);
-      this.grOpenByAddress.Controls.Add(this.txtAddressSrs);
       this.grOpenByAddress.Controls.Add(this.btnOpenByAddress);
       this.grOpenByAddress.Location = new System.Drawing.Point(180, 0);
       this.grOpenByAddress.Name = "grOpenByAddress";
-      this.grOpenByAddress.Size = new System.Drawing.Size(300, 100);
+      this.grOpenByAddress.Size = new System.Drawing.Size(300, 75);
       this.grOpenByAddress.TabIndex = 0;
       this.grOpenByAddress.TabStop = false;
       this.grOpenByAddress.Text = "Open by address";
@@ -1048,26 +1016,9 @@
       this.txtAdress.TabIndex = 14;
       this.txtAdress.Text = "Boschdijk 7, Eindhoven";
       // 
-      // lblAddressSrs
-      // 
-      this.lblAddressSrs.AutoSize = true;
-      this.lblAddressSrs.Location = new System.Drawing.Point(5, 40);
-      this.lblAddressSrs.Name = "lblAddressSrs";
-      this.lblAddressSrs.Size = new System.Drawing.Size(20, 13);
-      this.lblAddressSrs.TabIndex = 13;
-      this.lblAddressSrs.Text = "srs";
-      // 
-      // txtAddressSrs
-      // 
-      this.txtAddressSrs.Location = new System.Drawing.Point(65, 40);
-      this.txtAddressSrs.Name = "txtAddressSrs";
-      this.txtAddressSrs.Size = new System.Drawing.Size(230, 20);
-      this.txtAddressSrs.TabIndex = 15;
-      this.txtAddressSrs.Text = "EPSG:28992";
-      // 
       // btnOpenByAddress
       // 
-      this.btnOpenByAddress.Location = new System.Drawing.Point(5, 65);
+      this.btnOpenByAddress.Location = new System.Drawing.Point(5, 40);
       this.btnOpenByAddress.Name = "btnOpenByAddress";
       this.btnOpenByAddress.Size = new System.Drawing.Size(290, 30);
       this.btnOpenByAddress.TabIndex = 16;
@@ -1077,6 +1028,8 @@
       // 
       // grLogin
       // 
+      this.grLogin.Controls.Add(this.lblSRS);
+      this.grLogin.Controls.Add(this.txtSrs);
       this.grLogin.Controls.Add(this.btnSave);
       this.grLogin.Controls.Add(this.btnLogout);
       this.grLogin.Controls.Add(this.lblAPIKey);
@@ -1088,14 +1041,31 @@
       this.grLogin.Controls.Add(this.btnLogin);
       this.grLogin.Location = new System.Drawing.Point(0, 0);
       this.grLogin.Name = "grLogin";
-      this.grLogin.Size = new System.Drawing.Size(180, 135);
+      this.grLogin.Size = new System.Drawing.Size(180, 160);
       this.grLogin.TabIndex = 49;
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
       // 
+      // lblSRS
+      // 
+      this.lblSRS.AutoSize = true;
+      this.lblSRS.Location = new System.Drawing.Point(5, 90);
+      this.lblSRS.Name = "lblSRS";
+      this.lblSRS.Size = new System.Drawing.Size(29, 13);
+      this.lblSRS.TabIndex = 47;
+      this.lblSRS.Text = "SRS";
+      // 
+      // txtSrs
+      // 
+      this.txtSrs.Location = new System.Drawing.Point(65, 90);
+      this.txtSrs.Name = "txtSrs";
+      this.txtSrs.Size = new System.Drawing.Size(110, 20);
+      this.txtSrs.TabIndex = 48;
+      this.txtSrs.Text = "EPSG:28992";
+      // 
       // btnSave
       // 
-      this.btnSave.Location = new System.Drawing.Point(125, 100);
+      this.btnSave.Location = new System.Drawing.Point(125, 125);
       this.btnSave.Name = "btnSave";
       this.btnSave.Size = new System.Drawing.Size(50, 30);
       this.btnSave.TabIndex = 9;
@@ -1105,7 +1075,7 @@
       // 
       // btnLogout
       // 
-      this.btnLogout.Location = new System.Drawing.Point(65, 100);
+      this.btnLogout.Location = new System.Drawing.Point(65, 125);
       this.btnLogout.Name = "btnLogout";
       this.btnLogout.Size = new System.Drawing.Size(50, 30);
       this.btnLogout.TabIndex = 8;
@@ -1167,7 +1137,7 @@
       // 
       // btnLogin
       // 
-      this.btnLogin.Location = new System.Drawing.Point(5, 100);
+      this.btnLogin.Location = new System.Drawing.Point(5, 125);
       this.btnLogin.Name = "btnLogin";
       this.btnLogin.Size = new System.Drawing.Size(50, 30);
       this.btnLogin.TabIndex = 5;
@@ -1175,18 +1145,6 @@
       this.btnLogin.UseVisualStyleBackColor = true;
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-      // 
-      // ckReplace
-      // 
-      this.ckReplace.AutoSize = true;
-      this.ckReplace.Checked = true;
-      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckReplace.Location = new System.Drawing.Point(125, 15);
-      this.ckReplace.Name = "ckReplace";
-      this.ckReplace.Size = new System.Drawing.Size(66, 17);
-      this.ckReplace.TabIndex = 68;
-      this.ckReplace.Text = "Replace";
-      this.ckReplace.UseVisualStyleBackColor = true;
       // 
       // Demo
       // 
@@ -1248,9 +1206,7 @@
     private System.Windows.Forms.Button btnGetPermissions;
     private System.Windows.Forms.Button btnApplicationName;
     private System.Windows.Forms.Button btnApplicationVersion;
-    private System.Windows.Forms.TextBox txtAddressSrs;
     private System.Windows.Forms.TextBox txtAdress;
-    private System.Windows.Forms.Label lblAddressSrs;
     private System.Windows.Forms.Label lblAddress;
     private System.Windows.Forms.Button btnOpenByAddress;
     private System.Windows.Forms.Button btnGetViewerColor;
@@ -1294,11 +1250,7 @@
     private System.Windows.Forms.Label lblResult;
     private System.Windows.Forms.TextBox txtAPIResult;
     private System.Windows.Forms.GroupBox grCoordinate;
-    private System.Windows.Forms.Label lblCoordinateSrs;
-    private System.Windows.Forms.TextBox txtCoordinateSrs;
     private System.Windows.Forms.GroupBox grOpenByImageId;
-    private System.Windows.Forms.Label lblOpenByImageSrs;
-    private System.Windows.Forms.TextBox txtOpenByImageSrs;
     private System.Windows.Forms.GroupBox grOrientation;
     private System.Windows.Forms.GroupBox grRecordingViewerColorPermissions;
     private System.Windows.Forms.TextBox txtRecordingViewerColorPermissions;
@@ -1336,6 +1288,8 @@
     private System.Windows.Forms.GroupBox grSld;
     private System.Windows.Forms.TextBox txtSld;
     private System.Windows.Forms.CheckBox ckReplace;
+    private System.Windows.Forms.Label lblSRS;
+    private System.Windows.Forms.TextBox txtSrs;
   }
 }
 
