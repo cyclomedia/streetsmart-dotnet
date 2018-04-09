@@ -89,6 +89,18 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     void ZoomOut();
 
+    /// <summary>
+    /// Set the brightness of the viewer.
+    /// </summary>
+    /// <param name="value">Set brightness to a positive number</param>
+    void SetBrightness(double value);
+
+    /// <summary>
+    /// Set the contrast of the viewer.
+    /// </summary>
+    /// <param name="value">Set contrast to a positive number</param>
+    void SetContrast(double value);
+
     #endregion
   }
 }

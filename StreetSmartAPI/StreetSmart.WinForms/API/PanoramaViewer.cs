@@ -173,6 +173,11 @@ namespace StreetSmart.WinForms.API
       Browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
     }
 
+    public void Toggle3DCursor(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
+    }
+
     #endregion
 
     #region Events from StreetSmartAPI

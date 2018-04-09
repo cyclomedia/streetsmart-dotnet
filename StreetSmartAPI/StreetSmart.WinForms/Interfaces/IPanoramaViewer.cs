@@ -181,6 +181,12 @@ namespace StreetSmart.WinForms.Interfaces
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleRecordingsVisible(bool visible);
 
+    /// <summary>
+    /// Toggles the visibility of the 3D cursor in the PanoramaViewer
+    /// </summary>
+    /// <param name="visible">If available, sets visibility to this value.</param>
+    void Toggle3DCursor(bool visible);
+
     #endregion
   }
 }

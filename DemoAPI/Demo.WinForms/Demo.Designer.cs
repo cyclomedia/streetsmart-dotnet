@@ -31,6 +31,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenByQuery = new System.Windows.Forms.GroupBox();
+      this.ckReplace = new System.Windows.Forms.CheckBox();
       this.txtOpenByQuery = new System.Windows.Forms.TextBox();
       this.cbPanorama = new System.Windows.Forms.CheckBox();
       this.cbOblique = new System.Windows.Forms.CheckBox();
@@ -102,7 +103,6 @@
       this.btnOpenByCoordinate = new System.Windows.Forms.Button();
       this.btnLookAtCoordinate = new System.Windows.Forms.Button();
       this.grAPIInfo = new System.Windows.Forms.GroupBox();
-      this.lblResult = new System.Windows.Forms.Label();
       this.txtAPIResult = new System.Windows.Forms.TextBox();
       this.btnApiReadyState = new System.Windows.Forms.Button();
       this.btnApplicationVersion = new System.Windows.Forms.Button();
@@ -129,7 +129,6 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.ckReplace = new System.Windows.Forms.CheckBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grSld.SuspendLayout();
@@ -170,6 +169,18 @@
       this.grOpenByQuery.TabIndex = 0;
       this.grOpenByQuery.TabStop = false;
       this.grOpenByQuery.Text = "Open / Close Viewer";
+      // 
+      // ckReplace
+      // 
+      this.ckReplace.AutoSize = true;
+      this.ckReplace.Checked = true;
+      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckReplace.Location = new System.Drawing.Point(125, 15);
+      this.ckReplace.Name = "ckReplace";
+      this.ckReplace.Size = new System.Drawing.Size(66, 17);
+      this.ckReplace.TabIndex = 68;
+      this.ckReplace.Text = "Replace";
+      this.ckReplace.UseVisualStyleBackColor = true;
       // 
       // txtOpenByQuery
       // 
@@ -895,7 +906,6 @@
       // 
       // grAPIInfo
       // 
-      this.grAPIInfo.Controls.Add(this.lblResult);
       this.grAPIInfo.Controls.Add(this.txtAPIResult);
       this.grAPIInfo.Controls.Add(this.btnApiReadyState);
       this.grAPIInfo.Controls.Add(this.btnApplicationVersion);
@@ -907,25 +917,16 @@
       this.grAPIInfo.TabStop = false;
       this.grAPIInfo.Text = "API Info";
       // 
-      // lblResult
-      // 
-      this.lblResult.AutoSize = true;
-      this.lblResult.Location = new System.Drawing.Point(5, 120);
-      this.lblResult.Name = "lblResult";
-      this.lblResult.Size = new System.Drawing.Size(40, 13);
-      this.lblResult.TabIndex = 22;
-      this.lblResult.Text = "Result:";
-      // 
       // txtAPIResult
       // 
-      this.txtAPIResult.Location = new System.Drawing.Point(5, 155);
+      this.txtAPIResult.Location = new System.Drawing.Point(4, 165);
       this.txtAPIResult.Name = "txtAPIResult";
       this.txtAPIResult.Size = new System.Drawing.Size(110, 20);
       this.txtAPIResult.TabIndex = 23;
       // 
       // btnApiReadyState
       // 
-      this.btnApiReadyState.Location = new System.Drawing.Point(5, 15);
+      this.btnApiReadyState.Location = new System.Drawing.Point(4, 50);
       this.btnApiReadyState.Name = "btnApiReadyState";
       this.btnApiReadyState.Size = new System.Drawing.Size(110, 30);
       this.btnApiReadyState.TabIndex = 8;
@@ -935,7 +936,7 @@
       // 
       // btnApplicationVersion
       // 
-      this.btnApplicationVersion.Location = new System.Drawing.Point(5, 50);
+      this.btnApplicationVersion.Location = new System.Drawing.Point(4, 84);
       this.btnApplicationVersion.Name = "btnApplicationVersion";
       this.btnApplicationVersion.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationVersion.TabIndex = 9;
@@ -945,7 +946,7 @@
       // 
       // btnApplicationName
       // 
-      this.btnApplicationName.Location = new System.Drawing.Point(5, 85);
+      this.btnApplicationName.Location = new System.Drawing.Point(4, 120);
       this.btnApplicationName.Name = "btnApplicationName";
       this.btnApplicationName.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationName.TabIndex = 10;
@@ -1176,18 +1177,6 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // ckReplace
-      // 
-      this.ckReplace.AutoSize = true;
-      this.ckReplace.Checked = true;
-      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckReplace.Location = new System.Drawing.Point(125, 15);
-      this.ckReplace.Name = "ckReplace";
-      this.ckReplace.Size = new System.Drawing.Size(66, 17);
-      this.ckReplace.TabIndex = 68;
-      this.ckReplace.Text = "Replace";
-      this.ckReplace.UseVisualStyleBackColor = true;
-      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1291,7 +1280,6 @@
     private System.Windows.Forms.TextBox txtDeltaYawPitch;
     private System.Windows.Forms.GroupBox grOpenByQuery;
     private System.Windows.Forms.GroupBox grAPIInfo;
-    private System.Windows.Forms.Label lblResult;
     private System.Windows.Forms.TextBox txtAPIResult;
     private System.Windows.Forms.GroupBox grCoordinate;
     private System.Windows.Forms.Label lblCoordinateSrs;

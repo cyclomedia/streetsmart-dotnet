@@ -120,6 +120,16 @@ namespace StreetSmart.WinForms.API
       Browser.ExecuteScriptAsync($"{Name}.zoomOut();");
     }
 
+    public void SetBrightness(double value)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setBrightness({value});");
+    }
+
+    public void SetContrast(double value)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setContrast({value});");
+    }
+
     #endregion
 
     #region Callbacks viewer
