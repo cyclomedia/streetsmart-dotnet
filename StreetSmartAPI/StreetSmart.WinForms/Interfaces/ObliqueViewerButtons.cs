@@ -26,51 +26,39 @@ namespace StreetSmart.WinForms.Interfaces
   public enum ObliqueViewerButtons
   {
     /// <summary>
-    /// center map
-    /// </summary>
-    [Description("StreetSmartApi.ObliqueViewerUi.buttons.CENTER_MAP")]
-    CenterMap = 1,
-
-    /// <summary>
     /// image information
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.IMAGE_INFORMATION")]
-    ImageInformation = 2,
-
-    /// <summary>
-    /// copy link
-    /// </summary>
-    [Description("StreetSmartApi.ObliqueViewerUi.buttons.COPY_LINK")]
-    CopyLink = 3,
+    ImageInformation = 1,
 
     /// <summary>
     /// save image
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 4,
+    SaveImage = 2,
 
     /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 5,
+    ZoomIn = 3,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 6,
+    ZoomOut = 4,
 
     /// <summary>
     /// switch direction
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SWITCH_DIRECTION")]
-    SwitchDirection = 7,
+    SwitchDirection = 5,
 
     /// <summary>
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 8
+    ToggleNadir = 6
   }
 }

@@ -95,9 +95,8 @@ namespace Demo.WinForms
 
       ObliqueViewerButtons[] obButtons =
       {
-        ObliqueViewerButtons.CenterMap, ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.CopyLink,
-        ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
-        ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn,
+        ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
       };
 
       foreach (var obButton in obButtons)
@@ -107,9 +106,8 @@ namespace Demo.WinForms
 
       PanoramaViewerButtons[] pnButtons =
       {
-        PanoramaViewerButtons.CenterMap, PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.CopyLink,
-        PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
-        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
+        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
       };
 
       foreach (var pnButton in pnButtons)
@@ -811,9 +809,8 @@ namespace Demo.WinForms
       {
         ObliqueViewerButtons[] buttons =
         {
-          ObliqueViewerButtons.CenterMap, ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.CopyLink,
-          ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
-          ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn,
+          ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
         };
 
         foreach (var button in buttons)
@@ -827,9 +824,8 @@ namespace Demo.WinForms
       {
         PanoramaViewerButtons[] buttons =
         {
-          PanoramaViewerButtons.CenterMap, PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.CopyLink,
-          PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
-          PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
+          PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
         };
 
         foreach (var button in buttons)

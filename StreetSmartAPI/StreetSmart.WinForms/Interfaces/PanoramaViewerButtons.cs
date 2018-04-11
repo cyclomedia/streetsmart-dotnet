@@ -56,39 +56,27 @@ namespace StreetSmart.WinForms.Interfaces
     Measure = 5,
 
     /// <summary>
-    /// center map
-    /// </summary>
-    [Description("StreetSmartApi.PanoramaViewerUi.buttons.CENTER_MAP")]
-    CenterMap = 6,
-
-    /// <summary>
     /// image information
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.IMAGE_INFORMATION")]
-    ImageInformation = 7,
-
-    /// <summary>
-    /// copy link
-    /// </summary>
-    [Description("StreetSmartApi.PanoramaViewerUi.buttons.COPY_LINK")]
-    CopyLink = 8,
+    ImageInformation = 6,
 
     /// <summary>
     /// save image
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 9,
+    SaveImage = 7,
 
     /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 10,
+    ZoomIn = 8,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 11
+    ZoomOut = 9
   }
 }
