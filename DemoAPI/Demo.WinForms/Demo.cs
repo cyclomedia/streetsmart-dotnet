@@ -259,7 +259,7 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
       IDomElement element = DomElementFactory.Create();
       _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, srs, locale,
-        addressSettings, element, int.Parse(maxWindows));
+        addressSettings, element);
 
       try
       {

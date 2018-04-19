@@ -70,15 +70,6 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3.
-        /// </summary>
-        internal static string maxWindows {
-            get {
-                return ResourceManager.GetString("maxWindows", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to EPSG:28992.
         /// </summary>
         internal static string srs {

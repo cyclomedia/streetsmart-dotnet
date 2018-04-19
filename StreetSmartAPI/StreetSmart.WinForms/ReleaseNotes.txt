@@ -1,6 +1,14 @@
 ﻿Release notes:
 ==============
 
+Version: 18.5.0
+===============
+- Removed maxWindows, now the maxWindows is always 3
+- Removed the Copy_Link and Center_Map button in the oblique viewer and panorama viewer buttons
+- Added the toggle3D Cursor function in the Panorama viewer
+- Added the SetBrightness and the SetContrast functions in the panorama viewer and the oblique viewer
+
+
 Version: 18.4.0
 ===============
 - Added the folowing buttons to the panorama viewer button list. Now you can turn these buttons on and off.

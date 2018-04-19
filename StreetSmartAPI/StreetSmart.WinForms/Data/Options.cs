@@ -35,10 +35,9 @@ namespace StreetSmart.WinForms.Data
     private Uri _configurationURL;
     private IAddressSettings _addressSettings;
     private IDomElement _element;
-    private int? _maxWindows;
 
     public Options(string userName, SecureString password, string apiKey, string srs, CultureInfo locale,
-      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, int? maxWindows)
+      Uri configurationURL, IAddressSettings addressSettings, IDomElement element)
     {
       Username = userName;
       Password = password;
@@ -48,7 +47,6 @@ namespace StreetSmart.WinForms.Data
       ConfigurationURL = configurationURL;
       AddressSettings = addressSettings;
       Element = element;
-      _maxWindows = maxWindows;
     }
 
     // ReSharper restore InconsistentNaming
@@ -133,25 +131,14 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
-    public int? MaxWindows
-    {
-      get => _maxWindows;
-      set
-      {
-        _maxWindows = value;
-        RaisePropertyChanged();
-      }
-    }
-
     public override string ToString()
     {
       // ReSharper disable once InconsistentNaming
       string configurationURL = (ConfigurationURL == null) ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
       string locale = (Locale == null) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
-      string maxWindows = MaxWindows == null ? string.Empty : $",maxWindows:'{MaxWindows}'";
       return $@"{{targetElement:{_element.Name},username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
-             ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}{maxWindows}}}";
+             ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }
 }
