@@ -56,6 +56,18 @@ namespace StreetSmart.WinForms.Interfaces
     Task<bool> GetTimeTravelVisible();
 
     /// <summary>
+    /// Set the brightness of the viewer.
+    /// </summary>
+    /// <param name="value">Set brightness to a positive number</param>
+    void SetBrightness(double value);
+
+    /// <summary>
+    /// Set the contrast of the viewer.
+    /// </summary>
+    /// <param name="value">Set contrast to a positive number</param>
+    void SetContrast(double value);
+
+    /// <summary>
     /// Modify the state of navbar expanded in the panorama viewer store.
     /// </summary>
     /// <param name="expanded">Sets expanded to this value.</param>
@@ -88,18 +100,6 @@ namespace StreetSmart.WinForms.Interfaces
     /// Zoom out in the Panorama. This will alter the hFov.
     /// </summary>
     void ZoomOut();
-
-    /// <summary>
-    /// Set the brightness of the viewer.
-    /// </summary>
-    /// <param name="value">Set brightness to a positive number</param>
-    void SetBrightness(double value);
-
-    /// <summary>
-    /// Set the contrast of the viewer.
-    /// </summary>
-    /// <param name="value">Set contrast to a positive number</param>
-    void SetContrast(double value);
 
     #endregion
   }

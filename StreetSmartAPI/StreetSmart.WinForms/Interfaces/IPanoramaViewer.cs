@@ -42,6 +42,11 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
 
     /// <summary>
+    /// Triggers when the surface cursor is changed
+    /// </summary>
+    event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
+
+    /// <summary>
     /// Triggers when one or more tiles could not be loaded.
     /// </summary>
     event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
@@ -57,11 +62,6 @@ namespace StreetSmart.WinForms.Interfaces
     event EventHandler<IEventArgs<IOrientation>> ViewChange;
 
     /// <summary>
-    /// Triggers when the surface cursor is changed
-    /// </summary>
-    event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
-
-    /// <summary>
     /// Triggers when everything that is needed for the view to dislay correctly is loaded.
     /// </summary>
     event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
@@ -74,6 +74,13 @@ namespace StreetSmart.WinForms.Interfaces
     #endregion
 
     #region Interface functions
+
+    /// <summary>
+    /// Returns whether the 3D cursor is visible
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The 3D cursor visible state.</returns>
+    Task<bool> Get3DCursorVisible();
 
     /// <summary>
     /// Get the visibility of a button
@@ -169,6 +176,12 @@ namespace StreetSmart.WinForms.Interfaces
     void SetOrientation(IOrientation orientation);
 
     /// <summary>
+    /// Toggles the visibility of the 3D cursor in the PanoramaViewer
+    /// </summary>
+    /// <param name="visible">If available, sets visibility to this value.</param>
+    void Toggle3DCursor(bool visible);
+
+    /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
     /// <param name="buttonId"></param>
@@ -180,12 +193,6 @@ namespace StreetSmart.WinForms.Interfaces
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleRecordingsVisible(bool visible);
-
-    /// <summary>
-    /// Toggles the visibility of the 3D cursor in the PanoramaViewer
-    /// </summary>
-    /// <param name="visible">If available, sets visibility to this value.</param>
-    void Toggle3DCursor(bool visible);
 
     #endregion
   }

@@ -902,6 +902,28 @@ namespace Demo.WinForms
       txtRecordingViewerColorPermissions.Text = permissionsString;
     }
 
+    private void btnBrightness_Click(object sender, EventArgs e)
+    {
+      if (double.TryParse(txtBrightnessContrast.Text, out var value))
+      {
+        PanoramaViewer.SetBrightness(value);
+      }
+    }
+
+    private void btnContrast_Click(object sender, EventArgs e)
+    {
+      if (double.TryParse(txtBrightnessContrast.Text, out var value))
+      {
+        PanoramaViewer.SetContrast(value);
+      }
+    }
+
+    private async void btn3DCursor_Click(object sender, EventArgs e)
+    {
+      bool visible = await PanoramaViewer.Get3DCursorVisible();
+      PanoramaViewer.Toggle3DCursor(!visible);
+    }
+
     #endregion
 
     #region Private Functions
@@ -977,6 +999,33 @@ namespace Demo.WinForms
       {
         grMeasurement.Enabled = value;
       }
+
+      if (grButtonVisibility.InvokeRequired)
+      {
+        grButtonVisibility.Invoke(new MethodInvoker(() => grButtonVisibility.Enabled = value));
+      }
+      else
+      {
+        grButtonVisibility.Enabled = value;
+      }
+
+      if (grBrightCont.InvokeRequired)
+      {
+        grBrightCont.Invoke(new MethodInvoker(() => grBrightCont.Enabled = value));
+      }
+      else
+      {
+        grBrightCont.Enabled = value;
+      }
+
+      if (gr3DCursor.InvokeRequired)
+      {
+        gr3DCursor.Invoke(new MethodInvoker(() => gr3DCursor.Enabled = value));
+      }
+      else
+      {
+        gr3DCursor.Enabled = value;
+      }
     }
 
     private void PrintRecordingText(IRecording recording)
@@ -1011,6 +1060,9 @@ namespace Demo.WinForms
       grOpenByImageId.Enabled = false;
       grRecordingViewerColorPermissions.Enabled = false;
       grMeasurement.Enabled = false;
+      grButtonVisibility.Enabled = false;
+      grBrightCont.Enabled = false;
+      gr3DCursor.Enabled = false;
     }
 
     #endregion

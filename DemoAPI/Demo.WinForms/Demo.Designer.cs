@@ -37,6 +37,10 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grBrightCont = new System.Windows.Forms.GroupBox();
+      this.txtBrightnessContrast = new System.Windows.Forms.TextBox();
+      this.btnContrast = new System.Windows.Forms.Button();
+      this.btnBrightness = new System.Windows.Forms.Button();
       this.grSld = new System.Windows.Forms.GroupBox();
       this.txtSld = new System.Windows.Forms.TextBox();
       this.grButtonVisibility = new System.Windows.Forms.GroupBox();
@@ -125,8 +129,11 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.gr3DCursor = new System.Windows.Forms.GroupBox();
+      this.btn3DCursor = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grBrightCont.SuspendLayout();
       this.grSld.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
       this.grOverlay.SuspendLayout();
@@ -142,6 +149,7 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.gr3DCursor.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -223,6 +231,8 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.gr3DCursor);
+      this.plControl.Controls.Add(this.grBrightCont);
       this.plControl.Controls.Add(this.grSld);
       this.plControl.Controls.Add(this.grButtonVisibility);
       this.plControl.Controls.Add(this.grOverlay);
@@ -244,6 +254,45 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 925);
       this.plControl.TabIndex = 1;
+      // 
+      // grBrightCont
+      // 
+      this.grBrightCont.Controls.Add(this.txtBrightnessContrast);
+      this.grBrightCont.Controls.Add(this.btnContrast);
+      this.grBrightCont.Controls.Add(this.btnBrightness);
+      this.grBrightCont.Location = new System.Drawing.Point(360, 75);
+      this.grBrightCont.Name = "grBrightCont";
+      this.grBrightCont.Size = new System.Drawing.Size(120, 105);
+      this.grBrightCont.TabIndex = 56;
+      this.grBrightCont.TabStop = false;
+      this.grBrightCont.Text = "Brightness / Contrast";
+      // 
+      // txtBrightnessContrast
+      // 
+      this.txtBrightnessContrast.Location = new System.Drawing.Point(5, 75);
+      this.txtBrightnessContrast.Name = "txtBrightnessContrast";
+      this.txtBrightnessContrast.Size = new System.Drawing.Size(110, 20);
+      this.txtBrightnessContrast.TabIndex = 24;
+      // 
+      // btnContrast
+      // 
+      this.btnContrast.Location = new System.Drawing.Point(5, 45);
+      this.btnContrast.Name = "btnContrast";
+      this.btnContrast.Size = new System.Drawing.Size(110, 25);
+      this.btnContrast.TabIndex = 10;
+      this.btnContrast.Text = "Set Contrast";
+      this.btnContrast.UseVisualStyleBackColor = true;
+      this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
+      // 
+      // btnBrightness
+      // 
+      this.btnBrightness.Location = new System.Drawing.Point(5, 15);
+      this.btnBrightness.Name = "btnBrightness";
+      this.btnBrightness.Size = new System.Drawing.Size(110, 25);
+      this.btnBrightness.TabIndex = 9;
+      this.btnBrightness.Text = "Set Brightness";
+      this.btnBrightness.UseVisualStyleBackColor = true;
+      this.btnBrightness.Click += new System.EventHandler(this.btnBrightness_Click);
       // 
       // grSld
       // 
@@ -435,18 +484,18 @@
       // 
       this.grDevTools.Controls.Add(this.btnCloseDefTools);
       this.grDevTools.Controls.Add(this.btnShowDefTools);
-      this.grDevTools.Location = new System.Drawing.Point(360, 290);
+      this.grDevTools.Location = new System.Drawing.Point(360, 325);
       this.grDevTools.Name = "grDevTools";
-      this.grDevTools.Size = new System.Drawing.Size(120, 120);
+      this.grDevTools.Size = new System.Drawing.Size(120, 85);
       this.grDevTools.TabIndex = 51;
       this.grDevTools.TabStop = false;
       this.grDevTools.Text = "Dev tools";
       // 
       // btnCloseDefTools
       // 
-      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 85);
+      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 50);
       this.btnCloseDefTools.Name = "btnCloseDefTools";
-      this.btnCloseDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnCloseDefTools.Size = new System.Drawing.Size(110, 30);
       this.btnCloseDefTools.TabIndex = 49;
       this.btnCloseDefTools.Text = "Close def tools";
       this.btnCloseDefTools.UseVisualStyleBackColor = true;
@@ -456,7 +505,7 @@
       // 
       this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
       this.btnShowDefTools.Name = "btnShowDefTools";
-      this.btnShowDefTools.Size = new System.Drawing.Size(100, 30);
+      this.btnShowDefTools.Size = new System.Drawing.Size(110, 30);
       this.btnShowDefTools.TabIndex = 48;
       this.btnShowDefTools.Text = "Show def tools";
       this.btnShowDefTools.UseVisualStyleBackColor = true;
@@ -868,23 +917,23 @@
       this.grAPIInfo.Controls.Add(this.btnApiReadyState);
       this.grAPIInfo.Controls.Add(this.btnApplicationVersion);
       this.grAPIInfo.Controls.Add(this.btnApplicationName);
-      this.grAPIInfo.Location = new System.Drawing.Point(360, 100);
+      this.grAPIInfo.Location = new System.Drawing.Point(360, 180);
       this.grAPIInfo.Name = "grAPIInfo";
-      this.grAPIInfo.Size = new System.Drawing.Size(120, 190);
+      this.grAPIInfo.Size = new System.Drawing.Size(120, 145);
       this.grAPIInfo.TabIndex = 0;
       this.grAPIInfo.TabStop = false;
       this.grAPIInfo.Text = "API Info";
       // 
       // txtAPIResult
       // 
-      this.txtAPIResult.Location = new System.Drawing.Point(4, 165);
+      this.txtAPIResult.Location = new System.Drawing.Point(4, 120);
       this.txtAPIResult.Name = "txtAPIResult";
       this.txtAPIResult.Size = new System.Drawing.Size(110, 20);
       this.txtAPIResult.TabIndex = 23;
       // 
       // btnApiReadyState
       // 
-      this.btnApiReadyState.Location = new System.Drawing.Point(4, 50);
+      this.btnApiReadyState.Location = new System.Drawing.Point(4, 15);
       this.btnApiReadyState.Name = "btnApiReadyState";
       this.btnApiReadyState.Size = new System.Drawing.Size(110, 30);
       this.btnApiReadyState.TabIndex = 8;
@@ -894,7 +943,7 @@
       // 
       // btnApplicationVersion
       // 
-      this.btnApplicationVersion.Location = new System.Drawing.Point(4, 84);
+      this.btnApplicationVersion.Location = new System.Drawing.Point(4, 50);
       this.btnApplicationVersion.Name = "btnApplicationVersion";
       this.btnApplicationVersion.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationVersion.TabIndex = 9;
@@ -904,7 +953,7 @@
       // 
       // btnApplicationName
       // 
-      this.btnApplicationName.Location = new System.Drawing.Point(4, 120);
+      this.btnApplicationName.Location = new System.Drawing.Point(4, 85);
       this.btnApplicationName.Name = "btnApplicationName";
       this.btnApplicationName.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationName.TabIndex = 10;
@@ -919,9 +968,9 @@
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarExpanded);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
-      this.grViewerToggles.Location = new System.Drawing.Point(180, 100);
+      this.grViewerToggles.Location = new System.Drawing.Point(180, 125);
       this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Size = new System.Drawing.Size(180, 190);
+      this.grViewerToggles.Size = new System.Drawing.Size(180, 165);
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
@@ -930,7 +979,7 @@
       // 
       this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(5, 15);
       this.btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
-      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(150, 25);
       this.btnToggleRecordingsVisible.TabIndex = 36;
       this.btnToggleRecordingsVisible.Text = "Toggle recordings visible";
       this.btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
@@ -938,9 +987,9 @@
       // 
       // btnToggleTimeTravelExpanded
       // 
-      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 50);
+      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 45);
       this.btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
-      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(150, 25);
       this.btnToggleTimeTravelExpanded.TabIndex = 40;
       this.btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
       this.btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
@@ -948,9 +997,9 @@
       // 
       // btnToggleNavbarExpanded
       // 
-      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 85);
+      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 75);
       this.btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
-      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(150, 25);
       this.btnToggleNavbarExpanded.TabIndex = 38;
       this.btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
       this.btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
@@ -958,9 +1007,9 @@
       // 
       // btnToggleTimeTravelVisible
       // 
-      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 120);
+      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 105);
       this.btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
-      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(150, 25);
       this.btnToggleTimeTravelVisible.TabIndex = 39;
       this.btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
       this.btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
@@ -968,9 +1017,9 @@
       // 
       // btnToggleNavbarVisible
       // 
-      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 155);
+      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 135);
       this.btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
-      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(150, 25);
       this.btnToggleNavbarVisible.TabIndex = 37;
       this.btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
       this.btnToggleNavbarVisible.UseVisualStyleBackColor = true;
@@ -1135,6 +1184,26 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
+      // gr3DCursor
+      // 
+      this.gr3DCursor.Controls.Add(this.btn3DCursor);
+      this.gr3DCursor.Location = new System.Drawing.Point(180, 75);
+      this.gr3DCursor.Name = "gr3DCursor";
+      this.gr3DCursor.Size = new System.Drawing.Size(180, 45);
+      this.gr3DCursor.TabIndex = 57;
+      this.gr3DCursor.TabStop = false;
+      this.gr3DCursor.Text = "3D Cursor";
+      // 
+      // btn3DCursor
+      // 
+      this.btn3DCursor.Location = new System.Drawing.Point(5, 15);
+      this.btn3DCursor.Name = "btn3DCursor";
+      this.btn3DCursor.Size = new System.Drawing.Size(150, 25);
+      this.btn3DCursor.TabIndex = 9;
+      this.btn3DCursor.Text = "Toggle 3D Cursor";
+      this.btn3DCursor.UseVisualStyleBackColor = true;
+      this.btn3DCursor.Click += new System.EventHandler(this.btn3DCursor_Click);
+      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1150,6 +1219,8 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grBrightCont.ResumeLayout(false);
+      this.grBrightCont.PerformLayout();
       this.grSld.ResumeLayout(false);
       this.grSld.PerformLayout();
       this.grButtonVisibility.ResumeLayout(false);
@@ -1176,6 +1247,7 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.gr3DCursor.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1278,6 +1350,12 @@
     private System.Windows.Forms.CheckBox ckReplace;
     private System.Windows.Forms.Label lblSRS;
     private System.Windows.Forms.TextBox txtSrs;
+    private System.Windows.Forms.GroupBox grBrightCont;
+    private System.Windows.Forms.TextBox txtBrightnessContrast;
+    private System.Windows.Forms.Button btnContrast;
+    private System.Windows.Forms.Button btnBrightness;
+    private System.Windows.Forms.GroupBox gr3DCursor;
+    private System.Windows.Forms.Button btn3DCursor;
   }
 }
 

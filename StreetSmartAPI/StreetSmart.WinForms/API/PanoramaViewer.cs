@@ -45,12 +45,12 @@ namespace StreetSmart.WinForms.API
 
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
-    public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+    public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
 
     #endregion
 
@@ -90,6 +90,11 @@ namespace StreetSmart.WinForms.API
     #endregion
 
     #region Interface Functions
+
+    public async Task<bool> Get3DCursorVisible()
+    {
+      return (bool) await CallJsAsync(GetScript("get3DCursorVisible()"));
+    }
 
     public async Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId)
     {
@@ -163,6 +168,11 @@ namespace StreetSmart.WinForms.API
       Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
     }
 
+    public void Toggle3DCursor(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
+    }
+
     public void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled)
     {
       base.ToggleButtonEnabled(buttonId, enabled);
@@ -171,11 +181,6 @@ namespace StreetSmart.WinForms.API
     public void ToggleRecordingsVisible(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
-    }
-
-    public void Toggle3DCursor(bool visible)
-    {
-      Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
     }
 
     #endregion
