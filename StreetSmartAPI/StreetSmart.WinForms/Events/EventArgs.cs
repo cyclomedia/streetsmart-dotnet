@@ -18,7 +18,7 @@
 
 using System;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Events;
 
 namespace StreetSmart.WinForms.Events
 {

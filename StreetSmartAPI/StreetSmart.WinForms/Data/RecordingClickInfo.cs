@@ -18,7 +18,7 @@
 
 using System.Collections.Generic;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Data;
 
 namespace StreetSmart.WinForms.Data
 {

@@ -20,7 +20,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.DomElement;
 
 namespace StreetSmart.WinForms.Data.DomElement
 {

@@ -16,7 +16,7 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Data;
 
 namespace StreetSmart.WinForms.Data
 {

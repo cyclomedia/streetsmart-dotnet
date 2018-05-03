@@ -23,7 +23,8 @@ using System.Threading.Tasks;
 using CefSharp;
 using CefSharp.WinForms;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
+using StreetSmart.WinForms.Interfaces.Data;
 
 namespace StreetSmart.WinForms.API
 {

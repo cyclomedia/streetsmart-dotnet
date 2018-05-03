@@ -17,7 +17,8 @@
  */
 
 using System;
-using StreetSmart.WinForms.Interfaces;
+
+using StreetSmart.WinForms.Interfaces.DomElement;
 
 namespace StreetSmart.WinForms.Data.DomElement
 {

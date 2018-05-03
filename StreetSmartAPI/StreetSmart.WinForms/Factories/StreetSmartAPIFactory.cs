@@ -20,7 +20,7 @@ using CefSharp;
 
 using StreetSmart.WinForms.API;
 using StreetSmart.WinForms.Handlers;
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
 using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.Factories

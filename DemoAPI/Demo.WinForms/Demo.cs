@@ -16,10 +16,6 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Exceptions;
-using StreetSmart.WinForms.Factories;
-using StreetSmart.WinForms.Interfaces;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -27,7 +23,12 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-using Newtonsoft.Json;
+using StreetSmart.WinForms.Exceptions;
+using StreetSmart.WinForms.Factories;
+using StreetSmart.WinForms.Interfaces.API;
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.DomElement;
+using StreetSmart.WinForms.Interfaces.Events;
 
 using static Demo.WinForms.Properties.Resources;
 
@@ -811,9 +812,7 @@ namespace Demo.WinForms
     private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
     {
       var measurement = await _api.GetActiveMeasurement();
-      string json = JsonConvert.SerializeObject(measurement);
-      const int maxLength = 128;
-      AddViewerEventsText(json.Substring(0, Math.Min(json.Length, maxLength)));
+      AddViewerEventsText(measurement?.ToString() ?? string.Empty);
     }
 
     private async void btnAddOverlay_Click(object sender, EventArgs e)

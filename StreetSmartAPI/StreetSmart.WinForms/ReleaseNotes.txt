@@ -7,6 +7,7 @@ Version: 18.5.0
 - Removed the Copy_Link and Center_Map button in the oblique viewer and panorama viewer buttons
 - Added the toggle3D Cursor and get3DCursor visible functions in the Panorama viewer
 - Added the SetBrightness and the SetContrast functions in the panorama viewer and the oblique viewer
+- Improved parsing SLD, now you don't have to escape characters
 
 
 Version: 18.4.0

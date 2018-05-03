@@ -25,14 +25,14 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 
-using Newtonsoft.Json.Linq;
-
 using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.Events;
 using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.API
@@ -150,11 +150,9 @@ namespace StreetSmart.WinForms.API
       ViewerList.ClearViewers();
     }
 
-    public async Task<dynamic> GetActiveMeasurement()
+    public async Task<object> GetActiveMeasurement()
     {
-      var script = GetScriptStringify("getActiveMeasurement()");
-      var measurement = (string) await CallJsAsync(script);
-      return JObject.Parse(measurement);
+      return await CallJsAsync(GetScript("getActiveMeasurement()"));
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -305,11 +303,6 @@ namespace StreetSmart.WinForms.API
     private string GetScript(string funcName)
     {
       return $"{JsThis}.{JsResult}({JsApi}.{funcName});";
-    }
-
-    private string GetScriptStringify(string funcName)
-    {
-      return $"{JsThis}.{JsResult}(JSON.stringify({JsApi}.{funcName}));";
     }
 
     private void ReAssignMeasurementEvents()

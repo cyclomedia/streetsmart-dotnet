@@ -112,9 +112,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -167,30 +164,29 @@
     <Compile Include="Factories\OverlayFactory.cs" />
     <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
     <Compile Include="Factories\ViewerOptionsFactory.cs" />
-    <Compile Include="Interfaces\IDepthInfo.cs" />
-    <Compile Include="Interfaces\IObliqueViewerOptions.cs" />
-    <Compile Include="Interfaces\IMeasurementOptions.cs" />
-    <Compile Include="Interfaces\IObliqueViewer.cs" />
-    <Compile Include="Interfaces\IOverlay.cs" />
-    <Compile Include="Interfaces\IPanoramaViewerOptions.cs" />
-    <Compile Include="Interfaces\IBaseViewerOptions.cs" />
-    <Compile Include="Interfaces\IViewer.cs" />
-    <Compile Include="Interfaces\IViewerOptions.cs" />
-    <Compile Include="Interfaces\IViewerTypes.cs" />
-    <Compile Include="Interfaces\MeasurementGeometryType.cs" />
-    <Compile Include="Interfaces\ObliqueViewerButtons.cs" />
-    <Compile Include="Interfaces\PanoramaViewerButtons.cs" />
-    <Compile Include="Interfaces\StyleElementNumberType.cs" />
+    <Compile Include="Interfaces\Data\IBaseViewerOptions.cs" />
+    <Compile Include="Interfaces\Data\IOverlay.cs" />
+    <Compile Include="Interfaces\Data\IDepthInfo.cs" />
+    <Compile Include="Interfaces\Data\IObliqueViewerOptions.cs" />
+    <Compile Include="Interfaces\API\PanoramaViewerButtons.cs" />
+    <Compile Include="Interfaces\Data\IMeasurementOptions.cs" />
+    <Compile Include="Interfaces\API\IObliqueViewer.cs" />
+    <Compile Include="Interfaces\API\IViewer.cs" />
+    <Compile Include="Interfaces\Data\IViewerTypes.cs" />
+    <Compile Include="Interfaces\Data\IViewerOptions.cs" />
+    <Compile Include="Interfaces\Data\IPanoramaViewerOptions.cs" />
+    <Compile Include="Interfaces\API\ObliqueViewerButtons.cs" />
+    <Compile Include="Interfaces\DomElement\StyleElementNumberType.cs" />
     <Compile Include="Data\DomElement\StyleElementNumberValue.cs" />
     <Compile Include="Data\DomElement\StyleElementValue.cs" />
     <Compile Include="Data\DomElement\StyleElement.cs" />
     <Compile Include="Data\DomElement\Style.cs" />
-    <Compile Include="Interfaces\StyleElementName.cs" />
+    <Compile Include="Interfaces\DomElement\StyleElementName.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Interfaces\IDomElement.cs" />
-    <Compile Include="Interfaces\ProductType.cs" />
-    <Compile Include="Interfaces\IStyle.cs" />
-    <Compile Include="Interfaces\TileSchema.cs" />
+    <Compile Include="Interfaces\DomElement\IDomElement.cs" />
+    <Compile Include="Interfaces\Data\ProductType.cs" />
+    <Compile Include="Interfaces\DomElement\IStyle.cs" />
+    <Compile Include="Interfaces\Data\TileSchema.cs" />
     <Compile Include="Data\RecordingClickInfo.cs" />
     <Compile Include="Factories\OrientationFactory.cs" />
     <Compile Include="Factories\CoordinateFactory.cs" />
@@ -206,20 +202,21 @@
     <Compile Include="Extensions\SecureStringExtensions.cs" />
     <Compile Include="Factories\OptionsFactory.cs" />
     <Compile Include="Factories\AddressSettingsFactory.cs" />
-    <Compile Include="Interfaces\IRecordingClickInfo.cs" />
-    <Compile Include="Interfaces\ICoordinate.cs" />
-    <Compile Include="Interfaces\IAddressSettings.cs" />
-    <Compile Include="Interfaces\IOptions.cs" />
-    <Compile Include="Interfaces\IEventArgs.cs" />
+    <Compile Include="Interfaces\Data\IRecordingClickInfo.cs" />
+    <Compile Include="Interfaces\Data\ICoordinate.cs" />
+    <Compile Include="Interfaces\Data\IAddressSettings.cs" />
+    <Compile Include="Interfaces\Data\IOptions.cs" />
+    <Compile Include="Interfaces\Events\IEventArgs.cs" />
     <Compile Include="Data\Orientation.cs" />
-    <Compile Include="Interfaces\IOrientation.cs" />
-    <Compile Include="Interfaces\IRecording.cs" />
+    <Compile Include="Interfaces\Data\IOrientation.cs" />
+    <Compile Include="Interfaces\Data\IRecording.cs" />
     <Compile Include="API\PanoramaViewer.cs" />
     <Compile Include="API\PanoramaViewerList.cs" />
     <Compile Include="Handlers\DownloadHandler.cs" />
-    <Compile Include="Interfaces\IPanoramaViewer.cs" />
-    <Compile Include="Interfaces\IStreetSmartAPI.cs" />
-    <Compile Include="Interfaces\ViewerType.cs" />
+    <Compile Include="Interfaces\API\IPanoramaViewer.cs" />
+    <Compile Include="Interfaces\API\IStreetSmartAPI.cs" />
+    <Compile Include="Interfaces\Data\MeasurementGeometryType.cs" />
+    <Compile Include="Interfaces\Data\ViewerType.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

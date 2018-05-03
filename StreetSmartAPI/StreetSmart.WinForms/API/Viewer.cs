@@ -23,7 +23,7 @@ using CefSharp;
 using CefSharp.WinForms;
 
 using StreetSmart.WinForms.Exceptions;
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
 
 namespace StreetSmart.WinForms.API
 {

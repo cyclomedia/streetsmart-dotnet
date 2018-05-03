@@ -17,9 +17,10 @@
  */
 
 using System.Threading.Tasks;
+
 using CefSharp.WinForms;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
 
 namespace StreetSmart.WinForms.API
 {

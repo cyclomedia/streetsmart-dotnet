@@ -19,7 +19,9 @@
 using System;
 using System.Globalization;
 using System.Security;
-using StreetSmart.WinForms.Interfaces;
+
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.DomElement;
 
 namespace StreetSmart.WinForms.Data
 {

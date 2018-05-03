@@ -18,7 +18,7 @@
 
 using System;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Data;
 using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.Data

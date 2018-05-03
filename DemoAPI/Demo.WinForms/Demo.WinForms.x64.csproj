@@ -52,10 +52,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="StreetSmart.WinForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=27f0251e46fddaf9, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>x64\StreetSmart.WinForms.dll</HintPath>
@@ -90,7 +86,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="x64\cef.pak" />
     <None Include="x64\cef_100_percent.pak" />
     <None Include="x64\cef_200_percent.pak" />

@@ -17,7 +17,7 @@
  */
 
 using StreetSmart.WinForms.Data.DomElement;
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.DomElement;
 
 namespace StreetSmart.WinForms.Factories
 {

@@ -27,7 +27,9 @@ using CefSharp.WinForms;
 using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
 using StreetSmart.WinForms.Events;
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.API;
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.Events;
 
 using Orientation = StreetSmart.WinForms.Data.Orientation;
 

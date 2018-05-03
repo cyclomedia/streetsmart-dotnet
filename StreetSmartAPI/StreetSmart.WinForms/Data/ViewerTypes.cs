@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Data;
 using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.Data

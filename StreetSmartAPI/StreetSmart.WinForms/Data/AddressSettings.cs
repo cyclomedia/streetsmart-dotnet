@@ -19,7 +19,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-using StreetSmart.WinForms.Interfaces;
+using StreetSmart.WinForms.Interfaces.Data;
 
 namespace StreetSmart.WinForms.Data
 {
