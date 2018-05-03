@@ -119,6 +119,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Events\ApiEvent.cs" />
@@ -141,6 +142,23 @@
     <Compile Include="Data\PanoramaViewerOptions.cs" />
     <Compile Include="Data\ViewerOptions.cs" />
     <Compile Include="Data\ViewerTypes.cs" />
+    <Compile Include="Data\SLD\FeatureTypeStyle.cs" />
+    <Compile Include="Data\SLD\FillType.cs" />
+    <Compile Include="Data\SLD\Graphic.cs" />
+    <Compile Include="Data\SLD\Mark.cs" />
+    <Compile Include="Data\SLD\PointSymbolizer.cs" />
+    <Compile Include="Data\SLD\PolygonSymbolizer.cs" />
+    <Compile Include="Data\SLD\Rule.cs" />
+    <Compile Include="Data\SLD\StrokeType.cs" />
+    <Compile Include="Data\SLD\StyledLayerDescriptor.cs" />
+    <Compile Include="Data\SLD\SvgParameter.cs" />
+    <Compile Include="Data\SLD\SvgParameterCollection.cs" />
+    <Compile Include="Data\SLD\Symbolizer.cs" />
+    <Compile Include="Data\SLD\SymbolizerType.cs" />
+    <Compile Include="Data\SLD\UserLayer.cs" />
+    <Compile Include="Data\SLD\UserStyle.cs" />
+    <Compile Include="Data\SLD\VendorOption.cs" />
+    <Compile Include="Data\SLD\VendorOptionType.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\DomElementFactory.cs" />

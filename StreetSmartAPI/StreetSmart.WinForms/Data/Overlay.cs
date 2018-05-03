@@ -96,10 +96,17 @@ namespace StreetSmart.WinForms.Data
 
     public override string ToString()
     {
+      if (!Sld?.Contains("\\\"") ?? false)
+      {
+        Sld = Sld.Replace("\"", "\\\"");
+      }
+
+      Sld = Sld?.Replace(Environment.NewLine, " ");
+      Sld = Sld?.Replace("\t", " ");
+      Sld = Sld?.Replace("\"x", "\" x");
+
       string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
-      string sld = Sld == null
-        ? string.Empty
-        : $",sldXMLtext:{Sld.Replace(Environment.NewLine, string.Empty).ToQuote()}";
+      string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
       return $"{{name:{Name.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
     }
   }
