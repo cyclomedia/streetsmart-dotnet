@@ -8,6 +8,7 @@ Version: 18.5.0
 - Added the toggle3D Cursor and get3DCursor visible functions in the Panorama viewer
 - Added the SetBrightness and the SetContrast functions in the panorama viewer and the oblique viewer
 - Improved parsing SLD, now you don't have to escape characters
+- Added set Active measurment: ToDo: add it possible for create a GeoJSON object and parse this object to this function
 
 
 Version: 18.4.0
