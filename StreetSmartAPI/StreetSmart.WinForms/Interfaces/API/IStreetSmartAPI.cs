@@ -104,7 +104,7 @@ namespace StreetSmart.WinForms.Interfaces.API
     /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
-    Task<object> GetActiveMeasurement();
+    Task<Dictionary<string, object>> GetActiveMeasurement();
 
     /// <summary>
     /// Returns the object containing the address search settings
@@ -265,6 +265,11 @@ namespace StreetSmart.WinForms.Interfaces.API
     /// </summary>
     /// <param name="id">The id of the overlay</param>
     void RemoveOverlay(string id);
+
+    /// <summary>
+    /// Set the active measurement in GeoJSON format
+    /// </summary>
+    void SetActiveMeasurement(string measurement);
 
     /// <summary>
     /// Starts the measurement

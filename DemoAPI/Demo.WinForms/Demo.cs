@@ -799,7 +799,7 @@ namespace Demo.WinForms
 
       IMeasurementOptions options = (type == null)
         ? MeasurementOptionsFactory.Create()
-        : MeasurementOptionsFactory.Create((MeasurementGeometryType)type);
+        : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
 
       _api.StartMeasurementMode(PanoramaViewer, options);
     }

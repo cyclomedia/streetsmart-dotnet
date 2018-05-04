@@ -150,9 +150,9 @@ namespace StreetSmart.WinForms.API
       ViewerList.ClearViewers();
     }
 
-    public async Task<object> GetActiveMeasurement()
+    public async Task<Dictionary<string, object>> GetActiveMeasurement()
     {
-      return await CallJsAsync(GetScript("getActiveMeasurement()"));
+      return (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()"));
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -216,6 +216,11 @@ namespace StreetSmart.WinForms.API
       }
 
       return await ViewerList.ToViewersFromJsValue(options.ViewerTypes.GetTypes(), (string) result);
+    }
+
+    public void SetActiveMeasurement(string measurement)
+    {
+      _browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
     }
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)

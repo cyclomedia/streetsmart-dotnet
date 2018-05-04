@@ -169,6 +169,28 @@
     <Compile Include="Interfaces\API\IStreetSmartAPI.cs" />
     <Compile Include="Interfaces\Data\MeasurementGeometryType.cs" />
     <Compile Include="Interfaces\Data\ViewerType.cs" />
+    <Compile Include="Interfaces\GeoJson\IStDev.cs" />
+    <Compile Include="Interfaces\GeoJson\IDirection.cs" />
+    <Compile Include="Interfaces\GeoJson\IPosition.cs" />
+    <Compile Include="Interfaces\GeoJson\IRecordingInfo.cs" />
+    <Compile Include="Interfaces\GeoJson\IDepthDetails.cs" />
+    <Compile Include="Interfaces\GeoJson\IDetails.cs" />
+    <Compile Include="Interfaces\GeoJson\PointProblems.cs" />
+    <Compile Include="Interfaces\GeoJson\IMeasureDetails.cs" />
+    <Compile Include="Interfaces\GeoJson\MeasureMethod.cs" />
+    <Compile Include="Interfaces\GeoJson\CustomGeometryType.cs" />
+    <Compile Include="Interfaces\GeoJson\Reliability.cs" />
+    <Compile Include="Interfaces\GeoJson\CRSType.cs" />
+    <Compile Include="Interfaces\GeoJson\ICRS.cs" />
+    <Compile Include="Interfaces\GeoJson\IPolygon.cs" />
+    <Compile Include="Interfaces\GeoJson\ILineString.cs" />
+    <Compile Include="Interfaces\GeoJson\IPoint.cs" />
+    <Compile Include="Interfaces\GeoJson\IGeometry.cs" />
+    <Compile Include="Interfaces\GeoJson\IObservationLines.cs" />
+    <Compile Include="Interfaces\GeoJson\IProperties.cs" />
+    <Compile Include="Interfaces\GeoJson\IFeature.cs" />
+    <Compile Include="Interfaces\GeoJson\IFeatureCollection.cs" />
+    <Compile Include="Interfaces\GeoJson\FeatureType.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
