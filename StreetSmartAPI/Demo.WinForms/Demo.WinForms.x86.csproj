@@ -139,6 +139,8 @@ xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.pak" *
 xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\*.exe" *
 mkdir locales
 xcopy /Y  "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\locales\*.pak" "locales\*"
+mkdir swiftshader
+xcopy /Y  "$(SolutionDir)..\DemoAPI\Demo.WinForms\x86\swiftshader\*.*" swiftshader\*
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
