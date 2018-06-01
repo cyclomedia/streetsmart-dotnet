@@ -16,25 +16,18 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Derived data which contains the calculated data of a polygon measurement
   /// </summary>
-  public interface IPosition: ICoordinate
+  public interface IDerivedDataPolygon: IDerivedDataLineString
   {
     /// <summary>
-    /// XYZ
+    /// The polygon splited in areas
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
-
-    /// <summary>
-    /// Std dev
-    /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    IList<IArea> Areas { get; set; }
   }
 }

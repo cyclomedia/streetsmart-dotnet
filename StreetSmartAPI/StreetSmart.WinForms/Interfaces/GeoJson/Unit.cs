@@ -16,25 +16,36 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Unit of the measurement
   /// </summary>
-  public interface IPosition: ICoordinate
+  public enum Unit
   {
     /// <summary>
-    /// XYZ
+    /// anything else
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    Unknown = 0,
 
     /// <summary>
-    /// Std dev
+    /// Meters
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    Meters = 1,
+
+    /// <summary>
+    /// Feet
+    /// </summary>
+    Feet = 2,
+
+    /// <summary>
+    /// UsFeet
+    /// </summary>
+    UsFeet = 3,
+
+    /// <summary>
+    /// Degrees
+    /// </summary>
+    Degrees = 4,
   }
 }

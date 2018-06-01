@@ -41,6 +41,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Height
     /// </summary>
-    Height = 3
+    Height = 3,
+
+    /// <summary>
+    /// Rectangle
+    /// </summary>
+    Rectangle = 4,
   }
 }

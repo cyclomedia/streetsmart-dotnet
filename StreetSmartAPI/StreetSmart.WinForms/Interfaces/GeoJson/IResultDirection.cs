@@ -16,68 +16,49 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using System;
+using System.Drawing;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// GeoJson Feature
+  /// Result direction of the observation
   /// </summary>
-  public interface IProperties
+  public interface IResultDirection
   {
     /// <summary>
-    /// Id
+    /// Direction
+    /// </summary>
+    IDirection Direction { get; set; }
+
+    /// <summary>
+    /// GroundLevel offset
+    /// </summary>
+    double GroundLevelOffset { get; set; }
+
+    /// <summary>
+    /// ImageId
     /// </summary>
     string Id { get; set; }
 
     /// <summary>
-    /// Name
+    /// match image
     /// </summary>
-    string Name { get; set; }
+    Image MatchImage { get; set; }
 
     /// <summary>
-    /// Group
+    /// Orientation
     /// </summary>
-    string Group { get; set; }
+    IValue Orientation { get; set; }
 
     /// <summary>
-    /// Measure details
+    /// Position
     /// </summary>
-    IList<IMeasureDetails> MeasureDetails { get; set; }
+    IPosition Position { get; set; }
 
     /// <summary>
-    /// Dimension
+    /// RecordedAt
     /// </summary>
-    int Dimension { get; set; }
-
-    /// <summary>
-    /// Custom geometry type
-    /// </summary>
-    CustomGeometryType CustomGeometryType { get; set; }
-
-    /// <summary>
-    /// Derived data which contains the calculated data from the measurement
-    /// </summary>
-    IDerivedData DerivedData { get; set; }
-
-    /// <summary>
-    /// Measure reliability
-    /// </summary>
-    Reliability MeasureReliability { get; set; }
-
-    /// <summary>
-    /// Points with errors
-    /// </summary>
-    IList<int> PointsWithErrors { get; set; }
-
-    /// <summary>
-    /// Valid Geometry
-    /// </summary>
-    bool ValidGeometry { get; set; }
-
-    /// <summary>
-    /// Observation lines
-    /// </summary>
-    IObservationLines ObservationLines { get; set; }
+    DateTime RecordedAt { get; set; }
   }
 }

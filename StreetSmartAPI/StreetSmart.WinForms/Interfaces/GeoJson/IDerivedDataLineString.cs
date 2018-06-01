@@ -16,36 +16,56 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
+
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Depth details
+  /// Derived data which contains the calculated data of a line measurement
   /// </summary>
-  public interface IDepthDetails: IDetails
+  public interface IDerivedDataLineString: IDerivedData
   {
     /// <summary>
-    /// Position
+    /// The total lenght
     /// </summary>
-    IPosition Position { get; set; }
+    IValue TotalLength { get; set; }
 
     /// <summary>
-    /// Direction
+    /// Segment lengths
     /// </summary>
-    IDirection Direction { get; set; }
+    List<IValue> SegmentLengths { get; set; }
 
     /// <summary>
-    /// Depth in meters
+    /// Segments delta XY
     /// </summary>
-    double DepthInMeters { get; set; }
+    // ReSharper disable once InconsistentNaming
+    List<IValue> SegmentsDeltaXY { get; set; }
 
     /// <summary>
-    /// Depth
+    /// Segments delta Z
     /// </summary>
-    double Depth { get; set; }
+    List<IValue> SegmentsDeltaZ { get; set; }
 
     /// <summary>
-    /// Recording info
+    /// Segments slope percentage
     /// </summary>
-    IRecordingInfo RecordingInfo { get; set; }
+    // ReSharper disable once InconsistentNaming
+    List<IValue> SegmentSlopePercentage { get; set; }
+
+    /// <summary>
+    /// Segments slope angle
+    /// </summary>
+    List<IValue> SegmentsSlopeAngle { get; set; }
+
+    /// <summary>
+    /// Delta XY
+    /// </summary>
+    // ReSharper disable once InconsistentNaming
+    IValue DeltaXY { get; set; }
+
+    /// <summary>
+    /// Delta Z
+    /// </summary>
+    IValue DeltaZ { get; set; }
   }
 }

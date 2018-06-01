@@ -16,25 +16,22 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Derived data which contains the calculated data of a point measurement
   /// </summary>
-  public interface IPosition: ICoordinate
+  public interface IDerivedDataPoint: IDerivedData
   {
     /// <summary>
-    /// XYZ
+    /// The position XY with the standard deviation
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    IPositionXY PositionXY { get; set; }
 
     /// <summary>
-    /// Std dev
+    /// The position Z with the standard deviation
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    IValue PositionZ { get; set; }
   }
 }

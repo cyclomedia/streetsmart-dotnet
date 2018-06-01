@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
@@ -31,10 +29,10 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     string Id { get; set; }
 
     /// <summary>
-    /// xyz coordinate
+    /// Position
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    IPosition Position { get; set; }
 
     /// <summary>
     /// Coordinate system
@@ -45,18 +43,7 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Yaw
     /// </summary>
-    double Yaw { get; set; }
-
-    /// <summary>
-    /// xyz stdDev
-    /// </summary>
-    // ReSharper disable once InconsistentNaming
-    IStDev XYZStDev { get; set; }
-
-    /// <summary>
-    /// Yaw StdDev
-    /// </summary>
-    double YawStdDev { get; set; }
+    IValue Yaw { get; set; }
 
     /// <summary>
     /// Depth std dev

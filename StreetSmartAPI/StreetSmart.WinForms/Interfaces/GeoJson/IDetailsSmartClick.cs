@@ -16,25 +16,36 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Smart click / Forward intersection Details
   /// </summary>
-  public interface IPosition: ICoordinate
+  public interface IDetailsSmartClick: IDetails
   {
     /// <summary>
-    /// XYZ
+    /// Undocumented SmartClick behavior:
+    /// If no result could be found, Confidence is -1 and ResultDirections contains a single 'i:nil' attribute with a value of true.
+    /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
+    /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&imageParams=11;18;30
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    int Confidence { get; set; }
 
     /// <summary>
-    /// Std dev
+    /// Depth
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    double Depth { get; set; }
+
+    /// <summary>
+    /// Position
+    /// </summary>
+    IPosition Position { get; set; }
+
+    /// <summary>
+    /// List of the observations
+    /// </summary>
+    IList<IResultDirection> ResultDirections { get; set; }
   }
 }

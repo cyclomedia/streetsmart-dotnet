@@ -16,14 +16,23 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// standard deviation
+  /// Contains the triangle area of a polygon
   /// </summary>
-  public interface IStDev: ICoordinate
+  public interface IArea
   {
+    /// <summary>
+    /// Triangle of the area
+    /// </summary>
+    IList<double> Triangle { get; set; }
+
+    /// <summary>
+    /// The surface of the area
+    /// </summary>
+    IValue Surface { get; set; }
   }
 }

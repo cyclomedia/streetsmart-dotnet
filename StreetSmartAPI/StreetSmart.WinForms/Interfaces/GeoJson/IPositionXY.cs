@@ -16,25 +16,24 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Contains the XY position and the stdDev
   /// </summary>
-  public interface IPosition: ICoordinate
+  // ReSharper disable once InconsistentNaming
+  public interface IPositionXY
   {
     /// <summary>
-    /// XYZ
+    /// The value of the property
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    IList<double> Value { get; set; }
 
     /// <summary>
-    /// Std dev
+    /// The standard deviation of the value
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    double Stdev { get; set; }
   }
 }

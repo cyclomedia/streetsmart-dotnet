@@ -16,25 +16,36 @@
  * License along with this library.
  */
 
-using StreetSmart.WinForms.Interfaces.Data;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Position
+  /// Depth details
   /// </summary>
-  public interface IPosition: ICoordinate
+  public interface IDetailsDepth: IDetails
   {
     /// <summary>
-    /// XYZ
+    /// Position
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
+    IPosition Position { get; set; }
 
     /// <summary>
-    /// Std dev
+    /// Direction
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
+    IDirection Direction { get; set; }
+
+    /// <summary>
+    /// Depth in meters
+    /// </summary>
+    double DepthInMeters { get; set; }
+
+    /// <summary>
+    /// Depth
+    /// </summary>
+    double Depth { get; set; }
+
+    /// <summary>
+    /// Recording info
+    /// </summary>
+    IRecordingInfo RecordingInfo { get; set; }
   }
 }
