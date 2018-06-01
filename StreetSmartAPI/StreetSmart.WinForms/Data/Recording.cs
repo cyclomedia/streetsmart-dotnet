@@ -50,8 +50,17 @@ namespace StreetSmart.WinForms.Data
       string longPrec = recording["longitudePrecision"].ToString();
       string latPrec = recording["latitudePrecision"].ToString();
       string heightPrec = recording["heightPrecision"].ToString();
+      object groundOffset = recording["groundLevelOffset"];
 
-      GroundLevelOffset = (double?) recording["groundLevelOffset"];
+      if (groundOffset == null)
+      {
+        GroundLevelOffset = null;
+      }
+      else
+      {
+        GroundLevelOffset = Convert.ToDouble(groundOffset);
+      }
+
       RecorderDirection = (double?) recording["recorderDirection"];
       Orientation = (double?) recording["orientation"];
       RecordedAt = (DateTime?) recording["recordedAt"];
