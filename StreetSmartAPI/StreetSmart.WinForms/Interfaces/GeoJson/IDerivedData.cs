@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
@@ -28,16 +26,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// The unit of the measurement
     /// </summary>
-    Unit Unit { get; set; }
+    Unit Unit { get; }
 
     /// <summary>
     /// Precision
     /// </summary>
-    double Precision { get; set; }
-
-    /// <summary>
-    /// Standard deviations of the points
-    /// </summary>
-    IList<IPosition> Positions { get; set; }
+    int Precision { get; }
   }
 }

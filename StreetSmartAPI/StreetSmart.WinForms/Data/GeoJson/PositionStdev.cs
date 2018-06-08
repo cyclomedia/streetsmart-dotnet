@@ -19,13 +19,31 @@
 using System.Collections.Generic;
 
 using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Line string geometry type
-  /// </summary>
-  public interface ILineString : IList<ICoordinate>, IGeometry
+  internal class PositionStdev : Coordinate, IPositionStdev
   {
+    public PositionStdev(Dictionary<string, object> position, IList<object> coordinateStdDev)
+      : base(position)
+    {
+      StdDev = new Coordinate(coordinateStdDev);
+    }
+
+    public PositionStdev(Dictionary<string, object> position, Dictionary<string, object> coordinateStdev)
+      : base(position?["value"] as IList<object>)
+    {
+      StdDev = new Coordinate(coordinateStdev);
+    }
+
+    public PositionStdev(double x, double y, double z, double stdX, double stdY, double stdZ)
+      : base(x, y, z)
+    {
+      StdDev = new Coordinate(stdX, stdY, stdZ);
+    }
+
+    // ReSharper disable once InconsistentNaming
+    public ICoordinate StdDev { get; }
   }
 }

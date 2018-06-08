@@ -27,11 +27,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Type of the CRS
     /// </summary>
-    CRSType Type { get; set; }
+    CRSType Type { get; }
 
     /// <summary>
     /// Properties of the CRS
     /// </summary>
-    string Properties { get; set; }
+    string Properties { get; }
   }
 }

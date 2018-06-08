@@ -25,16 +25,5 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   /// </summary>
   public interface IPosition: ICoordinate
   {
-    /// <summary>
-    /// XYZ
-    /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate XYZ { get; set; }
-
-    /// <summary>
-    /// Std dev
-    /// </summary>
-    // ReSharper disable once InconsistentNaming
-    ICoordinate StdDev { get; set; }
   }
 }

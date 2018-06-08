@@ -26,7 +26,7 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Type of the feature
     /// </summary>
-    FeatureType Type { get; set; }
+    FeatureType Type { get; }
 
     /// <summary>
     /// Geometry of the feature
@@ -36,6 +36,6 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Properties of the coordinate
     /// </summary>
-    IProperties Properties { get; set; }
+    IProperties Properties { get; }
   }
 }

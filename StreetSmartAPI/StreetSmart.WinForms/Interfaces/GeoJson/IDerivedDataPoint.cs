@@ -21,17 +21,22 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   /// <summary>
   /// Derived data which contains the calculated data of a point measurement
   /// </summary>
-  public interface IDerivedDataPoint: IDerivedData
+  public interface IDerivedDataPoint : IDerivedData
   {
+    /// <summary>
+    /// position with the standard deviation
+    /// </summary>
+    IPositionStdev Position { get; }
+
     /// <summary>
     /// The position XY with the standard deviation
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    IPositionXY PositionXY { get; set; }
+    IPositionXY PositionXY { get; }
 
     /// <summary>
     /// The position Z with the standard deviation
     /// </summary>
-    IValue PositionZ { get; set; }
+    IProperty PositionZ { get; }
   }
 }

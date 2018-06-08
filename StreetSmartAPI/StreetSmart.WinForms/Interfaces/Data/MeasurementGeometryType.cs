@@ -26,6 +26,12 @@ namespace StreetSmart.WinForms.Interfaces.Data
   public enum MeasurementGeometryType
   {
     /// <summary>
+    /// anything else
+    /// </summary>
+    [Description("MeasurementGeometryType.UNKNOWN")]
+    Unknown = -1,
+
+    /// <summary>
     /// geometry point
     /// </summary>
     [Description("MeasurementGeometryType.POINT")]

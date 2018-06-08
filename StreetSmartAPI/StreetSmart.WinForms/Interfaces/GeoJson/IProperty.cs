@@ -16,33 +16,21 @@
  * License along with this library.
  */
 
-using System.Drawing;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Observation lines
+  /// Contains the value and the stdDev
   /// </summary>
-  public interface IObservationLines
+  public interface IProperty
   {
     /// <summary>
-    /// Active observation
+    /// The value of the property
     /// </summary>
-    int ActiveObservation { get; }
+    double? Value { get; }
 
     /// <summary>
-    /// RecordingId
+    /// The standard deviation of the value
     /// </summary>
-    string RecordingId { get; }
-
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    double? Stdev { get; }
   }
 }

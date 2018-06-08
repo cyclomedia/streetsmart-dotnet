@@ -26,12 +26,12 @@ namespace StreetSmart.WinForms.Interfaces.Data
     /// <summary>
     ///  X value of the coordinate
     /// </summary>
-    double X { get; set; }
+    double? X { get; set; }
 
     /// <summary>
     /// Y value of the coordinate
     /// </summary>
-    double Y { get; set; }
+    double? Y { get; set; }
 
     /// <summary>
     /// Z value of the coordinate

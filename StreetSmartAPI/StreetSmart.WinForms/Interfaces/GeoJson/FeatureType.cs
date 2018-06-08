@@ -24,6 +24,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public enum FeatureType
   {
     /// <summary>
+    /// anything else
+    /// </summary>
+    Unknown = -1,
+
+    /// <summary>
     /// Feature collection
     /// </summary>
     FeatureCollection = 1,

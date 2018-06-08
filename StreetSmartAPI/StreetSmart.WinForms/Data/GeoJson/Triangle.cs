@@ -16,33 +16,24 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Observation lines
-  /// </summary>
-  public interface IObservationLines
+  internal class Triangle : NotifyPropertyChanged, ITriangle
   {
-    /// <summary>
-    /// Active observation
-    /// </summary>
-    int ActiveObservation { get; }
+    public Triangle(IList<object> points)
+    {
+      Points = new List<int>();
 
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
+      foreach (var point in points)
+      {
+        Points.Add(point as int? ?? 0);
+      }
+    }
 
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    public IList<int> Points { get; }
   }
 }

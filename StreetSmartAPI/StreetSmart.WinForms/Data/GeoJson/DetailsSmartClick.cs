@@ -16,21 +16,23 @@
  * License along with this library.
  */
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
-{
-  /// <summary>
-  /// Contains the value and the stdDev
-  /// </summary>
-  public interface IValue
-  {
-    /// <summary>
-    /// The value of the property
-    /// </summary>
-    double Value { get; set; }
+using System.Collections.Generic;
 
-    /// <summary>
-    /// The standard deviation of the value
-    /// </summary>
-    double Stdev { get; set; }
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
+{
+  internal class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick
+  {
+    public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
+    : base(detailsSmartClick)
+    {
+      Confidence = detailsSmartClick?["Confidence"] as int? ?? 0;
+      Depth = detailsSmartClick?["Depth"] as double? ?? 0;
+    }
+
+    public int Confidence { get; }
+
+    public double Depth { get; }
   }
 }

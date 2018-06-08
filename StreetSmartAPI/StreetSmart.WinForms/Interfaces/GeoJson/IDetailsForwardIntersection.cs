@@ -16,33 +16,23 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Observation lines
+  /// Smart click / Forward intersection Details
   /// </summary>
-  public interface IObservationLines
+  public interface IDetailsForwardIntersection: IDetails
   {
     /// <summary>
-    /// Active observation
+    /// Position
     /// </summary>
-    int ActiveObservation { get; }
+    IPosition Position { get; }
 
     /// <summary>
-    /// RecordingId
+    /// List of the observations
     /// </summary>
-    string RecordingId { get; }
-
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    IList<IResultDirection> ResultDirections { get; }
   }
 }

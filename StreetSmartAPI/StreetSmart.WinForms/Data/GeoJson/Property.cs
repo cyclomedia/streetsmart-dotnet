@@ -16,23 +16,20 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Contains the triangle area of a polygon
-  /// </summary>
-  public interface IArea
+  internal class Property : NotifyPropertyChanged, IProperty
   {
-    /// <summary>
-    /// Triangle of the area
-    /// </summary>
-    IList<double> Triangle { get; set; }
+    public Property(object value, object stdev)
+    {
+      Value = value as double?;
+      Stdev = stdev as double?;
+    }
 
-    /// <summary>
-    /// The surface of the area
-    /// </summary>
-    IValue Surface { get; set; }
+    public double? Value { get; }
+
+    public double? Stdev { get; }
   }
 }

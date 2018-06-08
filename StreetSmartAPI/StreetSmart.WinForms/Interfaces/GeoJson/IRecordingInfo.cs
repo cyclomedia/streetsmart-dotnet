@@ -26,28 +26,28 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// ImageId
     /// </summary>
-    string Id { get; set; }
+    string Id { get; }
 
     /// <summary>
     /// Position
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    IPosition Position { get; set; }
+    IPositionStdev Position { get; }
 
     /// <summary>
     /// Coordinate system
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    string SRS { get; set; }
+    string SRS { get; }
 
     /// <summary>
     /// Yaw
     /// </summary>
-    IValue Yaw { get; set; }
+    IProperty Yaw { get; }
 
     /// <summary>
     /// Depth std dev
     /// </summary>
-    double DepthStdev { get; set; }
+    double DepthStdev { get; }
   }
 }

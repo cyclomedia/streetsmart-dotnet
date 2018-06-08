@@ -28,21 +28,21 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Measure method
     /// </summary>
-    MeasureMethod MeasureMethod { get; set; }
+    MeasureMethod MeasureMethod { get; }
 
     /// <summary>
     /// Details
     /// </summary>
-    IDetails Details { get; set; }
+    IDetails Details { get; }
 
     /// <summary>
     /// Point problems
     /// </summary>
-    IList<PointProblems> PointProblems { get; set; }
+    IList<PointProblems> PointProblems { get; }
 
     /// <summary>
     /// Point reliability
     /// </summary>
-    Reliability PointReliability { get; set; }
+    Reliability PointReliability { get; }
   }
 }

@@ -16,14 +16,12 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
   /// Smart click / Forward intersection Details
   /// </summary>
-  public interface IDetailsSmartClick: IDetails
+  public interface IDetailsSmartClick : IDetailsForwardIntersection
   {
     /// <summary>
     /// Undocumented SmartClick behavior:
@@ -31,21 +29,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
     /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&imageParams=11;18;30
     /// </summary>
-    int Confidence { get; set; }
+    int Confidence { get; }
 
     /// <summary>
     /// Depth
     /// </summary>
-    double Depth { get; set; }
-
-    /// <summary>
-    /// Position
-    /// </summary>
-    IPosition Position { get; set; }
-
-    /// <summary>
-    /// List of the observations
-    /// </summary>
-    IList<IResultDirection> ResultDirections { get; set; }
+    double Depth { get; }
   }
 }

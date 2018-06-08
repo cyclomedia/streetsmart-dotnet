@@ -16,33 +16,17 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Observation lines
-  /// </summary>
-  public interface IObservationLines
+  internal class Stdev : Coordinate, IStdev
   {
-    /// <summary>
-    /// Active observation
-    /// </summary>
-    int ActiveObservation { get; }
-
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
-
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    public Stdev(Dictionary<string, object> coordinateStdev)
+      :base(coordinateStdev)
+    {
+    }
   }
 }

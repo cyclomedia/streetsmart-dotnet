@@ -29,36 +29,36 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Direction
     /// </summary>
-    IDirection Direction { get; set; }
+    IDirection Direction { get; }
 
     /// <summary>
     /// GroundLevel offset
     /// </summary>
-    double GroundLevelOffset { get; set; }
+    double GroundLevelOffset { get; }
 
     /// <summary>
     /// ImageId
     /// </summary>
-    string Id { get; set; }
+    string Id { get; }
 
     /// <summary>
     /// match image
     /// </summary>
-    Image MatchImage { get; set; }
+    Image MatchImage { get; }
 
     /// <summary>
     /// Orientation
     /// </summary>
-    IValue Orientation { get; set; }
+    IProperty Orientation { get; }
 
     /// <summary>
     /// Position
     /// </summary>
-    IPosition Position { get; set; }
+    IPositionStdev Position { get; }
 
     /// <summary>
     /// RecordedAt
     /// </summary>
-    DateTime RecordedAt { get; set; }
+    DateTime? RecordedAt { get; }
   }
 }

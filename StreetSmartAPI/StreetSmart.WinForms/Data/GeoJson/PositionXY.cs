@@ -16,33 +16,26 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Observation lines
-  /// </summary>
-  public interface IObservationLines
+  // ReSharper disable once InconsistentNaming
+  internal class PositionXY: IPositionXY
   {
-    /// <summary>
-    /// Active observation
-    /// </summary>
-    int ActiveObservation { get; }
+    public PositionXY(IList<object> value, double? stdev)
+    {
+      X = value.Count >= 1 ? value[0] as double? : null;
+      Y = value.Count >= 2 ? value[1] as double? : null;
+      Stdev = stdev;
+    }
 
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
+    public double? X { get; }
 
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
+    public double? Y { get; }
 
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    public double? Stdev { get; }
   }
 }

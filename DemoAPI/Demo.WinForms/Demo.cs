@@ -29,6 +29,7 @@ using StreetSmart.WinForms.Interfaces.API;
 using StreetSmart.WinForms.Interfaces.Data;
 using StreetSmart.WinForms.Interfaces.DomElement;
 using StreetSmart.WinForms.Interfaces.Events;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 
 using static Demo.WinForms.Properties.Resources;
 
@@ -133,7 +134,7 @@ namespace Demo.WinForms
       }
     }
 
-    private void OnMeasurementChanged(object sender, IEventArgs<IDictionary<string, object>> args)
+    private void OnMeasurementChanged(object sender, IEventArgs<IFeatureCollection> args)
     {
       string text = "Measurement changed";
       AddViewerEventsText(text);
@@ -811,7 +812,7 @@ namespace Demo.WinForms
 
     private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
     {
-      var measurement = await _api.GetActiveMeasurement();
+      IFeatureCollection measurement = await _api.GetActiveMeasurement();
       AddViewerEventsText(measurement?.ToString() ?? string.Empty);
     }
 

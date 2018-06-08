@@ -27,12 +27,14 @@ using CefSharp.WinForms;
 
 using StreetSmart.WinForms.API.Events;
 using StreetSmart.WinForms.Data;
+using StreetSmart.WinForms.Data.GeoJson;
 using StreetSmart.WinForms.Events;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Handlers;
 using StreetSmart.WinForms.Interfaces.API;
 using StreetSmart.WinForms.Interfaces.Data;
 using StreetSmart.WinForms.Interfaces.Events;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 using StreetSmart.WinForms.Properties;
 
 namespace StreetSmart.WinForms.API
@@ -58,7 +60,7 @@ namespace StreetSmart.WinForms.API
 
     public event EventHandler APIReady;
 
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
@@ -150,9 +152,10 @@ namespace StreetSmart.WinForms.API
       ViewerList.ClearViewers();
     }
 
-    public async Task<Dictionary<string, object>> GetActiveMeasurement()
+    public async Task<IFeatureCollection> GetActiveMeasurement()
     {
-      return (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()"));
+      return new FeatureCollection(
+        (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()")));
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -271,7 +274,7 @@ namespace StreetSmart.WinForms.API
 
     public void OnMeasurementChanged(Dictionary<string, object> args)
     {
-      MeasurementChanged?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args)));
     }
 
     public void OnViewerAdded(string name, string type)

@@ -16,33 +16,18 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
-  /// Observation lines
+  /// Contains a triangle of a polygon
   /// </summary>
-  public interface IObservationLines
+  public interface ITriangle
   {
     /// <summary>
-    /// Active observation
+    /// Triangle
     /// </summary>
-    int ActiveObservation { get; }
-
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
-
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    IList<int> Points { get; }
   }
 }

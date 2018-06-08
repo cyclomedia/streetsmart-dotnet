@@ -23,6 +23,7 @@ using System.Threading.Tasks;
 using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Interfaces.Data;
 using StreetSmart.WinForms.Interfaces.Events;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 
 namespace StreetSmart.WinForms.Interfaces.API
 {
@@ -48,7 +49,7 @@ namespace StreetSmart.WinForms.Interfaces.API
     /// <summary>
     /// Measurement changed or added.
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> MeasurementChanged;
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
     /// <summary>
     /// Viewer is added (panoramic or oblique)
@@ -104,7 +105,7 @@ namespace StreetSmart.WinForms.Interfaces.API
     /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
-    Task<Dictionary<string, object>> GetActiveMeasurement();
+    Task<IFeatureCollection> GetActiveMeasurement();
 
     /// <summary>
     /// Returns the object containing the address search settings

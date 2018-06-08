@@ -16,16 +16,36 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 
 using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.GeoJson;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Line string geometry type
-  /// </summary>
-  public interface ILineString : IList<ICoordinate>, IGeometry
+  internal class LineString : List<ICoordinate>, ILineString
   {
+    public LineString(Dictionary<string, object> lineString)
+    {
+      string type = lineString?["type"]?.ToString() ?? string.Empty;
+      IList<object> coordinates = lineString?["coordinates"] as IList<object> ?? new List<object>();
+
+      try
+      {
+        Type = (MeasurementGeometryType) Enum.Parse(typeof(MeasurementGeometryType), type);
+      }
+      catch (ArgumentException)
+      {
+        Type = MeasurementGeometryType.Unknown;
+      }
+
+      foreach (var coordinate in coordinates)
+      {
+        Add(new Coordinate(coordinate as IList<object>));
+      }
+    }
+
+    public MeasurementGeometryType Type { get; }
   }
 }

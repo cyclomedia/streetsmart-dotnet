@@ -26,26 +26,26 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Position
     /// </summary>
-    IPosition Position { get; set; }
+    IPositionXYZ Position { get; }
 
     /// <summary>
     /// Direction
     /// </summary>
-    IDirection Direction { get; set; }
+    IDirection Direction { get; }
 
     /// <summary>
     /// Depth in meters
     /// </summary>
-    double DepthInMeters { get; set; }
+    double DepthInMeters { get; }
 
     /// <summary>
     /// Depth
     /// </summary>
-    double Depth { get; set; }
+    double Depth { get; }
 
     /// <summary>
     /// Recording info
     /// </summary>
-    IRecordingInfo RecordingInfo { get; set; }
+    IRecordingInfo RecordingInfo { get; }
   }
 }

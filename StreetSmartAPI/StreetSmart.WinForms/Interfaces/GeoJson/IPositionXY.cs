@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 namespace StreetSmart.WinForms.Interfaces.GeoJson
 {
   /// <summary>
@@ -27,13 +25,18 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public interface IPositionXY
   {
     /// <summary>
-    /// The value of the property
+    /// The X value
     /// </summary>
-    IList<double> Value { get; set; }
+    double? X { get; }
 
     /// <summary>
-    /// The standard deviation of the value
+    /// The Y value
     /// </summary>
-    double Stdev { get; set; }
+    double? Y { get; }
+
+    /// <summary>
+    /// The standard deviation of the XY position
+    /// </summary>
+    double? Stdev { get; }
   }
 }

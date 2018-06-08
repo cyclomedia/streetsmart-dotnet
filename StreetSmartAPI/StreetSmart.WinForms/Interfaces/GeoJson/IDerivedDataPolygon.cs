@@ -26,8 +26,13 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public interface IDerivedDataPolygon: IDerivedDataLineString
   {
     /// <summary>
-    /// The polygon splited in areas
+    /// The polygon splited in triangles
     /// </summary>
-    IList<IArea> Areas { get; set; }
+    IList<ITriangle> Triangles { get; }
+
+    /// <summary>
+    /// The area of the polygon
+    /// </summary>
+    IProperty Area { get; }
   }
 }

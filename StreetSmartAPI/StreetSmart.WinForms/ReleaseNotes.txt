@@ -1,6 +1,13 @@
 ﻿Release notes:
 ==============
 
+Version: 18.7.0
+===============
+- Bug fixed: crashed on .GetRecording() with images from 2008
+- GetActiveMeasurement: returns now an object structure
+- The measurement changed event, returns now an object structure
+
+
 Version: 18.5.0
 ===============
 - Removed maxWindows, now the maxWindows is always 3

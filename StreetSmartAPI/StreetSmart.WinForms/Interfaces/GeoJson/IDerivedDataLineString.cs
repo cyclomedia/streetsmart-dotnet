@@ -26,46 +26,51 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public interface IDerivedDataLineString: IDerivedData
   {
     /// <summary>
+    /// Standard deviations of the points
+    /// </summary>
+    IList<IStdev> CoordinateStdev { get; }
+
+    /// <summary>
     /// The total lenght
     /// </summary>
-    IValue TotalLength { get; set; }
+    IProperty TotalLength { get; }
 
     /// <summary>
     /// Segment lengths
     /// </summary>
-    List<IValue> SegmentLengths { get; set; }
+    IList<IProperty> SegmentLengths { get; }
 
     /// <summary>
     /// Segments delta XY
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    List<IValue> SegmentsDeltaXY { get; set; }
+    IList<IProperty> SegmentsDeltaXY { get; }
 
     /// <summary>
     /// Segments delta Z
     /// </summary>
-    List<IValue> SegmentsDeltaZ { get; set; }
+    IList<IProperty> SegmentsDeltaZ { get; }
 
     /// <summary>
     /// Segments slope percentage
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    List<IValue> SegmentSlopePercentage { get; set; }
+    IList<IProperty> SegmentSlopePercentage { get; }
 
     /// <summary>
     /// Segments slope angle
     /// </summary>
-    List<IValue> SegmentsSlopeAngle { get; set; }
+    IList<IProperty> SegmentsSlopeAngle { get; }
 
     /// <summary>
     /// Delta XY
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    IValue DeltaXY { get; set; }
+    IProperty DeltaXY { get; }
 
     /// <summary>
     /// Delta Z
     /// </summary>
-    IValue DeltaZ { get; set; }
+    IProperty DeltaZ { get; }
   }
 }

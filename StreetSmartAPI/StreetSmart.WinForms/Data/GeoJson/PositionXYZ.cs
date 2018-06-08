@@ -16,33 +16,27 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Observation lines
-  /// </summary>
-  public interface IObservationLines
+  // ReSharper disable once InconsistentNaming
+  internal class PositionXYZ : Coordinate, IPositionXYZ
   {
-    /// <summary>
-    /// Active observation
-    /// </summary>
-    int ActiveObservation { get; }
+    public PositionXYZ(Dictionary<string, object> position)
+      : base(position)
+    {
+      double x = position?["x"] as double? ?? 0.0;
+      double y = position?["y"] as double? ?? 0.0;
+      double z = position?["z"] as double? ?? 0.0;
 
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
+      XYZ = new Coordinate(x, y, z);
+    }
 
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    // ReSharper disable once InconsistentNaming
+    public ICoordinate XYZ { get; }
   }
 }

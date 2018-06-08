@@ -28,7 +28,7 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Id
     /// </summary>
-    string Id { get; set; }
+    string Id { get; }
 
     /// <summary>
     /// Name
@@ -38,46 +38,46 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Group
     /// </summary>
-    string Group { get; set; }
+    string Group { get; }
 
     /// <summary>
     /// Measure details
     /// </summary>
-    IList<IMeasureDetails> MeasureDetails { get; set; }
+    IList<IMeasureDetails> MeasureDetails { get; }
 
     /// <summary>
     /// Dimension
     /// </summary>
-    int Dimension { get; set; }
+    int Dimension { get; }
 
     /// <summary>
     /// Custom geometry type
     /// </summary>
-    CustomGeometryType CustomGeometryType { get; set; }
+    CustomGeometryType CustomGeometryType { get; }
 
     /// <summary>
     /// Derived data which contains the calculated data from the measurement
     /// </summary>
-    IDerivedData DerivedData { get; set; }
+    IDerivedData DerivedData { get; }
 
     /// <summary>
     /// Measure reliability
     /// </summary>
-    Reliability MeasureReliability { get; set; }
+    Reliability MeasureReliability { get; }
 
     /// <summary>
     /// Points with errors
     /// </summary>
-    IList<int> PointsWithErrors { get; set; }
+    IList<int> PointsWithErrors { get; }
 
     /// <summary>
     /// Valid Geometry
     /// </summary>
-    bool ValidGeometry { get; set; }
+    bool ValidGeometry { get; }
 
     /// <summary>
     /// Observation lines
     /// </summary>
-    IObservationLines ObservationLines { get; set; }
+    IObservationLines ObservationLines { get; }
   }
 }

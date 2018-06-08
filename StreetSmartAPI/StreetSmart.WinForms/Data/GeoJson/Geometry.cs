@@ -16,33 +16,30 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System;
+using System.Collections.Generic;
 
-namespace StreetSmart.WinForms.Interfaces.GeoJson
+using StreetSmart.WinForms.Interfaces.Data;
+using StreetSmart.WinForms.Interfaces.GeoJson;
+
+namespace StreetSmart.WinForms.Data.GeoJson
 {
-  /// <summary>
-  /// Observation lines
-  /// </summary>
-  public interface IObservationLines
+  internal class Geometry : NotifyPropertyChanged, IGeometry
   {
-    /// <summary>
-    /// Active observation
-    /// </summary>
-    int ActiveObservation { get; }
+    public Geometry(Dictionary<string, object> geometry)
+    {
+      string type = geometry?["type"]?.ToString() ?? string.Empty;
 
-    /// <summary>
-    /// RecordingId
-    /// </summary>
-    string RecordingId { get; }
+      try
+      {
+        Type = (MeasurementGeometryType) Enum.Parse(typeof(MeasurementGeometryType), type);
+      }
+      catch (ArgumentException)
+      {
+        Type = MeasurementGeometryType.Unknown;
+      }
+    }
 
-    /// <summary>
-    /// Color
-    /// </summary>
-    Color Color { get; }
-
-    /// <summary>
-    /// Selected measure method
-    /// </summary>
-    MeasureMethod SelectedMeasureMethod { get; }
+    public MeasurementGeometryType Type { get; }
   }
 }

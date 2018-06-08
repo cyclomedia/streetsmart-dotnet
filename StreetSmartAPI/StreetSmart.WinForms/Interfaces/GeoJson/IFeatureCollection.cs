@@ -28,17 +28,17 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
     /// <summary>
     /// Feature type
     /// </summary>
-    FeatureType Type { get; set; }
+    FeatureType Type { get; }
 
     /// <summary>
     /// Collection of features
     /// </summary>
-    IList<IFeature> Features { get; set; }
+    IList<IFeature> Features { get; }
 
     /// <summary>
     /// CRS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    ICRS CRS { get; set; }
+    ICRS CRS { get; }
   }
 }

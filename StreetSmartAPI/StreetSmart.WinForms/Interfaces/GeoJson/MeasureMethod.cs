@@ -25,6 +25,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public enum MeasureMethod
   {
     /// <summary>
+    /// Not defined
+    /// </summary>
+    NotDefined = -1,
+
+    /// <summary>
     ///  Measure using depth map (in marketing terms: Measure Smart)
     /// </summary>
     DepthMap = 1,

@@ -25,32 +25,54 @@ namespace StreetSmart.WinForms.Data
 {
   internal class Coordinate : NotifyPropertyChanged, ICoordinate
   {
-    private double _x;
-    private double _y;
+    private double? _x;
+    private double? _y;
     private double? _z;
+
+    public Coordinate()
+    {
+    }
 
     public Coordinate(Dictionary<string, object> coordinate)
     {
-      X = (double) coordinate["0"];
-      Y = (double) coordinate["1"];
-      Z = (double) coordinate["2"];
+      if (coordinate?.ContainsKey("0") ?? false)
+      {
+        X = coordinate["0"] as double?;
+      }
+
+      if (coordinate?.ContainsKey("1") ?? false)
+      {
+        Y = coordinate["1"] as double?;
+      }
+
+      if (coordinate?.ContainsKey("2") ?? false)
+      {
+        Z = coordinate["2"] as double?;
+      }
     }
 
-    public Coordinate(double x, double y)
+    public Coordinate(IList<object> coordinate)
+    {
+      X = coordinate?.Count >= 1 ? coordinate[0] as double? : null;
+      Y = coordinate?.Count >= 2 ? coordinate[1] as double? : null;
+      Z = coordinate?.Count >= 3 ? coordinate[2] as double? : null;
+    }
+
+    public Coordinate(double? x, double? y)
     {
       X = x;
       Y = y;
       Z = null;
     }
 
-    public Coordinate(double x, double y, double z)
+    public Coordinate(double? x, double? y, double? z)
     {
       X = x;
       Y = y;
       Z = z;
     }
 
-    public double X
+    public double? X
     {
       get => _x;
       set
@@ -60,7 +82,7 @@ namespace StreetSmart.WinForms.Data
       }
     }
 
-    public double Y
+    public double? Y
     {
       get => _y;
       set
@@ -84,7 +106,7 @@ namespace StreetSmart.WinForms.Data
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       string zComponent = (Z == null) ? string.Empty : $",{((double) Z).ToString(ci)}";
-      return $"[{X.ToString(ci)},{Y.ToString(ci)}{zComponent}]";
+      return $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
     }
   }
 }

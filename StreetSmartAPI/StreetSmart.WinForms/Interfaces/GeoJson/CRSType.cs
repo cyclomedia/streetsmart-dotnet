@@ -25,6 +25,11 @@ namespace StreetSmart.WinForms.Interfaces.GeoJson
   public enum CRSType
   {
     /// <summary>
+    /// Not defined
+    /// </summary>
+    NotDefined = -1,
+
+    /// <summary>
     /// EPSG type
     /// </summary>
     Epsg = 1,
