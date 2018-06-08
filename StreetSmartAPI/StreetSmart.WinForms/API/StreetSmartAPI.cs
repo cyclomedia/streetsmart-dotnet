@@ -139,9 +139,9 @@ namespace StreetSmart.WinForms.API
       return overlay;
     }
 
-    public void RemoveOverlay(string layerId)
+    public async Task RemoveOverlay(string layerId)
     {
-      _browser.ExecuteScriptAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
+      await CallJsAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
     }
 
     public void Destroy(IOptions options)

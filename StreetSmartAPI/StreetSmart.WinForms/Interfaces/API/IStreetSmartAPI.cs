@@ -265,7 +265,7 @@ namespace StreetSmart.WinForms.Interfaces.API
     /// Removes a GeoJSON overlay from the panorama viewer.
     /// </summary>
     /// <param name="id">The id of the overlay</param>
-    void RemoveOverlay(string id);
+    Task RemoveOverlay(string id);
 
     /// <summary>
     /// Set the active measurement in GeoJSON format
