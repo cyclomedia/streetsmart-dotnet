@@ -88,6 +88,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
+    public string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
+
     public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
 
     public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
@@ -137,6 +139,52 @@ namespace StreetSmart.WinForms.API
       string script = GetScript($"addOverlay({overlay})");
       ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script));
       return overlay;
+    }
+
+    public async Task<IList<IViewer>> CloseViewer(string viewerId)
+    {
+      string typeResult = "r";
+      string resultType = "resultCloseViewer";
+
+      string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
+                      (function(e){{{JsThis}.{JsCloseViewerException}(e.message)}}).then
+                      (function({typeResult}){{{resultType}={typeResult};{JsThis}.{JsResult}('{resultType}');}});";
+
+      object result = await CallJsAsync(script);
+
+      if (result is Exception exception)
+      {
+        throw exception;
+      }
+
+      IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
+        (new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, (string) result);
+      IViewer removedViewer = null;
+
+      foreach (var viewer in viewerList)
+      {
+        if (await viewer.GetViewerId() == viewerId)
+        {
+          removedViewer = viewer;
+        }
+      }
+
+      if (removedViewer != null)
+      {
+        viewerList.Remove(removedViewer);
+      }
+
+      return viewerList;
+    }
+
+    public async Task<IList<IViewer>> getViewers()
+    {
+      string resultType = "resultgetViewers";
+      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}');";
+      object result = await CallJsAsync(script);
+
+      return await ViewerList.ToViewersFromJsValue(new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
+        (string) result);
     }
 
     public async Task RemoveOverlay(string layerId)
@@ -270,6 +318,11 @@ namespace StreetSmart.WinForms.API
     public void OnImageNotFoundException(string message)
     {
       _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
+    }
+
+    public void OnViewerCloseException(string message)
+    {
+      _resultTask.TrySetResult(new StreetSmartCloseViewerException(message));
     }
 
     public void OnMeasurementChanged(Dictionary<string, object> args)

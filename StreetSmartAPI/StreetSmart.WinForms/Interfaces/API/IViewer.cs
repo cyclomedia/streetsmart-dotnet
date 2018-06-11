@@ -28,6 +28,12 @@ namespace StreetSmart.WinForms.Interfaces.API
     #region Interface functions
 
     /// <summary>
+    /// Returns the viewerId of the viewer
+    /// </summary>
+    /// <returns> The viewerId.</returns>
+    Task<string> GetViewerId();
+
+    /// <summary>
     /// Returns the navbarExpanded state.
     /// This is an asynchronous function.
     /// </summary>

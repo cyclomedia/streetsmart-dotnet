@@ -97,6 +97,19 @@ namespace StreetSmart.WinForms.Interfaces.API
     Task<IOverlay> AddOverlay(IOverlay overlay);
 
     /// <summary>
+    /// Close a panorama or oblique viewer.
+    /// </summary>
+    /// <param name="viewerId">The viewer to remove</param>
+    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
+    Task<IList<IViewer>> CloseViewer(string viewerId);
+
+    /// <summary>
+    /// Return an array with references to all viewers.
+    /// </summary>
+    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
+    Task<IList<IViewer>> getViewers();
+
+    /// <summary>
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>

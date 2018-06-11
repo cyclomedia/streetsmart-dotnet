@@ -70,7 +70,7 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to https://streetsmart-staging.cyclomedia.com/api/v18.7/api-dotnet.html.
         /// </summary>
         internal static string StreetSmartLocation {
             get {

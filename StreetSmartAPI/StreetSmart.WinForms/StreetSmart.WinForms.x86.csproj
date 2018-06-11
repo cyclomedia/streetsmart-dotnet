@@ -227,6 +227,7 @@
     <Compile Include="Events\EventArgs.cs" />
     <Compile Include="Exceptions\StreetSmartLoginFailedException.cs" />
     <Compile Include="Exceptions\StreetSmartImageNotFoundException.cs" />
+    <Compile Include="Exceptions\StreetSmartCloseViewerException.cs" />
     <Compile Include="Extensions\SecureStringExtensions.cs" />
     <Compile Include="Factories\OptionsFactory.cs" />
     <Compile Include="Factories\AddressSettingsFactory.cs" />

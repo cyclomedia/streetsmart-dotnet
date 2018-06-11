@@ -37,6 +37,8 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.gr3DCursor = new System.Windows.Forms.GroupBox();
+      this.btn3DCursor = new System.Windows.Forms.Button();
       this.grBrightCont = new System.Windows.Forms.GroupBox();
       this.txtBrightnessContrast = new System.Windows.Forms.TextBox();
       this.btnContrast = new System.Windows.Forms.Button();
@@ -129,10 +131,11 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.gr3DCursor = new System.Windows.Forms.GroupBox();
-      this.btn3DCursor = new System.Windows.Forms.Button();
+      this.btnClosePanoramaViewer = new System.Windows.Forms.Button();
+      this.btnGetViewers = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.gr3DCursor.SuspendLayout();
       this.grBrightCont.SuspendLayout();
       this.grSld.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
@@ -149,7 +152,6 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
-      this.gr3DCursor.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -254,6 +256,26 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(484, 925);
       this.plControl.TabIndex = 1;
+      // 
+      // gr3DCursor
+      // 
+      this.gr3DCursor.Controls.Add(this.btn3DCursor);
+      this.gr3DCursor.Location = new System.Drawing.Point(180, 75);
+      this.gr3DCursor.Name = "gr3DCursor";
+      this.gr3DCursor.Size = new System.Drawing.Size(180, 45);
+      this.gr3DCursor.TabIndex = 57;
+      this.gr3DCursor.TabStop = false;
+      this.gr3DCursor.Text = "3D Cursor";
+      // 
+      // btn3DCursor
+      // 
+      this.btn3DCursor.Location = new System.Drawing.Point(5, 15);
+      this.btn3DCursor.Name = "btn3DCursor";
+      this.btn3DCursor.Size = new System.Drawing.Size(150, 25);
+      this.btn3DCursor.TabIndex = 9;
+      this.btn3DCursor.Text = "Toggle 3D Cursor";
+      this.btn3DCursor.UseVisualStyleBackColor = true;
+      this.btn3DCursor.Click += new System.EventHandler(this.btn3DCursor_Click);
       // 
       // grBrightCont
       // 
@@ -513,6 +535,8 @@
       // 
       // grRotationsZoomInOut
       // 
+      this.grRotationsZoomInOut.Controls.Add(this.btnGetViewers);
+      this.grRotationsZoomInOut.Controls.Add(this.btnClosePanoramaViewer);
       this.grRotationsZoomInOut.Controls.Add(this.lblDeltaYawPitch);
       this.grRotationsZoomInOut.Controls.Add(this.txtDeltaYawPitch);
       this.grRotationsZoomInOut.Controls.Add(this.btnRotateDown);
@@ -531,7 +555,7 @@
       // lblDeltaYawPitch
       // 
       this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 120);
+      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 105);
       this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
       this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
       this.lblDeltaYawPitch.TabIndex = 20;
@@ -539,7 +563,7 @@
       // 
       // txtDeltaYawPitch
       // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 120);
+      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 105);
       this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
       this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
       this.txtDeltaYawPitch.TabIndex = 21;
@@ -549,7 +573,7 @@
       // 
       this.btnRotateDown.Location = new System.Drawing.Point(95, 15);
       this.btnRotateDown.Name = "btnRotateDown";
-      this.btnRotateDown.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateDown.Size = new System.Drawing.Size(80, 25);
       this.btnRotateDown.TabIndex = 19;
       this.btnRotateDown.Text = "Rotate down";
       this.btnRotateDown.UseVisualStyleBackColor = true;
@@ -559,7 +583,7 @@
       // 
       this.btnRotateUp.Location = new System.Drawing.Point(5, 15);
       this.btnRotateUp.Name = "btnRotateUp";
-      this.btnRotateUp.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateUp.Size = new System.Drawing.Size(80, 25);
       this.btnRotateUp.TabIndex = 18;
       this.btnRotateUp.Text = "Rotate up";
       this.btnRotateUp.UseVisualStyleBackColor = true;
@@ -567,9 +591,9 @@
       // 
       // btnRotateRight
       // 
-      this.btnRotateRight.Location = new System.Drawing.Point(5, 50);
+      this.btnRotateRight.Location = new System.Drawing.Point(5, 45);
       this.btnRotateRight.Name = "btnRotateRight";
-      this.btnRotateRight.Size = new System.Drawing.Size(80, 30);
+      this.btnRotateRight.Size = new System.Drawing.Size(80, 25);
       this.btnRotateRight.TabIndex = 6;
       this.btnRotateRight.Text = "Rotate right";
       this.btnRotateRight.UseVisualStyleBackColor = true;
@@ -577,9 +601,9 @@
       // 
       // btnZoomOut
       // 
-      this.btnZoomOut.Location = new System.Drawing.Point(95, 85);
+      this.btnZoomOut.Location = new System.Drawing.Point(95, 75);
       this.btnZoomOut.Name = "btnZoomOut";
-      this.btnZoomOut.Size = new System.Drawing.Size(80, 30);
+      this.btnZoomOut.Size = new System.Drawing.Size(80, 25);
       this.btnZoomOut.TabIndex = 46;
       this.btnZoomOut.Text = "Zoom out";
       this.btnZoomOut.UseVisualStyleBackColor = true;
@@ -587,9 +611,9 @@
       // 
       // btRotateLeft
       // 
-      this.btRotateLeft.Location = new System.Drawing.Point(5, 85);
+      this.btRotateLeft.Location = new System.Drawing.Point(5, 75);
       this.btRotateLeft.Name = "btRotateLeft";
-      this.btRotateLeft.Size = new System.Drawing.Size(80, 30);
+      this.btRotateLeft.Size = new System.Drawing.Size(80, 25);
       this.btRotateLeft.TabIndex = 0;
       this.btRotateLeft.Text = "Rotate left";
       this.btRotateLeft.UseVisualStyleBackColor = true;
@@ -597,9 +621,9 @@
       // 
       // btnZoomIn
       // 
-      this.btnZoomIn.Location = new System.Drawing.Point(95, 50);
+      this.btnZoomIn.Location = new System.Drawing.Point(95, 45);
       this.btnZoomIn.Name = "btnZoomIn";
-      this.btnZoomIn.Size = new System.Drawing.Size(80, 30);
+      this.btnZoomIn.Size = new System.Drawing.Size(80, 25);
       this.btnZoomIn.TabIndex = 45;
       this.btnZoomIn.Text = "Zoom in";
       this.btnZoomIn.UseVisualStyleBackColor = true;
@@ -1184,25 +1208,25 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // gr3DCursor
+      // btnClosePanoramaViewer
       // 
-      this.gr3DCursor.Controls.Add(this.btn3DCursor);
-      this.gr3DCursor.Location = new System.Drawing.Point(180, 75);
-      this.gr3DCursor.Name = "gr3DCursor";
-      this.gr3DCursor.Size = new System.Drawing.Size(180, 45);
-      this.gr3DCursor.TabIndex = 57;
-      this.gr3DCursor.TabStop = false;
-      this.gr3DCursor.Text = "3D Cursor";
+      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(0, 125);
+      this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
+      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(100, 25);
+      this.btnClosePanoramaViewer.TabIndex = 59;
+      this.btnClosePanoramaViewer.Text = "Close pan. viewer";
+      this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
+      this.btnClosePanoramaViewer.Click += new System.EventHandler(this.btnClosePanoramaViewer_Click);
       // 
-      // btn3DCursor
+      // btnGetViewers
       // 
-      this.btn3DCursor.Location = new System.Drawing.Point(5, 15);
-      this.btn3DCursor.Name = "btn3DCursor";
-      this.btn3DCursor.Size = new System.Drawing.Size(150, 25);
-      this.btn3DCursor.TabIndex = 9;
-      this.btn3DCursor.Text = "Toggle 3D Cursor";
-      this.btn3DCursor.UseVisualStyleBackColor = true;
-      this.btn3DCursor.Click += new System.EventHandler(this.btn3DCursor_Click);
+      this.btnGetViewers.Location = new System.Drawing.Point(100, 125);
+      this.btnGetViewers.Name = "btnGetViewers";
+      this.btnGetViewers.Size = new System.Drawing.Size(75, 25);
+      this.btnGetViewers.TabIndex = 60;
+      this.btnGetViewers.Text = "Get viewers";
+      this.btnGetViewers.UseVisualStyleBackColor = true;
+      this.btnGetViewers.Click += new System.EventHandler(this.btnGetViewers_Click);
       // 
       // Demo
       // 
@@ -1219,6 +1243,7 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.gr3DCursor.ResumeLayout(false);
       this.grBrightCont.ResumeLayout(false);
       this.grBrightCont.PerformLayout();
       this.grSld.ResumeLayout(false);
@@ -1247,7 +1272,6 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
-      this.gr3DCursor.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1356,6 +1380,8 @@
     private System.Windows.Forms.Button btnBrightness;
     private System.Windows.Forms.GroupBox gr3DCursor;
     private System.Windows.Forms.Button btn3DCursor;
+    private System.Windows.Forms.Button btnClosePanoramaViewer;
+    private System.Windows.Forms.Button btnGetViewers;
   }
 }
 

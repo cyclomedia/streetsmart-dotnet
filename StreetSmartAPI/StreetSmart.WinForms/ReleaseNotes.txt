@@ -7,6 +7,9 @@ Version: 18.7.0
 - GetActiveMeasurement: returns now an object structure
 - The measurement changed event, returns now an object structure
 - Remove overlay function is now awaited
+- Added a function for get the viewerId: GetViewerId()
+- Added a function for close a viewer by Id: CloseViewer()
+- Added a function for get the opened viewers: getViewers()
 
 
 Version: 18.5.0

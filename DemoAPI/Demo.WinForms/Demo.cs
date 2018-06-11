@@ -924,6 +924,26 @@ namespace Demo.WinForms
       PanoramaViewer.Toggle3DCursor(!visible);
     }
 
+    private async void btnClosePanoramaViewer_Click(object sender, EventArgs e)
+    {
+      if (PanoramaViewer != null)
+      {
+        string viewerId = await PanoramaViewer.GetViewerId();
+
+        if (viewerId != null)
+        {
+          IList<IViewer> result = await _api.CloseViewer(viewerId);
+          ShowOpenedViewers(result);
+        }
+      }
+    }
+
+    private async void btnGetViewers_Click(object sender, EventArgs e)
+    {
+      IList<IViewer> viewers = await _api.getViewers();
+      ShowOpenedViewers(viewers);
+    }
+
     #endregion
 
     #region Private Functions
@@ -1063,6 +1083,18 @@ namespace Demo.WinForms
       grButtonVisibility.Enabled = false;
       grBrightCont.Enabled = false;
       gr3DCursor.Enabled = false;
+    }
+
+    private async void ShowOpenedViewers(IList<IViewer> viewers)
+    {
+      string openedViewers = $"These viewers are now open:{Environment.NewLine}";
+
+      foreach (var viewer in viewers)
+      {
+        openedViewers += $" {await viewer.GetViewerId()}{Environment.NewLine}";
+      }
+
+      MessageBox.Show(openedViewers);
     }
 
     #endregion

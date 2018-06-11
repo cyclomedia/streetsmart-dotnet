@@ -136,6 +136,7 @@
     <Compile Include="Data\ViewerOptions.cs" />
     <Compile Include="Data\DomElement\DomElement.cs" />
     <Compile Include="Data\PanoramaViewerOptions.cs" />
+    <Compile Include="Exceptions\StreetSmartCloseViewerException.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factories\OverlayFactory.cs" />

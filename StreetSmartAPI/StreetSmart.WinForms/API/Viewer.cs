@@ -70,6 +70,11 @@ namespace StreetSmart.WinForms.API
 
     #region Interface Functions
 
+    public async Task<string> GetViewerId()
+    {
+      return (string) await CallJsAsync(GetScript("props.id"));
+    }
+
     public async Task<bool> GetNavbarExpanded()
     {
       return (bool) await CallJsAsync(GetScript("getNavbarExpanded()"));
