@@ -16,7 +16,6 @@
  * License along with this library.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -74,7 +73,7 @@ namespace StreetSmart.WinForms.Data
       string result = options.Aggregate(baseOptions, (current, part) => $"{current},{part}");
       return options.Count == 0 && string.IsNullOrEmpty(baseOptions)
         ? string.Empty
-        : $",panoramaViewer:{{{result.Substring(Math.Min(result.Length, 1))}}}";
+        : $",panoramaViewer:{{{result}}}";
     }
   }
 }

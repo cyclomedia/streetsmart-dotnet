@@ -3,13 +3,14 @@
 
 Version: 18.7.0
 ===============
-- Bug fixed: crashed on .GetRecording() with images from 2008
+- Fixed bug: crashed on .GetRecording() with images from 2008
 - GetActiveMeasurement: returns now an object structure
 - The measurement changed event, returns now an object structure
 - Remove overlay function is now awaited
 - Added a function for get the viewerId: GetViewerId()
-- Added a function for close a viewer by Id: CloseViewer()
+- Added a function for close a viewer by Id: CloseViewer(viewerId)
 - Added a function for get the opened viewers: getViewers()
+- Fixed bug: when setting a viewer to not be closeable, button still appears
 
 
 Version: 18.5.0

@@ -459,7 +459,7 @@ namespace Demo.WinForms
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
-        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, ckReplace.Checked, true);
       }
 
       try
