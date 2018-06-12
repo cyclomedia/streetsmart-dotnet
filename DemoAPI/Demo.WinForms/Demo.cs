@@ -906,7 +906,7 @@ namespace Demo.WinForms
     {
       if (double.TryParse(txtBrightnessContrast.Text, out var value))
       {
-        PanoramaViewer.SetBrightness(value);
+        PanoramaViewer?.SetBrightness(value);
       }
     }
 
@@ -914,7 +914,7 @@ namespace Demo.WinForms
     {
       if (double.TryParse(txtBrightnessContrast.Text, out var value))
       {
-        PanoramaViewer.SetContrast(value);
+        PanoramaViewer?.SetContrast(value);
       }
     }
 

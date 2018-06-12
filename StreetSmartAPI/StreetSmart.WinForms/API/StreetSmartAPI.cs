@@ -80,6 +80,8 @@ namespace StreetSmart.WinForms.API
 
     public string JsApi => Resources.JsApi;
 
+    public string ApiId { get; }
+
     private string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
 
     private string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
@@ -102,12 +104,19 @@ namespace StreetSmart.WinForms.API
 
     public StreetSmartAPI(string streetSmartLocation)
     {
+      ApiId = $"{Guid.NewGuid():N}";
       _browser = new ChromiumWebBrowser(streetSmartLocation) {Dock = DockStyle.Fill};
       _browser.RegisterJsObject(JsThis, this);
-      ViewerList.RegisterJsObjects(_browser);
+      ViewerList.CreateViewerList(ApiId);
+      ViewerList.RegisterJsObjects(ApiId, _browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
       GUI = new StreetSmartGUI(_browser);
+    }
+
+    ~StreetSmartAPI()
+    {
+      ViewerList.DeleteViewerList(ApiId);
     }
 
     #endregion
@@ -143,12 +152,11 @@ namespace StreetSmart.WinForms.API
 
     public async Task<IList<IViewer>> CloseViewer(string viewerId)
     {
-      string typeResult = "r";
       string resultType = "resultCloseViewer";
 
       string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
                       (function(e){{{JsThis}.{JsCloseViewerException}(e.message)}}).then
-                      (function({typeResult}){{{resultType}={typeResult};{JsThis}.{JsResult}('{resultType}');}});";
+                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}');}});";
 
       object result = await CallJsAsync(script);
 
@@ -158,7 +166,7 @@ namespace StreetSmart.WinForms.API
       }
 
       IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, (string) result);
+        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, (string) result);
       IViewer removedViewer = null;
 
       foreach (var viewer in viewerList)
@@ -179,11 +187,11 @@ namespace StreetSmart.WinForms.API
 
     public async Task<IList<IViewer>> getViewers()
     {
-      string resultType = "resultgetViewers";
+      string resultType = "resultGetViewers";
       string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}');";
       object result = await CallJsAsync(script);
 
-      return await ViewerList.ToViewersFromJsValue(new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
+      return await ViewerList.ToViewersFromJsValue(ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
         (string) result);
     }
 
@@ -197,7 +205,7 @@ namespace StreetSmart.WinForms.API
       RemoveMeasurementEvents();
       RemoveViewerEvents();
       _browser.ExecuteScriptAsync(GetScript($"destroy({options})"));
-      ViewerList.ClearViewers();
+      ViewerList.ClearViewers(ApiId);
     }
 
     public async Task<IFeatureCollection> GetActiveMeasurement()
@@ -251,13 +259,12 @@ namespace StreetSmart.WinForms.API
     }
 
     public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
-    {
-      string typeResult = "r";      
+    {     
       string resultType = "resultOpenByQuery";
 
       string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
                       (function(e){{{JsThis}.{JsImNotFound}(e.message)}}).then
-                      (function({typeResult}){{{resultType}={typeResult};{JsThis}.{JsResult}('{resultType}');}});";
+                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}');}});";
 
       object result = await CallJsAsync(script);
 
@@ -266,7 +273,7 @@ namespace StreetSmart.WinForms.API
         throw (Exception) result;
       }
 
-      return await ViewerList.ToViewersFromJsValue(options.ViewerTypes.GetTypes(), (string) result);
+      return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), (string) result);
     }
 
     public void SetActiveMeasurement(string measurement)
@@ -334,7 +341,7 @@ namespace StreetSmart.WinForms.API
     {
       string jsName = $"type{Guid.NewGuid():N}";
       _browser.ExecuteScriptAsync($"var {jsName}={name};");
-      IViewer viewer = ViewerList.ToViewer(type, jsName);
+      IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
       ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
 
       if (viewer is PanoramaViewer)
@@ -345,7 +352,7 @@ namespace StreetSmart.WinForms.API
 
     public async void OnViewerRemoved(string name, string type)
     {
-      IViewer viewer = await ViewerList.RemoveViewerFromJsValue(type, name);
+      IViewer viewer = await ViewerList.RemoveViewerFromJsValue(ApiId, type, name);
       ViewerRemoved?.Invoke(this, new EventArgs<IViewer>(viewer));
     }
 

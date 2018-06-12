@@ -27,7 +27,7 @@ namespace StreetSmart.WinForms.API.Events
 
     public override string ToString()
     {
-      PanoramaViewerList panViewerList = ViewerList.PanoramaViewerList;
+      PanoramaViewerList panViewerList = ViewerList.GetPanoramaViewerList(ApiId);
       string reAssignPanoramaViewer = panViewerList.ReAssignPanoramaViewer("e.detail.panoramaViewer");
       string disconnectScript = panViewerList.DisconnectEvents();
       string connectScript = panViewerList.ConnectEvents();

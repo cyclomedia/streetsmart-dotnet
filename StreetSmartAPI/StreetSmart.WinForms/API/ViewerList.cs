@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 
 using CefSharp;
 using CefSharp.WinForms;
@@ -33,6 +34,7 @@ namespace StreetSmart.WinForms.API
     #region Tasks
 
     private TaskCompletionSource<object> _resultTask;
+    private readonly EventWaitHandle _waitTask;
 
     #endregion
 
@@ -54,6 +56,7 @@ namespace StreetSmart.WinForms.API
 
     protected ViewerList()
     {
+      _waitTask = new AutoResetEvent(true);
       Viewers = new Dictionary<string, Viewer>();
     }
 
@@ -71,6 +74,8 @@ namespace StreetSmart.WinForms.API
 
     protected async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
     {
+      _waitTask.WaitOne();
+      _waitTask.Reset();
       IViewer result = null;
       string key = null;
 
@@ -92,11 +97,14 @@ namespace StreetSmart.WinForms.API
         Viewers.Remove(key);
       }
 
+      _waitTask.Set();
       return result;
     }
 
     protected async Task<IList<IViewer>> GetViewersFromJsValue(string jsValue)
     {
+      _waitTask.WaitOne();
+      _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
 
       foreach (var viewer in Viewers)
@@ -111,6 +119,7 @@ namespace StreetSmart.WinForms.API
         }
       }
 
+      _waitTask.Set();
       return result;
     }
 
@@ -153,11 +162,8 @@ namespace StreetSmart.WinForms.API
 
     #region Viewer lists / types
 
-    private static readonly Dictionary<string, ViewerList> ViewerLists = new Dictionary<string, ViewerList>
-    {
-      {PanoramaViewerList.Type, new PanoramaViewerList()},
-      {ObliqueViewerList.Type, new ObliqueViewerList()}
-    };
+    private static readonly Dictionary<string, Dictionary<string, ViewerList>> ViewerLists =
+      new Dictionary<string, Dictionary<string, ViewerList>>();
 
     private static readonly Dictionary<ViewerType, string> ToViewerTypes = new Dictionary<ViewerType, string>
     {
@@ -165,48 +171,71 @@ namespace StreetSmart.WinForms.API
       { ViewerType.Oblique, ObliqueViewerList.Type }
     };
 
-    public static PanoramaViewerList PanoramaViewerList => (PanoramaViewerList) ViewerLists[PanoramaViewerList.Type];
+    public static PanoramaViewerList GetPanoramaViewerList(string apiId)
+    {
+      return (PanoramaViewerList) ViewerLists[apiId][PanoramaViewerList.Type];
+    }
+
+    public static void CreateViewerList(string apiId)
+    {
+      if (!ViewerLists.ContainsKey(apiId))
+      {
+        ViewerLists.Add(apiId, new Dictionary<string, ViewerList>
+        {
+          {PanoramaViewerList.Type, new PanoramaViewerList()},
+          {ObliqueViewerList.Type, new ObliqueViewerList()}
+        });
+      }
+    }
+
+    public static void DeleteViewerList(string apiId)
+    {
+      if (ViewerLists.ContainsKey(apiId))
+      {
+        ViewerLists.Remove(apiId);
+      }
+    }
 
     #endregion
 
     #region Viewer functions
 
-    public static void RegisterJsObjects(ChromiumWebBrowser browser)
+    public static void RegisterJsObjects(string apiId, ChromiumWebBrowser browser)
     {
-      foreach (var viewerList in ViewerLists)
+      foreach (var viewerList in ViewerLists[apiId])
       {
         viewerList.Value.RegisterJsObject(browser);
       }
     }
 
-    public static void ClearViewers()
+    public static void ClearViewers(string apiId)
     {
-      foreach (var viewerList in ViewerLists)
+      foreach (var viewerList in ViewerLists[apiId])
       {
         viewerList.Value.Clear();
       }
     }
 
-    public static async Task<IViewer> RemoveViewerFromJsValue(string viewerType, string jsValue)
+    public static async Task<IViewer> RemoveViewerFromJsValue(string apiId, string viewerType, string jsValue)
     {
-      return await ViewerLists[viewerType].RemoveViewerFromJsValue(jsValue);
+      return await ViewerLists[apiId][viewerType].RemoveViewerFromJsValue(jsValue);
     }
 
-    public static async Task<IList<IViewer>> ToViewersFromJsValue(IList<ViewerType> viewerTypes, string jsValue)
+    public static async Task<IList<IViewer>> ToViewersFromJsValue(string apiId, IList<ViewerType> viewerTypes, string jsValue)
     {
       List<IViewer> result = new List<IViewer>();
 
       foreach (var viewerType in viewerTypes)
       {
-        result.AddRange(await ViewerLists[ToViewerTypes[viewerType]].GetViewersFromJsValue(jsValue));
+        result.AddRange(await ViewerLists[apiId][ToViewerTypes[viewerType]].GetViewersFromJsValue(jsValue));
       }
 
       return result;
     }
 
-    public static IViewer ToViewer(string type, string name)
+    public static IViewer ToViewer(string apiId, string type, string name)
     {
-      return ViewerLists[type].AddViewer(name);
+      return ViewerLists[apiId][type].AddViewer(name);
     }
 
     public void Clear()

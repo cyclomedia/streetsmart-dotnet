@@ -24,6 +24,8 @@ namespace StreetSmart.WinForms.API.Events
 
     protected string JsThis => _api.JsThis;
 
+    protected string ApiId => _api.ApiId;
+
     protected string Category { get; }
 
     protected override string Events => $"Events.{Category}";
