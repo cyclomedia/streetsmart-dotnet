@@ -115,15 +115,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\*.dll" *
-xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\*.bin" *
-xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\*.dat" *
-xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\*.pak" *
-xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\*.exe" *
-mkdir locales
-xcopy /Y  "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\locales\*.pak" "locales\*"
-mkdir swiftshader
-xcopy /Y "$(SolutionDir)..\DemoAPI\Demo.WinForms\x64\swiftshader\*.*" swiftshader\*</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

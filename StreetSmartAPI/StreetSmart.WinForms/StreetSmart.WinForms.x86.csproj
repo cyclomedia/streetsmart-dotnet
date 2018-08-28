@@ -62,7 +62,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.XML</DocumentationFile>
+    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
@@ -72,7 +72,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.XML</DocumentationFile>
+    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
