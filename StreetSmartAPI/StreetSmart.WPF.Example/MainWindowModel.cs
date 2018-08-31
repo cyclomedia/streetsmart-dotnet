@@ -1,40 +1,81 @@
-﻿using StreetSmart.Wpf.Data;
+﻿/*
+ * Street Smart .NET integration
+ * Copyright (c) 2018, CycloMedia, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
+using System;
+using System.Collections.Generic;
+
+using StreetSmart.Wpf.Factories;
 using StreetSmart.Wpf.Interfaces.API;
+using StreetSmart.Wpf.Interfaces.Data;
+using StreetSmart.Wpf.Interfaces.DomElement;
+using StreetSmart.WPF.Example.Properties;
 
 namespace StreetSmart.WPF.Example
 {
-  /// <summary>
-  /// 
-  /// </summary>
-  public class MainWindowModel: NotifyPropertyChanged
+  public class MainWindowModel
   {
-    private string _streetSmartLocation;
-    private IStreetSmartAPI _api;
+    #region Constants
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public string StreetSmartLocation
+    private const string Srs = "EPSG:28992";
+    private const string Language = "nl";
+    private const string Database = "CMDatabase";
+    private const string TestLocation = "van voordenpark 1a, zaltbommel";
+
+    #endregion
+
+    #region Members
+
+    private IOptions _options;
+
+    #endregion
+
+    #region Properties
+
+    public IStreetSmartAPI Api { get; }
+
+    #endregion
+
+    #region Constructor
+
+    public MainWindowModel()
     {
-      get => "https://streetsmart.cyclomedia.com/api/v18.7/api-dotnet.html"; // _streetSmartLocation;
-      set
-      {
-        _streetSmartLocation = value;
-        RaisePropertyChanged();
-      }
+      Api = StreetSmartAPIFactory.Create();
+      Api.APIReady += ApiReady;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public IStreetSmartAPI Api
+    #endregion
+
+    #region api ready function
+
+    private async void ApiReady(object sender, EventArgs args)
     {
-      get => _api;
-      set
-      {
-        _api = value;
-        RaisePropertyChanged();
-      }
+      IAddressSettings addressSettings = AddressSettingsFactory.Create(Language, Database);
+      IDomElement element = DomElementFactory.Create();
+      _options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
+        addressSettings, element);
+      await Api.Init(_options);
+
+      IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
+      IPanoramaViewerOptions panoramaOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);
+      IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, Srs, panoramaOptions);
+      await Api.Open(TestLocation, viewerOptions);
     }
+
+    #endregion
   }
 }

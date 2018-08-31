@@ -63,15 +63,6 @@ namespace StreetSmart.Wpf.Interfaces.API
 
     #endregion
 
-    #region StreetSmartAPI
-
-    /// <summary>
-    /// The GUI of StreetSmart
-    /// </summary>
-    StreetSmartGUI GUI { get; }
-
-    #endregion
-
     #region CefSharp functions
 
     /// <summary>

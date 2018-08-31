@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,11 +22,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StreetSmart API Demo WinForm")]
-[assembly: AssemblyDescription("StreetSmart API Demo for Windows Forms")]
+[assembly: AssemblyTitle("Street Smart API Demo WinForm")]
+[assembly: AssemblyDescription("Street Smart API Demo for Windows Forms")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CycloMedia")]
-[assembly: AssemblyProduct("StreetSmart API")]
+[assembly: AssemblyProduct("Street Smart API")]
 [assembly: AssemblyCopyright("Copyright © CycloMedia 2016 - 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

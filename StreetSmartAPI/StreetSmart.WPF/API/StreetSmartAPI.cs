@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 using CefSharp;
 using CefSharp.Wpf;
@@ -44,7 +43,7 @@ namespace StreetSmart.Wpf.API
   {
     #region Members
 
-    private readonly ChromiumWebBrowser _browser;
+    private ChromiumWebBrowser _browser;
     private ApiEventList _apiMeasurementEventList;
     private ApiEventList _apiViewerEventList;
 
@@ -65,12 +64,6 @@ namespace StreetSmart.Wpf.API
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
-
-    #endregion
-
-    #region GUI
-
-    public StreetSmartGUI GUI { get; }
 
     #endregion
 
@@ -104,18 +97,21 @@ namespace StreetSmart.Wpf.API
 
     #region Constructor
 
-    public StreetSmartAPI(string streetSmartLocation, ChromiumWebBrowser browser = null)
+    public StreetSmartAPI(string streetSmartLocation)
     {
       ApiId = $"{Guid.NewGuid():N}";
       StreetSmartLocation = streetSmartLocation;
-      _browser = browser ?? new ChromiumWebBrowser();
-      _browser.Address = streetSmartLocation;
+    }
+
+    public void InitBrowser(ChromiumWebBrowser browser)
+    {
+      _browser = browser;
+      _browser.Address = StreetSmartLocation;
       _browser.RegisterJsObject(JsThis, this);
       ViewerList.CreateViewerList(ApiId);
       ViewerList.RegisterJsObjects(ApiId, _browser);
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
-      // GUI = new StreetSmartGUI(_browser);
     }
 
     ~StreetSmartAPI()
