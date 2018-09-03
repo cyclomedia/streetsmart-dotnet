@@ -24,8 +24,10 @@ using MultipleAPI.WinForms.Properties;
 
 using StreetSmart.WinForms.Factories;
 using StreetSmart.WinForms.Interfaces.API;
-using StreetSmart.WinForms.Interfaces.Data;
-using StreetSmart.WinForms.Interfaces.DomElement;
+
+using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.DomElement;
 
 namespace MultipleAPI.WinForms
 {

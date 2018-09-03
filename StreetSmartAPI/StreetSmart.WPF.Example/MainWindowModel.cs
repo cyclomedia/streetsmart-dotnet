@@ -21,9 +21,11 @@ using System.Collections.Generic;
 
 using StreetSmart.Wpf.Factories;
 using StreetSmart.Wpf.Interfaces.API;
-using StreetSmart.Wpf.Interfaces.Data;
-using StreetSmart.Wpf.Interfaces.DomElement;
 using StreetSmart.WPF.Example.Properties;
+
+using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.DomElement;
 
 namespace StreetSmart.WPF.Example
 {

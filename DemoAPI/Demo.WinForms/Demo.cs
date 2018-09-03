@@ -23,13 +23,16 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-using StreetSmart.WinForms.Exceptions;
 using StreetSmart.WinForms.Factories;
+
+using StreetSmart.Common.Exceptions;
+using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.DomElement;
+using StreetSmart.Common.Interfaces.Events;
+using StreetSmart.Common.Interfaces.GeoJson;
+
 using StreetSmart.WinForms.Interfaces.API;
-using StreetSmart.WinForms.Interfaces.Data;
-using StreetSmart.WinForms.Interfaces.DomElement;
-using StreetSmart.WinForms.Interfaces.Events;
-using StreetSmart.WinForms.Interfaces.GeoJson;
 
 using static Demo.WinForms.Properties.Resources;
 
