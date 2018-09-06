@@ -16,24 +16,18 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.Interfaces.GeoJson
-{
-  /// <summary>
-  /// Smart click / Forward intersection Details
-  /// </summary>
-  public interface IDetailsSmartClick : IDetailsForwardIntersection
-  {
-    /// <summary>
-    /// Undocumented SmartClick behavior:
-    /// If no result could be found, Confidence is -1 and ResultDirections contains a single 'i:nil' attribute with a value of true.
-    /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
-    /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&amp;imageParams=11;18;30
-    /// </summary>
-    int Confidence { get; }
+using System.Collections.Generic;
+using System.Linq;
 
-    /// <summary>
-    /// Depth
-    /// </summary>
-    double Depth { get; }
+namespace StreetSmart.Common.API.Events
+{
+  internal class ApiEventList : List<ApiEvent>
+  {
+    public string Destroy => this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent.Destroy}");
+
+    public override string ToString()
+    {
+      return this.Aggregate(string.Empty, (current, panEvent) => $"{current}{panEvent}");
+    }
   }
 }

@@ -16,25 +16,41 @@
  * License along with this library.
  */
 
-using CefSharp;
+using System.Threading.Tasks;
 
-namespace StreetSmart.Common.Handlers
+using StreetSmart.Common.Interfaces.API;
+
+#if WINFORMS
+using CefSharp.WinForms;
+#else
+using CefSharp.Wpf;
+#endif
+
+namespace StreetSmart.Common.API
 {
-  internal class DownloadHandler : IDownloadHandler
+  internal class ObliqueViewer : Viewer, IObliqueViewer
   {
-    public void OnBeforeDownload(IWebBrowser webBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+    #region Constructors
+
+    public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
+      : base(browser, obliqueViewerList, name)
     {
-      if (!callback.IsDisposed)
-      {
-        using (callback)
-        {
-          callback.Continue(downloadItem.SuggestedFileName, true);
-        }
-      }
     }
 
-    public void OnDownloadUpdated(IWebBrowser webBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
+    #endregion
+
+    #region Interface Functions
+
+    public async Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId)
     {
+      return await base.GetButtonEnabled(buttonId);
     }
+
+    public void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled)
+    {
+      base.ToggleButtonEnabled(buttonId, enabled);
+    }
+
+    #endregion
   }
 }

@@ -16,24 +16,30 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.API.Events
 {
-  /// <summary>
-  /// Smart click / Forward intersection Details
-  /// </summary>
-  public interface IDetailsSmartClick : IDetailsForwardIntersection
+  internal class PanoramaViewerEvent: ApiEvent
   {
-    /// <summary>
-    /// Undocumented SmartClick behavior:
-    /// If no result could be found, Confidence is -1 and ResultDirections contains a single 'i:nil' attribute with a value of true.
-    /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
-    /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&amp;imageParams=11;18;30
-    /// </summary>
-    int Confidence { get; }
+    private readonly PanoramaViewer _viewer;
 
-    /// <summary>
-    /// Depth
-    /// </summary>
-    double Depth { get; }
+    protected string Name => _viewer.Name;
+
+    protected string JsThis => _viewer.JsThis;
+
+    protected override string Events => "Events.panoramaViewer";
+
+    public override string Destroy => $@"{Name}.off({JsApi}.{Events}.{Type},{FuncName}{Name});";
+
+    public PanoramaViewerEvent(PanoramaViewer viewer, string type, string funcName)
+      : base(type, funcName)
+    {
+      _viewer = viewer;
+    }
+
+    public override string ToString()
+    {
+      return $@"{Name}.on({JsApi}.{Events}.{Type},{FuncName}{Name}=function(e)
+             {{{JsThis}.{FuncName}('{Name}',e);}});";
+    }
   }
 }

@@ -16,24 +16,28 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+using System.Threading.Tasks;
+
+namespace StreetSmart.Common.Interfaces.API
 {
+  /// <inheritdoc />
   /// <summary>
-  /// Smart click / Forward intersection Details
+  /// ObliqueViewer component. Gets created by the StreetSmartAPI.
   /// </summary>
-  public interface IDetailsSmartClick : IDetailsForwardIntersection
+  public interface IObliqueViewer : IViewer
   {
     /// <summary>
-    /// Undocumented SmartClick behavior:
-    /// If no result could be found, Confidence is -1 and ResultDirections contains a single 'i:nil' attribute with a value of true.
-    /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
-    /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&amp;imageParams=11;18;30
+    /// Get the visibility of a button
     /// </summary>
-    int Confidence { get; }
+    /// <param name="buttonId"></param>
+    /// <returns></returns>
+    Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId);
 
     /// <summary>
-    /// Depth
+    /// Toggle the visibility of a button.
     /// </summary>
-    double Depth { get; }
+    /// <param name="buttonId"></param>
+    /// <param name="enabled">if available, sets enabled to this value</param>
+    void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled);
   }
 }

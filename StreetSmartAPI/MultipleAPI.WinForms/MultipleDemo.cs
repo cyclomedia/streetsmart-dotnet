@@ -22,10 +22,8 @@ using System.Windows.Forms;
 
 using MultipleAPI.WinForms.Properties;
 
-using StreetSmart.WinForms.Factories;
-using StreetSmart.WinForms.Interfaces.API;
-
 using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
 

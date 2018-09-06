@@ -18,8 +18,8 @@
 
 using System.Windows;
 
-using StreetSmart.Wpf.API;
-using StreetSmart.Wpf.Interfaces.API;
+using StreetSmart.Common.API;
+using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Wpf
 {

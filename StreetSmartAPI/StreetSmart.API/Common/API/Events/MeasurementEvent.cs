@@ -16,28 +16,25 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.API;
-
-namespace Demo.WinForms
+namespace StreetSmart.Common.API.Events
 {
-  class ViewerButtonsBox
+  internal class MeasurementEvent: StreetSmartApiEvent
   {
-    public object ButtonId { get; }
-
-    public ViewerButtonsBox(ObliqueViewerButtons buttonId)
+    public MeasurementEvent(StreetSmartAPI api, string type, string funcName)
+      : base(api, type, funcName, "measurement")
     {
-      ButtonId = buttonId;
-    }
-
-    public ViewerButtonsBox(PanoramaViewerButtons buttonId)
-    {
-      ButtonId = buttonId;
     }
 
     public override string ToString()
     {
-      string type = ButtonId is ObliqueViewerButtons ? "oblique" : "panorama";
-      return $"{type}:{ButtonId}";
+      PanoramaViewerList panViewerList = ViewerList.GetPanoramaViewerList(ApiId);
+      string reAssignPanoramaViewer = panViewerList.ReAssignPanoramaViewer("e.detail.panoramaViewer");
+      string disconnectScript = panViewerList.DisconnectEvents();
+      string connectScript = panViewerList.ConnectEvents();
+
+      return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
+             {{{disconnectScript}{reAssignPanoramaViewer}{connectScript}
+             {JsThis}.{FuncName}(e.detail.activeMeasurement);}});";
     }
   }
 }

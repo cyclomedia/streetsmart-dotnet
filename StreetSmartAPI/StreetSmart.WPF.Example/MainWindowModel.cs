@@ -19,11 +19,10 @@
 using System;
 using System.Collections.Generic;
 
-using StreetSmart.Wpf.Factories;
-using StreetSmart.Wpf.Interfaces.API;
 using StreetSmart.WPF.Example.Properties;
 
 using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
 
@@ -37,12 +36,6 @@ namespace StreetSmart.WPF.Example
     private const string Language = "nl";
     private const string Database = "CMDatabase";
     private const string TestLocation = "van voordenpark 1a, zaltbommel";
-
-    #endregion
-
-    #region Members
-
-    private IOptions _options;
 
     #endregion
 
@@ -68,9 +61,9 @@ namespace StreetSmart.WPF.Example
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create(Language, Database);
       IDomElement element = DomElementFactory.Create();
-      _options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
+      IOptions options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
         addressSettings, element);
-      await Api.Init(_options);
+      await Api.Init(options);
 
       IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
       IPanoramaViewerOptions panoramaOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);

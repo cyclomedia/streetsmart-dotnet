@@ -16,24 +16,27 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.API.Events
 {
-  /// <summary>
-  /// Smart click / Forward intersection Details
-  /// </summary>
-  public interface IDetailsSmartClick : IDetailsForwardIntersection
+  internal class StreetSmartApiEvent: ApiEvent
   {
-    /// <summary>
-    /// Undocumented SmartClick behavior:
-    /// If no result could be found, Confidence is -1 and ResultDirections contains a single 'i:nil' attribute with a value of true.
-    /// Test location: corner of West-Kruiskade / Schouwburgplein and Mauritsweg, Rotterdam (January 2017, photo from 08/08/2016)
-    /// https://streetsmart.cyclomedia.com/streetsmart?q=5D4FMDNX&amp;imageParams=11;18;30
-    /// </summary>
-    int Confidence { get; }
+    private readonly StreetSmartAPI _api;
 
-    /// <summary>
-    /// Depth
-    /// </summary>
-    double Depth { get; }
+    protected string JsThis => _api.JsThis;
+
+    protected string ApiId => _api.ApiId;
+
+    protected string Category { get; }
+
+    protected override string Events => $"Events.{Category}";
+
+    public override string Destroy => $@"{JsApi}.off({JsApi}.{Events}.{Type},{FuncName}{Category});";
+
+    public StreetSmartApiEvent(StreetSmartAPI api, string type, string funcName, string category)
+      : base(type, funcName)
+    {
+      _api = api;
+      Category = category;
+    }
   }
 }

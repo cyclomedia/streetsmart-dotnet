@@ -61,6 +61,15 @@ namespace StreetSmart.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CefSharp.BrowserSubprocess.exe.
+        /// </summary>
+        internal static string BrowserSubprocess {
+            get {
+                return ResourceManager.GetString("BrowserSubprocess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to StreetSmartApi.
         /// </summary>
         internal static string JsApi {

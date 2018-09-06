@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" />
-  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" />
-  <Import Project="..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" />
-  <Import Project="..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props" Condition="Exists('..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props')" />
+  <Import Project="..\..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props" Condition="Exists('..\..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props')" />
+  <Import Project="..\..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props" Condition="Exists('..\..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{11D8CE67-DC5B-4FC9-871B-968B97B5C990}</ProjectGuid>
+    <ProjectGuid>{4ECB3C45-E336-49A5-86C9-BF0E099F5109}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StreetSmart.WinForms</RootNamespace>
-    <AssemblyName>StreetSmart.WinForms</AssemblyName>
+    <RootNamespace>StreetSmart.Wpf</RootNamespace>
+    <AssemblyName>StreetSmart.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -56,13 +56,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.XML</DocumentationFile>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
@@ -72,13 +72,13 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.XML</DocumentationFile>
+    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>StreetSmart.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -112,192 +112,517 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Events\ApiEvent.cs" />
-    <Compile Include="API\Events\ApiEventList.cs" />
-    <Compile Include="API\Events\MeasurementEvent.cs" />
-    <Compile Include="API\Events\PanoramaRecordingClickViewerEvent.cs" />
-    <Compile Include="API\Events\PanoramaViewerEvent.cs" />
-    <Compile Include="API\Events\StreetSmartApiEvent.cs" />
-    <Compile Include="API\Events\ViewerEvent.cs" />
-    <Compile Include="API\ObliqueViewer.cs" />
-    <Compile Include="API\ObliqueViewerList.cs" />
-    <Compile Include="API\Viewer.cs" />
-    <Compile Include="API\ViewerList.cs" />
-    <Compile Include="Data\DepthInfo.cs" />
-    <Compile Include="Data\BaseViewerOptions.cs" />
-    <Compile Include="Data\DomElement\DomElement.cs" />
-    <Compile Include="Data\GeoJson\CRS.cs" />
-    <Compile Include="Data\GeoJson\DerivedData.cs" />
-    <Compile Include="Data\GeoJson\DerivedDataLineString.cs" />
-    <Compile Include="Data\GeoJson\DerivedDataPoint.cs" />
-    <Compile Include="Data\GeoJson\DerivedDataPolygon.cs" />
-    <Compile Include="Data\GeoJson\Details.cs" />
-    <Compile Include="Data\GeoJson\DetailsDepth.cs" />
-    <Compile Include="Data\GeoJson\DetailsForwardIntersection.cs" />
-    <Compile Include="Data\GeoJson\DetailsSmartClick.cs" />
-    <Compile Include="Data\GeoJson\Direction.cs" />
-    <Compile Include="Data\GeoJson\Feature.cs" />
-    <Compile Include="Data\GeoJson\FeatureCollection.cs" />
-    <Compile Include="Data\GeoJson\Geometry.cs" />
-    <Compile Include="Data\GeoJson\LineString.cs" />
-    <Compile Include="Data\GeoJson\MeasureDetails.cs" />
-    <Compile Include="Data\GeoJson\ObservationLines.cs" />
-    <Compile Include="Data\GeoJson\Point.cs" />
-    <Compile Include="Data\GeoJson\Polygon.cs" />
-    <Compile Include="Data\GeoJson\Position.cs" />
-    <Compile Include="Data\GeoJson\PositionStdev.cs" />
-    <Compile Include="Data\GeoJson\PositionXY.cs" />
-    <Compile Include="Data\GeoJson\PositionXYZ.cs" />
-    <Compile Include="Data\GeoJson\Properties.cs" />
-    <Compile Include="Data\GeoJson\Property.cs" />
-    <Compile Include="Data\GeoJson\RecordingInfo.cs" />
-    <Compile Include="Data\GeoJson\ResultDirection.cs" />
-    <Compile Include="Data\GeoJson\Stdev.cs" />
-    <Compile Include="Data\GeoJson\Triangle.cs" />
-    <Compile Include="Data\MeasurementOptions.cs" />
-    <Compile Include="Data\Overlay.cs" />
-    <Compile Include="Data\ObliqueViewerOptions.cs" />
-    <Compile Include="Data\PanoramaViewerOptions.cs" />
-    <Compile Include="Data\ViewerOptions.cs" />
-    <Compile Include="Data\ViewerTypes.cs" />
-    <Compile Include="Data\SLD\FeatureTypeStyle.cs" />
-    <Compile Include="Data\SLD\FillType.cs" />
-    <Compile Include="Data\SLD\Graphic.cs" />
-    <Compile Include="Data\SLD\Mark.cs" />
-    <Compile Include="Data\SLD\PointSymbolizer.cs" />
-    <Compile Include="Data\SLD\PolygonSymbolizer.cs" />
-    <Compile Include="Data\SLD\Rule.cs" />
-    <Compile Include="Data\SLD\StrokeType.cs" />
-    <Compile Include="Data\SLD\StyledLayerDescriptor.cs" />
-    <Compile Include="Data\SLD\SvgParameter.cs" />
-    <Compile Include="Data\SLD\SvgParameterCollection.cs" />
-    <Compile Include="Data\SLD\Symbolizer.cs" />
-    <Compile Include="Data\SLD\SymbolizerType.cs" />
-    <Compile Include="Data\SLD\UserLayer.cs" />
-    <Compile Include="Data\SLD\UserStyle.cs" />
-    <Compile Include="Data\SLD\VendorOption.cs" />
-    <Compile Include="Data\SLD\VendorOptionType.cs" />
-    <Compile Include="Extensions\BoolExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Factories\DomElementFactory.cs" />
-    <Compile Include="Factories\MeasurementOptionsFactory.cs" />
-    <Compile Include="Factories\ObliqueViewerOptionsFactory.cs" />
-    <Compile Include="Factories\OverlayFactory.cs" />
-    <Compile Include="Factories\PanoramaViewerOptionsFactory.cs" />
-    <Compile Include="Factories\ViewerOptionsFactory.cs" />
-    <Compile Include="Interfaces\Data\IBaseViewerOptions.cs" />
-    <Compile Include="Interfaces\Data\IOverlay.cs" />
-    <Compile Include="Interfaces\Data\IDepthInfo.cs" />
-    <Compile Include="Interfaces\Data\IObliqueViewerOptions.cs" />
-    <Compile Include="Interfaces\API\PanoramaViewerButtons.cs" />
-    <Compile Include="Interfaces\Data\IMeasurementOptions.cs" />
-    <Compile Include="Interfaces\API\IObliqueViewer.cs" />
-    <Compile Include="Interfaces\API\IViewer.cs" />
-    <Compile Include="Interfaces\Data\IViewerTypes.cs" />
-    <Compile Include="Interfaces\Data\IViewerOptions.cs" />
-    <Compile Include="Interfaces\Data\IPanoramaViewerOptions.cs" />
-    <Compile Include="Interfaces\API\ObliqueViewerButtons.cs" />
-    <Compile Include="Interfaces\DomElement\StyleElementNumberType.cs" />
-    <Compile Include="Data\DomElement\StyleElementNumberValue.cs" />
-    <Compile Include="Data\DomElement\StyleElementValue.cs" />
-    <Compile Include="Data\DomElement\StyleElement.cs" />
-    <Compile Include="Data\DomElement\Style.cs" />
-    <Compile Include="Interfaces\DomElement\StyleElementName.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Interfaces\DomElement\IDomElement.cs" />
-    <Compile Include="Interfaces\Data\ProductType.cs" />
-    <Compile Include="Interfaces\DomElement\IStyle.cs" />
-    <Compile Include="Interfaces\Data\TileSchema.cs" />
-    <Compile Include="Data\RecordingClickInfo.cs" />
-    <Compile Include="Factories\OrientationFactory.cs" />
-    <Compile Include="Factories\CoordinateFactory.cs" />
-    <Compile Include="Handlers\BrowserProcessHandler.cs" />
-    <Compile Include="Factories\StreetSmartAPIFactory.cs" />
-    <Compile Include="Data\AddressSettings.cs" />
-    <Compile Include="Data\Coordinate.cs" />
-    <Compile Include="Data\NotifyPropertyChanged.cs" />
-    <Compile Include="Data\Options.cs" />
-    <Compile Include="Events\EventArgs.cs" />
-    <Compile Include="Exceptions\StreetSmartLoginFailedException.cs" />
-    <Compile Include="Exceptions\StreetSmartImageNotFoundException.cs" />
-    <Compile Include="Exceptions\StreetSmartCloseViewerException.cs" />
-    <Compile Include="Extensions\SecureStringExtensions.cs" />
-    <Compile Include="Factories\OptionsFactory.cs" />
-    <Compile Include="Factories\AddressSettingsFactory.cs" />
-    <Compile Include="Interfaces\Data\IRecordingClickInfo.cs" />
-    <Compile Include="Interfaces\Data\ICoordinate.cs" />
-    <Compile Include="Interfaces\Data\IAddressSettings.cs" />
-    <Compile Include="Interfaces\Data\IOptions.cs" />
-    <Compile Include="Interfaces\Events\IEventArgs.cs" />
-    <Compile Include="Data\Orientation.cs" />
-    <Compile Include="Interfaces\Data\IOrientation.cs" />
-    <Compile Include="Interfaces\Data\IRecording.cs" />
-    <Compile Include="API\PanoramaViewer.cs" />
-    <Compile Include="API\PanoramaViewerList.cs" />
-    <Compile Include="Handlers\DownloadHandler.cs" />
-    <Compile Include="Interfaces\API\IPanoramaViewer.cs" />
-    <Compile Include="Interfaces\API\IStreetSmartAPI.cs" />
-    <Compile Include="Interfaces\Data\MeasurementGeometryType.cs" />
-    <Compile Include="Interfaces\Data\ViewerType.cs" />
-    <Compile Include="Interfaces\GeoJson\IDerivedData.cs" />
-    <Compile Include="Interfaces\GeoJson\IDerivedDataLineString.cs" />
-    <Compile Include="Interfaces\GeoJson\IDerivedDataPoint.cs" />
-    <Compile Include="Interfaces\GeoJson\IDerivedDataPolygon.cs" />
-    <Compile Include="Interfaces\GeoJson\IDetailsDepth.cs" />
-    <Compile Include="Interfaces\GeoJson\IDetailsForwardIntersection.cs" />
-    <Compile Include="Interfaces\GeoJson\IDetailsSmartClick.cs" />
-    <Compile Include="Interfaces\GeoJson\IPositionStdev.cs" />
-    <Compile Include="Interfaces\GeoJson\IPositionXY.cs" />
-    <Compile Include="Interfaces\GeoJson\IPositionXYZ.cs" />
-    <Compile Include="Interfaces\GeoJson\IProperty.cs" />
-    <Compile Include="Interfaces\GeoJson\IResultDirection.cs" />
-    <Compile Include="Interfaces\GeoJson\IStDev.cs" />
-    <Compile Include="Interfaces\GeoJson\IDirection.cs" />
-    <Compile Include="Interfaces\GeoJson\IPosition.cs" />
-    <Compile Include="Interfaces\GeoJson\IRecordingInfo.cs" />
-    <Compile Include="Interfaces\GeoJson\IDetails.cs" />
-    <Compile Include="Interfaces\GeoJson\ITriangle.cs" />
-    <Compile Include="Interfaces\GeoJson\PointProblems.cs" />
-    <Compile Include="Interfaces\GeoJson\IMeasureDetails.cs" />
-    <Compile Include="Interfaces\GeoJson\MeasureMethod.cs" />
-    <Compile Include="Interfaces\GeoJson\CustomGeometryType.cs" />
-    <Compile Include="Interfaces\GeoJson\Reliability.cs" />
-    <Compile Include="Interfaces\GeoJson\CRSType.cs" />
-    <Compile Include="Interfaces\GeoJson\ICRS.cs" />
-    <Compile Include="Interfaces\GeoJson\IPolygon.cs" />
-    <Compile Include="Interfaces\GeoJson\ILineString.cs" />
-    <Compile Include="Interfaces\GeoJson\IPoint.cs" />
-    <Compile Include="Interfaces\GeoJson\IGeometry.cs" />
-    <Compile Include="Interfaces\GeoJson\IObservationLines.cs" />
-    <Compile Include="Interfaces\GeoJson\IProperties.cs" />
-    <Compile Include="Interfaces\GeoJson\IFeature.cs" />
-    <Compile Include="Interfaces\GeoJson\IFeatureCollection.cs" />
-    <Compile Include="Interfaces\GeoJson\FeatureType.cs" />
-    <Compile Include="Interfaces\GeoJson\Unit.cs" />
+    <Compile Include="..\Common\API\Events\ApiEvent.cs">
+      <Link>API\Events\ApiEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\ApiEventList.cs">
+      <Link>API\Events\ApiEventList.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\MeasurementEvent.cs">
+      <Link>API\Events\MeasurementEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\PanoramaRecordingClickViewerEvent.cs">
+      <Link>API\Events\PanoramaRecordingClickViewerEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\PanoramaViewerEvent.cs">
+      <Link>API\Events\PanoramaViewerEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\StreetSmartApiEvent.cs">
+      <Link>API\Events\StreetSmartApiEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\ViewerEvent.cs">
+      <Link>API\Events\ViewerEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\ObliqueViewer.cs">
+      <Link>API\ObliqueViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\ObliqueViewerList.cs">
+      <Link>API\ObliqueViewerList.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\PanoramaViewer.cs">
+      <Link>API\PanoramaViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\PanoramaViewerList.cs">
+      <Link>API\PanoramaViewerList.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\StreetSmartAPI.cs">
+      <Link>API\StreetSmartAPI.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Viewer.cs">
+      <Link>API\Viewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\ViewerList.cs">
+      <Link>API\ViewerList.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\AddressSettings.cs">
+      <Link>Data\AddressSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\BaseViewerOptions.cs">
+      <Link>Data\BaseViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Coordinate.cs">
+      <Link>Data\Coordinate.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DepthInfo.cs">
+      <Link>Data\DepthInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DomElement\DomElement.cs">
+      <Link>Data\DomElement\DomElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DomElement\Style.cs">
+      <Link>Data\DomElement\Style.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DomElement\StyleElement.cs">
+      <Link>Data\DomElement\StyleElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DomElement\StyleElementNumberValue.cs">
+      <Link>Data\DomElement\StyleElementNumberValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\DomElement\StyleElementValue.cs">
+      <Link>Data\DomElement\StyleElementValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\CRS.cs">
+      <Link>Data\GeoJson\CRS.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DerivedData.cs">
+      <Link>Data\GeoJson\DerivedData.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DerivedDataLineString.cs">
+      <Link>Data\GeoJson\DerivedDataLineString.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DerivedDataPoint.cs">
+      <Link>Data\GeoJson\DerivedDataPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DerivedDataPolygon.cs">
+      <Link>Data\GeoJson\DerivedDataPolygon.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Details.cs">
+      <Link>Data\GeoJson\Details.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DetailsDepth.cs">
+      <Link>Data\GeoJson\DetailsDepth.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DetailsForwardIntersection.cs">
+      <Link>Data\GeoJson\DetailsForwardIntersection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\DetailsSmartClick.cs">
+      <Link>Data\GeoJson\DetailsSmartClick.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Direction.cs">
+      <Link>Data\GeoJson\Direction.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Feature.cs">
+      <Link>Data\GeoJson\Feature.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\FeatureCollection.cs">
+      <Link>Data\GeoJson\FeatureCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Geometry.cs">
+      <Link>Data\GeoJson\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\LineString.cs">
+      <Link>Data\GeoJson\LineString.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\MeasureDetails.cs">
+      <Link>Data\GeoJson\MeasureDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\ObservationLines.cs">
+      <Link>Data\GeoJson\ObservationLines.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Point.cs">
+      <Link>Data\GeoJson\Point.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Polygon.cs">
+      <Link>Data\GeoJson\Polygon.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Position.cs">
+      <Link>Data\GeoJson\Position.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\PositionStdev.cs">
+      <Link>Data\GeoJson\PositionStdev.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\PositionXY.cs">
+      <Link>Data\GeoJson\PositionXY.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\PositionXYZ.cs">
+      <Link>Data\GeoJson\PositionXYZ.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Properties.cs">
+      <Link>Data\GeoJson\Properties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Property.cs">
+      <Link>Data\GeoJson\Property.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\RecordingInfo.cs">
+      <Link>Data\GeoJson\RecordingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\ResultDirection.cs">
+      <Link>Data\GeoJson\ResultDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Stdev.cs">
+      <Link>Data\GeoJson\Stdev.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Triangle.cs">
+      <Link>Data\GeoJson\Triangle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\MeasurementOptions.cs">
+      <Link>Data\MeasurementOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\NotifyPropertyChanged.cs">
+      <Link>Data\NotifyPropertyChanged.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\ObliqueViewerOptions.cs">
+      <Link>Data\ObliqueViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Options.cs">
+      <Link>Data\Options.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Orientation.cs">
+      <Link>Data\Orientation.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Overlay.cs">
+      <Link>Data\Overlay.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\PanoramaViewerOptions.cs">
+      <Link>Data\PanoramaViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Recording.cs">
+      <Link>Data\Recording.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\RecordingClickInfo.cs">
+      <Link>Data\RecordingClickInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\FeatureTypeStyle.cs">
+      <Link>Data\SLD\FeatureTypeStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\FillType.cs">
+      <Link>Data\SLD\FillType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\Graphic.cs">
+      <Link>Data\SLD\Graphic.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\Mark.cs">
+      <Link>Data\SLD\Mark.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\PointSymbolizer.cs">
+      <Link>Data\SLD\PointSymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\PolygonSymbolizer.cs">
+      <Link>Data\SLD\PolygonSymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\Rule.cs">
+      <Link>Data\SLD\Rule.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\StrokeType.cs">
+      <Link>Data\SLD\StrokeType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\StyledLayerDescriptor.cs">
+      <Link>Data\SLD\StyledLayerDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\SvgParameter.cs">
+      <Link>Data\SLD\SvgParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\SvgParameterCollection.cs">
+      <Link>Data\SLD\SvgParameterCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\Symbolizer.cs">
+      <Link>Data\SLD\Symbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\SymbolizerType.cs">
+      <Link>Data\SLD\SymbolizerType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\UserLayer.cs">
+      <Link>Data\SLD\UserLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\UserStyle.cs">
+      <Link>Data\SLD\UserStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\VendorOption.cs">
+      <Link>Data\SLD\VendorOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\VendorOptionType.cs">
+      <Link>Data\SLD\VendorOptionType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\ViewerOptions.cs">
+      <Link>Data\ViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\ViewerTypes.cs">
+      <Link>Data\ViewerTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Events\EventArgs.cs">
+      <Link>Events\EventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartCloseViewerException.cs">
+      <Link>Exceptions\StreetSmartCloseViewerException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartImageNotFoundException.cs">
+      <Link>Exceptions\StreetSmartImageNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartLoginFailedException.cs">
+      <Link>Exceptions\StreetSmartLoginFailedException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\BoolExtensions.cs">
+      <Link>Extensions\BoolExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\EnumExtensions.cs">
+      <Link>Extensions\EnumExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\SecureStringExtensions.cs">
+      <Link>Extensions\SecureStringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\StringExtensions.cs">
+      <Link>Extensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\AddressSettingsFactory.cs">
+      <Link>Factories\AddressSettingsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\CoordinateFactory.cs">
+      <Link>Factories\CoordinateFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\DomElementFactory.cs">
+      <Link>Factories\DomElementFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\MeasurementOptionsFactory.cs">
+      <Link>Factories\MeasurementOptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\ObliqueViewerOptionsFactory.cs">
+      <Link>Factories\ObliqueViewerOptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\OptionsFactory.cs">
+      <Link>Factories\OptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\OrientationFactory.cs">
+      <Link>Factories\OrientationFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\OverlayFactory.cs">
+      <Link>Factories\OverlayFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\PanoramaViewerOptionsFactory.cs">
+      <Link>Factories\PanoramaViewerOptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\StreetSmartAPIFactory.cs">
+      <Link>Factories\StreetSmartAPIFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\ViewerOptionsFactory.cs">
+      <Link>Factories\ViewerOptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\BrowserProcessHandler.cs">
+      <Link>Handlers\BrowserProcessHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\DownloadHandler.cs">
+      <Link>Handlers\DownloadHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IObliqueViewer.cs">
+      <Link>Interfaces\API\IObliqueViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IPanoramaViewer.cs">
+      <Link>Interfaces\API\IPanoramaViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IStreetSmartAPI.cs">
+      <Link>Interfaces\API\IStreetSmartAPI.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IViewer.cs">
+      <Link>Interfaces\API\IViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\ObliqueViewerButtons.cs">
+      <Link>Interfaces\API\ObliqueViewerButtons.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\PanoramaViewerButtons.cs">
+      <Link>Interfaces\API\PanoramaViewerButtons.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IAddressSettings.cs">
+      <Link>Interfaces\Data\IAddressSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IBaseViewerOptions.cs">
+      <Link>Interfaces\Data\IBaseViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ICoordinate.cs">
+      <Link>Interfaces\Data\ICoordinate.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IDepthInfo.cs">
+      <Link>Interfaces\Data\IDepthInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IMeasurementOptions.cs">
+      <Link>Interfaces\Data\IMeasurementOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IObliqueViewerOptions.cs">
+      <Link>Interfaces\Data\IObliqueViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IOptions.cs">
+      <Link>Interfaces\Data\IOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IOrientation.cs">
+      <Link>Interfaces\Data\IOrientation.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IOverlay.cs">
+      <Link>Interfaces\Data\IOverlay.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IPanoramaViewerOptions.cs">
+      <Link>Interfaces\Data\IPanoramaViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IRecording.cs">
+      <Link>Interfaces\Data\IRecording.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IRecordingClickInfo.cs">
+      <Link>Interfaces\Data\IRecordingClickInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IViewerOptions.cs">
+      <Link>Interfaces\Data\IViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IViewerTypes.cs">
+      <Link>Interfaces\Data\IViewerTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\MeasurementGeometryType.cs">
+      <Link>Interfaces\Data\MeasurementGeometryType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ProductType.cs">
+      <Link>Interfaces\Data\ProductType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\TileSchema.cs">
+      <Link>Interfaces\Data\TileSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ViewerType.cs">
+      <Link>Interfaces\Data\ViewerType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\DomElement\IDomElement.cs">
+      <Link>Interfaces\DomElement\IDomElement.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\DomElement\IStyle.cs">
+      <Link>Interfaces\DomElement\IStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\DomElement\StyleElementName.cs">
+      <Link>Interfaces\DomElement\StyleElementName.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\DomElement\StyleElementNumberType.cs">
+      <Link>Interfaces\DomElement\StyleElementNumberType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Events\IEventArgs.cs">
+      <Link>Interfaces\Events\IEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\CRSType.cs">
+      <Link>Interfaces\GeoJson\CRSType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\CustomGeometryType.cs">
+      <Link>Interfaces\GeoJson\CustomGeometryType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\FeatureType.cs">
+      <Link>Interfaces\GeoJson\FeatureType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\ICrs.cs">
+      <Link>Interfaces\GeoJson\ICrs.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDerivedData.cs">
+      <Link>Interfaces\GeoJson\IDerivedData.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDerivedDataLineString.cs">
+      <Link>Interfaces\GeoJson\IDerivedDataLineString.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDerivedDataPoint.cs">
+      <Link>Interfaces\GeoJson\IDerivedDataPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDerivedDataPolygon.cs">
+      <Link>Interfaces\GeoJson\IDerivedDataPolygon.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDetails.cs">
+      <Link>Interfaces\GeoJson\IDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDetailsDepth.cs">
+      <Link>Interfaces\GeoJson\IDetailsDepth.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDetailsForwardIntersection.cs">
+      <Link>Interfaces\GeoJson\IDetailsForwardIntersection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDetailsSmartClick.cs">
+      <Link>Interfaces\GeoJson\IDetailsSmartClick.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IDirection.cs">
+      <Link>Interfaces\GeoJson\IDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IFeature.cs">
+      <Link>Interfaces\GeoJson\IFeature.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IFeatureCollection.cs">
+      <Link>Interfaces\GeoJson\IFeatureCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IGeometry.cs">
+      <Link>Interfaces\GeoJson\IGeometry.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\ILineString.cs">
+      <Link>Interfaces\GeoJson\ILineString.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IMeasureDetails.cs">
+      <Link>Interfaces\GeoJson\IMeasureDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IObservationLines.cs">
+      <Link>Interfaces\GeoJson\IObservationLines.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPoint.cs">
+      <Link>Interfaces\GeoJson\IPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPolygon.cs">
+      <Link>Interfaces\GeoJson\IPolygon.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPosition.cs">
+      <Link>Interfaces\GeoJson\IPosition.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPositionStdev.cs">
+      <Link>Interfaces\GeoJson\IPositionStdev.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPositionXY.cs">
+      <Link>Interfaces\GeoJson\IPositionXY.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IPositionXYZ.cs">
+      <Link>Interfaces\GeoJson\IPositionXYZ.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IProperties.cs">
+      <Link>Interfaces\GeoJson\IProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IProperty.cs">
+      <Link>Interfaces\GeoJson\IProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IRecordingInfo.cs">
+      <Link>Interfaces\GeoJson\IRecordingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IResultDirection.cs">
+      <Link>Interfaces\GeoJson\IResultDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IStdev.cs">
+      <Link>Interfaces\GeoJson\IStdev.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\ITriangle.cs">
+      <Link>Interfaces\GeoJson\ITriangle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\MeasureMethod.cs">
+      <Link>Interfaces\GeoJson\MeasureMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\PointProblems.cs">
+      <Link>Interfaces\GeoJson\PointProblems.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\Reliability.cs">
+      <Link>Interfaces\GeoJson\Reliability.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\Unit.cs">
+      <Link>Interfaces\GeoJson\Unit.cs</Link>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Data\Recording.cs" />
-    <Compile Include="API\StreetSmartAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreetSmartGUI.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="StreetSmartGUI.xaml.cs">
+      <DependentUpon>StreetSmartGUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StreetSmartGUI.Designer.cs">
-      <DependentUpon>StreetSmartGUI.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="StreetSmart.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -306,24 +631,29 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReleaseNotes.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Page Include="StreetSmartGUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="StreetSmart.WPF.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.3239.1723\build\cef.redist.x64.props'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.3239.1723\build\cef.redist.x86.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.3396.1786\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.3396.1786\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets'))" />
   </Target>
-  <Import Project="..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.63.0.3\build\CefSharp.Common.targets')" />
-  <Import Project="..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.63.0.3\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.67.0.0\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets" Condition="Exists('..\..\packages\CefSharp.Wpf.67.0.0\build\CefSharp.Wpf.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
