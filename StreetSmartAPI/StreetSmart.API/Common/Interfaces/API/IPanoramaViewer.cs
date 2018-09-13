@@ -35,9 +35,14 @@ namespace StreetSmart.Common.Interfaces.API
     #region Interface events
 
     /// <summary>
+    /// Triggers when the elevation is changed
+    /// </summary>
+    event EventHandler<IEventArgs<IElevationInfo>> ElevationChange;
+
+    /// <summary>
     /// Triggers when the loaded panorama is altered.
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
+    event EventHandler<IEventArgs<object>> ImageChange;
 
     /// <summary>
     /// Triggers when a recording is clicked inside the PanoramaViewer.
@@ -57,7 +62,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers when time travel date is changed
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+    event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
 
     /// <summary>
     /// Triggers when the view (pitch, hFov or yaw) of the panorama is altered.
@@ -67,12 +72,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers when everything that is needed for the view to dislay correctly is loaded.
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
+    event EventHandler<IEventArgs<object>> ViewLoadEnd;
 
     /// <summary>
     /// Triggers when the view is altered and needs to be (partly) reloaded.
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
+    event EventHandler<IEventArgs<object>> ViewLoadStart;
 
     #endregion
 
@@ -177,6 +182,14 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="orientation">Orientation object that contains values to change.</param>
     void SetOrientation(IOrientation orientation);
+
+    /// <summary>
+    /// Sets the selected feature using the given properties. The selected feature can only be selected
+    /// if the feature is in sight on the panorama viewer.
+    /// </summary>
+    /// <param name="properties">The properties by which the feature should be determined</param>
+    /// <param name="layerId">The layerId to which the feature is selected</param>
+    void SetSelectedFeatureByProperties(IJson properties, string layerId);
 
     /// <summary>
     /// Toggles the visibility of the 3D cursor in the PanoramaViewer

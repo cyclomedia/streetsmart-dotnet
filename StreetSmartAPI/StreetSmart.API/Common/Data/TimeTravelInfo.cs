@@ -16,23 +16,30 @@
  * License along with this library.
  */
 
+using System;
+using System.Collections.Generic;
+
 using StreetSmart.Common.Interfaces.Data;
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Data
 {
-  /// <summary>
-  /// Derived data which contains the calculated data from the measurement
-  /// </summary>
-  public interface IDerivedData
+  internal class TimeTravelInfo : NotifyPropertyChanged, ITimeTravelInfo
   {
-    /// <summary>
-    /// The unit of the measurement
-    /// </summary>
-    Unit Unit { get; }
+    private DateTime _date;
 
-    /// <summary>
-    /// Precision
-    /// </summary>
-    int Precision { get; }
+    public TimeTravelInfo(Dictionary<string, object> timeTravelInfo)
+    {
+      Date = (DateTime) (timeTravelInfo?["date"] ?? new DateTime());
+    }
+
+    public DateTime Date
+    {
+      get => _date;
+      set
+      {
+        _date = value;
+        RaisePropertyChanged();
+      }
+    }
   }
 }

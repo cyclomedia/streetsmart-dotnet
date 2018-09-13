@@ -151,6 +151,7 @@ namespace Demo.WinForms
         IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
         _panoramaViewers.Add(panoramaViewer);
 
+        panoramaViewer.ElevationChange += OnElevationChange;
         panoramaViewer.ImageChange += OnImageChange;
         panoramaViewer.RecordingClick += OnRecordingClick;
         panoramaViewer.TileLoadError += OnTileLoadError;
@@ -179,6 +180,7 @@ namespace Demo.WinForms
         IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
         _panoramaViewers.Remove(panoramaViewer);
 
+        panoramaViewer.ElevationChange -= OnElevationChange;
         panoramaViewer.ImageChange -= OnImageChange;
         panoramaViewer.RecordingClick -= OnRecordingClick;
         panoramaViewer.TileLoadError -= OnTileLoadError;
@@ -198,9 +200,15 @@ namespace Demo.WinForms
 
     #endregion
 
-    #region events panorama viewer 
+    #region events panorama viewer
 
-    private void OnImageChange(object sender, IEventArgs<IDictionary<string, object>> args)
+    private void OnElevationChange(object sender, IEventArgs<IElevationInfo> args)
+    {
+      string text = "Elevation change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnImageChange(object sender, IEventArgs<object> args)
     {
       string text = "Image change";
       AddViewerEventsText(text);
@@ -234,19 +242,19 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadEnd(object sender, IEventArgs<IDictionary<string, object>> args)
+    private void OnViewLoadEnd(object sender, IEventArgs<object> args)
     {
       string text = "Image load end";
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadStart(object sender, IEventArgs<IDictionary<string, object>> args)
+    private void OnViewLoadStart(object sender, IEventArgs<object> args)
     {
       string text = "Image load start";
       AddViewerEventsText(text);
     }
 
-    private void OnTimeTravelChange(object sender, IEventArgs<IDictionary<string, object>> args)
+    private void OnTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
     {
       string text = "Time travel change";
       AddViewerEventsText(text);
@@ -928,7 +936,7 @@ namespace Demo.WinForms
     {
       if (PanoramaViewer != null)
       {
-        string viewerId = await PanoramaViewer.GetViewerId();
+        string viewerId = await PanoramaViewer.GetId();
 
         if (viewerId != null)
         {
@@ -1091,12 +1099,31 @@ namespace Demo.WinForms
 
       foreach (var viewer in viewers)
       {
-        openedViewers += $" {await viewer.GetViewerId()}{Environment.NewLine}";
+        openedViewers += $" {await viewer.GetId()}{Environment.NewLine}";
       }
 
       MessageBox.Show(openedViewers);
     }
 
     #endregion
+
+    private void btnDrawDistance_Click(object sender, EventArgs e)
+    {
+      string text = txtDrawDistance.Text;
+
+      if (int.TryParse(text, out var distance))
+      {
+        _api.SetOverlayDrawDistance(distance);
+      }
+    }
+
+    private void btnSelectFeature_Click(object sender, EventArgs e)
+    {
+      Dictionary<string, string> properties = new Dictionary<string, string> {{txtName.Text, txtValue.Text}};
+      IJson json = JsonFactory.Create(properties);
+      string layerId = _overlay.Id;
+
+      PanoramaViewer.SetSelectedFeatureByProperties(json, layerId);
+    }
   }
 }

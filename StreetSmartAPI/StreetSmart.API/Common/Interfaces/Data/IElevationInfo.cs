@@ -16,23 +16,26 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.Data;
-
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Derived data which contains the calculated data from the measurement
+  /// Elevation info
   /// </summary>
-  public interface IDerivedData
+  public interface IElevationInfo
   {
     /// <summary>
-    /// The unit of the measurement
+    /// Level of elevation
     /// </summary>
-    Unit Unit { get; }
+    double Level { get; set; }
 
     /// <summary>
-    /// Precision
+    /// Height unit
     /// </summary>
-    int Precision { get; }
+    Unit HeightUnit { get; set; }
+
+    /// <summary>
+    /// Level of ground
+    /// </summary>
+    double GroundLevel { get; set; }
   }
 }

@@ -16,23 +16,39 @@
  * License along with this library.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using StreetSmart.Common.Interfaces.Data;
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Data
 {
-  /// <summary>
-  /// Derived data which contains the calculated data from the measurement
-  /// </summary>
-  public interface IDerivedData
+  internal class Json: Dictionary<string, string>, IJson
   {
-    /// <summary>
-    /// The unit of the measurement
-    /// </summary>
-    Unit Unit { get; }
+    public Json()
+    {
+    }
 
-    /// <summary>
-    /// Precision
-    /// </summary>
-    int Precision { get; }
+    public Json(Dictionary<string, string> properties)
+    {
+      foreach (var property in properties)
+      {
+        Add(property.Key, property.Value);
+      }
+    }
+
+    public override string ToString()
+    {
+      List<string> properies = new List<string>();
+
+      foreach (KeyValuePair<string, string> keyValue in this)
+      {
+        properies.Add($"{keyValue.Key.ToQuote()}:{keyValue.Value.ToQuote()}");
+      }
+
+      string result = properies.Aggregate(string.Empty, (current, part) => $"{current},{part}");
+      return $"{{{result.Substring(Math.Min(result.Length, 1))}}}";
+    }
   }
 }

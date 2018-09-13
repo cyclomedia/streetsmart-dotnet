@@ -54,6 +54,7 @@
       this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.btnAddOverlay = new System.Windows.Forms.Button();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
+      this.txtDrawDistance = new System.Windows.Forms.TextBox();
       this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
       this.rbMeasLineString = new System.Windows.Forms.RadioButton();
@@ -65,6 +66,8 @@
       this.btnCloseDefTools = new System.Windows.Forms.Button();
       this.btnShowDefTools = new System.Windows.Forms.Button();
       this.grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
+      this.btnGetViewers = new System.Windows.Forms.Button();
+      this.btnClosePanoramaViewer = new System.Windows.Forms.Button();
       this.lblDeltaYawPitch = new System.Windows.Forms.Label();
       this.txtDeltaYawPitch = new System.Windows.Forms.TextBox();
       this.btnRotateDown = new System.Windows.Forms.Button();
@@ -131,8 +134,13 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.btnClosePanoramaViewer = new System.Windows.Forms.Button();
-      this.btnGetViewers = new System.Windows.Forms.Button();
+      this.btnDrawDistance = new System.Windows.Forms.Button();
+      this.btnSelectFeature = new System.Windows.Forms.Button();
+      this.txtName = new System.Windows.Forms.TextBox();
+      this.lblPropertyName = new System.Windows.Forms.Label();
+      this.txtValue = new System.Windows.Forms.TextBox();
+      this.lblValue = new System.Windows.Forms.Label();
+      this.plStreetSmart.SuspendLayout();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.gr3DCursor.SuspendLayout();
@@ -156,6 +164,11 @@
       // 
       // plStreetSmart
       // 
+      this.plStreetSmart.Controls.Add(this.txtValue);
+      this.plStreetSmart.Controls.Add(this.lblValue);
+      this.plStreetSmart.Controls.Add(this.txtName);
+      this.plStreetSmart.Controls.Add(this.lblPropertyName);
+      this.plStreetSmart.Controls.Add(this.btnSelectFeature);
       this.plStreetSmart.Dock = System.Windows.Forms.DockStyle.Left;
       this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
       this.plStreetSmart.Name = "plStreetSmart";
@@ -416,6 +429,8 @@
       // 
       // grMeasurement
       // 
+      this.grMeasurement.Controls.Add(this.btnDrawDistance);
+      this.grMeasurement.Controls.Add(this.txtDrawDistance);
       this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
       this.grMeasurement.Controls.Add(this.rbMeasPolygon);
       this.grMeasurement.Controls.Add(this.rbMeasLineString);
@@ -429,6 +444,13 @@
       this.grMeasurement.TabIndex = 52;
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
+      // 
+      // txtDrawDistance
+      // 
+      this.txtDrawDistance.Location = new System.Drawing.Point(438, 56);
+      this.txtDrawDistance.Name = "txtDrawDistance";
+      this.txtDrawDistance.Size = new System.Drawing.Size(38, 20);
+      this.txtDrawDistance.TabIndex = 64;
       // 
       // btnGetActiveMeasurement
       // 
@@ -551,6 +573,26 @@
       this.grRotationsZoomInOut.TabIndex = 0;
       this.grRotationsZoomInOut.TabStop = false;
       this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
+      // 
+      // btnGetViewers
+      // 
+      this.btnGetViewers.Location = new System.Drawing.Point(100, 125);
+      this.btnGetViewers.Name = "btnGetViewers";
+      this.btnGetViewers.Size = new System.Drawing.Size(75, 25);
+      this.btnGetViewers.TabIndex = 60;
+      this.btnGetViewers.Text = "Get viewers";
+      this.btnGetViewers.UseVisualStyleBackColor = true;
+      this.btnGetViewers.Click += new System.EventHandler(this.btnGetViewers_Click);
+      // 
+      // btnClosePanoramaViewer
+      // 
+      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(0, 125);
+      this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
+      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(100, 25);
+      this.btnClosePanoramaViewer.TabIndex = 59;
+      this.btnClosePanoramaViewer.Text = "Close pan. viewer";
+      this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
+      this.btnClosePanoramaViewer.Click += new System.EventHandler(this.btnClosePanoramaViewer_Click);
       // 
       // lblDeltaYawPitch
       // 
@@ -1208,25 +1250,57 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // btnClosePanoramaViewer
+      // btnDrawDistance
       // 
-      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(0, 125);
-      this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
-      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(100, 25);
-      this.btnClosePanoramaViewer.TabIndex = 59;
-      this.btnClosePanoramaViewer.Text = "Close pan. viewer";
-      this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
-      this.btnClosePanoramaViewer.Click += new System.EventHandler(this.btnClosePanoramaViewer_Click);
+      this.btnDrawDistance.Location = new System.Drawing.Point(332, 50);
+      this.btnDrawDistance.Name = "btnDrawDistance";
+      this.btnDrawDistance.Size = new System.Drawing.Size(100, 30);
+      this.btnDrawDistance.TabIndex = 66;
+      this.btnDrawDistance.Text = "Set draw distance";
+      this.btnDrawDistance.UseVisualStyleBackColor = true;
+      this.btnDrawDistance.Click += new System.EventHandler(this.btnDrawDistance_Click);
       // 
-      // btnGetViewers
+      // btnSelectFeature
       // 
-      this.btnGetViewers.Location = new System.Drawing.Point(100, 125);
-      this.btnGetViewers.Name = "btnGetViewers";
-      this.btnGetViewers.Size = new System.Drawing.Size(75, 25);
-      this.btnGetViewers.TabIndex = 60;
-      this.btnGetViewers.Text = "Get viewers";
-      this.btnGetViewers.UseVisualStyleBackColor = true;
-      this.btnGetViewers.Click += new System.EventHandler(this.btnGetViewers_Click);
+      this.btnSelectFeature.Location = new System.Drawing.Point(744, 260);
+      this.btnSelectFeature.Name = "btnSelectFeature";
+      this.btnSelectFeature.Size = new System.Drawing.Size(150, 30);
+      this.btnSelectFeature.TabIndex = 50;
+      this.btnSelectFeature.Text = "Select feature";
+      this.btnSelectFeature.UseVisualStyleBackColor = true;
+      this.btnSelectFeature.Click += new System.EventHandler(this.btnSelectFeature_Click);
+      // 
+      // txtName
+      // 
+      this.txtName.Location = new System.Drawing.Point(744, 324);
+      this.txtName.Name = "txtName";
+      this.txtName.Size = new System.Drawing.Size(75, 20);
+      this.txtName.TabIndex = 51;
+      // 
+      // lblPropertyName
+      // 
+      this.lblPropertyName.AutoSize = true;
+      this.lblPropertyName.Location = new System.Drawing.Point(741, 297);
+      this.lblPropertyName.Name = "lblPropertyName";
+      this.lblPropertyName.Size = new System.Drawing.Size(35, 13);
+      this.lblPropertyName.TabIndex = 52;
+      this.lblPropertyName.Text = "Name";
+      // 
+      // txtValue
+      // 
+      this.txtValue.Location = new System.Drawing.Point(825, 324);
+      this.txtValue.Name = "txtValue";
+      this.txtValue.Size = new System.Drawing.Size(75, 20);
+      this.txtValue.TabIndex = 53;
+      // 
+      // lblValue
+      // 
+      this.lblValue.AutoSize = true;
+      this.lblValue.Location = new System.Drawing.Point(822, 297);
+      this.lblValue.Name = "lblValue";
+      this.lblValue.Size = new System.Drawing.Size(34, 13);
+      this.lblValue.TabIndex = 54;
+      this.lblValue.Text = "Value";
       // 
       // Demo
       // 
@@ -1240,6 +1314,8 @@
       this.MinimizeBox = false;
       this.Name = "Demo";
       this.Text = "Demo StreetSmart";
+      this.plStreetSmart.ResumeLayout(false);
+      this.plStreetSmart.PerformLayout();
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
@@ -1382,6 +1458,13 @@
     private System.Windows.Forms.Button btn3DCursor;
     private System.Windows.Forms.Button btnClosePanoramaViewer;
     private System.Windows.Forms.Button btnGetViewers;
+    private System.Windows.Forms.TextBox txtDrawDistance;
+    private System.Windows.Forms.Button btnDrawDistance;
+    private System.Windows.Forms.TextBox txtValue;
+    private System.Windows.Forms.Label lblValue;
+    private System.Windows.Forms.TextBox txtName;
+    private System.Windows.Forms.Label lblPropertyName;
+    private System.Windows.Forms.Button btnSelectFeature;
   }
 }
 

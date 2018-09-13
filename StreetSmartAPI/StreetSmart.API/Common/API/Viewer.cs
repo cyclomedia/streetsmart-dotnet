@@ -75,9 +75,9 @@ namespace StreetSmart.Common.API
 
 #region Interface Functions
 
-    public async Task<string> GetViewerId()
+    public async Task<string> GetId()
     {
-      return (string) await CallJsAsync(GetScript("props.id"));
+      return (string) await CallJsAsync(GetScript("getId()"));
     }
 
     public async Task<bool> GetNavbarExpanded()

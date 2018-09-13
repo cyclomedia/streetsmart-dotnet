@@ -43,26 +43,29 @@ namespace StreetSmart.Common.API
 {
   internal class PanoramaViewer : Viewer, IPanoramaViewer
   {
-#region Members
+    #region Members
 
     private ApiEventList _panoramaViewerEventList;
 
-#endregion
+    #endregion
 
-#region Events
+    #region Events
 
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> ImageChange;
+    public event EventHandler<IEventArgs<IElevationInfo>> ElevationChange;
+    public event EventHandler<IEventArgs<object>> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> TimeTravelChange;
+    public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadEnd;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> ViewLoadStart;
+    public event EventHandler<IEventArgs<object>> ViewLoadEnd;
+    public event EventHandler<IEventArgs<object>> ViewLoadStart;
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
+
+    public string JsElevationChange => (ViewerList as PanoramaViewerList)?.JsElevationChange;
 
     public string JsImChange => (ViewerList as PanoramaViewerList)?.JsImChange;
 
@@ -84,9 +87,9 @@ namespace StreetSmart.Common.API
 
     public string ConnectEventsScript => $"{_panoramaViewerEventList}";
 
-#endregion
+    #endregion
 
-#region Constructors
+    #region Constructors
 
     public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
       : base(browser, panoramaViewerList)
@@ -95,9 +98,9 @@ namespace StreetSmart.Common.API
       ConnectEvents();
     }
 
-#endregion
+    #endregion
 
-#region Interface Functions
+    #region Interface Functions
 
     public async Task<bool> Get3DCursorVisible()
     {
@@ -176,6 +179,11 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
     }
 
+    public void SetSelectedFeatureByProperties(IJson properties, string layerId)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties}, {layerId.ToQuote()});");
+    }
+
     public void Toggle3DCursor(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
@@ -191,13 +199,19 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
     }
 
-#endregion
+    #endregion
 
-#region Events from StreetSmartAPI
+    #region Events from StreetSmartAPI
+
+    public void OnElevationChange(Dictionary<string, object> args)
+    {
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      ElevationChange?.Invoke(this, new EventArgs<ElevationInfo>(new ElevationInfo(detail)));
+    }
 
     public void OnImageChange(Dictionary<string, object> args)
     {
-      ImageChange?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+      ImageChange?.Invoke(this, new EventArgs<object>(new object()));
     }
 
     public void OnRecordingClick(Dictionary<string, object> args)
@@ -229,28 +243,30 @@ namespace StreetSmart.Common.API
 
     public void OnViewLoadEnd(Dictionary<string, object> args)
     {
-      ViewLoadEnd?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+      ViewLoadEnd?.Invoke(this, new EventArgs<object>(new object()));
     }
 
     public void OnViewLoadStart(Dictionary<string, object> args)
     {
-      ViewLoadStart?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+      ViewLoadStart?.Invoke(this, new EventArgs<object>(new object()));
     }
 
     public void OnTimeTravelChange(Dictionary<string, object> args)
     {
-      TimeTravelChange?.Invoke(this, new EventArgs<Dictionary<string, object>>(args));
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 
-#endregion
+    #endregion
 
-#region Functions
+    #region Functions
 
     public void ConnectEvents()
     {
       _panoramaViewerEventList = new ApiEventList
       {
         new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
+        new PanoramaViewerEvent(this, "ELEVATION_CHANGE", JsElevationChange),
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
         new PanoramaViewerEvent(this, "SURFACE_CURSOR_CHANGE", JsSurfaceCursorChange),
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
@@ -283,6 +299,6 @@ namespace StreetSmart.Common.API
       return new Recording((Dictionary<string, object>) result);
     }
 
-#endregion
+    #endregion
   }
 }

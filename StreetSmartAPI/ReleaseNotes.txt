@@ -1,6 +1,20 @@
 ﻿Release notes:
 ==============
 
+Version: 18.10.0
+================
+- build with chefsharp version 0.67
+- From this moment, there is also a WPF version available
+- Now always expect that all files are placed / running in the same directory
+- Stability fixes
+- Changed parameters in following events: imageChanged, timeTravelChanged, viewLoadEnd, viewLoadStart
+- Added a json object
+- Rename: getViewerId() => getId()
+- Added function: setOverlayDrawDistance()
+- Added function: setSelectedFeatureByProperties()
+- Added event: elevationChanged
+
+
 Version: 18.7.0
 ===============
 - Fixed bug: crashed on .GetRecording() with images from 2008

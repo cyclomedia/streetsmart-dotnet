@@ -144,6 +144,9 @@
     <Compile Include="..\Common\Data\DomElement\StyleElementValue.cs">
       <Link>Data\DomElement\StyleElementValue.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\ElevationInfo.cs">
+      <Link>Data\ElevationInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\GeoJson\CRS.cs">
       <Link>Data\GeoJson\CRS.cs</Link>
     </Compile>
@@ -228,6 +231,9 @@
     <Compile Include="..\Common\Data\GeoJson\Triangle.cs">
       <Link>Data\GeoJson\Triangle.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\Json.cs">
+      <Link>Data\Json.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\MeasurementOptions.cs">
       <Link>Data\MeasurementOptions.cs</Link>
     </Compile>
@@ -306,6 +312,9 @@
     <Compile Include="..\Common\Data\SLD\VendorOptionType.cs">
       <Link>Data\SLD\VendorOptionType.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\TimeTravelInfo.cs">
+      <Link>Data\TimeTravelInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\ViewerOptions.cs">
       <Link>Data\ViewerOptions.cs</Link>
     </Compile>
@@ -344,6 +353,9 @@
     </Compile>
     <Compile Include="..\Common\Factories\DomElementFactory.cs">
       <Link>Factories\DomElementFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\JsonFactory.cs">
+      <Link>Factories\JsonFactory.cs</Link>
     </Compile>
     <Compile Include="..\Common\Factories\MeasurementOptionsFactory.cs">
       <Link>Factories\MeasurementOptionsFactory.cs</Link>
@@ -405,6 +417,12 @@
     <Compile Include="..\Common\Interfaces\Data\IDepthInfo.cs">
       <Link>Interfaces\Data\IDepthInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IElevationInfo.cs">
+      <Link>Interfaces\Data\IElevationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IJson.cs">
+      <Link>Interfaces\Data\IJson.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\IMeasurementOptions.cs">
       <Link>Interfaces\Data\IMeasurementOptions.cs</Link>
     </Compile>
@@ -429,6 +447,9 @@
     <Compile Include="..\Common\Interfaces\Data\IRecordingClickInfo.cs">
       <Link>Interfaces\Data\IRecordingClickInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ITimeTravelInfo.cs">
+      <Link>Interfaces\Data\ITimeTravelInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\IViewerOptions.cs">
       <Link>Interfaces\Data\IViewerOptions.cs</Link>
     </Compile>
@@ -443,6 +464,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\TileSchema.cs">
       <Link>Interfaces\Data\TileSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\Unit.cs">
+      <Link>Interfaces\Data\Unit.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\ViewerType.cs">
       <Link>Interfaces\Data\ViewerType.cs</Link>
@@ -563,9 +587,6 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\Reliability.cs">
       <Link>Interfaces\GeoJson\Reliability.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Interfaces\GeoJson\Unit.cs">
-      <Link>Interfaces\GeoJson\Unit.cs</Link>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

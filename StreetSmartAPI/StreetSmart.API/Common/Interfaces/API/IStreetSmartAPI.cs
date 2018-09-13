@@ -110,12 +110,6 @@ namespace StreetSmart.Common.Interfaces.API
     Task<IList<IViewer>> CloseViewer(string viewerId);
 
     /// <summary>
-    /// Return an array with references to all viewers.
-    /// </summary>
-    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
-    Task<IList<IViewer>> getViewers();
-
-    /// <summary>
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>
@@ -165,6 +159,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <returns>Array containing the permissions</returns>
     Task<string[]> GetPermissions();
+
+    /// <summary>
+    /// Return an array with references to all viewers.
+    /// </summary>
+    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
+    Task<IList<IViewer>> getViewers();
 
     /// <summary>
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
@@ -289,7 +289,14 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Set the active measurement in GeoJSON format
     /// </summary>
+    /// <param name="measurement">The measurement in GeoJSON format</param>
     void SetActiveMeasurement(string measurement);
+
+    /// <summary>
+    /// Set overlay draw distance
+    /// </summary>
+    /// <param name="distance">The overlay draw distance</param>
+    void SetOverlayDrawDistance(int distance);
 
     /// <summary>
     /// Starts the measurement

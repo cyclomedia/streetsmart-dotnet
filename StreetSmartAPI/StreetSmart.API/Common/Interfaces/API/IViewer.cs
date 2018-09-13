@@ -31,7 +31,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Returns the viewerId of the viewer
     /// </summary>
     /// <returns> The viewerId.</returns>
-    Task<string> GetViewerId();
+    Task<string> GetId();
 
     /// <summary>
     /// Returns the navbarExpanded state.

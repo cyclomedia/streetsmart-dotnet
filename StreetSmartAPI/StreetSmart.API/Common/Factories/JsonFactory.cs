@@ -16,23 +16,25 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
+using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Factories
 {
   /// <summary>
-  /// Derived data which contains the calculated data from the measurement
+  /// Factory for create Json objects
   /// </summary>
-  public interface IDerivedData
+  public static class JsonFactory
   {
     /// <summary>
-    /// The unit of the measurement
+    /// returns JSon object, which contains the specified properties
     /// </summary>
-    Unit Unit { get; }
+    public static IJson Create(Dictionary<string, string> properties) => new Json(properties);
 
     /// <summary>
-    /// Precision
+    /// returns JSon object
     /// </summary>
-    int Precision { get; }
+    public static IJson Create() => new Json();
   }
 }

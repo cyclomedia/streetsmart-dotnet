@@ -16,10 +16,10 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Unit of the measurement
+  /// Units of measurements / elevation
   /// </summary>
   public enum Unit
   {

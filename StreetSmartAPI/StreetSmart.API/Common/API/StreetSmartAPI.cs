@@ -205,7 +205,7 @@ namespace StreetSmart.Common.API
 
       foreach (var viewer in viewerList)
       {
-        if (await viewer.GetViewerId() == viewerId)
+        if (await viewer.GetId() == viewerId)
         {
           removedViewer = viewer;
         }
@@ -313,6 +313,11 @@ namespace StreetSmart.Common.API
     public void SetActiveMeasurement(string measurement)
     {
       _browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
+    }
+
+    public void SetOverlayDrawDistance(int distance)
+    {
+      _browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
     }
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)

@@ -16,23 +16,14 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
-namespace StreetSmart.Common.Interfaces.GeoJson
+namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Derived data which contains the calculated data from the measurement
+  /// JSon object which contains the properties in a key and value pair format
   /// </summary>
-  public interface IDerivedData
+  public interface IJson: IDictionary<string, string>
   {
-    /// <summary>
-    /// The unit of the measurement
-    /// </summary>
-    Unit Unit { get; }
-
-    /// <summary>
-    /// Precision
-    /// </summary>
-    int Precision { get; }
   }
 }

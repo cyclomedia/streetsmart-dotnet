@@ -32,6 +32,8 @@ namespace StreetSmart.Common.API
 
     public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
+    public string JsElevationChange => $"{nameof(OnElevationChange).FirstCharacterToLower()}";
+
     public string JsImChange => $"{nameof(OnImageChange).FirstCharacterToLower()}";
 
     public string JsSurfaceCursorChange => $"{nameof(OnSurfaceCursorChange).FirstCharacterToLower()}";
@@ -74,9 +76,17 @@ namespace StreetSmart.Common.API
         (current, viewer) => $"{current}{(viewer.Value as PanoramaViewer)?.ConnectEventsScript}");
     }
 
-#endregion
+    #endregion
 
-#region Events from StreetSmartAPI
+    #region Events from StreetSmartAPI
+
+    public void OnElevationChange(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        (Viewers[name] as PanoramaViewer)?.OnElevationChange(args);
+      }
+    }
 
     public void OnImageChange(string name, Dictionary<string, object> args)
     {
