@@ -608,10 +608,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WPF\StreetSmart.WPF.x64.csproj">
-      <Project>{011EC44B-B881-4523-8E5A-F37D47A9EDD3}</Project>
-      <Name>StreetSmart.WPF.x64</Name>
-    </ProjectReference>
+    <Content Include="..\..\ReleaseNotes.txt">
+      <Link>ReleaseNotes.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

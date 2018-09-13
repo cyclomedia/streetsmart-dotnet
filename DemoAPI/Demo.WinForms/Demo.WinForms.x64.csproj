@@ -51,9 +51,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="StreetSmart.WinForms.x64">
-      <HintPath>x64\StreetSmart.WinForms.x64.dll</HintPath>
+      <HintPath>..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.x64.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -186,9 +185,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(ProjectDir)x64\*.*" *
 md locales
-xcopy /Y "$(ProjectDir)x64\locales\*.*" locales\*
-md swiftshader
-xcopy /Y "$(ProjectDir)x64\swiftshader\*.*" swiftshader\*</PostBuildEvent>
+xcopy /Y "$(ProjectDir)x64\locales\*.*" locales\*</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

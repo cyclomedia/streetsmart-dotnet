@@ -117,6 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtSld.Text" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;sld:StyledLayerDescriptor version="1.1.0" 
+ xsi:schemaLocation="http://www.opengis.net/sld StyledLayerDescriptor.xsd" 
+ xmlns="http://www.opengis.net/se" 
+ xmlns:sld="http://www.opengis.net/sld" 
+ xmlns:ogc="http://www.opengis.net/ogc" 
+ xmlns:xlink="http://www.w3.org/1999/xlink" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+&lt;sld:UserLayer&gt;
+  &lt;sld:UserStyle&gt;
+    &lt;FeatureTypeStyle&gt;
+      &lt;Rule&gt;
+       &lt;PolygonSymbolizer&gt;
+        &lt;Fill&gt;
+           &lt;SvgParameter name="fill"&gt;#99ff99&lt;/SvgParameter&gt;
+        &lt;/Fill&gt;
+        &lt;Stroke&gt;
+          &lt;SvgParameter name="stroke"&gt;#000000&lt;/SvgParameter&gt;
+          &lt;SvgParameter name="stroke-width"&gt;1&lt;/SvgParameter&gt;
+        &lt;/Stroke&gt;
+       &lt;/PolygonSymbolizer&gt;
+      &lt;/Rule&gt;
+    &lt;/FeatureTypeStyle&gt;
+   &lt;/sld:UserStyle&gt;
+&lt;/sld:UserLayer&gt;
+&lt;/sld:StyledLayerDescriptor&gt;</value>
+  </data>
+  <data name="txtOverlayGeoJson.Text" xml:space="preserve">
+    <value>{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "name": "Polygon-feature-cj7hkzyaj000b3e65n0c1brht", "measurem": "RELIABLE", "dimensio": 3.0, "preciseC": "EPSG:28992", "unit": "m", "totalLen": 8.069524873183676, "area": 3.67654273421015 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 86830.923270114813931, 437047.938736550975591, 6.729331251626561 ], [ 86829.551954260779894, 437048.119579242891632, 6.751792892811787 ], [ 86829.55158184087486, 437048.169343649351504, 4.089863897911378 ], [ 86830.942449262642185, 437048.032167178520467, 4.105002001501827 ], [ 86830.923270114813931, 437047.938736550975591, 6.729331251626561 ] ] ] } }
+]
+}</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

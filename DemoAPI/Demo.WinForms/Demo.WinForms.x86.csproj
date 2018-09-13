@@ -53,7 +53,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="StreetSmart.WinForms.x86">
       <HintPath>x86\StreetSmart.WinForms.x86.dll</HintPath>
     </Reference>
@@ -150,7 +149,9 @@
     <None Include="x86\snapshot_blob.bin" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -175,9 +176,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(ProjectDir)x86\*.*" *
 md locales
-xcopy /Y "$(ProjectDir)x64\locales\*.*" locales\*
-md swiftshader
-xcopy /Y "$(ProjectDir)x64\swiftshader\*.*" swiftshader\*</PostBuildEvent>
+xcopy /Y "$(ProjectDir)x64\locales\*.*" locales\*</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

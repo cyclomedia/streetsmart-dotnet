@@ -61,6 +61,15 @@ namespace Demo.WinForms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://atlas.cyclomedia.com/configuration.
+        /// </summary>
+        internal static string ConfigurationUrl {
+            get {
+                return ResourceManager.GetString("ConfigurationUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en-US.
         /// </summary>
         internal static string locale {

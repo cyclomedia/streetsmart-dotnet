@@ -16,6 +16,10 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Exceptions;
+using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.GeoJson;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -23,13 +27,10 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-using StreetSmart.Common.Exceptions;
-using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
 using StreetSmart.Common.Interfaces.Events;
-using StreetSmart.Common.Interfaces.GeoJson;
-using StreetSmart.Common.Interfaces.API;
 
 using static Demo.WinForms.Properties.Resources;
 
@@ -52,9 +53,11 @@ namespace Demo.WinForms
 
     #region Properties
 
-    private IPanoramaViewer PanoramaViewer => (_panoramaViewers.Count == 0) ? null : _panoramaViewers[_panoramaViewers.Count - 1];
+    private IPanoramaViewer PanoramaViewer =>
+      _panoramaViewers.Count == 0 ? null : _panoramaViewers[_panoramaViewers.Count - 1];
 
-    private IObliqueViewer ObliqueViewer => (_obliqueViewers.Count == 0) ? null : _obliqueViewers[_obliqueViewers.Count - 1];
+    private IObliqueViewer ObliqueViewer =>
+      _obliqueViewers.Count == 0 ? null : _obliqueViewers[_obliqueViewers.Count - 1];
 
     private int DeltaYawPitch
     {
@@ -97,8 +100,9 @@ namespace Demo.WinForms
 
       ObliqueViewerButtons[] obButtons =
       {
-        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn,
-        ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage,
+        ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+        ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
       };
 
       foreach (var obButton in obButtons)
@@ -108,8 +112,9 @@ namespace Demo.WinForms
 
       PanoramaViewerButtons[] pnButtons =
       {
-        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage,
+        PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
+        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
       };
 
       foreach (var pnButton in pnButtons)
@@ -200,7 +205,7 @@ namespace Demo.WinForms
 
     #endregion
 
-    #region events panorama viewer
+    #region events panorama viewer 
 
     private void OnElevationChange(object sender, IEventArgs<IElevationInfo> args)
     {
@@ -266,10 +271,11 @@ namespace Demo.WinForms
 
     private async void btnLogin_Click(object sender, EventArgs e)
     {
-      IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMDatabase");
+      IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMdatabase");
       IDomElement element = DomElementFactory.Create();
+
       _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
-        addressSettings, element);
+        ConfigurationUrl, addressSettings, element);
 
       try
       {
@@ -331,14 +337,14 @@ namespace Demo.WinForms
 
     private void LogInOut(bool enabled)
     {
-        if (btnLogin.InvokeRequired)
-        {
+      if (btnLogin.InvokeRequired)
+      {
         btnLogin.Invoke(new MethodInvoker(() => btnLogin.Enabled = enabled));
-        }
-        else
-        {
+      }
+      else
+      {
         btnLogin.Enabled = enabled;
-        }
+      }
 
       if (txtUsername.InvokeRequired)
       {
@@ -352,7 +358,7 @@ namespace Demo.WinForms
       if (txtPassword.InvokeRequired)
       {
         txtPassword.Invoke(new MethodInvoker(() => txtPassword.Enabled = enabled));
-    }
+      }
       else
       {
         txtPassword.Enabled = enabled;
@@ -467,7 +473,7 @@ namespace Demo.WinForms
       if (cbPanorama.Checked)
       {
         viewerTypes.Add(ViewerType.Panorama);
-        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, ckReplace.Checked, true);
+        panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
       try
@@ -510,7 +516,8 @@ namespace Demo.WinForms
     private async void btnGetViewerColor_Click(object sender, EventArgs e)
     {
       Color color = await PanoramaViewer.GetViewerColor();
-      string text = $"Alpha: {color.A}{Environment.NewLine}Red: {color.R}{Environment.NewLine}Green: {color.G}{Environment.NewLine}Blue: {color.B}";
+      string text =
+        $"Alpha: {color.A}{Environment.NewLine}Red: {color.R}{Environment.NewLine}Green: {color.G}{Environment.NewLine}Blue: {color.B}";
       txtRecordingViewerColorPermissions.Text = text;
     }
 
@@ -534,9 +541,9 @@ namespace Demo.WinForms
 
     private void btnSetOrientation_Click(object sender, EventArgs e)
     {
-      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?)ParseDouble(txthFov.Text);
-      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?)ParseDouble(txtYaw.Text);
-      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?)ParseDouble(txtPitch.Text);
+      double? hFov = string.IsNullOrEmpty(txthFov.Text) ? null : (double?) ParseDouble(txthFov.Text);
+      double? yaw = string.IsNullOrEmpty(txtYaw.Text) ? null : (double?) ParseDouble(txtYaw.Text);
+      double? pitch = string.IsNullOrEmpty(txtPitch.Text) ? null : (double?) ParseDouble(txtPitch.Text);
       IOrientation orientation = OrientationFactory.Create(yaw, pitch, hFov);
       PanoramaViewer.SetOrientation(orientation);
     }
@@ -779,12 +786,12 @@ namespace Demo.WinForms
       txtRecordingViewerColorPermissions.Text = text;
     }
 
-    private void btnShowDefTools_Click(object sender, EventArgs e)
+    private void btnShowDevTools_Click(object sender, EventArgs e)
     {
       _api?.ShowDevTools();
     }
 
-    private void btnCloseDefTools_Click(object sender, EventArgs e)
+    private void btnCloseDevTools_Click(object sender, EventArgs e)
     {
       _api?.CloseDevTools();
     }
@@ -857,8 +864,9 @@ namespace Demo.WinForms
       {
         ObliqueViewerButtons[] buttons =
         {
-          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage, ObliqueViewerButtons.ZoomIn,
-          ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage,
+          ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+          ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
         };
 
         foreach (var button in buttons)
@@ -872,8 +880,9 @@ namespace Demo.WinForms
       {
         PanoramaViewerButtons[] buttons =
         {
-          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-          PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage,
+          PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
+          PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
         };
 
         foreach (var button in buttons)
@@ -926,7 +935,7 @@ namespace Demo.WinForms
       }
     }
 
-    private async void btn3DCursor_Click(object sender, EventArgs e)
+    private async void btnToggle3DCursor_Click(object sender, EventArgs e)
     {
       bool visible = await PanoramaViewer.Get3DCursorVisible();
       PanoramaViewer.Toggle3DCursor(!visible);
@@ -934,9 +943,9 @@ namespace Demo.WinForms
 
     private async void btnClosePanoramaViewer_Click(object sender, EventArgs e)
     {
-      if (PanoramaViewer != null)
+      if (_panoramaViewers.Count >= 1)
       {
-        string viewerId = await PanoramaViewer.GetId();
+        string viewerId = await _panoramaViewers[_panoramaViewers.Count - 1].GetId();
 
         if (viewerId != null)
         {
@@ -950,6 +959,25 @@ namespace Demo.WinForms
     {
       IList<IViewer> viewers = await _api.getViewers();
       ShowOpenedViewers(viewers);
+    }
+
+    private void btnDrawDistance_Click(object sender, EventArgs e)
+    {
+      string text = txtDrawDistance.Text;
+
+      if (int.TryParse(text, out var distance))
+      {
+        _api.SetOverlayDrawDistance(distance);
+      }
+    }
+
+    private void btnSelectFeature_Click(object sender, EventArgs e)
+    {
+      Dictionary<string, string> properties = new Dictionary<string, string> { { txtName.Text, txtValue.Text } };
+      IJson json = JsonFactory.Create(properties);
+      string layerId = _overlay.Id;
+
+      PanoramaViewer.SetSelectedFeatureByProperties(json, layerId);
     }
 
     #endregion
@@ -1036,24 +1064,6 @@ namespace Demo.WinForms
       {
         grButtonVisibility.Enabled = value;
       }
-
-      if (grBrightCont.InvokeRequired)
-      {
-        grBrightCont.Invoke(new MethodInvoker(() => grBrightCont.Enabled = value));
-      }
-      else
-      {
-        grBrightCont.Enabled = value;
-      }
-
-      if (gr3DCursor.InvokeRequired)
-      {
-        gr3DCursor.Invoke(new MethodInvoker(() => gr3DCursor.Enabled = value));
-      }
-      else
-      {
-        gr3DCursor.Enabled = value;
-      }
     }
 
     private void PrintRecordingText(IRecording recording)
@@ -1089,8 +1099,6 @@ namespace Demo.WinForms
       grRecordingViewerColorPermissions.Enabled = false;
       grMeasurement.Enabled = false;
       grButtonVisibility.Enabled = false;
-      grBrightCont.Enabled = false;
-      gr3DCursor.Enabled = false;
     }
 
     private async void ShowOpenedViewers(IList<IViewer> viewers)
@@ -1106,24 +1114,5 @@ namespace Demo.WinForms
     }
 
     #endregion
-
-    private void btnDrawDistance_Click(object sender, EventArgs e)
-    {
-      string text = txtDrawDistance.Text;
-
-      if (int.TryParse(text, out var distance))
-      {
-        _api.SetOverlayDrawDistance(distance);
-      }
-    }
-
-    private void btnSelectFeature_Click(object sender, EventArgs e)
-    {
-      Dictionary<string, string> properties = new Dictionary<string, string> {{txtName.Text, txtValue.Text}};
-      IJson json = JsonFactory.Create(properties);
-      string layerId = _overlay.Id;
-
-      PanoramaViewer.SetSelectedFeatureByProperties(json, layerId);
-    }
   }
 }

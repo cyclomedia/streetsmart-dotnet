@@ -22,11 +22,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Street Smart API Demo WinForm")]
-[assembly: AssemblyDescription("Street Smart API Demo for Windows Forms")]
+[assembly: AssemblyTitle("StreetSmart API Demo WinForm")]
+[assembly: AssemblyDescription("StreetSmart API Demo for Windows Forms")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CycloMedia")]
-[assembly: AssemblyProduct("Street Smart API")]
+[assembly: AssemblyProduct("StreetSmart API")]
 [assembly: AssemblyCopyright("Copyright © CycloMedia 2016 - 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

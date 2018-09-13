@@ -662,6 +662,12 @@
     <None Include="packages.config" />
     <None Include="StreetSmart.WPF.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\ReleaseNotes.txt">
+      <Link>ReleaseNotes.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

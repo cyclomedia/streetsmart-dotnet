@@ -37,12 +37,12 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
-      this.gr3DCursor = new System.Windows.Forms.GroupBox();
-      this.btn3DCursor = new System.Windows.Forms.Button();
-      this.grBrightCont = new System.Windows.Forms.GroupBox();
-      this.txtBrightnessContrast = new System.Windows.Forms.TextBox();
-      this.btnContrast = new System.Windows.Forms.Button();
-      this.btnBrightness = new System.Windows.Forms.Button();
+      this.grSelectFeature = new System.Windows.Forms.GroupBox();
+      this.txtValue = new System.Windows.Forms.TextBox();
+      this.lblValue = new System.Windows.Forms.Label();
+      this.txtName = new System.Windows.Forms.TextBox();
+      this.lblPropertyName = new System.Windows.Forms.Label();
+      this.btnSelectFeature = new System.Windows.Forms.Button();
       this.grSld = new System.Windows.Forms.GroupBox();
       this.txtSld = new System.Windows.Forms.TextBox();
       this.grButtonVisibility = new System.Windows.Forms.GroupBox();
@@ -50,11 +50,12 @@
       this.btnSetButtonVisibility = new System.Windows.Forms.Button();
       this.btnGetButtonEnabled = new System.Windows.Forms.Button();
       this.grOverlay = new System.Windows.Forms.GroupBox();
+      this.btnDrawDistance = new System.Windows.Forms.Button();
+      this.txtDrawDistance = new System.Windows.Forms.TextBox();
       this.btnRemoveOverlay = new System.Windows.Forms.Button();
       this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.btnAddOverlay = new System.Windows.Forms.Button();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
-      this.txtDrawDistance = new System.Windows.Forms.TextBox();
       this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
       this.rbMeasLineString = new System.Windows.Forms.RadioButton();
@@ -94,9 +95,11 @@
       this.btnGetOrientation = new System.Windows.Forms.Button();
       this.btnSetOrientation = new System.Windows.Forms.Button();
       this.grOpenByImageId = new System.Windows.Forms.GroupBox();
+      this.txtBrightnessContrast = new System.Windows.Forms.TextBox();
+      this.btnContrast = new System.Windows.Forms.Button();
+      this.btnBrightness = new System.Windows.Forms.Button();
       this.btnGetAddress = new System.Windows.Forms.Button();
       this.btnOpenByImageId = new System.Windows.Forms.Button();
-      this.lblImageId = new System.Windows.Forms.Label();
       this.txtImageId = new System.Windows.Forms.TextBox();
       this.grCoordinate = new System.Windows.Forms.GroupBox();
       this.txtX = new System.Windows.Forms.TextBox();
@@ -108,11 +111,13 @@
       this.btnOpenByCoordinate = new System.Windows.Forms.Button();
       this.btnLookAtCoordinate = new System.Windows.Forms.Button();
       this.grAPIInfo = new System.Windows.Forms.GroupBox();
+      this.lblResult = new System.Windows.Forms.Label();
       this.txtAPIResult = new System.Windows.Forms.TextBox();
       this.btnApiReadyState = new System.Windows.Forms.Button();
       this.btnApplicationVersion = new System.Windows.Forms.Button();
       this.btnApplicationName = new System.Windows.Forms.Button();
       this.grViewerToggles = new System.Windows.Forms.GroupBox();
+      this.btnToggle3DCursor = new System.Windows.Forms.Button();
       this.btnToggleRecordingsVisible = new System.Windows.Forms.Button();
       this.btnToggleTimeTravelExpanded = new System.Windows.Forms.Button();
       this.btnToggleNavbarExpanded = new System.Windows.Forms.Button();
@@ -134,17 +139,9 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.btnDrawDistance = new System.Windows.Forms.Button();
-      this.btnSelectFeature = new System.Windows.Forms.Button();
-      this.txtName = new System.Windows.Forms.TextBox();
-      this.lblPropertyName = new System.Windows.Forms.Label();
-      this.txtValue = new System.Windows.Forms.TextBox();
-      this.lblValue = new System.Windows.Forms.Label();
-      this.plStreetSmart.SuspendLayout();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
-      this.gr3DCursor.SuspendLayout();
-      this.grBrightCont.SuspendLayout();
+      this.grSelectFeature.SuspendLayout();
       this.grSld.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
       this.grOverlay.SuspendLayout();
@@ -164,15 +161,13 @@
       // 
       // plStreetSmart
       // 
-      this.plStreetSmart.Controls.Add(this.txtValue);
-      this.plStreetSmart.Controls.Add(this.lblValue);
-      this.plStreetSmart.Controls.Add(this.txtName);
-      this.plStreetSmart.Controls.Add(this.lblPropertyName);
-      this.plStreetSmart.Controls.Add(this.btnSelectFeature);
-      this.plStreetSmart.Dock = System.Windows.Forms.DockStyle.Left;
+      this.plStreetSmart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.plStreetSmart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
       this.plStreetSmart.Name = "plStreetSmart";
-      this.plStreetSmart.Size = new System.Drawing.Size(900, 925);
+      this.plStreetSmart.Size = new System.Drawing.Size(647, 701);
       this.plStreetSmart.TabIndex = 0;
       // 
       // grOpenByQuery
@@ -182,7 +177,7 @@
       this.grOpenByQuery.Controls.Add(this.cbPanorama);
       this.grOpenByQuery.Controls.Add(this.cbOblique);
       this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
-      this.grOpenByQuery.Location = new System.Drawing.Point(0, 315);
+      this.grOpenByQuery.Location = new System.Drawing.Point(480, 1);
       this.grOpenByQuery.Name = "grOpenByQuery";
       this.grOpenByQuery.Size = new System.Drawing.Size(220, 120);
       this.grOpenByQuery.TabIndex = 0;
@@ -246,11 +241,11 @@
       // 
       // plControl
       // 
-      this.plControl.Controls.Add(this.gr3DCursor);
-      this.plControl.Controls.Add(this.grBrightCont);
+      this.plControl.Controls.Add(this.grSelectFeature);
       this.plControl.Controls.Add(this.grSld);
       this.plControl.Controls.Add(this.grButtonVisibility);
       this.plControl.Controls.Add(this.grOverlay);
+      this.plControl.Controls.Add(this.grOpenByQuery);
       this.plControl.Controls.Add(this.grMeasurement);
       this.plControl.Controls.Add(this.grDevTools);
       this.plControl.Controls.Add(this.grRotationsZoomInOut);
@@ -259,82 +254,80 @@
       this.plControl.Controls.Add(this.grOrientation);
       this.plControl.Controls.Add(this.grOpenByImageId);
       this.plControl.Controls.Add(this.grCoordinate);
-      this.plControl.Controls.Add(this.grOpenByQuery);
       this.plControl.Controls.Add(this.grAPIInfo);
       this.plControl.Controls.Add(this.grViewerToggles);
       this.plControl.Controls.Add(this.grOpenByAddress);
       this.plControl.Controls.Add(this.grLogin);
-      this.plControl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.plControl.Location = new System.Drawing.Point(900, 0);
+      this.plControl.Dock = System.Windows.Forms.DockStyle.Right;
+      this.plControl.Location = new System.Drawing.Point(647, 0);
       this.plControl.Name = "plControl";
-      this.plControl.Size = new System.Drawing.Size(484, 925);
+      this.plControl.Size = new System.Drawing.Size(902, 701);
       this.plControl.TabIndex = 1;
       // 
-      // gr3DCursor
+      // grSelectFeature
       // 
-      this.gr3DCursor.Controls.Add(this.btn3DCursor);
-      this.gr3DCursor.Location = new System.Drawing.Point(180, 75);
-      this.gr3DCursor.Name = "gr3DCursor";
-      this.gr3DCursor.Size = new System.Drawing.Size(180, 45);
-      this.gr3DCursor.TabIndex = 57;
-      this.gr3DCursor.TabStop = false;
-      this.gr3DCursor.Text = "3D Cursor";
+      this.grSelectFeature.Controls.Add(this.txtValue);
+      this.grSelectFeature.Controls.Add(this.lblValue);
+      this.grSelectFeature.Controls.Add(this.txtName);
+      this.grSelectFeature.Controls.Add(this.lblPropertyName);
+      this.grSelectFeature.Controls.Add(this.btnSelectFeature);
+      this.grSelectFeature.Location = new System.Drawing.Point(731, 563);
+      this.grSelectFeature.Name = "grSelectFeature";
+      this.grSelectFeature.Size = new System.Drawing.Size(160, 130);
+      this.grSelectFeature.TabIndex = 56;
+      this.grSelectFeature.TabStop = false;
+      this.grSelectFeature.Text = "Select Feature";
       // 
-      // btn3DCursor
+      // txtValue
       // 
-      this.btn3DCursor.Location = new System.Drawing.Point(5, 15);
-      this.btn3DCursor.Name = "btn3DCursor";
-      this.btn3DCursor.Size = new System.Drawing.Size(150, 25);
-      this.btn3DCursor.TabIndex = 9;
-      this.btn3DCursor.Text = "Toggle 3D Cursor";
-      this.btn3DCursor.UseVisualStyleBackColor = true;
-      this.btn3DCursor.Click += new System.EventHandler(this.btn3DCursor_Click);
+      this.txtValue.Location = new System.Drawing.Point(85, 70);
+      this.txtValue.Name = "txtValue";
+      this.txtValue.Size = new System.Drawing.Size(70, 20);
+      this.txtValue.TabIndex = 58;
+      this.txtValue.Text = "Polygon-feature-cj7hkzyaj000b3e65n0c1brht";
       // 
-      // grBrightCont
+      // lblValue
       // 
-      this.grBrightCont.Controls.Add(this.txtBrightnessContrast);
-      this.grBrightCont.Controls.Add(this.btnContrast);
-      this.grBrightCont.Controls.Add(this.btnBrightness);
-      this.grBrightCont.Location = new System.Drawing.Point(360, 75);
-      this.grBrightCont.Name = "grBrightCont";
-      this.grBrightCont.Size = new System.Drawing.Size(120, 105);
-      this.grBrightCont.TabIndex = 56;
-      this.grBrightCont.TabStop = false;
-      this.grBrightCont.Text = "Brightness / Contrast";
+      this.lblValue.AutoSize = true;
+      this.lblValue.Location = new System.Drawing.Point(85, 50);
+      this.lblValue.Name = "lblValue";
+      this.lblValue.Size = new System.Drawing.Size(75, 13);
+      this.lblValue.TabIndex = 59;
+      this.lblValue.Text = "Property value";
       // 
-      // txtBrightnessContrast
+      // txtName
       // 
-      this.txtBrightnessContrast.Location = new System.Drawing.Point(5, 75);
-      this.txtBrightnessContrast.Name = "txtBrightnessContrast";
-      this.txtBrightnessContrast.Size = new System.Drawing.Size(110, 20);
-      this.txtBrightnessContrast.TabIndex = 24;
+      this.txtName.Location = new System.Drawing.Point(5, 70);
+      this.txtName.Name = "txtName";
+      this.txtName.Size = new System.Drawing.Size(70, 20);
+      this.txtName.TabIndex = 56;
+      this.txtName.Text = "name";
       // 
-      // btnContrast
+      // lblPropertyName
       // 
-      this.btnContrast.Location = new System.Drawing.Point(5, 45);
-      this.btnContrast.Name = "btnContrast";
-      this.btnContrast.Size = new System.Drawing.Size(110, 25);
-      this.btnContrast.TabIndex = 10;
-      this.btnContrast.Text = "Set Contrast";
-      this.btnContrast.UseVisualStyleBackColor = true;
-      this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
+      this.lblPropertyName.AutoSize = true;
+      this.lblPropertyName.Location = new System.Drawing.Point(5, 50);
+      this.lblPropertyName.Name = "lblPropertyName";
+      this.lblPropertyName.Size = new System.Drawing.Size(75, 13);
+      this.lblPropertyName.TabIndex = 57;
+      this.lblPropertyName.Text = "Property name";
       // 
-      // btnBrightness
+      // btnSelectFeature
       // 
-      this.btnBrightness.Location = new System.Drawing.Point(5, 15);
-      this.btnBrightness.Name = "btnBrightness";
-      this.btnBrightness.Size = new System.Drawing.Size(110, 25);
-      this.btnBrightness.TabIndex = 9;
-      this.btnBrightness.Text = "Set Brightness";
-      this.btnBrightness.UseVisualStyleBackColor = true;
-      this.btnBrightness.Click += new System.EventHandler(this.btnBrightness_Click);
+      this.btnSelectFeature.Location = new System.Drawing.Point(5, 15);
+      this.btnSelectFeature.Name = "btnSelectFeature";
+      this.btnSelectFeature.Size = new System.Drawing.Size(150, 30);
+      this.btnSelectFeature.TabIndex = 55;
+      this.btnSelectFeature.Text = "Select feature";
+      this.btnSelectFeature.UseVisualStyleBackColor = true;
+      this.btnSelectFeature.Click += new System.EventHandler(this.btnSelectFeature_Click);
       // 
       // grSld
       // 
       this.grSld.Controls.Add(this.txtSld);
-      this.grSld.Location = new System.Drawing.Point(310, 848);
+      this.grSld.Location = new System.Drawing.Point(561, 563);
       this.grSld.Name = "grSld";
-      this.grSld.Size = new System.Drawing.Size(170, 74);
+      this.grSld.Size = new System.Drawing.Size(170, 130);
       this.grSld.TabIndex = 55;
       this.grSld.TabStop = false;
       this.grSld.Text = "Sld";
@@ -344,17 +337,18 @@
       this.txtSld.Location = new System.Drawing.Point(6, 19);
       this.txtSld.Multiline = true;
       this.txtSld.Name = "txtSld";
-      this.txtSld.Size = new System.Drawing.Size(160, 46);
+      this.txtSld.Size = new System.Drawing.Size(160, 105);
       this.txtSld.TabIndex = 1;
+      this.txtSld.Text = resources.GetString("txtSld.Text");
       // 
       // grButtonVisibility
       // 
       this.grButtonVisibility.Controls.Add(this.cbViewerButton);
       this.grButtonVisibility.Controls.Add(this.btnSetButtonVisibility);
       this.grButtonVisibility.Controls.Add(this.btnGetButtonEnabled);
-      this.grButtonVisibility.Location = new System.Drawing.Point(220, 290);
+      this.grButtonVisibility.Location = new System.Drawing.Point(329, 323);
       this.grButtonVisibility.Name = "grButtonVisibility";
-      this.grButtonVisibility.Size = new System.Drawing.Size(140, 120);
+      this.grButtonVisibility.Size = new System.Drawing.Size(151, 120);
       this.grButtonVisibility.TabIndex = 54;
       this.grButtonVisibility.TabStop = false;
       this.grButtonVisibility.Text = "Button visibility";
@@ -364,14 +358,14 @@
       this.cbViewerButton.FormattingEnabled = true;
       this.cbViewerButton.Location = new System.Drawing.Point(5, 85);
       this.cbViewerButton.Name = "cbViewerButton";
-      this.cbViewerButton.Size = new System.Drawing.Size(130, 21);
+      this.cbViewerButton.Size = new System.Drawing.Size(140, 21);
       this.cbViewerButton.TabIndex = 51;
       // 
       // btnSetButtonVisibility
       // 
       this.btnSetButtonVisibility.Location = new System.Drawing.Point(5, 45);
       this.btnSetButtonVisibility.Name = "btnSetButtonVisibility";
-      this.btnSetButtonVisibility.Size = new System.Drawing.Size(130, 30);
+      this.btnSetButtonVisibility.Size = new System.Drawing.Size(140, 30);
       this.btnSetButtonVisibility.TabIndex = 50;
       this.btnSetButtonVisibility.Text = "Toggle button enabled";
       this.btnSetButtonVisibility.UseVisualStyleBackColor = true;
@@ -381,7 +375,7 @@
       // 
       this.btnGetButtonEnabled.Location = new System.Drawing.Point(5, 15);
       this.btnGetButtonEnabled.Name = "btnGetButtonEnabled";
-      this.btnGetButtonEnabled.Size = new System.Drawing.Size(130, 30);
+      this.btnGetButtonEnabled.Size = new System.Drawing.Size(141, 30);
       this.btnGetButtonEnabled.TabIndex = 49;
       this.btnGetButtonEnabled.Text = "Get button enabled";
       this.btnGetButtonEnabled.UseVisualStyleBackColor = true;
@@ -389,21 +383,41 @@
       // 
       // grOverlay
       // 
+      this.grOverlay.Controls.Add(this.btnDrawDistance);
+      this.grOverlay.Controls.Add(this.txtDrawDistance);
       this.grOverlay.Controls.Add(this.btnRemoveOverlay);
       this.grOverlay.Controls.Add(this.txtOverlayGeoJson);
       this.grOverlay.Controls.Add(this.btnAddOverlay);
-      this.grOverlay.Location = new System.Drawing.Point(0, 848);
+      this.grOverlay.Location = new System.Drawing.Point(277, 563);
       this.grOverlay.Name = "grOverlay";
-      this.grOverlay.Size = new System.Drawing.Size(310, 74);
+      this.grOverlay.Size = new System.Drawing.Size(280, 130);
       this.grOverlay.TabIndex = 53;
       this.grOverlay.TabStop = false;
       this.grOverlay.Text = "Load GeoJSON overlay";
       // 
+      // btnDrawDistance
+      // 
+      this.btnDrawDistance.Location = new System.Drawing.Point(178, 75);
+      this.btnDrawDistance.Name = "btnDrawDistance";
+      this.btnDrawDistance.Size = new System.Drawing.Size(100, 23);
+      this.btnDrawDistance.TabIndex = 68;
+      this.btnDrawDistance.Text = "Set draw distance";
+      this.btnDrawDistance.UseVisualStyleBackColor = true;
+      this.btnDrawDistance.Click += new System.EventHandler(this.btnDrawDistance_Click);
+      // 
+      // txtDrawDistance
+      // 
+      this.txtDrawDistance.Location = new System.Drawing.Point(178, 105);
+      this.txtDrawDistance.Name = "txtDrawDistance";
+      this.txtDrawDistance.Size = new System.Drawing.Size(100, 20);
+      this.txtDrawDistance.TabIndex = 67;
+      this.txtDrawDistance.Text = "30";
+      // 
       // btnRemoveOverlay
       // 
-      this.btnRemoveOverlay.Location = new System.Drawing.Point(210, 17);
+      this.btnRemoveOverlay.Location = new System.Drawing.Point(178, 15);
       this.btnRemoveOverlay.Name = "btnRemoveOverlay";
-      this.btnRemoveOverlay.Size = new System.Drawing.Size(95, 23);
+      this.btnRemoveOverlay.Size = new System.Drawing.Size(100, 23);
       this.btnRemoveOverlay.TabIndex = 2;
       this.btnRemoveOverlay.Text = "Remove overlay";
       this.btnRemoveOverlay.UseVisualStyleBackColor = true;
@@ -414,14 +428,15 @@
       this.txtOverlayGeoJson.Location = new System.Drawing.Point(6, 19);
       this.txtOverlayGeoJson.Multiline = true;
       this.txtOverlayGeoJson.Name = "txtOverlayGeoJson";
-      this.txtOverlayGeoJson.Size = new System.Drawing.Size(200, 46);
+      this.txtOverlayGeoJson.Size = new System.Drawing.Size(168, 105);
       this.txtOverlayGeoJson.TabIndex = 1;
+      this.txtOverlayGeoJson.Text = resources.GetString("txtOverlayGeoJson.Text");
       // 
       // btnAddOverlay
       // 
-      this.btnAddOverlay.Location = new System.Drawing.Point(210, 42);
+      this.btnAddOverlay.Location = new System.Drawing.Point(178, 45);
       this.btnAddOverlay.Name = "btnAddOverlay";
-      this.btnAddOverlay.Size = new System.Drawing.Size(95, 23);
+      this.btnAddOverlay.Size = new System.Drawing.Size(100, 23);
       this.btnAddOverlay.TabIndex = 0;
       this.btnAddOverlay.Text = "Add overlay";
       this.btnAddOverlay.UseVisualStyleBackColor = true;
@@ -429,8 +444,6 @@
       // 
       // grMeasurement
       // 
-      this.grMeasurement.Controls.Add(this.btnDrawDistance);
-      this.grMeasurement.Controls.Add(this.txtDrawDistance);
       this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
       this.grMeasurement.Controls.Add(this.rbMeasPolygon);
       this.grMeasurement.Controls.Add(this.rbMeasLineString);
@@ -438,23 +451,16 @@
       this.grMeasurement.Controls.Add(this.rbMeasDefault);
       this.grMeasurement.Controls.Add(this.btnStartMeasurementMode);
       this.grMeasurement.Controls.Add(this.btnStopMeasurementMode);
-      this.grMeasurement.Location = new System.Drawing.Point(0, 760);
+      this.grMeasurement.Location = new System.Drawing.Point(7, 558);
       this.grMeasurement.Name = "grMeasurement";
-      this.grMeasurement.Size = new System.Drawing.Size(480, 82);
+      this.grMeasurement.Size = new System.Drawing.Size(264, 135);
       this.grMeasurement.TabIndex = 52;
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
       // 
-      // txtDrawDistance
-      // 
-      this.txtDrawDistance.Location = new System.Drawing.Point(438, 56);
-      this.txtDrawDistance.Name = "txtDrawDistance";
-      this.txtDrawDistance.Size = new System.Drawing.Size(38, 20);
-      this.txtDrawDistance.TabIndex = 64;
-      // 
       // btnGetActiveMeasurement
       // 
-      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(316, 15);
+      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(5, 85);
       this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
       this.btnGetActiveMeasurement.Size = new System.Drawing.Size(150, 30);
       this.btnGetActiveMeasurement.TabIndex = 62;
@@ -465,7 +471,7 @@
       // rbMeasPolygon
       // 
       this.rbMeasPolygon.AutoSize = true;
-      this.rbMeasPolygon.Location = new System.Drawing.Point(202, 51);
+      this.rbMeasPolygon.Location = new System.Drawing.Point(165, 95);
       this.rbMeasPolygon.Name = "rbMeasPolygon";
       this.rbMeasPolygon.Size = new System.Drawing.Size(63, 17);
       this.rbMeasPolygon.TabIndex = 61;
@@ -475,7 +481,7 @@
       // rbMeasLineString
       // 
       this.rbMeasLineString.AutoSize = true;
-      this.rbMeasLineString.Location = new System.Drawing.Point(123, 51);
+      this.rbMeasLineString.Location = new System.Drawing.Point(165, 69);
       this.rbMeasLineString.Name = "rbMeasLineString";
       this.rbMeasLineString.Size = new System.Drawing.Size(73, 17);
       this.rbMeasLineString.TabIndex = 60;
@@ -485,7 +491,7 @@
       // rbMeasPoint
       // 
       this.rbMeasPoint.AutoSize = true;
-      this.rbMeasPoint.Location = new System.Drawing.Point(73, 51);
+      this.rbMeasPoint.Location = new System.Drawing.Point(165, 38);
       this.rbMeasPoint.Name = "rbMeasPoint";
       this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
       this.rbMeasPoint.TabIndex = 59;
@@ -496,7 +502,7 @@
       // 
       this.rbMeasDefault.AutoSize = true;
       this.rbMeasDefault.Checked = true;
-      this.rbMeasDefault.Location = new System.Drawing.Point(8, 51);
+      this.rbMeasDefault.Location = new System.Drawing.Point(165, 15);
       this.rbMeasDefault.Name = "rbMeasDefault";
       this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
       this.rbMeasDefault.TabIndex = 58;
@@ -516,7 +522,7 @@
       // 
       // btnStopMeasurementMode
       // 
-      this.btnStopMeasurementMode.Location = new System.Drawing.Point(160, 15);
+      this.btnStopMeasurementMode.Location = new System.Drawing.Point(6, 49);
       this.btnStopMeasurementMode.Name = "btnStopMeasurementMode";
       this.btnStopMeasurementMode.Size = new System.Drawing.Size(150, 30);
       this.btnStopMeasurementMode.TabIndex = 56;
@@ -528,32 +534,32 @@
       // 
       this.grDevTools.Controls.Add(this.btnCloseDefTools);
       this.grDevTools.Controls.Add(this.btnShowDefTools);
-      this.grDevTools.Location = new System.Drawing.Point(360, 325);
+      this.grDevTools.Location = new System.Drawing.Point(345, 265);
       this.grDevTools.Name = "grDevTools";
-      this.grDevTools.Size = new System.Drawing.Size(120, 85);
+      this.grDevTools.Size = new System.Drawing.Size(135, 54);
       this.grDevTools.TabIndex = 51;
       this.grDevTools.TabStop = false;
       this.grDevTools.Text = "Dev tools";
       // 
       // btnCloseDefTools
       // 
-      this.btnCloseDefTools.Location = new System.Drawing.Point(5, 50);
+      this.btnCloseDefTools.Location = new System.Drawing.Point(70, 15);
       this.btnCloseDefTools.Name = "btnCloseDefTools";
-      this.btnCloseDefTools.Size = new System.Drawing.Size(110, 30);
+      this.btnCloseDefTools.Size = new System.Drawing.Size(60, 35);
       this.btnCloseDefTools.TabIndex = 49;
-      this.btnCloseDefTools.Text = "Close def tools";
+      this.btnCloseDefTools.Text = "Close dev tools";
       this.btnCloseDefTools.UseVisualStyleBackColor = true;
-      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDefTools_Click);
+      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDevTools_Click);
       // 
       // btnShowDefTools
       // 
       this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
       this.btnShowDefTools.Name = "btnShowDefTools";
-      this.btnShowDefTools.Size = new System.Drawing.Size(110, 30);
+      this.btnShowDefTools.Size = new System.Drawing.Size(60, 35);
       this.btnShowDefTools.TabIndex = 48;
-      this.btnShowDefTools.Text = "Show def tools";
+      this.btnShowDefTools.Text = "Show dev tools";
       this.btnShowDefTools.UseVisualStyleBackColor = true;
-      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDefTools_Click);
+      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDevTools_Click);
       // 
       // grRotationsZoomInOut
       // 
@@ -567,29 +573,29 @@
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
       this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 160);
+      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 153);
       this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 155);
+      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 166);
       this.grRotationsZoomInOut.TabIndex = 0;
       this.grRotationsZoomInOut.TabStop = false;
       this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
       // 
       // btnGetViewers
       // 
-      this.btnGetViewers.Location = new System.Drawing.Point(100, 125);
+      this.btnGetViewers.Location = new System.Drawing.Point(95, 119);
       this.btnGetViewers.Name = "btnGetViewers";
-      this.btnGetViewers.Size = new System.Drawing.Size(75, 25);
-      this.btnGetViewers.TabIndex = 60;
+      this.btnGetViewers.Size = new System.Drawing.Size(80, 25);
+      this.btnGetViewers.TabIndex = 62;
       this.btnGetViewers.Text = "Get viewers";
       this.btnGetViewers.UseVisualStyleBackColor = true;
       this.btnGetViewers.Click += new System.EventHandler(this.btnGetViewers_Click);
       // 
       // btnClosePanoramaViewer
       // 
-      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(0, 125);
+      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(6, 119);
       this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
-      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(100, 25);
-      this.btnClosePanoramaViewer.TabIndex = 59;
+      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnClosePanoramaViewer.TabIndex = 61;
       this.btnClosePanoramaViewer.Text = "Close pan. viewer";
       this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
       this.btnClosePanoramaViewer.Click += new System.EventHandler(this.btnClosePanoramaViewer_Click);
@@ -597,7 +603,7 @@
       // lblDeltaYawPitch
       // 
       this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 105);
+      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 97);
       this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
       this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
       this.lblDeltaYawPitch.TabIndex = 20;
@@ -605,7 +611,7 @@
       // 
       // txtDeltaYawPitch
       // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 105);
+      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 97);
       this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
       this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
       this.txtDeltaYawPitch.TabIndex = 21;
@@ -623,7 +629,7 @@
       // 
       // btnRotateUp
       // 
-      this.btnRotateUp.Location = new System.Drawing.Point(5, 15);
+      this.btnRotateUp.Location = new System.Drawing.Point(6, 15);
       this.btnRotateUp.Name = "btnRotateUp";
       this.btnRotateUp.Size = new System.Drawing.Size(80, 25);
       this.btnRotateUp.TabIndex = 18;
@@ -633,7 +639,7 @@
       // 
       // btnRotateRight
       // 
-      this.btnRotateRight.Location = new System.Drawing.Point(5, 45);
+      this.btnRotateRight.Location = new System.Drawing.Point(6, 41);
       this.btnRotateRight.Name = "btnRotateRight";
       this.btnRotateRight.Size = new System.Drawing.Size(80, 25);
       this.btnRotateRight.TabIndex = 6;
@@ -643,7 +649,7 @@
       // 
       // btnZoomOut
       // 
-      this.btnZoomOut.Location = new System.Drawing.Point(95, 75);
+      this.btnZoomOut.Location = new System.Drawing.Point(95, 68);
       this.btnZoomOut.Name = "btnZoomOut";
       this.btnZoomOut.Size = new System.Drawing.Size(80, 25);
       this.btnZoomOut.TabIndex = 46;
@@ -653,7 +659,7 @@
       // 
       // btRotateLeft
       // 
-      this.btRotateLeft.Location = new System.Drawing.Point(5, 75);
+      this.btRotateLeft.Location = new System.Drawing.Point(6, 69);
       this.btRotateLeft.Name = "btRotateLeft";
       this.btRotateLeft.Size = new System.Drawing.Size(80, 25);
       this.btRotateLeft.TabIndex = 0;
@@ -663,7 +669,7 @@
       // 
       // btnZoomIn
       // 
-      this.btnZoomIn.Location = new System.Drawing.Point(95, 45);
+      this.btnZoomIn.Location = new System.Drawing.Point(95, 41);
       this.btnZoomIn.Name = "btnZoomIn";
       this.btnZoomIn.Size = new System.Drawing.Size(80, 25);
       this.btnZoomIn.TabIndex = 45;
@@ -674,9 +680,9 @@
       // grEvents
       // 
       this.grEvents.Controls.Add(this.lbViewerEvents);
-      this.grEvents.Location = new System.Drawing.Point(0, 660);
+      this.grEvents.Location = new System.Drawing.Point(6, 452);
       this.grEvents.Name = "grEvents";
-      this.grEvents.Size = new System.Drawing.Size(480, 100);
+      this.grEvents.Size = new System.Drawing.Size(728, 100);
       this.grEvents.TabIndex = 50;
       this.grEvents.TabStop = false;
       this.grEvents.Text = "Viewer events";
@@ -686,7 +692,7 @@
       this.lbViewerEvents.FormattingEnabled = true;
       this.lbViewerEvents.Location = new System.Drawing.Point(5, 15);
       this.lbViewerEvents.Name = "lbViewerEvents";
-      this.lbViewerEvents.Size = new System.Drawing.Size(470, 82);
+      this.lbViewerEvents.Size = new System.Drawing.Size(714, 82);
       this.lbViewerEvents.TabIndex = 0;
       // 
       // grRecordingViewerColorPermissions
@@ -695,7 +701,7 @@
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetPermissions);
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetRecording);
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetViewerColor);
-      this.grRecordingViewerColorPermissions.Location = new System.Drawing.Point(160, 525);
+      this.grRecordingViewerColorPermissions.Location = new System.Drawing.Point(5, 316);
       this.grRecordingViewerColorPermissions.Name = "grRecordingViewerColorPermissions";
       this.grRecordingViewerColorPermissions.Size = new System.Drawing.Size(320, 135);
       this.grRecordingViewerColorPermissions.TabIndex = 0;
@@ -752,7 +758,7 @@
       this.grOrientation.Controls.Add(this.txthFov);
       this.grOrientation.Controls.Add(this.btnGetOrientation);
       this.grOrientation.Controls.Add(this.btnSetOrientation);
-      this.grOrientation.Location = new System.Drawing.Point(240, 410);
+      this.grOrientation.Location = new System.Drawing.Point(489, 220);
       this.grOrientation.Name = "grOrientation";
       this.grOrientation.Size = new System.Drawing.Size(240, 115);
       this.grOrientation.TabIndex = 0;
@@ -842,22 +848,51 @@
       // 
       // grOpenByImageId
       // 
+      this.grOpenByImageId.Controls.Add(this.txtBrightnessContrast);
+      this.grOpenByImageId.Controls.Add(this.btnContrast);
+      this.grOpenByImageId.Controls.Add(this.btnBrightness);
       this.grOpenByImageId.Controls.Add(this.btnGetAddress);
       this.grOpenByImageId.Controls.Add(this.btnOpenByImageId);
-      this.grOpenByImageId.Controls.Add(this.lblImageId);
       this.grOpenByImageId.Controls.Add(this.txtImageId);
-      this.grOpenByImageId.Location = new System.Drawing.Point(0, 525);
+      this.grOpenByImageId.Location = new System.Drawing.Point(491, 338);
       this.grOpenByImageId.Name = "grOpenByImageId";
-      this.grOpenByImageId.Size = new System.Drawing.Size(160, 105);
+      this.grOpenByImageId.Size = new System.Drawing.Size(238, 105);
       this.grOpenByImageId.TabIndex = 44;
       this.grOpenByImageId.TabStop = false;
       this.grOpenByImageId.Text = "Open by imageId";
+      // 
+      // txtBrightnessContrast
+      // 
+      this.txtBrightnessContrast.Location = new System.Drawing.Point(120, 81);
+      this.txtBrightnessContrast.Name = "txtBrightnessContrast";
+      this.txtBrightnessContrast.Size = new System.Drawing.Size(110, 20);
+      this.txtBrightnessContrast.TabIndex = 52;
+      // 
+      // btnContrast
+      // 
+      this.btnContrast.Location = new System.Drawing.Point(120, 47);
+      this.btnContrast.Name = "btnContrast";
+      this.btnContrast.Size = new System.Drawing.Size(110, 30);
+      this.btnContrast.TabIndex = 51;
+      this.btnContrast.Text = "Set Contrast";
+      this.btnContrast.UseVisualStyleBackColor = true;
+      this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
+      // 
+      // btnBrightness
+      // 
+      this.btnBrightness.Location = new System.Drawing.Point(120, 15);
+      this.btnBrightness.Name = "btnBrightness";
+      this.btnBrightness.Size = new System.Drawing.Size(110, 30);
+      this.btnBrightness.TabIndex = 50;
+      this.btnBrightness.Text = "Set Brightness";
+      this.btnBrightness.UseVisualStyleBackColor = true;
+      this.btnBrightness.Click += new System.EventHandler(this.btnBrightness_Click);
       // 
       // btnGetAddress
       // 
       this.btnGetAddress.Location = new System.Drawing.Point(5, 75);
       this.btnGetAddress.Name = "btnGetAddress";
-      this.btnGetAddress.Size = new System.Drawing.Size(150, 30);
+      this.btnGetAddress.Size = new System.Drawing.Size(100, 30);
       this.btnGetAddress.TabIndex = 49;
       this.btnGetAddress.Text = "Get address settings";
       this.btnGetAddress.UseVisualStyleBackColor = true;
@@ -867,28 +902,19 @@
       // 
       this.btnOpenByImageId.Location = new System.Drawing.Point(5, 40);
       this.btnOpenByImageId.Name = "btnOpenByImageId";
-      this.btnOpenByImageId.Size = new System.Drawing.Size(150, 30);
+      this.btnOpenByImageId.Size = new System.Drawing.Size(100, 30);
       this.btnOpenByImageId.TabIndex = 43;
       this.btnOpenByImageId.Text = "Open by ImageId";
       this.btnOpenByImageId.UseVisualStyleBackColor = true;
       this.btnOpenByImageId.Click += new System.EventHandler(this.btnOpenByImageId_Click);
       // 
-      // lblImageId
-      // 
-      this.lblImageId.AutoSize = true;
-      this.lblImageId.Location = new System.Drawing.Point(5, 15);
-      this.lblImageId.Name = "lblImageId";
-      this.lblImageId.Size = new System.Drawing.Size(45, 13);
-      this.lblImageId.TabIndex = 41;
-      this.lblImageId.Text = "ImageId";
-      // 
       // txtImageId
       // 
-      this.txtImageId.Location = new System.Drawing.Point(55, 15);
+      this.txtImageId.Location = new System.Drawing.Point(8, 15);
       this.txtImageId.Name = "txtImageId";
       this.txtImageId.Size = new System.Drawing.Size(100, 20);
       this.txtImageId.TabIndex = 42;
-      this.txtImageId.Text = "5D123456";
+      this.txtImageId.Text = "5D4KX5SM";
       // 
       // grCoordinate
       // 
@@ -900,7 +926,7 @@
       this.grCoordinate.Controls.Add(this.lblZ);
       this.grCoordinate.Controls.Add(this.btnOpenByCoordinate);
       this.grCoordinate.Controls.Add(this.btnLookAtCoordinate);
-      this.grCoordinate.Location = new System.Drawing.Point(0, 435);
+      this.grCoordinate.Location = new System.Drawing.Point(484, 124);
       this.grCoordinate.Name = "grCoordinate";
       this.grCoordinate.Size = new System.Drawing.Size(240, 90);
       this.grCoordinate.TabIndex = 0;
@@ -979,27 +1005,37 @@
       // 
       // grAPIInfo
       // 
+      this.grAPIInfo.Controls.Add(this.lblResult);
       this.grAPIInfo.Controls.Add(this.txtAPIResult);
       this.grAPIInfo.Controls.Add(this.btnApiReadyState);
       this.grAPIInfo.Controls.Add(this.btnApplicationVersion);
       this.grAPIInfo.Controls.Add(this.btnApplicationName);
-      this.grAPIInfo.Location = new System.Drawing.Point(360, 180);
+      this.grAPIInfo.Location = new System.Drawing.Point(360, 78);
       this.grAPIInfo.Name = "grAPIInfo";
-      this.grAPIInfo.Size = new System.Drawing.Size(120, 145);
+      this.grAPIInfo.Size = new System.Drawing.Size(120, 190);
       this.grAPIInfo.TabIndex = 0;
       this.grAPIInfo.TabStop = false;
       this.grAPIInfo.Text = "API Info";
       // 
+      // lblResult
+      // 
+      this.lblResult.AutoSize = true;
+      this.lblResult.Location = new System.Drawing.Point(5, 120);
+      this.lblResult.Name = "lblResult";
+      this.lblResult.Size = new System.Drawing.Size(40, 13);
+      this.lblResult.TabIndex = 22;
+      this.lblResult.Text = "Result:";
+      // 
       // txtAPIResult
       // 
-      this.txtAPIResult.Location = new System.Drawing.Point(4, 120);
+      this.txtAPIResult.Location = new System.Drawing.Point(5, 155);
       this.txtAPIResult.Name = "txtAPIResult";
       this.txtAPIResult.Size = new System.Drawing.Size(110, 20);
       this.txtAPIResult.TabIndex = 23;
       // 
       // btnApiReadyState
       // 
-      this.btnApiReadyState.Location = new System.Drawing.Point(4, 15);
+      this.btnApiReadyState.Location = new System.Drawing.Point(5, 15);
       this.btnApiReadyState.Name = "btnApiReadyState";
       this.btnApiReadyState.Size = new System.Drawing.Size(110, 30);
       this.btnApiReadyState.TabIndex = 8;
@@ -1009,7 +1045,7 @@
       // 
       // btnApplicationVersion
       // 
-      this.btnApplicationVersion.Location = new System.Drawing.Point(4, 50);
+      this.btnApplicationVersion.Location = new System.Drawing.Point(5, 50);
       this.btnApplicationVersion.Name = "btnApplicationVersion";
       this.btnApplicationVersion.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationVersion.TabIndex = 9;
@@ -1019,7 +1055,7 @@
       // 
       // btnApplicationName
       // 
-      this.btnApplicationName.Location = new System.Drawing.Point(4, 85);
+      this.btnApplicationName.Location = new System.Drawing.Point(5, 85);
       this.btnApplicationName.Name = "btnApplicationName";
       this.btnApplicationName.Size = new System.Drawing.Size(110, 30);
       this.btnApplicationName.TabIndex = 10;
@@ -1029,23 +1065,34 @@
       // 
       // grViewerToggles
       // 
+      this.grViewerToggles.Controls.Add(this.btnToggle3DCursor);
       this.grViewerToggles.Controls.Add(this.btnToggleRecordingsVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelExpanded);
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarExpanded);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
-      this.grViewerToggles.Location = new System.Drawing.Point(180, 125);
+      this.grViewerToggles.Location = new System.Drawing.Point(180, 78);
       this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Size = new System.Drawing.Size(180, 165);
+      this.grViewerToggles.Size = new System.Drawing.Size(180, 225);
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
+      // 
+      // btnToggle3DCursor
+      // 
+      this.btnToggle3DCursor.Location = new System.Drawing.Point(5, 190);
+      this.btnToggle3DCursor.Name = "btnToggle3DCursor";
+      this.btnToggle3DCursor.Size = new System.Drawing.Size(150, 30);
+      this.btnToggle3DCursor.TabIndex = 41;
+      this.btnToggle3DCursor.Text = "Toggle 3D Cursor";
+      this.btnToggle3DCursor.UseVisualStyleBackColor = true;
+      this.btnToggle3DCursor.Click += new System.EventHandler(this.btnToggle3DCursor_Click);
       // 
       // btnToggleRecordingsVisible
       // 
       this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(5, 15);
       this.btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
-      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(150, 25);
+      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(150, 30);
       this.btnToggleRecordingsVisible.TabIndex = 36;
       this.btnToggleRecordingsVisible.Text = "Toggle recordings visible";
       this.btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
@@ -1053,9 +1100,9 @@
       // 
       // btnToggleTimeTravelExpanded
       // 
-      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 45);
+      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 50);
       this.btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
-      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(150, 25);
+      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(150, 30);
       this.btnToggleTimeTravelExpanded.TabIndex = 40;
       this.btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
       this.btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
@@ -1063,9 +1110,9 @@
       // 
       // btnToggleNavbarExpanded
       // 
-      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 75);
+      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 85);
       this.btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
-      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(150, 25);
+      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(150, 30);
       this.btnToggleNavbarExpanded.TabIndex = 38;
       this.btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
       this.btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
@@ -1073,9 +1120,9 @@
       // 
       // btnToggleTimeTravelVisible
       // 
-      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 105);
+      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 120);
       this.btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
-      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(150, 25);
+      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(150, 30);
       this.btnToggleTimeTravelVisible.TabIndex = 39;
       this.btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
       this.btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
@@ -1083,9 +1130,9 @@
       // 
       // btnToggleNavbarVisible
       // 
-      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 135);
+      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 155);
       this.btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
-      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(150, 25);
+      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(150, 30);
       this.btnToggleNavbarVisible.TabIndex = 37;
       this.btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
       this.btnToggleNavbarVisible.UseVisualStyleBackColor = true;
@@ -1118,7 +1165,7 @@
       this.txtAdress.Name = "txtAdress";
       this.txtAdress.Size = new System.Drawing.Size(230, 20);
       this.txtAdress.TabIndex = 14;
-      this.txtAdress.Text = "Boschdijk 7, Eindhoven";
+      this.txtAdress.Text = "Lange Haven 145, Schiedam";
       // 
       // btnOpenByAddress
       // 
@@ -1145,7 +1192,7 @@
       this.grLogin.Controls.Add(this.btnLogin);
       this.grLogin.Location = new System.Drawing.Point(0, 0);
       this.grLogin.Name = "grLogin";
-      this.grLogin.Size = new System.Drawing.Size(180, 160);
+      this.grLogin.Size = new System.Drawing.Size(180, 152);
       this.grLogin.TabIndex = 49;
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
@@ -1169,7 +1216,7 @@
       // 
       // btnSave
       // 
-      this.btnSave.Location = new System.Drawing.Point(125, 125);
+      this.btnSave.Location = new System.Drawing.Point(125, 114);
       this.btnSave.Name = "btnSave";
       this.btnSave.Size = new System.Drawing.Size(50, 30);
       this.btnSave.TabIndex = 9;
@@ -1179,7 +1226,7 @@
       // 
       // btnLogout
       // 
-      this.btnLogout.Location = new System.Drawing.Point(65, 125);
+      this.btnLogout.Location = new System.Drawing.Point(65, 114);
       this.btnLogout.Name = "btnLogout";
       this.btnLogout.Size = new System.Drawing.Size(50, 30);
       this.btnLogout.TabIndex = 8;
@@ -1241,7 +1288,7 @@
       // 
       // btnLogin
       // 
-      this.btnLogin.Location = new System.Drawing.Point(5, 125);
+      this.btnLogin.Location = new System.Drawing.Point(5, 114);
       this.btnLogin.Name = "btnLogin";
       this.btnLogin.Size = new System.Drawing.Size(50, 30);
       this.btnLogin.TabIndex = 5;
@@ -1250,78 +1297,21 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // btnDrawDistance
-      // 
-      this.btnDrawDistance.Location = new System.Drawing.Point(332, 50);
-      this.btnDrawDistance.Name = "btnDrawDistance";
-      this.btnDrawDistance.Size = new System.Drawing.Size(100, 30);
-      this.btnDrawDistance.TabIndex = 66;
-      this.btnDrawDistance.Text = "Set draw distance";
-      this.btnDrawDistance.UseVisualStyleBackColor = true;
-      this.btnDrawDistance.Click += new System.EventHandler(this.btnDrawDistance_Click);
-      // 
-      // btnSelectFeature
-      // 
-      this.btnSelectFeature.Location = new System.Drawing.Point(744, 260);
-      this.btnSelectFeature.Name = "btnSelectFeature";
-      this.btnSelectFeature.Size = new System.Drawing.Size(150, 30);
-      this.btnSelectFeature.TabIndex = 50;
-      this.btnSelectFeature.Text = "Select feature";
-      this.btnSelectFeature.UseVisualStyleBackColor = true;
-      this.btnSelectFeature.Click += new System.EventHandler(this.btnSelectFeature_Click);
-      // 
-      // txtName
-      // 
-      this.txtName.Location = new System.Drawing.Point(744, 324);
-      this.txtName.Name = "txtName";
-      this.txtName.Size = new System.Drawing.Size(75, 20);
-      this.txtName.TabIndex = 51;
-      // 
-      // lblPropertyName
-      // 
-      this.lblPropertyName.AutoSize = true;
-      this.lblPropertyName.Location = new System.Drawing.Point(741, 297);
-      this.lblPropertyName.Name = "lblPropertyName";
-      this.lblPropertyName.Size = new System.Drawing.Size(35, 13);
-      this.lblPropertyName.TabIndex = 52;
-      this.lblPropertyName.Text = "Name";
-      // 
-      // txtValue
-      // 
-      this.txtValue.Location = new System.Drawing.Point(825, 324);
-      this.txtValue.Name = "txtValue";
-      this.txtValue.Size = new System.Drawing.Size(75, 20);
-      this.txtValue.TabIndex = 53;
-      // 
-      // lblValue
-      // 
-      this.lblValue.AutoSize = true;
-      this.lblValue.Location = new System.Drawing.Point(822, 297);
-      this.lblValue.Name = "lblValue";
-      this.lblValue.Size = new System.Drawing.Size(34, 13);
-      this.lblValue.TabIndex = 54;
-      this.lblValue.Text = "Value";
-      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1384, 925);
+      this.ClientSize = new System.Drawing.Size(1549, 701);
       this.Controls.Add(this.plControl);
       this.Controls.Add(this.plStreetSmart);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
       this.Name = "Demo";
       this.Text = "Demo StreetSmart";
-      this.plStreetSmart.ResumeLayout(false);
-      this.plStreetSmart.PerformLayout();
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
-      this.gr3DCursor.ResumeLayout(false);
-      this.grBrightCont.ResumeLayout(false);
-      this.grBrightCont.PerformLayout();
+      this.grSelectFeature.ResumeLayout(false);
+      this.grSelectFeature.PerformLayout();
       this.grSld.ResumeLayout(false);
       this.grSld.PerformLayout();
       this.grButtonVisibility.ResumeLayout(false);
@@ -1396,7 +1386,6 @@
     private System.Windows.Forms.Button btnToggleTimeTravelExpanded;
     private System.Windows.Forms.Button btnOpenByImageId;
     private System.Windows.Forms.TextBox txtImageId;
-    private System.Windows.Forms.Label lblImageId;
     private System.Windows.Forms.Button btnOpenByCoordinate;
     private System.Windows.Forms.Button btnZoomOut;
     private System.Windows.Forms.Button btnZoomIn;
@@ -1408,6 +1397,7 @@
     private System.Windows.Forms.TextBox txtDeltaYawPitch;
     private System.Windows.Forms.GroupBox grOpenByQuery;
     private System.Windows.Forms.GroupBox grAPIInfo;
+    private System.Windows.Forms.Label lblResult;
     private System.Windows.Forms.TextBox txtAPIResult;
     private System.Windows.Forms.GroupBox grCoordinate;
     private System.Windows.Forms.GroupBox grOpenByImageId;
@@ -1450,16 +1440,15 @@
     private System.Windows.Forms.CheckBox ckReplace;
     private System.Windows.Forms.Label lblSRS;
     private System.Windows.Forms.TextBox txtSrs;
-    private System.Windows.Forms.GroupBox grBrightCont;
-    private System.Windows.Forms.TextBox txtBrightnessContrast;
-    private System.Windows.Forms.Button btnContrast;
-    private System.Windows.Forms.Button btnBrightness;
-    private System.Windows.Forms.GroupBox gr3DCursor;
-    private System.Windows.Forms.Button btn3DCursor;
-    private System.Windows.Forms.Button btnClosePanoramaViewer;
-    private System.Windows.Forms.Button btnGetViewers;
-    private System.Windows.Forms.TextBox txtDrawDistance;
+        private System.Windows.Forms.Button btnGetViewers;
+        private System.Windows.Forms.Button btnClosePanoramaViewer;
+        private System.Windows.Forms.TextBox txtBrightnessContrast;
+        private System.Windows.Forms.Button btnContrast;
+        private System.Windows.Forms.Button btnBrightness;
+    private System.Windows.Forms.Button btnToggle3DCursor;
     private System.Windows.Forms.Button btnDrawDistance;
+    private System.Windows.Forms.TextBox txtDrawDistance;
+    private System.Windows.Forms.GroupBox grSelectFeature;
     private System.Windows.Forms.TextBox txtValue;
     private System.Windows.Forms.Label lblValue;
     private System.Windows.Forms.TextBox txtName;

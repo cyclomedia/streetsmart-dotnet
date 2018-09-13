@@ -123,4 +123,7 @@
   <data name="StreetSmartLocation" xml:space="preserve">
     <value />
   </data>
+  <data name="ConfigurationUrl" xml:space="preserve">
+    <value>https://atlas.cyclomedia.com/configuration</value>
+  </data>
 </root>
