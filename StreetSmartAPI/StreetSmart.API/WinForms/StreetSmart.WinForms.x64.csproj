@@ -47,14 +47,14 @@
     <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.x64.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\..\DemoAPI\Demo.WinForms\x64\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x64\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.x64.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.x64.xml</DocumentationFile>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
