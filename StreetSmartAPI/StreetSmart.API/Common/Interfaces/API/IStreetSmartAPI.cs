@@ -164,7 +164,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Return an array with references to all viewers.
     /// </summary>
     /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
-    Task<IList<IViewer>> getViewers();
+    Task<IList<IViewer>> GetViewers();
 
     /// <summary>
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.

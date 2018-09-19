@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -36,14 +37,14 @@ namespace StreetSmart.Common.API
 {
   abstract class ViewerList
   {
-#region Tasks
+    #region Tasks
 
-    private TaskCompletionSource<object> _resultTask;
+    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
     private readonly EventWaitHandle _waitTask;
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
 
     protected ChromiumWebBrowser Browser { get; set; }
 
@@ -55,19 +56,20 @@ namespace StreetSmart.Common.API
 
     public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
 
-#endregion
+    #endregion
 
-#region Constructor
+    #region Constructor
 
     protected ViewerList()
     {
       _waitTask = new AutoResetEvent(true);
       Viewers = new Dictionary<string, Viewer>();
+      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
-#endregion
+    #endregion
 
-#region Functions
+    #region Functions
 
     public void RegisterJsObject(ChromiumWebBrowser browser)
     {
@@ -83,11 +85,12 @@ namespace StreetSmart.Common.API
       _waitTask.Reset();
       IViewer result = null;
       string key = null;
+      string funcName = $"{nameof(RemoveViewerFromJsValue).ToQuote()}";
 
       foreach (var viewer in Viewers)
       {
         string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
-                        {{result=true;}};{JsThis}.{JsThisResult}(result);}}";
+                        {{result=true;}};{JsThis}.{JsThisResult}(result,{funcName});}}";
         bool exists = (bool) await CallJsAsync(script);
 
         if (exists)
@@ -111,11 +114,12 @@ namespace StreetSmart.Common.API
       _waitTask.WaitOne();
       _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
+      string funcName = $"{nameof(GetViewersFromJsValue).ToQuote()}";
 
       foreach (var viewer in Viewers)
       {
         string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
-                        {{result=true;}}}});{JsThis}.{JsThisResult}(result);}}";
+                        {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
         bool exists = (bool) await CallJsAsync(script);
 
         if (exists)
@@ -138,34 +142,52 @@ namespace StreetSmart.Common.API
       return viewer;
     }
 
-    private async Task<object> CallJsAsync(string script)
+    private bool CheckResultTask(string funcName)
     {
-      _resultTask = new TaskCompletionSource<object>();
-      Browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return _resultTask.Task.Result;
+      bool result = true;
+
+      if (!_resultTask.ContainsKey(funcName))
+      {
+        _resultTask.Add(funcName, new TaskCompletionSource<object>());
+        result = false;
+      }
+
+      return result;
     }
 
-#endregion
+    private async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
+    {
+      if (CheckResultTask(memberName))
+      {
+        _resultTask[memberName] = new TaskCompletionSource<object>();
+      }
 
-#region Callbacks viewer
+      Browser.ExecuteScriptAsync(script);
+      await _resultTask[memberName].Task;
+      return _resultTask[memberName].Task.Result;
+    }
 
-    public void OnResult(string name, object result)
+    #endregion
+
+    #region Callbacks viewer
+
+    public void OnResult(string name, object result, string funcName)
     {
       if (Viewers.ContainsKey(name))
       {
-        Viewers[name].OnResult(result);
+        Viewers[name].OnResult(result, funcName);
       }
     }
 
-    public void OnThisResult(bool result)
+    public void OnThisResult(bool result, string funcName)
     {
-      _resultTask.TrySetResult(result);
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(result);
     }
 
-#endregion
+    #endregion
 
-#region Viewer lists / types
+    #region Viewer lists / types
 
     private static readonly Dictionary<string, Dictionary<string, ViewerList>> ViewerLists =
       new Dictionary<string, Dictionary<string, ViewerList>>();
@@ -201,9 +223,9 @@ namespace StreetSmart.Common.API
       }
     }
 
-#endregion
+    #endregion
 
-#region Viewer functions
+    #region Viewer functions
 
     public static void RegisterJsObjects(string apiId, ChromiumWebBrowser browser)
     {
@@ -248,6 +270,6 @@ namespace StreetSmart.Common.API
       Viewers.Clear();
     }
 
-#endregion
+    #endregion
   }
 }

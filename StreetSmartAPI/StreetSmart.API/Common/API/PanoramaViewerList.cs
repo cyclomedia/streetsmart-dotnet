@@ -26,7 +26,7 @@ namespace StreetSmart.Common.API
 {
   internal class PanoramaViewerList : ViewerList
   {
-#region Properties
+    #region Properties
 
     public static string Type => "@@ViewerType/PANORAMA";
 
@@ -50,9 +50,9 @@ namespace StreetSmart.Common.API
 
     public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
 
-#endregion
+    #endregion
 
-#region Functions
+    #region Functions
 
     public override IViewer AddViewer(string name)
     {
@@ -152,18 +152,18 @@ namespace StreetSmart.Common.API
       }
     }
 
-#endregion
+    #endregion
 
-#region Callbacks PanoramaViewer
+    #region Callbacks PanoramaViewer
 
-    public void OnImageNotFoundException(string name, string message)
+    public void OnImageNotFoundException(string name, string message, string funcName)
     {
       if (Viewers.ContainsKey(name))
       {
-        Viewers[name].OnImageNotFoundException(message);
+        Viewers[name].OnImageNotFoundException(message, funcName);
       }
     }
 
-#endregion
+    #endregion
   }
 }

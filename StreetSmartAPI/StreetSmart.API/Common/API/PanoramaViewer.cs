@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -119,8 +120,9 @@ namespace StreetSmart.Common.API
 
     public async Task<IRecording> GetRecording()
     {
+      string funcName = $"{nameof(GetRecording).ToQuote()}";
       var script = $@"recording{Name}={Name}.getRecording();delete recording{Name}.thumbs;
-                   {JsThis}.{JsResult}('{Name}',recording{Name});";
+                   {JsThis}.{JsResult}('{Name}',recording{Name},{funcName});";
       return new Recording((Dictionary<string, object>) await CallJsAsync(script));
     }
 
@@ -181,7 +183,7 @@ namespace StreetSmart.Common.API
 
     public void SetSelectedFeatureByProperties(IJson properties, string layerId)
     {
-      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties}, {layerId.ToQuote()});");
+      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
     }
 
     public void Toggle3DCursor(bool visible)
@@ -284,16 +286,17 @@ namespace StreetSmart.Common.API
       return Color.FromArgb((int) ((double) color[3] * 255), (int) color[0], (int) color[1], (int) color[2]);
     }
 
-    public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs)
+    public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs,
+      [CallerMemberName] string funcName = "")
     {
       string script = $@"{Name}.{func}({query}{srs.SrsComponent()}).catch
-                      (function(e){{{JsThis}.{JsImNotFound}('{Name}',e.message)}}).then
-                      (function(r){{delete r.thumbs;{JsThis}.{JsResult}('{Name}',r)}});";
+                      (function(e){{{JsThis}.{JsImNotFound}('{Name}',e.message,{funcName})}}).then
+                      (function(r){{delete r.thumbs;{JsThis}.{JsResult}('{Name}',r,{funcName})}});";
       object result = await CallJsAsync(script);
 
-      if (result is Exception)
+      if (result is Exception exception)
       {
-        throw (Exception) result;
+        throw exception;
       }
 
       return new Recording((Dictionary<string, object>) result);

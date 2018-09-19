@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version: 18.10.1
+================
+- Fixed: Make the API thread safe
+
+
 Version: 18.10.0
 ================
 - build with chefsharp version 0.67

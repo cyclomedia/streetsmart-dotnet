@@ -957,7 +957,7 @@ namespace Demo.WinForms
 
     private async void btnGetViewers_Click(object sender, EventArgs e)
     {
-      IList<IViewer> viewers = await _api.getViewers();
+      IList<IViewer> viewers = await _api.GetViewers();
       ShowOpenedViewers(viewers);
     }
 

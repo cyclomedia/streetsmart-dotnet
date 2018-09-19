@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -36,6 +37,7 @@ using CefSharp.Wpf;
 using StreetSmart.Wpf.Properties;
 #endif
 
+using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Data.GeoJson;
 using StreetSmart.Common.Events;
@@ -45,8 +47,6 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 using StreetSmart.Common.Interfaces.GeoJson;
-
-using StreetSmart.Common.API.Events;
 
 namespace StreetSmart.Common.API
 {
@@ -63,7 +63,7 @@ namespace StreetSmart.Common.API
 
     #region Tasks
 
-    private TaskCompletionSource<object> _resultTask;
+    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
 
     #endregion
 
@@ -121,6 +121,7 @@ namespace StreetSmart.Common.API
     {
       ApiId = $"{Guid.NewGuid():N}";
       StreetSmartLocation = streetSmartLocation;
+      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
       _browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
       _browser.RegisterJsObject(JsThis, this);
       ViewerList.CreateViewerList(ApiId);
@@ -134,6 +135,7 @@ namespace StreetSmart.Common.API
     {
       ApiId = $"{Guid.NewGuid():N}";
       StreetSmartLocation = streetSmartLocation;
+      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
     public void InitBrowser(ChromiumWebBrowser browser)
@@ -187,10 +189,11 @@ namespace StreetSmart.Common.API
     public async Task<IList<IViewer>> CloseViewer(string viewerId)
     {
       string resultType = "resultCloseViewer";
+      string funcName = $"{nameof(CloseViewer).ToQuote()}";
 
       string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
-                      (function(e){{{JsThis}.{JsCloseViewerException}(e.message)}}).then
-                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}');}});";
+                      (function(e){{{JsThis}.{JsCloseViewerException}(e.message,{funcName})}}).then
+                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcName});}});";
 
       object result = await CallJsAsync(script);
 
@@ -219,10 +222,11 @@ namespace StreetSmart.Common.API
       return viewerList;
     }
 
-    public async Task<IList<IViewer>> getViewers()
+    public async Task<IList<IViewer>> GetViewers()
     {
       string resultType = "resultGetViewers";
-      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}');";
+      string funcName = $"{nameof(GetViewers).ToQuote()}";
+      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcName});";
       object result = await CallJsAsync(script);
 
       return await ViewerList.ToViewersFromJsValue(ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
@@ -280,8 +284,9 @@ namespace StreetSmart.Common.API
 
     public async Task Init(IOptions options)
     {
-      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}()}},
-                      function(e){{{JsThis}.{JsLoginFailed}(e.message)}});";
+      string funcName = $"{nameof(Init).ToQuote()}";
+      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}({funcName})}},
+                      function(e){{{JsThis}.{JsLoginFailed}(e.message,{funcName})}});";
       object result = await CallJsAsync(script);
 
       if (result is Exception)
@@ -295,10 +300,11 @@ namespace StreetSmart.Common.API
     public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
     {     
       string resultType = "resultOpenByQuery";
+      string funcName = $"{nameof(Open).ToQuote()}";
 
       string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
-                      (function(e){{{JsThis}.{JsImNotFound}(e.message)}}).then
-                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}');}});";
+                      (function(e){{{JsThis}.{JsImNotFound}(e.message,{funcName})}}).then
+                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcName});}});";
 
       object result = await CallJsAsync(script);
 
@@ -346,29 +352,34 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnResult(object result)
+    public void OnResult(object result, string funcName)
     {
-      _resultTask.TrySetResult(result);
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(result);
     }
 
-    public void OnLoginSuccess()
+    public void OnLoginSuccess(string funcName)
     {
-      _resultTask.TrySetResult(true);
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(true);
     }
 
-    public void OnLoginFailedException(string message)
+    public void OnLoginFailedException(string message, string funcName)
     {
-      _resultTask.TrySetResult(new StreetSmartLoginFailedException(message));
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartLoginFailedException(message));
     }
 
-    public void OnImageNotFoundException(string message)
+    public void OnImageNotFoundException(string message, string funcName)
     {
-      _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
     }
 
-    public void OnViewerCloseException(string message)
+    public void OnViewerCloseException(string message, string funcName)
     {
-      _resultTask.TrySetResult(new StreetSmartCloseViewerException(message));
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartCloseViewerException(message));
     }
 
     public void OnMeasurementChanged(Dictionary<string, object> args)
@@ -399,17 +410,34 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
-    private async Task<object> CallJsAsync(string script)
+    private bool CheckResultTask(string funcName)
     {
-      _resultTask = new TaskCompletionSource<object>();
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return _resultTask.Task.Result;
+      bool result = true;
+
+      if (!_resultTask.ContainsKey(funcName))
+      {
+        _resultTask.Add(funcName, new TaskCompletionSource<object>());
+        result = false;
+      }
+
+      return result;
     }
 
-    private string GetScript(string funcName)
+    private async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
     {
-      return $"{JsThis}.{JsResult}({JsApi}.{funcName});";
+      if (CheckResultTask(memberName))
+      {
+        _resultTask[memberName] = new TaskCompletionSource<object>();
+      }
+
+      _browser.ExecuteScriptAsync(script);
+      await _resultTask[memberName].Task;
+      return _resultTask[memberName].Task.Result;
+    }
+
+    private string GetScript(string funcName, [CallerMemberName] string memberName = "")
+    {
+      return $"{JsThis}.{JsResult}({JsApi}.{funcName},{memberName.ToQuote()});";
     }
 
     private void ReAssignMeasurementEvents()

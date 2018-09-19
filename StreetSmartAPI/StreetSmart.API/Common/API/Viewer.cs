@@ -17,6 +17,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -34,13 +36,13 @@ namespace StreetSmart.Common.API
 {
   internal class Viewer : IViewer
   {
-#region Tasks
+    #region Tasks
 
-    private TaskCompletionSource<object> _resultTask;
+    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
 
-#endregion
+    #endregion
 
-#region Properties
+    #region Properties
 
     protected ChromiumWebBrowser Browser { get; }
 
@@ -54,14 +56,15 @@ namespace StreetSmart.Common.API
 
     public string JsImNotFound => (ViewerList as PanoramaViewerList)?.JsImNotFound;
 
-#endregion
+    #endregion
 
-#region Constructors
+    #region Constructors
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList)
     {
       Browser = browser;
       ViewerList = viewerList;
+      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
@@ -69,11 +72,12 @@ namespace StreetSmart.Common.API
       Browser = browser;
       ViewerList = viewerList;
       Name = name;
+      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
-#endregion
+    #endregion
 
-#region Interface Functions
+    #region Interface Functions
 
     public async Task<string> GetId()
     {
@@ -140,23 +144,38 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.setContrast({value});");
     }
 
-#endregion
+    #endregion
 
-#region Callbacks viewer
+    #region Callbacks viewer
 
-    public void OnResult(object result)
+    public void OnResult(object result, string funcName)
     {
-      _resultTask.TrySetResult(result);
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(result);
     }
 
-    public void OnImageNotFoundException(string message)
+    public void OnImageNotFoundException(string message, string funcName)
     {
-      _resultTask.TrySetResult(new StreetSmartImageNotFoundException(message));
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
     }
 
-#endregion
+    #endregion
 
-#region Functions
+    #region Functions
+
+    private bool CheckResultTask(string funcName)
+    {
+      bool result = true;
+
+      if (!_resultTask.ContainsKey(funcName))
+      {
+        _resultTask.Add(funcName, new TaskCompletionSource<object>());
+        result = false;
+      }
+
+      return result;
+    }
 
     protected async Task<bool> GetButtonEnabled(Enum buttonId)
     {
@@ -168,19 +187,23 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleButtonEnabled({buttonId.Description()},{enabled.ToJsBool()})");
     }
 
-    protected async Task<object> CallJsAsync(string script)
+    protected async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
     {
-      _resultTask = new TaskCompletionSource<object>();
+      if (CheckResultTask(memberName))
+      {
+        _resultTask[memberName] = new TaskCompletionSource<object>();
+      }
+
       Browser.ExecuteScriptAsync(script);
-      await _resultTask.Task;
-      return _resultTask.Task.Result;
+      await _resultTask[memberName].Task;
+      return _resultTask[memberName].Task.Result;
     }
 
-    protected string GetScript(string funcName)
+    protected string GetScript(string funcName, [CallerMemberName] string memberName = "")
     {
-      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName});";
+      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName},{memberName.ToQuote()});";
     }
 
-#endregion
+    #endregion
   }
 }
