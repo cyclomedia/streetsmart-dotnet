@@ -29,6 +29,10 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public ResultDirection(Dictionary<string, object> resultDirection)
     {
+      RecordedAt = (resultDirection?.ContainsKey("RecordedAt") ?? false)
+        ? (DateTime?) DateTime.Parse(resultDirection["RecordedAt"]?.ToString())
+        : null;
+
       double directionX = resultDirection?["DirectionX"] as double? ?? 0.0;
       double directionY = resultDirection?["DirectionY"] as double? ?? 0.0;
       double directionZ = resultDirection?["DirectionZ"] as double? ?? 0.0;
@@ -39,7 +43,6 @@ namespace StreetSmart.Common.Data.GeoJson
       double positionX = resultDirection?["PositionX"] as double? ?? 0.0;
       double positionY = resultDirection?["PositionY"] as double? ?? 0.0;
       double positionZ = resultDirection?["PositionZ"] as double? ?? 0.0;
-      RecordedAt = DateTime.Parse(resultDirection?["RecordedAt"]?.ToString());
       double stdOrientation = resultDirection?["StdOrientation"] as double? ?? 0.0;
       double stdX = resultDirection?["StdX"] as double? ?? 0.0;
       double stdY = resultDirection?["StdY"] as double? ?? 0.0;
