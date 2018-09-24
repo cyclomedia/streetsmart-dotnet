@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 18.10.1
+Version: 18.11.0
 ================
 - Fixed: Make the API thread safe
 
