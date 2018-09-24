@@ -66,14 +66,14 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
+    <OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
     <DefineConstants>TRACE;WPF</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.Wpf.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x86\StreetSmart.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
