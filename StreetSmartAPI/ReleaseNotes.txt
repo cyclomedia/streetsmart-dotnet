@@ -4,6 +4,7 @@
 Version: 18.11.0
 ================
 - Fixed: Make the API thread safe
+- Fixed: parsing recordedAt in case of Smart Click measurements with use of old services
 
 
 Version: 18.10.0
