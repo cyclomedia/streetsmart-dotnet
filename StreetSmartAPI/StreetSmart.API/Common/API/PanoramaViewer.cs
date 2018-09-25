@@ -136,9 +136,9 @@ namespace StreetSmart.Common.API
       return GetColor((object[]) await CallJsAsync(GetScript("getViewerColor()")));
     }
 
-    public void LookAtCoordinate(ICoordinate coordinate, string srs = null)
+    public async Task LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
-      Browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({coordinate}{srs.SrsComponent()});");
+      await CallJsAsync(GetScript($"lookAtCoordinate({coordinate}{srs.SrsComponent()})"));
     }
 
     public async Task<IRecording> OpenByAddress(string query, string srs = null)

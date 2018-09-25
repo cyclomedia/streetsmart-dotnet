@@ -554,7 +554,7 @@ namespace Demo.WinForms
       PrintRecordingText(recording);
     }
 
-    private void btnLookAtCoordinate_Click(object sender, EventArgs e)
+    private async void btnLookAtCoordinate_Click(object sender, EventArgs e)
     {
       ICoordinate coordinate = string.IsNullOrEmpty(txtZ.Text)
         ? CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text))
@@ -562,11 +562,11 @@ namespace Demo.WinForms
 
       if (string.IsNullOrEmpty(txtSrs.Text))
       {
-        PanoramaViewer.LookAtCoordinate(coordinate);
+        await PanoramaViewer.LookAtCoordinate(coordinate);
       }
       else
       {
-        PanoramaViewer.LookAtCoordinate(coordinate, txtSrs.Text);
+        await PanoramaViewer.LookAtCoordinate(coordinate, txtSrs.Text);
       }
     }
 
@@ -847,11 +847,11 @@ namespace Demo.WinForms
       }
     }
 
-    private void btnRemoveOverlay_Click(object sender, EventArgs e)
+    private async void btnRemoveOverlay_Click(object sender, EventArgs e)
     {
       if (_overlay != null)
       {
-        _api.RemoveOverlay(_overlay.Id);
+        await _api.RemoveOverlay(_overlay.Id);
         _overlay = null;
       }
     }

@@ -130,7 +130,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="coordinate">Coordinate to look to.</param>
     /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
-    void LookAtCoordinate(ICoordinate coordinate, string srs = null);
+    Task LookAtCoordinate(ICoordinate coordinate, string srs = null);
 
     /// <summary>
     /// Opens a panorama closest to the given address.
