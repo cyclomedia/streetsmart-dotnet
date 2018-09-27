@@ -50,6 +50,8 @@ namespace StreetSmart.Common.API
 
     public string Name { get; protected set; }
 
+    public bool Destroyed { private get; set; }
+
     public string JsThis => ViewerList.JsThis;
 
     public string JsResult => ViewerList.JsResult;
@@ -64,6 +66,7 @@ namespace StreetSmart.Common.API
     {
       Browser = browser;
       ViewerList = viewerList;
+      Destroyed = false;
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
@@ -72,6 +75,7 @@ namespace StreetSmart.Common.API
       Browser = browser;
       ViewerList = viewerList;
       Name = name;
+      Destroyed = false;
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
@@ -189,14 +193,19 @@ namespace StreetSmart.Common.API
 
     protected async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
     {
-      if (CheckResultTask(memberName))
+      if (!Destroyed)
       {
-        _resultTask[memberName] = new TaskCompletionSource<object>();
+        if (CheckResultTask(memberName))
+        {
+          _resultTask[memberName] = new TaskCompletionSource<object>();
+        }
+
+        Browser.ExecuteScriptAsync(script);
+        await _resultTask[memberName].Task;
+        return _resultTask[memberName].Task.Result;
       }
 
-      Browser.ExecuteScriptAsync(script);
-      await _resultTask[memberName].Task;
-      return _resultTask[memberName].Task.Result;
+      throw new StreetSmartViewerDoesNotExistException();
     }
 
     protected string GetScript(string funcName, [CallerMemberName] string memberName = "")

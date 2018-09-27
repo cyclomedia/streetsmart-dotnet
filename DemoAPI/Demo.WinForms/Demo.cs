@@ -383,11 +383,11 @@ namespace Demo.WinForms
       }
     }
 
-    private void btnLogout_Click(object sender, EventArgs e)
+    private async void btnLogout_Click(object sender, EventArgs e)
     {
       if (_options != null)
       {
-        _api.Destroy(_options);
+        await _api.Destroy(_options);
         _panoramaViewers.Clear();
         _obliqueViewers.Clear();
 

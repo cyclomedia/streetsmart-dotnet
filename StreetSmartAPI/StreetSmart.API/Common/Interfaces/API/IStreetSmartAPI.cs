@@ -113,7 +113,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>
-    void Destroy(IOptions options);
+    Task Destroy(IOptions options);
 
     /// <summary>
     /// Returns the active measurement in GeoJSON format

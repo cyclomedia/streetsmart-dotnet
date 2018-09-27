@@ -238,11 +238,11 @@ namespace StreetSmart.Common.API
       await CallJsAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
     }
 
-    public void Destroy(IOptions options)
+    public async Task Destroy(IOptions options)
     {
       RemoveMeasurementEvents();
       RemoveViewerEvents();
-      _browser.ExecuteScriptAsync(GetScript($"destroy({options})"));
+      await CallJsAsync(GetScript($"destroy({options})"));
       ViewerList.ClearViewers(ApiId);
     }
 

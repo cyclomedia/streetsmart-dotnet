@@ -333,6 +333,9 @@
     <Compile Include="..\Common\Exceptions\StreetSmartLoginFailedException.cs">
       <Link>Exceptions\StreetSmartLoginFailedException.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartViewerDoesNotExistException.cs">
+      <Link>Exceptions\StreetSmartViewerDoesNotExistException.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Extensions\BoolExtensions.cs">
       <Link>Extensions\BoolExtensions.cs</Link>
     </Compile>

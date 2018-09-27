@@ -83,7 +83,7 @@ namespace StreetSmart.Common.API
     {
       _waitTask.WaitOne();
       _waitTask.Reset();
-      IViewer result = null;
+      Viewer result = null;
       string key = null;
       string funcName = $"{nameof(RemoveViewerFromJsValue).ToQuote()}";
 
@@ -102,6 +102,7 @@ namespace StreetSmart.Common.API
 
       if (key != null)
       {
+        result.Destroyed = true;
         Viewers.Remove(key);
       }
 
