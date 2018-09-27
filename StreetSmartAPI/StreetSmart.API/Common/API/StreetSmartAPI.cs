@@ -259,7 +259,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> GetApiReadyState()
     {
-      return _browser != null && (bool) await CallJsAsync(GetScript("getApiReadyState()"));
+      return _browser != null && ((bool?) await CallJsAsync(GetScript("getApiReadyState()")) ?? false);
     }
 
     public async Task<string> GetApplicationName()
