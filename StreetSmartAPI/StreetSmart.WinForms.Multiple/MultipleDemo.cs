@@ -67,9 +67,9 @@ namespace MultipleAPI.WinForms
       SetApiState(State.ApiInitialized);
     }
 
-    private void btnDestroy_Click(object sender, EventArgs e)
+    private async void btnDestroy_Click(object sender, EventArgs e)
     {
-      _api.Destroy(_options);
+      await _api.Destroy(_options);
       SetApiState(State.ApiReady);
     }
 
