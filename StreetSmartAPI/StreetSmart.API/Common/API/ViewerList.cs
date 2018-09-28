@@ -44,6 +44,12 @@ namespace StreetSmart.Common.API
 
     #endregion
 
+    #region Constants
+
+    private int MaxWaitTime = 1000;
+
+    #endregion
+
     #region Properties
 
     protected ChromiumWebBrowser Browser { get; set; }
@@ -81,7 +87,7 @@ namespace StreetSmart.Common.API
 
     protected async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
     {
-      _waitTask.WaitOne();
+      _waitTask.WaitOne(MaxWaitTime);
       _waitTask.Reset();
       Viewer result = null;
       string key = null;
@@ -112,7 +118,7 @@ namespace StreetSmart.Common.API
 
     protected async Task<IList<IViewer>> GetViewersFromJsValue(string jsValue)
     {
-      _waitTask.WaitOne();
+      _waitTask.WaitOne(MaxWaitTime);
       _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
       string funcName = $"{nameof(GetViewersFromJsValue).ToQuote()}";
