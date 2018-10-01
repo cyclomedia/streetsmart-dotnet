@@ -44,39 +44,51 @@ namespace StreetSmart.Common.Interfaces.API
     OpenOblique = 3,
 
     /// <summary>
+    /// open pointcloud
+    /// </summary>
+    [Description("StreetSmartApi.PanoramaViewerUi.buttons.OPEN_POINTCLOUD")]
+    OpenPointCloud = 4,
+
+    /// <summary>
     /// report blurring
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.REPORT_BLURRING")]
-    ReportBlurring = 4,
+    ReportBlurring = 5,
 
     /// <summary>
     /// measure
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.MEASURE")]
-    Measure = 5,
+    Measure = 6,
+
+    /// <summary>
+    /// play list
+    /// </summary>
+    [Description("StreetSmartApi.PanoramaViewerUi.buttons.PLAYLIST")]
+    PlayList = 7,
+
+    /// <summary>
+    /// center map
+    /// </summary>
+    [Description("StreetSmartApi.PanoramaViewerUi.buttons.CENTER_MAP")]
+    CenterMap = 8,
 
     /// <summary>
     /// image information
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.IMAGE_INFORMATION")]
-    ImageInformation = 6,
-
-    /// <summary>
-    /// save image
-    /// </summary>
-    [Description("StreetSmartApi.PanoramaViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 7,
+    ImageInformation = 9,
 
     /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 8,
+    ZoomIn = 10,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 9
+    ZoomOut = 11
   }
 }

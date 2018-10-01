@@ -1,13 +1,17 @@
 ﻿Release notes:
 ==============
 
-Version: 18.11.5
+Version: 18.11.6
 ================
 - LookAtCoordinate function is now awaited
 - Exception message if you try to call a viewer which no longer exists
 - Destroy function is now awaited
 - fixed: getAPIReady state, incase of API isn't ready, now returns false in case of a crash
 - wait time for getViewers is now 1 second, no infinite wait time
+- added panorama viewer buttons: OPEN_POINTCLOUD, PLAYLIST, CENTER_MAP
+- remove panorama viewer button: SAVE_IMAGE
+- added oblique viewer buttons: OVERLAYS, CENTER_MAP
+- remove oblique viewer button: SAVE_IMAGE
 
 
 Version: 18.11.0

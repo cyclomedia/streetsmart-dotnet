@@ -26,39 +26,45 @@ namespace StreetSmart.Common.Interfaces.API
   public enum ObliqueViewerButtons
   {
     /// <summary>
+    /// overlays
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.buttons.OVERLAYS")]
+    Overlays = 1,
+
+    /// <summary>
+    /// center map
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.buttons.CENTER_MAP")]
+    CenterMap = 2,
+
+    /// <summary>
     /// image information
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.IMAGE_INFORMATION")]
-    ImageInformation = 1,
-
-    /// <summary>
-    /// save image
-    /// </summary>
-    [Description("StreetSmartApi.ObliqueViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 2,
+    ImageInformation = 3,
 
     /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 3,
+    ZoomIn = 4,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 4,
+    ZoomOut = 5,
 
     /// <summary>
     /// switch direction
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SWITCH_DIRECTION")]
-    SwitchDirection = 5,
+    SwitchDirection = 6,
 
     /// <summary>
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 6
+    ToggleNadir = 7
   }
 }

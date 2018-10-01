@@ -100,9 +100,10 @@ namespace Demo.WinForms
 
       ObliqueViewerButtons[] obButtons =
       {
-        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage,
-        ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
-        ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+        ObliqueViewerButtons.Overlays, ObliqueViewerButtons.CenterMap,
+        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.ZoomIn,
+        ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection,
+        ObliqueViewerButtons.ToggleNadir
       };
 
       foreach (var obButton in obButtons)
@@ -112,9 +113,12 @@ namespace Demo.WinForms
 
       PanoramaViewerButtons[] pnButtons =
       {
-        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage,
-        PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
-        PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+        PanoramaViewerButtons.Elevation, PanoramaViewerButtons.Overlays,
+        PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.OpenPointCloud,
+        PanoramaViewerButtons.ReportBlurring, PanoramaViewerButtons.Measure,
+        PanoramaViewerButtons.PlayList, PanoramaViewerButtons.CenterMap,
+        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.ZoomIn,
+        PanoramaViewerButtons.ZoomOut
       };
 
       foreach (var pnButton in pnButtons)
@@ -864,9 +868,10 @@ namespace Demo.WinForms
       {
         ObliqueViewerButtons[] buttons =
         {
-          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.SaveImage,
-          ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
-          ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.ToggleNadir
+          ObliqueViewerButtons.Overlays, ObliqueViewerButtons.CenterMap,
+          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.ZoomIn,
+          ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection,
+          ObliqueViewerButtons.ToggleNadir
         };
 
         foreach (var button in buttons)
@@ -878,11 +883,15 @@ namespace Demo.WinForms
 
       if (PanoramaViewer != null)
       {
+
         PanoramaViewerButtons[] buttons =
         {
-          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.SaveImage,
-          PanoramaViewerButtons.ZoomIn, PanoramaViewerButtons.ZoomOut,
-          PanoramaViewerButtons.Overlays, PanoramaViewerButtons.OpenOblique
+          PanoramaViewerButtons.Elevation, PanoramaViewerButtons.Overlays,
+          PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.OpenPointCloud,
+          PanoramaViewerButtons.ReportBlurring, PanoramaViewerButtons.Measure,
+          PanoramaViewerButtons.PlayList, PanoramaViewerButtons.CenterMap,
+          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.ZoomIn,
+          PanoramaViewerButtons.ZoomOut
         };
 
         foreach (var button in buttons)
