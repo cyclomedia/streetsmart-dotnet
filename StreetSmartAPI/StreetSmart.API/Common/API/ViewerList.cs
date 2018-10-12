@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Threading;
@@ -122,16 +123,28 @@ namespace StreetSmart.Common.API
       _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
       string funcName = $"{nameof(GetViewersFromJsValue).ToQuote()}";
+      int nrViewers = Viewers.Count;
+      int i = -1;
 
-      foreach (var viewer in Viewers)
+      while(++i < Viewers.Count || nrViewers != Viewers.Count)
       {
-        string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
-                        {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
-        bool exists = (bool) await CallJsAsync(script);
-
-        if (exists)
+        if (nrViewers != Viewers.Count)
         {
-          result.Add(viewer.Value);
+          i = -1;
+          nrViewers = Viewers.Count;
+          result.Clear();
+        }
+        else
+        {
+          var viewer = Viewers.ElementAt(i);
+          string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
+                        {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
+          bool exists = (bool) await CallJsAsync(script);
+
+          if (exists)
+          {
+            result.Add(viewer.Value);
+          }
         }
       }
 
