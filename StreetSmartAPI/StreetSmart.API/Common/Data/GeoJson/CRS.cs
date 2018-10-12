@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 
 using StreetSmart.Common.Interfaces.GeoJson;
@@ -46,18 +47,30 @@ namespace StreetSmart.Common.Data.GeoJson
       switch (Type)
       {
         case CRSType.Name:
-          Dictionary<string, object> props = properties as Dictionary<string, object>;
-          Properties = props?["name"] as string ?? string.Empty;
-          break;
         case CRSType.Epsg:
+          Dictionary<string, object> props = properties as Dictionary<string, object>;
+          Properties = (Type == CRSType.Name ? props?["name"] : props?["code"]) as string ?? string.Empty;
+          break;
         case CRSType.NotDefined:
-          Properties = properties as string ?? string.Empty;
+          Properties = string.Empty;
           break;
       }
+    }
+
+    public CRS(int wkid)
+    {
+      Type = CRSType.Epsg;
+      Properties = wkid.ToString();
     }
 
     public CRSType Type { get; }
 
     public string Properties { get; }
+
+    public override string ToString()
+    {
+      string properties = Type == CRSType.Epsg ? "code" : "name";
+      return $"\"crs\":{{\"type\":\"{Type.Description()}\",\"properties\":{{\"{properties}\":{Properties}}}}}";
+    }
   }
 }

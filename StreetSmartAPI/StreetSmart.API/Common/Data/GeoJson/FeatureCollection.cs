@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -25,7 +26,7 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class FeatureCollection: NotifyPropertyChanged, IFeatureCollection
   {
-    public FeatureCollection(Dictionary<string, object> featureCollection)
+    public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
     {
       string type = featureCollection?["type"]?.ToString() ?? string.Empty;
       IList<object> features = featureCollection?["features"] as IList<object> ?? new List<object>();
@@ -45,8 +46,15 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var feature in features)
       {
-        Features.Add(new Feature(feature as Dictionary<string, object>));
+        Features.Add(new Feature(feature as Dictionary<string, object>, measurementProperties));
       }
+    }
+
+    public FeatureCollection(int wkid)
+    {
+      Type = FeatureType.FeatureCollection;
+      Features = new List<IFeature>();
+      CRS = new CRS(wkid);
     }
 
     public FeatureType Type { get; }
@@ -55,5 +63,12 @@ namespace StreetSmart.Common.Data.GeoJson
 
     // ReSharper disable once InconsistentNaming
     public ICRS CRS { get; }
+
+    public override string ToString()
+    {
+      string features = Features.Aggregate(string.Empty, (current, feature) => $"{current},{feature}");
+      features = features.Substring(Math.Min(features.Length, 1));
+      return $"{{\"type\":\"{Type.Description()}\",{CRS},\"features\": [{features}]}}";
+    }
   }
 }

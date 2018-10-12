@@ -18,103 +18,45 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Properties: NotifyPropertyChanged, IProperties
+  internal class Properties: Dictionary<string, object>, IProperties
   {
-    public Properties(Dictionary<string, object> properties, MeasurementGeometryType measurementType)
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public Properties()
     {
-      Id = properties?["id"]?.ToString() ?? string.Empty;
-      Name = properties?["name"]?.ToString() ?? string.Empty;
-      Group = properties?["group"]?.ToString() ?? string.Empty;
-      IList<object> measureDetails = properties?["measureDetails"] as IList<object> ?? new List<object>();
-      Dimension = properties?["dimension"] as int? ?? 0;
-      string customGeometryType = properties?["customGeometryType"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> derivedData = properties?["derivedData"] as Dictionary<string, object>;
-      string measureReliability = properties?["measureReliability"]?.ToString() ?? string.Empty;
-      IList<object> pointsWithErrors = properties?["pointsWithErrors"] as IList<object> ?? new List<object>();
-      ValidGeometry = properties?["validGeometry"] as bool? ?? false;
-      Dictionary<string, object> observationLines = properties?.ContainsKey("observationLines") ?? false
-        ? properties["observationLines"] as Dictionary<string, object>
-        : null;
+    }
 
-      MeasureDetails = new List<IMeasureDetails>();
-      PointsWithErrors = new List<int>();
-      ObservationLines = new ObservationLines(observationLines);
-
-      foreach (var measureDetail in measureDetails)
+    public Properties(Dictionary<string, object> properties)
+    {
+      foreach (var property in properties)
       {
-        MeasureDetails.Add(new MeasureDetails(measureDetail as Dictionary<string, object>));
-      }
-
-      try
-      {
-        CustomGeometryType = (CustomGeometryType) Enum.Parse(typeof(CustomGeometryType), customGeometryType);
-      }
-      catch (ArgumentException)
-      {
-        CustomGeometryType = CustomGeometryType.NotDefined;
-      }
-
-      switch (measurementType)
-      {
-        case MeasurementGeometryType.Point:
-          DerivedData = new DerivedDataPoint(derivedData);
-          break;
-        case MeasurementGeometryType.LineString:
-          DerivedData = new DerivedDataLineString(derivedData);
-          break;
-        case MeasurementGeometryType.Polygon:
-          DerivedData = new DerivedDataPolygon(derivedData);
-          break;
-        case MeasurementGeometryType.Unknown:
-          DerivedData = null;
-          break;
-      }
-
-      switch (measureReliability)
-      {
-        case "RELIABLE":
-          MeasureReliability = Reliability.Reliable;
-          break;
-        case "ACCEPTABLE":
-          MeasureReliability = Reliability.Acceptable;
-          break;
-        case "UNRELIABLE":
-          MeasureReliability = Reliability.Unreliable;
-          break;
-      }
-
-      foreach (var pointsWithError in pointsWithErrors)
-      {
-        PointsWithErrors.Add(pointsWithError as int? ?? 0);
+        Add(property.Key, property.Value);
       }
     }
 
-    public string Id { get; }
+    public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 
-    public string Name { get; set; }
+    public override string ToString()
+    {
+      string properties = string.Empty;
 
-    public string Group { get; }
+      foreach (var property in this)
+      {
+        properties = $"{properties},\"{property.Key}\":\"{property.Value}\"";
+      }
 
-    public IList<IMeasureDetails> MeasureDetails { get; }
-
-    public int Dimension { get; }
-
-    public CustomGeometryType CustomGeometryType { get; }
-
-    public IDerivedData DerivedData { get; }
-
-    public Reliability MeasureReliability { get; }
-
-    public IList<int> PointsWithErrors { get; }
-
-    public bool ValidGeometry { get; }
-
-    public IObservationLines ObservationLines { get; }
+      properties = properties.Substring(Math.Min(properties.Length, 1));
+      return $"\"properties\":{{{properties}}}";
+    }
   }
 }

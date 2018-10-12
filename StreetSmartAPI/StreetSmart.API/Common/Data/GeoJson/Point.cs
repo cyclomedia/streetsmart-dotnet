@@ -33,14 +33,37 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (MeasurementGeometryType)Enum.Parse(typeof(MeasurementGeometryType), type);
+        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
       }
       catch (ArgumentException)
       {
-        Type = MeasurementGeometryType.Unknown;
+        Type = GeometryType.Unknown;
       }
     }
 
-    public MeasurementGeometryType Type { get; }
+    public Point(double x, double y, double z)
+      : base(x, y, z)
+    {
+      Type = GeometryType.Point;
+    }
+
+    public Point(double x, double y)
+      : base(x, y)
+    {
+      Type = GeometryType.Point;
+    }
+
+    public Point(ICoordinate coordinate)
+      : base(coordinate)
+    {
+      Type = GeometryType.Point;
+    }
+
+    public GeometryType Type { get; }
+
+    public override string ToString()
+    {
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":{base.ToString()}}}";
+    }
   }
 }

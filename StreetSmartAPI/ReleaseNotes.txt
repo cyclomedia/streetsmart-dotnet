@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 18.11.6
+Version: 18.11.7
 ================
 - LookAtCoordinate function is now awaited
 - Exception message if you try to call a viewer which no longer exists
@@ -12,6 +12,7 @@ Version: 18.11.6
 - remove panorama viewer button: SAVE_IMAGE
 - added oblique viewer buttons: OVERLAYS, CENTER_MAP
 - remove oblique viewer button: SAVE_IMAGE
+- Added geoJson parsing, now it is possible for generate a geoJson
 
 
 Version: 18.11.0

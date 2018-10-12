@@ -249,7 +249,7 @@ namespace StreetSmart.Common.API
     public async Task<IFeatureCollection> GetActiveMeasurement()
     {
       return new FeatureCollection(
-        (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()")));
+        (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()")), true);
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
@@ -384,7 +384,7 @@ namespace StreetSmart.Common.API
 
     public void OnMeasurementChanged(Dictionary<string, object> args)
     {
-      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args)));
+      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
     public void OnViewerAdded(string name, string type)

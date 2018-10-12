@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.Data;
-
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
@@ -28,6 +26,6 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// <summary>
     /// Geometry type
     /// </summary>
-    MeasurementGeometryType Type { get; }
+    GeometryType Type { get; }
   }
 }

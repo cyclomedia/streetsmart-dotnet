@@ -188,6 +188,9 @@
     <Compile Include="..\Common\Data\GeoJson\MeasureDetails.cs">
       <Link>Data\GeoJson\MeasureDetails.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\GeoJson\MeasurementProperties.cs">
+      <Link>Data\GeoJson\MeasurementProperties.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\GeoJson\ObservationLines.cs">
       <Link>Data\GeoJson\ObservationLines.cs</Link>
     </Compile>
@@ -353,6 +356,9 @@
     <Compile Include="..\Common\Factories\DomElementFactory.cs">
       <Link>Factories\DomElementFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Factories\GeoJsonFactory.cs">
+      <Link>Factories\GeoJsonFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Factories\JsonFactory.cs">
       <Link>Factories\JsonFactory.cs</Link>
     </Compile>
@@ -494,6 +500,9 @@
     <Compile Include="..\Common\Interfaces\GeoJson\FeatureType.cs">
       <Link>Interfaces\GeoJson\FeatureType.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\GeometryType.cs">
+      <Link>Interfaces\GeoJson\GeometryType.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\ICrs.cs">
       <Link>Interfaces\GeoJson\ICrs.cs</Link>
     </Compile>
@@ -538,6 +547,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IMeasureDetails.cs">
       <Link>Interfaces\GeoJson\IMeasureDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IMeasurementProperties.cs">
+      <Link>Interfaces\GeoJson\IMeasurementProperties.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IObservationLines.cs">
       <Link>Interfaces\GeoJson\IObservationLines.cs</Link>

@@ -21,27 +21,62 @@ using System.ComponentModel;
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
-  /// The CRS type
+  /// Defines the geometryType of a GeoJson
   /// </summary>
-  // ReSharper disable once InconsistentNaming
-  public enum CRSType
+  public enum GeometryType
   {
     /// <summary>
-    /// Not defined
+    /// anything else
     /// </summary>
     [Description("")]
-    NotDefined = -1,
+    Unknown = -1,
 
     /// <summary>
-    /// EPSG type
+    /// positions
     /// </summary>
-    [Description("EPSG")]
-    Epsg = 1,
+    [Description("Positions")]
+    Positions = 1,
 
     /// <summary>
-    /// Name type
+    /// geometry point
     /// </summary>
-    [Description("name")]
-    Name = 2
+    [Description("Point")]
+    Point = 2,
+
+    /// <summary>
+    /// geometry multipoint
+    /// </summary>
+    [Description("MultiPoint")]
+    MultiPoint = 3,
+
+    /// <summary>
+    /// geometry lineString
+    /// </summary>
+    [Description("LineString")]
+    LineString = 4,
+
+    /// <summary>
+    /// geometry multiLineString
+    /// </summary>
+    [Description("MultiLineString")]
+    MultiLineString = 5,
+
+    /// <summary>
+    /// geometry polygon
+    /// </summary>
+    [Description("Polygon")]
+    Polygon = 6,
+
+    /// <summary>
+    /// geometry multipolygon
+    /// </summary>
+    [Description("MultiPolygon")]
+    MultiPolygon = 7,
+
+    /// <summary>
+    /// geometry geometrycollection
+    /// </summary>
+    [Description("GeometryCollection")]
+    GeometryCollection = 8,
   }
 }

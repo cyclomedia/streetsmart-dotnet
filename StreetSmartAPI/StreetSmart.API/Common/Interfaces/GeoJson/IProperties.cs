@@ -23,61 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// GeoJson Feature
   /// </summary>
-  public interface IProperties
+  public interface IProperties: IDictionary<string, object>
   {
-    /// <summary>
-    /// Id
-    /// </summary>
-    string Id { get; }
-
-    /// <summary>
-    /// Name
-    /// </summary>
-    string Name { get; set; }
-
-    /// <summary>
-    /// Group
-    /// </summary>
-    string Group { get; }
-
-    /// <summary>
-    /// Measure details
-    /// </summary>
-    IList<IMeasureDetails> MeasureDetails { get; }
-
-    /// <summary>
-    /// Dimension
-    /// </summary>
-    int Dimension { get; }
-
-    /// <summary>
-    /// Custom geometry type
-    /// </summary>
-    CustomGeometryType CustomGeometryType { get; }
-
-    /// <summary>
-    /// Derived data which contains the calculated data from the measurement
-    /// </summary>
-    IDerivedData DerivedData { get; }
-
-    /// <summary>
-    /// Measure reliability
-    /// </summary>
-    Reliability MeasureReliability { get; }
-
-    /// <summary>
-    /// Points with errors
-    /// </summary>
-    IList<int> PointsWithErrors { get; }
-
-    /// <summary>
-    /// Valid Geometry
-    /// </summary>
-    bool ValidGeometry { get; }
-
-    /// <summary>
-    /// Observation lines
-    /// </summary>
-    IObservationLines ObservationLines { get; }
   }
 }

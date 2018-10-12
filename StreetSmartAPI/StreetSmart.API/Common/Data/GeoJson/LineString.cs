@@ -33,11 +33,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (MeasurementGeometryType) Enum.Parse(typeof(MeasurementGeometryType), type);
+        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
       }
       catch (ArgumentException)
       {
-        Type = MeasurementGeometryType.Unknown;
+        Type = GeometryType.Unknown;
       }
 
       foreach (var coordinate in coordinates)
@@ -46,6 +46,29 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
-    public MeasurementGeometryType Type { get; }
+    public LineString(IList<ICoordinate> coordinates)
+    {
+      Type = GeometryType.LineString;
+
+      foreach (ICoordinate coordinate in coordinates)
+      {
+        Add(coordinate);
+      }
+    }
+
+    public GeometryType Type { get; }
+
+    public override string ToString()
+    {
+      string coordinates = string.Empty;
+
+      foreach (ICoordinate coordinate in this)
+      {
+        coordinates = $"{coordinates},{coordinate}";
+      }
+
+      coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
+    }
   }
 }

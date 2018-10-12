@@ -26,14 +26,16 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Feature : NotifyPropertyChanged, IFeature
   {
-    public Feature(Dictionary<string, object> feature)
+    public Feature(Dictionary<string, object> feature, bool measurementProperties)
     {
       string type = feature?["type"]?.ToString() ?? string.Empty;
       Dictionary<string, object> geometry = feature?["geometry"] as Dictionary<string, object>;
       Dictionary<string, object> properties = feature?["properties"] as Dictionary<string, object>;
 
       Geometry geom = new Geometry(geometry);
-      Properties = new Properties(properties, geom.Type);
+      Properties = measurementProperties
+        ? new MeasurementProperties(properties, geom.Type)
+        : new Properties(properties);
 
       try
       {
@@ -46,19 +48,26 @@ namespace StreetSmart.Common.Data.GeoJson
 
       switch (geom.Type)
       {
-        case MeasurementGeometryType.Point:
+        case GeometryType.Point:
           Geometry = new Point(geometry);
           break;
-        case MeasurementGeometryType.LineString:
+        case GeometryType.LineString:
           Geometry = new LineString(geometry);
           break;
-        case MeasurementGeometryType.Polygon:
+        case GeometryType.Polygon:
           Geometry = new Polygon(geometry);
           break;
-        case MeasurementGeometryType.Unknown:
+        case GeometryType.Unknown:
           Geometry = null;
           break;
       }
+    }
+
+    public Feature(IGeometry geometry)
+    {
+      Type = FeatureType.Feature;
+      Geometry = geometry;
+      Properties = new Properties();
     }
 
     public FeatureType Type { get; }
@@ -66,5 +75,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public IGeometry Geometry { get; set; }
 
     public IProperties Properties { get; }
+
+    public override string ToString()
+    {
+      return $"{{\"type\":\"{Type.Description()}\",{Geometry},{Properties}}}";
+    }
   }
 }

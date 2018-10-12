@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 
-using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
@@ -32,14 +31,19 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (MeasurementGeometryType) Enum.Parse(typeof(MeasurementGeometryType), type);
+        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
       }
       catch (ArgumentException)
       {
-        Type = MeasurementGeometryType.Unknown;
+        Type = GeometryType.Unknown;
       }
     }
 
-    public MeasurementGeometryType Type { get; }
+    public GeometryType Type { get; }
+
+    public override string ToString()
+    {
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\"}}";
+    }
   }
 }
