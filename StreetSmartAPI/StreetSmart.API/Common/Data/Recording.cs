@@ -44,7 +44,10 @@ namespace StreetSmart.Common.Data
     public Recording(Dictionary<string, object> recording)
     {
       Dictionary<string, object> xyz = (Dictionary<string, object>) recording["xyz"];
-      XYZ = new Coordinate((double) xyz["0"], (double) xyz["1"], (double) xyz["2"]);
+      double.TryParse(xyz["0"].ToString(), out var x);
+      double.TryParse(xyz["1"].ToString(), out var y);
+      double.TryParse(xyz["2"].ToString(), out var z);
+      XYZ = new Coordinate(x, y, z);
 
       string orPrec = recording["orientationPrecision"].ToString();
       string longPrec = recording["longitudePrecision"].ToString();

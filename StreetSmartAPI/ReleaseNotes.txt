@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 18.11.8
+Version: 18.11.9
 ================
 - LookAtCoordinate function is now awaited
 - Exception message if you try to call a viewer which no longer exists
@@ -14,6 +14,7 @@ Version: 18.11.8
 - Remove oblique viewer button: SAVE_IMAGE
 - Added geoJson parsing, now it is possible for generate a geoJson
 - Solved crash with removing panorama viewers
+- Solved crash with getRecording() and the coordinate doesn't contains decimals after the comma
 
 
 Version: 18.11.0
