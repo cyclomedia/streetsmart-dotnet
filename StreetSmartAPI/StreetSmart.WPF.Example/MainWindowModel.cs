@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 using StreetSmart.WPF.Example.Properties;
 
@@ -41,7 +42,11 @@ namespace StreetSmart.WPF.Example
 
     #region Properties
 
-    public IStreetSmartAPI Api { get; }
+    private IOptions _options;
+
+    public IStreetSmartAPI Api { get; set; }
+
+    public ICommand RestartCommand => new DelegateCommand(RestartStreetSmart);
 
     #endregion
 
@@ -61,14 +66,20 @@ namespace StreetSmart.WPF.Example
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create(Language, Database);
       IDomElement element = DomElementFactory.Create();
-      IOptions options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
+      _options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
         addressSettings, element);
-      await Api.Init(options);
+      await Api.Init(_options);
 
       IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
       IPanoramaViewerOptions panoramaOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);
       IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, Srs, panoramaOptions);
       await Api.Open(TestLocation, viewerOptions);
+    }
+
+    private async void RestartStreetSmart()
+    {
+      await Api.Destroy(_options);
+      Api.RestartStreetSmart(Resources.StreetSmartLocation);
     }
 
     #endregion

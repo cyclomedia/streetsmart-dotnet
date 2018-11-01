@@ -29,6 +29,9 @@
   <Window.DataContext>
     <example:MainWindowModel />
   </Window.DataContext>
-  <streetSmart:StreetSmartGUI
+  <StackPanel>
+    <streetSmart:StreetSmartGUI Height="350"
       Api="{Binding Api, Mode=OneWay}" />
+    <Button Command="{Binding RestartCommand}" Width="100" Height="30">Restart API</Button>
+  </StackPanel>
 </Window>

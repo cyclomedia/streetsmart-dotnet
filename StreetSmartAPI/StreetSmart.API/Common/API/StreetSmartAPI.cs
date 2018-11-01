@@ -89,7 +89,7 @@ namespace StreetSmart.Common.API
 
     #region Properties
 
-    public string StreetSmartLocation { get; }
+    public string StreetSmartLocation { get; set; }
 
     public string JsThis => $"{GetType().Name}Events";
 
@@ -178,7 +178,19 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region Interface Functions
+    #if WPF
+    public void RestartStreetSmart()
+    {
+      RestartStreetSmart(Resources.StreetSmartLocation);
+    }
 
+    public void RestartStreetSmart(string streetSmartLocation)
+    {
+      StreetSmartLocation = streetSmartLocation;
+      _browser.Address = streetSmartLocation;
+    }
+
+    #endif
     public async Task<IOverlay> AddOverlay(IOverlay overlay)
     {
       string script = GetScript($"addOverlay({overlay})");

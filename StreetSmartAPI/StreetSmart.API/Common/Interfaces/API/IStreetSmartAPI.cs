@@ -94,6 +94,19 @@ namespace StreetSmart.Common.Interfaces.API
 
     #region Interface functions
 
+    #if WPF
+    /// <summary>
+    /// Restarts streetsmart
+    /// </summary>
+    void RestartStreetSmart();
+
+    /// <summary>
+    /// Restarts streetsmart
+    /// </summary>
+    /// <param name="streetSmartLocation">The location of Street Smart</param>
+    void RestartStreetSmart(string streetSmartLocation);
+    #endif
+
     /// <summary>
     /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
     /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
