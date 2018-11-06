@@ -70,6 +70,15 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localinstallation.cyclomedia.com:8080/configuration.
+        /// </summary>
+        public static string ConfigurationUrl {
+            get {
+                return ResourceManager.GetString("ConfigurationUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string Password {
@@ -79,7 +88,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v18.10/api-dotnet.html.
+        ///   Looks up a localized string similar to http://localinstallation.cyclomedia.com/streetsmart/v18.1/api/api-dotnet.html.
         /// </summary>
         public static string StreetSmartLocation {
             get {

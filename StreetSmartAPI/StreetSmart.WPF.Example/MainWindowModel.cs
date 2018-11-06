@@ -29,7 +29,7 @@ using StreetSmart.Common.Interfaces.DomElement;
 
 namespace StreetSmart.WPF.Example
 {
-  public class MainWindowModel
+  public class MainWindowModel: NotifyPropertyChanged
   {
     #region Constants
 
@@ -42,11 +42,58 @@ namespace StreetSmart.WPF.Example
 
     #region Properties
 
+    private bool _developerTools;
     private IOptions _options;
+    private string _restartUrl;
+    private string _configurationUrl;
+    private string _username;
+    private string _password;
 
     public IStreetSmartAPI Api { get; set; }
 
+    public string RestartUrl
+    {
+      get => _restartUrl;
+      set
+      {
+        _restartUrl = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string ConfigurationUrl
+    {
+      get => _configurationUrl;
+      set
+      {
+        _configurationUrl = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Username
+    {
+      get => _username;
+      set
+      {
+        _username = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string Password
+    {
+      get => _password;
+      set
+      {
+        _password = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public ICommand RestartCommand => new DelegateCommand(RestartStreetSmart);
+
+    public ICommand DeveloperCommand => new DelegateCommand(ToggleDeveloperTools);
 
     #endregion
 
@@ -54,6 +101,10 @@ namespace StreetSmart.WPF.Example
 
     public MainWindowModel()
     {
+      _developerTools = false;
+      Username = Resources.Username;
+      Password = Resources.Password;
+      ConfigurationUrl = "https://atlas.cyclomedia.com/configuration";
       Api = StreetSmartAPIFactory.Create();
       Api.APIReady += ApiReady;
     }
@@ -66,20 +117,43 @@ namespace StreetSmart.WPF.Example
     {
       IAddressSettings addressSettings = AddressSettingsFactory.Create(Language, Database);
       IDomElement element = DomElementFactory.Create();
-      _options = OptionsFactory.Create(Resources.Username, Resources.Password, Resources.ApiKey, Srs, Language,
-        addressSettings, element);
+      _options = string.IsNullOrEmpty(ConfigurationUrl)
+        ? OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, addressSettings, element)
+        : OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, ConfigurationUrl,
+          addressSettings, element);
       await Api.Init(_options);
 
-      IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
-      IPanoramaViewerOptions panoramaOptions = PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);
+      IList<ViewerType> viewerTypes = new List<ViewerType> {ViewerType.Panorama};
+      IPanoramaViewerOptions panoramaOptions =
+        PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);
       IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, Srs, panoramaOptions);
       await Api.Open(TestLocation, viewerOptions);
+
+      Username = "cyclo";
+      Password = "cyclo";
+      ConfigurationUrl = Resources.ConfigurationUrl;
+      RestartUrl = Resources.StreetSmartLocation;
     }
 
     private async void RestartStreetSmart()
     {
+      // "https://streetsmart.cyclomedia.com/api/v18.10/api-dotnet.html"
       await Api.Destroy(_options);
-      Api.RestartStreetSmart(Resources.StreetSmartLocation);
+      Api.RestartStreetSmart(RestartUrl);
+    }
+
+    private void ToggleDeveloperTools()
+    {
+      _developerTools = !_developerTools;
+
+      if (_developerTools)
+      {
+        Api.ShowDevTools();
+      }
+      else
+      {
+        Api.CloseDevTools();
+      }
     }
 
     #endregion

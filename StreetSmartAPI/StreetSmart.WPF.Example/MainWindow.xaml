@@ -6,8 +6,8 @@
         xmlns:streetSmart="clr-namespace:StreetSmart.Wpf;assembly=StreetSmart.Wpf"
         xmlns:example="clr-namespace:StreetSmart.WPF.Example"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-<!--
+        Title="MainWindow" Height="550" Width="800">
+  <!--
 /*
  * Street Smart .NET integration
  * Copyright (c) 2018, CycloMedia, All rights reserved.
@@ -32,6 +32,30 @@
   <StackPanel>
     <streetSmart:StreetSmartGUI Height="350"
       Api="{Binding Api, Mode=OneWay}" />
-    <Button Command="{Binding RestartCommand}" Width="100" Height="30">Restart API</Button>
+    <StackPanel>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="200"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="30" />
+          <RowDefinition Height="25" />
+          <RowDefinition Height="25" />
+          <RowDefinition Height="25" />
+          <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Button Command="{Binding RestartCommand}" Width="100" Height="30" Grid.Column="0" Grid.Row="0">Restart API</Button>
+        <Button Command="{Binding DeveloperCommand}" Width="100" Height="30" Grid.Column="1" Grid.Row="0">Developer tools</Button>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="StreetSmart restart URL" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding RestartUrl, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Configuration URL" />
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ConfigurationUrl, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="0" Grid.Row="3" Height="25" Text="Username" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="0" Grid.Row="4" Height="25" Text="Password" />
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+      </Grid>
+    </StackPanel>
   </StackPanel>
 </Window>
