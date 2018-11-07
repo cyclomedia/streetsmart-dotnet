@@ -16,7 +16,11 @@
  * License along with this library.
  */
 
+using System;
 using System.Threading.Tasks;
+
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.Interfaces.API
 {
@@ -26,6 +30,11 @@ namespace StreetSmart.Common.Interfaces.API
   public interface IViewer
   {
     #region Interface functions
+
+    /// <summary>
+    /// Triggers when the elevation is changed
+    /// </summary>
+    event EventHandler<IEventArgs<ILayerInfo>> LayerVisibilityChange;
 
     /// <summary>
     /// Returns the viewerId of the viewer

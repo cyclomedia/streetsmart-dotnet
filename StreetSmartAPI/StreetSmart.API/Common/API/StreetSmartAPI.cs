@@ -55,7 +55,9 @@ namespace StreetSmart.Common.API
   {
     #region Members
 
+    // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private ChromiumWebBrowser _browser;
+
     private ApiEventList _apiMeasurementEventList;
     private ApiEventList _apiViewerEventList;
 

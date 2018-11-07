@@ -154,6 +154,7 @@ namespace Demo.WinForms
       string text = "Viewer added";
       AddViewerEventsText(text);
       IViewer viewer = args.Value;
+      viewer.LayerVisibilityChange += OnLayerVisibilityChange;
 
       if (viewer is IPanoramaViewer)
       {
@@ -183,6 +184,7 @@ namespace Demo.WinForms
       string text = "Viewer removed";
       AddViewerEventsText(text);
       IViewer viewer = args.Value;
+      viewer.LayerVisibilityChange -= OnLayerVisibilityChange;
 
       if (viewer is IPanoramaViewer)
       {
@@ -217,7 +219,7 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnImageChange(object sender, IEventArgs<object> args)
+    private void OnImageChange(object sender, EventArgs args)
     {
       string text = "Image change";
       AddViewerEventsText(text);
@@ -251,13 +253,13 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadEnd(object sender, IEventArgs<object> args)
+    private void OnViewLoadEnd(object sender, EventArgs args)
     {
       string text = "Image load end";
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadStart(object sender, IEventArgs<object> args)
+    private void OnViewLoadStart(object sender, EventArgs args)
     {
       string text = "Image load start";
       AddViewerEventsText(text);
@@ -266,6 +268,12 @@ namespace Demo.WinForms
     private void OnTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
     {
       string text = "Time travel change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnLayerVisibilityChange(object sender, IEventArgs<ILayerInfo> args)
+    {
+      string text = "Layer visible change";
       AddViewerEventsText(text);
     }
 

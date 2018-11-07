@@ -63,6 +63,8 @@ namespace StreetSmart.Common.API
 
     public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
 
+    public string JsLayerVisibilityChange => $"{nameof(OnLayerVisibilityChange).FirstCharacterToLower()}";
+
     #endregion
 
     #region Constructor
@@ -203,6 +205,14 @@ namespace StreetSmart.Common.API
     {
       CheckResultTask(funcName);
       _resultTask[funcName].TrySetResult(result);
+    }
+
+    public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        Viewers[name]?.OnLayerVisibilityChange(args);
+      }
     }
 
     #endregion

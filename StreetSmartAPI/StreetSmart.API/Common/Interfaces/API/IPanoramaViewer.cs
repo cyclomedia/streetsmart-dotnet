@@ -42,7 +42,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers when the loaded panorama is altered.
     /// </summary>
-    event EventHandler<IEventArgs<object>> ImageChange;
+    event EventHandler<EventArgs> ImageChange;
 
     /// <summary>
     /// Triggers when a recording is clicked inside the PanoramaViewer.
@@ -72,12 +72,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers when everything that is needed for the view to dislay correctly is loaded.
     /// </summary>
-    event EventHandler<IEventArgs<object>> ViewLoadEnd;
+    event EventHandler<EventArgs> ViewLoadEnd;
 
     /// <summary>
     /// Triggers when the view is altered and needs to be (partly) reloaded.
     /// </summary>
-    event EventHandler<IEventArgs<object>> ViewLoadStart;
+    event EventHandler<EventArgs> ViewLoadStart;
 
     #endregion
 

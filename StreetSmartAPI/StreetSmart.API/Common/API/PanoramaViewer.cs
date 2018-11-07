@@ -42,7 +42,7 @@ using Orientation = StreetSmart.Common.Data.Orientation;
 
 namespace StreetSmart.Common.API
 {
-  internal class PanoramaViewer : Viewer, IPanoramaViewer
+  internal sealed class PanoramaViewer : Viewer, IPanoramaViewer
   {
     #region Members
 
@@ -53,14 +53,14 @@ namespace StreetSmart.Common.API
     #region Events
 
     public event EventHandler<IEventArgs<IElevationInfo>> ElevationChange;
-    public event EventHandler<IEventArgs<object>> ImageChange;
+    public event EventHandler<EventArgs> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
-    public event EventHandler<IEventArgs<object>> ViewLoadEnd;
-    public event EventHandler<IEventArgs<object>> ViewLoadStart;
+    public event EventHandler<EventArgs> ViewLoadEnd;
+    public event EventHandler<EventArgs> ViewLoadStart;
 
     #endregion
 
@@ -84,9 +84,9 @@ namespace StreetSmart.Common.API
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
-    public string DisconnectEventsScript => _panoramaViewerEventList.Destroy;
+    public override string DisconnectEventsScript => $"{_panoramaViewerEventList.Destroy}{base.DisconnectEventsScript}";
 
-    public string ConnectEventsScript => $"{_panoramaViewerEventList}";
+    public override string ConnectEventsScript => $"{_panoramaViewerEventList}{base.ConnectEventsScript}";
 
     #endregion
 
@@ -213,7 +213,7 @@ namespace StreetSmart.Common.API
 
     public void OnImageChange(Dictionary<string, object> args)
     {
-      ImageChange?.Invoke(this, new EventArgs<object>(new object()));
+      ImageChange?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnRecordingClick(Dictionary<string, object> args)
@@ -245,12 +245,12 @@ namespace StreetSmart.Common.API
 
     public void OnViewLoadEnd(Dictionary<string, object> args)
     {
-      ViewLoadEnd?.Invoke(this, new EventArgs<object>(new object()));
+      ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnViewLoadStart(Dictionary<string, object> args)
     {
-      ViewLoadStart?.Invoke(this, new EventArgs<object>(new object()));
+      ViewLoadStart?.Invoke(this, EventArgs.Empty);
     }
 
     public void OnTimeTravelChange(Dictionary<string, object> args)
@@ -263,7 +263,7 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
-    public void ConnectEvents()
+    public override void ConnectEvents()
     {
       _panoramaViewerEventList = new ApiEventList
       {
@@ -279,6 +279,7 @@ namespace StreetSmart.Common.API
       };
 
       Browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
+      base.ConnectEvents();
     }
 
     private Color GetColor(object[] color)

@@ -16,42 +16,30 @@
  * License along with this library.
  */
 
-using System.Threading.Tasks;
-
-using StreetSmart.Common.Interfaces.API;
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
-namespace StreetSmart.Common.API
+namespace StreetSmart.Common.API.Events
 {
-  internal sealed class ObliqueViewer : Viewer, IObliqueViewer
+  internal class PanoramaObliqueViewerEvent: ApiEvent
   {
-    #region Constructors
+    private readonly Viewer _viewer;
 
-    public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
-      : base(browser, obliqueViewerList, name)
+    protected string Name => _viewer.Name;
+
+    protected string JsThis => _viewer.JsThis;
+
+    protected override string Events => "Events.viewer";
+
+    public override string Destroy => $@"{Name}.off({JsApi}.{Events}.{Type},{FuncName}{Name});";
+
+    public PanoramaObliqueViewerEvent(Viewer viewer, string type, string funcName)
+      : base(type, funcName)
     {
-      ConnectEvents();
+      _viewer = viewer;
     }
 
-    #endregion
-
-    #region Interface Functions
-
-    public async Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId)
+    public override string ToString()
     {
-      return await base.GetButtonEnabled(buttonId);
+      return $@"{Name}.on({JsApi}.{Events}.{Type},{FuncName}{Name}=function(e)
+             {{{JsThis}.{FuncName}('{Name}',e);}});";
     }
-
-    public void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled)
-    {
-      base.ToggleButtonEnabled(buttonId, enabled);
-    }
-
-    #endregion
   }
 }

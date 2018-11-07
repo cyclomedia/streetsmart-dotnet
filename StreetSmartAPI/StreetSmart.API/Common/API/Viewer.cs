@@ -22,7 +22,9 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using CefSharp;
-
+using StreetSmart.Common.API.Events;
+using StreetSmart.Common.Data;
+using StreetSmart.Common.Events;
 #if WINFORMS
 using CefSharp.WinForms;
 #else
@@ -31,6 +33,8 @@ using CefSharp.Wpf;
 
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Exceptions;
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.API
 {
@@ -39,6 +43,18 @@ namespace StreetSmart.Common.API
     #region Tasks
 
     private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
+
+    #endregion
+
+    #region Members
+
+    private ApiEventList _viewerEventList;
+
+    #endregion
+
+    #region Events
+
+    public event EventHandler<IEventArgs<ILayerInfo>> LayerVisibilityChange;
 
     #endregion
 
@@ -58,6 +74,12 @@ namespace StreetSmart.Common.API
 
     public string JsImNotFound => (ViewerList as PanoramaViewerList)?.JsImNotFound;
 
+    public string JsLayerVisibilityChange => ViewerList.JsLayerVisibilityChange;
+
+    public virtual string DisconnectEventsScript => $"{_viewerEventList.Destroy}";
+
+    public virtual string ConnectEventsScript => $"{_viewerEventList}";
+
     #endregion
 
     #region Constructors
@@ -71,12 +93,9 @@ namespace StreetSmart.Common.API
     }
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
+      : this(browser, viewerList)
     {
-      Browser = browser;
-      ViewerList = viewerList;
       Name = name;
-      Destroyed = false;
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
     #endregion
@@ -164,6 +183,12 @@ namespace StreetSmart.Common.API
       _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
     }
 
+    public void OnLayerVisibilityChange(Dictionary<string, object> args)
+    {
+      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));
+    }
+
     #endregion
 
     #region Functions
@@ -211,6 +236,16 @@ namespace StreetSmart.Common.API
     protected string GetScript(string funcName, [CallerMemberName] string memberName = "")
     {
       return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName},{memberName.ToQuote()});";
+    }
+
+    public virtual void ConnectEvents()
+    {
+      _viewerEventList = new ApiEventList
+      {
+        new PanoramaObliqueViewerEvent(this, "LAYER_VISIBILITY_CHANGE", JsLayerVisibilityChange),
+      };
+
+      Browser.ExecuteScriptAsync($"{_viewerEventList}");
     }
 
     #endregion

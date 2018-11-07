@@ -80,6 +80,9 @@
     <Compile Include="..\Common\API\Events\MeasurementEvent.cs">
       <Link>API\Events\MeasurementEvent.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\Events\PanoramaObliqueViewerEvent.cs">
+      <Link>API\Events\PanoramaObliqueViewerEvent.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\Events\PanoramaRecordingClickViewerEvent.cs">
       <Link>API\Events\PanoramaRecordingClickViewerEvent.cs</Link>
     </Compile>
@@ -232,6 +235,9 @@
     </Compile>
     <Compile Include="..\Common\Data\Json.cs">
       <Link>Data\Json.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\LayerInfo.cs">
+      <Link>Data\LayerInfo.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\MeasurementOptions.cs">
       <Link>Data\MeasurementOptions.cs</Link>
@@ -427,6 +433,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IJson.cs">
       <Link>Interfaces\Data\IJson.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ILayerInfo.cs">
+      <Link>Interfaces\Data\ILayerInfo.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IMeasurementOptions.cs">
       <Link>Interfaces\Data\IMeasurementOptions.cs</Link>

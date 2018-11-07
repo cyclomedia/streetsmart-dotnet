@@ -16,15 +16,21 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
+namespace StreetSmart.Common.Interfaces.Data
 {
-  internal class PanoramaViewerEvent: PanoramaObliqueViewerEvent
+  /// <summary>
+  /// Layer info
+  /// </summary>
+  public interface ILayerInfo
   {
-    protected override string Events => "Events.panoramaViewer";
+    /// <summary>
+    /// The id of the layer
+    /// </summary>
+    string LayerId { get; set; }
 
-    public PanoramaViewerEvent(Viewer viewer, string type, string funcName)
-      : base(viewer, type, funcName)
-    {
-    }
+    /// <summary>
+    /// Visibility of the layer
+    /// </summary>
+    bool Visible { get; set; }
   }
 }

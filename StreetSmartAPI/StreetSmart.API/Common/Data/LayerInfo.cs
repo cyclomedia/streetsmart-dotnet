@@ -16,42 +16,41 @@
  * License along with this library.
  */
 
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
-using StreetSmart.Common.Interfaces.API;
+using StreetSmart.Common.Interfaces.Data;
 
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
-namespace StreetSmart.Common.API
+namespace StreetSmart.Common.Data
 {
-  internal sealed class ObliqueViewer : Viewer, IObliqueViewer
+  internal class LayerInfo : NotifyPropertyChanged, ILayerInfo
   {
-    #region Constructors
+    private string _layerId;
+    private bool _visible;
 
-    public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
-      : base(browser, obliqueViewerList, name)
+    public LayerInfo(Dictionary<string, object> layerInfo)
     {
-      ConnectEvents();
+      LayerId = layerInfo?["layerId"]?.ToString() ?? string.Empty;
+      Visible = (bool) (layerInfo?["visibility"] ?? false);
     }
 
-    #endregion
-
-    #region Interface Functions
-
-    public async Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId)
+    public string LayerId
     {
-      return await base.GetButtonEnabled(buttonId);
+      get => _layerId;
+      set
+      {
+        _layerId = value;
+        RaisePropertyChanged();
+      }
     }
 
-    public void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled)
+    public bool Visible
     {
-      base.ToggleButtonEnabled(buttonId, enabled);
+      get => _visible;
+      set
+      {
+        _visible = value;
+        RaisePropertyChanged();
+      }
     }
-
-    #endregion
   }
 }
