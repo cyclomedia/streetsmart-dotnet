@@ -21,10 +21,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-using CefSharp;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
+
+using CefSharp;
+
 #if WINFORMS
 using CefSharp.WinForms;
 #else
@@ -49,6 +51,7 @@ namespace StreetSmart.Common.API
     #region Members
 
     private ApiEventList _viewerEventList;
+    private int _processId;
 
     #endregion
 
@@ -80,6 +83,8 @@ namespace StreetSmart.Common.API
 
     public virtual string ConnectEventsScript => $"{_viewerEventList}";
 
+    public int GetProcessId => _processId = (_processId + 1) % 10000;
+
     #endregion
 
     #region Constructors
@@ -90,6 +95,7 @@ namespace StreetSmart.Common.API
       ViewerList = viewerList;
       Destroyed = false;
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
+      _processId = 0;
     }
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
@@ -104,27 +110,27 @@ namespace StreetSmart.Common.API
 
     public async Task<string> GetId()
     {
-      return (string) await CallJsAsync(GetScript("getId()"));
+      return (string) await CallJsGetScriptAsync("getId()");
     }
 
     public async Task<bool> GetNavbarExpanded()
     {
-      return (bool) await CallJsAsync(GetScript("getNavbarExpanded()"));
+      return (bool) await CallJsGetScriptAsync("getNavbarExpanded()");
     }
 
     public async Task<bool> GetNavbarVisible()
     {
-      return (bool) await CallJsAsync(GetScript("getNavbarVisible()"));
+      return (bool) await CallJsGetScriptAsync("getNavbarVisible()");
     }
 
     public async Task<bool> GetTimeTravelExpanded()
     {
-      return (bool) await CallJsAsync(GetScript("getTimeTravelExpanded()"));
+      return (bool) await CallJsGetScriptAsync("getTimeTravelExpanded()");
     }
 
     public async Task<bool> GetTimeTravelVisible()
     {
-      return (bool) await CallJsAsync(GetScript("getTimeTravelVisible()"));
+      return (bool) await CallJsGetScriptAsync("getTimeTravelVisible()");
     }
 
     public void ToggleNavbarExpanded(bool expanded)
@@ -208,7 +214,7 @@ namespace StreetSmart.Common.API
 
     protected async Task<bool> GetButtonEnabled(Enum buttonId)
     {
-      return (bool) await CallJsAsync(GetScript($"getButtonEnabled({buttonId.Description()})"));
+      return (bool) await CallJsGetScriptAsync($"getButtonEnabled({buttonId.Description()})");
     }
 
     protected void ToggleButtonEnabled(Enum buttonId, bool enabled)
@@ -216,26 +222,37 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleButtonEnabled({buttonId.Description()},{enabled.ToJsBool()})");
     }
 
-    protected async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
+    protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
+    {
+      int processId = GetProcessId;
+      return await CallJsAsync(GetScript(script, processId, memberName), processId, memberName);
+    }
+
+    protected async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
       if (!Destroyed)
       {
-        if (CheckResultTask(memberName))
+        string funcName = $"{memberName}{processId}";
+
+        if (CheckResultTask(funcName))
         {
-          _resultTask[memberName] = new TaskCompletionSource<object>();
+          _resultTask[funcName] = new TaskCompletionSource<object>();
         }
 
         Browser.ExecuteScriptAsync(script);
-        await _resultTask[memberName].Task;
-        return _resultTask[memberName].Task.Result;
+        await _resultTask[funcName].Task;
+        TaskCompletionSource<object> result = _resultTask[funcName];
+        _resultTask.Remove(funcName);
+        return result.Task.Result;
       }
 
       throw new StreetSmartViewerDoesNotExistException();
     }
 
-    protected string GetScript(string funcName, [CallerMemberName] string memberName = "")
+    protected string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
     {
-      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName},{memberName.ToQuote()});";
+      string memberId = $"{memberName}{processId}";
+      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName},{memberId.ToQuote()});";
     }
 
     public virtual void ConnectEvents()

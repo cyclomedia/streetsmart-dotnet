@@ -57,6 +57,7 @@ namespace StreetSmart.Common.API
 
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private ChromiumWebBrowser _browser;
+    private int _processId;
 
     private ApiEventList _apiMeasurementEventList;
     private ApiEventList _apiViewerEventList;
@@ -115,6 +116,8 @@ namespace StreetSmart.Common.API
 
     public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
 
+    public int GetProcessId => _processId = (_processId + 1) % 10000;
+
     #endregion
 
     #region Constructor
@@ -131,6 +134,7 @@ namespace StreetSmart.Common.API
       _browser.FrameLoadEnd += OnFrameLoadEnd;
       _browser.DownloadHandler = new DownloadHandler();
       GUI = new StreetSmartGUI(_browser);
+      _processId = 0;
     }
     #else
     public StreetSmartAPI(string streetSmartLocation)
@@ -138,6 +142,7 @@ namespace StreetSmart.Common.API
       ApiId = $"{Guid.NewGuid():N}";
       StreetSmartLocation = streetSmartLocation;
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
+      _processId = 0;
     }
 
     public void InitBrowser(ChromiumWebBrowser browser)
@@ -195,21 +200,23 @@ namespace StreetSmart.Common.API
     #endif
     public async Task<IOverlay> AddOverlay(IOverlay overlay)
     {
-      string script = GetScript($"addOverlay({overlay})");
-      ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script));
+      int processId = GetProcessId;
+      string script = GetScript($"addOverlay({overlay})", processId);
+      ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script, processId));
       return overlay;
     }
 
     public async Task<IList<IViewer>> CloseViewer(string viewerId)
     {
       string resultType = "resultCloseViewer";
-      string funcName = $"{nameof(CloseViewer).ToQuote()}";
+      int processId = GetProcessId;
+      string funcName = $"{nameof(CloseViewer)}{processId}".ToQuote();
 
       string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
                       (function(e){{{JsThis}.{JsCloseViewerException}(e.message,{funcName})}}).then
                       (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcName});}});";
 
-      object result = await CallJsAsync(script);
+      object result = await CallJsAsync(script, processId);
 
       if (result is Exception exception)
       {
@@ -239,9 +246,10 @@ namespace StreetSmart.Common.API
     public async Task<IList<IViewer>> GetViewers()
     {
       string resultType = "resultGetViewers";
-      string funcName = $"{nameof(GetViewers).ToQuote()}";
-      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcName});";
-      object result = await CallJsAsync(script);
+      int processId = GetProcessId;
+      string funcId = $"{nameof(GetViewers)}{processId}".ToQuote();
+      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcId});";
+      object result = await CallJsAsync(script, processId);
 
       return await ViewerList.ToViewersFromJsValue(ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
         (string) result);
@@ -249,82 +257,84 @@ namespace StreetSmart.Common.API
 
     public async Task RemoveOverlay(string layerId)
     {
-      await CallJsAsync(GetScript($"removeOverlay({layerId.ToQuote()})"));
+      await CallJsGetScriptAsync($"removeOverlay({layerId.ToQuote()})");
     }
 
     public async Task Destroy(IOptions options)
     {
       RemoveMeasurementEvents();
       RemoveViewerEvents();
-      await CallJsAsync(GetScript($"destroy({options})"));
+      await CallJsGetScriptAsync($"destroy({options})");
       ViewerList.ClearViewers(ApiId);
     }
 
     public async Task<IFeatureCollection> GetActiveMeasurement()
     {
       return new FeatureCollection(
-        (Dictionary<string, object>) await CallJsAsync(GetScript("getActiveMeasurement()")), true);
+        (Dictionary<string, object>) await CallJsGetScriptAsync("getActiveMeasurement()"), true);
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
     {
-      return new AddressSettings((Dictionary<string, object>) await CallJsAsync(GetScript("getAddressSettings()")));
+      return new AddressSettings((Dictionary<string, object>) await CallJsGetScriptAsync("getAddressSettings()"));
     }
 
     public async Task<bool> GetApiReadyState()
     {
-      return _browser != null && ((bool?) await CallJsAsync(GetScript("getApiReadyState()")) ?? false);
+      return _browser != null && ((bool?) await CallJsGetScriptAsync("getApiReadyState()") ?? false);
     }
 
     public async Task<string> GetApplicationName()
     {
-      return (string) await CallJsAsync(GetScript("getApplicationName()"));
+      return (string) await CallJsGetScriptAsync("getApplicationName()");
     }
 
     public async Task<string> GetApplicationVersion()
     {
-      return (string) await CallJsAsync(GetScript("getApplicationVersion()"));
+      return (string) await CallJsGetScriptAsync("getApplicationVersion()");
     }
 
     public async Task<string[]> GetDebugLogs()
     {
-      return ((object[]) await CallJsAsync(GetScript("getDebugLogs()"))).Cast<string>().ToArray();
+      return ((object[]) await CallJsGetScriptAsync("getDebugLogs()")).Cast<string>().ToArray();
     }
 
     public async Task<string[]> GetPermissions()
     {
-      return ((object[]) await CallJsAsync(GetScript("getPermissions()"))).Cast<string>().ToArray();
+      return ((object[]) await CallJsGetScriptAsync("getPermissions()")).Cast<string>().ToArray();
     }
 
     public async Task Init(IOptions options)
     {
-      string funcName = $"{nameof(Init).ToQuote()}";
-      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}({funcName})}},
-                      function(e){{{JsThis}.{JsLoginFailed}(e.message,{funcName})}});";
-      object result = await CallJsAsync(script);
+      int processId = GetProcessId;
+      string funcId = $"{nameof(Init)}{processId}".ToQuote();
+      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}({funcId})}},
+                      function(e){{{JsThis}.{JsLoginFailed}(e.message,{funcId})}});";
+      object result = await CallJsAsync(script, processId);
 
-      if (result is Exception)
+      if (result is Exception exception)
       {
-        throw (Exception) result;
+        throw exception;
       }
 
       AddViewerEvents();
     }
 
     public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
-    {     
+    {
+      int processId = GetProcessId;
       string resultType = "resultOpenByQuery";
-      string funcName = $"{nameof(Open).ToQuote()}";
+      string funcId = $"{nameof(Open)}{processId}".ToQuote();
 
       string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
-                      (function(e){{{JsThis}.{JsImNotFound}(e.message,{funcName})}}).then
-                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcName});}});";
+                      (function(e){{{JsThis}.{JsImNotFound}(e.message,{funcId})}}).then
+                      (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcId});}});";
 
-      object result = await CallJsAsync(script);
+      object result = await CallJsAsync(script, processId);
 
-      if (result is Exception)
+      if (result is Exception exception)
       {
-        throw (Exception) result;
+        throw exception;
       }
 
       return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), (string) result);
@@ -437,21 +447,32 @@ namespace StreetSmart.Common.API
       return result;
     }
 
-    private async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
+    private async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
     {
-      if (CheckResultTask(memberName))
+      int processId = GetProcessId;
+      return await CallJsAsync(GetScript(script, processId, memberName), processId, memberName);
+    }
+
+    private async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
+    {
+      string funcName = $"{memberName}{processId}";
+
+      if (CheckResultTask(funcName))
       {
-        _resultTask[memberName] = new TaskCompletionSource<object>();
+        _resultTask[funcName] = new TaskCompletionSource<object>();
       }
 
       _browser.ExecuteScriptAsync(script);
-      await _resultTask[memberName].Task;
-      return _resultTask[memberName].Task.Result;
+      await _resultTask[funcName].Task;
+      TaskCompletionSource<object> result = _resultTask[funcName];
+      _resultTask.Remove(funcName);
+      return result.Task.Result;
     }
 
-    private string GetScript(string funcName, [CallerMemberName] string memberName = "")
+    private string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
     {
-      return $"{JsThis}.{JsResult}({JsApi}.{funcName},{memberName.ToQuote()});";
+      string memberId = $"{memberName}{processId}";
+      return $"{JsThis}.{JsResult}({JsApi}.{funcName},{memberId.ToQuote()});";
     }
 
     private void ReAssignMeasurementEvents()

@@ -45,6 +45,12 @@ namespace StreetSmart.Common.API
 
     #endregion
 
+    #region Members
+
+    private int _processId;
+
+    #endregion
+
     #region Constants
 
     private int MaxWaitTime = 1000;
@@ -65,6 +71,8 @@ namespace StreetSmart.Common.API
 
     public string JsLayerVisibilityChange => $"{nameof(OnLayerVisibilityChange).FirstCharacterToLower()}";
 
+    public int GetProcessId => _processId = (_processId + 1) % 10000;
+
     #endregion
 
     #region Constructor
@@ -74,6 +82,7 @@ namespace StreetSmart.Common.API
       _waitTask = new AutoResetEvent(true);
       Viewers = new Dictionary<string, Viewer>();
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
+      _processId = 0;
     }
 
     #endregion
@@ -94,13 +103,14 @@ namespace StreetSmart.Common.API
       _waitTask.Reset();
       Viewer result = null;
       string key = null;
-      string funcName = $"{nameof(RemoveViewerFromJsValue).ToQuote()}";
+      int processId = GetProcessId;
+      string funcName = $"{nameof(RemoveViewerFromJsValue)}{processId}".ToQuote();
 
       foreach (var viewer in Viewers)
       {
         string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
                         {{result=true;}};{JsThis}.{JsThisResult}(result,{funcName});}}";
-        bool exists = (bool) await CallJsAsync(script);
+        bool exists = (bool) await CallJsAsync(script, processId);
 
         if (exists)
         {
@@ -124,7 +134,8 @@ namespace StreetSmart.Common.API
       _waitTask.WaitOne(MaxWaitTime);
       _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
-      string funcName = $"{nameof(GetViewersFromJsValue).ToQuote()}";
+      int processId = GetProcessId;
+      string funcName = $"{nameof(GetViewersFromJsValue)}{processId}".ToQuote();
       int nrViewers = Viewers.Count;
       int i = -1;
 
@@ -141,7 +152,7 @@ namespace StreetSmart.Common.API
           var viewer = Viewers.ElementAt(i);
           string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
                         {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
-          bool exists = (bool) await CallJsAsync(script);
+          bool exists = (bool) await CallJsAsync(script, processId);
 
           if (exists)
           {
@@ -177,16 +188,20 @@ namespace StreetSmart.Common.API
       return result;
     }
 
-    private async Task<object> CallJsAsync(string script, [CallerMemberName] string memberName = "")
+    private async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
-      if (CheckResultTask(memberName))
+      string funcName = $"{memberName}{processId}";
+
+      if (CheckResultTask(funcName))
       {
-        _resultTask[memberName] = new TaskCompletionSource<object>();
+        _resultTask[funcName] = new TaskCompletionSource<object>();
       }
 
       Browser.ExecuteScriptAsync(script);
-      await _resultTask[memberName].Task;
-      return _resultTask[memberName].Task.Result;
+      await _resultTask[funcName].Task;
+      TaskCompletionSource<object> result = _resultTask[funcName];
+      _resultTask.Remove(funcName);
+      return result.Task.Result;
     }
 
     #endregion

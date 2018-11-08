@@ -17,6 +17,7 @@ Version: 18.13.0
 - Solved crash with getRecording() and the coordinate doesn't contains decimals after the comma
 - Added function for restart the StreetSmartAPI, only for the WPF version
 - added event: LayerVisibilityChanged in the panorama viewer and the oblique viewer
+- Fixed: some more issues about thread safe of the API
 
 
 Version: 18.11.0

@@ -105,7 +105,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> Get3DCursorVisible()
     {
-      return (bool) await CallJsAsync(GetScript("get3DCursorVisible()"));
+      return (bool) await CallJsGetScriptAsync("get3DCursorVisible()");
     }
 
     public async Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId)
@@ -115,30 +115,31 @@ namespace StreetSmart.Common.API
 
     public async Task<IOrientation> GetOrientation()
     {
-      return new Orientation((Dictionary<string, object>) await CallJsAsync(GetScript("getOrientation()")));
+      return new Orientation((Dictionary<string, object>) await CallJsGetScriptAsync("getOrientation()"));
     }
 
     public async Task<IRecording> GetRecording()
     {
-      string funcName = $"{nameof(GetRecording).ToQuote()}";
+      int processId = GetProcessId;
+      string funcId = $"{nameof(GetRecording)}{processId}".ToQuote();
       var script = $@"recording{Name}={Name}.getRecording();delete recording{Name}.thumbs;
-                   {JsThis}.{JsResult}('{Name}',recording{Name},{funcName});";
-      return new Recording((Dictionary<string, object>) await CallJsAsync(script));
+                   {JsThis}.{JsResult}('{Name}',recording{Name},{funcId});";
+      return new Recording((Dictionary<string, object>) await CallJsAsync(script, processId));
     }
 
     public async Task<bool> GetRecordingsVisible()
     {
-      return (bool) await CallJsAsync(GetScript("getRecordingsVisible()"));
+      return (bool) await CallJsGetScriptAsync("getRecordingsVisible()");
     }
 
     public async Task<Color> GetViewerColor()
     {
-      return GetColor((object[]) await CallJsAsync(GetScript("getViewerColor()")));
+      return GetColor((object[]) await CallJsGetScriptAsync("getViewerColor()"));
     }
 
     public async Task LookAtCoordinate(ICoordinate coordinate, string srs = null)
     {
-      await CallJsAsync(GetScript($"lookAtCoordinate({coordinate}{srs.SrsComponent()})"));
+      await CallJsGetScriptAsync($"lookAtCoordinate({coordinate}{srs.SrsComponent()})");
     }
 
     public async Task<IRecording> OpenByAddress(string query, string srs = null)
@@ -290,10 +291,12 @@ namespace StreetSmart.Common.API
     public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs,
       [CallerMemberName] string funcName = "")
     {
+      int processId = GetProcessId;
+      string funcId = $"{funcName}{processId}";
       string script = $@"{Name}.{func}({query}{srs.SrsComponent()}).catch
-                      (function(e){{{JsThis}.{JsImNotFound}('{Name}',e.message,{funcName})}}).then
-                      (function(r){{delete r.thumbs;{JsThis}.{JsResult}('{Name}',r,{funcName})}});";
-      object result = await CallJsAsync(script);
+                      (function(e){{{JsThis}.{JsImNotFound}('{Name}',e.message,{funcId})}}).then
+                      (function(r){{delete r.thumbs;{JsThis}.{JsResult}('{Name}',r,{funcId})}});";
+      object result = await CallJsAsync(script, processId);
 
       if (result is Exception exception)
       {
