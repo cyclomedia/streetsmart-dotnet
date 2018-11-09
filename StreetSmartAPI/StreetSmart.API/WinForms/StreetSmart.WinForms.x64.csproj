@@ -71,6 +71,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\API\APIBase.cs">
+      <Link>API\APIBase.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\Events\ApiEvent.cs">
       <Link>API\Events\ApiEvent.cs</Link>
     </Compile>

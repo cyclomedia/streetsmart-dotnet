@@ -64,7 +64,7 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #region Properties
+    #region Callback definitions
 
     public string JsElevationChange => (ViewerList as PanoramaViewerList)?.JsElevationChange;
 
@@ -83,6 +83,10 @@ namespace StreetSmart.Common.API
     public string JsViewLoadStart => (ViewerList as PanoramaViewerList)?.JsViewLoadStart;
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
+
+    #endregion
+
+    #region Properties
 
     public override string DisconnectEventsScript => $"{_panoramaViewerEventList.Destroy}{base.DisconnectEventsScript}";
 

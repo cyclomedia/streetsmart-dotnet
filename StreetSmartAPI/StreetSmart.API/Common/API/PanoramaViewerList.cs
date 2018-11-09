@@ -30,7 +30,9 @@ namespace StreetSmart.Common.API
 
     public static string Type => "@@ViewerType/PANORAMA";
 
-    public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
+    #endregion
+
+    #region Callback definitions
 
     public string JsElevationChange => $"{nameof(OnElevationChange).FirstCharacterToLower()}";
 
@@ -49,6 +51,12 @@ namespace StreetSmart.Common.API
     public string JsViewLoadStart => $"{nameof(OnViewLoadStart).FirstCharacterToLower()}";
 
     public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
+
+    #endregion
+
+    #region Callback definitions PanoramaViewer
+
+    public override string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
     #endregion
 

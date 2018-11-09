@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version: 18.14.0
+================
+- Refactor some code
+
+
 Version: 18.13.0
 ================
 - LookAtCoordinate function is now awaited

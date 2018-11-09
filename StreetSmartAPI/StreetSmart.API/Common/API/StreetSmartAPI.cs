@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -41,7 +40,6 @@ using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Data.GeoJson;
 using StreetSmart.Common.Events;
-using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Handlers;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
@@ -51,22 +49,13 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal class StreetSmartAPI : IStreetSmartAPI
+  internal class StreetSmartAPI : APIBase, IStreetSmartAPI
   {
     #region Members
 
-    // ReSharper disable once FieldCanBeMadeReadOnly.Local
-    private ChromiumWebBrowser _browser;
-    private int _processId;
-
     private ApiEventList _apiMeasurementEventList;
     private ApiEventList _apiViewerEventList;
-
-    #endregion
-
-    #region Tasks
-
-    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
+    private string _streetSmartLocation;
 
     #endregion
 
@@ -92,23 +81,15 @@ namespace StreetSmart.Common.API
 
     #region Properties
 
-    public string StreetSmartLocation { get; set; }
+    private string JsApi => Resources.JsApi;
 
-    public string JsThis => $"{GetType().Name}Events";
+    public string ApiId { get; private set; }
 
-    public string JsApi => Resources.JsApi;
+    protected override string CallFunctionBase => $"{JsApi}";
 
-    public string ApiId { get; }
+    #endregion
 
-    private string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
-
-    private string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
-
-    private string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
-
-    public string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
-
-    public string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
+    #region Callback definitions
 
     public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
 
@@ -116,44 +97,28 @@ namespace StreetSmart.Common.API
 
     public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
 
-    public int GetProcessId => _processId = (_processId + 1) % 10000;
-
     #endregion
 
     #region Constructor
     #if WINFORMS
     public StreetSmartAPI(string streetSmartLocation)
     {
-      ApiId = $"{Guid.NewGuid():N}";
-      StreetSmartLocation = streetSmartLocation;
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
-      _browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
-      _browser.RegisterJsObject(JsThis, this);
-      ViewerList.CreateViewerList(ApiId);
-      ViewerList.RegisterJsObjects(ApiId, _browser);
-      _browser.FrameLoadEnd += OnFrameLoadEnd;
-      _browser.DownloadHandler = new DownloadHandler();
-      GUI = new StreetSmartGUI(_browser);
-      _processId = 0;
+      InitApi(streetSmartLocation);
+      Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
+      RegisterBrowser();
+      GUI = new StreetSmartGUI(Browser);
     }
     #else
     public StreetSmartAPI(string streetSmartLocation)
     {
-      ApiId = $"{Guid.NewGuid():N}";
-      StreetSmartLocation = streetSmartLocation;
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
-      _processId = 0;
+      InitApi(streetSmartLocation);
     }
 
     public void InitBrowser(ChromiumWebBrowser browser)
     {
-      _browser = browser;
-      _browser.Address = StreetSmartLocation;
-      _browser.RegisterJsObject(JsThis, this);
-      ViewerList.CreateViewerList(ApiId);
-      ViewerList.RegisterJsObjects(ApiId, _browser);
-      _browser.FrameLoadEnd += OnFrameLoadEnd;
-      _browser.DownloadHandler = new DownloadHandler();
+      Browser = browser;
+      Browser.Address = _streetSmartLocation;
+      RegisterBrowser();
     }
     #endif
 
@@ -168,23 +133,20 @@ namespace StreetSmart.Common.API
 
     public void ShowDevTools()
     {
-      if (_browser.IsBrowserInitialized)
+      if (Browser.IsBrowserInitialized)
       {
-        _browser?.ShowDevTools();
+        Browser?.ShowDevTools();
       }
     }
 
     public void CloseDevTools()
     {
-      if (_browser.IsBrowserInitialized)
+      if (Browser.IsBrowserInitialized)
       {
-        _browser?.CloseDevTools();
+        Browser?.CloseDevTools();
       }
     }
 
-    #endregion
-
-    #region Interface Functions
     #if WPF
     public void RestartStreetSmart()
     {
@@ -193,11 +155,15 @@ namespace StreetSmart.Common.API
 
     public void RestartStreetSmart(string streetSmartLocation)
     {
-      StreetSmartLocation = streetSmartLocation;
-      _browser.Address = streetSmartLocation;
+      _streetSmartLocation = streetSmartLocation;
+      Browser.Address = streetSmartLocation;
     }
 
     #endif
+    #endregion
+
+    #region Interface Functions
+
     public async Task<IOverlay> AddOverlay(IOverlay overlay)
     {
       int processId = GetProcessId;
@@ -281,7 +247,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> GetApiReadyState()
     {
-      return _browser != null && ((bool?) await CallJsGetScriptAsync("getApiReadyState()") ?? false);
+      return Browser != null && ((bool?) await CallJsGetScriptAsync("getApiReadyState()") ?? false);
     }
 
     public async Task<string> GetApplicationName()
@@ -342,22 +308,22 @@ namespace StreetSmart.Common.API
 
     public void SetActiveMeasurement(string measurement)
     {
-      _browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
+      Browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
     }
 
     public void SetOverlayDrawDistance(int distance)
     {
-      _browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
+      Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
     }
 
     public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
     {
-      _browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
+      Browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
     }
 
     public void StopMeasurementMode()
     {
-      _browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
+      Browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
     }
 
     #endregion
@@ -376,36 +342,6 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnResult(object result, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(result);
-    }
-
-    public void OnLoginSuccess(string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(true);
-    }
-
-    public void OnLoginFailedException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartLoginFailedException(message));
-    }
-
-    public void OnImageNotFoundException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
-    }
-
-    public void OnViewerCloseException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartCloseViewerException(message));
-    }
-
     public void OnMeasurementChanged(Dictionary<string, object> args)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
@@ -414,7 +350,7 @@ namespace StreetSmart.Common.API
     public void OnViewerAdded(string name, string type)
     {
       string jsName = $"type{Guid.NewGuid():N}";
-      _browser.ExecuteScriptAsync($"var {jsName}={name};");
+      Browser.ExecuteScriptAsync($"var {jsName}={name};");
       IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
       ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
 
@@ -434,45 +370,19 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
-    private bool CheckResultTask(string funcName)
+    public void InitApi(string streetSmartLocation)
     {
-      bool result = true;
-
-      if (!_resultTask.ContainsKey(funcName))
-      {
-        _resultTask.Add(funcName, new TaskCompletionSource<object>());
-        result = false;
-      }
-
-      return result;
+      ApiId = $"{Guid.NewGuid():N}";
+      _streetSmartLocation = streetSmartLocation;
     }
 
-    private async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
+    public void RegisterBrowser()
     {
-      int processId = GetProcessId;
-      return await CallJsAsync(GetScript(script, processId, memberName), processId, memberName);
-    }
-
-    private async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
-    {
-      string funcName = $"{memberName}{processId}";
-
-      if (CheckResultTask(funcName))
-      {
-        _resultTask[funcName] = new TaskCompletionSource<object>();
-      }
-
-      _browser.ExecuteScriptAsync(script);
-      await _resultTask[funcName].Task;
-      TaskCompletionSource<object> result = _resultTask[funcName];
-      _resultTask.Remove(funcName);
-      return result.Task.Result;
-    }
-
-    private string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
-    {
-      string memberId = $"{memberName}{processId}";
-      return $"{JsThis}.{JsResult}({JsApi}.{funcName},{memberId.ToQuote()});";
+      Browser.RegisterJsObject(JsThis, this);
+      ViewerList.CreateViewerList(ApiId);
+      ViewerList.RegisterJsObjects(ApiId, Browser);
+      Browser.FrameLoadEnd += OnFrameLoadEnd;
+      Browser.DownloadHandler = new DownloadHandler();
     }
 
     private void ReAssignMeasurementEvents()
@@ -491,7 +401,7 @@ namespace StreetSmart.Common.API
           new ViewerEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved)
         };
 
-        _browser.ExecuteScriptAsync($"{_apiViewerEventList}");
+        Browser.ExecuteScriptAsync($"{_apiViewerEventList}");
       }
     }
 
@@ -504,7 +414,7 @@ namespace StreetSmart.Common.API
           new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
         };
 
-        _browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+        Browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
       }
     }
 
@@ -512,7 +422,7 @@ namespace StreetSmart.Common.API
     {
       if (_apiViewerEventList != null)
       {
-        _browser.ExecuteScriptAsync(_apiViewerEventList.Destroy);
+        Browser.ExecuteScriptAsync(_apiViewerEventList.Destroy);
         _apiViewerEventList = null;
       }
     }
@@ -521,7 +431,7 @@ namespace StreetSmart.Common.API
     {
       if (_apiMeasurementEventList != null)
       {
-        _browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
+        Browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
         _apiMeasurementEventList = null;
       }
     }

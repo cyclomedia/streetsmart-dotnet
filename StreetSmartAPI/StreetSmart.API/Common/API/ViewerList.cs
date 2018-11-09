@@ -19,11 +19,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Threading;
-
-using CefSharp;
 
 #if WINFORMS
 using CefSharp.WinForms;
@@ -36,18 +33,11 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.API
 {
-  abstract class ViewerList
+  abstract class ViewerList: APIBase
   {
     #region Tasks
 
-    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
     private readonly EventWaitHandle _waitTask;
-
-    #endregion
-
-    #region Members
-
-    private int _processId;
 
     #endregion
 
@@ -59,19 +49,13 @@ namespace StreetSmart.Common.API
 
     #region Properties
 
-    protected ChromiumWebBrowser Browser { get; set; }
-
     protected Dictionary<string, Viewer> Viewers { get; }
 
-    public string JsThis => $"{GetType().Name}Events";
+    #endregion
 
-    public string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
-
-    public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
+    #region Callback definitions
 
     public string JsLayerVisibilityChange => $"{nameof(OnLayerVisibilityChange).FirstCharacterToLower()}";
-
-    public int GetProcessId => _processId = (_processId + 1) % 10000;
 
     #endregion
 
@@ -81,8 +65,6 @@ namespace StreetSmart.Common.API
     {
       _waitTask = new AutoResetEvent(true);
       Viewers = new Dictionary<string, Viewer>();
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
-      _processId = 0;
     }
 
     #endregion
@@ -151,7 +133,7 @@ namespace StreetSmart.Common.API
         {
           var viewer = Viewers.ElementAt(i);
           string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
-                        {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
+                          {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
           bool exists = (bool) await CallJsAsync(script, processId);
 
           if (exists)
@@ -175,38 +157,9 @@ namespace StreetSmart.Common.API
       return viewer;
     }
 
-    private bool CheckResultTask(string funcName)
-    {
-      bool result = true;
-
-      if (!_resultTask.ContainsKey(funcName))
-      {
-        _resultTask.Add(funcName, new TaskCompletionSource<object>());
-        result = false;
-      }
-
-      return result;
-    }
-
-    private async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
-    {
-      string funcName = $"{memberName}{processId}";
-
-      if (CheckResultTask(funcName))
-      {
-        _resultTask[funcName] = new TaskCompletionSource<object>();
-      }
-
-      Browser.ExecuteScriptAsync(script);
-      await _resultTask[funcName].Task;
-      TaskCompletionSource<object> result = _resultTask[funcName];
-      _resultTask.Remove(funcName);
-      return result.Task.Result;
-    }
-
     #endregion
 
-    #region Callbacks viewer
+    #region Callbacks
 
     public void OnResult(string name, object result, string funcName)
     {
@@ -214,12 +167,6 @@ namespace StreetSmart.Common.API
       {
         Viewers[name].OnResult(result, funcName);
       }
-    }
-
-    public void OnThisResult(bool result, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(result);
     }
 
     public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
@@ -270,7 +217,7 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #region Viewer functions
+    #region Functions
 
     public static void RegisterJsObjects(string apiId, ChromiumWebBrowser browser)
     {

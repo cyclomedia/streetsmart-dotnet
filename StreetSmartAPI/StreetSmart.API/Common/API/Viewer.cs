@@ -33,25 +33,18 @@ using CefSharp.WinForms;
 using CefSharp.Wpf;
 #endif
 
-using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Exceptions;
+using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.API
 {
-  internal class Viewer : IViewer
+  internal class Viewer : APIBase, IViewer
   {
-    #region Tasks
-
-    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
-
-    #endregion
-
     #region Members
 
     private ApiEventList _viewerEventList;
-    private int _processId;
 
     #endregion
 
@@ -63,39 +56,39 @@ namespace StreetSmart.Common.API
 
     #region Properties
 
-    protected ChromiumWebBrowser Browser { get; }
-
     protected ViewerList ViewerList { get; }
 
     public string Name { get; protected set; }
 
+    protected override string CallFunctionBase => $"'{Name}',{Name}";
+
     public bool Destroyed { private get; set; }
 
-    public string JsThis => ViewerList.JsThis;
-
-    public string JsResult => ViewerList.JsResult;
-
-    public string JsImNotFound => (ViewerList as PanoramaViewerList)?.JsImNotFound;
-
-    public string JsLayerVisibilityChange => ViewerList.JsLayerVisibilityChange;
+    public override string JsThis => ViewerList.JsThis;
 
     public virtual string DisconnectEventsScript => $"{_viewerEventList.Destroy}";
 
     public virtual string ConnectEventsScript => $"{_viewerEventList}";
 
-    public int GetProcessId => _processId = (_processId + 1) % 10000;
+    #endregion
+
+    #region Callback definitions
+
+    public override string JsResult => ViewerList.JsResult;
+
+    public override string JsImNotFound => (ViewerList as PanoramaViewerList)?.JsImNotFound;
+
+    private string JsLayerVisibilityChange => ViewerList.JsLayerVisibilityChange;
 
     #endregion
 
     #region Constructors
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList)
+      : base(browser)
     {
-      Browser = browser;
       ViewerList = viewerList;
       Destroyed = false;
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
-      _processId = 0;
     }
 
     public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
@@ -177,18 +170,6 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-    public void OnResult(object result, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(result);
-    }
-
-    public void OnImageNotFoundException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
-    }
-
     public void OnLayerVisibilityChange(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
@@ -198,19 +179,6 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region Functions
-
-    private bool CheckResultTask(string funcName)
-    {
-      bool result = true;
-
-      if (!_resultTask.ContainsKey(funcName))
-      {
-        _resultTask.Add(funcName, new TaskCompletionSource<object>());
-        result = false;
-      }
-
-      return result;
-    }
 
     protected async Task<bool> GetButtonEnabled(Enum buttonId)
     {
@@ -222,37 +190,14 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleButtonEnabled({buttonId.Description()},{enabled.ToJsBool()})");
     }
 
-    protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
-    {
-      int processId = GetProcessId;
-      return await CallJsAsync(GetScript(script, processId, memberName), processId, memberName);
-    }
-
-    protected async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
+    protected override async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
       if (!Destroyed)
       {
-        string funcName = $"{memberName}{processId}";
-
-        if (CheckResultTask(funcName))
-        {
-          _resultTask[funcName] = new TaskCompletionSource<object>();
-        }
-
-        Browser.ExecuteScriptAsync(script);
-        await _resultTask[funcName].Task;
-        TaskCompletionSource<object> result = _resultTask[funcName];
-        _resultTask.Remove(funcName);
-        return result.Task.Result;
+        return await base.CallJsAsync(script, processId, memberName);
       }
 
       throw new StreetSmartViewerDoesNotExistException();
-    }
-
-    protected string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
-    {
-      string memberId = $"{memberName}{processId}";
-      return $"{JsThis}.{JsResult}('{Name}',{Name}.{funcName},{memberId.ToQuote()});";
     }
 
     public virtual void ConnectEvents()
