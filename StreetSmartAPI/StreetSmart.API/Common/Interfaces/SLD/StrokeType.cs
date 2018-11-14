@@ -16,27 +16,32 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
+using System.Xml.Serialization;
 
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// Stroke type
+  /// </summary>
+  public enum StrokeType
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// Stroke
+    /// </summary>
+    [XmlEnum("stroke")]
+    Stroke,
 
-      XYZ = new Coordinate(x, y, z);
-    }
+    /// <summary>
+    /// Width
+    /// </summary>
+    [XmlEnum("stroke-width")]
+    StrokeWidth,
 
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// Opacity
+    /// </summary>
+    [XmlEnum("stroke-opacity")]
+    StrokeOpacity
   }
 }

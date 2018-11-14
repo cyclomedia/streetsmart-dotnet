@@ -35,6 +35,6 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Oblique image
     /// </summary>
     [Description("ViewerType.OBLIQUE")]
-    Oblique = 2,
+    Oblique = 2
   }
 }

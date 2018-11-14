@@ -16,27 +16,28 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using StreetSmart.Common.Data.SLD;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// The mark
+  /// </summary>
+  public interface IMark
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// Symbolizer type
+    /// </summary>
+    SymbolizerType? WellKnownName { get; set; }
 
-      XYZ = new Coordinate(x, y, z);
-    }
+    /// <summary>
+    /// Fill types
+    /// </summary>
+    SvgParameterCollection<FillType> Fill { get; set; }
 
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// Stroke types
+    /// </summary>
+    SvgParameterCollection<StrokeType> Stroke { get; set; }
   }
 }

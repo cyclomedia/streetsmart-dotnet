@@ -17,9 +17,10 @@
  */
 
 using StreetSmart.Common.Data;
-
+using StreetSmart.Common.Data.SLD;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
+using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Factories
 {
@@ -68,5 +69,16 @@ namespace StreetSmart.Common.Factories
     /// <returns>Overlay object</returns>
     public static IOverlay Create(IFeatureCollection featureCollection, string name, string srs, string sld)
       => new Overlay(featureCollection.ToString(), name, srs, sld);
+
+    /// <summary>
+    /// Create the overlay object
+    /// </summary>
+    /// <param name="featureCollection">FeatureCollection object containing the layer data</param>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
+    /// <param name="styledLayerDescriptor">StyledLayer descriptor contains the sld styling of the layer</param>
+    /// <returns>Overlay object</returns>
+    public static IOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor)
+      => new Overlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD);
   }
 }

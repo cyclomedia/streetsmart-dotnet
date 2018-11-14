@@ -24,41 +24,22 @@ using StreetSmart.Common.Interfaces.SLD;
 namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
-  public class PolygonSymbolizer : Symbolizer, IPolygonSymbolizer
+  public class LineSymbolizer : Symbolizer, ILineSymbolizer
   {
-    public PolygonSymbolizer()
+    public LineSymbolizer()
     {
     }
 
-    public PolygonSymbolizer(SvgParameterCollection<FillType> fill, SvgParameterCollection<StrokeType> stroke)
+    public LineSymbolizer(SvgParameterCollection<StrokeType> stroke)
     {
-      Fill = fill;
       Stroke = stroke;
     }
 
-    public PolygonSymbolizer(Color? fillColor, double? fillOpacity, Color? strokeColor, double? strokeWidth)
+    public LineSymbolizer(Color? color, double? width, double? opacity)
     {
-      if (fillColor != null)
+      if (color != null)
       {
-        Fill = SvgParameterCollection<FillType>.GetFillObject((Color) fillColor, fillOpacity);
-      }
-
-      if (strokeColor != null)
-      {
-        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, null);
-      }
-    }
-
-    private SvgParameterCollection<FillType> _fill;
-
-    [XmlElement("Fill", Namespace = "http://www.opengis.net/se")]
-    public SvgParameterCollection<FillType> Fill
-    {
-      get => _fill;
-      set
-      {
-        _fill = value;
-        RaisePropertyChanged();
+        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) color, width, opacity);
       }
     }
 

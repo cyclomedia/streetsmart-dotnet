@@ -16,27 +16,23 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using StreetSmart.Common.Data.SLD;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// The graphic
+  /// </summary>
+  public interface IGraphic
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// Mark of the graphic
+    /// </summary>
+    Mark Mark { get; set; }
 
-      XYZ = new Coordinate(x, y, z);
-    }
-
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// Size of the graphic
+    /// </summary>
+    double Size { get; set; }
   }
 }

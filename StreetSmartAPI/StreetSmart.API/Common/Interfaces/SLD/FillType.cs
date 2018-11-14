@@ -16,27 +16,25 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// Filltype of the polygon
+  /// </summary>
+  public enum FillType
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// The fill
+    /// </summary>
+    [XmlEnum("fill")]
+    Fill,
 
-      XYZ = new Coordinate(x, y, z);
-    }
-
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// The opacity
+    /// </summary>
+    [XmlEnum("fill-opacity")]
+    FillOpacity
   }
 }

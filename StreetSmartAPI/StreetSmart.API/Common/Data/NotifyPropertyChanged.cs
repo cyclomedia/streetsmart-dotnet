@@ -21,7 +21,8 @@ using System.Runtime.CompilerServices;
 
 namespace StreetSmart.Common.Data
 {
-  internal abstract class NotifyPropertyChanged : INotifyPropertyChanged
+  #pragma warning disable 1591
+  public abstract class NotifyPropertyChanged : INotifyPropertyChanged
   {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,5 +30,6 @@ namespace StreetSmart.Common.Data
     {
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    #pragma warning restore 1591
   }
 }

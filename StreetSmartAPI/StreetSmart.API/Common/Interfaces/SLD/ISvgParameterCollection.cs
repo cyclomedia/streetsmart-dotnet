@@ -16,27 +16,21 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
+using StreetSmart.Common.Data.SLD;
 
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// Svg parameter collection
+  /// </summary>
+  /// <typeparam name="T">names of the parameters</typeparam>
+  public interface ISvgParameterCollection<T>
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
-
-      XYZ = new Coordinate(x, y, z);
-    }
-
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// Svg Parameters
+    /// </summary>
+    ObservableCollection<SvgParameter<T>> SvgParameter { get; set; }
   }
 }

@@ -16,27 +16,29 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using StreetSmart.Common.Data.SLD;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// Styled layer descriptor
+  /// </summary>
+  public interface IStyledLayerDescriptor
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// Version number
+    /// </summary>
+    string Version { get; set; }
 
-      XYZ = new Coordinate(x, y, z);
-    }
+    /// <summary>
+    /// the user layer
+    /// </summary>
+    UserLayer UserLayer { get; set; }
 
+    /// <summary>
+    /// The SLD
+    /// </summary>
     // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    string SLD { get; }
   }
 }

@@ -1,9 +1,30 @@
-﻿using System.Drawing;
+﻿/*
+ * Street Smart .NET integration
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
+using System.Drawing;
 using System.Xml.Serialization;
+
+using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Data.SLD
 {
-  internal class Mark : NotifyPropertyChanged
+  #pragma warning disable 1591
+  public class Mark : NotifyPropertyChanged, IMark
   {
     public Mark()
     {
@@ -16,17 +37,23 @@ namespace StreetSmart.Common.Data.SLD
       Stroke = stroke;
     }
 
-    public Mark(SymbolizerType type, Color fillColor, double opacity, Color strokeColor, double width)
+    public Mark(SymbolizerType? type, Color fillColor, double? fillOpacity, Color? strokeColor, double? strokeWidth)
     {
+
       WellKnownName = type;
-      Fill = SvgParameterCollection<FillType>.GetFillObject(fillColor, opacity);
-      Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject(strokeColor, width);
+
+      Fill = SvgParameterCollection<FillType>.GetFillObject(fillColor, fillOpacity);
+
+      if (strokeColor != null)
+      {
+        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, null);
+      }
     }
 
-    private SymbolizerType _wellKnownName;
+    private SymbolizerType? _wellKnownName;
 
     [XmlElement("WellKnownName", Namespace = "http://www.opengis.net/se")]
-    public SymbolizerType WellKnownName
+    public SymbolizerType? WellKnownName
     {
       get => _wellKnownName;
       set
@@ -61,5 +88,12 @@ namespace StreetSmart.Common.Data.SLD
         RaisePropertyChanged();
       }
     }
+
+    public bool ShouldSerializeWellKnownName()
+    {
+      return WellKnownName.HasValue;
+    }
   }
+
+  #pragma warning restore 1591
 }

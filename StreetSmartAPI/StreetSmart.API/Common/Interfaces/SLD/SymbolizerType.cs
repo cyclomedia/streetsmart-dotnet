@@ -16,27 +16,31 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
+using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  /// <summary>
+  /// Symbolizer type
+  /// </summary>
+  public enum SymbolizerType
   {
-    public PositionXYZ(Dictionary<string, object> position)
-      : base(position)
-    {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+    /// <summary>
+    /// Square
+    /// </summary>
+    [XmlEnum("square")]
+    Square,
 
-      XYZ = new Coordinate(x, y, z);
-    }
+    /// <summary>
+    /// Circle
+    /// </summary>
+    [XmlEnum("circle")]
+    Circle,
 
-    // ReSharper disable once InconsistentNaming
-    public ICoordinate XYZ { get; }
+    /// <summary>
+    /// Cross
+    /// </summary>
+    [XmlEnum("cross")]
+    Cross
   }
 }

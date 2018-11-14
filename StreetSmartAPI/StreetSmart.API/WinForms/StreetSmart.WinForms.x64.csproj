@@ -272,11 +272,11 @@
     <Compile Include="..\Common\Data\SLD\FeatureTypeStyle.cs">
       <Link>Data\SLD\FeatureTypeStyle.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Data\SLD\FillType.cs">
-      <Link>Data\SLD\FillType.cs</Link>
-    </Compile>
     <Compile Include="..\Common\Data\SLD\Graphic.cs">
       <Link>Data\SLD\Graphic.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\LineSymbolizer.cs">
+      <Link>Data\SLD\LineSymbolizer.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\SLD\Mark.cs">
       <Link>Data\SLD\Mark.cs</Link>
@@ -290,9 +290,6 @@
     <Compile Include="..\Common\Data\SLD\Rule.cs">
       <Link>Data\SLD\Rule.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Data\SLD\StrokeType.cs">
-      <Link>Data\SLD\StrokeType.cs</Link>
-    </Compile>
     <Compile Include="..\Common\Data\SLD\StyledLayerDescriptor.cs">
       <Link>Data\SLD\StyledLayerDescriptor.cs</Link>
     </Compile>
@@ -305,9 +302,6 @@
     <Compile Include="..\Common\Data\SLD\Symbolizer.cs">
       <Link>Data\SLD\Symbolizer.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Data\SLD\SymbolizerType.cs">
-      <Link>Data\SLD\SymbolizerType.cs</Link>
-    </Compile>
     <Compile Include="..\Common\Data\SLD\UserLayer.cs">
       <Link>Data\SLD\UserLayer.cs</Link>
     </Compile>
@@ -316,9 +310,6 @@
     </Compile>
     <Compile Include="..\Common\Data\SLD\VendorOption.cs">
       <Link>Data\SLD\VendorOption.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Data\SLD\VendorOptionType.cs">
-      <Link>Data\SLD\VendorOptionType.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\TimeTravelInfo.cs">
       <Link>Data\TimeTravelInfo.cs</Link>
@@ -388,6 +379,9 @@
     </Compile>
     <Compile Include="..\Common\Factories\PanoramaViewerOptionsFactory.cs">
       <Link>Factories\PanoramaViewerOptionsFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Factories\SLDFactory.cs">
+      <Link>Factories\SLDFactory.cs</Link>
     </Compile>
     <Compile Include="..\Common\Factories\StreetSmartAPIFactory.cs">
       <Link>Factories\StreetSmartAPIFactory.cs</Link>
@@ -610,6 +604,60 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\Reliability.cs">
       <Link>Interfaces\GeoJson\Reliability.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\FillType.cs">
+      <Link>Interfaces\SLD\FillType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IFeatureTypeStyle.cs">
+      <Link>Interfaces\SLD\IFeatureTypeStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IGraphic.cs">
+      <Link>Interfaces\SLD\IGraphic.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\ILineSymbolizer.cs">
+      <Link>Interfaces\SLD\ILineSymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IMark.cs">
+      <Link>Interfaces\SLD\IMark.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IPointSymbolizer.cs">
+      <Link>Interfaces\SLD\IPointSymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IPolygonSymbolizer.cs">
+      <Link>Interfaces\SLD\IPolygonSymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IRule.cs">
+      <Link>Interfaces\SLD\IRule.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IStyledLayerDescriptor.cs">
+      <Link>Interfaces\SLD\IStyledLayerDescriptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\ISvgParameter.cs">
+      <Link>Interfaces\SLD\ISvgParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\ISvgParameterCollection.cs">
+      <Link>Interfaces\SLD\ISvgParameterCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\ISymbolizer.cs">
+      <Link>Interfaces\SLD\ISymbolizer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IUserLayer.cs">
+      <Link>Interfaces\SLD\IUserLayer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IUserStyle.cs">
+      <Link>Interfaces\SLD\IUserStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IVendorOption.cs">
+      <Link>Interfaces\SLD\IVendorOption.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\StrokeType.cs">
+      <Link>Interfaces\SLD\StrokeType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\SymbolizerType.cs">
+      <Link>Interfaces\SLD\SymbolizerType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\VendorOptionType.cs">
+      <Link>Interfaces\SLD\VendorOptionType.cs</Link>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

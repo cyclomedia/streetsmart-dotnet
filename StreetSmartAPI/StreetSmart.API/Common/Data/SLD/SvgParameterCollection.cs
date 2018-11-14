@@ -1,11 +1,32 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+ * Street Smart .NET integration
+ * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Xml.Serialization;
 
+using StreetSmart.Common.Interfaces.SLD;
+
 namespace StreetSmart.Common.Data.SLD
 {
-  internal class SvgParameterCollection<T> : NotifyPropertyChanged
+  #pragma warning disable 1591
+  public class SvgParameterCollection<T> : NotifyPropertyChanged, ISvgParameterCollection<T>
   {
     private ObservableCollection<SvgParameter<T>> _svgParameter;
 
@@ -20,9 +41,9 @@ namespace StreetSmart.Common.Data.SLD
       }
     }
 
-    public static SvgParameterCollection<FillType> GetFillObject(Color color, double opacity)
+    public static SvgParameterCollection<FillType> GetFillObject(Color color, double? opacity)
     {
-      return new SvgParameterCollection<FillType>
+      SvgParameterCollection<FillType> result = new SvgParameterCollection<FillType>
       {
         SvgParameter = new ObservableCollection<SvgParameter<FillType>>
         {
@@ -30,19 +51,25 @@ namespace StreetSmart.Common.Data.SLD
           {
             Name = FillType.Fill,
             Value = $"#{color.ToArgb().ToString("X").Substring(2)}"
-          },
-          new SvgParameter<FillType>
-          {
-            Name = FillType.FillOpacity,
-            Value = opacity.ToString(CultureInfo.InvariantCulture)
           }
         }
       };
+
+      if (opacity != null)
+      {
+        result.SvgParameter.Add(new SvgParameter<FillType>
+        {
+          Name = FillType.FillOpacity,
+          Value = opacity?.ToString(CultureInfo.InvariantCulture)
+        });
+      }
+
+      return result;
     }
 
-    public static SvgParameterCollection<StrokeType> GetStrokeObject(Color color, double width)
+    public static SvgParameterCollection<StrokeType> GetStrokeObject(Color color, double? width, double? opacity)
     {
-      return new SvgParameterCollection<StrokeType>
+      SvgParameterCollection<StrokeType> result = new SvgParameterCollection<StrokeType>
       {
         SvgParameter = new ObservableCollection<SvgParameter<StrokeType>>
         {
@@ -50,14 +77,30 @@ namespace StreetSmart.Common.Data.SLD
           {
             Name = StrokeType.Stroke,
             Value = $"#{color.ToArgb().ToString("X").Substring(2)}"
-          },
-          new SvgParameter<StrokeType>
-          {
-            Name = StrokeType.StrokeWidth,
-            Value = width.ToString(CultureInfo.InvariantCulture)
           }
         }
       };
+
+      if (width != null)
+      {
+        result.SvgParameter.Add(new SvgParameter<StrokeType>
+        {
+          Name = StrokeType.StrokeWidth,
+          Value = width?.ToString(CultureInfo.InvariantCulture)
+        });
+      }
+
+      if (opacity != null)
+      {
+        result.SvgParameter.Add(new SvgParameter<StrokeType>
+        {
+          Name = StrokeType.StrokeOpacity,
+          Value = opacity?.ToString(CultureInfo.InvariantCulture)
+        });
+      }
+
+      return result;
     }
   }
+  #pragma warning restore 1591
 }
