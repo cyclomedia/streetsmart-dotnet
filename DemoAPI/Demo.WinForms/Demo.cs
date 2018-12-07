@@ -82,9 +82,12 @@ namespace Demo.WinForms
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
 
+      IAPISettings apiSettings = CefSettingsFactory.Create();
+      apiSettings.DisableGPUCache = true;
+
       _api = string.IsNullOrEmpty(StreetSmartLocation)
-        ? StreetSmartAPIFactory.Create()
-        : StreetSmartAPIFactory.Create(StreetSmartLocation);
+        ? StreetSmartAPIFactory.Create(apiSettings)
+        : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings);
       _api.APIReady += OnAPIReady;
       _api.MeasurementChanged += OnMeasurementChanged;
       _api.ViewerAdded += OnViewerAdded;

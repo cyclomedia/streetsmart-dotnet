@@ -74,6 +74,12 @@
     <Compile Include="..\Common\API\APIBase.cs">
       <Link>API\APIBase.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\APISettings.cs">
+      <Link>API\APISettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\CommandLineArgs.cs">
+      <Link>API\CommandLineArgs.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\Events\ApiEvent.cs">
       <Link>API\Events\ApiEvent.cs</Link>
     </Compile>
@@ -350,6 +356,9 @@
     <Compile Include="..\Common\Factories\AddressSettingsFactory.cs">
       <Link>Factories\AddressSettingsFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Factories\CefSettingsFactory.cs">
+      <Link>Factories\CefSettingsFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Factories\CoordinateFactory.cs">
       <Link>Factories\CoordinateFactory.cs</Link>
     </Compile>
@@ -394,6 +403,9 @@
     </Compile>
     <Compile Include="..\Common\Handlers\DownloadHandler.cs">
       <Link>Handlers\DownloadHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IAPISettings.cs">
+      <Link>Interfaces\API\IAPISettings.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\API\IObliqueViewer.cs">
       <Link>Interfaces\API\IObliqueViewer.cs</Link>

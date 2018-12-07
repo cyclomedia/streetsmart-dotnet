@@ -16,10 +16,6 @@
  * License along with this library.
  */
 
-using System;
-using System.IO;
-using System.Reflection;
-
 using CefSharp;
 
 using StreetSmart.Common.Handlers;
@@ -45,33 +41,34 @@ namespace StreetSmart.Common.Factories
   /// </summary>
   public static class StreetSmartAPIFactory
   {
-    static StreetSmartAPIFactory()
+    private static void InitializeCefSharp(CefSettings settings)
     {
-      string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-      UriBuilder uri = new UriBuilder(codeBase);
-      string path = Uri.UnescapeDataString(uri.Path);
-      string browserSubprocessPath = Path.GetDirectoryName(path) ?? string.Empty;
-      string broserSubprocess = Path.Combine(browserSubprocessPath, Resources.BrowserSubprocess);
-
-      CefSettings settings = new CefSettings {BrowserSubprocessPath = broserSubprocess};
-      BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
-
-      CefSharpSettings.LegacyJavascriptBindingEnabled = true;
-      Cef.Initialize(settings, true, browserProcessHandler);
+      if (settings != null)
+      {
+        CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+        BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
+        Cef.Initialize(settings, true, browserProcessHandler);
+      }
     }
 
     /// <summary>
     /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
+    /// <param name="settings">The settings of CefSharp</param>
     /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create() => Create(Resources.StreetSmartLocation);
+    public static IStreetSmartAPI Create(IAPISettings settings = null) => Create(Resources.StreetSmartLocation, settings);
 
     /// <summary>
     /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
     /// <param name="streetSmartLocation">The location Uri of StreetSmart</param>
+    /// <param name="settings">The settings of CefSharp</param>
     /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create(string streetSmartLocation) => new StreetSmartAPI(streetSmartLocation);
+    public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null)
+    {
+      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings);
+      return new StreetSmartAPI(streetSmartLocation);
+    }
   }
 
   // ReSharper restore InconsistentNaming
