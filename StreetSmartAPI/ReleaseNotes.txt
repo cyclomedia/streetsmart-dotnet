@@ -5,6 +5,10 @@ Version: 18.14.0
 ================
 - Refactor some code
 - Added Constructing of SLD objects
+- Added a API Settings class
+- Added in the API Settings class functionalities for location of the GPU Cache and the disabling of the GPU cash
+- Added functions in the viewer objects: (IViewer / IPanoramaViewer / IObliqueViewer): GetType(), SaveImage(), ToggleOverlay()
+- Added function to the obliqueViewer: SwitchViewingDirection()
 
 
 Version: 18.13.0

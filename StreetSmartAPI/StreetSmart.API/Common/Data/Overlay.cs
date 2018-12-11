@@ -30,6 +30,7 @@ namespace StreetSmart.Common.Data
     private string _name;
     private string _srs;
     private string _sld;
+    private bool _visible;
 
     public Overlay(string geoJson, string name, string srs, string sld)
     {
@@ -37,6 +38,7 @@ namespace StreetSmart.Common.Data
       Name = name;
       Srs = srs;
       Sld = sld;
+      Visible = true;
     }
 
     public void FillInParameters(Dictionary<string, object> overlay)
@@ -107,7 +109,17 @@ namespace StreetSmart.Common.Data
 
       string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
       string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
-      return $"{{name:{Name.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
+      return $"{{name:{Name.ToQuote()},visible:{Visible.ToJsBool()},id:{Id.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
+    }
+
+    public bool Visible
+    {
+      get => _visible;
+      set
+      {
+        _visible = value;
+        RaisePropertyChanged();
+      }
     }
   }
 }

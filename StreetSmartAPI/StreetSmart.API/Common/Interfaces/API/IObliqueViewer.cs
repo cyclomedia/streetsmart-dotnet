@@ -34,6 +34,12 @@ namespace StreetSmart.Common.Interfaces.API
     Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId);
 
     /// <summary>
+    /// Changes the viewing direction of the oblique viewer.
+    /// </summary>
+    /// <param name="deltaDegrees">Change direction (-90, 90, 180)</param>
+    void SwitchViewingDirection(double deltaDegrees);
+
+    /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
     /// <param name="buttonId"></param>

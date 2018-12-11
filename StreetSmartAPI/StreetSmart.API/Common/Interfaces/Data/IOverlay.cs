@@ -48,5 +48,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Optional XML string for Styled Layer Descriptor.
     /// </summary>
     string Sld { get; set; }
+
+    /// <summary>
+    /// visibility of the layer
+    /// </summary>
+    bool Visible { get; set; }
   }
 }

@@ -18,6 +18,8 @@
 
 using System.Threading.Tasks;
 
+using CefSharp;
+
 using StreetSmart.Common.Interfaces.API;
 
 #if WINFORMS
@@ -45,6 +47,11 @@ namespace StreetSmart.Common.API
     public async Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId)
     {
       return await base.GetButtonEnabled(buttonId);
+    }
+
+    public void SwitchViewingDirection(double deltaDegrees)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.switchViewingDirection({deltaDegrees});");
     }
 
     public void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled)

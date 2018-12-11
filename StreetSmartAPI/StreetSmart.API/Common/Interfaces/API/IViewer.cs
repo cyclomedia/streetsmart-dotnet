@@ -71,6 +71,17 @@ namespace StreetSmart.Common.Interfaces.API
     Task<bool> GetTimeTravelVisible();
 
     /// <summary>
+    /// Returns the type of this viewer.
+    /// </summary>
+    /// <returns>The type of this viewer..</returns>
+    Task<ViewerType> GetType();
+
+    /// <summary>
+    /// Downloads the image
+    /// </summary>
+    void SaveImage();
+
+    /// <summary>
     /// Set the brightness of the viewer.
     /// </summary>
     /// <param name="value">Set brightness to a positive number</param>
@@ -93,6 +104,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleNavbarVisible(bool visible);
+
+    /// <summary>
+    /// Toggles the visibility of an overlay.
+    /// </summary>
+    /// <param name="overlay">Sets the visibility of the layer to this value.</param>
+    void ToggleOverlay(IOverlay overlay);
 
     /// <summary>
     /// Expands or hides the timetravel components.

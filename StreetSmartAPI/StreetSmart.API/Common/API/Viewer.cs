@@ -126,6 +126,39 @@ namespace StreetSmart.Common.API
       return (bool) await CallJsGetScriptAsync("getTimeTravelVisible()");
     }
 
+    public new async Task<ViewerType> GetType()
+    {
+      string type = (string) await CallJsGetScriptAsync("getType()");
+      ViewerType viewerType = ViewerType.Panorama;
+
+      switch (type)
+      {
+        case "@@ViewerType/PANORAMA":
+          viewerType = ViewerType.Panorama;
+          break;
+        case "@@ViewerType/OBLIQUE":
+          viewerType = ViewerType.Oblique;
+          break;
+      }
+
+      return viewerType;
+    }
+
+    public void SaveImage()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.saveImage();");
+    }
+
+    public void SetBrightness(double value)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setBrightness({value});");
+    }
+
+    public void SetContrast(double value)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setContrast({value});");
+    }
+
     public void ToggleNavbarExpanded(bool expanded)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleNavbarExpanded({expanded.ToJsBool()});");
@@ -134,6 +167,12 @@ namespace StreetSmart.Common.API
     public void ToggleNavbarVisible(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleNavbarVisible({visible.ToJsBool()});");
+    }
+
+    public void ToggleOverlay(IOverlay overlay)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleOverlay({overlay});");
+      overlay.Visible = !overlay.Visible;
     }
 
     public void ToggleTimeTravelExpanded(bool expanded)
@@ -154,16 +193,6 @@ namespace StreetSmart.Common.API
     public void ZoomOut()
     {
       Browser.ExecuteScriptAsync($"{Name}.zoomOut();");
-    }
-
-    public void SetBrightness(double value)
-    {
-      Browser.ExecuteScriptAsync($"{Name}.setBrightness({value});");
-    }
-
-    public void SetContrast(double value)
-    {
-      Browser.ExecuteScriptAsync($"{Name}.setContrast({value});");
     }
 
     #endregion
