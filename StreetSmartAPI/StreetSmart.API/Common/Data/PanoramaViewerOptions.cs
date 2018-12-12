@@ -27,6 +27,9 @@ namespace StreetSmart.Common.Data
   {
     private bool? _replace;
     private bool? _recordingsVisible;
+    private bool? _measureTypeButtonVisible;
+    private bool? _measureTypeButtonToggle;
+    private bool? _measureTypeButtonStart;
 
     public PanoramaViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible,
       bool? replace, bool? recordingsVisible) : base(closable, maximizable, timeTravelVisible, navBarVisible)
@@ -55,6 +58,36 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public bool? MeasureTypeButtonVisible
+    {
+      get => _measureTypeButtonVisible;
+      set
+      {
+        _measureTypeButtonVisible = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool? MeasureTypeButtonToggle
+    {
+      get => _measureTypeButtonToggle;
+      set
+      {
+        _measureTypeButtonToggle = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool? MeasureTypeButtonStart
+    {
+      get => _measureTypeButtonStart;
+      set
+      {
+        _measureTypeButtonStart = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
       List<string> options = new List<string>();
@@ -67,6 +100,21 @@ namespace StreetSmart.Common.Data
       if (RecordingsVisible != null)
       {
         options.Add($"recordingsVisible:{RecordingsVisible.ToString().ToLower()}");
+      }
+
+      if (MeasureTypeButtonVisible != null)
+      {
+        options.Add($"measureTypeButtonVisible:{MeasureTypeButtonVisible.ToString().ToLower()}");
+      }
+
+      if (MeasureTypeButtonToggle != null)
+      {
+        options.Add($"measureTypeButtonToggle:{MeasureTypeButtonToggle.ToString().ToLower()}");
+      }
+
+      if (MeasureTypeButtonStart != null)
+      {
+        options.Add($"measureTypeButtonStart:{MeasureTypeButtonStart.ToString().ToLower()}");
       }
 
       string baseOptions = base.ToString();

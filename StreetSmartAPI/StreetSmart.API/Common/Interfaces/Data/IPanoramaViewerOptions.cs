@@ -32,5 +32,20 @@ namespace StreetSmart.Common.Interfaces.Data
     /// If recordings should be visible
     /// </summary>
     bool? RecordingsVisible { get; set; }
+
+    /// <summary>
+    /// Show measurement type button in measurement the navigation bar. Default is true.
+    /// </summary>
+    bool? MeasureTypeButtonVisible { get; set; }
+
+    /// <summary>
+    /// Allow toggle of measurement type in measurement the navigation bar. Default is true.
+    /// </summary>
+    bool? MeasureTypeButtonToggle { get; set; }
+
+    /// <summary>
+    /// Start new measurement when clicking on measurement type button in measurement the navigation bar. Default is true.
+    /// </summary>
+    bool? MeasureTypeButtonStart { get; set; }
   }
 }

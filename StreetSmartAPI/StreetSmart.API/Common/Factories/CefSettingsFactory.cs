@@ -16,31 +16,36 @@
  * License along with this library.
  */
 
-using System.ComponentModel;
+using StreetSmart.Common.Interfaces.API;
+using StreetSmart.Common.API;
 
-namespace StreetSmart.Common.Interfaces.Data
+namespace StreetSmart.Common.Factories
 {
+  // ReSharper disable InconsistentNaming
+
   /// <summary>
-  /// Defines the viewerTypes of the API
+  /// Factory for create a API settings class
   /// </summary>
-  public enum ViewerType
+  public static class CefSettingsFactory
   {
     /// <summary>
-    /// Panoramic image
+    /// Creates a new instance of the API Settings class.
     /// </summary>
-    [Description("ViewerType.PANORAMA")]
-    Panorama = 1,
+    /// <returns>API Settings class</returns>
+    public static IAPISettings Create(string cachePath, string browserSubprocessPath = null)
+    {
+      return new APISettings(cachePath, browserSubprocessPath);
+    }
 
     /// <summary>
-    /// Oblique image
+    /// Creates a new instance of the API Settings class.
     /// </summary>
-    [Description("ViewerType.OBLIQUE")]
-    Oblique = 2,
-
-    /// <summary>
-    /// Map
-    /// </summary>
-    [Description("ViewerType.MAP")]
-    Map = 3,
+    /// <returns>API Settings class</returns>
+    public static IAPISettings Create()
+    {
+      return new APISettings();
+    }
   }
+
+  // ReSharper restore InconsistentNaming
 }

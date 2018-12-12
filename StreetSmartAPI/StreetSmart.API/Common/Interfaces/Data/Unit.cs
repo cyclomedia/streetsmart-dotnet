@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.ComponentModel;
+
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
@@ -26,26 +28,31 @@ namespace StreetSmart.Common.Interfaces.Data
     /// <summary>
     /// anything else
     /// </summary>
+    [Description("?")]
     Unknown = 0,
 
     /// <summary>
     /// Meters
     /// </summary>
+    [Description("m")]
     Meters = 1,
 
     /// <summary>
     /// Feet
     /// </summary>
+    [Description("ft")]
     Feet = 2,
 
     /// <summary>
     /// UsFeet
     /// </summary>
+    [Description("us-ft")]
     UsFeet = 3,
 
     /// <summary>
     /// Degrees
     /// </summary>
+    [Description("degrees")]
     Degrees = 4,
   }
 }

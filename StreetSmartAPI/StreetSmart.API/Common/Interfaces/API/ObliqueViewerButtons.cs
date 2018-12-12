@@ -62,9 +62,15 @@ namespace StreetSmart.Common.Interfaces.API
     SwitchDirection = 6,
 
     /// <summary>
+    /// save image
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.buttons.SAVE_IMAGE")]
+    SaveImage = 7,
+
+    /// <summary>
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 7
+    ToggleNadir = 8
   }
 }

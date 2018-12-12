@@ -16,31 +16,11 @@
  * License along with this library.
  */
 
-using System.ComponentModel;
-
-namespace StreetSmart.Common.Interfaces.Data
+namespace StreetSmart.Common.API
 {
-  /// <summary>
-  /// Defines the viewerTypes of the API
-  /// </summary>
-  public enum ViewerType
+  // ReSharper disable once InconsistentNaming
+  internal class CommandLineArgs
   {
-    /// <summary>
-    /// Panoramic image
-    /// </summary>
-    [Description("ViewerType.PANORAMA")]
-    Panorama = 1,
-
-    /// <summary>
-    /// Oblique image
-    /// </summary>
-    [Description("ViewerType.OBLIQUE")]
-    Oblique = 2,
-
-    /// <summary>
-    /// Map
-    /// </summary>
-    [Description("ViewerType.MAP")]
-    Map = 3,
+    public const string DisableGPUCache = "disable-gpu-shader-disk-cache";
   }
 }
