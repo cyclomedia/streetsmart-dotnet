@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -35,6 +36,7 @@ namespace StreetSmart.Common.Data.GeoJson
       string customGeometryType = properties?["customGeometryType"]?.ToString() ?? string.Empty;
       Dictionary<string, object> derivedData = properties?["derivedData"] as Dictionary<string, object>;
       string measureReliability = properties?["measureReliability"]?.ToString() ?? string.Empty;
+      string measurementTool = properties?["measurementTool"]?.ToString() ?? string.Empty;
       IList<object> pointsWithErrors = properties?["pointsWithErrors"] as IList<object> ?? new List<object>();
       ValidGeometry = properties?["validGeometry"] as bool? ?? false;
       Dictionary<string, object> observationLines = properties?.ContainsKey("observationLines") ?? false
@@ -88,6 +90,19 @@ namespace StreetSmart.Common.Data.GeoJson
           break;
       }
 
+      switch (measurementTool)
+      {
+        case "MAP":
+          MeasurementTool = MeasurementTools.Map;
+          break;
+        case "PANORAMA":
+          MeasurementTool = MeasurementTools.Panorama;
+          break;
+        case "POINTCLOUD":
+          MeasurementTool = MeasurementTools.PointCloud;
+          break;
+      }
+
       foreach (var pointsWithError in pointsWithErrors)
       {
         PointsWithErrors.Add(pointsWithError as int? ?? 0);
@@ -104,6 +119,7 @@ namespace StreetSmart.Common.Data.GeoJson
       Add("PointsWithErrors", PointsWithErrors);
       Add("ValidGeometry", ValidGeometry);
       Add("ObservationLines", ObservationLines);
+      Add("measurementTool", measurementTool);
     }
 
     public string Id { get; }
@@ -127,5 +143,24 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool ValidGeometry { get; }
 
     public IObservationLines ObservationLines { get; }
+
+    public MeasurementTools MeasurementTool { get; }
+
+    public override string ToString()
+    {
+      string pointsWithErrors = PointsWithErrors.Aggregate("[", (current, point) => $"{current}{point},");
+      string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
+
+      string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
+      string measureDetailsStr = $"{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]";
+
+      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\",\"measureDetails\":{measureDetailsStr},\"dimension\":{Dimension}" +
+                          $",\"customGeometryType\":\"{CustomGeometryType.Description()}\",\"derivedData\":{DerivedData}" +
+                          $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
+                          $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +
+                          $",\"measurementTool\":\"{MeasurementTool.Description()}\"";
+
+      return $"\"properties\":{{{properties}}}";
+    }
   }
 }

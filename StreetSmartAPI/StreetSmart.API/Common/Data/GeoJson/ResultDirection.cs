@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 
 using StreetSmart.Common.Interfaces.GeoJson;
@@ -27,6 +28,8 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class ResultDirection : NotifyPropertyChanged, IResultDirection
   {
+    private readonly string _matchImage;
+
     public ResultDirection(Dictionary<string, object> resultDirection)
     {
       RecordedAt = (resultDirection?.ContainsKey("RecordedAt") ?? false)
@@ -38,7 +41,7 @@ namespace StreetSmart.Common.Data.GeoJson
       double directionZ = resultDirection?["DirectionZ"] as double? ?? 0.0;
       GroundLevelOffset = resultDirection?["GroundLevelOffset"] as double? ?? 0.0;
       Id = resultDirection?["Id"]?.ToString() ?? string.Empty;
-      string matchImage = resultDirection?["MatchImage"]?.ToString() ?? string.Empty;
+      _matchImage = resultDirection?["MatchImage"]?.ToString() ?? string.Empty;
       double orientation = resultDirection?["Orientation"] as double? ?? 0.0;
       double positionX = resultDirection?["PositionX"] as double? ?? 0.0;
       double positionY = resultDirection?["PositionY"] as double? ?? 0.0;
@@ -47,12 +50,22 @@ namespace StreetSmart.Common.Data.GeoJson
       double stdX = resultDirection?["StdX"] as double? ?? 0.0;
       double stdY = resultDirection?["StdY"] as double? ?? 0.0;
       double stdZ = resultDirection?["StdZ"] as double? ?? 0.0;
+      string calculationMethod = resultDirection?["calculationMethod"]?.ToString() ?? string.Empty;
+
+      try
+      {
+        CalculatedMethod = (CalculatedMethod) Enum.Parse(typeof(CalculatedMethod), calculationMethod);
+      }
+      catch (ArgumentException)
+      {
+        CalculatedMethod = CalculatedMethod.NotDefined;
+      }
 
       Direction = new Direction(directionX, directionY, directionZ);
       Orientation = new Property(orientation, stdOrientation);
       Position = new PositionStdev(positionX, positionY, positionZ, stdX, stdY, stdZ);
 
-      byte[] bytes = Convert.FromBase64String(matchImage);
+      byte[] bytes = Convert.FromBase64String(_matchImage);
       MatchImage = new Bitmap(new MemoryStream(bytes));
     }
 
@@ -68,6 +81,23 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public IPositionStdev Position { get; }
 
+    public CalculatedMethod CalculatedMethod { get; }
+
     public DateTime? RecordedAt { get; }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      DateTimeFormatInfo ff = new DateTimeFormatInfo();
+      string dateString = RecordedAt == null
+        ? string.Empty
+        : $",\"RecordedAt\":\"{((DateTime) RecordedAt).ToString(ff.SortableDateTimePattern)}\"";
+
+      return $"{{\"DirectionX\":{Direction?.X?.ToString(ci)},\"DirectionY\":{Direction?.Y?.ToString(ci)},\"DirectionZ\":{Direction?.Z?.ToString(ci)}," +
+             $"\"GroundLevelOffset\":{GroundLevelOffset.ToString(ci)},\"Id\":\"{Id}\",\"MatchImage\":\"{_matchImage}\",\"Orientation\":{Orientation?.Value?.ToString(ci)}," +
+             $"\"StdOrientation\":{Orientation?.Stdev?.ToString(ci)},\"PositionX\":{Position?.X?.ToString(ci)},\"PositionY\":{Position?.Y?.ToString(ci)}," +
+             $"\"PositionZ\":{Position?.Z?.ToString(ci)},\"StdX\":{Position?.StdDev?.X?.ToString(ci)},\"StdY\":{Position?.StdDev?.Y?.ToString(ci)}," +
+             $"\"StdZ\":{Position?.StdDev?.Z?.ToString(ci)},\"calculationMethod\":\"{CalculatedMethod.Description()}\"{dateString}}}";
+    }
   }
 }

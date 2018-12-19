@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.ComponentModel;
+
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
@@ -26,26 +28,37 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// <summary>
     /// Not defined
     /// </summary>
+    [Description("")]
     NotDefined = 0,
 
     /// <summary>
     /// Circle
     /// </summary>
+    [Description("Circle")]
     Circle = 1,
 
     /// <summary>
     /// Orthogonal
     /// </summary>
+    [Description("Orthogonal")]
     Orthogonal = 2,
 
     /// <summary>
     /// Height
     /// </summary>
+    [Description("Height")]
     Height = 3,
 
     /// <summary>
     /// Rectangle
     /// </summary>
+    [Description("Rectangle")]
     Rectangle = 4,
+
+    /// <summary>
+    /// Redline
+    /// </summary>
+    [Description("Redline")]
+    Redline = 5
   }
 }

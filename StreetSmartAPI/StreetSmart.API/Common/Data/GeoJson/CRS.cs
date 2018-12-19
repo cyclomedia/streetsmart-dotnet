@@ -70,7 +70,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       string properties = Type == CRSType.Epsg ? "code" : "name";
-      return $"\"crs\":{{\"type\":\"{Type.Description()}\",\"properties\":{{\"{properties}\":{Properties}}}}}";
+      return $"\"crs\":{{\"type\":\"{Type.Description()}\",\"properties\":{{\"{properties}\":\"{Properties}\"}}}}";
     }
   }
 }

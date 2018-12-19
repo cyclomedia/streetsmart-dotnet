@@ -79,7 +79,7 @@ namespace StreetSmart.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v18.14/api-dotnet.html.
+        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v18.15/api-dotnet.html.
         /// </summary>
         internal static string StreetSmartLocation {
             get {

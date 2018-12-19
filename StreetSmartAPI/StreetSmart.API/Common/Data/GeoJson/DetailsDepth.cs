@@ -17,6 +17,7 @@
  */
 
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -46,5 +47,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public double Depth { get; }
 
     public IRecordingInfo RecordingInfo { get; }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      return $"{{\"position\":{Position},\"direction\":{Direction},\"depthInMeters\":{DepthInMeters.ToString(ci)},\"depth\":{Depth.ToString(ci)},\"recordingInfo\":{RecordingInfo}}}";
+    }
   }
 }

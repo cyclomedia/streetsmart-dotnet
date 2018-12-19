@@ -17,6 +17,7 @@
  */
 
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -49,5 +50,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public IProperty Yaw { get; }
 
     public double DepthStdev { get; }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      return $"{{\"id\":\"{Id}\",{Position},\"srs\":\"{SRS}\",\"yaw\":{Yaw?.Value?.ToString(ci)},\"yawStdev\":{Yaw?.Stdev?.ToString(ci)},\"depthStdev\":{DepthStdev.ToString(ci)}}}";
+    }
   }
 }

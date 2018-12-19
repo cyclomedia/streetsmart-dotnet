@@ -17,6 +17,7 @@
  */
 
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
@@ -38,5 +39,12 @@ namespace StreetSmart.Common.Data.GeoJson
 
     // ReSharper disable once InconsistentNaming
     public ICoordinate XYZ { get; }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      return $"{{\"x\":{XYZ?.X?.ToString(ci)},\"y\":{XYZ?.Y?.ToString(ci)},\"z\":{XYZ?.Z?.ToString(ci)}," +
+             $"\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
+    }
   }
 }

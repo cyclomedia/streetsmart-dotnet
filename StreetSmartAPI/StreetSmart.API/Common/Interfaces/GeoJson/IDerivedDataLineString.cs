@@ -55,7 +55,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Segments slope percentage
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    IList<IProperty> SegmentSlopePercentage { get; }
+    IList<IProperty> SegmentsSlopePercentage { get; }
 
     /// <summary>
     /// Segments slope angle

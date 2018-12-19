@@ -16,7 +16,9 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -44,5 +46,15 @@ namespace StreetSmart.Common.Data.GeoJson
     public IList<ITriangle> Triangles { get; }
 
     public IProperty Area { get; }
+
+    public override string ToString()
+    {
+      string baseStr = base.ToString();
+      string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
+      string comma = subStr.Length >= 2 ? "," : string.Empty;
+      subStr = $"{subStr}{comma}";
+      string triangles = Triangles.Aggregate("[", (current, triangle) => $"{current}{triangle},");
+      return $"{subStr}{GetValueString(Area, "area")}\"triangles\":{triangles.Substring(0, Math.Max(triangles.Length - 1, 1))}]}}";
+    }
   }
 }

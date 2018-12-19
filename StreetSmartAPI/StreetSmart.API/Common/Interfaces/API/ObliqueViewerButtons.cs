@@ -32,45 +32,39 @@ namespace StreetSmart.Common.Interfaces.API
     Overlays = 1,
 
     /// <summary>
-    /// center map
-    /// </summary>
-    [Description("StreetSmartApi.ObliqueViewerUi.buttons.CENTER_MAP")]
-    CenterMap = 2,
-
-    /// <summary>
     /// image information
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.IMAGE_INFORMATION")]
-    ImageInformation = 3,
+    ImageInformation = 2,
 
     /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 4,
+    ZoomIn = 3,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 5,
+    ZoomOut = 4,
 
     /// <summary>
     /// switch direction
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SWITCH_DIRECTION")]
-    SwitchDirection = 6,
+    SwitchDirection = 5,
 
     /// <summary>
     /// save image
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 7,
+    SaveImage = 6,
 
     /// <summary>
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 8
+    ToggleNadir = 7
   }
 }

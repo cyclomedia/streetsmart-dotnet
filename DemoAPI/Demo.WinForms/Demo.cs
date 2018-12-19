@@ -46,6 +46,8 @@ namespace Demo.WinForms
     private readonly CultureInfo _ci;
     private readonly Login _login;
 
+    private IFeatureCollection _measurement;
+
     private IOptions _options;
     private IOverlay _overlay;
 
@@ -103,9 +105,9 @@ namespace Demo.WinForms
 
       ObliqueViewerButtons[] obButtons =
       {
-        ObliqueViewerButtons.Overlays, ObliqueViewerButtons.CenterMap,
-        ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.ZoomIn,
-        ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection,
+        ObliqueViewerButtons.Overlays, ObliqueViewerButtons.ImageInformation,
+        ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+        ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
         ObliqueViewerButtons.ToggleNadir
       };
 
@@ -117,10 +119,9 @@ namespace Demo.WinForms
       PanoramaViewerButtons[] pnButtons =
       {
         PanoramaViewerButtons.Elevation, PanoramaViewerButtons.Overlays,
-        PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.OpenPointCloud,
-        PanoramaViewerButtons.ReportBlurring, PanoramaViewerButtons.Measure,
-        PanoramaViewerButtons.PlayList, PanoramaViewerButtons.CenterMap,
-        PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.ZoomIn,
+        PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
+        PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
+        PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
         PanoramaViewerButtons.ZoomOut
       };
 
@@ -842,8 +843,8 @@ namespace Demo.WinForms
 
     private async void btnGetMeasurementInfo_Click(object sender, EventArgs e)
     {
-      IFeatureCollection measurement = await _api.GetActiveMeasurement();
-      AddViewerEventsText(measurement?.ToString() ?? string.Empty);
+      _measurement = await _api.GetActiveMeasurement();
+      AddViewerEventsText(_measurement?.ToString() ?? string.Empty);
     }
 
     private async void btnAddOverlay_Click(object sender, EventArgs e)
@@ -879,9 +880,9 @@ namespace Demo.WinForms
       {
         ObliqueViewerButtons[] buttons =
         {
-          ObliqueViewerButtons.Overlays, ObliqueViewerButtons.CenterMap,
-          ObliqueViewerButtons.ImageInformation, ObliqueViewerButtons.ZoomIn,
-          ObliqueViewerButtons.ZoomOut, ObliqueViewerButtons.SwitchDirection,
+          ObliqueViewerButtons.Overlays, ObliqueViewerButtons.ImageInformation,
+          ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
+          ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
           ObliqueViewerButtons.ToggleNadir
         };
 
@@ -894,14 +895,12 @@ namespace Demo.WinForms
 
       if (PanoramaViewer != null)
       {
-
         PanoramaViewerButtons[] buttons =
         {
           PanoramaViewerButtons.Elevation, PanoramaViewerButtons.Overlays,
-          PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.OpenPointCloud,
-          PanoramaViewerButtons.ReportBlurring, PanoramaViewerButtons.Measure,
-          PanoramaViewerButtons.PlayList, PanoramaViewerButtons.CenterMap,
-          PanoramaViewerButtons.ImageInformation, PanoramaViewerButtons.ZoomIn,
+          PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
+          PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
+          PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
           PanoramaViewerButtons.ZoomOut
         };
 

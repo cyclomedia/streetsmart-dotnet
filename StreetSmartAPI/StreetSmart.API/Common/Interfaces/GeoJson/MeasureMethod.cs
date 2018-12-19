@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.ComponentModel;
+
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
@@ -27,26 +29,31 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// <summary>
     /// Not defined
     /// </summary>
+    [Description("")]
     NotDefined = -1,
 
     /// <summary>
     ///  Measure using depth map (in marketing terms: Measure Smart)
     /// </summary>
+    [Description("DepthMap")]
     DepthMap = 1,
 
     /// <summary>
     ///Measure using Smart Click
     /// </summary>
+    [Description("SmartClick")]
     SmartClick = 2,
 
     /// <summary>
     /// Measure using Auto Focus
     /// </summary>
+    [Description("AutoFocus")]
     AutoFocus = 3,
 
     /// <summary>
     /// Measure using manual forward intersection
     /// </summary>
+    [Description("ForwardIntersection")]
     ForwardIntersection = 4
   }
 }

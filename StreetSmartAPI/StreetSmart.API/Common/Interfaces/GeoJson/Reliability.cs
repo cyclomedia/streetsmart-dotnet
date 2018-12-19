@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System.ComponentModel;
+
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
@@ -26,21 +28,25 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// <summary>
     /// Not defined
     /// </summary>
+    [Description("")]
     NotDefined = 0,
 
     /// <summary>
     /// Good reliablity
     /// </summary>
+    [Description("RELIABLE")]
     Reliable = 1,
 
     /// <summary>
     /// Acceptable reliability
     /// </summary>
+    [Description("ACCEPTABLE")]
     Acceptable = 2,
 
     /// <summary>
     /// Bad reliability
     /// </summary>
+    [Description("UNRELIABLE")]
     Unreliable = 3
   }
 }

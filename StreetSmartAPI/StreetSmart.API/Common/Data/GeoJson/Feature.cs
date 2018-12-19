@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 
-using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson

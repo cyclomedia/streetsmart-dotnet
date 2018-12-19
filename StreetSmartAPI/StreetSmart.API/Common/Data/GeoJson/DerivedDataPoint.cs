@@ -16,7 +16,9 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -63,6 +65,29 @@ namespace StreetSmart.Common.Data.GeoJson
     public Dictionary<string, object> GetProperty(Dictionary<string, object> derivedData, string key)
     {
       return derivedData?.ContainsKey(key) ?? false ? derivedData[key] as Dictionary<string, object> : null;
+    }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string baseStr = base.ToString();
+      string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
+
+      string positionZ = PositionZ == null ? string.Empty : $"\"positionZ\":{PositionZ},";
+      string positionStdev = Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
+        ? $",\"stdev\":[{Position?.StdDev?.X?.ToString(ci)},{Position?.StdDev?.Y?.ToString(ci)},{Position?.StdDev?.Z?.ToString(ci)}]"
+        : string.Empty;
+      string position = Position?.X != null && Position?.Y != null && Position?.Z != null
+        ? $"\"position\":{{\"value\":[{Position?.X?.ToString(ci)},{Position?.Y?.ToString(ci)},{Position?.Z?.ToString(ci)}]{positionStdev}}},"
+        : string.Empty;
+      string coordinateStdevs =
+        Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
+          ? $"\"coordinateStdevs\":[{{\"0\":{Position?.StdDev?.X?.ToString(ci)},\"1\":{Position?.StdDev?.Y?.ToString(ci)},\"2\":{Position?.StdDev?.Z?.ToString(ci)}}}]"
+          : string.Empty;
+
+      string derivedDataPoint = $"{PositionXY}{positionZ}{position}{coordinateStdevs}";
+      string comma = subStr.Length >= 2 && derivedDataPoint.Length >= 1 ? "," : string.Empty;
+      return $"{subStr}{comma}{derivedDataPoint}}}";
     }
   }
 }

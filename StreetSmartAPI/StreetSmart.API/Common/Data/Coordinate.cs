@@ -113,7 +113,7 @@ namespace StreetSmart.Common.Data
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       string zComponent = Z == null ? string.Empty : $",{((double) Z).ToString(ci)}";
-      return $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
+      return X == null || Y == null ? "null" : $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
     }
   }
 }

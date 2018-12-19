@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 
 using StreetSmart.Common.Interfaces.Data;
@@ -57,5 +58,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public Unit Unit { get; }
 
     public int Precision { get; }
+
+    public override string ToString()
+    {
+      return $"{{\"unit\":\"{Unit.Description()}\",\"precision\":{Precision}}}";
+    }
   }
 }

@@ -17,6 +17,7 @@
  */
 
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -32,6 +33,12 @@ namespace StreetSmart.Common.Data.GeoJson
     public Direction(double x, double y, double z)
       : base(x, y, z)
     {
+    }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      return $"{{\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
     }
   }
 }

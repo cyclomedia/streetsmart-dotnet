@@ -16,7 +16,9 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -34,7 +36,7 @@ namespace StreetSmart.Common.Data.GeoJson
       SegmentLengths = GetStdValueList(derivedData, "segmentLengths");
       SegmentsDeltaXY = GetStdValueList(derivedData, "segmentsDeltaXY");
       SegmentsDeltaZ = GetStdValueList(derivedData, "segmentsDeltaZ");
-      SegmentSlopePercentage = GetStdValueList(derivedData, "segmentsSlopePercentage");
+      SegmentsSlopePercentage = GetStdValueList(derivedData, "segmentsSlopePercentage");
       SegmentsSlopeAngle = GetStdValueList(derivedData, "segmentsSlopeAngle");
       DeltaXY = getStdValue(derivedData, "deltaXY");
       DeltaZ = getStdValue(derivedData, "deltaZ");
@@ -59,7 +61,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public IList<IProperty> SegmentsDeltaZ { get; }
 
-    public IList<IProperty> SegmentSlopePercentage { get; }
+    public IList<IProperty> SegmentsSlopePercentage { get; }
 
     public IList<IProperty> SegmentsSlopeAngle { get; }
 
@@ -104,6 +106,76 @@ namespace StreetSmart.Common.Data.GeoJson
       }
 
       return result;
+    }
+
+    private string GetValueString(IList<IProperty> propertyList, string propertyName)
+    {
+      string result = string.Empty;
+
+      if (propertyList != null)
+      {
+        CultureInfo ci = CultureInfo.InvariantCulture;
+        string value = "\"value\":[";
+        string stdev = "\"stdev\":[";
+
+        foreach (IProperty property in propertyList)
+        {
+          string valueStr = property?.Value?.ToString(ci);
+          string stdevStr = property?.Stdev?.ToString(ci);
+          valueStr = string.IsNullOrEmpty(valueStr) ? "null" : valueStr;
+          stdevStr = string.IsNullOrEmpty(stdevStr) ? "null" : stdevStr;
+          value = $"{value}{valueStr},";
+          stdev = $"{stdev}{stdevStr},";
+        }
+
+        if (propertyList.Count >= 1)
+        {
+          value = value.Substring(0, value.Length - 1);
+          stdev = stdev.Substring(0, stdev.Length - 1);
+        }
+
+        result = $"\"{propertyName}\":{{{value}],{stdev}]}},";
+      }
+
+      return result;
+    }
+
+    protected string GetValueString(IProperty property, string propertyName)
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string value = property?.Value?.ToString(ci);
+      string stdev = property?.Stdev?.ToString(ci);
+      string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
+      string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
+      string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
+      return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
+    }
+
+    public override string ToString()
+    {
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string stdevs = "[";
+
+      foreach (IStdev stdev in CoordinateStdev)
+      {
+        string stdevX = stdev?.X?.ToString(ci);
+        string stdevY = stdev?.Y?.ToString(ci);
+        string stdevZ = stdev?.Z?.ToString(ci);
+        bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
+        stdevs = noStdev ? $"{stdevs}null," : $"{stdevs}{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},";
+      }
+
+      stdevs = $"{stdevs.Substring(0, Math.Max(stdevs.Length - 1, 1))}]";
+      string baseStr = base.ToString();
+      string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
+      string comma = subStr.Length >= 2 ? "," : string.Empty;
+      subStr = $"{subStr}{comma}";
+
+      return
+        $"{subStr}{GetValueString(TotalLength, "totalLength")}{GetValueString(SegmentLengths, "segmentLengths")}" +
+        $"{GetValueString(SegmentsDeltaXY, "segmentsDeltaXY")}{GetValueString(SegmentsDeltaZ, "segmentsDeltaZ")}" +
+        $"{GetValueString(SegmentsSlopePercentage, "segmentsSlopePercentage")}{GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle")}" +
+        $"{GetValueString(DeltaXY, "deltaXY")}{GetValueString(DeltaZ, "deltaZ")}\"coordinateStdevs\":{stdevs}}}";
     }
   }
 }

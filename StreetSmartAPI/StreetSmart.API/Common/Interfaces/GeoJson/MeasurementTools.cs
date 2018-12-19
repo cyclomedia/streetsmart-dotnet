@@ -21,38 +21,32 @@ using System.ComponentModel;
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
-  /// Point problems
+  /// measurement tool
   /// </summary>
-  public enum PointProblems
+  public enum MeasurementTools
   {
     /// <summary>
-    /// oneObservation
+    /// Not defined
     /// </summary>
-    [Description("ONE_OBSERVATION")]
-    OneObservation = 1,
+    [Description("")]
+    NotDefined = 0,
 
     /// <summary>
-    /// Too few recordings
+    /// Map
     /// </summary>
-    [Description("TOO_FEW_RECORDINGS")]
-    TooFewRecordings = 2,
+    [Description("MAP")]
+    Map = 1,
 
     /// <summary>
-    /// Invalid angle
+    /// Panorama
     /// </summary>
-    [Description("INVALID_ANGLE")]
-    InvalidAngle = 3,
+    [Description("PANORAMA")]
+    Panorama = 2,
 
     /// <summary>
-    /// Point too far
+    /// Point cloud
     /// </summary>
-    [Description("POINT_TOO_FAR")]
-    PointTooFar = 4,
-
-    /// <summary>
-    /// Standard deviation
-    /// </summary>
-    [Description("STANDARD_DEVIATION")]
-    StandardDeviation = 5
+    [Description("POINTCLOUD")]
+    PointCloud = 3
   }
 }

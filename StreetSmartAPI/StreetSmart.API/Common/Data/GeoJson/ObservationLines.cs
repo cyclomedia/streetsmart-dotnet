@@ -55,5 +55,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public Color Color { get; }
 
     public MeasureMethod SelectedMeasureMethod { get; }
+
+    public override string ToString()
+    {
+      return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()}," +
+             $"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"}}";
+    }
   }
 }

@@ -16,7 +16,10 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -44,5 +47,15 @@ namespace StreetSmart.Common.Data.GeoJson
     public IPosition Position { get; }
 
     public IList<IResultDirection> ResultDirections { get; }
+
+    public override string ToString()
+    {
+      string resultDirections = ResultDirections.Aggregate("[", (current, resultDirection) => $"{current}{resultDirection},");
+      string resultDirectionsStr = $"{resultDirections.Substring(0, Math.Max(resultDirections.Length - 1, 1))}]";
+
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      return $"{{\"PositionX\":{Position?.X?.ToString(ci)},\"PositionY\":{Position?.Y?.ToString(ci)},\"PositionZ\":{Position?.Z?.ToString(ci)}," +
+             $"\"ResultDirections\":{{\"ResultDirection\":{resultDirectionsStr}}}}}";
+    }
   }
 }

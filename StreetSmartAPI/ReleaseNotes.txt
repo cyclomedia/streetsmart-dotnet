@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 18.14.0
+Version: 18.15.0
 ================
 - Refactor some code
 - Added Code for Constructing SLD objects
@@ -11,6 +11,9 @@ Version: 18.14.0
 - Added function to the obliqueViewer: SwitchViewingDirection()
 - Added to the obliwue and the panorama viewer buttons list: SAVE_IMAGE
 - Added properties to the panoramaViewerOptions: MeasureTypeButtonVisible, MeasureTypeButtonToggle, MeasureTypeButtonStart
+- Possible for set the active measurement
+- Updated with cefsharp version 0.69
+- Added function for setActiveMeasurement
 
 
 Version: 18.13.0

@@ -16,7 +16,9 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -35,5 +37,11 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public IList<int> Points { get; }
+
+    public override string ToString()
+    {
+      string result = Points.Aggregate("[", (current, point) => $"{current}{point},");
+      return $"{result.Substring(0, Math.Max(result.Length - 1, 1))}]";
+    }
   }
 }

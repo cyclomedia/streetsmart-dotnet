@@ -303,7 +303,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Set the active measurement in GeoJSON format
     /// </summary>
     /// <param name="measurement">The measurement in GeoJSON format</param>
-    void SetActiveMeasurement(string measurement);
+    void SetActiveMeasurement(IFeatureCollection measurement);
 
     /// <summary>
     /// Set overlay draw distance

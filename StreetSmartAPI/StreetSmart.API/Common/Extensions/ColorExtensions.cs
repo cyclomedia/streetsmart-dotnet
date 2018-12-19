@@ -16,45 +16,20 @@
  * License along with this library.
  */
 
+// ReSharper disable once CheckNamespace
+
+using System.Drawing;
 using System.Globalization;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
-namespace StreetSmart.Common.Data.GeoJson
+namespace System
 {
-  internal class Property : NotifyPropertyChanged, IProperty
+  internal static class ColorExtensions
   {
-    public Property(object value, object stdev)
-    {
-      if (value != null)
-      {
-        double.TryParse(value.ToString(), out var valueOut);
-        Value = valueOut;
-      }
-      else
-      {
-        Value = null;
-      }
-
-      if (stdev != null)
-      {
-        double.TryParse(stdev.ToString(), out var stdevOut);
-        Stdev = stdevOut;
-      }
-      else
-      {
-        Stdev = null;
-      }
-    }
-
-    public double? Value { get; }
-
-    public double? Stdev { get; }
-
-    public override string ToString()
+    public static string ToJsColor(this Color value)
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"value\":{Value?.ToString(ci)},\"stdev\":{Stdev?.ToString(ci)}}}";
+      double alpha = (double) value.A / 255;
+      return $"[{value.R},{value.G},{value.B},{alpha.ToString("0.00", ci)}]";
     }
   }
 }

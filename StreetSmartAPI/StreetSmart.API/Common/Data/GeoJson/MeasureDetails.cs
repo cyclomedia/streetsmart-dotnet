@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -103,5 +104,18 @@ namespace StreetSmart.Common.Data.GeoJson
     public IList<PointProblems> PointProblems { get; }
 
     public Reliability PointReliability { get; }
+
+    public override string ToString()
+    {
+      string pointsWithProblems = PointProblems.Aggregate("[", (current, problem) => $"{current}\"{problem.Description()}\",");
+      string pointsWithProblemsStr = $"{pointsWithProblems.Substring(0, Math.Max(pointsWithProblems.Length - 1, 1))}]";
+
+      string measureDetails = Details == null
+        ? string.Empty
+        : $"\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details},\"pointProblems\":{pointsWithProblemsStr}," +
+          $"\"pointReliability\":\"{PointReliability.Description()}\"";
+
+      return $"{{{measureDetails}}}";
+    }
   }
 }

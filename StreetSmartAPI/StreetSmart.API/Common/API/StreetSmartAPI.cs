@@ -306,7 +306,7 @@ namespace StreetSmart.Common.API
       return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), (string) result);
     }
 
-    public void SetActiveMeasurement(string measurement)
+    public void SetActiveMeasurement(IFeatureCollection measurement)
     {
       Browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
     }
