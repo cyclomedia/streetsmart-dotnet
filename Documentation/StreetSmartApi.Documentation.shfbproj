@@ -27,7 +27,7 @@
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <HelpFileVersion>18.13</HelpFileVersion>
+    <HelpFileVersion>18.15</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>Standard</SyntaxFilters>
@@ -36,7 +36,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
-    <HelpTitle>Street Smart API for DotNet version 18.13</HelpTitle>
+    <HelpTitle>Street Smart API for DotNet version 18.15</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <HeaderText>
     </HeaderText>
@@ -50,40 +50,41 @@ The &lt;c&gt;StreetSmartGUI&lt;/c&gt; class is the &lt;c&gt;UserControl&lt;/c&gt
 &lt;summary&gt;
 This class must be added to a &lt;c&gt;Panel&lt;/c&gt; within your application.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="(global)" isDocumented="True">&lt;summary&gt;
 This is the help of the Street Smart .NET API.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.WinForms.Factories" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.WinForms.Factories" isDocumented="True">&lt;summary&gt;
 This namespace contains factories that are used to generate the different objects.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.WinForms.Exceptions" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.WinForms.Exceptions" isDocumented="True">&lt;summary&gt;
 This namespace contains the exceptions that can occur in the Street Smart API.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.WinForms.Interfaces" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.WinForms.Interfaces" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to the different api objects.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.WinForms.Interfaces.DomElement" isDocumented="True" />
-<NamespaceSummaryItem name="StreetSmart.Common.Exceptions" isDocumented="False">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.WinForms.Interfaces.DomElement" isDocumented="True" />
+      <NamespaceSummaryItem name="StreetSmart.Common.Exceptions" isDocumented="False">&lt;summary&gt;
 This namespace contains the exceptions that can occur in the Street Smart API.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Factories" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Factories" isDocumented="True">&lt;summary&gt;
 This namespace contains factories that are used to generate the different objects.
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Interfaces.API" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Interfaces.API" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to basic api objects
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Interfaces.Data" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Interfaces.Data" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to different type of objects
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Interfaces.DomElement" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Interfaces.DomElement" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to objects for create a DomElement
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Interfaces.Events" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Interfaces.Events" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to a event object
 &lt;/summary&gt;</NamespaceSummaryItem>
-<NamespaceSummaryItem name="StreetSmart.Common.Interfaces.GeoJson" isDocumented="True">&lt;summary&gt;
+      <NamespaceSummaryItem name="StreetSmart.Common.Interfaces.GeoJson" isDocumented="True">&lt;summary&gt;
 This namespace contains the interfaces to the objects for construct GeoJson
-&lt;/summary&gt;</NamespaceSummaryItem></NamespaceSummaries>
+&lt;/summary&gt;</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <PlugInConfigurations>
       <PlugInConfig id="Version Builder" enabled="True" xmlns="">
         <configuration>
