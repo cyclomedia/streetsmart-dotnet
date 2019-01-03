@@ -44,6 +44,11 @@ namespace StreetSmart.Common.Interfaces.API
     /// Don't create a "GPUCache" directory when cache-path is unspecified.
     /// </summary>
     bool DisableGPUCache { get; set; }
+
+    /// <summary>
+    /// Don't create "local storage"
+    /// </summary>
+    bool DisableLocalStorage { get; set; }
   }
 
   // ReSharper restore InconsistentNaming

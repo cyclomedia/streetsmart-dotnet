@@ -22,5 +22,7 @@ namespace StreetSmart.Common.API
   internal class CommandLineArgs
   {
     public const string DisableGPUCache = "disable-gpu-shader-disk-cache";
+
+    public const string DisableLogalStorage = "disable-local-storage";
   }
 }

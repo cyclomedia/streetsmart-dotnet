@@ -20,6 +20,8 @@ using System;
 using System.IO;
 using System.Reflection;
 
+using CefSharp;
+
 #if WINFORMS
 using CefSharp.WinForms;
 
@@ -41,6 +43,7 @@ namespace StreetSmart.Common.API
     {
       CachePath = cachePath;
       BrowserSubprocessPath = browserSubprocessPath ?? GetBrowserSubprocessPath();
+      LogSeverity = LogSeverity.Disable;
     }
 
     public APISettings()
@@ -57,20 +60,33 @@ namespace StreetSmart.Common.API
       return Path.Combine(browserSubprocessPath, Resources.BrowserSubprocess);
     }
 
+    private bool GetCommandLineArgs(string commandLine)
+    {
+      return CefCommandLineArgs.ContainsKey(commandLine);
+    }
+
+    private void SetCommandLineArgs(bool enabled, string commandLine)
+    {
+      if (enabled && !CefCommandLineArgs.ContainsKey(commandLine))
+      {
+        CefCommandLineArgs.Add(commandLine, "1");
+      }
+      else if (!enabled && CefCommandLineArgs.ContainsKey(commandLine))
+      {
+        CefCommandLineArgs.Remove(commandLine);
+      }
+    }
+
     public bool DisableGPUCache
     {
-      get => CefCommandLineArgs.ContainsKey(CommandLineArgs.DisableGPUCache);
-      set
-      {
-        if (value && !CefCommandLineArgs.ContainsKey(CommandLineArgs.DisableGPUCache))
-        {
-          CefCommandLineArgs.Add(CommandLineArgs.DisableGPUCache, "1");
-        }
-        else if (!value && CefCommandLineArgs.ContainsKey(CommandLineArgs.DisableGPUCache))
-        {
-          CefCommandLineArgs.Remove(CommandLineArgs.DisableGPUCache);
-        }
-      }
+      get => GetCommandLineArgs(CommandLineArgs.DisableGPUCache);
+      set => SetCommandLineArgs(value, CommandLineArgs.DisableGPUCache);
+    }
+
+    public bool DisableLocalStorage
+    {
+      get => GetCommandLineArgs(CommandLineArgs.DisableLogalStorage);
+      set => SetCommandLineArgs(value, CommandLineArgs.DisableLogalStorage);
     }
   }
 }
