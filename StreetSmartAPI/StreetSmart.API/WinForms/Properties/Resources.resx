@@ -123,6 +123,12 @@
   <data name="JsApi" xml:space="preserve">
     <value>StreetSmartApi</value>
   </data>
+  <data name="LocalesPath" xml:space="preserve">
+    <value>locales</value>
+  </data>
+  <data name="ResourcesPath" xml:space="preserve">
+    <value />
+  </data>
   <data name="StreetSmartLocation" xml:space="preserve">
     <value>https://streetsmart.cyclomedia.com/api/v18.15/api-dotnet.html</value>
   </data>

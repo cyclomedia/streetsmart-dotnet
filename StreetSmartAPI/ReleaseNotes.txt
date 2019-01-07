@@ -1,6 +1,13 @@
 ﻿Release notes:
 ==============
 
+Version: 18.15.1
+================
+	- No debug log is made in the working directory
+	- localesDirPath is configurable
+	- resourcesDirPath is configurable
+	- Fixed error message: CEF can only be initialized once per process
+
 Version: 18.15.0
 ================
 - Refactor some code

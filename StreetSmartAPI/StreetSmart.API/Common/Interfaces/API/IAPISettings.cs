@@ -46,9 +46,29 @@ namespace StreetSmart.Common.Interfaces.API
     bool DisableGPUCache { get; set; }
 
     /// <summary>
-    /// Don't create "local storage"
+    /// The path to the locales directory, if empty locales\ will be used.
     /// </summary>
-    bool DisableLocalStorage { get; set; }
+    string LocalesDirPath { get; set; }
+
+    /// <summary>
+    /// The path to the resources directory, if empty the Executing Assembly path is used.
+    /// </summary>
+    string ResourcesDirPath { get; set; }
+
+    /// <summary>
+    /// Sets the default browserSupProcessPath
+    /// </summary>
+    void SetDefaultBrowserSubprocessPath();
+
+    /// <summary>
+    /// Sets the default localesDirPath
+    /// </summary>
+    void SetDefaultLocalesDirPath();
+
+    /// <summary>
+    /// Sets the default resourcesDirPath
+    /// </summary>
+    void SetDefaultResourcesDirPath();
   }
 
   // ReSharper restore InconsistentNaming

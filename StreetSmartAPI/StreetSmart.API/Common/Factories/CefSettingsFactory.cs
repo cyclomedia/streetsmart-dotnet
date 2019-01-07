@@ -32,9 +32,9 @@ namespace StreetSmart.Common.Factories
     /// Creates a new instance of the API Settings class.
     /// </summary>
     /// <returns>API Settings class</returns>
-    public static IAPISettings Create(string cachePath, string browserSubprocessPath = null)
+    public static IAPISettings Create(string cachePath, string browserSubprocessPath = null, string localesDirPath = null, string resourcesDirPath = null)
     {
-      return new APISettings(cachePath, browserSubprocessPath);
+      return new APISettings(cachePath, browserSubprocessPath, localesDirPath, resourcesDirPath);
     }
 
     /// <summary>

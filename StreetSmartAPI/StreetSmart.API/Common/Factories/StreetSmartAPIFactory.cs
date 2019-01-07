@@ -43,7 +43,7 @@ namespace StreetSmart.Common.Factories
   {
     private static void InitializeCefSharp(CefSettings settings)
     {
-      if (settings != null)
+      if (settings != null && !Cef.IsInitialized)
       {
         CefSharpSettings.LegacyJavascriptBindingEnabled = true;
         BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();

@@ -79,6 +79,24 @@ namespace StreetSmart.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to locales.
+        /// </summary>
+        internal static string LocalesPath {
+            get {
+                return ResourceManager.GetString("LocalesPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ResourcesPath {
+            get {
+                return ResourceManager.GetString("ResourcesPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v18.15/api-dotnet.html.
         /// </summary>
         internal static string StreetSmartLocation {

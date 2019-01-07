@@ -84,9 +84,14 @@ namespace Demo.WinForms
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
 
-      IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartCache");
+      IAPISettings apiSettings = CefSettingsFactory.Create();
+//      IAPISettings apiSettings = CefSettingsFactory.Create(
+//        @"D:\StreetSmartFiles\Cache",
+//        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
+//        @"D:\StreetSmartFiles\Locales",
+//        @"D:\StreetSmartFiles\Resources");
+ //     IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
       apiSettings.DisableGPUCache = true;
-      apiSettings.DisableLocalStorage = true;
 
       _api = string.IsNullOrEmpty(StreetSmartLocation)
         ? StreetSmartAPIFactory.Create(apiSettings)

@@ -39,25 +39,29 @@ namespace StreetSmart.Common.API
   // ReSharper disable once InconsistentNaming
   internal class APISettings: CefSettings, IAPISettings
   {
-    public APISettings(string cachePath, string browserSubprocessPath)
+    public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
     {
-      CachePath = cachePath;
-      BrowserSubprocessPath = browserSubprocessPath ?? GetBrowserSubprocessPath();
       LogSeverity = LogSeverity.Disable;
+      CachePath = cachePath ?? CachePath;
+      BrowserSubprocessPath = browserSubprocessPath ?? BrowserSubprocessPath;
+      LocalesDirPath = localesDirPath ?? LocalesDirPath;
+      ResourcesDirPath = resourcesDirPath ?? ResourcesDirPath;
     }
 
     public APISettings()
-      : this(null, null)
+      : this(null, null, null, null)
     {
     }
 
-    private string GetBrowserSubprocessPath()
+    private string DirectoryPath
     {
-      string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-      UriBuilder uri = new UriBuilder(codeBase);
-      string path = Uri.UnescapeDataString(uri.Path);
-      string browserSubprocessPath = Path.GetDirectoryName(path) ?? string.Empty;
-      return Path.Combine(browserSubprocessPath, Resources.BrowserSubprocess);
+      get
+      {
+        string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+        UriBuilder uri = new UriBuilder(codeBase);
+        string path = Uri.UnescapeDataString(uri.Path);
+        return Path.GetDirectoryName(path) ?? string.Empty;
+      }
     }
 
     private bool GetCommandLineArgs(string commandLine)
@@ -83,10 +87,19 @@ namespace StreetSmart.Common.API
       set => SetCommandLineArgs(value, CommandLineArgs.DisableGPUCache);
     }
 
-    public bool DisableLocalStorage
+    public void SetDefaultBrowserSubprocessPath()
     {
-      get => GetCommandLineArgs(CommandLineArgs.DisableLogalStorage);
-      set => SetCommandLineArgs(value, CommandLineArgs.DisableLogalStorage);
+      BrowserSubprocessPath = Path.Combine(DirectoryPath, Resources.BrowserSubprocess);
+    }
+
+    public void SetDefaultLocalesDirPath()
+    {
+      LocalesDirPath = Path.Combine(DirectoryPath, Resources.LocalesPath);
+    }
+
+    public void SetDefaultResourcesDirPath()
+    {
+      ResourcesDirPath = Path.Combine(DirectoryPath, Resources.ResourcesPath);
     }
   }
 }
