@@ -3,10 +3,11 @@
 
 Version: 18.15.1
 ================
-	- No debug log is made in the working directory
-	- localesDirPath is configurable
-	- resourcesDirPath is configurable
-	- Fixed error message: CEF can only be initialized once per process
+- No debug log is made in the working directory
+- localesDirPath is configurable
+- resourcesDirPath is configurable
+- Fixed error message: CEF can only be initialized once per process
+
 
 Version: 18.15.0
 ================
@@ -16,7 +17,7 @@ Version: 18.15.0
 - Added in the API Settings class functionalities for location of the GPU Cache and the disabling of the GPU cache
 - Added functions in the viewer objects: (IViewer / IPanoramaViewer / IObliqueViewer): GetType(), SaveImage(), ToggleOverlay()
 - Added function to the obliqueViewer: SwitchViewingDirection()
-- Added to the obliwue and the panorama viewer buttons list: SAVE_IMAGE
+- Added to the oblique and the panorama viewer buttons list: SAVE_IMAGE
 - Added properties to the panoramaViewerOptions: MeasureTypeButtonVisible, MeasureTypeButtonToggle, MeasureTypeButtonStart
 - Possible for set the active measurement
 - Updated with cefsharp version 0.69

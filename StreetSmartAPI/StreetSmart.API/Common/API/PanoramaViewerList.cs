@@ -42,6 +42,8 @@ namespace StreetSmart.Common.API
 
     public string JsRecClick => $"{nameof(OnRecordingClick).FirstCharacterToLower()}";
 
+    public string JsFeatureClick => $"{nameof(OnFeatureClick).FirstCharacterToLower()}";
+
     public string JsTileLoadError => $"{nameof(OnTileLoadError).FirstCharacterToLower()}";
 
     public string JsViewChange => $"{nameof(OnViewChange).FirstCharacterToLower()}";
@@ -109,6 +111,14 @@ namespace StreetSmart.Common.API
       if (Viewers.ContainsKey(name))
       {
         (Viewers[name] as PanoramaViewer)?.OnRecordingClick(args);
+      }
+    }
+
+    public void OnFeatureClick(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        (Viewers[name] as PanoramaViewer)?.OnFeatureClick(args);
       }
     }
 

@@ -55,6 +55,7 @@ namespace StreetSmart.Common.API
     public event EventHandler<IEventArgs<IElevationInfo>> ElevationChange;
     public event EventHandler<EventArgs> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
+    public event EventHandler<IEventArgs<IDictionary<string, object>>> FeatureClick;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
@@ -73,6 +74,8 @@ namespace StreetSmart.Common.API
     public string JsSurfaceCursorChange => (ViewerList as PanoramaViewerList)?.JsSurfaceCursorChange;
 
     public string JsRecClick => (ViewerList as PanoramaViewerList)?.JsRecClick;
+
+    public string JsFeatureClick => (ViewerList as PanoramaViewerList)?.JsFeatureClick;
 
     public string JsTileLoadError => (ViewerList as PanoramaViewerList)?.JsTileLoadError;
 
@@ -229,6 +232,11 @@ namespace StreetSmart.Common.API
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
+    public void OnFeatureClick(Dictionary<string, object> args)
+    {
+      FeatureClick?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
+    }
+
     public void OnTileLoadError(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
@@ -274,6 +282,7 @@ namespace StreetSmart.Common.API
       {
         new PanoramaRecordingClickViewerEvent(this, "RECORDING_CLICK", JsRecClick),
         new PanoramaViewerEvent(this, "ELEVATION_CHANGE", JsElevationChange),
+        new PanoramaViewerEvent(this, "FEATURE_CLICK", JsFeatureClick),
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
         new PanoramaViewerEvent(this, "SURFACE_CURSOR_CHANGE", JsSurfaceCursorChange),
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
