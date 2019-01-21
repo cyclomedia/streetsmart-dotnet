@@ -69,6 +69,26 @@ namespace StreetSmart.Common.Data.GeoJson
       MatchImage = new Bitmap(new MemoryStream(bytes));
     }
 
+    public ResultDirection(IResultDirection resultDirection)
+    {
+      if (resultDirection != null)
+      {
+        Direction = new Direction(resultDirection.Direction);
+        GroundLevelOffset = resultDirection.GroundLevelOffset;
+        Id = resultDirection.Id != null ? string.Copy(resultDirection.Id) : null;
+        MatchImage = (Image) MatchImage?.Clone();
+        Orientation = new Property(resultDirection.Orientation);
+        Position = new PositionStdev(resultDirection.Position);
+        CalculatedMethod = resultDirection.CalculatedMethod;
+
+        if (resultDirection.RecordedAt != null)
+        {
+          DateTime recordedAt = (DateTime) resultDirection.RecordedAt;
+          RecordedAt = DateTime.FromBinary(recordedAt.ToBinary());
+        }
+      }
+    }
+
     public IDirection Direction { get; }
 
     public double GroundLevelOffset { get; }

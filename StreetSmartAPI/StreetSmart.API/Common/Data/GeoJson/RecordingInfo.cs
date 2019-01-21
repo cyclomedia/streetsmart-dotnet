@@ -40,6 +40,18 @@ namespace StreetSmart.Common.Data.GeoJson
       Yaw = new Property(yaw, yawStdev);
     }
 
+    public RecordingInfo(IRecordingInfo recordingInfo)
+    {
+      if (recordingInfo != null)
+      {
+        Id = recordingInfo.Id != null ? string.Copy(recordingInfo.Id) : null;
+        Position = new PositionStdev(recordingInfo.Position);
+        SRS = recordingInfo.SRS != null ? string.Copy(recordingInfo.SRS) : null;
+        Yaw = new Property(recordingInfo.Yaw);
+        DepthStdev = recordingInfo.DepthStdev;
+      }
+    }
+
     public string Id { get; }
 
     public IPositionStdev Position { get; }

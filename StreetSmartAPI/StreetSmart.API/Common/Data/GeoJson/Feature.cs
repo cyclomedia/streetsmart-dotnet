@@ -69,6 +69,42 @@ namespace StreetSmart.Common.Data.GeoJson
       Properties = new Properties();
     }
 
+    public Feature(IFeature feature)
+    {
+      if (feature != null)
+      {
+        Type = feature.Type;
+
+        if (feature.Geometry != null)
+        {
+          switch (feature.Geometry.Type)
+          {
+            case GeometryType.Point:
+              Geometry = new Point((IPoint) feature.Geometry);
+              break;
+            case GeometryType.LineString:
+              Geometry = new LineString((ILineString) feature.Geometry);
+              break;
+            case GeometryType.Polygon:
+              Geometry = new Polygon((IPolygon) feature.Geometry);
+              break;
+            case GeometryType.Unknown:
+              Geometry = null;
+              break;
+          }
+        }
+
+        if (feature.Properties is IMeasurementProperties properties)
+        {
+          Properties = new MeasurementProperties(properties);
+        }
+        else
+        {
+          Properties = new Properties(feature.Properties);
+        }
+      }
+    }
+
     public FeatureType Type { get; }
 
     public IGeometry Geometry { get; set; }

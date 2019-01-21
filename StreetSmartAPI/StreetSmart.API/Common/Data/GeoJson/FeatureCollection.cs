@@ -57,6 +57,26 @@ namespace StreetSmart.Common.Data.GeoJson
       CRS = new CRS(wkid);
     }
 
+    public FeatureCollection(IFeatureCollection featureCollection)
+    {
+      if (featureCollection != null)
+      {
+        Type = featureCollection.Type;
+
+        if (featureCollection.Features != null)
+        {
+          Features = new List<IFeature>();
+
+          foreach (IFeature feature in featureCollection.Features)
+          {
+            Features.Add(new Feature(feature));
+          }
+        }
+
+        CRS = new CRS(featureCollection.CRS);
+      }
+    }
+
     public FeatureType Type { get; }
 
     public IList<IFeature> Features { get; }

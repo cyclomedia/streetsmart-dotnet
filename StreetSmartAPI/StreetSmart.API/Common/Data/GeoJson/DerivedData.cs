@@ -55,6 +55,15 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public DerivedData(IDerivedData derivedData)
+    {
+      if (derivedData != null)
+      {
+        Unit = derivedData.Unit;
+        Precision = derivedData.Precision;
+      }
+    }
+
     public Unit Unit { get; }
 
     public int Precision { get; }

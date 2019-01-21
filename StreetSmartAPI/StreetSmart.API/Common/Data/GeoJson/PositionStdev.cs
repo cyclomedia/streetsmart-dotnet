@@ -44,6 +44,15 @@ namespace StreetSmart.Common.Data.GeoJson
       StdDev = new Coordinate(stdX, stdY, stdZ);
     }
 
+    public PositionStdev(IPositionStdev position)
+      : base(position)
+    {
+      if (position != null)
+      {
+        StdDev = new Coordinate(position.StdDev);
+      }
+    }
+
     // ReSharper disable once InconsistentNaming
     public ICoordinate StdDev { get; }
 

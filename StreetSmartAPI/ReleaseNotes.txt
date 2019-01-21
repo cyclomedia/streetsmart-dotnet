@@ -1,12 +1,19 @@
 ﻿Release notes:
 ==============
 
+Version: 18.15.2
+================
+- Created methods for create point, lineString and polygons in a geoJson
+- Create a clone function for clone the FeatureCollection
+
+
 Version: 18.15.1
 ================
-	- No debug log is made in the working directory
-	- localesDirPath is configurable
-	- resourcesDirPath is configurable
-	- Fixed error message: CEF can only be initialized once per process
+- No debug log is made in the working directory
+- localesDirPath is configurable
+- resourcesDirPath is configurable
+- Fixed error message: CEF can only be initialized once per process
+
 
 Version: 18.15.0
 ================

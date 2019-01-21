@@ -47,6 +47,15 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public Property(IProperty property)
+    {
+      if (property != null)
+      {
+        Value = property.Value;
+        Stdev = property.Stdev;
+      }
+    }
+
     public double? Value { get; }
 
     public double? Stdev { get; }

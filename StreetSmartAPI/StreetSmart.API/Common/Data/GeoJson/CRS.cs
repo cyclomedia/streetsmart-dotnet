@@ -63,6 +63,15 @@ namespace StreetSmart.Common.Data.GeoJson
       Properties = wkid.ToString();
     }
 
+    public CRS(ICRS crs)
+    {
+      if (crs != null)
+      {
+        Type = crs.Type;
+        Properties = crs.Properties != null ? string.Copy(crs.Properties): null;
+      }
+    }
+
     public CRSType Type { get; }
 
     public string Properties { get; }

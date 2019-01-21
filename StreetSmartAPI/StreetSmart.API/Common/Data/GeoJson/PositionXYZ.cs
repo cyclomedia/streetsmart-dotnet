@@ -37,6 +37,15 @@ namespace StreetSmart.Common.Data.GeoJson
       XYZ = new Coordinate(x, y, z);
     }
 
+    public PositionXYZ(IPositionXYZ positionXyz)
+      : base(positionXyz)
+    {
+      if (positionXyz != null)
+      {
+        XYZ = new Coordinate(positionXyz.XYZ);
+      }
+    }
+
     // ReSharper disable once InconsistentNaming
     public ICoordinate XYZ { get; }
 

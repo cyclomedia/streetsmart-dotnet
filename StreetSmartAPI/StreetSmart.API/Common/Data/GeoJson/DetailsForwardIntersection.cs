@@ -44,6 +44,24 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public DetailsForwardIntersection(IDetailsForwardIntersection detailsForwardIntersection)
+    {
+      if (detailsForwardIntersection != null)
+      {
+        Position = new Position(detailsForwardIntersection.Position);
+
+        if (detailsForwardIntersection.ResultDirections != null)
+        {
+          ResultDirections = new List<IResultDirection>();
+
+          foreach (IResultDirection resultDirection in detailsForwardIntersection.ResultDirections)
+          {
+            ResultDirections.Add(new ResultDirection(resultDirection));
+          }
+        }
+      }
+    }
+
     public IPosition Position { get; }
 
     public IList<IResultDirection> ResultDirections { get; }

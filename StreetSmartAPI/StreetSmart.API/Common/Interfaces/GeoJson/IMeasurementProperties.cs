@@ -79,5 +79,10 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Observation lines
     /// </summary>
     IObservationLines ObservationLines { get; }
+
+    /// <summary>
+    /// Measurement tools
+    /// </summary>
+    MeasurementTools MeasurementTool { get; }
   }
 }

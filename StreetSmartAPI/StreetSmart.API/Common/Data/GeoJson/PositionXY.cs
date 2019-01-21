@@ -33,6 +33,16 @@ namespace StreetSmart.Common.Data.GeoJson
       Stdev = stdev;
     }
 
+    public PositionXY(IPositionXY position)
+    {
+      if (position != null)
+      {
+        X = position.X;
+        Y = position.Y;
+        Stdev = position.Stdev;
+      }
+    }
+
     public double? X { get; }
 
     public double? Y { get; }

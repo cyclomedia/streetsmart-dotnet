@@ -60,9 +60,12 @@ namespace StreetSmart.Common.Data
 
     public Coordinate(ICoordinate coordinate)
     {
-      X = coordinate.X;
-      Y = coordinate.Y;
-      Z = coordinate.Z;
+      if (coordinate != null)
+      {
+        X = coordinate.X;
+        Y = coordinate.Y;
+        Z = coordinate.Z;
+      }
     }
 
     public Coordinate(double? x, double? y)

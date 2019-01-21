@@ -38,6 +38,18 @@ namespace StreetSmart.Common.Data.GeoJson
       RecordingInfo = new RecordingInfo(recordingInfo);
     }
 
+    public DetailsDepth(IDetailsDepth detailsDepth)
+    {
+      if (detailsDepth != null)
+      {
+        Position = new PositionXYZ(detailsDepth.Position);
+        Direction = new Direction(detailsDepth.Direction);
+        DepthInMeters = detailsDepth.DepthInMeters;
+        Depth = detailsDepth.Depth;
+        RecordingInfo = new RecordingInfo(detailsDepth.RecordingInfo);
+      }
+    }
+
     public IPositionXYZ Position { get; }
 
     public IDirection Direction { get; }

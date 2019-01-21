@@ -55,6 +55,17 @@ namespace StreetSmart.Common.Data.GeoJson
       // ReSharper restore InconsistentNaming
     }
 
+    public DerivedDataPoint(IDerivedDataPoint derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        Position = new PositionStdev(derivedData.Position);
+        PositionXY = new PositionXY(derivedData.PositionXY);
+        PositionZ = new Property(derivedData.PositionZ);
+      }
+    }
+
     public IPositionStdev Position { get; }
 
     // ReSharper disable once InconsistentNaming

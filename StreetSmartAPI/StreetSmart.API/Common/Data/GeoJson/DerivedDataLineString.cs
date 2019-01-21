@@ -50,6 +50,32 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public DerivedDataLineString(IDerivedDataLineString derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        if (derivedData.CoordinateStdev != null)
+        {
+          CoordinateStdev = new List<IStdev>();
+
+          foreach (IStdev stdev in derivedData.CoordinateStdev)
+          {
+            CoordinateStdev.Add(new Stdev(stdev));
+          }
+        }
+
+        TotalLength = new Property(derivedData.TotalLength);
+        SegmentLengths = GetStdValueList(derivedData.SegmentLengths);
+        SegmentsDeltaXY = GetStdValueList(derivedData.SegmentsDeltaXY);
+        SegmentsDeltaZ = GetStdValueList(derivedData.SegmentsDeltaZ);
+        SegmentsSlopePercentage = GetStdValueList(derivedData.SegmentsSlopePercentage);
+        SegmentsSlopeAngle = GetStdValueList(derivedData.SegmentsSlopeAngle);
+        DeltaXY = new Property(derivedData.DeltaXY);
+        DeltaZ = new Property(derivedData.DeltaZ);
+      }
+    }
+
     public IList<IStdev> CoordinateStdev { get; }
 
     public IProperty TotalLength { get; }
@@ -87,6 +113,23 @@ namespace StreetSmart.Common.Data.GeoJson
           {
             result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
           }
+        }
+      }
+
+      return result;
+    }
+
+    private IList<IProperty> GetStdValueList(IList<IProperty> properties)
+    {
+      List<IProperty> result = null;
+
+      if (properties != null)
+      {
+        result = new List<IProperty>();
+
+        foreach (IProperty property in properties)
+        {
+          result.Add(new Property(property));
         }
       }
 

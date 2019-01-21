@@ -97,6 +97,43 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public MeasureDetails(IMeasureDetails measureDetails)
+    {
+      if (measureDetails != null)
+      {
+        MeasureMethod = measureDetails.MeasureMethod;
+
+        switch (measureDetails.MeasureMethod)
+        {
+          case MeasureMethod.DepthMap:
+            Details = new DetailsDepth((IDetailsDepth) measureDetails.Details);
+            break;
+          case MeasureMethod.SmartClick:
+            Details = new DetailsSmartClick((IDetailsSmartClick) measureDetails.Details);
+            break;
+          case MeasureMethod.ForwardIntersection:
+            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details);
+            break;
+          case MeasureMethod.AutoFocus:
+          case MeasureMethod.NotDefined:
+            Details = null;
+            break;
+        }
+
+        if (measureDetails.PointProblems != null)
+        {
+          PointProblems = new List<PointProblems>();
+
+          foreach (var pointProblem in measureDetails.PointProblems)
+          {
+            PointProblems.Add(pointProblem);
+          }
+        }
+
+        PointReliability = measureDetails.PointReliability;
+      }
+    }
+
     public MeasureMethod MeasureMethod { get; }
 
     public IDetails Details { get; }

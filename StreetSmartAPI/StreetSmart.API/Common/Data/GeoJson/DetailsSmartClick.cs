@@ -32,6 +32,16 @@ namespace StreetSmart.Common.Data.GeoJson
       Depth = detailsSmartClick?["Depth"] as double? ?? 0;
     }
 
+    public DetailsSmartClick(IDetailsSmartClick detailsSmartClick)
+      : base(detailsSmartClick)
+    {
+      if (detailsSmartClick != null)
+      {
+        Confidence = detailsSmartClick.Confidence;
+        Depth = detailsSmartClick.Depth;
+      }
+    }
+
     public int Confidence { get; }
 
     public double Depth { get; }

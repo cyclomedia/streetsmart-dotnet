@@ -43,6 +43,25 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public DerivedDataPolygon(IDerivedDataPolygon derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        if (derivedData.Triangles != null)
+        {
+          Triangles = new List<ITriangle>();
+
+          foreach (ITriangle triangle in derivedData.Triangles)
+          {
+            Triangles.Add(new Triangle(triangle));
+          }
+        }
+
+        Area = new Property(derivedData.Area);
+      }
+    }
+
     public IList<ITriangle> Triangles { get; }
 
     public IProperty Area { get; }

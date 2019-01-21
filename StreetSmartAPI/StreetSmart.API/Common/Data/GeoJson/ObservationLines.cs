@@ -48,6 +48,18 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public ObservationLines(IObservationLines observationLines)
+    {
+      if (observationLines != null)
+      {
+        ActiveObservation = observationLines.ActiveObservation;
+        RecordingId = observationLines.RecordingId != null ? string.Copy(observationLines.RecordingId) : null;
+        Color obsColor = observationLines.Color;
+        Color = Color.FromArgb(obsColor.A, obsColor);
+        SelectedMeasureMethod = observationLines.SelectedMeasureMethod;
+      }
+    }
+
     public int ActiveObservation { get; }
 
     public string RecordingId { get; }

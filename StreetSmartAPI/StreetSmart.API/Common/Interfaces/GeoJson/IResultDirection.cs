@@ -60,5 +60,10 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// RecordedAt
     /// </summary>
     DateTime? RecordedAt { get; }
+
+    /// <summary>
+    /// Calculated method
+    /// </summary>
+    CalculatedMethod CalculatedMethod { get; }
   }
 }

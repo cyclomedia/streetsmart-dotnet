@@ -119,7 +119,73 @@ namespace StreetSmart.Common.Data.GeoJson
       Add("PointsWithErrors", PointsWithErrors);
       Add("ValidGeometry", ValidGeometry);
       Add("ObservationLines", ObservationLines);
-      Add("measurementTool", measurementTool);
+      Add("measurementTool", MeasurementTool);
+    }
+
+    public MeasurementProperties(IMeasurementProperties properties)
+    {
+      if (properties != null)
+      {
+        Id = properties.Id != null ? string.Copy(properties.Id) : null;
+        Name = properties.Name != null ? string.Copy(properties.Name) : null;
+        Group = properties.Group != null ? string.Copy(properties.Group) : null;
+
+        if (properties.MeasureDetails != null)
+        {
+          MeasureDetails = new List<IMeasureDetails>();
+
+          foreach (var measureDetail in properties.MeasureDetails)
+          {
+            MeasureDetails.Add(new MeasureDetails(measureDetail));
+          }
+        }
+
+        Dimension = properties.Dimension;
+        CustomGeometryType = properties.CustomGeometryType;
+        IDerivedData derivedData = properties.DerivedData;
+
+        switch (derivedData)
+        {
+          case IDerivedDataPoint point:
+            DerivedData = new DerivedDataPoint(point);
+            break;
+          case IDerivedDataPolygon polygon:
+            DerivedData = new DerivedDataPolygon(polygon);
+            break;
+          case IDerivedDataLineString lineString:
+            DerivedData = new DerivedDataLineString(lineString);
+            break;
+        }
+
+        MeasureReliability = properties.MeasureReliability;
+
+        if (properties.PointsWithErrors != null)
+        {
+          PointsWithErrors = new List<int>();
+
+          foreach (int pointWithError in properties.PointsWithErrors)
+          {
+            PointsWithErrors.Add(pointWithError);
+          }
+        }
+
+        ValidGeometry = properties.ValidGeometry;
+        ObservationLines = new ObservationLines(properties.ObservationLines);
+        MeasurementTool = properties.MeasurementTool;
+
+        Add("Id", Id);
+        Add("Name", Name);
+        Add("Group", Group);
+        Add("MeasureDetails", MeasureDetails);
+        Add("Dimension", Dimension);
+        Add("CustomGeometryType", CustomGeometryType);
+        Add("DerivedData", DerivedData);
+        Add("MeasureReliability", MeasureReliability);
+        Add("PointsWithErrors", PointsWithErrors);
+        Add("ValidGeometry", ValidGeometry);
+        Add("ObservationLines", ObservationLines);
+        Add("measurementTool", MeasurementTool);
+      }
     }
 
     public string Id { get; }
