@@ -29,9 +29,9 @@ namespace StreetSmart.Common.Data.GeoJson
     public MeasureDetails(Dictionary<string, object> measureDetails)
     {
       string measureMethod = measureDetails?["measureMethod"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> details = measureDetails?["details"] as Dictionary<string, object>;
-      IList<object> pointProblems = measureDetails?["pointProblems"] as IList<object> ?? new List<object>();
-      string pointReliability = measureDetails?["pointReliability"]?.ToString() ?? string.Empty;
+      Dictionary<string, object> details = GetValue(measureDetails, "details") as Dictionary<string, object>;
+      IList<object> pointProblems = GetValue(measureDetails, "pointProblems") as IList<object> ?? new List<object>();
+      string pointReliability = GetValue(measureDetails, "pointReliability")?.ToString() ?? string.Empty;
 
       PointProblems = new List<PointProblems>();
 
@@ -94,6 +94,9 @@ namespace StreetSmart.Common.Data.GeoJson
         case "UNRELIABLE":
           PointReliability = Reliability.Unreliable;
           break;
+        default:
+          PointReliability = Reliability.NotDefined;
+          break;
       }
     }
 
@@ -134,6 +137,12 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public MeasureDetails()
+    {
+      MeasureMethod = MeasureMethod.unknown;
+      PointProblems = new List<PointProblems>();
+    }
+
     public MeasureMethod MeasureMethod { get; }
 
     public IDetails Details { get; }
@@ -141,6 +150,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public IList<PointProblems> PointProblems { get; }
 
     public Reliability PointReliability { get; }
+
+    public object GetValue(Dictionary<string, object> measureDetails, string value)
+    {
+      return measureDetails?.ContainsKey(value) ?? false ? measureDetails[value] : null;
+    }
 
     public override string ToString()
     {

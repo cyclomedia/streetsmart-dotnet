@@ -41,6 +41,11 @@ namespace StreetSmart.Common.Factories
       new FeatureCollection(featureCollection);
 
     /// <summary>
+    /// create measure details
+    /// </summary>
+    public static IMeasureDetails CreateMeasureDetails() => new MeasureDetails();
+
+    /// <summary>
     /// returns GeoJson point feature object
     /// </summary>
     public static IFeature CreatePointFeature(double x, double y, double z) => new Feature(new Point(x, y, z));

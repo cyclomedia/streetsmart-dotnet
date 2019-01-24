@@ -35,7 +35,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
       if (color.Count >= 4)
       {
-        Color = Color.FromArgb((int) ((double) color[3] * 255), (int) color[0], (int) color[1], (int) color[2]);
+        int color0 = int.Parse(color[0].ToString());
+        int color1 = int.Parse(color[1].ToString());
+        int color2 = int.Parse(color[2].ToString());
+        double color3 = double.Parse(color[3].ToString());
+        Color = Color.FromArgb((int) (color3 * 255), color0, color1, color2);
       }
 
       try

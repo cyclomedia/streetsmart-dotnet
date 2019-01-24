@@ -218,9 +218,11 @@ namespace StreetSmart.Common.Data.GeoJson
       string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
 
       string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
-      string measureDetailsStr = $"{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]";
+      string measureDetailsStr = MeasureDetails.Count >= 1
+        ? $",\"measureDetails\":{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]"
+        : string.Empty;
 
-      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\",\"measureDetails\":{measureDetailsStr},\"dimension\":{Dimension}" +
+      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr},\"dimension\":{Dimension}" +
                           $",\"customGeometryType\":\"{CustomGeometryType.Description()}\",\"derivedData\":{DerivedData}" +
                           $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
                           $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +
