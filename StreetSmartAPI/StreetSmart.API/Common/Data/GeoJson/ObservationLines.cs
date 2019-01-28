@@ -28,10 +28,10 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
-      ActiveObservation = observationLines?["activeObservation"] as int? ?? 0;
-      RecordingId = observationLines?["recordingId"]?.ToString() ?? string.Empty;
-      IList<object> color = observationLines?["color"] as IList<object> ?? new List<object>();
-      string selectedMeasureMethod = observationLines?["selectedMeasureMethod"]?.ToString() ?? string.Empty;
+      ActiveObservation = GetValue(observationLines, "activeObservation") as int? ?? 0;
+      RecordingId = GetValue(observationLines, "recordingId")?.ToString() ?? string.Empty;
+      IList<object> color = GetValue(observationLines, "color") as IList<object> ?? new List<object>();
+      string selectedMeasureMethod = GetValue(observationLines, "selectedMeasureMethod")?.ToString() ?? string.Empty;
 
       if (color.Count >= 4)
       {
@@ -71,6 +71,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public Color Color { get; }
 
     public MeasureMethod SelectedMeasureMethod { get; }
+
+    public object GetValue(Dictionary<string, object> measureDetails, string value)
+    {
+      return measureDetails?.ContainsKey(value) ?? false ? measureDetails[value] : null;
+    }
 
     public override string ToString()
     {

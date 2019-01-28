@@ -65,8 +65,11 @@ namespace StreetSmart.Common.Data.GeoJson
       Orientation = new Property(orientation, stdOrientation);
       Position = new PositionStdev(positionX, positionY, positionZ, stdX, stdY, stdZ);
 
-      byte[] bytes = Convert.FromBase64String(_matchImage);
-      MatchImage = new Bitmap(new MemoryStream(bytes));
+      if (!string.IsNullOrEmpty(_matchImage))
+      {
+        byte[] bytes = Convert.FromBase64String(_matchImage);
+        MatchImage = new Bitmap(new MemoryStream(bytes));
+      }
     }
 
     public ResultDirection(IResultDirection resultDirection)
@@ -80,6 +83,7 @@ namespace StreetSmart.Common.Data.GeoJson
         Orientation = new Property(resultDirection.Orientation);
         Position = new PositionStdev(resultDirection.Position);
         CalculatedMethod = resultDirection.CalculatedMethod;
+        _matchImage = (resultDirection as ResultDirection)?._matchImage;
 
         if (resultDirection.RecordedAt != null)
         {
