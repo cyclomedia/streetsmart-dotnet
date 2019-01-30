@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Recording : NotifyPropertyChanged, IRecording
+  internal class Recording : DataBase, IRecording
   {
     private double? _groundLevelOffset;
     private double? _recorderDirection;
@@ -64,8 +64,8 @@ namespace StreetSmart.Common.Data
         GroundLevelOffset = Convert.ToDouble(groundOffset);
       }
 
-      RecorderDirection = (double?) recording["recorderDirection"];
-      Orientation = (double?) recording["orientation"];
+      RecorderDirection = ToNullDouble(recording, "recorderDirection");
+      Orientation = ToNullDouble(recording, "orientation");
       RecordedAt = (DateTime?) recording["recordedAt"];
       Id = (string) recording["id"];
       SRS = (string) recording["srs"];
