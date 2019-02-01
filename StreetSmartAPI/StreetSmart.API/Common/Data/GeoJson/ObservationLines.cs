@@ -30,7 +30,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       ActiveObservation = ToInt(observationLines, "activeObservation");
       RecordingId = ToString(observationLines, "recordingId");
-      IList<object> color = GetValue(observationLines, "color") as IList<object> ?? new List<object>();
+      var color = GetListValue(observationLines, "color");
 
       if (color.Count >= 4)
       {

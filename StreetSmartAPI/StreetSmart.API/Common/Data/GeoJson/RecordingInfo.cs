@@ -29,10 +29,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public RecordingInfo(Dictionary<string, object> recordingInfo)
     {
       Id = ToString(recordingInfo, "id");
-      Dictionary<string, object> xyz = GetValue(recordingInfo, "xyz") as Dictionary<string, object>;
+      var xyz = GetDictValue(recordingInfo, "xyz");
       SRS = ToString(recordingInfo, "srs");
       double yaw = ToDouble(recordingInfo, "yaw");
-      IList<object> xyzStdev = GetValue(recordingInfo, "xyzStdev") as IList<object> ?? new List<object>();
+      var xyzStdev = GetListValue(recordingInfo, "xyzStdev");
       double yawStdev = ToDouble(recordingInfo, "yawStdev");
       DepthStdev = ToDouble(recordingInfo, "depthStdev");
 

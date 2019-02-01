@@ -30,10 +30,10 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
-      Dictionary<string, object> positionXY = GetProperty(derivedData, "positionXY");
-      Dictionary<string, object> positionZ = GetProperty(derivedData, "positionZ");
-      IList<object> coordinateStdevs = GetValue(derivedData, "coordinateStdevs") as IList<object> ?? new List<object>();
-      Dictionary<string, object> position = GetProperty(derivedData, "position");
+      var positionXY = GetDictValue(derivedData, "positionXY");
+      var positionZ = GetDictValue(derivedData, "positionZ");
+      var coordinateStdevs = GetListValue(derivedData, "coordinateStdevs");
+      var position = GetDictValue(derivedData, "position");
 
       if (coordinateStdevs.Count >= 1)
       {
@@ -72,11 +72,6 @@ namespace StreetSmart.Common.Data.GeoJson
     public IPositionXY PositionXY { get; }
 
     public IProperty PositionZ { get; }
-
-    public Dictionary<string, object> GetProperty(Dictionary<string, object> derivedData, string key)
-    {
-      return GetValue(derivedData, key) as Dictionary<string, object>;
-    }
 
     public override string ToString()
     {

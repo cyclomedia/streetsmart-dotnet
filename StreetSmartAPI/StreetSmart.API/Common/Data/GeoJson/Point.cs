@@ -27,7 +27,7 @@ namespace StreetSmart.Common.Data.GeoJson
   internal class Point: Coordinate, IPoint
   {
     public Point(Dictionary<string, object> point)
-      : base(new DataConvert().GetValue(point, "coordinates") as IList<object>)
+      : base(new DataConvert().GetListValue(point, "coordinates"))
     {
       try
       {

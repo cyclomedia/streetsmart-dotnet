@@ -32,8 +32,8 @@ namespace StreetSmart.Common.Data.GeoJson
       double? positionX = ToNullDouble(detailsForwardIntersection, "PositionX");
       double? positionY = ToNullDouble(detailsForwardIntersection, "PositionY");
       double? positionZ = ToNullDouble(detailsForwardIntersection, "PositionZ");
-      Dictionary<string, object> resultDirections = GetValue(detailsForwardIntersection, "ResultDirections") as Dictionary<string, object>;
-      IList<object> resultDirection = GetValue(resultDirections, "ResultDirection") as IList<object> ?? new List<object>();
+      var resultDirections = GetDictValue(detailsForwardIntersection, "ResultDirections");
+      var resultDirection = GetListValue(resultDirections, "ResultDirection");
 
       Position = new Position(positionX, positionY, positionZ);
       ResultDirections = new List<IResultDirection>();

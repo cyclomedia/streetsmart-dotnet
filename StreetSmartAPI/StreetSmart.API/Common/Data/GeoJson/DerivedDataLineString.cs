@@ -31,7 +31,7 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
-      IList<object> coordinateStdevs = GetValue(derivedData, "coordinateStdevs") as IList<object> ?? new List<object>();
+      var coordinateStdevs = GetListValue(derivedData, "coordinateStdevs");
       TotalLength = getStdValue(derivedData, "totalLength");
       SegmentLengths = GetStdValueList(derivedData, "segmentLengths");
       SegmentsDeltaXY = GetStdValueList(derivedData, "segmentsDeltaXY");
@@ -97,22 +97,17 @@ namespace StreetSmart.Common.Data.GeoJson
 
     private IList<IProperty> GetStdValueList(Dictionary<string, object> derivedData, string key)
     {
-      object input = GetValue(derivedData, key);
+      var input = GetDictValue(derivedData, key);
       List<IProperty> result = null;
 
-      if (input != null)
+      if (GetValue(input, "value") is IList<object> value)
       {
-        Dictionary<string, object> dictInput = input as Dictionary<string, object>;
+        var stdevstList = GetListValue(input, "stdev");
+        result = new List<IProperty>();
 
-        if (GetValue(dictInput, "value") is IList<object> value)
+        for (int i = 0; i < value.Count; i++)
         {
-          IList<object> stdevstList = GetValue(dictInput, "stdev") as IList<object>;
-          result = new List<IProperty>();
-
-          for (int i = 0; i < value.Count; i++)
-          {
-            result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
-          }
+          result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
         }
       }
 
@@ -138,14 +133,13 @@ namespace StreetSmart.Common.Data.GeoJson
 
     protected IProperty getStdValue(Dictionary<string, object> derivedData, string key)
     {
-      object input = GetValue(derivedData, key);
+      var input = GetDictValue(derivedData, key);
       IProperty result = null;
 
-      if (input != null)
+      if (input.Count >= 1)
       {
-        Dictionary<string, object> dictInput = input as Dictionary<string, object>;
-        double? stdev = ToNullDouble(dictInput, "stdev");
-        result = new Property(ToDouble(dictInput, "value"), stdev);
+        double? stdev = ToNullDouble(input, "stdev");
+        result = new Property(ToDouble(input, "value"), stdev);
       }
 
       return result;

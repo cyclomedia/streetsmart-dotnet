@@ -27,11 +27,11 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public DetailsDepth(Dictionary<string, object> details)
     {
-      Dictionary<string, object> position = GetValue(details, "position") as Dictionary<string, object>;
-      Dictionary<string, object> direction = GetValue(details, "direction") as Dictionary<string, object>;
+      var position = GetDictValue(details, "position");
+      var direction = GetDictValue(details, "direction");
       DepthInMeters = ToDouble(details, "depthInMeters");
       Depth = ToDouble(details, "depth");
-      Dictionary<string, object> recordingInfo = GetValue(details, "recordingInfo") as Dictionary<string, object>;
+      var recordingInfo = GetDictValue(details, "recordingInfo");
 
       Position = new PositionXYZ(position);
       Direction = new Direction(direction);

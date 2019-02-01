@@ -107,5 +107,15 @@ namespace StreetSmart.Common.Data
     {
       return details?.ContainsKey(value) ?? false ? details[value] : null;
     }
+
+    public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
+    {
+      return GetValue(details, value) as Dictionary<string, object> ?? new Dictionary<string, object>();
+    }
+
+    public IList<object> GetListValue(Dictionary<string, object> details, string value)
+    {
+      return GetValue(details, value) as IList<object> ?? new List<object>();
+    }
   }
 }

@@ -27,8 +27,8 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public Feature(Dictionary<string, object> feature, bool measurementProperties)
     {
-      var geometry = GetValue(feature, "geometry") as Dictionary<string, object>;
-      var properties = GetValue(feature, "properties") as Dictionary<string, object>;
+      var geometry = GetDictValue(feature, "geometry");
+      var properties = GetDictValue(feature, "properties");
 
       Geometry geom = new Geometry(geometry);
       Properties = measurementProperties

@@ -43,7 +43,7 @@ namespace StreetSmart.Common.Data
 
     public Recording(Dictionary<string, object> recording)
     {
-      var xyz = (Dictionary<string, object>) GetValue(recording, "xyz");
+      var xyz = GetDictValue(recording, "xyz");
       double x = ToDouble(xyz, "0");
       double y = ToDouble(xyz, "1");
       double z = ToDouble(xyz, "2");

@@ -32,14 +32,14 @@ namespace StreetSmart.Common.Data.GeoJson
       Id = converter.ToString(properties, "id");
       Name = converter.ToString(properties, "name");
       Group = converter.ToString(properties, "group");
-      IList<object> measureDetails = converter.GetValue(properties, "measureDetails") as IList<object> ?? new List<object>();
+      var measureDetails = converter.GetListValue(properties, "measureDetails");
       Dimension = converter.ToInt(properties, "dimension");
-      Dictionary<string, object> derivedData = converter.GetValue(properties, "derivedData") as Dictionary<string, object>;
+      var derivedData = converter.GetDictValue(properties, "derivedData");
       string measureReliability = converter.ToString(properties, "measureReliability");
       string measurementTool = converter.ToString(properties, "measurementTool");
-      IList<object> pointsWithErrors = converter.GetValue(properties, "pointsWithErrors") as IList<object> ?? new List<object>();
+      var pointsWithErrors = converter.GetListValue(properties, "pointsWithErrors");
       ValidGeometry = converter.ToBool(properties, "validGeometry");
-      Dictionary<string, object> observationLines = converter.GetValue(properties, "observationLines") as Dictionary<string, object>;
+      var observationLines = converter.GetDictValue(properties, "observationLines");
 
       MeasureDetails = new List<IMeasureDetails>();
       PointsWithErrors = new List<int>();

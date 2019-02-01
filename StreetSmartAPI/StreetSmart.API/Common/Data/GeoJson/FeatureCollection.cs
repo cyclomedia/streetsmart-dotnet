@@ -28,8 +28,8 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
     {
-      IList<object> features = GetValue(featureCollection, "features") as IList<object> ?? new List<object>();
-      Dictionary<string, object> crs = GetValue(featureCollection, "crs") as Dictionary<string, object>;
+      var features = GetListValue(featureCollection, "features");
+      var crs = GetDictValue(featureCollection, "crs");
 
       Features = new List<IFeature>();
       CRS = new CRS(crs);

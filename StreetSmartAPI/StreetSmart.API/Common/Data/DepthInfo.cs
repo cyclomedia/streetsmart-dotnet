@@ -33,7 +33,7 @@ namespace StreetSmart.Common.Data
     {
       Depth = ToDouble(depthInfo, "depth");
       DepthInMeters = ToDouble(depthInfo, "depthInMeters");
-      XYZ = new Coordinate((Dictionary<string, object>) GetValue(depthInfo, "xyz") ?? new Dictionary<string, object>());
+      XYZ = new Coordinate(GetDictValue(depthInfo, "xyz"));
       SRS = ToString(depthInfo, "srs");
     }
 

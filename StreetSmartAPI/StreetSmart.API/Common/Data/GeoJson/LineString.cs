@@ -29,7 +29,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public LineString(Dictionary<string, object> lineString)
     {
       DataConvert converter = new DataConvert();
-      IList<object> coordinates = converter.GetValue(lineString, "coordinates") as IList<object> ?? new List<object>();
+      var coordinates = converter.GetListValue(lineString, "coordinates");
 
       try
       {

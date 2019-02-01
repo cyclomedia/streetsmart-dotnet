@@ -28,8 +28,8 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public MeasureDetails(Dictionary<string, object> measureDetails)
     {
-      Dictionary<string, object> details = GetValue(measureDetails, "details") as Dictionary<string, object>;
-      IList<object> pointProblems = GetValue(measureDetails, "pointProblems") as IList<object> ?? new List<object>();
+      var details = GetDictValue(measureDetails, "details");
+      var pointProblems = GetListValue(measureDetails, "pointProblems");
       string pointReliability = ToString(measureDetails, "pointReliability");
 
       PointProblems = new List<PointProblems>();

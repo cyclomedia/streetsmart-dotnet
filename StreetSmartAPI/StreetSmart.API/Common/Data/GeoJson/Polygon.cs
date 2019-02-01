@@ -29,7 +29,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public Polygon(Dictionary<string, object> polygon)
     {
       DataConvert converter = new DataConvert();
-      IList<object> coordinates = converter.GetValue(polygon, "coordinates") as IList<object> ?? new List<object>();
+      var coordinates = converter.GetListValue(polygon, "coordinates");
 
       try
       {

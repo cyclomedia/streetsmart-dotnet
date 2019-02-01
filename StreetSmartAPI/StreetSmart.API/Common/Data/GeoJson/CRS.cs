@@ -29,7 +29,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public CRS(Dictionary<string, object> crs)
     {
       string type = ToString(crs, "type");
-      object properties = GetValue(crs, "properties");
+      var properties = GetDictValue(crs, "properties");
 
       switch (type)
       {
@@ -48,7 +48,7 @@ namespace StreetSmart.Common.Data.GeoJson
       {
         case CRSType.Name:
         case CRSType.Epsg:
-          Properties = ToString(properties as Dictionary<string, object>, Type == CRSType.Name ? "name" : "code");
+          Properties = ToString(properties, Type == CRSType.Name ? "name" : "code");
           break;
         case CRSType.NotDefined:
           Properties = string.Empty;
