@@ -24,20 +24,19 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: NotifyPropertyChanged, IMeasureDetails
+  internal class MeasureDetails: DataConvert, IMeasureDetails
   {
     public MeasureDetails(Dictionary<string, object> measureDetails)
     {
-      string measureMethod = measureDetails?["measureMethod"]?.ToString() ?? string.Empty;
       Dictionary<string, object> details = GetValue(measureDetails, "details") as Dictionary<string, object>;
       IList<object> pointProblems = GetValue(measureDetails, "pointProblems") as IList<object> ?? new List<object>();
-      string pointReliability = GetValue(measureDetails, "pointReliability")?.ToString() ?? string.Empty;
+      string pointReliability = ToString(measureDetails, "pointReliability");
 
       PointProblems = new List<PointProblems>();
 
       try
       {
-        MeasureMethod = (MeasureMethod) Enum.Parse(typeof(MeasureMethod), measureMethod);
+        MeasureMethod = (MeasureMethod) ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
       }
       catch (ArgumentException)
       {
@@ -150,11 +149,6 @@ namespace StreetSmart.Common.Data.GeoJson
     public IList<PointProblems> PointProblems { get; }
 
     public Reliability PointReliability { get; }
-
-    public object GetValue(Dictionary<string, object> measureDetails, string value)
-    {
-      return measureDetails?.ContainsKey(value) ?? false ? measureDetails[value] : null;
-    }
 
     public override string ToString()
     {

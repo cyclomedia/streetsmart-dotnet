@@ -25,12 +25,12 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedData : NotifyPropertyChanged, IDerivedData
+  internal class DerivedData : DataConvert, IDerivedData
   {
     public DerivedData(Dictionary<string, object> derivedData)
     {
-      string unit = derivedData?["unit"]?.ToString() ?? string.Empty;
-      Precision = derivedData?["precision"] as int? ?? 0;
+      string unit = ToString(derivedData, "unit");
+      Precision = ToInt(derivedData, "precision");
 
       switch (unit)
       {

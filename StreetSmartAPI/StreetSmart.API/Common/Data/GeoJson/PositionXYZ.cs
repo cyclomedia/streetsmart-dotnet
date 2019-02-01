@@ -30,9 +30,9 @@ namespace StreetSmart.Common.Data.GeoJson
     public PositionXYZ(Dictionary<string, object> position)
       : base(position)
     {
-      double? x = position?["x"] as double?;
-      double? y = position?["y"] as double?;
-      double? z = position?.ContainsKey("z") ?? false ? position["z"] as double? : null;
+      double? x = ToNullDouble(position, "x");
+      double? y = ToNullDouble(position, "y");
+      double? z = ToNullDouble(position, "z");
 
       XYZ = new Coordinate(x, y, z);
     }

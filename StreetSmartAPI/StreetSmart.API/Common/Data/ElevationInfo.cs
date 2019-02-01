@@ -22,7 +22,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class ElevationInfo : NotifyPropertyChanged, IElevationInfo
+  internal class ElevationInfo : DataConvert, IElevationInfo
   {
     private double _level;
     private Unit _heightUnit;
@@ -30,9 +30,7 @@ namespace StreetSmart.Common.Data
 
     public ElevationInfo(Dictionary<string, object> elevationInfo)
     {
-      string level = elevationInfo?["level"]?.ToString();
-      string unit = elevationInfo?["heightUnits"]?.ToString() ?? string.Empty;
-      string groundLevel = elevationInfo?["groundLevel"].ToString();
+      string unit = ToString(elevationInfo, "heightUnits");
 
       switch (unit)
       {
@@ -56,8 +54,8 @@ namespace StreetSmart.Common.Data
           break;
       }
 
-      Level = string.IsNullOrEmpty(level) ? 0.0 : double.Parse(level);
-      GroundLevel = string.IsNullOrEmpty(groundLevel) ? 0.0 : double.Parse(groundLevel);
+      Level = ToDouble(elevationInfo, "level");
+      GroundLevel = ToDouble(elevationInfo, "groundLevel");
     }
 
     public double Level

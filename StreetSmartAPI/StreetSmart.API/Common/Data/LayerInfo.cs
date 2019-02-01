@@ -22,15 +22,15 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class LayerInfo : NotifyPropertyChanged, ILayerInfo
+  internal class LayerInfo : DataConvert, ILayerInfo
   {
     private string _layerId;
     private bool _visible;
 
     public LayerInfo(Dictionary<string, object> layerInfo)
     {
-      LayerId = layerInfo?["layerId"]?.ToString() ?? string.Empty;
-      Visible = (bool) (layerInfo?["visibility"] ?? false);
+      LayerId = ToString(layerInfo, "layerId");
+      Visible = ToBool(layerInfo, "visibility");
     }
 
     public string LayerId

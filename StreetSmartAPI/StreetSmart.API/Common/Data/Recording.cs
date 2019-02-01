@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Recording : DataBase, IRecording
+  internal class Recording : DataConvert, IRecording
   {
     private double? _groundLevelOffset;
     private double? _recorderDirection;
@@ -43,40 +43,26 @@ namespace StreetSmart.Common.Data
 
     public Recording(Dictionary<string, object> recording)
     {
-      Dictionary<string, object> xyz = (Dictionary<string, object>) recording["xyz"];
-      double.TryParse(xyz["0"].ToString(), out var x);
-      double.TryParse(xyz["1"].ToString(), out var y);
-      double.TryParse(xyz["2"].ToString(), out var z);
+      var xyz = (Dictionary<string, object>) GetValue(recording, "xyz");
+      double x = ToDouble(xyz, "0");
+      double y = ToDouble(xyz, "1");
+      double z = ToDouble(xyz, "2");
       XYZ = new Coordinate(x, y, z);
 
-      string orPrec = recording["orientationPrecision"].ToString();
-      string longPrec = recording["longitudePrecision"].ToString();
-      string latPrec = recording["latitudePrecision"].ToString();
-      string heightPrec = recording["heightPrecision"].ToString();
-      object groundOffset = recording["groundLevelOffset"];
-
-      if (groundOffset == null)
-      {
-        GroundLevelOffset = null;
-      }
-      else
-      {
-        GroundLevelOffset = Convert.ToDouble(groundOffset);
-      }
-
+      GroundLevelOffset = ToNullDouble(recording, "groundLevelOffset");
       RecorderDirection = ToNullDouble(recording, "recorderDirection");
       Orientation = ToNullDouble(recording, "orientation");
-      RecordedAt = (DateTime?) recording["recordedAt"];
-      Id = (string) recording["id"];
-      SRS = (string) recording["srs"];
-      OrientationPrecision = string.IsNullOrEmpty(orPrec) ? null : (double?) double.Parse(orPrec);
-      TileSchema = (TileSchema) Enum.Parse(typeof (TileSchema), (string) recording["tileSchema"]);
-      LongitudePrecision = string.IsNullOrEmpty(longPrec) ? null : (double?) double.Parse(longPrec);
-      LatitudePrecision = string.IsNullOrEmpty(latPrec) ? null : (double?) double.Parse(latPrec);
-      HeightPrecision = string.IsNullOrEmpty(heightPrec) ? null : (double?) double.Parse(heightPrec);
-      ProductType = (ProductType) Enum.Parse(typeof (ProductType), (string) recording["productType"]);
-      HeightSystem = (string) recording["heightSystem"];
-      ExpiredAt = (DateTime?) recording["expiredAt"];
+      RecordedAt = ToNullDateTime(recording, "recordedAt");
+      Id = ToString(recording, "id");
+      SRS = ToString(recording, "srs");
+      OrientationPrecision = ToNullDouble(recording, "orientationPrecision");
+      TileSchema = (TileSchema) ToEnum(typeof(TileSchema), recording, "tileSchema");
+      LongitudePrecision = ToNullDouble(recording, "longitudePrecision");
+      LatitudePrecision = ToNullDouble(recording, "latitudePrecision");
+      HeightPrecision = ToNullDouble(recording, "heightPrecision");
+      ProductType = (ProductType) ToEnum(typeof(ProductType), recording, "productType");
+      HeightSystem = ToString(recording, "heightSystem");
+      ExpiredAt = ToNullDateTime(recording, "expiredAt");
     }
 
     public double? GroundLevelOffset

@@ -29,11 +29,11 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection)
     {
-      double? positionX = detailsForwardIntersection?["PositionX"] as double?;
-      double? positionY = detailsForwardIntersection?["PositionY"] as double?;
-      double? positionZ = detailsForwardIntersection?["PositionZ"] as double?;
-      Dictionary<string, object> resultDirections = detailsForwardIntersection?["ResultDirections"] as Dictionary<string, object>;
-      IList<object> resultDirection = resultDirections?["ResultDirection"] as IList<object> ?? new List<object>();
+      double? positionX = ToNullDouble(detailsForwardIntersection, "PositionX");
+      double? positionY = ToNullDouble(detailsForwardIntersection, "PositionY");
+      double? positionZ = ToNullDouble(detailsForwardIntersection, "PositionZ");
+      Dictionary<string, object> resultDirections = GetValue(detailsForwardIntersection, "ResultDirections") as Dictionary<string, object>;
+      IList<object> resultDirection = GetValue(resultDirections, "ResultDirection") as IList<object> ?? new List<object>();
 
       Position = new Position(positionX, positionY, positionZ);
       ResultDirections = new List<IResultDirection>();

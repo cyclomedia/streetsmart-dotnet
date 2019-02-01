@@ -24,12 +24,12 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class CRS : NotifyPropertyChanged, ICRS
+  internal class CRS : DataConvert, ICRS
   {
     public CRS(Dictionary<string, object> crs)
     {
-      string type = crs?["type"]?.ToString() ?? string.Empty;
-      object properties = crs?["properties"];
+      string type = ToString(crs, "type");
+      object properties = GetValue(crs, "properties");
 
       switch (type)
       {
@@ -48,8 +48,7 @@ namespace StreetSmart.Common.Data.GeoJson
       {
         case CRSType.Name:
         case CRSType.Epsg:
-          Dictionary<string, object> props = properties as Dictionary<string, object>;
-          Properties = (Type == CRSType.Name ? props?["name"] : props?["code"]) as string ?? string.Empty;
+          Properties = ToString(properties as Dictionary<string, object>, Type == CRSType.Name ? "name" : "code");
           break;
         case CRSType.NotDefined:
           Properties = string.Empty;

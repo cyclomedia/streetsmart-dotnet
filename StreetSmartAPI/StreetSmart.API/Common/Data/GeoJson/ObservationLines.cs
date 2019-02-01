@@ -24,14 +24,13 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines: NotifyPropertyChanged, IObservationLines
+  internal class ObservationLines: DataConvert, IObservationLines
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
-      ActiveObservation = GetValue(observationLines, "activeObservation") as int? ?? 0;
-      RecordingId = GetValue(observationLines, "recordingId")?.ToString() ?? string.Empty;
+      ActiveObservation = ToInt(observationLines, "activeObservation");
+      RecordingId = ToString(observationLines, "recordingId");
       IList<object> color = GetValue(observationLines, "color") as IList<object> ?? new List<object>();
-      string selectedMeasureMethod = GetValue(observationLines, "selectedMeasureMethod")?.ToString() ?? string.Empty;
 
       if (color.Count >= 4)
       {
@@ -44,7 +43,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        SelectedMeasureMethod = (MeasureMethod) Enum.Parse(typeof(MeasureMethod), selectedMeasureMethod);
+        SelectedMeasureMethod =
+          (MeasureMethod) ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
       }
       catch (ArgumentException)
       {
@@ -71,11 +71,6 @@ namespace StreetSmart.Common.Data.GeoJson
     public Color Color { get; }
 
     public MeasureMethod SelectedMeasureMethod { get; }
-
-    public object GetValue(Dictionary<string, object> measureDetails, string value)
-    {
-      return measureDetails?.ContainsKey(value) ?? false ? measureDetails[value] : null;
-    }
 
     public override string ToString()
     {

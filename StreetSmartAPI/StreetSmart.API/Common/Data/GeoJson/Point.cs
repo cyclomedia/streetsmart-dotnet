@@ -27,13 +27,11 @@ namespace StreetSmart.Common.Data.GeoJson
   internal class Point: Coordinate, IPoint
   {
     public Point(Dictionary<string, object> point)
-      : base(point?["coordinates"] as IList<object>)
+      : base(new DataConvert().GetValue(point, "coordinates") as IList<object>)
     {
-      string type = point?["type"]?.ToString() ?? string.Empty;
-
       try
       {
-        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
+        Type = (GeometryType) ToEnum(typeof(GeometryType), point, "type");
       }
       catch (ArgumentException)
       {

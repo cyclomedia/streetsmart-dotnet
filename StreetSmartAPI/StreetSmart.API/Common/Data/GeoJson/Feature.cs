@@ -23,13 +23,12 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Feature : NotifyPropertyChanged, IFeature
+  internal class Feature : DataConvert, IFeature
   {
     public Feature(Dictionary<string, object> feature, bool measurementProperties)
     {
-      string type = feature?["type"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> geometry = feature?["geometry"] as Dictionary<string, object>;
-      Dictionary<string, object> properties = feature?["properties"] as Dictionary<string, object>;
+      var geometry = GetValue(feature, "geometry") as Dictionary<string, object>;
+      var properties = GetValue(feature, "properties") as Dictionary<string, object>;
 
       Geometry geom = new Geometry(geometry);
       Properties = measurementProperties
@@ -38,7 +37,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (FeatureType) Enum.Parse(typeof(FeatureType), type);
+        Type = (FeatureType) ToEnum(typeof(FeatureType), feature, "type");
       }
       catch (ArgumentException)
       {

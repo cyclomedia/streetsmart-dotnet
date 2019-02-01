@@ -24,20 +24,19 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class FeatureCollection: NotifyPropertyChanged, IFeatureCollection
+  internal class FeatureCollection: DataConvert, IFeatureCollection
   {
     public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
     {
-      string type = featureCollection?["type"]?.ToString() ?? string.Empty;
-      IList<object> features = featureCollection?["features"] as IList<object> ?? new List<object>();
-      Dictionary<string, object> crs = featureCollection?["crs"] as Dictionary<string, object>;
+      IList<object> features = GetValue(featureCollection, "features") as IList<object> ?? new List<object>();
+      Dictionary<string, object> crs = GetValue(featureCollection, "crs") as Dictionary<string, object>;
 
       Features = new List<IFeature>();
       CRS = new CRS(crs);
 
       try
       {
-        Type = (FeatureType) Enum.Parse(typeof(FeatureType), type);
+        Type = (FeatureType) ToEnum(typeof(FeatureType), featureCollection, "type");
       }
       catch (ArgumentException)
       {

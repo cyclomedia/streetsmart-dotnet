@@ -28,20 +28,18 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {
-      Id = properties?["id"]?.ToString() ?? string.Empty;
-      Name = properties?["name"]?.ToString() ?? string.Empty;
-      Group = properties?["group"]?.ToString() ?? string.Empty;
-      IList<object> measureDetails = properties?["measureDetails"] as IList<object> ?? new List<object>();
-      Dimension = properties?["dimension"] as int? ?? 0;
-      string customGeometryType = properties?["customGeometryType"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> derivedData = properties?["derivedData"] as Dictionary<string, object>;
-      string measureReliability = properties?["measureReliability"]?.ToString() ?? string.Empty;
-      string measurementTool = properties?["measurementTool"]?.ToString() ?? string.Empty;
-      IList<object> pointsWithErrors = properties?["pointsWithErrors"] as IList<object> ?? new List<object>();
-      ValidGeometry = properties?["validGeometry"] as bool? ?? false;
-      Dictionary<string, object> observationLines = properties?.ContainsKey("observationLines") ?? false
-        ? properties["observationLines"] as Dictionary<string, object>
-        : null;
+      DataConvert converter = new DataConvert();
+      Id = converter.ToString(properties, "id");
+      Name = converter.ToString(properties, "name");
+      Group = converter.ToString(properties, "group");
+      IList<object> measureDetails = converter.GetValue(properties, "measureDetails") as IList<object> ?? new List<object>();
+      Dimension = converter.ToInt(properties, "dimension");
+      Dictionary<string, object> derivedData = converter.GetValue(properties, "derivedData") as Dictionary<string, object>;
+      string measureReliability = converter.ToString(properties, "measureReliability");
+      string measurementTool = converter.ToString(properties, "measurementTool");
+      IList<object> pointsWithErrors = converter.GetValue(properties, "pointsWithErrors") as IList<object> ?? new List<object>();
+      ValidGeometry = converter.ToBool(properties, "validGeometry");
+      Dictionary<string, object> observationLines = converter.GetValue(properties, "observationLines") as Dictionary<string, object>;
 
       MeasureDetails = new List<IMeasureDetails>();
       PointsWithErrors = new List<int>();
@@ -54,7 +52,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        CustomGeometryType = (CustomGeometryType) Enum.Parse(typeof(CustomGeometryType), customGeometryType);
+        CustomGeometryType =
+          (CustomGeometryType) converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {

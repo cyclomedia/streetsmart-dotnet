@@ -33,7 +33,7 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public PositionStdev(Dictionary<string, object> position, Dictionary<string, object> coordinateStdev)
-      : base(position?["value"] as IList<object>)
+      : base(new DataConvert().GetValue(position, "value") as IList<object>)
     {
       StdDev = new Coordinate(coordinateStdev);
     }

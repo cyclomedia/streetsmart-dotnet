@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Orientation : NotifyPropertyChanged, IOrientation
+  internal class Orientation : DataConvert, IOrientation
   {
     private double? _yaw;
     private double? _pitch;
@@ -40,9 +40,9 @@ namespace StreetSmart.Common.Data
 
     public Orientation(Dictionary<string, object> orientation)
     {
-      Yaw = double.Parse(orientation["yaw"].ToString());
-      Pitch = double.Parse(orientation["pitch"].ToString());
-      HFov = double.Parse(orientation["hFov"].ToString());
+      Yaw = ToNullDouble(orientation, "yaw");
+      Pitch = ToNullDouble(orientation, "pitch");
+      HFov = ToNullDouble(orientation, "hFov");
     }
 
     public double? Yaw

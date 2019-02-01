@@ -182,8 +182,8 @@
     <Compile Include="..\Common\Data\Coordinate.cs">
       <Link>Data\Coordinate.cs</Link>
     </Compile>
-    <Compile Include="..\Common\Data\DataBase.cs">
-      <Link>Data\DataBase.cs</Link>
+    <Compile Include="..\Common\Data\DataConvert.cs">
+      <Link>Data\DataConvert.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\DepthInfo.cs">
       <Link>Data\DepthInfo.cs</Link>

@@ -26,44 +26,43 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirection : NotifyPropertyChanged, IResultDirection
+  internal class ResultDirection : DataConvert, IResultDirection
   {
     private readonly string _matchImage;
 
     public ResultDirection(Dictionary<string, object> resultDirection)
     {
-      RecordedAt = (resultDirection?.ContainsKey("RecordedAt") ?? false)
-        ? (DateTime?) DateTime.Parse(resultDirection["RecordedAt"]?.ToString())
-        : null;
-
-      double directionX = resultDirection?["DirectionX"] as double? ?? 0.0;
-      double directionY = resultDirection?["DirectionY"] as double? ?? 0.0;
-      double directionZ = resultDirection?["DirectionZ"] as double? ?? 0.0;
-      GroundLevelOffset = resultDirection?["GroundLevelOffset"] as double? ?? 0.0;
-      Id = resultDirection?["Id"]?.ToString() ?? string.Empty;
-      _matchImage = resultDirection?["MatchImage"]?.ToString() ?? string.Empty;
-      double orientation = resultDirection?["Orientation"] as double? ?? 0.0;
-      double positionX = resultDirection?["PositionX"] as double? ?? 0.0;
-      double positionY = resultDirection?["PositionY"] as double? ?? 0.0;
-      double positionZ = resultDirection?["PositionZ"] as double? ?? 0.0;
-      double stdOrientation = resultDirection?["StdOrientation"] as double? ?? 0.0;
-      double stdX = resultDirection?["StdX"] as double? ?? 0.0;
-      double stdY = resultDirection?["StdY"] as double? ?? 0.0;
-      double stdZ = resultDirection?["StdZ"] as double? ?? 0.0;
-      string calculationMethod = resultDirection?["calculationMethod"]?.ToString() ?? string.Empty;
+      RecordedAt = ToNullDateTime(resultDirection, "RecordedAt");
+      GroundLevelOffset = ToDouble(resultDirection, "GroundLevelOffset");
+      Id = ToString(resultDirection, "Id");
 
       try
       {
-        CalculatedMethod = (CalculatedMethod) Enum.Parse(typeof(CalculatedMethod), calculationMethod);
+        CalculatedMethod = (CalculatedMethod) ToEnum(typeof(CalculatedMethod), resultDirection, "calculationMethod");
       }
       catch (ArgumentException)
       {
         CalculatedMethod = CalculatedMethod.NotDefined;
       }
 
+      double directionX = ToDouble(resultDirection, "DirectionX");
+      double directionY = ToDouble(resultDirection, "DirectionY");
+      double directionZ = ToDouble(resultDirection, "DirectionZ");
       Direction = new Direction(directionX, directionY, directionZ);
+
+      double orientation = ToDouble(resultDirection, "Orientation");
+      double stdOrientation = ToDouble(resultDirection, "StdOrientation");
       Orientation = new Property(orientation, stdOrientation);
+
+      double positionX = ToDouble(resultDirection, "PositionX");
+      double positionY = ToDouble(resultDirection, "PositionY");
+      double positionZ = ToDouble(resultDirection, "PositionZ");
+      double stdX = ToDouble(resultDirection, "StdX");
+      double stdY = ToDouble(resultDirection, "StdY");
+      double stdZ = ToDouble(resultDirection, "StdZ");
       Position = new PositionStdev(positionX, positionY, positionZ, stdX, stdY, stdZ);
+
+      _matchImage = ToString(resultDirection, "MatchImage");
 
       if (!string.IsNullOrEmpty(_matchImage))
       {

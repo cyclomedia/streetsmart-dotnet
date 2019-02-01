@@ -24,17 +24,17 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class RecordingInfo : NotifyPropertyChanged, IRecordingInfo
+  internal class RecordingInfo : DataConvert, IRecordingInfo
   {
     public RecordingInfo(Dictionary<string, object> recordingInfo)
     {
-      Id = recordingInfo?["id"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> xyz = recordingInfo?["xyz"] as Dictionary<string, object>;
-      SRS = recordingInfo?["srs"]?.ToString() ?? string.Empty;
-      double yaw = recordingInfo?["yaw"] as double? ?? 0.0;
-      IList<object> xyzStdev = recordingInfo?["xyzStdev"] as IList<object> ?? new List<object>();
-      double yawStdev = recordingInfo?["yawStdev"] as double? ?? 0.0;
-      DepthStdev = recordingInfo?["depthStdev"] as double? ?? 0.0;
+      Id = ToString(recordingInfo, "id");
+      Dictionary<string, object> xyz = GetValue(recordingInfo, "xyz") as Dictionary<string, object>;
+      SRS = ToString(recordingInfo, "srs");
+      double yaw = ToDouble(recordingInfo, "yaw");
+      IList<object> xyzStdev = GetValue(recordingInfo, "xyzStdev") as IList<object> ?? new List<object>();
+      double yawStdev = ToDouble(recordingInfo, "yawStdev");
+      DepthStdev = ToDouble(recordingInfo, "depthStdev");
 
       Position = new PositionStdev(xyz, xyzStdev);
       Yaw = new Property(yaw, yawStdev);

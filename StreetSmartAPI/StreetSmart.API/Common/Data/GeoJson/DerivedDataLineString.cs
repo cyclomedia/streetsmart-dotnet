@@ -31,7 +31,7 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
-      IList<object> coordinateStdevs = derivedData?["coordinateStdevs"] as IList<object> ?? new List<object>();
+      IList<object> coordinateStdevs = GetValue(derivedData, "coordinateStdevs") as IList<object> ?? new List<object>();
       TotalLength = getStdValue(derivedData, "totalLength");
       SegmentLengths = GetStdValueList(derivedData, "segmentLengths");
       SegmentsDeltaXY = GetStdValueList(derivedData, "segmentsDeltaXY");
@@ -97,16 +97,16 @@ namespace StreetSmart.Common.Data.GeoJson
 
     private IList<IProperty> GetStdValueList(Dictionary<string, object> derivedData, string key)
     {
-      object input = derivedData?.ContainsKey(key) ?? false ? derivedData[key] : null;
+      object input = GetValue(derivedData, key);
       List<IProperty> result = null;
 
       if (input != null)
       {
         Dictionary<string, object> dictInput = input as Dictionary<string, object>;
 
-        if (dictInput?["value"] is IList<object> value)
+        if (GetValue(dictInput, "value") is IList<object> value)
         {
-          IList<object> stdevstList = dictInput["stdev"] as IList<object>;
+          IList<object> stdevstList = GetValue(dictInput, "stdev") as IList<object>;
           result = new List<IProperty>();
 
           for (int i = 0; i < value.Count; i++)
@@ -138,14 +138,14 @@ namespace StreetSmart.Common.Data.GeoJson
 
     protected IProperty getStdValue(Dictionary<string, object> derivedData, string key)
     {
-      object input = derivedData?.ContainsKey(key) ?? false ? derivedData[key] : null;
+      object input = GetValue(derivedData, key);
       IProperty result = null;
 
       if (input != null)
       {
         Dictionary<string, object> dictInput = input as Dictionary<string, object>;
-        double? stdev = dictInput?.ContainsKey("stdev") ?? false ? dictInput["stdev"] as double? : null;
-        result = new Property(dictInput?["value"], stdev);
+        double? stdev = ToNullDouble(dictInput, "stdev");
+        result = new Property(ToDouble(dictInput, "value"), stdev);
       }
 
       return result;
