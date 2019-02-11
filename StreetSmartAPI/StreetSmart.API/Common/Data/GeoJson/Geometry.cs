@@ -23,15 +23,13 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Geometry : NotifyPropertyChanged, IGeometry
+  internal class Geometry : DataConvert, IGeometry
   {
     public Geometry(Dictionary<string, object> geometry)
     {
-      string type = geometry?["type"]?.ToString() ?? string.Empty;
-
       try
       {
-        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
+        Type = (GeometryType) ToEnum(typeof(GeometryType), geometry, "type");
       }
       catch (ArgumentException)
       {

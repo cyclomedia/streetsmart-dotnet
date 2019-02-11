@@ -28,20 +28,18 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {
-      Id = properties?["id"]?.ToString() ?? string.Empty;
-      Name = properties?["name"]?.ToString() ?? string.Empty;
-      Group = properties?["group"]?.ToString() ?? string.Empty;
-      IList<object> measureDetails = properties?["measureDetails"] as IList<object> ?? new List<object>();
-      Dimension = properties?["dimension"] as int? ?? 0;
-      string customGeometryType = properties?["customGeometryType"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> derivedData = properties?["derivedData"] as Dictionary<string, object>;
-      string measureReliability = properties?["measureReliability"]?.ToString() ?? string.Empty;
-      string measurementTool = properties?["measurementTool"]?.ToString() ?? string.Empty;
-      IList<object> pointsWithErrors = properties?["pointsWithErrors"] as IList<object> ?? new List<object>();
-      ValidGeometry = properties?["validGeometry"] as bool? ?? false;
-      Dictionary<string, object> observationLines = properties?.ContainsKey("observationLines") ?? false
-        ? properties["observationLines"] as Dictionary<string, object>
-        : null;
+      DataConvert converter = new DataConvert();
+      Id = converter.ToString(properties, "id");
+      Name = converter.ToString(properties, "name");
+      Group = converter.ToString(properties, "group");
+      var measureDetails = converter.GetListValue(properties, "measureDetails");
+      Dimension = converter.ToInt(properties, "dimension");
+      var derivedData = converter.GetDictValue(properties, "derivedData");
+      string measureReliability = converter.ToString(properties, "measureReliability");
+      string measurementTool = converter.ToString(properties, "measurementTool");
+      var pointsWithErrors = converter.GetListValue(properties, "pointsWithErrors");
+      ValidGeometry = converter.ToBool(properties, "validGeometry");
+      var observationLines = converter.GetDictValue(properties, "observationLines");
 
       MeasureDetails = new List<IMeasureDetails>();
       PointsWithErrors = new List<int>();
@@ -54,7 +52,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        CustomGeometryType = (CustomGeometryType) Enum.Parse(typeof(CustomGeometryType), customGeometryType);
+        CustomGeometryType =
+          (CustomGeometryType) converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {
@@ -119,7 +118,73 @@ namespace StreetSmart.Common.Data.GeoJson
       Add("PointsWithErrors", PointsWithErrors);
       Add("ValidGeometry", ValidGeometry);
       Add("ObservationLines", ObservationLines);
-      Add("measurementTool", measurementTool);
+      Add("measurementTool", MeasurementTool);
+    }
+
+    public MeasurementProperties(IMeasurementProperties properties)
+    {
+      if (properties != null)
+      {
+        Id = properties.Id != null ? string.Copy(properties.Id) : null;
+        Name = properties.Name != null ? string.Copy(properties.Name) : null;
+        Group = properties.Group != null ? string.Copy(properties.Group) : null;
+
+        if (properties.MeasureDetails != null)
+        {
+          MeasureDetails = new List<IMeasureDetails>();
+
+          foreach (var measureDetail in properties.MeasureDetails)
+          {
+            MeasureDetails.Add(new MeasureDetails(measureDetail));
+          }
+        }
+
+        Dimension = properties.Dimension;
+        CustomGeometryType = properties.CustomGeometryType;
+        IDerivedData derivedData = properties.DerivedData;
+
+        switch (derivedData)
+        {
+          case IDerivedDataPoint point:
+            DerivedData = new DerivedDataPoint(point);
+            break;
+          case IDerivedDataPolygon polygon:
+            DerivedData = new DerivedDataPolygon(polygon);
+            break;
+          case IDerivedDataLineString lineString:
+            DerivedData = new DerivedDataLineString(lineString);
+            break;
+        }
+
+        MeasureReliability = properties.MeasureReliability;
+
+        if (properties.PointsWithErrors != null)
+        {
+          PointsWithErrors = new List<int>();
+
+          foreach (int pointWithError in properties.PointsWithErrors)
+          {
+            PointsWithErrors.Add(pointWithError);
+          }
+        }
+
+        ValidGeometry = properties.ValidGeometry;
+        ObservationLines = new ObservationLines(properties.ObservationLines);
+        MeasurementTool = properties.MeasurementTool;
+
+        Add("Id", Id);
+        Add("Name", Name);
+        Add("Group", Group);
+        Add("MeasureDetails", MeasureDetails);
+        Add("Dimension", Dimension);
+        Add("CustomGeometryType", CustomGeometryType);
+        Add("DerivedData", DerivedData);
+        Add("MeasureReliability", MeasureReliability);
+        Add("PointsWithErrors", PointsWithErrors);
+        Add("ValidGeometry", ValidGeometry);
+        Add("ObservationLines", ObservationLines);
+        Add("measurementTool", MeasurementTool);
+      }
     }
 
     public string Id { get; }
@@ -152,9 +217,11 @@ namespace StreetSmart.Common.Data.GeoJson
       string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
 
       string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
-      string measureDetailsStr = $"{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]";
+      string measureDetailsStr = MeasureDetails.Count >= 1
+        ? $",\"measureDetails\":{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]"
+        : string.Empty;
 
-      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\",\"measureDetails\":{measureDetailsStr},\"dimension\":{Dimension}" +
+      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr},\"dimension\":{Dimension}" +
                           $",\"customGeometryType\":\"{CustomGeometryType.Description()}\",\"derivedData\":{DerivedData}" +
                           $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
                           $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +

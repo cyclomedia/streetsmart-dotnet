@@ -30,9 +30,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public DerivedDataPolygon(Dictionary<string, object> derivedData)
       : base(derivedData)
     {
-      IList<object> triangles = derivedData?.ContainsKey("triangles") ?? false
-        ? derivedData["triangles"] as IList<object> ?? new List<object>()
-        : new List<object>();
+      var triangles = GetListValue(derivedData, "triangles");
       Area = getStdValue(derivedData, "area");
 
       Triangles = new List<ITriangle>();
@@ -40,6 +38,25 @@ namespace StreetSmart.Common.Data.GeoJson
       for (int i = 0; i < triangles.Count; i++)
       {
         Triangles.Add(new Triangle(triangles[i] as IList<object> ?? new List<object>()));
+      }
+    }
+
+    public DerivedDataPolygon(IDerivedDataPolygon derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        if (derivedData.Triangles != null)
+        {
+          Triangles = new List<ITriangle>();
+
+          foreach (ITriangle triangle in derivedData.Triangles)
+          {
+            Triangles.Add(new Triangle(triangle));
+          }
+        }
+
+        Area = new Property(derivedData.Area);
       }
     }
 

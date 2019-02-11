@@ -29,11 +29,11 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection)
     {
-      double? positionX = detailsForwardIntersection?["PositionX"] as double?;
-      double? positionY = detailsForwardIntersection?["PositionY"] as double?;
-      double? positionZ = detailsForwardIntersection?["PositionZ"] as double?;
-      Dictionary<string, object> resultDirections = detailsForwardIntersection?["ResultDirections"] as Dictionary<string, object>;
-      IList<object> resultDirection = resultDirections?["ResultDirection"] as IList<object> ?? new List<object>();
+      double? positionX = ToNullDouble(detailsForwardIntersection, "PositionX");
+      double? positionY = ToNullDouble(detailsForwardIntersection, "PositionY");
+      double? positionZ = ToNullDouble(detailsForwardIntersection, "PositionZ");
+      var resultDirections = GetDictValue(detailsForwardIntersection, "ResultDirections");
+      var resultDirection = GetListValue(resultDirections, "ResultDirection");
 
       Position = new Position(positionX, positionY, positionZ);
       ResultDirections = new List<IResultDirection>();
@@ -41,6 +41,24 @@ namespace StreetSmart.Common.Data.GeoJson
       foreach (var intResultDirection in resultDirection)
       {
         ResultDirections.Add(new ResultDirection(intResultDirection as Dictionary<string, object>));
+      }
+    }
+
+    public DetailsForwardIntersection(IDetailsForwardIntersection detailsForwardIntersection)
+    {
+      if (detailsForwardIntersection != null)
+      {
+        Position = new Position(detailsForwardIntersection.Position);
+
+        if (detailsForwardIntersection.ResultDirections != null)
+        {
+          ResultDirections = new List<IResultDirection>();
+
+          foreach (IResultDirection resultDirection in detailsForwardIntersection.ResultDirections)
+          {
+            ResultDirections.Add(new ResultDirection(resultDirection));
+          }
+        }
       }
     }
 

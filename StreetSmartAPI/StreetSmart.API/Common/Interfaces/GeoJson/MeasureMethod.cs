@@ -54,6 +54,13 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Measure using manual forward intersection
     /// </summary>
     [Description("ForwardIntersection")]
-    ForwardIntersection = 4
+    ForwardIntersection = 4,
+
+    /// <summary>
+    /// unknown measurement method
+    /// </summary>
+    [Description("unknown")]
+    // ReSharper disable once InconsistentNaming
+    unknown
   }
 }

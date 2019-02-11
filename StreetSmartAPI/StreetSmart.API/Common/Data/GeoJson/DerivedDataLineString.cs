@@ -31,7 +31,7 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
-      IList<object> coordinateStdevs = derivedData?["coordinateStdevs"] as IList<object> ?? new List<object>();
+      var coordinateStdevs = GetListValue(derivedData, "coordinateStdevs");
       TotalLength = getStdValue(derivedData, "totalLength");
       SegmentLengths = GetStdValueList(derivedData, "segmentLengths");
       SegmentsDeltaXY = GetStdValueList(derivedData, "segmentsDeltaXY");
@@ -47,6 +47,32 @@ namespace StreetSmart.Common.Data.GeoJson
       foreach (var coordinateStdev in coordinateStdevs)
       {
         CoordinateStdev.Add(new Stdev(coordinateStdev as Dictionary<string, object>));
+      }
+    }
+
+    public DerivedDataLineString(IDerivedDataLineString derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        if (derivedData.CoordinateStdev != null)
+        {
+          CoordinateStdev = new List<IStdev>();
+
+          foreach (IStdev stdev in derivedData.CoordinateStdev)
+          {
+            CoordinateStdev.Add(new Stdev(stdev));
+          }
+        }
+
+        TotalLength = new Property(derivedData.TotalLength);
+        SegmentLengths = GetStdValueList(derivedData.SegmentLengths);
+        SegmentsDeltaXY = GetStdValueList(derivedData.SegmentsDeltaXY);
+        SegmentsDeltaZ = GetStdValueList(derivedData.SegmentsDeltaZ);
+        SegmentsSlopePercentage = GetStdValueList(derivedData.SegmentsSlopePercentage);
+        SegmentsSlopeAngle = GetStdValueList(derivedData.SegmentsSlopeAngle);
+        DeltaXY = new Property(derivedData.DeltaXY);
+        DeltaZ = new Property(derivedData.DeltaZ);
       }
     }
 
@@ -71,22 +97,34 @@ namespace StreetSmart.Common.Data.GeoJson
 
     private IList<IProperty> GetStdValueList(Dictionary<string, object> derivedData, string key)
     {
-      object input = derivedData?.ContainsKey(key) ?? false ? derivedData[key] : null;
+      var input = GetDictValue(derivedData, key);
       List<IProperty> result = null;
 
-      if (input != null)
+      if (GetValue(input, "value") is IList<object> value)
       {
-        Dictionary<string, object> dictInput = input as Dictionary<string, object>;
+        var stdevstList = GetListValue(input, "stdev");
+        result = new List<IProperty>();
 
-        if (dictInput?["value"] is IList<object> value)
+        for (int i = 0; i < value.Count; i++)
         {
-          IList<object> stdevstList = dictInput["stdev"] as IList<object>;
-          result = new List<IProperty>();
+          result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
+        }
+      }
 
-          for (int i = 0; i < value.Count; i++)
-          {
-            result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
-          }
+      return result;
+    }
+
+    private IList<IProperty> GetStdValueList(IList<IProperty> properties)
+    {
+      List<IProperty> result = null;
+
+      if (properties != null)
+      {
+        result = new List<IProperty>();
+
+        foreach (IProperty property in properties)
+        {
+          result.Add(new Property(property));
         }
       }
 
@@ -95,14 +133,13 @@ namespace StreetSmart.Common.Data.GeoJson
 
     protected IProperty getStdValue(Dictionary<string, object> derivedData, string key)
     {
-      object input = derivedData?.ContainsKey(key) ?? false ? derivedData[key] : null;
+      var input = GetDictValue(derivedData, key);
       IProperty result = null;
 
-      if (input != null)
+      if (input.Count >= 1)
       {
-        Dictionary<string, object> dictInput = input as Dictionary<string, object>;
-        double? stdev = dictInput?.ContainsKey("stdev") ?? false ? dictInput["stdev"] as double? : null;
-        result = new Property(dictInput?["value"], stdev);
+        double? stdev = ToNullDouble(input, "stdev");
+        result = new Property(ToDouble(input, "value"), stdev);
       }
 
       return result;

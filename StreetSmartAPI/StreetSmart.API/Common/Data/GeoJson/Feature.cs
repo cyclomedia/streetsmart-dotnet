@@ -23,13 +23,12 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Feature : NotifyPropertyChanged, IFeature
+  internal class Feature : DataConvert, IFeature
   {
     public Feature(Dictionary<string, object> feature, bool measurementProperties)
     {
-      string type = feature?["type"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> geometry = feature?["geometry"] as Dictionary<string, object>;
-      Dictionary<string, object> properties = feature?["properties"] as Dictionary<string, object>;
+      var geometry = GetDictValue(feature, "geometry");
+      var properties = GetDictValue(feature, "properties");
 
       Geometry geom = new Geometry(geometry);
       Properties = measurementProperties
@@ -38,7 +37,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (FeatureType) Enum.Parse(typeof(FeatureType), type);
+        Type = (FeatureType) ToEnum(typeof(FeatureType), feature, "type");
       }
       catch (ArgumentException)
       {
@@ -67,6 +66,42 @@ namespace StreetSmart.Common.Data.GeoJson
       Type = FeatureType.Feature;
       Geometry = geometry;
       Properties = new Properties();
+    }
+
+    public Feature(IFeature feature)
+    {
+      if (feature != null)
+      {
+        Type = feature.Type;
+
+        if (feature.Geometry != null)
+        {
+          switch (feature.Geometry.Type)
+          {
+            case GeometryType.Point:
+              Geometry = new Point((IPoint) feature.Geometry);
+              break;
+            case GeometryType.LineString:
+              Geometry = new LineString((ILineString) feature.Geometry);
+              break;
+            case GeometryType.Polygon:
+              Geometry = new Polygon((IPolygon) feature.Geometry);
+              break;
+            case GeometryType.Unknown:
+              Geometry = null;
+              break;
+          }
+        }
+
+        if (feature.Properties is IMeasurementProperties properties)
+        {
+          Properties = new MeasurementProperties(properties);
+        }
+        else
+        {
+          Properties = new Properties(feature.Properties);
+        }
+      }
     }
 
     public FeatureType Type { get; }

@@ -41,6 +41,17 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public Properties(IProperties properties)
+    {
+      if (properties != null)
+      {
+        foreach (var property in properties)
+        {
+          Add(property.Key, property.Value);
+        }
+      }
+    }
+
     public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

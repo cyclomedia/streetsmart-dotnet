@@ -36,6 +36,19 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public Triangle(ITriangle triangle)
+    {
+      if (triangle?.Points != null)
+      {
+        Points = new List<int>();
+
+        foreach (var point in triangle.Points)
+        {
+          Points.Add(point);
+        }
+      }
+    }
+
     public IList<int> Points { get; }
 
     public override string ToString()

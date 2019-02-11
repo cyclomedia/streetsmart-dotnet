@@ -35,6 +35,17 @@ namespace StreetSmart.Common.Factories
     public static IFeatureCollection CreateFeatureCollection(int wkid) => new FeatureCollection(wkid);
 
     /// <summary>
+    /// returns a clone of a GeoJSon featureCollection object
+    /// </summary>
+    public static IFeatureCollection CloneFeatureCollection(IFeatureCollection featureCollection) =>
+      new FeatureCollection(featureCollection);
+
+    /// <summary>
+    /// create measure details
+    /// </summary>
+    public static IMeasureDetails CreateMeasureDetails() => new MeasureDetails();
+
+    /// <summary>
     /// returns GeoJson point feature object
     /// </summary>
     public static IFeature CreatePointFeature(double x, double y, double z) => new Feature(new Point(x, y, z));
@@ -60,5 +71,20 @@ namespace StreetSmart.Common.Factories
     /// </summary>
     public static IFeature CreatePolygonFeature(IList<IList<ICoordinate>> coordinates) =>
       new Feature(new Polygon(coordinates));
+
+    /// <summary>
+    /// returns GeoJson point geometry object
+    /// </summary>
+    public static IGeometry CreatePointGeometry(ICoordinate coordinate) => new Point(coordinate);
+
+    /// <summary>
+    /// returns GeoJson line string geometry object
+    /// </summary>
+    public static IGeometry CreateLineGeometry(IList<ICoordinate> coordinates) => new LineString(coordinates);
+
+    /// <summary>
+    /// returns GeoJson polygon geometry object
+    /// </summary>
+    public static IGeometry CreatePolygonGeometry(IList<IList<ICoordinate>> coordinates) => new Polygon(coordinates);
   }
 }

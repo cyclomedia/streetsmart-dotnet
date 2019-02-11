@@ -24,20 +24,19 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: NotifyPropertyChanged, IMeasureDetails
+  internal class MeasureDetails: DataConvert, IMeasureDetails
   {
     public MeasureDetails(Dictionary<string, object> measureDetails)
     {
-      string measureMethod = measureDetails?["measureMethod"]?.ToString() ?? string.Empty;
-      Dictionary<string, object> details = measureDetails?["details"] as Dictionary<string, object>;
-      IList<object> pointProblems = measureDetails?["pointProblems"] as IList<object> ?? new List<object>();
-      string pointReliability = measureDetails?["pointReliability"]?.ToString() ?? string.Empty;
+      var details = GetDictValue(measureDetails, "details");
+      var pointProblems = GetListValue(measureDetails, "pointProblems");
+      string pointReliability = ToString(measureDetails, "pointReliability");
 
       PointProblems = new List<PointProblems>();
 
       try
       {
-        MeasureMethod = (MeasureMethod) Enum.Parse(typeof(MeasureMethod), measureMethod);
+        MeasureMethod = (MeasureMethod) ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
       }
       catch (ArgumentException)
       {
@@ -94,7 +93,53 @@ namespace StreetSmart.Common.Data.GeoJson
         case "UNRELIABLE":
           PointReliability = Reliability.Unreliable;
           break;
+        default:
+          PointReliability = Reliability.NotDefined;
+          break;
       }
+    }
+
+    public MeasureDetails(IMeasureDetails measureDetails)
+    {
+      if (measureDetails != null)
+      {
+        MeasureMethod = measureDetails.MeasureMethod;
+
+        switch (measureDetails.MeasureMethod)
+        {
+          case MeasureMethod.DepthMap:
+            Details = new DetailsDepth((IDetailsDepth) measureDetails.Details);
+            break;
+          case MeasureMethod.SmartClick:
+            Details = new DetailsSmartClick((IDetailsSmartClick) measureDetails.Details);
+            break;
+          case MeasureMethod.ForwardIntersection:
+            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details);
+            break;
+          case MeasureMethod.AutoFocus:
+          case MeasureMethod.NotDefined:
+            Details = null;
+            break;
+        }
+
+        if (measureDetails.PointProblems != null)
+        {
+          PointProblems = new List<PointProblems>();
+
+          foreach (var pointProblem in measureDetails.PointProblems)
+          {
+            PointProblems.Add(pointProblem);
+          }
+        }
+
+        PointReliability = measureDetails.PointReliability;
+      }
+    }
+
+    public MeasureDetails()
+    {
+      MeasureMethod = MeasureMethod.unknown;
+      PointProblems = new List<PointProblems>();
     }
 
     public MeasureMethod MeasureMethod { get; }

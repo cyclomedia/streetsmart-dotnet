@@ -1,6 +1,13 @@
 ﻿Release notes:
 ==============
 
+Version: 18.15.2
+================
+- Created methods for create point, lineString and polygons in a geoJson
+- Create a clone function for clone the FeatureCollection
+- Fixed several small bugs
+
+
 Version: 18.15.1
 ================
 - No debug log is made in the working directory

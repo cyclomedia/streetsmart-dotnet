@@ -24,20 +24,19 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class FeatureCollection: NotifyPropertyChanged, IFeatureCollection
+  internal class FeatureCollection: DataConvert, IFeatureCollection
   {
     public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
     {
-      string type = featureCollection?["type"]?.ToString() ?? string.Empty;
-      IList<object> features = featureCollection?["features"] as IList<object> ?? new List<object>();
-      Dictionary<string, object> crs = featureCollection?["crs"] as Dictionary<string, object>;
+      var features = GetListValue(featureCollection, "features");
+      var crs = GetDictValue(featureCollection, "crs");
 
       Features = new List<IFeature>();
       CRS = new CRS(crs);
 
       try
       {
-        Type = (FeatureType) Enum.Parse(typeof(FeatureType), type);
+        Type = (FeatureType) ToEnum(typeof(FeatureType), featureCollection, "type");
       }
       catch (ArgumentException)
       {
@@ -55,6 +54,26 @@ namespace StreetSmart.Common.Data.GeoJson
       Type = FeatureType.FeatureCollection;
       Features = new List<IFeature>();
       CRS = new CRS(wkid);
+    }
+
+    public FeatureCollection(IFeatureCollection featureCollection)
+    {
+      if (featureCollection != null)
+      {
+        Type = featureCollection.Type;
+
+        if (featureCollection.Features != null)
+        {
+          Features = new List<IFeature>();
+
+          foreach (IFeature feature in featureCollection.Features)
+          {
+            Features.Add(new Feature(feature));
+          }
+        }
+
+        CRS = new CRS(featureCollection.CRS);
+      }
     }
 
     public FeatureType Type { get; }

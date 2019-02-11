@@ -35,6 +35,11 @@ namespace StreetSmart.Common.Data.GeoJson
     {
     }
 
+    public Direction(IDirection direction)
+      : base(direction)
+    {
+    }
+
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;

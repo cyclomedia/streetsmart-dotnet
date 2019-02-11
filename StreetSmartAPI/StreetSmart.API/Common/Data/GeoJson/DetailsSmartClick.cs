@@ -28,8 +28,18 @@ namespace StreetSmart.Common.Data.GeoJson
     public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
     : base(detailsSmartClick)
     {
-      Confidence = detailsSmartClick?["Confidence"] as int? ?? 0;
-      Depth = detailsSmartClick?["Depth"] as double? ?? 0;
+      Confidence = ToInt(detailsSmartClick, "Confidence");
+      Depth = ToDouble(detailsSmartClick, "Depth");
+    }
+
+    public DetailsSmartClick(IDetailsSmartClick detailsSmartClick)
+      : base(detailsSmartClick)
+    {
+      if (detailsSmartClick != null)
+      {
+        Confidence = detailsSmartClick.Confidence;
+        Depth = detailsSmartClick.Depth;
+      }
     }
 
     public int Confidence { get; }

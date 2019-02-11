@@ -26,5 +26,10 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(x, y, z)
     {
     }
+
+    public Position(IPosition position)
+      : base(position)
+    {
+    }
   }
 }

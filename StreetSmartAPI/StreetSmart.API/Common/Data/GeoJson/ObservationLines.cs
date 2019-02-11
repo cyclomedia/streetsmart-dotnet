@@ -24,27 +24,43 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines: NotifyPropertyChanged, IObservationLines
+  internal class ObservationLines: DataConvert, IObservationLines
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
-      ActiveObservation = observationLines?["activeObservation"] as int? ?? 0;
-      RecordingId = observationLines?["recordingId"]?.ToString() ?? string.Empty;
-      IList<object> color = observationLines?["color"] as IList<object> ?? new List<object>();
-      string selectedMeasureMethod = observationLines?["selectedMeasureMethod"]?.ToString() ?? string.Empty;
+      ActiveObservation = ToInt(observationLines, "activeObservation");
+      RecordingId = ToString(observationLines, "recordingId");
+      var color = GetListValue(observationLines, "color");
 
       if (color.Count >= 4)
       {
-        Color = Color.FromArgb((int) ((double) color[3] * 255), (int) color[0], (int) color[1], (int) color[2]);
+        int color0 = int.Parse(color[0].ToString());
+        int color1 = int.Parse(color[1].ToString());
+        int color2 = int.Parse(color[2].ToString());
+        double color3 = double.Parse(color[3].ToString());
+        Color = Color.FromArgb((int) (color3 * 255), color0, color1, color2);
       }
 
       try
       {
-        SelectedMeasureMethod = (MeasureMethod) Enum.Parse(typeof(MeasureMethod), selectedMeasureMethod);
+        SelectedMeasureMethod =
+          (MeasureMethod) ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
       }
       catch (ArgumentException)
       {
         SelectedMeasureMethod = MeasureMethod.NotDefined;
+      }
+    }
+
+    public ObservationLines(IObservationLines observationLines)
+    {
+      if (observationLines != null)
+      {
+        ActiveObservation = observationLines.ActiveObservation;
+        RecordingId = observationLines.RecordingId != null ? string.Copy(observationLines.RecordingId) : null;
+        Color obsColor = observationLines.Color;
+        Color = Color.FromArgb(obsColor.A, obsColor);
+        SelectedMeasureMethod = observationLines.SelectedMeasureMethod;
       }
     }
 

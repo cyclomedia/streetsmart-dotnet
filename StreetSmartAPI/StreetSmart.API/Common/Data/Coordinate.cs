@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Coordinate : NotifyPropertyChanged, ICoordinate
+  internal class Coordinate : DataConvert, ICoordinate
   {
     private double? _x;
     private double? _y;
@@ -35,20 +35,9 @@ namespace StreetSmart.Common.Data
 
     public Coordinate(Dictionary<string, object> coordinate)
     {
-      if (coordinate?.ContainsKey("0") ?? false)
-      {
-        X = coordinate["0"] as double?;
-      }
-
-      if (coordinate?.ContainsKey("1") ?? false)
-      {
-        Y = coordinate["1"] as double?;
-      }
-
-      if (coordinate?.ContainsKey("2") ?? false)
-      {
-        Z = coordinate["2"] as double?;
-      }
+      X = ToNullDouble(coordinate, "0");
+      Y = ToNullDouble(coordinate, "1");
+      Z = ToNullDouble(coordinate, "2");
     }
 
     public Coordinate(IList<object> coordinate)
@@ -60,9 +49,12 @@ namespace StreetSmart.Common.Data
 
     public Coordinate(ICoordinate coordinate)
     {
-      X = coordinate.X;
-      Y = coordinate.Y;
-      Z = coordinate.Z;
+      if (coordinate != null)
+      {
+        X = coordinate.X;
+        Y = coordinate.Y;
+        Z = coordinate.Z;
+      }
     }
 
     public Coordinate(double? x, double? y)

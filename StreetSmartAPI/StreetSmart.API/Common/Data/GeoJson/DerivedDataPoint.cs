@@ -30,29 +30,40 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
-      Dictionary<string, object> positionXY = GetProperty(derivedData, "positionXY");
-      Dictionary<string, object> positionZ = GetProperty(derivedData, "positionZ");
-      IList<object> coordinateStdevs = derivedData?["coordinateStdevs"] as IList<object> ?? new List<object>();
-      Dictionary<string, object> position = GetProperty(derivedData, "position");
+      var positionXY = GetDictValue(derivedData, "positionXY");
+      var positionZ = GetDictValue(derivedData, "positionZ");
+      var coordinateStdevs = GetListValue(derivedData, "coordinateStdevs");
+      var position = GetDictValue(derivedData, "position");
 
       if (coordinateStdevs.Count >= 1)
       {
         Position = new PositionStdev(position, coordinateStdevs[0] as Dictionary<string, object>);
       }
 
-      if (positionXY?["value"] is IList<object> valueXY)
+      if (GetValue(positionXY, "value") is IList<object> valueXY)
       {
-        double? stdevXY = positionXY.ContainsKey("stdev") ? positionXY["stdev"] as double? : null;
+        double? stdevXY = ToNullDouble(positionXY,"stdev");
         PositionXY = new PositionXY(valueXY, stdevXY);
       }
 
-      if (positionZ?["value"] is double valueZ)
+      if (GetValue(positionZ, "value") is double valueZ)
       {
-        double? stdevZ = positionZ.ContainsKey("stdev") ? positionZ["stdev"] as double? : null;
+        double? stdevZ = ToNullDouble(positionZ, "stdev");
         PositionZ = new Property(valueZ, stdevZ);
       }
 
       // ReSharper restore InconsistentNaming
+    }
+
+    public DerivedDataPoint(IDerivedDataPoint derivedData)
+      : base(derivedData)
+    {
+      if (derivedData != null)
+      {
+        Position = new PositionStdev(derivedData.Position);
+        PositionXY = new PositionXY(derivedData.PositionXY);
+        PositionZ = new Property(derivedData.PositionZ);
+      }
     }
 
     public IPositionStdev Position { get; }
@@ -61,11 +72,6 @@ namespace StreetSmart.Common.Data.GeoJson
     public IPositionXY PositionXY { get; }
 
     public IProperty PositionZ { get; }
-
-    public Dictionary<string, object> GetProperty(Dictionary<string, object> derivedData, string key)
-    {
-      return derivedData?.ContainsKey(key) ?? false ? derivedData[key] as Dictionary<string, object> : null;
-    }
 
     public override string ToString()
     {

@@ -20,7 +20,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Details: NotifyPropertyChanged, IDetails
+  internal class Details: DataConvert, IDetails
   {
   }
 }

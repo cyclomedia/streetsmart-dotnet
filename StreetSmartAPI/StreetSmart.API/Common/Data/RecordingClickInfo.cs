@@ -22,7 +22,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class RecordingClickInfo : NotifyPropertyChanged, IRecordingClickInfo
+  internal class RecordingClickInfo : DataConvert, IRecordingClickInfo
   {
     private IRecording _recording;
     private bool _ctrlKey;
@@ -32,9 +32,9 @@ namespace StreetSmart.Common.Data
     public RecordingClickInfo(Dictionary<string, object> recording, Dictionary<string, object> eventData)
     {
       Recording = new Recording(recording);
-      ShiftKey = (bool) eventData["shiftKey"];
-      AltKey = (bool) eventData["altKey"];
-      CtrlKey = (bool) eventData["ctrlKey"];
+      ShiftKey = ToBool(eventData, "shiftKey");
+      AltKey = ToBool(eventData, "altKey");
+      CtrlKey = ToBool(eventData, "ctrlKey");
     }
 
     public IRecording Recording

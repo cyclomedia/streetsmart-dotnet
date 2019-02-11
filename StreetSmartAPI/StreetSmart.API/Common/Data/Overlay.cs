@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Overlay : NotifyPropertyChanged, IOverlay
+  internal class Overlay : DataConvert, IOverlay
   {
     private string _id;
     private string _geoJson;
@@ -43,7 +43,7 @@ namespace StreetSmart.Common.Data
 
     public void FillInParameters(Dictionary<string, object> overlay)
     {
-      Id = (string) overlay["id"];
+      Id = ToString(overlay, "id");
     }
 
     public string Id

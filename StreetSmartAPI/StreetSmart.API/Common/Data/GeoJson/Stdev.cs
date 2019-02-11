@@ -28,5 +28,10 @@ namespace StreetSmart.Common.Data.GeoJson
       :base(coordinateStdev)
     {
     }
+
+    public Stdev(IStdev stdev)
+      : base(stdev)
+    {
+    }
   }
 }

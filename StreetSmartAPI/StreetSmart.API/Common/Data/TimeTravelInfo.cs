@@ -23,13 +23,13 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class TimeTravelInfo : NotifyPropertyChanged, ITimeTravelInfo
+  internal class TimeTravelInfo : DataConvert, ITimeTravelInfo
   {
     private DateTime _date;
 
     public TimeTravelInfo(Dictionary<string, object> timeTravelInfo)
     {
-      Date = (DateTime) (timeTravelInfo?["date"] ?? new DateTime());
+      Date = ToDateTime(timeTravelInfo, "date");
     }
 
     public DateTime Date

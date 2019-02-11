@@ -22,7 +22,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class DepthInfo : NotifyPropertyChanged, IDepthInfo
+  internal class DepthInfo : DataConvert, IDepthInfo
   {
     private double _depth;
     private double _depthInMeters;
@@ -31,10 +31,10 @@ namespace StreetSmart.Common.Data
 
     public DepthInfo(Dictionary<string, object> depthInfo)
     {
-      Depth = double.Parse(depthInfo["depth"].ToString());
-      DepthInMeters = double.Parse(depthInfo["depthInMeters"].ToString());
-      XYZ = new Coordinate((Dictionary<string, object>) depthInfo["xyz"]);
-      SRS = (string) depthInfo["srs"];
+      Depth = ToDouble(depthInfo, "depth");
+      DepthInMeters = ToDouble(depthInfo, "depthInMeters");
+      XYZ = new Coordinate(GetDictValue(depthInfo, "xyz"));
+      SRS = ToString(depthInfo, "srs");
     }
 
     public double Depth

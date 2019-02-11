@@ -28,12 +28,12 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public Polygon(Dictionary<string, object> polygon)
     {
-      string type = polygon?["type"]?.ToString() ?? string.Empty;
-      IList<object> coordinates = polygon?["coordinates"] as IList<object> ?? new List<object>();
+      DataConvert converter = new DataConvert();
+      var coordinates = converter.GetListValue(polygon, "coordinates");
 
       try
       {
-        Type = (GeometryType) Enum.Parse(typeof(GeometryType), type);
+        Type = (GeometryType) converter.ToEnum(typeof(GeometryType), polygon, "type");
       }
       catch (ArgumentException)
       {

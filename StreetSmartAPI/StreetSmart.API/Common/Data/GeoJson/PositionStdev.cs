@@ -33,7 +33,7 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public PositionStdev(Dictionary<string, object> position, Dictionary<string, object> coordinateStdev)
-      : base(position?["value"] as IList<object>)
+      : base(new DataConvert().GetListValue(position, "value"))
     {
       StdDev = new Coordinate(coordinateStdev);
     }
@@ -42,6 +42,15 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(x, y, z)
     {
       StdDev = new Coordinate(stdX, stdY, stdZ);
+    }
+
+    public PositionStdev(IPositionStdev position)
+      : base(position)
+    {
+      if (position != null)
+      {
+        StdDev = new Coordinate(position.StdDev);
+      }
     }
 
     // ReSharper disable once InconsistentNaming

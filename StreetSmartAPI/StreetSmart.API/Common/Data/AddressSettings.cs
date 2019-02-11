@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class AddressSettings : NotifyPropertyChanged, IAddressSettings
+  internal class AddressSettings : DataConvert, IAddressSettings
   {
     private CultureInfo _locale;
     private string _database;
@@ -36,8 +36,8 @@ namespace StreetSmart.Common.Data
 
     public AddressSettings(Dictionary<string, object> addressSettings)
     {
-      Locale = new CultureInfo((string) addressSettings["locale"]);
-      Database = (string) addressSettings["database"];
+      Locale = new CultureInfo(ToString(addressSettings, "locale"));
+      Database = ToString(addressSettings, "database");
     }
 
     public CultureInfo Locale
