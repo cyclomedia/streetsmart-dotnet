@@ -1,8 +1,9 @@
 ﻿Release notes:
 ==============
 
-Version: 18.15.2
-================
+Version: 19.1.0
+===============
+- Added event: FeatureClicked, this event is fired when click on a feature in a layer
 - Created methods for create point, lineString and polygons in a geoJson
 - Create a clone function for clone the FeatureCollection
 - Fixed several small bugs

@@ -180,6 +180,7 @@ namespace Demo.WinForms
         panoramaViewer.ViewLoadEnd += OnViewLoadEnd;
         panoramaViewer.ViewLoadStart += OnViewLoadStart;
         panoramaViewer.TimeTravelChange += OnTimeTravelChange;
+        panoramaViewer.FeatureClick += OnFeatureClick;
       }
 
       if (viewer is IObliqueViewer)
@@ -210,6 +211,7 @@ namespace Demo.WinForms
         panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
         panoramaViewer.ViewLoadStart -= OnViewLoadStart;
         panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
+        panoramaViewer.FeatureClick -= OnFeatureClick;
       }
 
       if (viewer is IObliqueViewer)
@@ -284,6 +286,12 @@ namespace Demo.WinForms
     private void OnLayerVisibilityChange(object sender, IEventArgs<ILayerInfo> args)
     {
       string text = "Layer visible change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnFeatureClick(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "featureClicked";
       AddViewerEventsText(text);
     }
 

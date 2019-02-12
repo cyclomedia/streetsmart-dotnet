@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+using StreetSmart.Common.Data;
 using StreetSmart.Common.Exceptions;
 
 using CefSharp;
@@ -34,7 +35,7 @@ using CefSharp.Wpf;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  abstract class APIBase
+  abstract class APIBase: DataConvert
   {
     #region Tasks
 

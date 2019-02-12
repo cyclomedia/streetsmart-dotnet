@@ -55,7 +55,7 @@ namespace StreetSmart.Common.API
     public event EventHandler<IEventArgs<IElevationInfo>> ElevationChange;
     public event EventHandler<EventArgs> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
-    public event EventHandler<IEventArgs<IDictionary<string, object>>> FeatureClick;
+    public event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
@@ -215,7 +215,7 @@ namespace StreetSmart.Common.API
 
     public void OnElevationChange(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       ElevationChange?.Invoke(this, new EventArgs<ElevationInfo>(new ElevationInfo(detail)));
     }
 
@@ -226,33 +226,34 @@ namespace StreetSmart.Common.API
 
     public void OnRecordingClick(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
-      Dictionary<string, object> recording = (Dictionary<string, object>) detail["recording"];
-      Dictionary<string, object> eventData = (Dictionary<string, object>) detail["eventData"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
+      Dictionary<string, object> recording = GetDictValue(detail, "recording");
+      Dictionary<string, object> eventData = GetDictValue(detail, "eventData");
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
     public void OnFeatureClick(Dictionary<string, object> args)
     {
-      FeatureClick?.Invoke(this, new EventArgs<IDictionary<string, object>>(args));
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
+      FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
     public void OnTileLoadError(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>
-        ((Dictionary<string, object>) detail["request"]));
+        (GetDictValue(detail, "request")));
     }
 
     public void OnViewChange(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
     public void OnSurfaceCursorChange(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       SurfaceCursorChange?.Invoke(this, new EventArgs<IDepthInfo>(new DepthInfo(detail)));
     }
 
@@ -268,7 +269,7 @@ namespace StreetSmart.Common.API
 
     public void OnTimeTravelChange(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 

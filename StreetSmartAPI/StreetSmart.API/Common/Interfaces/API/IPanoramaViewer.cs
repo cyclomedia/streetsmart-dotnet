@@ -52,7 +52,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers when a feature is clicked inside the PanoramaViewer.
     /// </summary>
-    event EventHandler<IEventArgs<IDictionary<string, object>>> FeatureClick;
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
 
     /// <summary>
     /// Triggers when the surface cursor is changed

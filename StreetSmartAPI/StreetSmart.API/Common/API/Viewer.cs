@@ -201,7 +201,7 @@ namespace StreetSmart.Common.API
 
     public void OnLayerVisibilityChange(Dictionary<string, object> args)
     {
-      Dictionary<string, object> detail = (Dictionary<string, object>) args["detail"];
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));
     }
 

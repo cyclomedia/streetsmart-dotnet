@@ -161,14 +161,6 @@ namespace StreetSmart.Common.API
 
     #region Callbacks
 
-    public void OnResult(string name, object result, string funcName)
-    {
-      if (Viewers.ContainsKey(name))
-      {
-        Viewers[name].OnResult(result, funcName);
-      }
-    }
-
     public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))

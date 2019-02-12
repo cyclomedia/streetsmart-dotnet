@@ -16,47 +16,53 @@
  * License along with this library.
  */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Json: Dictionary<string, string>, IJson
+  internal class FeatureInfo : DataConvert, IFeatureInfo
   {
-    public Json()
+    private string _layerName;
+    private string _layerId;
+    private IJson _featureProperties;
+
+    public FeatureInfo(Dictionary<string, object> featureInfo)
     {
+      LayerName = ToString(featureInfo, "layerName");
+      LayerId = ToString(featureInfo, "layerId");
+      FeatureProperties = new Json(GetDictValue(featureInfo, "featureProperties"));
     }
 
-    public Json(Dictionary<string, object> properties)
+    public string LayerName
     {
-      foreach (var property in properties)
+      get => _layerName;
+      set
       {
-        Add(property.Key, property.Value.ToString());
+        _layerName = value;
+        RaisePropertyChanged();
       }
     }
 
-    public Json(Dictionary<string, string> properties)
+    public string LayerId
     {
-      foreach (var property in properties)
+      get => _layerId;
+      set
       {
-        Add(property.Key, property.Value);
+        _layerId = value;
+        RaisePropertyChanged();
       }
     }
 
-    public override string ToString()
+    public IJson FeatureProperties
     {
-      List<string> properies = new List<string>();
-
-      foreach (KeyValuePair<string, string> keyValue in this)
+      get => _featureProperties;
+      set
       {
-        properies.Add($"{keyValue.Key.ToQuote()}:{keyValue.Value.ToQuote()}");
+        _featureProperties = value;
+        RaisePropertyChanged();
       }
-
-      string result = properies.Aggregate(string.Empty, (current, part) => $"{current},{part}");
-      return $"{{{result.Substring(Math.Min(result.Length, 1))}}}";
     }
   }
 }

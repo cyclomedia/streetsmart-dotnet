@@ -206,6 +206,9 @@
     <Compile Include="..\Common\Data\ElevationInfo.cs">
       <Link>Data\ElevationInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\FeatureInfo.cs">
+      <Link>Data\FeatureInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\GeoJson\CRS.cs">
       <Link>Data\GeoJson\CRS.cs</Link>
     </Compile>
@@ -490,6 +493,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IElevationInfo.cs">
       <Link>Interfaces\Data\IElevationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IFeatureInfo.cs">
+      <Link>Interfaces\Data\IFeatureInfo.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IJson.cs">
       <Link>Interfaces\Data\IJson.cs</Link>
