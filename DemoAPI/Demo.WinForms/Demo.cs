@@ -195,29 +195,33 @@ namespace Demo.WinForms
       string text = "Viewer removed";
       AddViewerEventsText(text);
       IViewer viewer = args.Value;
-      viewer.LayerVisibilityChange -= OnLayerVisibilityChange;
 
-      if (viewer is IPanoramaViewer)
+      if (viewer != null)
       {
-        IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
-        _panoramaViewers.Remove(panoramaViewer);
+        viewer.LayerVisibilityChange -= OnLayerVisibilityChange;
 
-        panoramaViewer.ElevationChange -= OnElevationChange;
-        panoramaViewer.ImageChange -= OnImageChange;
-        panoramaViewer.RecordingClick -= OnRecordingClick;
-        panoramaViewer.TileLoadError -= OnTileLoadError;
-        panoramaViewer.ViewChange -= OnViewChange;
-        panoramaViewer.SurfaceCursorChange -= OnSurfaceCursorChange;
-        panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
-        panoramaViewer.ViewLoadStart -= OnViewLoadStart;
-        panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
-        panoramaViewer.FeatureClick -= OnFeatureClick;
-      }
+        if (viewer is IPanoramaViewer)
+        {
+          IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
+          _panoramaViewers.Remove(panoramaViewer);
 
-      if (viewer is IObliqueViewer)
-      {
-        IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
-        _obliqueViewers.Remove(obliqueViewer);
+          panoramaViewer.ElevationChange -= OnElevationChange;
+          panoramaViewer.ImageChange -= OnImageChange;
+          panoramaViewer.RecordingClick -= OnRecordingClick;
+          panoramaViewer.TileLoadError -= OnTileLoadError;
+          panoramaViewer.ViewChange -= OnViewChange;
+          panoramaViewer.SurfaceCursorChange -= OnSurfaceCursorChange;
+          panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
+          panoramaViewer.ViewLoadStart -= OnViewLoadStart;
+          panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
+          panoramaViewer.FeatureClick -= OnFeatureClick;
+        }
+
+        if (viewer is IObliqueViewer)
+        {
+          IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
+          _obliqueViewers.Remove(obliqueViewer);
+        }
       }
     }
 

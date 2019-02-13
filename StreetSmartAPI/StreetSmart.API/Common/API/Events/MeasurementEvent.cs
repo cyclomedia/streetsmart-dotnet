@@ -33,8 +33,8 @@ namespace StreetSmart.Common.API.Events
       string connectScript = panViewerList.ConnectEvents();
 
       return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{disconnectScript}{reAssignPanoramaViewer}{connectScript}
-             {JsThis}.{FuncName}(e.detail.activeMeasurement);}});";
+             {{if(""panoramaViewer"" in e.detail){{{disconnectScript}{reAssignPanoramaViewer}{connectScript}
+             {JsThis}.{FuncName}(e.detail.activeMeasurement);}}}});";
     }
   }
 }
