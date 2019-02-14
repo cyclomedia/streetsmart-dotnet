@@ -27,14 +27,8 @@ namespace StreetSmart.Common.API.Events
 
     public override string ToString()
     {
-      PanoramaViewerList panViewerList = ViewerList.GetPanoramaViewerList(ApiId);
-      string reAssignPanoramaViewer = panViewerList.ReAssignPanoramaViewer("e.detail.panoramaViewer");
-      string disconnectScript = panViewerList.DisconnectEvents();
-      string connectScript = panViewerList.ConnectEvents();
-
       return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{if(""panoramaViewer"" in e.detail){{{disconnectScript}{reAssignPanoramaViewer}{connectScript}
-             {JsThis}.{FuncName}(e.detail.activeMeasurement);}}}});";
+             {{{JsThis}.{FuncName}(e.detail.activeMeasurement);}});";
     }
   }
 }
