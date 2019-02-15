@@ -253,11 +253,15 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewChange(object sender, IEventArgs<IOrientation> args)
+    private async void OnViewChange(object sender, IEventArgs<IOrientation> args)
     {
-      IOrientation orientation = args.Value;
-      string text = $"View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
-      AddViewerEventsText(text);
+      if (sender is IPanoramaViewer panoramaViewer)
+      {
+        string id = await panoramaViewer.GetId();
+        IOrientation orientation = args.Value;
+        string text = $"Id: {id}, View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
+        AddViewerEventsText(text);
+      }
     }
 
     private void OnSurfaceCursorChange(object sender, IEventArgs<IDepthInfo> args)
