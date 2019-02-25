@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version: 19.2.0
+===============
+- Added function in the panorama viewer: ShowAttributePanelOnFeatureClick(), for deselect the object info
+
+
 Version: 19.1.0
 ===============
 - Added event: FeatureClicked, this event is fired when click on a feature in a layer

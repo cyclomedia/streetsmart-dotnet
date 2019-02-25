@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -301,6 +301,11 @@ namespace Demo.WinForms
     {
       string text = "featureClicked";
       AddViewerEventsText(text);
+    }
+
+    private void ckShowAttributePanelOnFeatureClick_CheckedChanged(object sender, EventArgs e)
+    {
+      PanoramaViewer.ShowAttributePanelOnFeatureClick(ckShowAttributePanelOnFeatureClick.Checked);
     }
 
     #endregion
@@ -1155,5 +1160,6 @@ namespace Demo.WinForms
     }
 
     #endregion
+
   }
 }

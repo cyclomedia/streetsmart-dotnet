@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -192,6 +192,16 @@ namespace StreetSmart.Common.API
     public void SetSelectedFeatureByProperties(IJson properties, string layerId)
     {
       Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
+    }
+
+    public void ShowAttributePanelOnFeatureClick()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.showAttributePanelOnFeatureClick();");
+    }
+
+    public void ShowAttributePanelOnFeatureClick(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.showAttributePanelOnFeatureClick({visible.ToJsBool()});");
     }
 
     public void Toggle3DCursor(bool visible)

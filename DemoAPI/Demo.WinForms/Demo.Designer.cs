@@ -139,6 +139,7 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
+      this.ckShowAttributePanelOnFeatureClick = new System.Windows.Forms.CheckBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grSelectFeature.SuspendLayout();
@@ -266,6 +267,7 @@
       // 
       // grSelectFeature
       // 
+      this.grSelectFeature.Controls.Add(this.ckShowAttributePanelOnFeatureClick);
       this.grSelectFeature.Controls.Add(this.txtValue);
       this.grSelectFeature.Controls.Add(this.lblValue);
       this.grSelectFeature.Controls.Add(this.txtName);
@@ -1297,6 +1299,19 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
+      // ckShowAttributePanelOnFeatureClick
+      // 
+      this.ckShowAttributePanelOnFeatureClick.AutoSize = true;
+      this.ckShowAttributePanelOnFeatureClick.Checked = true;
+      this.ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(6, 96);
+      this.ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
+      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(161, 17);
+      this.ckShowAttributePanelOnFeatureClick.TabIndex = 67;
+      this.ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
+      this.ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
+      this.ckShowAttributePanelOnFeatureClick.CheckedChanged += new System.EventHandler(this.ckShowAttributePanelOnFeatureClick_CheckedChanged);
+      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1454,6 +1469,7 @@
     private System.Windows.Forms.TextBox txtName;
     private System.Windows.Forms.Label lblPropertyName;
     private System.Windows.Forms.Button btnSelectFeature;
+    private System.Windows.Forms.CheckBox ckShowAttributePanelOnFeatureClick;
   }
 }
 

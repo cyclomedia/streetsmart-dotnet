@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2018, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -195,6 +195,18 @@ namespace StreetSmart.Common.Interfaces.API
     /// <param name="properties">The properties by which the feature should be determined</param>
     /// <param name="layerId">The layerId to which the feature is selected</param>
     void SetSelectedFeatureByProperties(IJson properties, string layerId);
+
+    /// <summary>
+    /// Toggles the visibility of the Attribute information panel, decided if it should be shown on clicking on a feature.
+    /// </summary>
+    void ShowAttributePanelOnFeatureClick();
+
+    /// <summary>
+    /// Toggles the visibility of the Attribute information panel, decided if it should be shown on clicking on a feature.
+    /// </summary>
+    /// <param name="visible">visibility of the show attributes panel</param>
+    void ShowAttributePanelOnFeatureClick(bool visible);
+
 
     /// <summary>
     /// Toggles the visibility of the 3D cursor in the PanoramaViewer
