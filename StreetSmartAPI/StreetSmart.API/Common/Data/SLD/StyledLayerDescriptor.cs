@@ -24,6 +24,7 @@ using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Data.SLD
 {
+  /// <exclude/>
   [XmlType(AnonymousType = true, Namespace = "http://www.opengis.net/sld")]
   [XmlRoot(Namespace = "http://www.opengis.net/sld", IsNullable = false)]
   #pragma warning disable 1591

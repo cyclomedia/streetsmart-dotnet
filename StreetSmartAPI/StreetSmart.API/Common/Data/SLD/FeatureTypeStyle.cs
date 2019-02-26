@@ -24,6 +24,7 @@ using StreetSmart.Common.Interfaces.SLD;
 namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
+  /// <exclude/>
   public class FeatureTypeStyle : NotifyPropertyChanged, IFeatureTypeStyle
   {
     private ObservableCollection<Rule> _rule;

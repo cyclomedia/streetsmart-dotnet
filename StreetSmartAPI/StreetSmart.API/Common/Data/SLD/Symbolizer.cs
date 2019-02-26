@@ -23,6 +23,7 @@ using StreetSmart.Common.Interfaces.SLD;
 namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
+  /// <exclude/>
   [XmlInclude(typeof(PolygonSymbolizer))]
   [XmlInclude(typeof(LineSymbolizer))]
   [XmlInclude(typeof(PointSymbolizer))]

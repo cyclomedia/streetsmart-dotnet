@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 namespace StreetSmart.Common.Data
 {
   #pragma warning disable 1591
+  /// <exclude/>
   public abstract class NotifyPropertyChanged : INotifyPropertyChanged
   {
     public event PropertyChangedEventHandler PropertyChanged;

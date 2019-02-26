@@ -26,6 +26,7 @@ using StreetSmart.Common.Interfaces.SLD;
 namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
+  /// <exclude/>
   public class SvgParameterCollection<T> : NotifyPropertyChanged, ISvgParameterCollection<T>
   {
     private ObservableCollection<SvgParameter<T>> _svgParameter;
