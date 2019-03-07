@@ -56,6 +56,11 @@ namespace StreetSmart.Common.Interfaces.API
     string ResourcesDirPath { get; set; }
 
     /// <summary>
+    /// The locale string that will be passed to WebKit. If empty the default locale of "en-US" will be used.
+    /// </summary>
+    string Locale { get; set; }
+
+    /// <summary>
     /// Sets the default browserSupProcessPath
     /// </summary>
     void SetDefaultBrowserSubprocessPath();

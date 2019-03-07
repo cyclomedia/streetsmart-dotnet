@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using CefSharp;
+
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.API;
 
@@ -44,6 +46,30 @@ namespace StreetSmart.Common.Factories
     public static IAPISettings Create()
     {
       return new APISettings();
+    }
+
+    /// <summary>
+    /// Set the language code
+    /// </summary>
+    /// <param name="languageCode"></param>
+    public static bool SetLanguage(string languageCode)
+    {
+      bool result = false;
+
+      Cef.UIThreadTaskFactory.StartNew(() =>
+      {
+        using (var context = Cef.GetGlobalRequestContext())
+        {
+          result = SetLanguage(languageCode, context);
+        }
+      });
+
+      return result;
+    }
+
+    private static bool SetLanguage(string languageCode, IRequestContext context)
+    {
+      return context.SetPreference("intl.accept_languages", languageCode, out _);
     }
   }
 
