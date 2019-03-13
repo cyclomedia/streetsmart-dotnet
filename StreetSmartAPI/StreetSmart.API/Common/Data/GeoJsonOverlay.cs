@@ -66,7 +66,7 @@ namespace StreetSmart.Common.Data
     {
       string overlay = base.ToString();
       string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
-      return $"{overlay.Substring(0, overlay.Length - 2)},geojson:{GeoJson}{srs}}}";
+      return $"{overlay.Substring(0, overlay.Length - 1)},geojson:{GeoJson}{srs}}}";
     }
   }
 }

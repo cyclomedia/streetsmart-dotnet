@@ -87,6 +87,12 @@ namespace StreetSmart.Common.API
       set => SetCommandLineArgs(value, CommandLineArgs.DisableGPUCache);
     }
 
+    public bool AllowInsecureContent
+    {
+      get => GetCommandLineArgs(CommandLineArgs.AllowInsecureContent);
+      set => SetCommandLineArgs(value, CommandLineArgs.AllowInsecureContent);
+    }
+
     public void SetDefaultBrowserSubprocessPath()
     {
       BrowserSubprocessPath = Path.Combine(DirectoryPath, Resources.BrowserSubprocess);

@@ -34,7 +34,7 @@ namespace System
 
     public static string ToHexColor(this Color value)
     {
-      return $"#{value.R:X}{value.G:X}{value.B:X}";
+      return $"#{value.R:x2}{value.G:x2}{value.B:x2}";
     }
   }
 }

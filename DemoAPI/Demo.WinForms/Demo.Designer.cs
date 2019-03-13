@@ -37,7 +37,14 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grColorOverlay = new System.Windows.Forms.GroupBox();
+      this.txtOverlayColor = new System.Windows.Forms.TextBox();
+      this.btnToggleAddressOverlays = new System.Windows.Forms.Button();
+      this.btnColorOverlay = new System.Windows.Forms.Button();
+      this.rbColor = new System.Windows.Forms.RadioButton();
+      this.rbSLD = new System.Windows.Forms.RadioButton();
       this.grSelectFeature = new System.Windows.Forms.GroupBox();
+      this.ckShowAttributePanelOnFeatureClick = new System.Windows.Forms.CheckBox();
       this.txtValue = new System.Windows.Forms.TextBox();
       this.lblValue = new System.Windows.Forms.Label();
       this.txtName = new System.Windows.Forms.TextBox();
@@ -139,9 +146,11 @@
       this.txtUsername = new System.Windows.Forms.TextBox();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
-      this.ckShowAttributePanelOnFeatureClick = new System.Windows.Forms.CheckBox();
+      this.colorOverlay = new System.Windows.Forms.ColorDialog();
+      this.btnDemoWFSLayer = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grColorOverlay.SuspendLayout();
       this.grSelectFeature.SuspendLayout();
       this.grSld.SuspendLayout();
       this.grButtonVisibility.SuspendLayout();
@@ -242,6 +251,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grColorOverlay);
       this.plControl.Controls.Add(this.grSelectFeature);
       this.plControl.Controls.Add(this.grSld);
       this.plControl.Controls.Add(this.grButtonVisibility);
@@ -265,6 +275,71 @@
       this.plControl.Size = new System.Drawing.Size(902, 701);
       this.plControl.TabIndex = 1;
       // 
+      // grColorOverlay
+      // 
+      this.grColorOverlay.Controls.Add(this.btnDemoWFSLayer);
+      this.grColorOverlay.Controls.Add(this.txtOverlayColor);
+      this.grColorOverlay.Controls.Add(this.btnToggleAddressOverlays);
+      this.grColorOverlay.Controls.Add(this.btnColorOverlay);
+      this.grColorOverlay.Controls.Add(this.rbColor);
+      this.grColorOverlay.Controls.Add(this.rbSLD);
+      this.grColorOverlay.Location = new System.Drawing.Point(731, 403);
+      this.grColorOverlay.Name = "grColorOverlay";
+      this.grColorOverlay.Size = new System.Drawing.Size(160, 160);
+      this.grColorOverlay.TabIndex = 69;
+      this.grColorOverlay.TabStop = false;
+      this.grColorOverlay.Text = "Overlay";
+      // 
+      // txtOverlayColor
+      // 
+      this.txtOverlayColor.Enabled = false;
+      this.txtOverlayColor.Location = new System.Drawing.Point(5, 40);
+      this.txtOverlayColor.Name = "txtOverlayColor";
+      this.txtOverlayColor.Size = new System.Drawing.Size(140, 20);
+      this.txtOverlayColor.TabIndex = 68;
+      // 
+      // btnToggleAddressOverlays
+      // 
+      this.btnToggleAddressOverlays.Location = new System.Drawing.Point(5, 80);
+      this.btnToggleAddressOverlays.Name = "btnToggleAddressOverlays";
+      this.btnToggleAddressOverlays.Size = new System.Drawing.Size(140, 30);
+      this.btnToggleAddressOverlays.TabIndex = 57;
+      this.btnToggleAddressOverlays.Text = "Toggle Address overlays";
+      this.btnToggleAddressOverlays.UseVisualStyleBackColor = true;
+      this.btnToggleAddressOverlays.Click += new System.EventHandler(this.btnToggleAddressOverlays_Click);
+      // 
+      // btnColorOverlay
+      // 
+      this.btnColorOverlay.Location = new System.Drawing.Point(5, 15);
+      this.btnColorOverlay.Name = "btnColorOverlay";
+      this.btnColorOverlay.Size = new System.Drawing.Size(140, 23);
+      this.btnColorOverlay.TabIndex = 58;
+      this.btnColorOverlay.Text = "Color overlay";
+      this.btnColorOverlay.UseVisualStyleBackColor = true;
+      this.btnColorOverlay.Click += new System.EventHandler(this.btnColorOverlay_Click);
+      // 
+      // rbColor
+      // 
+      this.rbColor.AutoSize = true;
+      this.rbColor.Location = new System.Drawing.Point(50, 60);
+      this.rbColor.Name = "rbColor";
+      this.rbColor.Size = new System.Drawing.Size(49, 17);
+      this.rbColor.TabIndex = 59;
+      this.rbColor.Text = "Color";
+      this.rbColor.UseVisualStyleBackColor = true;
+      // 
+      // rbSLD
+      // 
+      this.rbSLD.AutoSize = true;
+      this.rbSLD.Checked = true;
+      this.rbSLD.Location = new System.Drawing.Point(5, 60);
+      this.rbSLD.Name = "rbSLD";
+      this.rbSLD.Size = new System.Drawing.Size(46, 17);
+      this.rbSLD.TabIndex = 58;
+      this.rbSLD.TabStop = true;
+      this.rbSLD.Text = "SLD";
+      this.rbSLD.UseVisualStyleBackColor = true;
+      // 
       // grSelectFeature
       // 
       this.grSelectFeature.Controls.Add(this.ckShowAttributePanelOnFeatureClick);
@@ -279,6 +354,19 @@
       this.grSelectFeature.TabIndex = 56;
       this.grSelectFeature.TabStop = false;
       this.grSelectFeature.Text = "Select Feature";
+      // 
+      // ckShowAttributePanelOnFeatureClick
+      // 
+      this.ckShowAttributePanelOnFeatureClick.AutoSize = true;
+      this.ckShowAttributePanelOnFeatureClick.Checked = true;
+      this.ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(6, 96);
+      this.ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
+      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(161, 17);
+      this.ckShowAttributePanelOnFeatureClick.TabIndex = 67;
+      this.ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
+      this.ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
+      this.ckShowAttributePanelOnFeatureClick.CheckedChanged += new System.EventHandler(this.ckShowAttributePanelOnFeatureClick_CheckedChanged);
       // 
       // txtValue
       // 
@@ -1299,18 +1387,15 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // ckShowAttributePanelOnFeatureClick
+      // btnDemoWFSLayer
       // 
-      this.ckShowAttributePanelOnFeatureClick.AutoSize = true;
-      this.ckShowAttributePanelOnFeatureClick.Checked = true;
-      this.ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(6, 96);
-      this.ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
-      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(161, 17);
-      this.ckShowAttributePanelOnFeatureClick.TabIndex = 67;
-      this.ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
-      this.ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
-      this.ckShowAttributePanelOnFeatureClick.CheckedChanged += new System.EventHandler(this.ckShowAttributePanelOnFeatureClick_CheckedChanged);
+      this.btnDemoWFSLayer.Location = new System.Drawing.Point(5, 115);
+      this.btnDemoWFSLayer.Name = "btnDemoWFSLayer";
+      this.btnDemoWFSLayer.Size = new System.Drawing.Size(140, 30);
+      this.btnDemoWFSLayer.TabIndex = 69;
+      this.btnDemoWFSLayer.Text = "Add demo WFS Layer";
+      this.btnDemoWFSLayer.UseVisualStyleBackColor = true;
+      this.btnDemoWFSLayer.Click += new System.EventHandler(this.btnDemoWFSLayer_Click);
       // 
       // Demo
       // 
@@ -1325,6 +1410,8 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grColorOverlay.ResumeLayout(false);
+      this.grColorOverlay.PerformLayout();
       this.grSelectFeature.ResumeLayout(false);
       this.grSelectFeature.PerformLayout();
       this.grSld.ResumeLayout(false);
@@ -1470,6 +1557,14 @@
     private System.Windows.Forms.Label lblPropertyName;
     private System.Windows.Forms.Button btnSelectFeature;
     private System.Windows.Forms.CheckBox ckShowAttributePanelOnFeatureClick;
+    private System.Windows.Forms.Button btnToggleAddressOverlays;
+    private System.Windows.Forms.ColorDialog colorOverlay;
+    private System.Windows.Forms.Button btnColorOverlay;
+    private System.Windows.Forms.GroupBox grColorOverlay;
+    private System.Windows.Forms.TextBox txtOverlayColor;
+    private System.Windows.Forms.RadioButton rbColor;
+    private System.Windows.Forms.RadioButton rbSLD;
+    private System.Windows.Forms.Button btnDemoWFSLayer;
   }
 }
 

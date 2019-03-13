@@ -46,6 +46,11 @@ namespace StreetSmart.Common.Interfaces.API
     bool DisableGPUCache { get; set; }
 
     /// <summary>
+    /// Allow insecure content
+    /// </summary>
+    bool AllowInsecureContent { get; set; }
+
+    /// <summary>
     /// The path to the locales directory, if empty locales\ will be used.
     /// </summary>
     string LocalesDirPath { get; set; }

@@ -8,6 +8,7 @@ Version: 19.3.0
 - Add WFS option on API-WFS-SLD-string styling
 - Add address layer option
 - addOverlay function with only a color
+- add function: AllowInsecureContent, this function can for example be used for show insecure wfs content
 
 
 Version: 19.2.0

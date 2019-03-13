@@ -49,7 +49,8 @@ namespace Demo.WinForms
     private IFeatureCollection _measurement;
 
     private IOptions _options;
-    private IGeoJsonOverlay _overlay;
+    private IOverlay _overlay;
+    private bool _addressLayerOverlayVisible;
 
     #endregion
 
@@ -83,6 +84,8 @@ namespace Demo.WinForms
       _ci = CultureInfo.InvariantCulture;
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
+      _addressLayerOverlayVisible = true;
+      txtOverlayColor.BackColor = Color.Blue;
 
       IAPISettings apiSettings = CefSettingsFactory.Create();
 //      IAPISettings apiSettings = CefSettingsFactory.Create(
@@ -92,6 +95,7 @@ namespace Demo.WinForms
 //        @"D:\StreetSmartFiles\Resources");
  //     IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
       apiSettings.DisableGPUCache = true;
+      apiSettings.AllowInsecureContent = true;
 
       _api = string.IsNullOrEmpty(StreetSmartLocation)
         ? StreetSmartAPIFactory.Create(apiSettings)
@@ -881,12 +885,20 @@ namespace Demo.WinForms
         string name = "My GeoJSON";
         string geoJson = txtOverlayGeoJson.Text;
         string sld = txtSld.Text;
+        IGeoJsonOverlay overlay;
 
-        _overlay = string.IsNullOrEmpty(sld)
-          ? OverlayFactory.Create(geoJson, name)
-          : OverlayFactory.Create(geoJson, name, txtSrs.Text, sld);
+        if (rbSLD.Checked)
+        {
+          overlay = string.IsNullOrEmpty(sld)
+            ? OverlayFactory.Create(geoJson, name)
+            : OverlayFactory.Create(geoJson, name, txtSrs.Text, sld);
+        }
+        else
+        {
+          overlay = OverlayFactory.Create(geoJson, name, txtSrs.Text, txtOverlayColor.BackColor);
+        }
 
-        _overlay = await _api.AddOverlay(_overlay);
+        _overlay = await _api.AddOverlay(overlay);
       }
     }
 
@@ -1161,5 +1173,37 @@ namespace Demo.WinForms
 
     #endregion
 
+    private void btnToggleAddressOverlays_Click(object sender, EventArgs e)
+    {
+      PanoramaViewer?.ToggleAddressesVisible(!_addressLayerOverlayVisible);
+      _addressLayerOverlayVisible = !_addressLayerOverlayVisible;
+    }
+
+    private void btnColorOverlay_Click(object sender, EventArgs e)
+    {
+      colorOverlay.Color = txtOverlayColor.BackColor;
+
+      if (colorOverlay.ShowDialog() == DialogResult.OK)
+      {
+        txtOverlayColor.BackColor = colorOverlay.Color;
+      }
+    }
+
+    private async void btnDemoWFSLayer_Click(object sender, EventArgs e)
+    {
+      string name = "My Supper cool layer";
+      string url = "http://sandboxgeoserver.westeurope.cloudapp.azure.com/geoserver/agro/wfs";
+      string typeName = "agro:polygon_agro_inventory";
+      string version = "1.1.0";
+      Color color = txtOverlayColor.BackColor;
+      string username = "agro";
+      string password = "XdEVA!7r";
+
+      IWFSOverlay wfsOverlay = rbSLD.Checked
+        ? OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtSld.Text, true, username, password)
+        : OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, true, username, password);
+
+      _overlay = await _api.AddWFSLayer(wfsOverlay);
+    }
   }
 }

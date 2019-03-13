@@ -109,7 +109,7 @@ namespace StreetSmart.Common.Data
       string overlay = base.ToString();
       string credentials = Credentials == null ? string.Empty : $",credentials:{Credentials}";
       return
-        $"{overlay.Substring(0, overlay.Length - 2)},url:'{Url}',typeName:{TypeName.ToQuote()},version:{Version.ToQuote()},authRequired:{AuthRequired.ToJsBool()}{credentials}}}";
+        $"{overlay.Substring(0, overlay.Length - 1)},url:'{Url}',typeName:{TypeName.ToQuote()},version:{Version.ToQuote()},authRequired:{AuthRequired.ToJsBool()}{credentials}}}";
     }
   }
 }

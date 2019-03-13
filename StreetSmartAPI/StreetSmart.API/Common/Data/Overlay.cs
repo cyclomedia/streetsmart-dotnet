@@ -111,7 +111,7 @@ namespace StreetSmart.Common.Data
       Sld = Sld?.Replace("\t", " ");
       Sld = Sld?.Replace("\"x", "\" x");
 
-      string color = Color == null ? string.Empty : $",color:{((Color) Color).ToHexColor()}";
+      string color = Color == null ? string.Empty : $",color:{((Color) Color).ToHexColor().ToQuote()}";
       string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
       return $"{{name:{Name.ToQuote()},visible:{Visible.ToJsBool()},id:{Id.ToQuote()}{sld}{color}}}";
     }
