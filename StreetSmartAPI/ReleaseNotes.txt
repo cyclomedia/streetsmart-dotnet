@@ -1,6 +1,15 @@
 ﻿Release notes:
 ==============
 
+
+Version: 19.3.0
+===============
+- Added function for set the chromium browser language
+- Add WFS option on API-WFS-SLD-string styling
+- Add address layer option
+- addOverlay function with only a color
+
+
 Version: 19.2.0
 ===============
 - Added function in the panorama viewer: ShowAttributePanelOnFeatureClick(), for deselect the object info

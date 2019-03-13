@@ -209,6 +209,11 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
     }
 
+    public void ToggleAddressesVisible(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleAddressesVisible({visible.ToJsBool()});");
+    }
+
     public void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled)
     {
       base.ToggleButtonEnabled(buttonId, enabled);

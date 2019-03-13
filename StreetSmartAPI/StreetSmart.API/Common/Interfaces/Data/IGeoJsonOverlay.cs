@@ -16,25 +16,23 @@
  * License along with this library.
  */
 
-// ReSharper disable once CheckNamespace
-
-using System.Drawing;
-using System.Globalization;
-
-namespace System
+namespace StreetSmart.Common.Interfaces.Data
 {
-  internal static class ColorExtensions
+  /// <summary>
+  /// Information about the overlay
+  /// </summary>
+  // ReSharper disable once UnusedMember.Global
+  public interface IGeoJsonOverlay: IOverlay
   {
-    public static string ToJsColor(this Color value)
-    {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      double alpha = (double) value.A / 255;
-      return $"[{value.R},{value.G},{value.B},{alpha.ToString("0.00", ci)}]";
-    }
+    /// <summary>
+    /// GeoJSON object containing the layer data
+    /// </summary>
+    // ReSharper disable once InconsistentNaming
+    string GeoJson { get; set; }
 
-    public static string ToHexColor(this Color value)
-    {
-      return $"#{value.R:X}{value.G:X}{value.B:X}";
-    }
+    /// <summary>
+    /// Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.
+    /// </summary>
+    string Srs { get; set; }
   }
 }

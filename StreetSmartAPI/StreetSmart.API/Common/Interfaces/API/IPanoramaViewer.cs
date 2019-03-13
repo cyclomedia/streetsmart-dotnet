@@ -207,12 +207,17 @@ namespace StreetSmart.Common.Interfaces.API
     /// <param name="visible">visibility of the show attributes panel</param>
     void ShowAttributePanelOnFeatureClick(bool visible);
 
-
     /// <summary>
     /// Toggles the visibility of the 3D cursor in the PanoramaViewer
     /// </summary>
     /// <param name="visible">If available, sets visibility to this value.</param>
     void Toggle3DCursor(bool visible);
+
+    /// <summary>
+    /// Toggles the visibility of the Address features in the PanoramaViewer.
+    /// </summary>
+    /// <param name="visible">If available, sets visibility to this value.</param>
+    void ToggleAddressesVisible(bool visible);
 
     /// <summary>
     /// Toggle the visibility of a button.

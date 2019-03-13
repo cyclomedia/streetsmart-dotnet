@@ -138,6 +138,9 @@
     <Compile Include="..\Common\Data\Coordinate.cs">
       <Link>Data\Coordinate.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\Credentials.cs">
+      <Link>Data\Credentials.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\DataConvert.cs">
       <Link>Data\DataConvert.cs</Link>
     </Compile>
@@ -164,6 +167,9 @@
     </Compile>
     <Compile Include="..\Common\Data\FeatureInfo.cs">
       <Link>Data\FeatureInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJsonOverlay.cs">
+      <Link>Data\GeoJsonOverlay.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\GeoJson\CRS.cs">
       <Link>Data\GeoJson\CRS.cs</Link>
@@ -336,6 +342,9 @@
     <Compile Include="..\Common\Data\ViewerTypes.cs">
       <Link>Data\ViewerTypes.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\WFSOverlay.cs">
+      <Link>Data\WFSOverlay.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Events\EventArgs.cs">
       <Link>Events\EventArgs.cs</Link>
     </Compile>
@@ -447,6 +456,9 @@
     <Compile Include="..\Common\Interfaces\Data\ICoordinate.cs">
       <Link>Interfaces\Data\ICoordinate.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ICredentials.cs">
+      <Link>Interfaces\Data\ICredentials.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\IDepthInfo.cs">
       <Link>Interfaces\Data\IDepthInfo.cs</Link>
     </Compile>
@@ -455,6 +467,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IFeatureInfo.cs">
       <Link>Interfaces\Data\IFeatureInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IGeoJsonOverlay.cs">
+      <Link>Interfaces\Data\IGeoJsonOverlay.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IJson.cs">
       <Link>Interfaces\Data\IJson.cs</Link>
@@ -494,6 +509,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IViewerTypes.cs">
       <Link>Interfaces\Data\IViewerTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IWFSOverlay.cs">
+      <Link>Interfaces\Data\IWFSOverlay.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\MeasurementGeometryType.cs">
       <Link>Interfaces\Data\MeasurementGeometryType.cs</Link>

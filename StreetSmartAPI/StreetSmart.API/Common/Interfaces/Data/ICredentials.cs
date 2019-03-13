@@ -16,25 +16,24 @@
  * License along with this library.
  */
 
-// ReSharper disable once CheckNamespace
-
 using System.Drawing;
-using System.Globalization;
+using System.Security;
 
-namespace System
+namespace StreetSmart.Common.Interfaces.Data
 {
-  internal static class ColorExtensions
+  /// <summary>
+  /// Credential information
+  /// </summary>
+  public interface ICredentials
   {
-    public static string ToJsColor(this Color value)
-    {
-      CultureInfo ci = CultureInfo.InvariantCulture;
-      double alpha = (double) value.A / 255;
-      return $"[{value.R},{value.G},{value.B},{alpha.ToString("0.00", ci)}]";
-    }
+    /// <summary>
+    /// Username of the user.
+    /// </summary>
+    string Username { get; set; }
 
-    public static string ToHexColor(this Color value)
-    {
-      return $"#{value.R:X}{value.G:X}{value.B:X}";
-    }
+    /// <summary>
+    /// Password of the user.
+    /// </summary>
+    SecureString Password { get; set; }
   }
 }

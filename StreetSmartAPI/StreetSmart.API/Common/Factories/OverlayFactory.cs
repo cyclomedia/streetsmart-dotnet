@@ -16,8 +16,11 @@
  * License along with this library.
  */
 
+using System;
+using System.Drawing;
+using System.Security;
+
 using StreetSmart.Common.Data;
-using StreetSmart.Common.Data.SLD;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 using StreetSmart.Common.Interfaces.SLD;
@@ -35,7 +38,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="geoJson">GeoJSON object containing the layer data</param>
     /// <param name="name">Name of the layer.</param>
     /// <returns>Overlay object</returns>
-    public static IOverlay Create(string geoJson, string name)
+    public static IGeoJsonOverlay Create(string geoJson, string name)
       => Create(geoJson, name, null, null);
 
     /// <summary>
@@ -45,7 +48,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">EPSG code (srs) for the source GeoJSON</param>
     /// <returns>Overlay object</returns>
-    public static IOverlay Create(string geoJson, string name, string srs)
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs)
       => Create(geoJson, name, srs, null);
 
     /// <summary>
@@ -56,8 +59,19 @@ namespace StreetSmart.Common.Factories
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
     /// <returns>Overlay object</returns>
-    public static IOverlay Create(string geoJson, string name, string srs, string sld)
-      => new Overlay(geoJson, name, srs, sld);
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, string sld)
+      => new GeoJsonOverlay(geoJson, name, srs, sld);
+
+    /// <summary>
+    /// Create the overlay object
+    /// </summary>
+    /// <param name="geoJson">GeoJSON object containing the layer data</param>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
+    /// <param name="color">Optional color for the layer</param>
+    /// <returns>Overlay object</returns>
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, Color color)
+      => new GeoJsonOverlay(geoJson, name, srs, color);
 
     /// <summary>
     /// Create the overlay object
@@ -67,8 +81,19 @@ namespace StreetSmart.Common.Factories
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
     /// <returns>Overlay object</returns>
-    public static IOverlay Create(IFeatureCollection featureCollection, string name, string srs, string sld)
-      => new Overlay(featureCollection.ToString(), name, srs, sld);
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, string sld)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, sld);
+
+    /// <summary>
+    /// Create the overlay object
+    /// </summary>
+    /// <param name="featureCollection">FeatureCollection object containing the layer data</param>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
+    /// <param name="color">Optional color for the layer</param>
+    /// <returns>Overlay object</returns>
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, Color color)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, color);
 
     /// <summary>
     /// Create the overlay object
@@ -78,7 +103,89 @@ namespace StreetSmart.Common.Factories
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="styledLayerDescriptor">StyledLayer descriptor contains the sld styling of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor)
-      => new Overlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD);
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD);
+
+    /// <summary>
+    /// Create the wfs overlay object
+    /// </summary>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="url">The url where the WFS is hosted</param>
+    /// <param name="typeName">The type name of the layer</param>
+    /// <param name="version">The WFS version to be used</param>
+    /// <param name="color">Color for the layer</param>
+    /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <returns>Overlay object</returns>
+    public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, Color color,
+      bool authRequired)
+    {
+      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, null);
+    }
+
+    /// <summary>
+    /// Create the wfs overlay object
+    /// </summary>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="url">The url where the WFS is hosted</param>
+    /// <param name="typeName">The type name of the layer</param>
+    /// <param name="version">The WFS version to be used</param>
+    /// <param name="color">Color for the layer</param>
+    /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <returns>Overlay object</returns>
+    public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, Color color,
+      bool authRequired, string username, string password)
+    {
+      SecureString Password = new SecureString();
+
+      foreach (var character in password)
+      {
+        Password.AppendChar(character);
+      }
+
+      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, new Credentials(username, Password));
+    }
+
+    /// <summary>
+    /// Create the wfs overlay object
+    /// </summary>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="url">The url where the WFS is hosted</param>
+    /// <param name="typeName">The type name of the layer</param>
+    /// <param name="version">The WFS version to be used</param>
+    /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
+    /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <returns>Overlay object</returns>
+    public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, string sld,
+      bool authRequired)
+    {
+      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, null);
+    }
+
+    /// <summary>
+    /// Create the overlay object
+    /// </summary>
+    /// <param name="name">Name of the layer.</param>
+    /// <param name="url">The url where the WFS is hosted</param>
+    /// <param name="typeName">The type name of the layer</param>
+    /// <param name="version">The WFS version to be used</param>
+    /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
+    /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <param name="username">Username of the user.</param>
+    /// <param name="password">Password of the user.</param>
+    /// <returns>Overlay object</returns>
+    public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, string sld,
+      bool authRequired, string username, string password)
+    {
+      SecureString Password = new SecureString();
+
+      foreach (var character in password)
+      {
+        Password.AppendChar(character);
+      }
+
+      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, new Credentials(username, Password));
+    }
   }
 }

@@ -16,38 +16,42 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System;
 
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
   /// Information about the overlay
   /// </summary>
-  public interface IOverlay
+  // ReSharper disable once UnusedMember.Global
+  // ReSharper disable once InconsistentNaming
+  // ReSharper disable once IdentifierTypo
+  public interface IWFSOverlay: IOverlay
   {
     /// <summary>
-    /// Id of the overlay
+    /// The url where the WFS is hosted
     /// </summary>
-    string Id { get; set; }
+    // ReSharper disable once InconsistentNaming
+    Uri Url { get; set; }
 
     /// <summary>
-    /// Name of the layer
+    /// The type name of the layer
     /// </summary>
-    string Name { get; set; }
+    string TypeName { get; set; }
 
     /// <summary>
-    /// Optional XML string for Styled Layer Descriptor.
+    /// The WFS version to be used
     /// </summary>
-    string Sld { get; set; }
+    string Version { get; set; }
 
     /// <summary>
-    /// Optional color
+    /// Whether this layer requires authentication to access
     /// </summary>
-    Color? Color { get; set; }
+    bool AuthRequired { get; set; }
 
     /// <summary>
-    /// visibility of the layer
+    /// Credentials used to access the layer.
     /// </summary>
-    bool Visible { get; set; }
+    ICredentials Credentials { get; set; }
   }
 }

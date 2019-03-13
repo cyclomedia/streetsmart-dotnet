@@ -113,7 +113,14 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="overlay">The overlay to add</param>
     /// <returns>the overlay object</returns>
-    Task<IOverlay> AddOverlay(IOverlay overlay);
+    Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay);
+
+    /// <summary>
+    /// Add a WFS Layer as overlay to the panorama viewer. Can be removed with removeOverlay
+    /// </summary>
+    /// <param name="overlay">The WFS layer to add</param>
+    /// <returns>the overlay object</returns>
+    Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay);
 
     /// <summary>
     /// Close a panorama or oblique viewer.

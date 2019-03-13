@@ -49,7 +49,7 @@ namespace Demo.WinForms
     private IFeatureCollection _measurement;
 
     private IOptions _options;
-    private IOverlay _overlay;
+    private IGeoJsonOverlay _overlay;
 
     #endregion
 

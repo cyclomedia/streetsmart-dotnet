@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Drawing;
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
@@ -26,18 +26,22 @@ namespace StreetSmart.Common.Data
   internal class Overlay : DataConvert, IOverlay
   {
     private string _id;
-    private string _geoJson;
     private string _name;
-    private string _srs;
     private string _sld;
+    private Color? _color;
     private bool _visible;
 
-    public Overlay(string geoJson, string name, string srs, string sld)
+    public Overlay(string name, string sld)
     {
-      GeoJson = geoJson;
       Name = name;
-      Srs = srs;
       Sld = sld;
+      Visible = true;
+    }
+
+    public Overlay(string name, Color color)
+    {
+      Name = name;
+      Color = color;
       Visible = true;
     }
 
@@ -56,16 +60,6 @@ namespace StreetSmart.Common.Data
       }
     }
 
-    public string GeoJson
-    {
-      get => _geoJson;
-      set
-      {
-        _geoJson = value;
-        RaisePropertyChanged();
-      }
-    }
-
     public string Name
     {
       get => _name;
@@ -76,22 +70,32 @@ namespace StreetSmart.Common.Data
       }
     }
 
-    public string Srs
-    {
-      get => _srs;
-      set
-      {
-        _srs = value;
-        RaisePropertyChanged();
-      }
-    }
-
     public string Sld
     {
       get => _sld;
       set
       {
         _sld = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public Color? Color
+    {
+      get => _color;
+      set
+      {
+        _color = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool Visible
+    {
+      get => _visible;
+      set
+      {
+        _visible = value;
         RaisePropertyChanged();
       }
     }
@@ -107,19 +111,9 @@ namespace StreetSmart.Common.Data
       Sld = Sld?.Replace("\t", " ");
       Sld = Sld?.Replace("\"x", "\" x");
 
-      string srs = Srs == null ? string.Empty : $",sourceSrs:{Srs.ToQuote()}";
+      string color = Color == null ? string.Empty : $",color:{((Color) Color).ToHexColor()}";
       string sld = Sld == null ? string.Empty : $",sldXMLtext:{Sld.ToQuote()}";
-      return $"{{name:{Name.ToQuote()},visible:{Visible.ToJsBool()},id:{Id.ToQuote()},geojson:{GeoJson}{srs}{sld}}}";
-    }
-
-    public bool Visible
-    {
-      get => _visible;
-      set
-      {
-        _visible = value;
-        RaisePropertyChanged();
-      }
+      return $"{{name:{Name.ToQuote()},visible:{Visible.ToJsBool()},id:{Id.ToQuote()}{sld}{color}}}";
     }
   }
 }

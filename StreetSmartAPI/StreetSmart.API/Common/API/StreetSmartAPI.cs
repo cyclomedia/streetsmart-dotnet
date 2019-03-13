@@ -164,11 +164,19 @@ namespace StreetSmart.Common.API
 
     #region Interface Functions
 
-    public async Task<IOverlay> AddOverlay(IOverlay overlay)
+    public async Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay)
     {
       int processId = GetProcessId;
       string script = GetScript($"addOverlay({overlay})", processId);
       ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script, processId));
+      return overlay;
+    }
+
+    public async Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay)
+    {
+      int processId = GetProcessId;
+      string script = GetScript($"addWFSLayer({overlay})", processId);
+      ((Overlay)overlay)?.FillInParameters((Dictionary<string, object>)await CallJsAsync(script, processId));
       return overlay;
     }
 
