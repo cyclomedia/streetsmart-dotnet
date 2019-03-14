@@ -16,28 +16,21 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Data.SLD;
-
 namespace StreetSmart.Common.Interfaces.SLD
 {
   /// <summary>
-  /// The graphic
+  /// Inline content
   /// </summary>
-  public interface IGraphic
+  public interface IInlineContent
   {
     /// <summary>
-    /// External Graphic
+    /// Encoding
     /// </summary>
-    ExternalGraphic ExternalGraphic { get; set; }
+    Encoding Encoding { get; set; }
 
     /// <summary>
-    /// Mark of the graphic
+    /// Value of the encoding
     /// </summary>
-    Mark Mark { get; set; }
-
-    /// <summary>
-    /// Size of the graphic
-    /// </summary>
-    double Size { get; set; }
+    string Value { get; set; }
   }
 }

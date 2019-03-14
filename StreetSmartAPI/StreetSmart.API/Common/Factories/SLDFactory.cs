@@ -64,5 +64,14 @@ namespace StreetSmart.Common.Factories
     public static IStyledLayerDescriptor CreateStylePoint(SymbolizerType? type, double size, Color fillColor, double? fillOpacity = null,
       Color? strokeColor = null, double? strokeWidth = null) => new StyledLayerDescriptor(new Rule(null,
       new Graphic(new Mark(type, fillColor, fillOpacity, strokeColor, strokeWidth), size)));
+
+    /// <summary>
+    /// Returns a point / image as inline content style object
+    /// </summary>
+    /// <param name="size">Size of the point objects</param>
+    /// <param name="image">The image object</param>
+    /// <returns>Styled layer description of the image object in a point symbolizer</returns>
+    public static IStyledLayerDescriptor CreateStyleImage(double size, Image image) =>
+      new StyledLayerDescriptor(new Rule(null, new Graphic(new ExternalGraphic(Encoding.Base64, image), size)));
   }
 }

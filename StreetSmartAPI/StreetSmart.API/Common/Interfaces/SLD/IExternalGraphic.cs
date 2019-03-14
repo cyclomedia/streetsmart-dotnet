@@ -21,23 +21,13 @@ using StreetSmart.Common.Data.SLD;
 namespace StreetSmart.Common.Interfaces.SLD
 {
   /// <summary>
-  /// The graphic
+  /// External Graphic
   /// </summary>
-  public interface IGraphic
+  public interface IExternalGraphic
   {
     /// <summary>
-    /// External Graphic
+    /// Inline content
     /// </summary>
-    ExternalGraphic ExternalGraphic { get; set; }
-
-    /// <summary>
-    /// Mark of the graphic
-    /// </summary>
-    Mark Mark { get; set; }
-
-    /// <summary>
-    /// Size of the graphic
-    /// </summary>
-    double Size { get; set; }
+    InlineContent InlineContent { get; set; }
   }
 }

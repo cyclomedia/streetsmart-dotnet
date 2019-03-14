@@ -339,11 +339,17 @@
     <Compile Include="..\Common\Data\RecordingClickInfo.cs">
       <Link>Data\RecordingClickInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\SLD\ExternalGraphic.cs">
+      <Link>Data\SLD\ExternalGraphic.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\SLD\FeatureTypeStyle.cs">
       <Link>Data\SLD\FeatureTypeStyle.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\SLD\Graphic.cs">
       <Link>Data\SLD\Graphic.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\InlineContent.cs">
+      <Link>Data\SLD\InlineContent.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\SLD\LineSymbolizer.cs">
       <Link>Data\SLD\LineSymbolizer.cs</Link>
@@ -702,14 +708,23 @@
     <Compile Include="..\Common\Interfaces\GeoJson\Reliability.cs">
       <Link>Interfaces\GeoJson\Reliability.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\Encoding.cs">
+      <Link>Interfaces\SLD\Encoding.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\SLD\FillType.cs">
       <Link>Interfaces\SLD\FillType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IExternalGraphic.cs">
+      <Link>Interfaces\SLD\IExternalGraphic.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\SLD\IFeatureTypeStyle.cs">
       <Link>Interfaces\SLD\IFeatureTypeStyle.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\SLD\IGraphic.cs">
       <Link>Interfaces\SLD\IGraphic.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IInlineContent.cs">
+      <Link>Interfaces\SLD\IInlineContent.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\SLD\ILineSymbolizer.cs">
       <Link>Interfaces\SLD\ILineSymbolizer.cs</Link>

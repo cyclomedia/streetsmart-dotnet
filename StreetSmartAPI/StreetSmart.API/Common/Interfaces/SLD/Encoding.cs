@@ -16,28 +16,20 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Data.SLD;
+
+using System.Xml.Serialization;
 
 namespace StreetSmart.Common.Interfaces.SLD
 {
   /// <summary>
-  /// The graphic
+  /// Encoding
   /// </summary>
-  public interface IGraphic
+  public enum Encoding
   {
     /// <summary>
-    /// External Graphic
+    /// base64
     /// </summary>
-    ExternalGraphic ExternalGraphic { get; set; }
-
-    /// <summary>
-    /// Mark of the graphic
-    /// </summary>
-    Mark Mark { get; set; }
-
-    /// <summary>
-    /// Size of the graphic
-    /// </summary>
-    double Size { get; set; }
+    [XmlEnum("data:image/png;base64")]
+    Base64
   }
 }

@@ -16,28 +16,39 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Data.SLD;
+using System.Drawing;
+using System.Xml.Serialization;
 
-namespace StreetSmart.Common.Interfaces.SLD
+using StreetSmart.Common.Interfaces.SLD;
+
+namespace StreetSmart.Common.Data.SLD
 {
-  /// <summary>
-  /// The graphic
-  /// </summary>
-  public interface IGraphic
+  #pragma warning disable 1591
+  /// <exclude/>
+  public class ExternalGraphic : NotifyPropertyChanged, IExternalGraphic
   {
-    /// <summary>
-    /// External Graphic
-    /// </summary>
-    ExternalGraphic ExternalGraphic { get; set; }
+    public ExternalGraphic()
+    {
+    }
 
-    /// <summary>
-    /// Mark of the graphic
-    /// </summary>
-    Mark Mark { get; set; }
+    public ExternalGraphic(Encoding encoding, Image image)
+    {
+      InlineContent = new InlineContent(encoding, image);
+    }
 
-    /// <summary>
-    /// Size of the graphic
-    /// </summary>
-    double Size { get; set; }
+    private InlineContent _inlineContent;
+
+    [XmlElement("InlineContent", Namespace = "http://www.opengis.net/se")]
+    public InlineContent InlineContent
+    {
+      get => _inlineContent;
+      set
+      {
+        _inlineContent = value;
+        RaisePropertyChanged();
+      }
+    }
   }
+
+  #pragma warning restore 1591
 }

@@ -16,6 +16,9 @@
  * License along with this library.
  */
 
+using System;
+using System.Drawing;
+using System.IO;
 using System.Xml.Serialization;
 
 using StreetSmart.Common.Interfaces.SLD;
@@ -24,62 +27,53 @@ namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
   /// <exclude/>
-  public class Graphic : NotifyPropertyChanged, IGraphic
+  public class InlineContent : NotifyPropertyChanged, IInlineContent
   {
-    public Graphic()
+    public InlineContent()
     {
     }
 
-    public Graphic(Mark mark, double size)
+    public InlineContent(Encoding encoding, Image image)
     {
-      Mark = mark;
-      Size = size;
+      Encoding = encoding;
+
+      if (encoding == Encoding.Base64)
+      {
+        using (MemoryStream stream = new MemoryStream())
+        {
+          image.Save(stream, image.RawFormat);
+          byte[] imageBytes = stream.ToArray();
+          Value = Convert.ToBase64String(imageBytes);
+        }
+      }
     }
 
-    public Graphic(ExternalGraphic externalGraphic, double size)
-    {
-      ExternalGraphic = externalGraphic;
-      Size = size;
-    }
+    private Encoding _encoding;
 
-    private ExternalGraphic _externalGraphic;
-
-    [XmlElement("ExternalGraphic", Namespace = "http://www.opengis.net/se")]
-    public ExternalGraphic ExternalGraphic
+    [XmlAttribute("encoding", Namespace = "http://www.opengis.net/se")]
+    public Encoding Encoding
     {
-      get => _externalGraphic;
+      get => _encoding;
       set
       {
-        _externalGraphic = value;
+        _encoding = value;
         RaisePropertyChanged();
       }
     }
 
-    private Mark _mark;
+    private string _value;
 
-    [XmlElement("Mark", Namespace = "http://www.opengis.net/se")]
-    public Mark Mark
+    [XmlText]
+    public string Value
     {
-      get => _mark;
+      get => _value;
       set
       {
-        _mark = value;
-        RaisePropertyChanged();
-      }
-    }
-
-    private double _size;
-
-    [XmlElement("Size", Namespace = "http://www.opengis.net/se")]
-    public double Size
-    {
-      get => _size;
-      set
-      {
-        _size = value;
+        _value = value;
         RaisePropertyChanged();
       }
     }
   }
+
   #pragma warning restore 1591
 }
