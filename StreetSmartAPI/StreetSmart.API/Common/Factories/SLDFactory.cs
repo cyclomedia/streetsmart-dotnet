@@ -61,10 +61,11 @@ namespace StreetSmart.Common.Factories
     /// <param name="fillOpacity">The fill opacity of the point objects</param>
     /// <param name="strokeColor">The stroke color of the point objects</param>
     /// <param name="strokeWidth">The stroke width of the point objects</param>
+    /// <param name="strokeOpacity">The stroke opacity of the point objects</param>
     /// <returns>Point symbolizer which describes the image symbol</returns>
     public static IPointSymbolizer CreateStylePoint(SymbolizerType? type, double size, Color fillColor,
-      double? fillOpacity = null, Color? strokeColor = null, double? strokeWidth = null) =>
-      new PointSymbolizer(new Graphic(new Mark(type, fillColor, fillOpacity, strokeColor, strokeWidth), size));
+      double? fillOpacity = null, Color? strokeColor = null, double? strokeWidth = null, double? strokeOpacity = null) =>
+      new PointSymbolizer(new Graphic(new Mark(type, fillColor, fillOpacity, strokeColor, strokeWidth, strokeOpacity), size));
 
     /// <summary>
     /// Returns a point symbolizer of an image symbol

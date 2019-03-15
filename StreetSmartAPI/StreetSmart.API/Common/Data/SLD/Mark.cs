@@ -38,7 +38,7 @@ namespace StreetSmart.Common.Data.SLD
       Stroke = stroke;
     }
 
-    public Mark(SymbolizerType? type, Color fillColor, double? fillOpacity, Color? strokeColor, double? strokeWidth)
+    public Mark(SymbolizerType? type, Color fillColor, double? fillOpacity, Color? strokeColor, double? strokeWidth, double? strokeOpacity)
     {
 
       WellKnownName = type;
@@ -47,7 +47,7 @@ namespace StreetSmart.Common.Data.SLD
 
       if (strokeColor != null)
       {
-        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, null);
+        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, strokeOpacity);
       }
     }
 
