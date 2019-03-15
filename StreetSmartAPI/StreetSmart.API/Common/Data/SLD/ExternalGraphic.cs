@@ -31,6 +31,12 @@ namespace StreetSmart.Common.Data.SLD
     {
     }
 
+    public ExternalGraphic(Encoding encoding, string value)
+    {
+      InlineContent = new InlineContent(encoding, value);
+    }
+
+
     public ExternalGraphic(Encoding encoding, Image image)
     {
       InlineContent = new InlineContent(encoding, image);

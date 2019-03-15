@@ -33,11 +33,7 @@ namespace StreetSmart.Common.Data.SLD
     public Rule(VendorOption vendorOption, Graphic graphic)
     {
       VendorOption = vendorOption;
-
-      Symbolizer = new PointSymbolizer
-      {
-        Graphic = graphic
-      };
+      Symbolizer = new PointSymbolizer(graphic);
     }
 
     public Rule(VendorOption vendorOption, Symbolizer symbolizer)

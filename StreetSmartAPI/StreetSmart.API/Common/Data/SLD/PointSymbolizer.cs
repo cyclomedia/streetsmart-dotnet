@@ -28,6 +28,15 @@ namespace StreetSmart.Common.Data.SLD
   {
     private Graphic _graphic;
 
+    public PointSymbolizer()
+    {
+    }
+
+    public PointSymbolizer(Graphic graphic)
+    {
+      Graphic = graphic;
+    }
+
     [XmlElement("Graphic", Namespace = "http://www.opengis.net/se")]
     public Graphic Graphic
     {

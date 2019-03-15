@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System.Collections.ObjectModel;
 using System.Drawing;
 
 using StreetSmart.Common.Data.SLD;
@@ -36,10 +37,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="fillOpacity">The fill opacity of thye polygon</param>
     /// <param name="strokeColor">The stroke color of the polygon</param>
     /// <param name="strokeWidth">The stroke width of the polygon</param>
-    /// <returns>Styled layer description of the polygon symbolizer</returns>
-    public static IStyledLayerDescriptor CreateStylePolygon(Color fillColor, double? fillOpacity = null,
-      Color? strokeColor = null, double? strokeWidth = null) => new StyledLayerDescriptor(new Rule(null,
-      new PolygonSymbolizer(fillColor, fillOpacity, strokeColor, strokeWidth)));
+    /// <returns>Polygon symbolizer which describes the polygon</returns>
+    public static IPolygonSymbolizer CreateStylePolygon(Color fillColor, double? fillOpacity = null,
+      Color? strokeColor = null, double? strokeWidth = null) =>
+      new PolygonSymbolizer(fillColor, fillOpacity, strokeColor, strokeWidth);
 
     /// <summary>
     /// Returns a line style
@@ -47,9 +48,9 @@ namespace StreetSmart.Common.Factories
     /// <param name="color">The color of the line</param>
     /// <param name="width">The width of the line</param>
     /// <param name="opacity">The opacity of the line</param>
-    /// <returns>Styled layer description of the line symbolizer</returns>
-    public static IStyledLayerDescriptor CreateStyleLine(Color color, double? width = null, double? opacity = null) =>
-      new StyledLayerDescriptor(new Rule(null, new LineSymbolizer(color, width, opacity)));
+    /// <returns>Line symbolizer which describes the line</returns>
+    public static ILineSymbolizer CreateStyleLine(Color color, double? width = null, double? opacity = null) =>
+      new LineSymbolizer(color, width, opacity);
 
     /// <summary>
     /// Returns a point style
@@ -60,18 +61,60 @@ namespace StreetSmart.Common.Factories
     /// <param name="fillOpacity">The fill opacity of the point objects</param>
     /// <param name="strokeColor">The stroke color of the point objects</param>
     /// <param name="strokeWidth">The stroke width of the point objects</param>
-    /// <returns>Styled layer description of the point symbolizer</returns>
-    public static IStyledLayerDescriptor CreateStylePoint(SymbolizerType? type, double size, Color fillColor, double? fillOpacity = null,
-      Color? strokeColor = null, double? strokeWidth = null) => new StyledLayerDescriptor(new Rule(null,
-      new Graphic(new Mark(type, fillColor, fillOpacity, strokeColor, strokeWidth), size)));
+    /// <returns>Point symbolizer which describes the image symbol</returns>
+    public static IPointSymbolizer CreateStylePoint(SymbolizerType? type, double size, Color fillColor,
+      double? fillOpacity = null, Color? strokeColor = null, double? strokeWidth = null) =>
+      new PointSymbolizer(new Graphic(new Mark(type, fillColor, fillOpacity, strokeColor, strokeWidth), size));
 
     /// <summary>
-    /// Returns a point / image as inline content style object
+    /// Returns a point symbolizer of an image symbol
+    /// </summary>
+    /// <param name="size">Size of the point objects</param>
+    /// <param name="base64">Base64 string of an image object</param>
+    /// <returns>Point symbolizer which describes the image symbol</returns>
+    public static IPointSymbolizer CreateImageSymbol(double size, string base64) =>
+      new PointSymbolizer(new Graphic(new ExternalGraphic(Encoding.Base64, base64), size));
+
+    /// <summary>
+    /// Returns a point symbolizer of an image symbol
     /// </summary>
     /// <param name="size">Size of the point objects</param>
     /// <param name="image">The image object</param>
-    /// <returns>Styled layer description of the image object in a point symbolizer</returns>
-    public static IStyledLayerDescriptor CreateStyleImage(double size, Image image) =>
-      new StyledLayerDescriptor(new Rule(null, new Graphic(new ExternalGraphic(Encoding.Base64, image), size)));
+    /// <returns>Point symbolizer which describes the image symbol</returns>
+    public static IPointSymbolizer CreateImageSymbol(double size, Image image) =>
+      new PointSymbolizer(new Graphic(new ExternalGraphic(Encoding.Base64, image), size));
+
+    /// <summary>
+    /// Returns a sld rule
+    /// </summary>
+    /// <param name="symbolizer">The point / line or polygon symbolizer</param>
+    /// <param name="vendorOption">The vendor option</param>
+    /// <returns>Rule of the image object</returns>
+    public static IRule CreateRule(ISymbolizer symbolizer, IVendorOption vendorOption) =>
+      new Rule(vendorOption as VendorOption, symbolizer as Symbolizer);
+
+    /// <summary>
+    /// Returns a vendor option
+    /// </summary>
+    /// <param name="type">Vendor option type</param>
+    /// <returns>Vendor option</returns>
+    public static IVendorOption CreateVendorOption(VendorOptionType type) => new VendorOption(type);
+
+    /// <summary>
+    /// Add an rule to an sld style
+    /// </summary>
+    /// <param name="sld">The styled layer description of a layer</param>
+    /// <param name="rule">Rule which must be added to the sld</param>
+    public static void AddRuleToStyle(IStyledLayerDescriptor sld, IRule rule)
+    {
+      sld?.UserLayer?.UserStyle?.FeatureTypeStyle?.Rules?.Add(rule as Rule);
+    }
+
+    /// <summary>
+    /// Returns an empty layer style
+    /// </summary>
+    /// <returns>Styled layer description</returns>
+    public static IStyledLayerDescriptor CreateEmptyStyle() =>
+      new StyledLayerDescriptor(new ObservableCollection<Rule>());
   }
 }

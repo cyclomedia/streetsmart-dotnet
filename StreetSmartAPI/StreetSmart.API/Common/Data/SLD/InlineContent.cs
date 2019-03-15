@@ -33,6 +33,12 @@ namespace StreetSmart.Common.Data.SLD
     {
     }
 
+    public InlineContent(Encoding encoding, string value)
+    {
+      Encoding = encoding;
+      Value = value;
+    }
+
     public InlineContent(Encoding encoding, Image image)
     {
       Encoding = encoding;
