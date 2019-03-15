@@ -31,6 +31,11 @@ namespace StreetSmart.Common.Interfaces.SLD
     VendorOption VendorOption { get; set; }
 
     /// <summary>
+    /// Filter
+    /// </summary>
+    Filter Filter { get; set; }
+
+    /// <summary>
     /// Symbolizer
     /// </summary>
     Symbolizer Symbolizer { get; set; }

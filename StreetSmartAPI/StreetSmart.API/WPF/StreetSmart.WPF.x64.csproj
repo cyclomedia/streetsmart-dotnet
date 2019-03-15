@@ -297,6 +297,15 @@
     <Compile Include="..\Common\Data\SLD\FeatureTypeStyle.cs">
       <Link>Data\SLD\FeatureTypeStyle.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\SLD\Filter.cs">
+      <Link>Data\SLD\Filter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\FilterProperty.cs">
+      <Link>Data\SLD\FilterProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\SLD\FilterPropertyIsEqualTo.cs">
+      <Link>Data\SLD\FilterPropertyIsEqualTo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\SLD\Graphic.cs">
       <Link>Data\SLD\Graphic.cs</Link>
     </Compile>
@@ -674,6 +683,15 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\SLD\IFeatureTypeStyle.cs">
       <Link>Interfaces\SLD\IFeatureTypeStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IFilter.cs">
+      <Link>Interfaces\SLD\IFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IFilterProperty.cs">
+      <Link>Interfaces\SLD\IFilterProperty.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\SLD\IFilterPropertyIsEqualTo.cs">
+      <Link>Interfaces\SLD\IFilterPropertyIsEqualTo.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\SLD\IGraphic.cs">
       <Link>Interfaces\SLD\IGraphic.cs</Link>

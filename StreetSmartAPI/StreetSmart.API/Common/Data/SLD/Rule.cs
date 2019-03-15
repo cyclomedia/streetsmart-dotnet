@@ -30,16 +30,23 @@ namespace StreetSmart.Common.Data.SLD
     {
     }
 
-    public Rule(VendorOption vendorOption, Graphic graphic)
+    public Rule(Graphic graphic, VendorOption vendorOption)
     {
-      VendorOption = vendorOption;
       Symbolizer = new PointSymbolizer(graphic);
+      VendorOption = vendorOption;
     }
 
-    public Rule(VendorOption vendorOption, Symbolizer symbolizer)
+    public Rule(Symbolizer symbolizer, VendorOption vendorOption)
     {
-      VendorOption = vendorOption;
       Symbolizer = symbolizer;
+      VendorOption = vendorOption;
+    }
+
+    public Rule(Symbolizer symbolizer, Filter filter, VendorOption vendorOption)
+    {
+      Symbolizer = symbolizer;
+      Filter = filter;
+      VendorOption = vendorOption;
     }
 
     private VendorOption _vendorOption;
@@ -51,6 +58,19 @@ namespace StreetSmart.Common.Data.SLD
       set
       {
         _vendorOption = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    private Filter _filter;
+
+    [XmlElement("Filter", Namespace = "http://www.opengis.net/ogc")]
+    public Filter Filter
+    {
+      get => _filter;
+      set
+      {
+        _filter = value;
         RaisePropertyChanged();
       }
     }

@@ -16,39 +16,18 @@
  * License along with this library.
  */
 
-using System.Xml.Serialization;
+using StreetSmart.Common.Data.SLD;
 
-using StreetSmart.Common.Interfaces.SLD;
-
-namespace StreetSmart.Common.Data.SLD
+namespace StreetSmart.Common.Interfaces.SLD
 {
-  #pragma warning disable 1591
-
-  /// <exclude/>
-  public class PointSymbolizer : Symbolizer, IPointSymbolizer
+  /// <summary>
+  /// Filter
+  /// </summary>
+  public interface IFilter
   {
-    private Graphic _graphic;
-
-    public PointSymbolizer()
-    {
-    }
-
-    public PointSymbolizer(Graphic graphic)
-    {
-      Graphic = graphic;
-    }
-
-    [XmlElement("Graphic", Namespace = "http://www.opengis.net/se")]
-    public Graphic Graphic
-    {
-      get => _graphic;
-      set
-      {
-        _graphic = value;
-        RaisePropertyChanged();
-      }
-    }
+    /// <summary>
+    /// Filter property
+    /// </summary>
+    FilterProperty FilterProperty { get; set; }
   }
-
-  #pragma warning restore 1591
 }

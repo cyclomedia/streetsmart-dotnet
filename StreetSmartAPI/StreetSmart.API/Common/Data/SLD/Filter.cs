@@ -23,28 +23,27 @@ using StreetSmart.Common.Interfaces.SLD;
 namespace StreetSmart.Common.Data.SLD
 {
   #pragma warning disable 1591
-
   /// <exclude/>
-  public class PointSymbolizer : Symbolizer, IPointSymbolizer
+  public class Filter : NotifyPropertyChanged, IFilter
   {
-    private Graphic _graphic;
-
-    public PointSymbolizer()
+    public Filter()
     {
     }
 
-    public PointSymbolizer(Graphic graphic)
+    public Filter(FilterProperty filterProperty)
     {
-      Graphic = graphic;
+      FilterProperty = filterProperty;
     }
 
-    [XmlElement("Graphic", Namespace = "http://www.opengis.net/se")]
-    public Graphic Graphic
+    private FilterProperty _filterProperty;
+
+    [XmlElement("PropertyIsEqualTo", typeof(FilterPropertyIsEqualTo), Namespace = "http://www.opengis.net/ogc")]
+    public FilterProperty FilterProperty
     {
-      get => _graphic;
+      get => _filterProperty;
       set
       {
-        _graphic = value;
+        _filterProperty = value;
         RaisePropertyChanged();
       }
     }

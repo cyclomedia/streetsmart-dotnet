@@ -86,13 +86,32 @@ namespace StreetSmart.Common.Factories
       new PointSymbolizer(new Graphic(new ExternalGraphic(Encoding.Base64, image), size));
 
     /// <summary>
+    /// Returns a sld filter
+    /// </summary>
+    /// <param name="propertyName">Property name</param>
+    /// <param name="literal">Litteral</param>
+    /// <returns>Rule of the image object</returns>
+    public static IFilter CreateEqualIsFilter(string propertyName, string literal) =>
+      new Filter(new FilterPropertyIsEqualTo(propertyName, literal));
+
+    /// <summary>
+    /// Returns a sld rule
+    /// </summary>
+    /// <param name="symbolizer">The point / line or polygon symbolizer</param>
+    /// <param name="filter">The filter</param>
+    /// <param name="vendorOption">The vendor option</param>
+    /// <returns>Rule of the image object</returns>
+    public static IRule CreateRule(ISymbolizer symbolizer, IFilter filter = null, IVendorOption vendorOption = null) =>
+      new Rule(symbolizer as Symbolizer, filter as Filter, vendorOption as VendorOption);
+
+    /// <summary>
     /// Returns a sld rule
     /// </summary>
     /// <param name="symbolizer">The point / line or polygon symbolizer</param>
     /// <param name="vendorOption">The vendor option</param>
     /// <returns>Rule of the image object</returns>
     public static IRule CreateRule(ISymbolizer symbolizer, IVendorOption vendorOption) =>
-      new Rule(vendorOption as VendorOption, symbolizer as Symbolizer);
+      new Rule(symbolizer as Symbolizer, vendorOption as VendorOption);
 
     /// <summary>
     /// Returns a vendor option
