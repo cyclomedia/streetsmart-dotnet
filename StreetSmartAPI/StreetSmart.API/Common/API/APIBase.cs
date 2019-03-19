@@ -165,7 +165,7 @@ namespace StreetSmart.Common.API
       object funcResult = null;
       IBrowser myBrowser = Browser?.GetBrowser();
 
-      if ((Browser?.IsBrowserInitialized ?? false) && myBrowser != null)
+      if (myBrowser != null)
       {
         string funcName = $"{memberName}{processId}";
 
