@@ -103,32 +103,32 @@ namespace StreetSmart.Common.API
 
     public async Task<string> GetId()
     {
-      return (string) await CallJsGetScriptAsync("getId()");
+      return ToString(await CallJsGetScriptAsync("getId()"));
     }
 
     public async Task<bool> GetNavbarExpanded()
     {
-      return (bool) await CallJsGetScriptAsync("getNavbarExpanded()");
+      return ToBool(await CallJsGetScriptAsync("getNavbarExpanded()"));
     }
 
     public async Task<bool> GetNavbarVisible()
     {
-      return (bool) await CallJsGetScriptAsync("getNavbarVisible()");
+      return ToBool(await CallJsGetScriptAsync("getNavbarVisible()"));
     }
 
     public async Task<bool> GetTimeTravelExpanded()
     {
-      return (bool) await CallJsGetScriptAsync("getTimeTravelExpanded()");
+      return ToBool(await CallJsGetScriptAsync("getTimeTravelExpanded()"));
     }
 
     public async Task<bool> GetTimeTravelVisible()
     {
-      return (bool) await CallJsGetScriptAsync("getTimeTravelVisible()");
+      return ToBool(await CallJsGetScriptAsync("getTimeTravelVisible()"));
     }
 
     public new async Task<ViewerType> GetType()
     {
-      string type = (string) await CallJsGetScriptAsync("getType()");
+      string type = ToString(await CallJsGetScriptAsync("getType()"));
       ViewerType viewerType = ViewerType.Panorama;
 
       switch (type)
@@ -211,7 +211,7 @@ namespace StreetSmart.Common.API
 
     protected async Task<bool> GetButtonEnabled(Enum buttonId)
     {
-      return (bool) await CallJsGetScriptAsync($"getButtonEnabled({buttonId.Description()})");
+      return ToBool(await CallJsGetScriptAsync($"getButtonEnabled({buttonId.Description()})"));
     }
 
     protected void ToggleButtonEnabled(Enum buttonId, bool enabled)

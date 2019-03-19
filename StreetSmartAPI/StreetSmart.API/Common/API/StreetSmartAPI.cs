@@ -168,7 +168,7 @@ namespace StreetSmart.Common.API
     {
       int processId = GetProcessId;
       string script = GetScript($"addOverlay({overlay})", processId);
-      ((Overlay) overlay)?.FillInParameters((Dictionary<string, object>) await CallJsAsync(script, processId));
+      ((Overlay) overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
       return overlay;
     }
 
@@ -176,7 +176,7 @@ namespace StreetSmart.Common.API
     {
       int processId = GetProcessId;
       string script = GetScript($"addWFSLayer({overlay})", processId);
-      ((Overlay)overlay)?.FillInParameters((Dictionary<string, object>)await CallJsAsync(script, processId));
+      ((Overlay) overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
       return overlay;
     }
 
@@ -198,7 +198,7 @@ namespace StreetSmart.Common.API
       }
 
       IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, (string) result);
+        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, ToString(result));
       IViewer removedViewer = null;
 
       foreach (var viewer in viewerList)
@@ -225,8 +225,8 @@ namespace StreetSmart.Common.API
       string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcId});";
       object result = await CallJsAsync(script, processId);
 
-      return await ViewerList.ToViewersFromJsValue(ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique},
-        (string) result);
+      return await ViewerList.ToViewersFromJsValue(ApiId,
+        new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, ToString(result));
     }
 
     public async Task RemoveOverlay(string layerId)
@@ -244,38 +244,37 @@ namespace StreetSmart.Common.API
 
     public async Task<IFeatureCollection> GetActiveMeasurement()
     {
-      return new FeatureCollection(
-        (Dictionary<string, object>) await CallJsGetScriptAsync("getActiveMeasurement()"), true);
+      return new FeatureCollection(ToDictionary(await CallJsGetScriptAsync("getActiveMeasurement()")), true);
     }
 
     public async Task<IAddressSettings> GetAddressSettings()
     {
-      return new AddressSettings((Dictionary<string, object>) await CallJsGetScriptAsync("getAddressSettings()"));
+      return new AddressSettings(ToDictionary(await CallJsGetScriptAsync("getAddressSettings()")));
     }
 
     public async Task<bool> GetApiReadyState()
     {
-      return Browser != null && ((bool?) await CallJsGetScriptAsync("getApiReadyState()") ?? false);
+      return Browser != null && ToBool(await CallJsGetScriptAsync("getApiReadyState()"));
     }
 
     public async Task<string> GetApplicationName()
     {
-      return (string) await CallJsGetScriptAsync("getApplicationName()");
+      return ToString(await CallJsGetScriptAsync("getApplicationName()"));
     }
 
     public async Task<string> GetApplicationVersion()
     {
-      return (string) await CallJsGetScriptAsync("getApplicationVersion()");
+      return ToString(await CallJsGetScriptAsync("getApplicationVersion()"));
     }
 
     public async Task<string[]> GetDebugLogs()
     {
-      return ((object[]) await CallJsGetScriptAsync("getDebugLogs()")).Cast<string>().ToArray();
+      return ToArray(await CallJsGetScriptAsync("getDebugLogs()")).Cast<string>().ToArray();
     }
 
     public async Task<string[]> GetPermissions()
     {
-      return ((object[]) await CallJsGetScriptAsync("getPermissions()")).Cast<string>().ToArray();
+      return ToArray(await CallJsGetScriptAsync("getPermissions()")).Cast<string>().ToArray();
     }
 
     public async Task Init(IOptions options)
@@ -311,7 +310,7 @@ namespace StreetSmart.Common.API
         throw exception;
       }
 
-      return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), (string) result);
+      return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), ToString(result));
     }
 
     public void SetActiveMeasurement(IFeatureCollection measurement)

@@ -92,7 +92,7 @@ namespace StreetSmart.Common.API
       {
         string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
                         {{result=true;}};{JsThis}.{JsThisResult}(result,{funcName});}}";
-        bool exists = (bool) await CallJsAsync(script, processId);
+        bool exists = ToBool(await CallJsAsync(script, processId));
 
         if (exists)
         {
@@ -134,7 +134,7 @@ namespace StreetSmart.Common.API
           var viewer = Viewers.ElementAt(i);
           string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
                           {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
-          bool exists = (bool) await CallJsAsync(script, processId);
+          bool exists = ToBool(await CallJsAsync(script, processId));
 
           if (exists)
           {

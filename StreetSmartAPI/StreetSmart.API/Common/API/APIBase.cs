@@ -162,18 +162,26 @@ namespace StreetSmart.Common.API
 
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
-      string funcName = $"{memberName}{processId}";
+      object funcResult = null;
+      IBrowser myBrowser = Browser?.GetBrowser();
 
-      if (CheckResultTask(funcName))
+      if ((Browser?.IsBrowserInitialized ?? false) && myBrowser != null)
       {
-        _resultTask[funcName] = new TaskCompletionSource<object>();
+        string funcName = $"{memberName}{processId}";
+
+        if (CheckResultTask(funcName))
+        {
+          _resultTask[funcName] = new TaskCompletionSource<object>();
+        }
+
+        Browser.ExecuteScriptAsync(script);
+        await _resultTask[funcName].Task;
+        TaskCompletionSource<object> result = _resultTask[funcName];
+        _resultTask.Remove(funcName);
+        funcResult = result.Task.Result;
       }
 
-      Browser.ExecuteScriptAsync(script);
-      await _resultTask[funcName].Task;
-      TaskCompletionSource<object> result = _resultTask[funcName];
-      _resultTask.Remove(funcName);
-      return result.Task.Result;
+      return funcResult;
     }
 
     #endregion

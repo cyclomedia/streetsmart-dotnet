@@ -33,6 +33,11 @@ namespace StreetSmart.Common.Data
       return ToDouble(GetValue(details, value));
     }
 
+    public double ToDouble(object[] array, int nr)
+    {
+      return array.Length > nr ? ToDouble(array[nr]) : 0.0;
+    }
+
     public double? ToNullDouble(object value)
     {
       return double.TryParse(value?.ToString(), out var outValue) ? (double?) outValue : null;
@@ -46,6 +51,11 @@ namespace StreetSmart.Common.Data
     public int ToInt(object value)
     {
       return int.TryParse(value?.ToString(), out var outValue) ? outValue : 0;
+    }
+
+    public int ToInt(object[] array, int nr)
+    {
+      return array.Length > nr ? ToInt(array[nr]) : 0;
     }
 
     public int ToInt(Dictionary<string, object> details, string value)
@@ -103,6 +113,21 @@ namespace StreetSmart.Common.Data
       return ToBool(GetValue(details, value));
     }
 
+    public Dictionary<string, object> ToDictionary(object value)
+    {
+      return value as Dictionary<string, object> ?? new Dictionary<string, object>();
+    }
+
+    public IList<object> ToList(object value)
+    {
+      return value as IList<object> ?? new List<object>();
+    }
+
+    public object[] ToArray(object value)
+    {
+      return value as object[] ?? new object[0];
+    }
+
     public object GetValue(Dictionary<string, object> details, string value)
     {
       return details?.ContainsKey(value) ?? false ? details[value] : null;
@@ -110,12 +135,12 @@ namespace StreetSmart.Common.Data
 
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
     {
-      return GetValue(details, value) as Dictionary<string, object> ?? new Dictionary<string, object>();
+      return ToDictionary(GetValue(details, value));
     }
 
     public IList<object> GetListValue(Dictionary<string, object> details, string value)
     {
-      return GetValue(details, value) as IList<object> ?? new List<object>();
+      return ToList(GetValue(details, value));
     }
   }
 }

@@ -112,7 +112,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> Get3DCursorVisible()
     {
-      return (bool) await CallJsGetScriptAsync("get3DCursorVisible()");
+      return ToBool(await CallJsGetScriptAsync("get3DCursorVisible()"));
     }
 
     public async Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId)
@@ -122,7 +122,7 @@ namespace StreetSmart.Common.API
 
     public async Task<IOrientation> GetOrientation()
     {
-      return new Orientation((Dictionary<string, object>) await CallJsGetScriptAsync("getOrientation()"));
+      return new Orientation(ToDictionary(await CallJsGetScriptAsync("getOrientation()")));
     }
 
     public async Task<IRecording> GetRecording()
@@ -131,17 +131,17 @@ namespace StreetSmart.Common.API
       string funcId = $"{nameof(GetRecording)}{processId}".ToQuote();
       var script = $@"recording{Name}={Name}.getRecording();delete recording{Name}.thumbs;
                    {JsThis}.{JsResult}('{Name}',recording{Name},{funcId});";
-      return new Recording((Dictionary<string, object>) await CallJsAsync(script, processId));
+      return new Recording(ToDictionary(await CallJsAsync(script, processId)));
     }
 
     public async Task<bool> GetRecordingsVisible()
     {
-      return (bool) await CallJsGetScriptAsync("getRecordingsVisible()");
+      return ToBool(await CallJsGetScriptAsync("getRecordingsVisible()"));
     }
 
     public async Task<Color> GetViewerColor()
     {
-      return GetColor((object[]) await CallJsGetScriptAsync("getViewerColor()"));
+      return GetColor(ToArray(await CallJsGetScriptAsync("getViewerColor()")));
     }
 
     public async Task LookAtCoordinate(ICoordinate coordinate, string srs = null)
@@ -314,7 +314,7 @@ namespace StreetSmart.Common.API
 
     private Color GetColor(object[] color)
     {
-      return Color.FromArgb((int) ((double) color[3] * 255), (int) color[0], (int) color[1], (int) color[2]);
+      return Color.FromArgb((int) (ToDouble(color, 3) * 255), ToInt(color, 0), ToInt(color, 1), ToInt(color, 2));
     }
 
     public async Task<IRecording> SearchRecordingAsync(string func, string query, string srs,
@@ -332,7 +332,7 @@ namespace StreetSmart.Common.API
         throw exception;
       }
 
-      return new Recording((Dictionary<string, object>) result);
+      return new Recording(ToDictionary(result));
     }
 
     #endregion
