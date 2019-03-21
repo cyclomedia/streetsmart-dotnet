@@ -132,7 +132,7 @@ namespace StreetSmart.Common.API
         else
         {
           var viewer = Viewers.ElementAt(i);
-          string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem==={viewer.Key})
+          string script = $@"{{let result=false;{jsValue}.forEach((elem)=>{{if(elem.getId()==={viewer.Key}.getId())
                           {{result=true;}}}});{JsThis}.{JsThisResult}(result,{funcName});}}";
           bool exists = ToBool(await CallJsAsync(script, processId));
 
