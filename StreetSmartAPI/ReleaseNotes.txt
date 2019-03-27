@@ -5,6 +5,7 @@ Version: 19.4.0
 ===============
 - SLD parsing: External Graphic / InlineContent as base64 string
 - Solved stability issues
+- Solved small issue with the set the point measurement as geoJson
 
 
 Version: 19.3.0

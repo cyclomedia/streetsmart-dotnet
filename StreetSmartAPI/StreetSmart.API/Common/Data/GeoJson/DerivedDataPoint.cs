@@ -79,7 +79,7 @@ namespace StreetSmart.Common.Data.GeoJson
       string baseStr = base.ToString();
       string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
 
-      string positionZ = PositionZ == null ? string.Empty : $"\"positionZ\":{PositionZ},";
+      string positionZ = PositionZ?.Value != null && PositionZ?.Stdev != null ? $"\"positionZ\":{PositionZ}," : string.Empty;
       string positionStdev = Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
         ? $",\"stdev\":[{Position?.StdDev?.X?.ToString(ci)},{Position?.StdDev?.Y?.ToString(ci)},{Position?.StdDev?.Z?.ToString(ci)}]"
         : string.Empty;
