@@ -93,7 +93,7 @@ namespace Demo.WinForms
 //        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
 //        @"D:\StreetSmartFiles\Locales",
 //        @"D:\StreetSmartFiles\Resources");
- //     IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
+      //     IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
       apiSettings.DisableGPUCache = true;
       apiSettings.AllowInsecureContent = true;
 
@@ -263,7 +263,8 @@ namespace Demo.WinForms
       {
         string id = await panoramaViewer.GetId();
         IOrientation orientation = args.Value;
-        string text = $"Id: {id}, View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
+        string text =
+          $"Id: {id}, View change args, pitch: {orientation.Pitch}, yaw: {orientation.Yaw}, hFov: {orientation.HFov}";
         AddViewerEventsText(text);
       }
     }
@@ -1031,7 +1032,7 @@ namespace Demo.WinForms
 
     private void btnSelectFeature_Click(object sender, EventArgs e)
     {
-      Dictionary<string, string> properties = new Dictionary<string, string> { { txtName.Text, txtValue.Text } };
+      Dictionary<string, string> properties = new Dictionary<string, string> {{txtName.Text, txtValue.Text}};
       IJson json = JsonFactory.Create(properties);
       string layerId = _overlay.Id;
 
@@ -1191,6 +1192,14 @@ namespace Demo.WinForms
 
     private async void btnDemoWFSLayer_Click(object sender, EventArgs e)
     {
+      string name = "PDOK BGT WFS";
+      string url = "https://geodata.nationaalgeoregister.nl/beta/bgt/wfs";
+      string typeName = "bgt:pand";
+      string version = "1.1.0";
+      Color color = Color.FromArgb(00, 255, 00);
+      IWFSOverlay wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, false);
+      _overlay = await _api.AddWFSLayer(wfsOverlay);
+/*
       string name = "My Supper cool layer";
       string url = "http://sandboxgeoserver.westeurope.cloudapp.azure.com/geoserver/agro/wfs";
       string typeName = "agro:polygon_agro_inventory";
@@ -1204,6 +1213,7 @@ namespace Demo.WinForms
         : OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, true, username, password);
 
       _overlay = await _api.AddWFSLayer(wfsOverlay);
+*/
     }
   }
 }
