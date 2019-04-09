@@ -93,7 +93,7 @@ namespace Demo.WinForms
 //        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
 //        @"D:\StreetSmartFiles\Locales",
 //        @"D:\StreetSmartFiles\Resources");
-      //     IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
+//    IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
       apiSettings.DisableGPUCache = true;
       apiSettings.AllowInsecureContent = true;
 
@@ -1192,13 +1192,28 @@ namespace Demo.WinForms
 
     private async void btnDemoWFSLayer_Click(object sender, EventArgs e)
     {
-      string name = "PDOK BGT WFS";
-      string url = "https://geodata.nationaalgeoregister.nl/beta/bgt/wfs";
-      string typeName = "bgt:pand";
-      string version = "1.1.0";
-      Color color = Color.FromArgb(00, 255, 00);
-      IWFSOverlay wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, false);
-      _overlay = await _api.AddWFSLayer(wfsOverlay);
+      if (_overlay == null)
+      {
+        string name = "PDOK BGT WFS";
+        string url = "https://geodata.nationaalgeoregister.nl/beta/bgt/wfs";
+        string typeName = "bgt:pand";
+        string version = "1.1.0";
+        string sld = txtSld.Text;
+        IWFSOverlay wfsOverlay;
+
+        if (rbSLD.Checked)
+        {
+          _overlay = string.IsNullOrEmpty(sld)
+            ? wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtOverlayColor.BackColor, false)
+            : wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, sld, false);
+        }
+        else
+        {
+          wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtOverlayColor.BackColor, false);
+        }
+
+        _overlay = await _api.AddWFSLayer(wfsOverlay);
+      }
 /*
       string name = "My Supper cool layer";
       string url = "http://sandboxgeoserver.westeurope.cloudapp.azure.com/geoserver/agro/wfs";

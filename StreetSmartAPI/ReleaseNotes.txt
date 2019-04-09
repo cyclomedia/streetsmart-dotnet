@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 19.4.0
+Version: 19.5.0
 ===============
 - SLD parsing: External Graphic / InlineContent as base64 string
 - Solved stability issues
