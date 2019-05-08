@@ -22,6 +22,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 
+using CefSharp;
+
 #if WINFORMS
 using CefSharp.WinForms;
 #else

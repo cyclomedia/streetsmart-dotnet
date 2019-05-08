@@ -98,8 +98,8 @@ namespace Demo.WinForms
       apiSettings.AllowInsecureContent = true;
 
       _api = string.IsNullOrEmpty(StreetSmartLocation)
-        ? StreetSmartAPIFactory.Create(apiSettings)
-        : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings);
+        ? StreetSmartAPIFactory.Create(apiSettings, true)
+        : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings, true);
       _api.APIReady += OnAPIReady;
       _api.MeasurementChanged += OnMeasurementChanged;
       _api.ViewerAdded += OnViewerAdded;

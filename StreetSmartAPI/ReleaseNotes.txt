@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version: 19.6.0
+===============
+- Added option: EnableHighDPISupport()
+- Updated to CefSharp version 0.73
+
 Version: 19.5.0
 ===============
 - SLD parsing: External Graphic / InlineContent as base64 string
