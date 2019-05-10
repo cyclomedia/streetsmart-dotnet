@@ -159,6 +159,16 @@ namespace StreetSmart.Common.API
       return viewer;
     }
 
+    public IViewer ReRegisterViewer(string oldName, Viewer viewer)
+    {
+      if (Viewers.ContainsKey(oldName))
+      {
+        Viewers.Remove(oldName);
+      }
+
+      return RegisterViewer(viewer);
+    }
+
     #endregion
 
     #region Callbacks
@@ -254,9 +264,21 @@ namespace StreetSmart.Common.API
       return result;
     }
 
+    public static async Task<IViewer> ToViewerFromJsValue(string apiId, string viewerType, string jsValue)
+    {
+      string viewerList = $"[{jsValue}]";
+      IList<IViewer> viewers = await ViewerLists[apiId][viewerType].GetViewersFromJsValue(viewerList);
+      return viewers.Count >= 1 ? viewers[0] : null;
+    }
+
     public static IViewer ToViewer(string apiId, string type, string name)
     {
       return ViewerLists[apiId][type].AddViewer(name);
+    }
+
+    public static IViewer ReRegisterViewer(string apiId, string type, string oldName, Viewer viewer)
+    {
+      return ViewerLists[apiId][type].ReRegisterViewer(oldName, viewer);
     }
 
     public void Clear()

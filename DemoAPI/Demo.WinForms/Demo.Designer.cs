@@ -38,6 +38,7 @@
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
       this.grColorOverlay = new System.Windows.Forms.GroupBox();
+      this.btnDemoWFSLayer = new System.Windows.Forms.Button();
       this.txtOverlayColor = new System.Windows.Forms.TextBox();
       this.btnToggleAddressOverlays = new System.Windows.Forms.Button();
       this.btnColorOverlay = new System.Windows.Forms.Button();
@@ -147,7 +148,8 @@
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.btnDemoWFSLayer = new System.Windows.Forms.Button();
+      this.lbPanoramaList = new System.Windows.Forms.ListBox();
+      this.grPanoramaList = new System.Windows.Forms.GroupBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grColorOverlay.SuspendLayout();
@@ -167,6 +169,7 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.grPanoramaList.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -251,6 +254,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grPanoramaList);
       this.plControl.Controls.Add(this.grColorOverlay);
       this.plControl.Controls.Add(this.grSelectFeature);
       this.plControl.Controls.Add(this.grSld);
@@ -289,6 +293,16 @@
       this.grColorOverlay.TabIndex = 69;
       this.grColorOverlay.TabStop = false;
       this.grColorOverlay.Text = "Overlay";
+      // 
+      // btnDemoWFSLayer
+      // 
+      this.btnDemoWFSLayer.Location = new System.Drawing.Point(5, 115);
+      this.btnDemoWFSLayer.Name = "btnDemoWFSLayer";
+      this.btnDemoWFSLayer.Size = new System.Drawing.Size(140, 30);
+      this.btnDemoWFSLayer.TabIndex = 69;
+      this.btnDemoWFSLayer.Text = "Add demo WFS Layer";
+      this.btnDemoWFSLayer.UseVisualStyleBackColor = true;
+      this.btnDemoWFSLayer.Click += new System.EventHandler(this.btnDemoWFSLayer_Click);
       // 
       // txtOverlayColor
       // 
@@ -1387,15 +1401,24 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // btnDemoWFSLayer
+      // lbPanoramaList
       // 
-      this.btnDemoWFSLayer.Location = new System.Drawing.Point(5, 115);
-      this.btnDemoWFSLayer.Name = "btnDemoWFSLayer";
-      this.btnDemoWFSLayer.Size = new System.Drawing.Size(140, 30);
-      this.btnDemoWFSLayer.TabIndex = 69;
-      this.btnDemoWFSLayer.Text = "Add demo WFS Layer";
-      this.btnDemoWFSLayer.UseVisualStyleBackColor = true;
-      this.btnDemoWFSLayer.Click += new System.EventHandler(this.btnDemoWFSLayer_Click);
+      this.lbPanoramaList.FormattingEnabled = true;
+      this.lbPanoramaList.Location = new System.Drawing.Point(5, 15);
+      this.lbPanoramaList.Name = "lbPanoramaList";
+      this.lbPanoramaList.Size = new System.Drawing.Size(150, 134);
+      this.lbPanoramaList.TabIndex = 70;
+      this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
+      // 
+      // grPanoramaList
+      // 
+      this.grPanoramaList.Controls.Add(this.lbPanoramaList);
+      this.grPanoramaList.Location = new System.Drawing.Point(731, 243);
+      this.grPanoramaList.Name = "grPanoramaList";
+      this.grPanoramaList.Size = new System.Drawing.Size(160, 160);
+      this.grPanoramaList.TabIndex = 71;
+      this.grPanoramaList.TabStop = false;
+      this.grPanoramaList.Text = "Viewer list";
       // 
       // Demo
       // 
@@ -1440,6 +1463,7 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.grPanoramaList.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1565,6 +1589,8 @@
     private System.Windows.Forms.RadioButton rbColor;
     private System.Windows.Forms.RadioButton rbSLD;
     private System.Windows.Forms.Button btnDemoWFSLayer;
+    private System.Windows.Forms.GroupBox grPanoramaList;
+    private System.Windows.Forms.ListBox lbPanoramaList;
   }
 }
 

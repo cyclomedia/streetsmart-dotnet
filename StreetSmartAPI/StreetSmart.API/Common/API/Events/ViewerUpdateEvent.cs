@@ -18,19 +18,21 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class ViewerEvent: StreetSmartApiEvent
+  internal class ViewerUpdateEvent: StreetSmartApiEvent
   {
     private string TempType => $"temp{Type}";
 
-    public ViewerEvent(StreetSmartAPI api, string type, string funcName)
+    private string TempOldType => $"tempOld{Type}";
+
+    public ViewerUpdateEvent(StreetSmartAPI api, string type, string funcName)
       : base(api, type, funcName, "viewer")
     {
     }
 
     public override string ToString()
     {
-      return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{TempType}=e.detail.viewer;{JsThis}.{FuncName}('{TempType}',{TempType}.getType());}});";
+      return $@"var {TempType},{TempOldType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
+             {{{TempType}=e.detail.viewer;{TempOldType}=e.detail.oldViewer;{JsThis}.{FuncName}('{TempOldType}','{TempType}',{TempType}.getType());}});";
     }
   }
 }

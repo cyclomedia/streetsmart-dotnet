@@ -58,7 +58,7 @@ namespace StreetSmart.Common.API
 
     protected ViewerList ViewerList { get; }
 
-    public string Name { get; protected set; }
+    public string Name { get; set; }
 
     protected override string CallFunctionBase => $"'{Name}',{Name}";
 
@@ -227,6 +227,16 @@ namespace StreetSmart.Common.API
       }
 
       throw new StreetSmartViewerDoesNotExistException();
+    }
+
+    public void DisConnectEvents()
+    {
+      Browser.ExecuteScriptAsync(DisconnectEventsScript);
+    }
+
+    public void ReConnectEvents()
+    {
+      Browser.ExecuteScriptAsync(ConnectEventsScript);
     }
 
     public virtual void ConnectEvents()

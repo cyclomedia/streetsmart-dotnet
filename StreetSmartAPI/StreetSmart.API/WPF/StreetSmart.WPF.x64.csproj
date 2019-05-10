@@ -108,6 +108,9 @@
     <Compile Include="..\Common\API\Events\ViewerEvent.cs">
       <Link>API\Events\ViewerEvent.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\Events\ViewerUpdateEvent.cs">
+      <Link>API\Events\ViewerUpdateEvent.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\ObliqueViewer.cs">
       <Link>API\ObliqueViewer.cs</Link>
     </Compile>

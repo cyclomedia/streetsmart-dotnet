@@ -16,21 +16,28 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
-{
-  internal class ViewerEvent: StreetSmartApiEvent
-  {
-    private string TempType => $"temp{Type}";
+using System.Threading.Tasks;
 
-    public ViewerEvent(StreetSmartAPI api, string type, string funcName)
-      : base(api, type, funcName, "viewer")
+using StreetSmart.Common.Interfaces.API;
+
+namespace Demo.WinForms
+{
+  class ViewerElement
+  {
+    public IViewer Viewer { get; set; }
+
+    private string _id;
+
+    public async Task AddViewer(IViewer viewer)
     {
+      Viewer = viewer;
+      _id = await viewer.GetId();
     }
 
     public override string ToString()
     {
-      return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{TempType}=e.detail.viewer;{JsThis}.{FuncName}('{TempType}',{TempType}.getType());}});";
+      string type = Viewer is IObliqueViewer ? "O" : "P";
+      return $"({type}):{_id}";
     }
   }
 }

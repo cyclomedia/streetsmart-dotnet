@@ -5,6 +5,8 @@ Version: 19.6.0
 ===============
 - Added option: EnableHighDPISupport()
 - Updated to CefSharp version 0.73
+- Fixed issue with more panorama viewers, start measurement, stop measurement, all panorama viewers are working now
+
 
 Version: 19.5.0
 ===============

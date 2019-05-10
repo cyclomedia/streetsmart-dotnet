@@ -97,6 +97,8 @@ namespace StreetSmart.Common.API
 
     public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
 
+    public string JsOnViewerUpdated => $"{nameof(OnViewerUpdated).FirstCharacterToLower()}";
+
     #endregion
 
     #region Constructor
@@ -373,6 +375,24 @@ namespace StreetSmart.Common.API
       ViewerRemoved?.Invoke(this, new EventArgs<IViewer>(viewer));
     }
 
+    public async void OnViewerUpdated(string oldName, string name, string type)
+    {
+      string jsName = $"type{Guid.NewGuid():N}";
+      Browser.ExecuteScriptAsync($"var {jsName}={name};");
+      IViewer iViewer = await ViewerList.ToViewerFromJsValue(ApiId, type, oldName);
+      Viewer viewer = (Viewer) iViewer;
+      viewer.DisConnectEvents();
+      string removedName = viewer.Name;
+      viewer.Name = jsName;
+      ViewerList.ReRegisterViewer(ApiId, type, removedName, viewer);
+      viewer.ReConnectEvents();
+
+      if (viewer is PanoramaViewer)
+      {
+        ReAssignMeasurementEvents();
+      }
+    }
+
     #endregion
 
     #region Functions
@@ -405,7 +425,8 @@ namespace StreetSmart.Common.API
         _apiViewerEventList = new ApiEventList
         {
           new ViewerEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
-          new ViewerEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved)
+          new ViewerEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
+          new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
         };
 
         Browser.ExecuteScriptAsync($"{_apiViewerEventList}");

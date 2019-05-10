@@ -51,13 +51,17 @@ namespace Demo.WinForms
     private IOptions _options;
     private IOverlay _overlay;
     private bool _addressLayerOverlayVisible;
+    private IPanoramaViewer _panoramaViewer;
 
     #endregion
 
     #region Properties
 
-    private IPanoramaViewer PanoramaViewer =>
-      _panoramaViewers.Count == 0 ? null : _panoramaViewers[_panoramaViewers.Count - 1];
+    private IPanoramaViewer PanoramaViewer
+    {
+      get => _panoramaViewer ?? (_panoramaViewers.Count == 0 ? null : _panoramaViewers[_panoramaViewers.Count - 1]);
+      set => _panoramaViewer = value;
+    }
 
     private IObliqueViewer ObliqueViewer =>
       _obliqueViewers.Count == 0 ? null : _obliqueViewers[_obliqueViewers.Count - 1];
@@ -163,16 +167,27 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewerAdded(object sender, IEventArgs<IViewer> args)
+    private async void OnViewerAdded(object sender, IEventArgs<IViewer> args)
     {
       string text = "Viewer added";
       AddViewerEventsText(text);
       IViewer viewer = args.Value;
       viewer.LayerVisibilityChange += OnLayerVisibilityChange;
 
-      if (viewer is IPanoramaViewer)
+      ViewerElement viewerElement = new ViewerElement();
+      await viewerElement.AddViewer(viewer);
+
+      if (lbPanoramaList.InvokeRequired)
       {
-        IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
+        lbPanoramaList.Invoke(new MethodInvoker(() => lbPanoramaList.Items.Add(viewerElement)));
+      }
+      else
+      {
+        lbPanoramaList.Items.Add(viewerElement);
+      }
+
+      if (viewer is IPanoramaViewer panoramaViewer)
+      {
         _panoramaViewers.Add(panoramaViewer);
 
         panoramaViewer.ElevationChange += OnElevationChange;
@@ -187,9 +202,8 @@ namespace Demo.WinForms
         panoramaViewer.FeatureClick += OnFeatureClick;
       }
 
-      if (viewer is IObliqueViewer)
+      if (viewer is IObliqueViewer obliqueViewer)
       {
-        IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
         _obliqueViewers.Add(obliqueViewer);
       }
     }
@@ -203,10 +217,15 @@ namespace Demo.WinForms
       if (viewer != null)
       {
         viewer.LayerVisibilityChange -= OnLayerVisibilityChange;
+        ViewerElement remove = null;
 
-        if (viewer is IPanoramaViewer)
+        foreach (var item in lbPanoramaList.Items)
         {
-          IPanoramaViewer panoramaViewer = viewer as IPanoramaViewer;
+          remove = item is ViewerElement element && element.Viewer == viewer ? element : remove;
+        }
+
+        if (viewer is IPanoramaViewer panoramaViewer)
+        {
           _panoramaViewers.Remove(panoramaViewer);
 
           panoramaViewer.ElevationChange -= OnElevationChange;
@@ -221,10 +240,21 @@ namespace Demo.WinForms
           panoramaViewer.FeatureClick -= OnFeatureClick;
         }
 
-        if (viewer is IObliqueViewer)
+        if (viewer is IObliqueViewer obliqueViewer)
         {
-          IObliqueViewer obliqueViewer = viewer as IObliqueViewer;
           _obliqueViewers.Remove(obliqueViewer);
+        }
+
+        if (remove != null)
+        {
+          if (lbPanoramaList.InvokeRequired)
+          {
+            lbPanoramaList.Invoke(new MethodInvoker(() => lbPanoramaList.Items.Remove(remove)));
+          }
+          else
+          {
+            lbPanoramaList.Items.Remove(remove);
+          }
         }
       }
     }
@@ -1229,6 +1259,14 @@ namespace Demo.WinForms
 
       _overlay = await _api.AddWFSLayer(wfsOverlay);
 */
+    }
+
+    private void lbPanoramaList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      if (lbPanoramaList.SelectedItem is ViewerElement element && element.Viewer is IPanoramaViewer panoramaViewer)
+      {
+        PanoramaViewer = panoramaViewer;
+      }
     }
   }
 }

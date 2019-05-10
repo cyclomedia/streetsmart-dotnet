@@ -93,6 +93,9 @@
     <Compile Include="..\..\DemoAPI\Demo.WinForms\viewerButtonsBox.cs">
       <Link>viewerButtonsBox.cs</Link>
     </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\viewerElement.cs">
+      <Link>viewerElement.cs</Link>
+    </Compile>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
       <Link>Demo.resx</Link>
       <DependentUpon>Demo.cs</DependentUpon>
@@ -134,7 +137,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
