@@ -54,6 +54,8 @@ namespace StreetSmart.Common.API
 
     public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
 
+    public string JsFeatureSelectionChange => $"{nameof(OnFeatureSelectionChange).FirstCharacterToLower()}";
+
     #endregion
 
     #region Callback definitions PanoramaViewer
@@ -167,6 +169,14 @@ namespace StreetSmart.Common.API
       if (Viewers.ContainsKey(name))
       {
         (Viewers[name] as PanoramaViewer)?.OnTimeTravelChange(args);
+      }
+    }
+
+    public void OnFeatureSelectionChange(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        (Viewers[name] as PanoramaViewer)?.OnFeatureSelectionChange(args);
       }
     }
 

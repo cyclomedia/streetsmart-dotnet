@@ -1,6 +1,10 @@
 ﻿Release notes:
 ==============
 
+Version: 19.7.0
+===============
+
+
 Version: 19.6.0
 ===============
 - Added option: EnableHighDPISupport()

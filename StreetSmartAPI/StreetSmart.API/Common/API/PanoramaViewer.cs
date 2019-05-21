@@ -87,6 +87,8 @@ namespace StreetSmart.Common.API
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
+    public string JsFeatureSelectionChange => (ViewerList as PanoramaViewerList)?.JsFeatureSelectionChange;
+
     #endregion
 
     #region Properties
@@ -288,6 +290,11 @@ namespace StreetSmart.Common.API
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 
+    public void OnFeatureSelectionChange(Dictionary<string, object> args)
+    {
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
+    }
+
     #endregion
 
     #region Functions
@@ -305,7 +312,8 @@ namespace StreetSmart.Common.API
         new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
         new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
         new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError),
-        new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange)
+        new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange),
+        new PanoramaViewerEvent(this, "FEATURE_SELECTION_CHANGE", JsFeatureSelectionChange)
       };
 
       Browser.ExecuteScriptAsync($"{_panoramaViewerEventList}");
