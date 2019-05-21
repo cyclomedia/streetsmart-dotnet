@@ -477,6 +477,9 @@
     <Compile Include="..\Common\Factories\PanoramaViewerOptionsFactory.cs">
       <Link>Factories\PanoramaViewerOptionsFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Factories\SLDFactory.cs">
+      <Link>Factories\SLDFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Factories\StreetSmartAPIFactory.cs">
       <Link>Factories\StreetSmartAPIFactory.cs</Link>
     </Compile>
