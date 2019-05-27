@@ -200,6 +200,7 @@ namespace Demo.WinForms
         panoramaViewer.ViewLoadStart += OnViewLoadStart;
         panoramaViewer.TimeTravelChange += OnTimeTravelChange;
         panoramaViewer.FeatureClick += OnFeatureClick;
+        panoramaViewer.FeatureSelectionChange += OnFeatureSelectionChange;
       }
 
       if (viewer is IObliqueViewer obliqueViewer)
@@ -238,6 +239,7 @@ namespace Demo.WinForms
           panoramaViewer.ViewLoadStart -= OnViewLoadStart;
           panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
           panoramaViewer.FeatureClick -= OnFeatureClick;
+          panoramaViewer.FeatureSelectionChange -= OnFeatureSelectionChange;
         }
 
         if (viewer is IObliqueViewer obliqueViewer)
@@ -335,6 +337,12 @@ namespace Demo.WinForms
     private void OnFeatureClick(object sender, IEventArgs<IFeatureInfo> args)
     {
       string text = "featureClicked";
+      AddViewerEventsText(text);
+    }
+
+    private void OnFeatureSelectionChange(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "featureSelectionChange";
       AddViewerEventsText(text);
     }
 

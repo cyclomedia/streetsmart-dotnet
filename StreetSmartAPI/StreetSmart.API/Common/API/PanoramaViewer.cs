@@ -56,6 +56,7 @@ namespace StreetSmart.Common.API
     public event EventHandler<EventArgs> ImageChange;
     public event EventHandler<IEventArgs<IRecordingClickInfo>> RecordingClick;
     public event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
+    public event EventHandler<IEventArgs<IFeatureInfo>> FeatureSelectionChange;
     public event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
     public event EventHandler<IEventArgs<IDictionary<string, object>>> TileLoadError;
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
@@ -293,6 +294,7 @@ namespace StreetSmart.Common.API
     public void OnFeatureSelectionChange(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
+      FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
     #endregion

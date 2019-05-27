@@ -55,6 +55,11 @@ namespace StreetSmart.Common.Interfaces.API
     event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
 
     /// <summary>
+    /// Triggers when a feature is selected / deselected inside the PanoramaViewer.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureSelectionChange;
+
+    /// <summary>
     /// Triggers when the surface cursor is changed
     /// </summary>
     event EventHandler<IEventArgs<IDepthInfo>> SurfaceCursorChange;
