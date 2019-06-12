@@ -121,7 +121,8 @@
     <value>en-US</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value />
+    <value>http://localhost:8081/api-dotnet.html</value>
+    <comment>https://streetsmart.cyclomedia.com/api/v19.6/api-dotnet.htm</comment>
   </data>
   <data name="ConfigurationUrl" xml:space="preserve">
     <value>https://atlas.cyclomedia.com/configuration</value>

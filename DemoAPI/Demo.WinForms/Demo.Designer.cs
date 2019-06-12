@@ -37,6 +37,8 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grPanoramaList = new System.Windows.Forms.GroupBox();
+      this.lbPanoramaList = new System.Windows.Forms.ListBox();
       this.grColorOverlay = new System.Windows.Forms.GroupBox();
       this.btnDemoWFSLayer = new System.Windows.Forms.Button();
       this.txtOverlayColor = new System.Windows.Forms.TextBox();
@@ -125,6 +127,8 @@
       this.btnApplicationVersion = new System.Windows.Forms.Button();
       this.btnApplicationName = new System.Windows.Forms.Button();
       this.grViewerToggles = new System.Windows.Forms.GroupBox();
+      this.btnToggleSidebarExpandable = new System.Windows.Forms.Button();
+      this.btnToggleSidebar = new System.Windows.Forms.Button();
       this.btnToggle3DCursor = new System.Windows.Forms.Button();
       this.btnToggleRecordingsVisible = new System.Windows.Forms.Button();
       this.btnToggleTimeTravelExpanded = new System.Windows.Forms.Button();
@@ -148,10 +152,10 @@
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.lbPanoramaList = new System.Windows.Forms.ListBox();
-      this.grPanoramaList = new System.Windows.Forms.GroupBox();
+      this.button1 = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grPanoramaList.SuspendLayout();
       this.grColorOverlay.SuspendLayout();
       this.grSelectFeature.SuspendLayout();
       this.grSld.SuspendLayout();
@@ -169,7 +173,6 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
-      this.grPanoramaList.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -278,6 +281,25 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(902, 701);
       this.plControl.TabIndex = 1;
+      // 
+      // grPanoramaList
+      // 
+      this.grPanoramaList.Controls.Add(this.lbPanoramaList);
+      this.grPanoramaList.Location = new System.Drawing.Point(731, 243);
+      this.grPanoramaList.Name = "grPanoramaList";
+      this.grPanoramaList.Size = new System.Drawing.Size(160, 160);
+      this.grPanoramaList.TabIndex = 71;
+      this.grPanoramaList.TabStop = false;
+      this.grPanoramaList.Text = "Viewer list";
+      // 
+      // lbPanoramaList
+      // 
+      this.lbPanoramaList.FormattingEnabled = true;
+      this.lbPanoramaList.Location = new System.Drawing.Point(5, 15);
+      this.lbPanoramaList.Name = "lbPanoramaList";
+      this.lbPanoramaList.Size = new System.Drawing.Size(150, 134);
+      this.lbPanoramaList.TabIndex = 70;
+      this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
       // 
       // grColorOverlay
       // 
@@ -679,7 +701,7 @@
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
       this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 153);
       this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 166);
+      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 162);
       this.grRotationsZoomInOut.TabIndex = 0;
       this.grRotationsZoomInOut.TabStop = false;
       this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
@@ -1169,6 +1191,9 @@
       // 
       // grViewerToggles
       // 
+      this.grViewerToggles.Controls.Add(this.button1);
+      this.grViewerToggles.Controls.Add(this.btnToggleSidebarExpandable);
+      this.grViewerToggles.Controls.Add(this.btnToggleSidebar);
       this.grViewerToggles.Controls.Add(this.btnToggle3DCursor);
       this.grViewerToggles.Controls.Add(this.btnToggleRecordingsVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelExpanded);
@@ -1177,16 +1202,36 @@
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
       this.grViewerToggles.Location = new System.Drawing.Point(180, 78);
       this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Size = new System.Drawing.Size(180, 225);
+      this.grViewerToggles.Size = new System.Drawing.Size(180, 237);
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
       // 
+      // btnToggleSidebarExpandable
+      // 
+      this.btnToggleSidebarExpandable.Location = new System.Drawing.Point(5, 191);
+      this.btnToggleSidebarExpandable.Name = "btnToggleSidebarExpandable";
+      this.btnToggleSidebarExpandable.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleSidebarExpandable.TabIndex = 43;
+      this.btnToggleSidebarExpandable.Text = "Toggle Sidebar expandable";
+      this.btnToggleSidebarExpandable.UseVisualStyleBackColor = true;
+      this.btnToggleSidebarExpandable.Click += new System.EventHandler(this.btnToggleSidebarExpandable_Click);
+      // 
+      // btnToggleSidebar
+      // 
+      this.btnToggleSidebar.Location = new System.Drawing.Point(5, 165);
+      this.btnToggleSidebar.Name = "btnToggleSidebar";
+      this.btnToggleSidebar.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleSidebar.TabIndex = 42;
+      this.btnToggleSidebar.Text = "Toggle Sidebar expanded";
+      this.btnToggleSidebar.UseVisualStyleBackColor = true;
+      this.btnToggleSidebar.Click += new System.EventHandler(this.btnToggleSidebar_Click);
+      // 
       // btnToggle3DCursor
       // 
-      this.btnToggle3DCursor.Location = new System.Drawing.Point(5, 190);
+      this.btnToggle3DCursor.Location = new System.Drawing.Point(5, 140);
       this.btnToggle3DCursor.Name = "btnToggle3DCursor";
-      this.btnToggle3DCursor.Size = new System.Drawing.Size(150, 30);
+      this.btnToggle3DCursor.Size = new System.Drawing.Size(154, 22);
       this.btnToggle3DCursor.TabIndex = 41;
       this.btnToggle3DCursor.Text = "Toggle 3D Cursor";
       this.btnToggle3DCursor.UseVisualStyleBackColor = true;
@@ -1194,9 +1239,9 @@
       // 
       // btnToggleRecordingsVisible
       // 
-      this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(5, 15);
+      this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(5, 14);
       this.btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
-      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(154, 22);
       this.btnToggleRecordingsVisible.TabIndex = 36;
       this.btnToggleRecordingsVisible.Text = "Toggle recordings visible";
       this.btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
@@ -1204,9 +1249,9 @@
       // 
       // btnToggleTimeTravelExpanded
       // 
-      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 50);
+      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 40);
       this.btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
-      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(154, 22);
       this.btnToggleTimeTravelExpanded.TabIndex = 40;
       this.btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
       this.btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
@@ -1214,9 +1259,9 @@
       // 
       // btnToggleNavbarExpanded
       // 
-      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 85);
+      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 65);
       this.btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
-      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(154, 22);
       this.btnToggleNavbarExpanded.TabIndex = 38;
       this.btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
       this.btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
@@ -1224,9 +1269,9 @@
       // 
       // btnToggleTimeTravelVisible
       // 
-      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 120);
+      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 90);
       this.btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
-      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(154, 22);
       this.btnToggleTimeTravelVisible.TabIndex = 39;
       this.btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
       this.btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
@@ -1234,9 +1279,9 @@
       // 
       // btnToggleNavbarVisible
       // 
-      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 155);
+      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 115);
       this.btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
-      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(150, 30);
+      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(154, 22);
       this.btnToggleNavbarVisible.TabIndex = 37;
       this.btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
       this.btnToggleNavbarVisible.UseVisualStyleBackColor = true;
@@ -1401,24 +1446,15 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // lbPanoramaList
+      // button1
       // 
-      this.lbPanoramaList.FormattingEnabled = true;
-      this.lbPanoramaList.Location = new System.Drawing.Point(5, 15);
-      this.lbPanoramaList.Name = "lbPanoramaList";
-      this.lbPanoramaList.Size = new System.Drawing.Size(150, 134);
-      this.lbPanoramaList.TabIndex = 70;
-      this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
-      // 
-      // grPanoramaList
-      // 
-      this.grPanoramaList.Controls.Add(this.lbPanoramaList);
-      this.grPanoramaList.Location = new System.Drawing.Point(731, 243);
-      this.grPanoramaList.Name = "grPanoramaList";
-      this.grPanoramaList.Size = new System.Drawing.Size(160, 160);
-      this.grPanoramaList.TabIndex = 71;
-      this.grPanoramaList.TabStop = false;
-      this.grPanoramaList.Text = "Viewer list";
+      this.button1.Location = new System.Drawing.Point(5, 215);
+      this.button1.Name = "button1";
+      this.button1.Size = new System.Drawing.Size(154, 22);
+      this.button1.TabIndex = 44;
+      this.button1.Text = "Toggle Sidebar visibility";
+      this.button1.UseVisualStyleBackColor = true;
+      this.button1.Click += new System.EventHandler(this.btnToggleSidebarVisibility_Click);
       // 
       // Demo
       // 
@@ -1433,6 +1469,7 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grPanoramaList.ResumeLayout(false);
       this.grColorOverlay.ResumeLayout(false);
       this.grColorOverlay.PerformLayout();
       this.grSelectFeature.ResumeLayout(false);
@@ -1463,7 +1500,6 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
-      this.grPanoramaList.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1591,6 +1627,9 @@
     private System.Windows.Forms.Button btnDemoWFSLayer;
     private System.Windows.Forms.GroupBox grPanoramaList;
     private System.Windows.Forms.ListBox lbPanoramaList;
+        private System.Windows.Forms.Button btnToggleSidebar;
+        private System.Windows.Forms.Button btnToggleSidebarExpandable;
+    private System.Windows.Forms.Button button1;
   }
 }
 
