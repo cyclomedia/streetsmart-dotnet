@@ -108,6 +108,24 @@ namespace StreetSmart.Common.Interfaces.API
     Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId);
 
     /// <summary>
+    /// Get the visibility of the panorama Sidebar
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> GetSidebarVisible();
+
+    /// <summary>
+    /// Get the expandability of the panorama Sidebar
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> GetSidebarEnabled();
+
+    /// <summary>
+    /// Get the expanded state of the panorama Sidebar
+    /// </summary>
+    /// <returns></returns>
+    Task<bool> GetSidebarExpanded();
+
+    /// <summary>
     /// Returns the orientation in degrees (yaw, pitch, hFov) for this CycloramaViewer.
     /// This is an asynchronous function.
     /// </summary>
@@ -236,6 +254,24 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleRecordingsVisible(bool visible);
+
+    /// <summary>
+    /// Toggles the expanded state of Sidebar in the PanoramaViewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleSidebarExpanded(bool visible);
+
+    /// <summary>
+    /// Toggles the visibility of Sidebar in the PanoramaViewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleSidebarVisible(bool visible);
+
+    /// <summary>
+    /// Toggles the expandability of Sidebar in the PanoramaViewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleSidebarEnabled(bool visible);
 
     #endregion
   }

@@ -92,12 +92,12 @@ namespace Demo.WinForms
       txtOverlayColor.BackColor = Color.Blue;
 
       IAPISettings apiSettings = CefSettingsFactory.Create();
-//      IAPISettings apiSettings = CefSettingsFactory.Create(
-//        @"D:\StreetSmartFiles\Cache",
-//        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
-//        @"D:\StreetSmartFiles\Locales",
-//        @"D:\StreetSmartFiles\Resources");
-//    IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
+      //      IAPISettings apiSettings = CefSettingsFactory.Create(
+      //        @"D:\StreetSmartFiles\Cache",
+      //        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
+      //        @"D:\StreetSmartFiles\Locales",
+      //        @"D:\StreetSmartFiles\Resources");
+      //    IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
       apiSettings.DisableGPUCache = true;
       apiSettings.AllowInsecureContent = true;
 
@@ -1242,7 +1242,8 @@ namespace Demo.WinForms
         if (rbSLD.Checked)
         {
           _overlay = string.IsNullOrEmpty(sld)
-            ? wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtOverlayColor.BackColor, false)
+            ? wfsOverlay =
+              OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtOverlayColor.BackColor, false)
             : wfsOverlay = OverlayFactory.CreateWfsOverlay(name, url, typeName, version, sld, false);
         }
         else
@@ -1252,21 +1253,22 @@ namespace Demo.WinForms
 
         _overlay = await _api.AddWFSLayer(wfsOverlay);
       }
-/*
-      string name = "My Supper cool layer";
-      string url = "http://sandboxgeoserver.westeurope.cloudapp.azure.com/geoserver/agro/wfs";
-      string typeName = "agro:polygon_agro_inventory";
-      string version = "1.1.0";
-      Color color = txtOverlayColor.BackColor;
-      string username = "agro";
-      string password = "XdEVA!7r";
 
-      IWFSOverlay wfsOverlay = rbSLD.Checked
-        ? OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtSld.Text, true, username, password)
-        : OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, true, username, password);
+      /*
+            string name = "My Supper cool layer";
+            string url = "http://sandboxgeoserver.westeurope.cloudapp.azure.com/geoserver/agro/wfs";
+            string typeName = "agro:polygon_agro_inventory";
+            string version = "1.1.0";
+            Color color = txtOverlayColor.BackColor;
+            string username = "agro";
+            string password = "XdEVA!7r";
 
-      _overlay = await _api.AddWFSLayer(wfsOverlay);
-*/
+            IWFSOverlay wfsOverlay = rbSLD.Checked
+              ? OverlayFactory.CreateWfsOverlay(name, url, typeName, version, txtSld.Text, true, username, password)
+              : OverlayFactory.CreateWfsOverlay(name, url, typeName, version, color, true, username, password);
+
+            _overlay = await _api.AddWFSLayer(wfsOverlay);
+      */
     }
 
     private void lbPanoramaList_SelectedIndexChanged(object sender, EventArgs e)
@@ -1275,6 +1277,24 @@ namespace Demo.WinForms
       {
         PanoramaViewer = panoramaViewer;
       }
+    }
+
+    private async void btnToggleSidebar_Click(object sender, EventArgs e)
+    {
+      bool visible = await PanoramaViewer.GetSidebarExpanded();
+      PanoramaViewer.ToggleSidebarExpanded(!visible);
+    }
+
+    private async void btnToggleSidebarExpandable_Click(object sender, EventArgs e)
+    {
+      bool visible = await PanoramaViewer.GetSidebarEnabled();
+      PanoramaViewer.ToggleSidebarEnabled(!visible);
+    }
+
+    private async void btnToggleSidebarVisibility_Click(object sender, EventArgs e)
+    {
+      bool visible = await PanoramaViewer.GetSidebarVisible();
+      PanoramaViewer.ToggleSidebarVisible(!visible);
     }
   }
 }

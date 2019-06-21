@@ -123,6 +123,21 @@ namespace StreetSmart.Common.API
       return await base.GetButtonEnabled(buttonId);
     }
 
+    public async Task<bool> GetSidebarVisible()
+    {
+      return ToBool(await CallJsGetScriptAsync("getSidebarVisible()"));
+    }
+
+    public async Task<bool> GetSidebarEnabled()
+    {
+      return ToBool(await CallJsGetScriptAsync("getSidebarEnabled()"));
+    }
+
+    public async Task<bool> GetSidebarExpanded()
+    {
+      return ToBool(await CallJsGetScriptAsync("getSidebarExpanded()"));
+    }
+
     public async Task<IOrientation> GetOrientation()
     {
       return new Orientation(ToDictionary(await CallJsGetScriptAsync("getOrientation()")));
@@ -225,6 +240,21 @@ namespace StreetSmart.Common.API
     public void ToggleRecordingsVisible(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleRecordingsVisible({visible.ToJsBool()});");
+    }
+
+    public void ToggleSidebarExpanded(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleSidebarExpanded({visible.ToJsBool()});");
+    }
+
+    public void ToggleSidebarVisible(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleSidebarVisible({visible.ToJsBool()});");
+    }
+
+    public void ToggleSidebarEnabled(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleSidebarEnabled({visible.ToJsBool()});");
     }
 
     #endregion
