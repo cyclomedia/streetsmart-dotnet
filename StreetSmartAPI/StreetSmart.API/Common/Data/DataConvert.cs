@@ -40,7 +40,7 @@ namespace StreetSmart.Common.Data
 
     public double? ToNullDouble(object value)
     {
-      return double.TryParse(value?.ToString(), out var outValue) ? (double?) outValue : null;
+      return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? (double?) null : outValue : null;
     }
 
     public double? ToNullDouble(Dictionary<string, object> details, string value)

@@ -1,6 +1,12 @@
 ﻿Release notes:
 ==============
 
+Version: 19.8.0
+===============
+- Added interface functions: GetSidebarVisible, getSidebarEnabled, GetSidebarExpanded, TobbleSidebarExpanded, toggleSidebarVisible, toggleSidebarEnabled
+- Minor bug fixes of parsing of measurement information
+
+
 Version: 19.7.0
 ===============
 - Added layer visibility changed event
