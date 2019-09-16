@@ -68,15 +68,21 @@ namespace StreetSmart.Common.Interfaces.API
     SaveImage = 7,
 
     /// <summary>
+    /// zoom window
+    /// </summary>
+    [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_WINDOW")]
+    ZoomWindow = 8,
+
+    /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 8,
+    ZoomIn = 9,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 9
+    ZoomOut = 10
   }
 }

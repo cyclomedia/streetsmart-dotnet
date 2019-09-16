@@ -122,7 +122,7 @@ namespace Demo.WinForms
         ObliqueViewerButtons.Overlays, ObliqueViewerButtons.ImageInformation,
         ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
         ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
-        ObliqueViewerButtons.ToggleNadir
+        ObliqueViewerButtons.ToggleNadir, ObliqueViewerButtons.Measure,
       };
 
       foreach (var obButton in obButtons)
@@ -136,7 +136,7 @@ namespace Demo.WinForms
         PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
         PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
         PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-        PanoramaViewerButtons.ZoomOut
+        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow
       };
 
       foreach (var pnButton in pnButtons)
@@ -961,7 +961,7 @@ namespace Demo.WinForms
           ObliqueViewerButtons.Overlays, ObliqueViewerButtons.ImageInformation,
           ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
           ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
-          ObliqueViewerButtons.ToggleNadir
+          ObliqueViewerButtons.ToggleNadir, ObliqueViewerButtons.Measure
         };
 
         foreach (var button in buttons)
@@ -979,7 +979,7 @@ namespace Demo.WinForms
           PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
           PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
           PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-          PanoramaViewerButtons.ZoomOut
+          PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow
         };
 
         foreach (var button in buttons)

@@ -121,7 +121,7 @@
     <value>en-US</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://streetsmart.cyclomedia.com/api/v19.8/api-dotnet.html</value>
+    <value />
     <comment>https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html</comment>
   </data>
   <data name="ConfigurationUrl" xml:space="preserve">

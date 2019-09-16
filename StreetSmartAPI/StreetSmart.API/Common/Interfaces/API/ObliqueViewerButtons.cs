@@ -38,33 +38,39 @@ namespace StreetSmart.Common.Interfaces.API
     ImageInformation = 2,
 
     /// <summary>
+    /// measure
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.buttons.MEASURE")]
+    Measure = 3,
+
+    /// <summary>
     /// zoom in
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_IN")]
-    ZoomIn = 3,
+    ZoomIn = 4,
 
     /// <summary>
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 4,
+    ZoomOut = 5,
 
     /// <summary>
     /// switch direction
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SWITCH_DIRECTION")]
-    SwitchDirection = 5,
+    SwitchDirection = 6,
 
     /// <summary>
     /// save image
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.SAVE_IMAGE")]
-    SaveImage = 6,
+    SaveImage = 7,
 
     /// <summary>
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 7
+    ToggleNadir = 8
   }
 }

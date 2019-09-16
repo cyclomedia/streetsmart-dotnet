@@ -1,12 +1,14 @@
 ﻿Release notes:
 ==============
 
-Version: 19.8.0
+Version: 19.10.0
 ===============
 - Added interface functions: GetSidebarVisible, getSidebarEnabled, GetSidebarExpanded, TobbleSidebarExpanded, toggleSidebarVisible, toggleSidebarEnabled
 - Minor bug fixes of parsing of measurement information
-- Updated CefSharp version 0.75
+- Updated to CefSharp version 0.75
 - Bug fixed in the event handling of the on the viewerAdded and viewerRemovedEvents
+- Added ObliqueViewerButtons: MEASURE
+- Added PanoramaViewerButtons: ZOOM_WINDOW
 
 
 Version: 19.7.0
