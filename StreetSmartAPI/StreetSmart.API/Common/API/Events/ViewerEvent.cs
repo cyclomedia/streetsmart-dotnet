@@ -30,7 +30,7 @@ namespace StreetSmart.Common.API.Events
     public override string ToString()
     {
       return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{TempType}=e.detail.viewer;{JsThis}.{FuncName}('{TempType}',{TempType}.getType());}});";
+             {{{TempType}=e.detail.viewer;if({TempType}!==undefined&&{TempType}!==undefined){{{JsThis}.{FuncName}('{TempType}',{TempType}.getType());}}}});";
     }
   }
 }

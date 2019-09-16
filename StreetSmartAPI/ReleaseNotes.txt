@@ -5,6 +5,8 @@ Version: 19.8.0
 ===============
 - Added interface functions: GetSidebarVisible, getSidebarEnabled, GetSidebarExpanded, TobbleSidebarExpanded, toggleSidebarVisible, toggleSidebarEnabled
 - Minor bug fixes of parsing of measurement information
+- Updated CefSharp version 0.75
+- Bug fixed in the event handling of the on the viewerAdded and viewerRemovedEvents
 
 
 Version: 19.7.0
