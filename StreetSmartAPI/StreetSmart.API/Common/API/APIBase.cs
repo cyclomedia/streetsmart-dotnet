@@ -71,6 +71,8 @@ namespace StreetSmart.Common.API
 
     protected string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
 
+    protected string JsMeasurementFailed => $"{nameof(OnMeasurementException).FirstCharacterToLower()}";
+
     public virtual string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
 
     protected string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
@@ -111,6 +113,12 @@ namespace StreetSmart.Common.API
     {
       CheckResultTask(funcName);
       _resultTask[funcName].TrySetResult(true);
+    }
+
+    public void OnMeasurementException(string message, string funcName)
+    {
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartMeasurementException(message));
     }
 
     public void OnLoginFailedException(string message, string funcName)

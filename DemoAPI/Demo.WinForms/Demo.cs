@@ -52,6 +52,7 @@ namespace Demo.WinForms
     private IOverlay _overlay;
     private bool _addressLayerOverlayVisible;
     private IPanoramaViewer _panoramaViewer;
+    private IViewer _viewer;
 
     #endregion
 
@@ -63,8 +64,21 @@ namespace Demo.WinForms
       set => _panoramaViewer = value;
     }
 
-    private IObliqueViewer ObliqueViewer =>
-      _obliqueViewers.Count == 0 ? null : _obliqueViewers[_obliqueViewers.Count - 1];
+    private IObliqueViewer ObliqueViewer
+    {
+      get => _obliqueViewers.Count == 0 ? null : _obliqueViewers [_obliqueViewers.Count - 1];
+      set
+      {
+        if (_obliqueViewers.Count == 0)
+        {
+          _obliqueViewers.Add(value);
+        }
+        else
+        {
+          _obliqueViewers[_obliqueViewers.Count - 1] = value;
+        }
+      }
+    }
 
     private int DeltaYawPitch
     {
@@ -882,7 +896,7 @@ namespace Demo.WinForms
       _api?.CloseDevTools();
     }
 
-    private void btnStartMeasurementMode_Click(object sender, EventArgs e)
+    private async void btnStartMeasurementMode_Click(object sender, EventArgs e)
     {
       MeasurementGeometryType? type = null;
 
@@ -903,7 +917,19 @@ namespace Demo.WinForms
         ? MeasurementOptionsFactory.Create()
         : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
 
-      _api.StartMeasurementMode(PanoramaViewer, options);
+      IViewer viewer = _viewer ?? PanoramaViewer;
+
+      if (viewer != null)
+      {
+        try
+        {
+          await _api.StartMeasurementMode(viewer, options);
+        }
+        catch (StreetSmartMeasurementException exception)
+        {
+          MessageBox.Show($"exception during start measurement: {exception}");
+        }
+      }
     }
 
     private void btnStopMeasurementMode_Click(object sender, EventArgs e)
@@ -1273,9 +1299,18 @@ namespace Demo.WinForms
 
     private void lbPanoramaList_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (lbPanoramaList.SelectedItem is ViewerElement element && element.Viewer is IPanoramaViewer panoramaViewer)
+      if (lbPanoramaList.SelectedItem is ViewerElement element)
       {
-        PanoramaViewer = panoramaViewer;
+        _viewer = element.Viewer;
+
+        if (element.Viewer is IPanoramaViewer panoramaViewer)
+        {
+          PanoramaViewer = panoramaViewer;
+        }
+        else if (element.Viewer is IObliqueViewer obliqueViewer)
+        {
+          ObliqueViewer = obliqueViewer;
+        }
       }
     }
 

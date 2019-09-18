@@ -419,6 +419,9 @@
     <Compile Include="..\Common\Exceptions\StreetSmartLoginFailedException.cs">
       <Link>Exceptions\StreetSmartLoginFailedException.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartMeasurementException.cs">
+      <Link>Exceptions\StreetSmartMeasurementException.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Exceptions\StreetSmartViewerDoesNotExistException.cs">
       <Link>Exceptions\StreetSmartViewerDoesNotExistException.cs</Link>
     </Compile>

@@ -325,9 +325,18 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
     }
 
-    public void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options)
+    public async Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options)
     {
-      Browser.ExecuteScriptAsync(GetScript($"startMeasurementMode({((PanoramaViewer) viewer).Name}{options})"));
+      int processId = GetProcessId;
+      string funcId = $"{nameof(StartMeasurementMode)}{processId}".ToQuote();
+      string startMeasurement = GetScript($"startMeasurementMode({((Viewer) viewer).Name}{options})", processId);
+      string script = $@"try{{{startMeasurement}}}catch(e){{{JsThis}.{JsMeasurementFailed}(e.message,{funcId})}}";
+      object result = await CallJsAsync(script, processId);
+
+      if (result is Exception exception)
+      {
+        throw exception;
+      }
     }
 
     public void StopMeasurementMode()
@@ -381,15 +390,19 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"var {jsName}={name};");
       IViewer iViewer = await ViewerList.ToViewerFromJsValue(ApiId, type, oldName);
       Viewer viewer = (Viewer) iViewer;
-      viewer.DisConnectEvents();
-      string removedName = viewer.Name;
-      viewer.Name = jsName;
-      ViewerList.ReRegisterViewer(ApiId, type, removedName, viewer);
-      viewer.ReConnectEvents();
 
-      if (viewer is PanoramaViewer)
+      if (viewer != null)
       {
-        ReAssignMeasurementEvents();
+        viewer.DisConnectEvents();
+        string removedName = viewer.Name;
+        viewer.Name = jsName;
+        ViewerList.ReRegisterViewer(ApiId, type, removedName, viewer);
+        viewer.ReConnectEvents();
+
+        if (viewer is PanoramaViewer)
+        {
+          ReAssignMeasurementEvents();
+        }
       }
     }
 

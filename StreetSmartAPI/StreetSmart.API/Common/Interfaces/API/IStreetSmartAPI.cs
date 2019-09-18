@@ -323,7 +323,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="viewer">Panorama viewer for start the measurement inside</param>
     /// <param name="options">Measurement options</param>
-    void StartMeasurementMode(IPanoramaViewer viewer, IMeasurementOptions options);
+    Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options);
 
     /// <summary>
     /// Stops the measurement
