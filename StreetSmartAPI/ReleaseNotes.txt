@@ -12,6 +12,7 @@ Version: 19.14.0
 - Start measurement function: Now the function send an exception if there is an exception on the javascript side
 - Start measurement function: It is now also possible for start oblique measurements
 - Updated geoJson structure of measurements with the oblique values
+- Changed culture info parsing
 
 
 Version: 19.7.0
