@@ -25,10 +25,10 @@ namespace StreetSmart.Common.Data
 {
   internal class AddressSettings : DataConvert, IAddressSettings
   {
-    private CultureInfo _locale;
+    private string _locale;
     private string _database;
 
-    public AddressSettings(CultureInfo locale, string database)
+    public AddressSettings(string locale, string database)
     {
       Locale = locale;
       Database = database;
@@ -36,11 +36,11 @@ namespace StreetSmart.Common.Data
 
     public AddressSettings(Dictionary<string, object> addressSettings)
     {
-      Locale = new CultureInfo(ToString(addressSettings, "locale"));
+      Locale = ToString(addressSettings, "locale");
       Database = ToString(addressSettings, "database");
     }
 
-    public CultureInfo Locale
+    public string Locale
     {
       get => _locale;
       set

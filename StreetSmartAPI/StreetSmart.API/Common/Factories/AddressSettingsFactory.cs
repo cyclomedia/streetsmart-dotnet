@@ -83,7 +83,7 @@ namespace StreetSmart.Common.Factories
     /// </example>
     /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
     /// <returns>The address settings interface to use for address searches</returns>
-    public static IAddressSettings Create(string database) => Create(CultureInfo.CurrentCulture, database);
+    public static IAddressSettings Create(string database) => Create(CultureInfo.CurrentCulture.Name, database);
 
     /// <summary>
     /// Create address settings to use for address searches, based on the locale string and the address database.
@@ -100,23 +100,6 @@ namespace StreetSmart.Common.Factories
     /// <param name="locale">The locale to use. e.g. 'nl'</param>
     /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
     /// <returns>The address settings interface to use for address searches</returns>
-    public static IAddressSettings Create(string locale, string database) => Create(new CultureInfo(locale), database);
-
-    /// <summary>
-    /// Create address settings to use for address searches, based on the locale culture and the address database.
-    /// </summary>
-    /// <example> 
-    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(CultureInfo, string)"/> method.
-    /// <code>
-    /// // Create an address settings that are used in the application
-    /// CultureInfo ci = new CultureInfo("en-US");
-    /// string database = "CMDatabase";
-    /// IAddressSettings addressSettings = AddressSettingsFactory.Create(ci, database);
-    /// </code>
-    /// </example>
-    /// <param name="locale">The locale to use. e.g. 'nl'</param>
-    /// <param name="database">The name of the database. e.g. 'CMDatabase'</param>
-    /// <returns>The address settings interface to use for address searches</returns>
-    public static IAddressSettings Create(CultureInfo locale, string database) => new AddressSettings(locale, database);
+    public static IAddressSettings Create(string locale, string database) => new AddressSettings(locale, database);
   }
 }

@@ -28,7 +28,7 @@ namespace StreetSmart.Common.Interfaces.Data
     /// <summary>
     /// The locale to use. e.g. 'nl'
     /// </summary>
-    CultureInfo Locale { get; set; }
+    string Locale { get; set; }
 
     /// <summary>
     /// The name of the database. e.g. 'CMDatabase'

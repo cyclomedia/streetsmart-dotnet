@@ -72,22 +72,6 @@ namespace StreetSmart.Common.Factories
     /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       IAddressSettings addressSettings, IDomElement element)
-      => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
-        string.Empty, addressSettings, element);
-
-    /// <summary>
-    /// Create the options object which used for initializing the API
-    /// </summary>
-    /// <param name="userName">Username of the user.</param>
-    /// <param name="password">Password of the user.</param>
-    /// <param name="apiKey">ApiKey given to the user.</param>
-    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
-    /// <param name="locale">Language used as default in the API.</param>
-    /// <param name="addressSettings">The address settings to use for address searches.</param>
-    /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
-    /// <returns>Object containing the options used for initializing the API</returns>
-    public static IOptions Create(string userName, string password, string apiKey, string srs, CultureInfo locale,
-      IAddressSettings addressSettings, IDomElement element)
       => Create(userName, password, apiKey, srs, locale, string.Empty, addressSettings, element);
 
     /// <summary>
@@ -102,25 +86,8 @@ namespace StreetSmart.Common.Factories
     /// <param name="addressSettings">The address settings to use for address searches.</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
     /// <returns>Object containing the options used for initializing the API</returns>
-    public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
-      string configurationURL, IAddressSettings addressSettings, IDomElement element)
-      => Create(userName, password, apiKey, srs, string.IsNullOrEmpty(locale) ? null : new CultureInfo(locale),
-        configurationURL, addressSettings, element);
-
-    /// <summary>
-    /// Create the options object which used for initializing the API
-    /// </summary>
-    /// <param name="userName">Username of the user.</param>
-    /// <param name="password">Password of the user.</param>
-    /// <param name="apiKey">ApiKey given to the user.</param>
-    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
-    /// <param name="locale">Language used as default in the API.</param>
-    /// <param name="configurationURL">Alternate configuration url to use for all configuration services.</param>
-    /// <param name="addressSettings">The address settings to use for address searches.</param>
-    /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
-    /// <returns>Object containing the options used for initializing the API</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static IOptions Create(string userName, string password, string apiKey, string srs, CultureInfo locale,
+    public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       string configurationURL, IAddressSettings addressSettings, IDomElement element)
     {
       if (string.IsNullOrEmpty(userName))

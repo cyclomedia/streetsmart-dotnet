@@ -54,7 +54,7 @@ namespace StreetSmart.Common.Interfaces.Data
     /// <summary>
     /// Language used as default in the API.
     /// </summary>
-    CultureInfo Locale { get; set; }
+    string Locale { get; set; }
 
     /// <summary>
     /// Alternate configuration url to use for all configuration services

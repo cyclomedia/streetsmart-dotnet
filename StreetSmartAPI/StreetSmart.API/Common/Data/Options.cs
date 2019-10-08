@@ -33,12 +33,12 @@ namespace StreetSmart.Common.Data
     private SecureString _password;
     private string _apiKey;
     private string _srs;
-    private CultureInfo _locale;
+    private string _locale;
     private Uri _configurationURL;
     private IAddressSettings _addressSettings;
     private IDomElement _element;
 
-    public Options(string userName, SecureString password, string apiKey, string srs, CultureInfo locale,
+    public Options(string userName, SecureString password, string apiKey, string srs, string locale,
       Uri configurationURL, IAddressSettings addressSettings, IDomElement element)
     {
       Username = userName;
@@ -93,7 +93,7 @@ namespace StreetSmart.Common.Data
       }
     }
 
-    public CultureInfo Locale
+    public string Locale
     {
       get => _locale;
       set
@@ -137,7 +137,7 @@ namespace StreetSmart.Common.Data
     {
       // ReSharper disable once InconsistentNaming
       string configurationURL = (ConfigurationURL == null) ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
-      string locale = (Locale == null) ? string.Empty : $",locale:'{Locale}'";
+      string locale = string.IsNullOrEmpty(Locale) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
       return $@"{{targetElement:{_element.Name},username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
              ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
