@@ -18,46 +18,55 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-
+using System.Globalization;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirection : DataConvert, IResultDirection
+  internal class Matrix : DataConvert, IMatrix
   {
-    private readonly string _matchImage;
-
-    public ResultDirection(Dictionary<string, object> resultDirection)
+    public Matrix(Dictionary<string, object> matrixValues, int width, int height)
     {
-      Id = ToString(resultDirection, "Id");
-      _matchImage = ToString(resultDirection, "MatchImage");
+      Width = width;
+      Height = height;
+      Values = new List<double>();
 
-      if (!string.IsNullOrEmpty(_matchImage))
+      for (int i = 0; i < width * height; i++)
       {
-        byte[] bytes = Convert.FromBase64String(_matchImage);
-        MatchImage = new Bitmap(new MemoryStream(bytes));
+        Values.Add(ToDouble(matrixValues, i.ToString()));
       }
     }
 
-    public ResultDirection(IResultDirection resultDirection)
+    public Matrix(IMatrix matrix)
     {
-      if (resultDirection != null)
+      Width = matrix.Width;
+      Height = matrix.Height;
+      Values = new List<double>();
+
+      foreach (var t in matrix.Values)
       {
-        Id = resultDirection.Id != null ? string.Copy(resultDirection.Id) : null;
-        MatchImage = (Image) MatchImage?.Clone();
-        _matchImage = (resultDirection as ResultDirection)?._matchImage;
+        Values.Add(t);
       }
     }
 
-    public string Id { get; }
+    public int Width { get; }
 
-    public Image MatchImage { get; }
+    public int Height { get; }
+
+    public IList<double> Values { get; }
 
     public override string ToString()
     {
-      return $"{{\"Id\":\"{Id}\",\"MatchImage\":\"{_matchImage}\"}}";
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string values = string.Empty;
+
+      for(int i = 0; i < Values.Count; i++)
+      {
+        values = $"{values}{i.ToDoubleQuote()}:{Values[i].ToString(ci)},";
+      }
+
+      values = values.Substring(0, Math.Max(0, values.Length - 1));
+      return values.Length == 0 ? "null" : $"{{{values}}}";
     }
   }
 }

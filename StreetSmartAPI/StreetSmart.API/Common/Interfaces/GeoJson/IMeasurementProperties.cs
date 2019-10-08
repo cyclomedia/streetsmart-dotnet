@@ -46,6 +46,11 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     IList<IMeasureDetails> MeasureDetails { get; }
 
     /// <summary>
+    /// FontSize
+    /// </summary>
+    int? FontSize { get; }
+
+    /// <summary>
     /// Dimension
     /// </summary>
     int Dimension { get; }
@@ -84,5 +89,10 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Measurement tools
     /// </summary>
     MeasurementTools MeasurementTool { get; }
+
+    /// <summary>
+    /// Geometry
+    /// </summary>
+    IGeometry WgsGeometry { get; }
   }
 }

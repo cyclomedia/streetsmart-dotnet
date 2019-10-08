@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version: 19.10.0
+Version: 19.14.0
 ===============
 - Added interface functions: GetSidebarVisible, getSidebarEnabled, GetSidebarExpanded, TobbleSidebarExpanded, toggleSidebarVisible, toggleSidebarEnabled
 - Minor bug fixes of parsing of measurement information
@@ -9,6 +9,9 @@ Version: 19.10.0
 - Bug fixed in the event handling of the on the viewerAdded and viewerRemovedEvents
 - Added ObliqueViewerButtons: MEASURE
 - Added PanoramaViewerButtons: ZOOM_WINDOW
+- Start measurement function: Now the function send an exception if there is an exception on the javascript side
+- Start measurement function: It is now also possible for start oblique measurements
+- Updated geoJson structure of measurements with the oblique values
 
 
 Version: 19.7.0

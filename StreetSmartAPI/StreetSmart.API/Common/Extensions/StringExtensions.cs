@@ -36,5 +36,10 @@ namespace System
     {
       return $"'{txt}'";
     }
+
+    public static string ToDoubleQuote(this string txt)
+    {
+      return $"\"{txt}\"";
+    }
   }
 }

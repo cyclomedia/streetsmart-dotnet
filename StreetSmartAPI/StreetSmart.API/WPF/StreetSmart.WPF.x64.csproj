@@ -216,6 +216,9 @@
     <Compile Include="..\Common\Data\GeoJson\LineString.cs">
       <Link>Data\GeoJson\LineString.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Matrix.cs">
+      <Link>Data\GeoJson\Matrix.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\GeoJson\MeasureDetails.cs">
       <Link>Data\GeoJson\MeasureDetails.cs</Link>
     </Compile>
@@ -254,6 +257,15 @@
     </Compile>
     <Compile Include="..\Common\Data\GeoJson\ResultDirection.cs">
       <Link>Data\GeoJson\ResultDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\ResultDirectionOblique.cs">
+      <Link>Data\GeoJson\ResultDirectionOblique.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\ResultDirectionPanorama.cs">
+      <Link>Data\GeoJson\ResultDirectionPanorama.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Rotation.cs">
+      <Link>Data\GeoJson\Rotation.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\GeoJson\Stdev.cs">
       <Link>Data\GeoJson\Stdev.cs</Link>
@@ -389,6 +401,9 @@
     </Compile>
     <Compile Include="..\Common\Extensions\EnumExtensions.cs">
       <Link>Extensions\EnumExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\intExtensions.cs">
+      <Link>Extensions\intExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Common\Extensions\SecureStringExtensions.cs">
       <Link>Extensions\SecureStringExtensions.cs</Link>
@@ -621,6 +636,9 @@
     <Compile Include="..\Common\Interfaces\GeoJson\ILineString.cs">
       <Link>Interfaces\GeoJson\ILineString.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IMatrix.cs">
+      <Link>Interfaces\GeoJson\IMatrix.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IMeasureDetails.cs">
       <Link>Interfaces\GeoJson\IMeasureDetails.cs</Link>
     </Compile>
@@ -659,6 +677,15 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IResultDirection.cs">
       <Link>Interfaces\GeoJson\IResultDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IResultDirectionOblique.cs">
+      <Link>Interfaces\GeoJson\IResultDirectionOblique.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IResultDirectionPanorama.cs">
+      <Link>Interfaces\GeoJson\IResultDirectionPanorama.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IRotation.cs">
+      <Link>Interfaces\GeoJson\IRotation.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IStdev.cs">
       <Link>Interfaces\GeoJson\IStdev.cs</Link>

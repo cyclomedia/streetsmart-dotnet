@@ -130,6 +130,6 @@
     <value />
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://streetsmart.cyclomedia.com/api/v19.13/api-dotnet.html</value>
+    <value>https://streetsmart.cyclomedia.com/api/v19.14/api-dotnet.html</value>
   </data>
 </root>

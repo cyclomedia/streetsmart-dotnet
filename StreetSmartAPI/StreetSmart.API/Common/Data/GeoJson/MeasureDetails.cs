@@ -26,7 +26,7 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class MeasureDetails: DataConvert, IMeasureDetails
   {
-    public MeasureDetails(Dictionary<string, object> measureDetails)
+    public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
       var details = GetDictValue(measureDetails, "details");
       var pointProblems = GetListValue(measureDetails, "pointProblems");
@@ -52,7 +52,7 @@ namespace StreetSmart.Common.Data.GeoJson
           Details = new DetailsSmartClick(details);
           break;
         case MeasureMethod.ForwardIntersection:
-          Details = new DetailsForwardIntersection(details);
+          Details = new DetailsForwardIntersection(details, measurementTool);
           break;
         case MeasureMethod.AutoFocus:
         case MeasureMethod.NotDefined:
@@ -99,7 +99,7 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
-    public MeasureDetails(IMeasureDetails measureDetails)
+    public MeasureDetails(IMeasureDetails measureDetails, MeasurementTools measurementTool)
     {
       if (measureDetails != null)
       {
@@ -114,7 +114,7 @@ namespace StreetSmart.Common.Data.GeoJson
             Details = new DetailsSmartClick((IDetailsSmartClick) measureDetails.Details);
             break;
           case MeasureMethod.ForwardIntersection:
-            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details);
+            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details, measurementTool);
             break;
           case MeasureMethod.AutoFocus:
           case MeasureMethod.NotDefined:

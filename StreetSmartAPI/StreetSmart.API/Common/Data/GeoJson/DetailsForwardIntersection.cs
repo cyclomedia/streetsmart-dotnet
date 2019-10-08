@@ -27,7 +27,7 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class DetailsForwardIntersection : Details, IDetailsForwardIntersection
   {
-    public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection)
+    public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection, MeasurementTools measurementTool)
     {
       double? positionX = ToNullDouble(detailsForwardIntersection, "PositionX");
       double? positionY = ToNullDouble(detailsForwardIntersection, "PositionY");
@@ -40,11 +40,26 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var intResultDirection in resultDirection)
       {
-        ResultDirections.Add(new ResultDirection(intResultDirection as Dictionary<string, object>));
+        IResultDirection objResultDirection = null;
+
+        switch (measurementTool)
+        {
+          case MeasurementTools.Oblique:
+            objResultDirection = new ResultDirectionOblique(intResultDirection as Dictionary<string, object>);
+            break;
+          case MeasurementTools.Panorama:
+            objResultDirection = new ResultDirectionPanorama(intResultDirection as Dictionary<string, object>);
+            break;
+        }
+
+        if (objResultDirection != null)
+        {
+          ResultDirections.Add(objResultDirection);
+        }
       }
     }
 
-    public DetailsForwardIntersection(IDetailsForwardIntersection detailsForwardIntersection)
+    public DetailsForwardIntersection(IDetailsForwardIntersection detailsForwardIntersection, MeasurementTools measurementTool)
     {
       if (detailsForwardIntersection != null)
       {
@@ -72,7 +87,7 @@ namespace StreetSmart.Common.Data.GeoJson
       string resultDirectionsStr = $"{resultDirections.Substring(0, Math.Max(resultDirections.Length - 1, 1))}]";
 
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"PositionX\":{Position?.X?.ToString(ci)},\"PositionY\":{Position?.Y?.ToString(ci)},\"PositionZ\":{Position?.Z?.ToString(ci)}," +
+      return $"{{\"PositionX\":{Position?.X?.ToString(ci) ?? "null"},\"PositionY\":{Position?.Y?.ToString(ci) ?? "null"},\"PositionZ\":{Position?.Z?.ToString(ci) ?? "null"}," +
              $"\"ResultDirections\":{{\"ResultDirection\":{resultDirectionsStr}}}}}";
     }
   }

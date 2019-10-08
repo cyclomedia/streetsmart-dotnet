@@ -47,6 +47,12 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Point cloud
     /// </summary>
     [Description("POINTCLOUD")]
-    PointCloud = 3
+    PointCloud = 3,
+
+    /// <summary>
+    /// Oblique
+    /// </summary>
+    [Description("OBLIQUE")]
+    Oblique = 4
   }
 }

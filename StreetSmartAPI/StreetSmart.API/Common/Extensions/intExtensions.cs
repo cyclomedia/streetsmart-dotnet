@@ -16,23 +16,14 @@
  * License along with this library.
  */
 
-using System.Drawing;
-
-namespace StreetSmart.Common.Interfaces.GeoJson
+// ReSharper disable once CheckNamespace
+namespace System
 {
-  /// <summary>
-  /// Result direction of the observation
-  /// </summary>
-  public interface IResultDirection
+  internal static class intExtensions
   {
-    /// <summary>
-    /// ImageId
-    /// </summary>
-    string Id { get; }
-
-    /// <summary>
-    /// match image
-    /// </summary>
-    Image MatchImage { get; }
+    public static string ToDoubleQuote(this int txt)
+    {
+      return txt.ToString().ToDoubleQuote();
+    }
   }
 }

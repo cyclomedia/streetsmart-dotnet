@@ -16,23 +16,28 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
-  /// Result direction of the observation
+  /// Matrix definition
   /// </summary>
-  public interface IResultDirection
+  public interface IMatrix
   {
     /// <summary>
-    /// ImageId
+    /// Width
     /// </summary>
-    string Id { get; }
+    int Width { get; }
 
     /// <summary>
-    /// match image
+    /// Height
     /// </summary>
-    Image MatchImage { get; }
+    int Height { get; }
+
+    /// <summary>
+    /// Values
+    /// </summary>
+    IList<double> Values { get; }
   }
 }

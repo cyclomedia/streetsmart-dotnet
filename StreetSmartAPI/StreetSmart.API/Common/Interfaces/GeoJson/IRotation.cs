@@ -16,23 +16,23 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
-  /// Result direction of the observation
+  /// Rotation definition
   /// </summary>
-  public interface IResultDirection
+  public interface IRotation
   {
     /// <summary>
-    /// ImageId
+    /// Shape
     /// </summary>
-    string Id { get; }
+    List<int> Shape { get; }
 
     /// <summary>
-    /// match image
+    /// Data
     /// </summary>
-    Image MatchImage { get; }
+    IList<double> Data { get; }
   }
 }

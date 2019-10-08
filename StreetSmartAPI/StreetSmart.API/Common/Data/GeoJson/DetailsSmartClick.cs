@@ -26,14 +26,14 @@ namespace StreetSmart.Common.Data.GeoJson
   internal class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick
   {
     public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
-    : base(detailsSmartClick)
+      : base(detailsSmartClick, MeasurementTools.Panorama)
     {
       Confidence = ToInt(detailsSmartClick, "Confidence");
       Depth = ToDouble(detailsSmartClick, "Depth");
     }
 
     public DetailsSmartClick(IDetailsSmartClick detailsSmartClick)
-      : base(detailsSmartClick)
+      : base(detailsSmartClick, MeasurementTools.Panorama)
     {
       if (detailsSmartClick != null)
       {

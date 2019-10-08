@@ -33,6 +33,7 @@ namespace StreetSmart.Common.Data.GeoJson
       Name = converter.ToString(properties, "name");
       Group = converter.ToString(properties, "group");
       var measureDetails = converter.GetListValue(properties, "measureDetails");
+      FontSize = converter.ToNullInt(properties, "fontsize");
       Dimension = converter.ToInt(properties, "dimension");
       var derivedData = converter.GetDictValue(properties, "derivedData");
       string measureReliability = converter.ToString(properties, "measureReliability");
@@ -44,10 +45,48 @@ namespace StreetSmart.Common.Data.GeoJson
       MeasureDetails = new List<IMeasureDetails>();
       PointsWithErrors = new List<int>();
       ObservationLines = new ObservationLines(observationLines);
+      var wgsGeometry = converter.GetDictValue(properties, "wgsGeometry");
+
+      if (wgsGeometry != null)
+      {
+        switch (geometryType)
+        {
+          case GeometryType.Point:
+            WgsGeometry = new Point(wgsGeometry);
+            break;
+          case GeometryType.LineString:
+            WgsGeometry = new LineString(wgsGeometry);
+            break;
+          case GeometryType.Polygon:
+            WgsGeometry = new Polygon(wgsGeometry);
+            break;
+          case GeometryType.Unknown:
+            WgsGeometry = null;
+            break;
+        }
+
+        Add("WgsGeometry", WgsGeometry);
+      }
+
+      switch (measurementTool)
+      {
+        case "MAP":
+          MeasurementTool = MeasurementTools.Map;
+          break;
+        case "PANORAMA":
+          MeasurementTool = MeasurementTools.Panorama;
+          break;
+        case "POINTCLOUD":
+          MeasurementTool = MeasurementTools.PointCloud;
+          break;
+        case "OBLIQUE":
+          MeasurementTool = MeasurementTools.Oblique;
+          break;
+      }
 
       foreach (var measureDetail in measureDetails)
       {
-        MeasureDetails.Add(new MeasureDetails(measureDetail as Dictionary<string, object>));
+        MeasureDetails.Add(new MeasureDetails(measureDetail as Dictionary<string, object>, MeasurementTool));
       }
 
       try
@@ -89,19 +128,6 @@ namespace StreetSmart.Common.Data.GeoJson
           break;
       }
 
-      switch (measurementTool)
-      {
-        case "MAP":
-          MeasurementTool = MeasurementTools.Map;
-          break;
-        case "PANORAMA":
-          MeasurementTool = MeasurementTools.Panorama;
-          break;
-        case "POINTCLOUD":
-          MeasurementTool = MeasurementTools.PointCloud;
-          break;
-      }
-
       foreach (var pointsWithError in pointsWithErrors)
       {
         PointsWithErrors.Add(pointsWithError as int? ?? 0);
@@ -118,7 +144,12 @@ namespace StreetSmart.Common.Data.GeoJson
       Add("PointsWithErrors", PointsWithErrors);
       Add("ValidGeometry", ValidGeometry);
       Add("ObservationLines", ObservationLines);
-      Add("measurementTool", MeasurementTool);
+      Add("MeasurementTool", MeasurementTool);
+
+      if (FontSize != null)
+      {
+        Add("FontSize", FontSize);
+      }
     }
 
     public MeasurementProperties(IMeasurementProperties properties)
@@ -128,6 +159,7 @@ namespace StreetSmart.Common.Data.GeoJson
         Id = properties.Id != null ? string.Copy(properties.Id) : null;
         Name = properties.Name != null ? string.Copy(properties.Name) : null;
         Group = properties.Group != null ? string.Copy(properties.Group) : null;
+        MeasurementTool = properties.MeasurementTool;
 
         if (properties.MeasureDetails != null)
         {
@@ -135,11 +167,12 @@ namespace StreetSmart.Common.Data.GeoJson
 
           foreach (var measureDetail in properties.MeasureDetails)
           {
-            MeasureDetails.Add(new MeasureDetails(measureDetail));
+            MeasureDetails.Add(new MeasureDetails(measureDetail, MeasurementTool));
           }
         }
 
         Dimension = properties.Dimension;
+        FontSize = properties.FontSize;
         CustomGeometryType = properties.CustomGeometryType;
         IDerivedData derivedData = properties.DerivedData;
 
@@ -170,7 +203,25 @@ namespace StreetSmart.Common.Data.GeoJson
 
         ValidGeometry = properties.ValidGeometry;
         ObservationLines = new ObservationLines(properties.ObservationLines);
-        MeasurementTool = properties.MeasurementTool;
+        IGeometry wgsGeometry = properties.WgsGeometry;
+
+        switch (wgsGeometry)
+        {
+          case IPoint point:
+            WgsGeometry = new Point(point);
+            break;
+          case ILineString lineString:
+            WgsGeometry = new LineString(lineString);
+            break;
+          case IPolygon polygon:
+            WgsGeometry = new Polygon(polygon);
+            break;
+        }
+
+        if (WgsGeometry != null)
+        {
+          Add("WgsGeometry", WgsGeometry);
+        }
 
         Add("Id", Id);
         Add("Name", Name);
@@ -183,7 +234,12 @@ namespace StreetSmart.Common.Data.GeoJson
         Add("PointsWithErrors", PointsWithErrors);
         Add("ValidGeometry", ValidGeometry);
         Add("ObservationLines", ObservationLines);
-        Add("measurementTool", MeasurementTool);
+        Add("MeasurementTool", MeasurementTool);
+
+        if (FontSize != null)
+        {
+          Add("FontSize", FontSize);
+        }
       }
     }
 
@@ -194,6 +250,8 @@ namespace StreetSmart.Common.Data.GeoJson
     public string Group { get; }
 
     public IList<IMeasureDetails> MeasureDetails { get; }
+
+    public int? FontSize { get; }
 
     public int Dimension { get; }
 
@@ -211,21 +269,27 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public MeasurementTools MeasurementTool { get; }
 
+    public IGeometry WgsGeometry { get; }
+
     public override string ToString()
     {
       string pointsWithErrors = PointsWithErrors.Aggregate("[", (current, point) => $"{current}{point},");
       string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
 
       string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
-      string measureDetailsStr = MeasureDetails.Count >= 1
+      string measureDetailsStr = MeasureDetails.Count >= 1 || MeasurementTool == MeasurementTools.Oblique
         ? $",\"measureDetails\":{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]"
         : string.Empty;
 
-      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr},\"dimension\":{Dimension}" +
-                          $",\"customGeometryType\":\"{CustomGeometryType.Description()}\",\"derivedData\":{DerivedData}" +
+      string fontSize = FontSize == null ? string.Empty : $",\"fontSize\": {FontSize}";
+      string customGeometryType = MeasurementTool == MeasurementTools.Oblique ? string.Empty : $",\"customGeometryType\":\"{CustomGeometryType.Description()}\"";
+      string strGeometry = WgsGeometry == null ? string.Empty : $",{WgsGeometry.ToString().Replace("geometry", "wgsGeometry")}";
+
+      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr}{fontSize},\"dimension\":{Dimension}" +
+                          $"{customGeometryType},\"derivedData\":{DerivedData}" +
                           $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
                           $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +
-                          $",\"measurementTool\":\"{MeasurementTool.Description()}\"";
+                          $"{strGeometry},\"measurementTool\":\"{MeasurementTool.Description()}\"";
 
       return $"\"properties\":{{{properties}}}";
     }

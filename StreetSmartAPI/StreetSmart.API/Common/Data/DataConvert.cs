@@ -53,6 +53,11 @@ namespace StreetSmart.Common.Data
       return int.TryParse(value?.ToString(), out var outValue) ? outValue : 0;
     }
 
+    public int? ToNullInt(object value)
+    {
+      return int.TryParse(value?.ToString(), out var outValue) ? (int?) outValue : null;
+    }
+
     public int ToInt(object[] array, int nr)
     {
       return array.Length > nr ? ToInt(array[nr]) : 0;
@@ -61,6 +66,11 @@ namespace StreetSmart.Common.Data
     public int ToInt(Dictionary<string, object> details, string value)
     {
       return ToInt(GetValue(details, value));
+    }
+
+    public int? ToNullInt(Dictionary<string, object> details, string value)
+    {
+      return ToNullInt(GetValue(details, value));
     }
 
     public string ToString(object value)
@@ -126,6 +136,11 @@ namespace StreetSmart.Common.Data
     public object[] ToArray(object value)
     {
       return value as object[] ?? new object[0];
+    }
+
+    public object[] GetArrayValue(Dictionary<string, object> details, string value)
+    {
+      return ToArray(GetValue(details, value));
     }
 
     public object GetValue(Dictionary<string, object> details, string value)

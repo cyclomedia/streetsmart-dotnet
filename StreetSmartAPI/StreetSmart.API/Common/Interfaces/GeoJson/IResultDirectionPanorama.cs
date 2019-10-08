@@ -16,23 +16,43 @@
  * License along with this library.
  */
 
-using System.Drawing;
+using System;
 
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
-  /// Result direction of the observation
+  /// Result direction of the observation of a panorama image
   /// </summary>
-  public interface IResultDirection
+  public interface IResultDirectionPanorama : IResultDirection
   {
     /// <summary>
-    /// ImageId
+    /// Direction
     /// </summary>
-    string Id { get; }
+    IDirection Direction { get; }
 
     /// <summary>
-    /// match image
+    /// GroundLevel offset
     /// </summary>
-    Image MatchImage { get; }
+    double GroundLevelOffset { get; }
+
+    /// <summary>
+    /// Orientation
+    /// </summary>
+    IProperty Orientation { get; }
+
+    /// <summary>
+    /// Position
+    /// </summary>
+    IPositionStdev Position { get; }
+
+    /// <summary>
+    /// RecordedAt
+    /// </summary>
+    DateTime? RecordedAt { get; }
+
+    /// <summary>
+    /// Calculated method
+    /// </summary>
+    CalculatedMethod CalculatedMethod { get; }
   }
 }
