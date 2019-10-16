@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Threading;
 
 using CefSharp;
 
@@ -37,18 +36,6 @@ namespace StreetSmart.Common.API
 {
   abstract class ViewerList: APIBase
   {
-    #region Tasks
-
-    private readonly EventWaitHandle _waitTask;
-
-    #endregion
-
-    #region Constants
-
-    private int MaxWaitTime = 1000;
-
-    #endregion
-
     #region Properties
 
     protected Dictionary<string, Viewer> Viewers { get; }
@@ -65,7 +52,6 @@ namespace StreetSmart.Common.API
 
     protected ViewerList()
     {
-      _waitTask = new AutoResetEvent(true);
       Viewers = new Dictionary<string, Viewer>();
     }
 
@@ -83,23 +69,32 @@ namespace StreetSmart.Common.API
 
     protected async Task<IViewer> RemoveViewerFromJsValue(string jsValue)
     {
-      _waitTask.WaitOne(MaxWaitTime);
-      _waitTask.Reset();
       Viewer result = null;
       string key = null;
       int processId = GetProcessId;
       string funcName = $"{nameof(RemoveViewerFromJsValue)}{processId}".ToQuote();
+      int nrViewers = Viewers.Count;
+      int i = -1;
 
-      foreach (var viewer in Viewers)
+      while (++i < Viewers.Count || nrViewers != Viewers.Count)
       {
-        string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
-                        {{result=true;}};{JsThis}.{JsThisResult}(result,{funcName});}}";
-        bool exists = ToBool(await CallJsAsync(script, processId));
-
-        if (exists)
+        if (nrViewers != Viewers.Count)
         {
-          result = viewer.Value;
-          key = viewer.Key;
+          i = -1;
+          nrViewers = Viewers.Count;
+        }
+        else
+        {
+          var viewer = Viewers.ElementAt(i);
+          string script = $@"{{let result=false;if({jsValue}==={viewer.Key})
+                        {{result=true;}};{JsThis}.{JsThisResult}(result,{funcName});}}";
+          bool exists = ToBool(await CallJsAsync(script, processId));
+
+          if (exists)
+          {
+            result = viewer.Value;
+            key = viewer.Key;
+          }
         }
       }
 
@@ -109,14 +104,11 @@ namespace StreetSmart.Common.API
         Viewers.Remove(key);
       }
 
-      _waitTask.Set();
       return result;
     }
 
     protected async Task<IList<IViewer>> GetViewersFromJsValue(string jsValue)
     {
-      _waitTask.WaitOne(MaxWaitTime);
-      _waitTask.Reset();
       IList<IViewer> result = new List<IViewer>();
       int processId = GetProcessId;
       string funcName = $"{nameof(GetViewersFromJsValue)}{processId}".ToQuote();
@@ -145,7 +137,6 @@ namespace StreetSmart.Common.API
         }
       }
 
-      _waitTask.Set();
       return result;
     }
 
