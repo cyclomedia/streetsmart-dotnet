@@ -1,8 +1,13 @@
 ﻿Release notes:
 ==============
 
+Version: 19.15.0
+================
+- a bug has been fixed that sometimes causes a crash if panorama viewers are closed very quickly.
+
+
 Version: 19.14.0
-===============
+================
 - Added interface functions: GetSidebarVisible, getSidebarEnabled, GetSidebarExpanded, TobbleSidebarExpanded, toggleSidebarVisible, toggleSidebarEnabled
 - Minor bug fixes of parsing of measurement information
 - Updated to CefSharp version 0.75
