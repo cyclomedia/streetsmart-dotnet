@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version: 19.16.0
+================
+- reverted to Cefsharp version 73.1.130 becauce some of problems with the ArcGisPro integration of version 75.1.142
+
+
 Version: 19.15.0
 ================
 - a bug has been fixed that sometimes causes a crash if panorama viewers are closed very quickly.
