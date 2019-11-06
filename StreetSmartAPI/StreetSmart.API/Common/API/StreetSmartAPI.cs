@@ -437,8 +437,8 @@ namespace StreetSmart.Common.API
       {
         _apiViewerEventList = new ApiEventList
         {
-          new ViewerEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
-          new ViewerEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
+          new ViewerAddedEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
+          new ViewerRemovedEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
           new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
         };
 

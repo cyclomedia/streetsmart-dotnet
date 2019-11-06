@@ -3,7 +3,8 @@
 
 Version: 19.16.0
 ================
-- reverted to Cefsharp version 73.1.130 becauce some of problems with the ArcGisPro integration of version 75.1.142
+- reverted to Cefsharp version 73.1.130 because of some problems with the ArcGisPro integration of version 75.1.142 of Cefsharp
+- fixed issue that sometimes a wrong close viewer is given to the viewerRemovedEvent
 
 
 Version: 19.15.0

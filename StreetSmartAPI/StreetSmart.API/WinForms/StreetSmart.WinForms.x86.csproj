@@ -149,8 +149,11 @@
     <Compile Include="..\Common\API\Events\StreetSmartApiEvent.cs">
       <Link>API\Events\StreetSmartApiEvent.cs</Link>
     </Compile>
-    <Compile Include="..\Common\API\Events\ViewerEvent.cs">
-      <Link>API\Events\ViewerEvent.cs</Link>
+    <Compile Include="..\Common\API\Events\ViewerAddedEvent.cs">
+      <Link>API\Events\ViewerAddedEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\ViewerRemovedEvent.cs">
+      <Link>API\Events\ViewerRemovedEvent.cs</Link>
     </Compile>
     <Compile Include="..\Common\API\Events\ViewerUpdateEvent.cs">
       <Link>API\Events\ViewerUpdateEvent.cs</Link>
