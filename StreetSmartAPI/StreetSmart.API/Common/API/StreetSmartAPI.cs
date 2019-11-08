@@ -238,10 +238,13 @@ namespace StreetSmart.Common.API
 
     public async Task Destroy(IOptions options)
     {
-      RemoveMeasurementEvents();
-      RemoveViewerEvents();
-      await CallJsGetScriptAsync($"destroy({options})");
-      ViewerList.ClearViewers(ApiId);
+      if (Browser.GetBrowser() != null)
+      {
+        RemoveMeasurementEvents();
+        RemoveViewerEvents();
+        await CallJsGetScriptAsync($"destroy({options})");
+        ViewerList.ClearViewers(ApiId);
+      }
     }
 
     public async Task<IFeatureCollection> GetActiveMeasurement()
@@ -442,7 +445,7 @@ namespace StreetSmart.Common.API
           new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
         };
 
-        Browser.ExecuteScriptAsync($"{_apiViewerEventList}");
+        Browser?.ExecuteScriptAsync($"{_apiViewerEventList}");
       }
     }
 
@@ -455,7 +458,7 @@ namespace StreetSmart.Common.API
           new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
         };
 
-        Browser.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+        Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
       }
     }
 
@@ -463,7 +466,7 @@ namespace StreetSmart.Common.API
     {
       if (_apiViewerEventList != null)
       {
-        Browser.ExecuteScriptAsync(_apiViewerEventList.Destroy);
+        Browser?.ExecuteScriptAsync(_apiViewerEventList.Destroy);
         _apiViewerEventList = null;
       }
     }
@@ -472,7 +475,7 @@ namespace StreetSmart.Common.API
     {
       if (_apiMeasurementEventList != null)
       {
-        Browser.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
+        Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
         _apiMeasurementEventList = null;
       }
     }
