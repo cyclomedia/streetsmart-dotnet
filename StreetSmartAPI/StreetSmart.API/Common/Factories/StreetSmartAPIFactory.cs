@@ -58,6 +58,16 @@ namespace StreetSmart.Common.Factories
     }
 
     /// <summary>
+    /// Initialize the api without creating an instance of it
+    /// </summary>
+    /// <param name="settings">The settings of CefSharp</param>
+    /// <param name="enableHighDPISupport">enableHighDPISupport, optional, default value = false</param>
+    public static void Initialize(IAPISettings settings = null, bool enableHighDPISupport = false)
+    {
+      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings, enableHighDPISupport);
+    }
+
+    /// <summary>
     /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
     /// <param name="settings">The settings of CefSharp</param>
@@ -75,7 +85,7 @@ namespace StreetSmart.Common.Factories
     /// <returns>API used to use and modify various StreetSmart components.</returns>
     public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null, bool enableHighDPISupport = false)
     {
-      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings, enableHighDPISupport);
+      Initialize(settings, enableHighDPISupport);
       return new StreetSmartAPI(streetSmartLocation);
     }
   }
