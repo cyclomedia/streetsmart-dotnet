@@ -306,6 +306,9 @@
     <Compile Include="..\Common\Data\GeoJson\RecordingInfo.cs">
       <Link>Data\GeoJson\RecordingInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\GeoJson\Resolution.cs">
+      <Link>Data\GeoJson\Resolution.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\GeoJson\ResultDirection.cs">
       <Link>Data\GeoJson\ResultDirection.cs</Link>
     </Compile>
@@ -449,6 +452,9 @@
     </Compile>
     <Compile Include="..\Common\Extensions\ColorExtensions.cs">
       <Link>Extensions\ColorExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Extensions\DateTimeExtensions.cs">
+      <Link>Extensions\DateTimeExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Common\Extensions\EnumExtensions.cs">
       <Link>Extensions\EnumExtensions.cs</Link>
@@ -725,6 +731,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IRecordingInfo.cs">
       <Link>Interfaces\GeoJson\IRecordingInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\GeoJson\IResolution.cs">
+      <Link>Interfaces\GeoJson\IResolution.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\GeoJson\IResultDirection.cs">
       <Link>Interfaces\GeoJson\IResultDirection.cs</Link>

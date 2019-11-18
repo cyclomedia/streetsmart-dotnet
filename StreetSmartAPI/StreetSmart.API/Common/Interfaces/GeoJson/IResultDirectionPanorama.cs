@@ -54,5 +54,10 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Calculated method
     /// </summary>
     CalculatedMethod CalculatedMethod { get; }
+
+    /// <summary>
+    /// Resolution
+    /// </summary>
+    IResolution Resolution { get; }
   }
 }

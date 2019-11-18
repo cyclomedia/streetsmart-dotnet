@@ -16,6 +16,8 @@
  * License along with this library.
  */
 
+using System;
+
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>
@@ -49,5 +51,15 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// Depth std dev
     /// </summary>
     double DepthStdev { get; }
+
+    /// <summary>
+    /// RecordedAt
+    /// </summary>
+    DateTime? RecordedAt { get; }
+
+    /// <summary>
+    /// Resolution
+    /// </summary>
+    IResolution Resolution { get; }
   }
 }

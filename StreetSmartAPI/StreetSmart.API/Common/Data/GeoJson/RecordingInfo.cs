@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -35,7 +36,9 @@ namespace StreetSmart.Common.Data.GeoJson
       var xyzStdev = GetListValue(recordingInfo, "xyzStdev");
       double yawStdev = ToDouble(recordingInfo, "yawStdev");
       DepthStdev = ToDouble(recordingInfo, "depthStdev");
+      RecordedAt = ToNullDateTime(recordingInfo, "recordedAt");
 
+      Resolution = new Resolution(recordingInfo);
       Position = new PositionStdev(xyz, xyzStdev);
       Yaw = new Property(yaw, yawStdev);
     }
@@ -49,6 +52,13 @@ namespace StreetSmart.Common.Data.GeoJson
         SRS = recordingInfo.SRS != null ? string.Copy(recordingInfo.SRS) : null;
         Yaw = new Property(recordingInfo.Yaw);
         DepthStdev = recordingInfo.DepthStdev;
+        Resolution = new Resolution(recordingInfo.Resolution);
+
+        if (recordingInfo.RecordedAt != null)
+        {
+          DateTime recordedAt = (DateTime) recordingInfo.RecordedAt;
+          RecordedAt = DateTime.FromBinary(recordedAt.ToBinary());
+        }
       }
     }
 
@@ -63,10 +73,17 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public double DepthStdev { get; }
 
+    public DateTime? RecordedAt { get; }
+
+    public IResolution Resolution { get; }
+
     public override string ToString()
     {
+      string jsDate = RecordedAt.ToJsDateTime();
+      string dateString = string.IsNullOrEmpty(jsDate) ? string.Empty : $",\"recordedAt\":\"{jsDate}\"";
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"id\":\"{Id}\",{Position},\"srs\":\"{SRS}\",\"yaw\":{Yaw?.Value?.ToString(ci)},\"yawStdev\":{Yaw?.Stdev?.ToString(ci)},\"depthStdev\":{DepthStdev.ToString(ci)}}}";
+      return
+        $"{{\"id\":\"{Id}\",{Position},\"srs\":\"{SRS}\",\"yaw\":{Yaw?.Value?.ToString(ci)},\"yawStdev\":{Yaw?.Stdev?.ToString(ci)},\"depthStdev\":{DepthStdev.ToString(ci)},{Resolution}{dateString}}}";
     }
   }
 }

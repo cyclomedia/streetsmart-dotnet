@@ -57,6 +57,7 @@ namespace StreetSmart.Common.Data.GeoJson
       double stdY = ToDouble(resultDirection, "StdY");
       double stdZ = ToDouble(resultDirection, "StdZ");
       Position = new PositionStdev(positionX, positionY, positionZ, stdX, stdY, stdZ);
+      Resolution = new Resolution(resultDirection);
     }
 
     public ResultDirectionPanorama(IResultDirectionPanorama resultDirection)
@@ -69,6 +70,7 @@ namespace StreetSmart.Common.Data.GeoJson
         Orientation = new Property(resultDirection.Orientation);
         Position = new PositionStdev(resultDirection.Position);
         CalculatedMethod = resultDirection.CalculatedMethod;
+        Resolution = new Resolution(resultDirection.Resolution);
 
         if (resultDirection.RecordedAt != null)
         {
@@ -90,13 +92,13 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public DateTime? RecordedAt { get; }
 
+    public IResolution Resolution { get; }
+
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      DateTimeFormatInfo ff = new DateTimeFormatInfo();
-      string dateString = RecordedAt == null
-        ? string.Empty
-        : $",\"RecordedAt\":\"{((DateTime) RecordedAt).ToString(ff.SortableDateTimePattern)}\"";
+      string jsDate = RecordedAt.ToJsDateTime();
+      string dateString = string.IsNullOrEmpty(jsDate) ? string.Empty : $",\"RecordedAt\":\"{jsDate}\"";
       string baseStr = base.ToString();
       string inputStr = baseStr.Substring(1, baseStr.Length - 2);
 
@@ -105,7 +107,7 @@ namespace StreetSmart.Common.Data.GeoJson
         $"\"GroundLevelOffset\":{GroundLevelOffset.ToString(ci)},{inputStr},\"Orientation\":{Orientation?.Value?.ToString(ci)}," +
         $"\"StdOrientation\":{Orientation?.Stdev?.ToString(ci)},\"PositionX\":{Position?.X?.ToString(ci)},\"PositionY\":{Position?.Y?.ToString(ci)}," +
         $"\"PositionZ\":{Position?.Z?.ToString(ci)},\"StdX\":{Position?.StdDev?.X?.ToString(ci)},\"StdY\":{Position?.StdDev?.Y?.ToString(ci)}," +
-        $"\"StdZ\":{Position?.StdDev?.Z?.ToString(ci)},\"calculationMethod\":\"{CalculatedMethod.Description()}\"{dateString}}}";
+        $"\"StdZ\":{Position?.StdDev?.Z?.ToString(ci)},\"calculationMethod\":\"{CalculatedMethod.Description()}\",{Resolution}{dateString}}}";
     }
   }
 }
