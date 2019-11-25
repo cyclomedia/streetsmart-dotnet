@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{955985A6-C770-4BAE-8966-4B0DAA3F42B4}"
 	ProjectSection(SolutionItems) = preProject
 		ReleaseNotes.txt = ReleaseNotes.txt
+		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.Demo.x86", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.x86.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"

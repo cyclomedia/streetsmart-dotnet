@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D05C286-B281-42D4-A3A9-618ED3512FD3}"
 	ProjectSection(SolutionItems) = preProject
 		ReleaseNotes.txt = ReleaseNotes.txt
+		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.x64", "StreetSmart.API\WinForms\StreetSmart.WinForms.x64.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
