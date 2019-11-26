@@ -60,6 +60,8 @@ namespace StreetSmart.Common.API
 
     public string Name { get; set; }
 
+    public string JsObjectCollection { set; private get; }
+
     protected override string CallFunctionBase => $"'{Name}',{Name}";
 
     public bool Destroyed { private get; set; }
@@ -138,6 +140,9 @@ namespace StreetSmart.Common.API
           break;
         case "@@ViewerType/OBLIQUE":
           viewerType = ViewerType.Oblique;
+          break;
+        case "@@ViewerType/POINTCLOUD":
+          viewerType = ViewerType.PointCloud;
           break;
       }
 
@@ -247,6 +252,12 @@ namespace StreetSmart.Common.API
       };
 
       Browser.ExecuteScriptAsync($"{_viewerEventList}");
+    }
+
+    public async Task DeleteJsObject()
+    {
+      string id = await GetId();
+      Browser.ExecuteScriptAsync($"delete {JsObjectCollection}['{id}'];");
     }
 
     #endregion

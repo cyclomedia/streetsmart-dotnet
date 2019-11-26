@@ -200,7 +200,7 @@ namespace StreetSmart.Common.API
       }
 
       IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, ToString(result));
+        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
       IViewer removedViewer = null;
 
       foreach (var viewer in viewerList)
@@ -228,7 +228,7 @@ namespace StreetSmart.Common.API
       object result = await CallJsAsync(script, processId);
 
       return await ViewerList.ToViewersFromJsValue(ApiId,
-        new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique}, ToString(result));
+        new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
     }
 
     public async Task RemoveOverlay(string layerId)
@@ -368,11 +368,12 @@ namespace StreetSmart.Common.API
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
-    public void OnViewerAdded(string name, string type)
+    public void OnViewerAdded(string id, string type, string name)
     {
       string jsName = $"type{Guid.NewGuid():N}";
-      Browser.ExecuteScriptAsync($"var {jsName}={name};");
+      Browser.ExecuteScriptAsync($"var {jsName}={name}['{id}'];");
       IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
+      ((Viewer) viewer).JsObjectCollection = name;
       ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
 
       if (viewer is PanoramaViewer)

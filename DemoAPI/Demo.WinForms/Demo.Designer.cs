@@ -31,12 +31,15 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
       this.plStreetSmart = new System.Windows.Forms.Panel();
       this.grOpenByQuery = new System.Windows.Forms.GroupBox();
+      this.cbPointCloud = new System.Windows.Forms.CheckBox();
       this.ckReplace = new System.Windows.Forms.CheckBox();
       this.txtOpenByQuery = new System.Windows.Forms.TextBox();
       this.cbPanorama = new System.Windows.Forms.CheckBox();
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.btnClosePointViewer = new System.Windows.Forms.Button();
+      this.btnCloseObliqueViewer = new System.Windows.Forms.Button();
       this.grPanoramaList = new System.Windows.Forms.GroupBox();
       this.lbPanoramaList = new System.Windows.Forms.ListBox();
       this.grColorOverlay = new System.Windows.Forms.GroupBox();
@@ -152,7 +155,7 @@
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.button1 = new System.Windows.Forms.Button();
+      this.grCloseViewers = new System.Windows.Forms.GroupBox();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grPanoramaList.SuspendLayout();
@@ -173,6 +176,7 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
+      this.grCloseViewers.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -188,6 +192,7 @@
       // 
       // grOpenByQuery
       // 
+      this.grOpenByQuery.Controls.Add(this.cbPointCloud);
       this.grOpenByQuery.Controls.Add(this.ckReplace);
       this.grOpenByQuery.Controls.Add(this.txtOpenByQuery);
       this.grOpenByQuery.Controls.Add(this.cbPanorama);
@@ -199,6 +204,18 @@
       this.grOpenByQuery.TabIndex = 0;
       this.grOpenByQuery.TabStop = false;
       this.grOpenByQuery.Text = "Open / Close Viewer";
+      // 
+      // cbPointCloud
+      // 
+      this.cbPointCloud.AutoSize = true;
+      this.cbPointCloud.Checked = true;
+      this.cbPointCloud.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.cbPointCloud.Location = new System.Drawing.Point(146, 97);
+      this.cbPointCloud.Name = "cbPointCloud";
+      this.cbPointCloud.Size = new System.Drawing.Size(80, 17);
+      this.cbPointCloud.TabIndex = 69;
+      this.cbPointCloud.Text = "Point Cloud";
+      this.cbPointCloud.UseVisualStyleBackColor = true;
       // 
       // ckReplace
       // 
@@ -226,7 +243,7 @@
       this.cbPanorama.AutoSize = true;
       this.cbPanorama.Checked = true;
       this.cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbPanorama.Location = new System.Drawing.Point(100, 95);
+      this.cbPanorama.Location = new System.Drawing.Point(73, 95);
       this.cbPanorama.Name = "cbPanorama";
       this.cbPanorama.Size = new System.Drawing.Size(74, 17);
       this.cbPanorama.TabIndex = 66;
@@ -257,6 +274,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grCloseViewers);
       this.plControl.Controls.Add(this.grPanoramaList);
       this.plControl.Controls.Add(this.grColorOverlay);
       this.plControl.Controls.Add(this.grSelectFeature);
@@ -281,6 +299,26 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(902, 701);
       this.plControl.TabIndex = 1;
+      // 
+      // btnClosePointViewer
+      // 
+      this.btnClosePointViewer.Location = new System.Drawing.Point(90, 15);
+      this.btnClosePointViewer.Name = "btnClosePointViewer";
+      this.btnClosePointViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnClosePointViewer.TabIndex = 73;
+      this.btnClosePointViewer.Text = "Close point. viewer";
+      this.btnClosePointViewer.UseVisualStyleBackColor = true;
+      this.btnClosePointViewer.Click += new System.EventHandler(this.btnClosePointViewer_Click);
+      // 
+      // btnCloseObliqueViewer
+      // 
+      this.btnCloseObliqueViewer.Location = new System.Drawing.Point(5, 15);
+      this.btnCloseObliqueViewer.Name = "btnCloseObliqueViewer";
+      this.btnCloseObliqueViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnCloseObliqueViewer.TabIndex = 72;
+      this.btnCloseObliqueViewer.Text = "Close obl. viewer";
+      this.btnCloseObliqueViewer.UseVisualStyleBackColor = true;
+      this.btnCloseObliqueViewer.Click += new System.EventHandler(this.btnCloseObliqueViewer_Click);
       // 
       // grPanoramaList
       // 
@@ -1191,7 +1229,6 @@
       // 
       // grViewerToggles
       // 
-      this.grViewerToggles.Controls.Add(this.button1);
       this.grViewerToggles.Controls.Add(this.btnToggleSidebarExpandable);
       this.grViewerToggles.Controls.Add(this.btnToggleSidebar);
       this.grViewerToggles.Controls.Add(this.btnToggle3DCursor);
@@ -1446,15 +1483,16 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // button1
+      // grCloseViewers
       // 
-      this.button1.Location = new System.Drawing.Point(5, 215);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(154, 22);
-      this.button1.TabIndex = 44;
-      this.button1.Text = "Toggle Sidebar visibility";
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.btnToggleSidebarVisibility_Click);
+      this.grCloseViewers.Controls.Add(this.btnCloseObliqueViewer);
+      this.grCloseViewers.Controls.Add(this.btnClosePointViewer);
+      this.grCloseViewers.Location = new System.Drawing.Point(700, 1);
+      this.grCloseViewers.Name = "grCloseViewers";
+      this.grCloseViewers.Size = new System.Drawing.Size(200, 120);
+      this.grCloseViewers.TabIndex = 74;
+      this.grCloseViewers.TabStop = false;
+      this.grCloseViewers.Text = "Close viewers";
       // 
       // Demo
       // 
@@ -1500,6 +1538,7 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
+      this.grCloseViewers.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -1630,6 +1669,10 @@
         private System.Windows.Forms.Button btnToggleSidebar;
         private System.Windows.Forms.Button btnToggleSidebarExpandable;
     private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.CheckBox cbPointCloud;
+    private System.Windows.Forms.Button btnClosePointViewer;
+    private System.Windows.Forms.Button btnCloseObliqueViewer;
+    private System.Windows.Forms.GroupBox grCloseViewers;
   }
 }
 

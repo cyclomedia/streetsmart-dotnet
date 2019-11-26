@@ -20,24 +20,38 @@ using System.Threading.Tasks;
 
 using StreetSmart.Common.Interfaces.API;
 
-namespace Demo.WinForms
+#if WINFORMS
+using CefSharp.WinForms;
+#else
+using CefSharp.Wpf;
+#endif
+
+namespace StreetSmart.Common.API
 {
-  class ViewerElement
+  internal sealed class PointCloudViewer : Viewer, IPointCloudViewer
   {
-    public IViewer Viewer { get; set; }
+    #region Constructors
 
-    private string _id;
-
-    public async Task AddViewer(IViewer viewer)
+    public PointCloudViewer(ChromiumWebBrowser browser, PointCloudViewerList pointCloudViewerList, string name)
+      : base(browser, pointCloudViewerList, name)
     {
-      Viewer = viewer;
-      _id = await viewer.GetId();
+      ConnectEvents();
     }
 
-    public override string ToString()
+    #endregion
+
+    #region Interface Functions
+
+    public async Task<bool> GetButtonEnabled(PointCloudViewerButtons buttonId)
     {
-      string type = Viewer is IObliqueViewer ? "O" : Viewer is IPanoramaViewer ? "P" : "C";
-      return $"({type}):{_id}";
+      return await base.GetButtonEnabled(buttonId);
     }
+
+    public void ToggleButtonEnabled(PointCloudViewerButtons buttonId, bool enabled)
+    {
+      base.ToggleButtonEnabled(buttonId, enabled);
+    }
+
+    #endregion
   }
 }

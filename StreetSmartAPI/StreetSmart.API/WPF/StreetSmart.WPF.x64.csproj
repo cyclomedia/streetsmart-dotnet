@@ -126,6 +126,12 @@
     <Compile Include="..\Common\API\PanoramaViewerList.cs">
       <Link>API\PanoramaViewerList.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\PointCloudViewer.cs">
+      <Link>API\PointCloudViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\PointCloudViewerList.cs">
+      <Link>API\PointCloudViewerList.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\StreetSmartAPI.cs">
       <Link>API\StreetSmartAPI.cs</Link>
     </Compile>
@@ -480,6 +486,9 @@
     <Compile Include="..\Common\Interfaces\API\IPanoramaViewer.cs">
       <Link>Interfaces\API\IPanoramaViewer.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\API\IPointCloudViewer.cs">
+      <Link>Interfaces\API\IPointCloudViewer.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\API\IStreetSmartAPI.cs">
       <Link>Interfaces\API\IStreetSmartAPI.cs</Link>
     </Compile>
@@ -491,6 +500,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\API\PanoramaViewerButtons.cs">
       <Link>Interfaces\API\PanoramaViewerButtons.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\PointCloudViewerButtons.cs">
+      <Link>Interfaces\API\PointCloudViewerButtons.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IAddressSettings.cs">
       <Link>Interfaces\Data\IAddressSettings.cs</Link>

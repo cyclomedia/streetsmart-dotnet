@@ -100,6 +100,7 @@ namespace StreetSmart.Common.API
 
       if (key != null)
       {
+        await result.DeleteJsObject();
         result.Destroyed = true;
         Viewers.Remove(key);
       }
@@ -190,7 +191,8 @@ namespace StreetSmart.Common.API
     private static readonly Dictionary<ViewerType, string> ToViewerTypes = new Dictionary<ViewerType, string>
     {
       { ViewerType.Panorama, PanoramaViewerList.Type },
-      { ViewerType.Oblique, ObliqueViewerList.Type }
+      { ViewerType.Oblique, ObliqueViewerList.Type },
+      { ViewerType.PointCloud, PointCloudViewerList.Type }
     };
 
     public static PanoramaViewerList GetPanoramaViewerList(string apiId)
@@ -205,7 +207,8 @@ namespace StreetSmart.Common.API
         ViewerLists.Add(apiId, new Dictionary<string, ViewerList>
         {
           {PanoramaViewerList.Type, new PanoramaViewerList()},
-          {ObliqueViewerList.Type, new ObliqueViewerList()}
+          {ObliqueViewerList.Type, new ObliqueViewerList()},
+          {PointCloudViewerList.Type, new PointCloudViewerList()}
         });
       }
     }

@@ -43,6 +43,7 @@ namespace Demo.WinForms
     private readonly IStreetSmartAPI _api;
     private readonly List<IPanoramaViewer> _panoramaViewers;
     private readonly List<IObliqueViewer> _obliqueViewers;
+    private readonly List<IPointCloudViewer> _pointCloudViewers;
     private readonly CultureInfo _ci;
     private readonly Login _login;
 
@@ -80,6 +81,22 @@ namespace Demo.WinForms
       }
     }
 
+    private IPointCloudViewer PointCloudViewer
+    {
+      get => _pointCloudViewers.Count == 0 ? null : _pointCloudViewers[_pointCloudViewers.Count - 1];
+      set
+      {
+        if (_pointCloudViewers.Count == 0)
+        {
+          _pointCloudViewers.Add(value);
+        }
+        else
+        {
+          _pointCloudViewers[_pointCloudViewers.Count - 1] = value;
+        }
+      }
+    }
+
     private int DeltaYawPitch
     {
       get
@@ -102,6 +119,7 @@ namespace Demo.WinForms
       _ci = CultureInfo.InvariantCulture;
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
+      _pointCloudViewers = new List<IPointCloudViewer>();
       _addressLayerOverlayVisible = true;
       txtOverlayColor.BackColor = Color.Blue;
 
@@ -142,6 +160,18 @@ namespace Demo.WinForms
       foreach (var obButton in obButtons)
       {
         cbViewerButton.Items.Add(new ViewerButtonsBox(obButton));
+      }
+
+      PointCloudViewerButtons[] pcButtons =
+      {
+        PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
+        PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
+        PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+      };
+
+      foreach (var pcButton in pcButtons)
+      {
+        cbViewerButton.Items.Add(new ViewerButtonsBox(pcButton));
       }
 
       PanoramaViewerButtons[] pnButtons =
@@ -221,6 +251,11 @@ namespace Demo.WinForms
       {
         _obliqueViewers.Add(obliqueViewer);
       }
+
+      if (viewer is IPointCloudViewer pointCloudViewer)
+      {
+        _pointCloudViewers.Add(pointCloudViewer);
+      }
     }
 
     private void OnViewerRemoved(object sender, IEventArgs<IViewer> args)
@@ -259,6 +294,11 @@ namespace Demo.WinForms
         if (viewer is IObliqueViewer obliqueViewer)
         {
           _obliqueViewers.Remove(obliqueViewer);
+        }
+
+        if (viewer is IPointCloudViewer pointCloudViewer)
+        {
+          _pointCloudViewers.Remove(pointCloudViewer);
         }
 
         if (remove != null)
@@ -490,6 +530,7 @@ namespace Demo.WinForms
         await _api.Destroy(_options);
         _panoramaViewers.Clear();
         _obliqueViewers.Clear();
+        _pointCloudViewers.Clear();
 
         LogInOut(true);
         DisableGroups();
@@ -576,6 +617,11 @@ namespace Demo.WinForms
         panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
+      if (cbPointCloud.Checked)
+      {
+        viewerTypes.Add(ViewerType.PointCloud);
+      }
+
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
@@ -601,6 +647,16 @@ namespace Demo.WinForms
             if (!_obliqueViewers.Contains(obliqueViewer))
             {
               MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IPointCloudViewer)
+          {
+            IPointCloudViewer pointCloudViewer = viewer as IPointCloudViewer;
+
+            if (!_pointCloudViewers.Contains(pointCloudViewer))
+            {
+              MessageBox.Show("point cloud viewer doesn't exists in the list");
             }
           }
         }
@@ -718,6 +774,11 @@ namespace Demo.WinForms
         panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
+      if (cbPointCloud.Checked)
+      {
+        viewerTypes.Add(ViewerType.PointCloud);
+      }
+
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
@@ -743,6 +804,16 @@ namespace Demo.WinForms
             if (!_obliqueViewers.Contains(obliqueViewer))
             {
               MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IPointCloudViewer)
+          {
+            IPointCloudViewer pointCloudViewer = viewer as IPointCloudViewer;
+
+            if (!_pointCloudViewers.Contains(pointCloudViewer))
+            {
+              MessageBox.Show("point cloud viewer doesn't exists in the list");
             }
           }
         }
@@ -771,6 +842,11 @@ namespace Demo.WinForms
       {
         viewerTypes.Add(ViewerType.Panorama);
         panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
+      }
+
+      if (cbPointCloud.Checked)
+      {
+        viewerTypes.Add(ViewerType.PointCloud);
       }
 
       try
@@ -802,6 +878,16 @@ namespace Demo.WinForms
             if (!_obliqueViewers.Contains(obliqueViewer))
             {
               MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IPointCloudViewer)
+          {
+            IPointCloudViewer pointCloudViewer = viewer as IPointCloudViewer;
+
+            if (!_pointCloudViewers.Contains(pointCloudViewer))
+            {
+              MessageBox.Show("point cloud viewer doesn't exists in the list");
             }
           }
         }
@@ -842,6 +928,11 @@ namespace Demo.WinForms
         panoramaViewerOptions = PanoramaViewerOptionsFactory.Create(true, true, true, true, ckReplace.Checked, true);
       }
 
+      if (cbPointCloud.Checked)
+      {
+        viewerTypes.Add(ViewerType.PointCloud);
+      }
+
       try
       {
         IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, txtSrs.Text,
@@ -867,6 +958,16 @@ namespace Demo.WinForms
             if (!_obliqueViewers.Contains(obliqueViewer))
             {
               MessageBox.Show("oblique viewer doesn't exists in the list");
+            }
+          }
+
+          if (viewer is IPointCloudViewer)
+          {
+            IPointCloudViewer pointCloudViewer = viewer as IPointCloudViewer;
+
+            if (!_pointCloudViewers.Contains(pointCloudViewer))
+            {
+              MessageBox.Show("point cloud viewer doesn't exists in the list");
             }
           }
         }
@@ -997,6 +1098,22 @@ namespace Demo.WinForms
         }
       }
 
+      if (PointCloudViewer != null)
+      {
+        PointCloudViewerButtons[] buttons =
+        {
+          PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
+          PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
+          PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+        };
+
+        foreach (var button in buttons)
+        {
+          bool enabled = await PointCloudViewer.GetButtonEnabled(button);
+          txtRecordingViewerColorPermissions.Text += $@"Point cloud viewer: {button}: {enabled}{Environment.NewLine}";
+        }
+      }
+
       if (PanoramaViewer != null)
       {
         PanoramaViewerButtons[] buttons =
@@ -1024,6 +1141,12 @@ namespace Demo.WinForms
       {
         bool enabled = await ObliqueViewer.GetButtonEnabled(ovButtons);
         ObliqueViewer.ToggleButtonEnabled(ovButtons, !enabled);
+      }
+
+      if (selectedItem is PointCloudViewerButtons pcButtons && PointCloudViewer != null)
+      {
+        bool enabled = await PointCloudViewer.GetButtonEnabled(pcButtons);
+        PointCloudViewer.ToggleButtonEnabled(pcButtons, !enabled);
       }
 
       if (selectedItem is PanoramaViewerButtons pvButtons && PanoramaViewer != null)
@@ -1311,6 +1434,10 @@ namespace Demo.WinForms
         {
           ObliqueViewer = obliqueViewer;
         }
+        else if (element.Viewer is IPointCloudViewer pointCloudViewer)
+        {
+          PointCloudViewer = pointCloudViewer;
+        }
       }
     }
 
@@ -1330,6 +1457,24 @@ namespace Demo.WinForms
     {
       bool visible = await PanoramaViewer.GetSidebarVisible();
       PanoramaViewer.ToggleSidebarVisible(!visible);
+    }
+
+    private async void btnCloseObliqueViewer_Click(object sender, EventArgs e)
+    {
+      if (ObliqueViewer != null)
+      {
+        string viewerId = await ObliqueViewer.GetId();
+        await _api.CloseViewer(viewerId);
+      }
+    }
+
+    private async void btnClosePointViewer_Click(object sender, EventArgs e)
+    {
+      if (PointCloudViewer != null)
+      {
+        string viewerId = await PointCloudViewer.GetId();
+        await _api.CloseViewer(viewerId);
+      }
     }
   }
 }

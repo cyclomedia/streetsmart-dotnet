@@ -18,29 +18,47 @@
 
 using System.ComponentModel;
 
-namespace StreetSmart.Common.Interfaces.Data
+namespace StreetSmart.Common.Interfaces.API
 {
   /// <summary>
-  /// Defines the viewerTypes of the API
+  /// Defines the oblique viewer buttons
   /// </summary>
-  public enum ViewerType
+  public enum PointCloudViewerButtons
   {
     /// <summary>
-    /// Panoramic image
+    /// measure
     /// </summary>
-    [Description("ViewerType.PANORAMA")]
-    Panorama = 1,
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.MEASURE")]
+    Measure = 1,
 
     /// <summary>
-    /// Oblique image
+    /// image information
     /// </summary>
-    [Description("ViewerType.OBLIQUE")]
-    Oblique = 2,
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.IMAGE_INFORMATION")]
+    ImageInformation = 2,
 
     /// <summary>
-    /// Point cloud viewer
+    /// overlays
     /// </summary>
-    [Description("ViewerType.POINTCLOUD")]
-    PointCloud = 3
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.OVERLAYS")]
+    Overlays = 3,
+
+    /// <summary>
+    /// sections
+    /// </summary>
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.SECTIONS")]
+    Sections = 4,
+
+    /// <summary>
+    /// display
+    /// </summary>
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.DISPLAY")]
+    Display = 5,
+
+    /// <summary>
+    /// download
+    /// </summary>
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.DOWNLOAD")]
+    Download = 6
   }
 }

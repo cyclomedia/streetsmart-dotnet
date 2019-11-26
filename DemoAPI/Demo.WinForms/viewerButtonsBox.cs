@@ -34,9 +34,14 @@ namespace Demo.WinForms
       ButtonId = buttonId;
     }
 
+    public ViewerButtonsBox(PointCloudViewerButtons buttonId)
+    {
+      ButtonId = buttonId;
+    }
+
     public override string ToString()
     {
-      string type = ButtonId is ObliqueViewerButtons ? "oblique" : "panorama";
+      string type = ButtonId is ObliqueViewerButtons ? "oblique" : ButtonId is PanoramaViewerButtons ? "panorama" : "point cloud";
       return $"{type}:{ButtonId}";
     }
   }

@@ -16,21 +16,25 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
+using StreetSmart.Common.Interfaces.API;
+
+namespace StreetSmart.Common.API
 {
-  internal class ViewerRemovedEvent: StreetSmartApiEvent
+  internal class PointCloudViewerList : ViewerList
   {
-    private string TempType => $"temp{Type}";
+    #region Properties
 
-    public ViewerRemovedEvent(StreetSmartAPI api, string type, string funcName)
-      : base(api, type, funcName, "viewer")
+    public static string Type => "@@ViewerType/POINTCLOUD";
+
+    #endregion
+
+    #region Functions
+
+    public override IViewer AddViewer(string name)
     {
+      return RegisterViewer(new PointCloudViewer(Browser, this, name));
     }
 
-    public override string ToString()
-    {
-      return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{TempType}=e.detail.viewer;if({TempType}!==undefined&&{TempType}!==null){{{JsThis}.{FuncName}({TempType}.getId(),{TempType}.getType());}}}});";
-    }
+    #endregion
   }
 }

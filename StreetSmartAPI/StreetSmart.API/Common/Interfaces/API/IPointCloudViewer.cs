@@ -16,21 +16,28 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
+using System.Threading.Tasks;
+
+namespace StreetSmart.Common.Interfaces.API
 {
-  internal class ViewerRemovedEvent: StreetSmartApiEvent
+  /// <inheritdoc />
+  /// <summary>
+  /// ObliqueViewer component. Gets created by the StreetSmartAPI.
+  /// </summary>
+  public interface IPointCloudViewer : IViewer
   {
-    private string TempType => $"temp{Type}";
+    /// <summary>
+    /// Get the visibility of a button
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <returns></returns>
+    Task<bool> GetButtonEnabled(PointCloudViewerButtons buttonId);
 
-    public ViewerRemovedEvent(StreetSmartAPI api, string type, string funcName)
-      : base(api, type, funcName, "viewer")
-    {
-    }
-
-    public override string ToString()
-    {
-      return $@"var {TempType};{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{TempType}=e.detail.viewer;if({TempType}!==undefined&&{TempType}!==null){{{JsThis}.{FuncName}({TempType}.getId(),{TempType}.getType());}}}});";
-    }
+    /// <summary>
+    /// Toggle the visibility of a button.
+    /// </summary>
+    /// <param name="buttonId"></param>
+    /// <param name="enabled">if available, sets enabled to this value</param>
+    void ToggleButtonEnabled(PointCloudViewerButtons buttonId, bool enabled);
   }
 }
