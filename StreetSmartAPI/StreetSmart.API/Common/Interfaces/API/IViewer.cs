@@ -16,11 +16,9 @@
  * License along with this library.
  */
 
-using System;
 using System.Threading.Tasks;
 
 using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.Interfaces.API
 {
@@ -30,11 +28,6 @@ namespace StreetSmart.Common.Interfaces.API
   public interface IViewer
   {
     #region Interface functions
-
-    /// <summary>
-    /// Triggers when the elevation is changed
-    /// </summary>
-    event EventHandler<IEventArgs<ILayerInfo>> LayerVisibilityChange;
 
     /// <summary>
     /// Returns the viewerId of the viewer
@@ -57,41 +50,10 @@ namespace StreetSmart.Common.Interfaces.API
     Task<bool> GetNavbarVisible();
 
     /// <summary>
-    /// Returns whether the timetravel component is visible or hidden.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>Whether the timetravel component is visible or hidden.</returns>
-    Task<bool> GetTimeTravelExpanded();
-
-    /// <summary>
-    /// Returns whether timetravel is enabled for the viewer.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>Whether timetravel is enabled for the viewer.</returns>
-    Task<bool> GetTimeTravelVisible();
-
-    /// <summary>
     /// Returns the type of this viewer.
     /// </summary>
     /// <returns>The type of this viewer..</returns>
     Task<ViewerType> GetType();
-
-    /// <summary>
-    /// Downloads the image
-    /// </summary>
-    void SaveImage();
-
-    /// <summary>
-    /// Set the brightness of the viewer.
-    /// </summary>
-    /// <param name="value">Set brightness to a positive number</param>
-    void SetBrightness(double value);
-
-    /// <summary>
-    /// Set the contrast of the viewer.
-    /// </summary>
-    /// <param name="value">Set contrast to a positive number</param>
-    void SetContrast(double value);
 
     /// <summary>
     /// Modify the state of navbar expanded in the panorama viewer store.
@@ -104,34 +66,6 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>
     void ToggleNavbarVisible(bool visible);
-
-    /// <summary>
-    /// Toggles the visibility of an overlay.
-    /// </summary>
-    /// <param name="overlay">Sets the visibility of the layer to this value.</param>
-    void ToggleOverlay(IOverlay overlay);
-
-    /// <summary>
-    /// Expands or hides the timetravel components.
-    /// </summary>
-    /// <param name="expanded">Value for expanding or hiding time travel.</param>
-    void ToggleTimeTravelExpanded(bool expanded);
-
-    /// <summary>
-    /// Enables or disables timeTravel in the viewer.
-    /// </summary>
-    /// <param name="visible">Value for enabling or disablingtoggles time travel.</param>
-    void ToggleTimeTravelVisible(bool visible);
-
-    /// <summary>
-    /// Zoom in in the Panorama. This will alter the hFov.
-    /// </summary>
-    void ZoomIn();
-
-    /// <summary>
-    /// Zoom out in the Panorama. This will alter the hFov.
-    /// </summary>
-    void ZoomOut();
 
     #endregion
   }

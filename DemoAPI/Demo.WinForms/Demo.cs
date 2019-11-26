@@ -216,7 +216,11 @@ namespace Demo.WinForms
       string text = "Viewer added";
       AddViewerEventsText(text);
       IViewer viewer = args.Value;
-      viewer.LayerVisibilityChange += OnLayerVisibilityChange;
+
+      if (viewer is IImageViewer imageViewer)
+      {
+        imageViewer.LayerVisibilityChange += OnLayerVisibilityChange;
+      }
 
       ViewerElement viewerElement = new ViewerElement();
       await viewerElement.AddViewer(viewer);
@@ -266,7 +270,11 @@ namespace Demo.WinForms
 
       if (viewer != null)
       {
-        viewer.LayerVisibilityChange -= OnLayerVisibilityChange;
+        if (viewer is IImageViewer imageViewer)
+        {
+          imageViewer.LayerVisibilityChange -= OnLayerVisibilityChange;
+        }
+
         ViewerElement remove = null;
 
         foreach (var item in lbPanoramaList.Items)
@@ -734,14 +742,14 @@ namespace Demo.WinForms
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await PanoramaViewer.GetNavbarVisible();
-      PanoramaViewer.ToggleNavbarVisible(!visible);
+      bool visible = await _viewer.GetNavbarVisible();
+      _viewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await PanoramaViewer.GetNavbarExpanded();
-      PanoramaViewer.ToggleNavbarExpanded(!expanded);
+      bool expanded = await _viewer.GetNavbarExpanded();
+      _viewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
@@ -1475,6 +1483,12 @@ namespace Demo.WinForms
         string viewerId = await PointCloudViewer.GetId();
         await _api.CloseViewer(viewerId);
       }
+    }
+
+    private async void btnGetType_Click(object sender, EventArgs e)
+    {
+      ViewerType type = await _viewer.GetType();
+      MessageBox.Show($"Get viewer type: {type}");
     }
   }
 }

@@ -30,7 +30,7 @@ namespace StreetSmart.Common.Interfaces.API
   /// <summary>
   /// PanoramaViewer component. Gets created by the StreetSmartAPI.
   /// </summary>
-  public interface IPanoramaViewer : IViewer
+  public interface IPanoramaViewer : IImageViewer
   {
     #region Interface events
 

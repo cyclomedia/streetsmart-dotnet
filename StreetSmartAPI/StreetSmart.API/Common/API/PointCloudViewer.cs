@@ -35,7 +35,7 @@ namespace StreetSmart.Common.API
     public PointCloudViewer(ChromiumWebBrowser browser, PointCloudViewerList pointCloudViewerList, string name)
       : base(browser, pointCloudViewerList, name)
     {
-      ConnectEvents();
+      // nothing to do
     }
 
     #endregion

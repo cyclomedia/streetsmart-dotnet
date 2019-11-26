@@ -177,7 +177,7 @@ namespace StreetSmart.Common.API
     {
       if (Viewers.ContainsKey(name))
       {
-        Viewers[name]?.OnLayerVisibilityChange(args);
+        (Viewers[name] as ImageViewer)?.OnLayerVisibilityChange(args);
       }
     }
 

@@ -30,7 +30,7 @@ using CefSharp.Wpf;
 
 namespace StreetSmart.Common.API
 {
-  internal sealed class ObliqueViewer : Viewer, IObliqueViewer
+  internal sealed class ObliqueViewer : ImageViewer, IObliqueViewer
   {
     #region Constructors
 

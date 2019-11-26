@@ -24,7 +24,7 @@ namespace StreetSmart.Common.Interfaces.API
   /// <summary>
   /// ObliqueViewer component. Gets created by the StreetSmartAPI.
   /// </summary>
-  public interface IObliqueViewer : IViewer
+  public interface IObliqueViewer : IImageViewer
   {
     /// <summary>
     /// Get the visibility of a button
