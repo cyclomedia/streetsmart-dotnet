@@ -121,7 +121,7 @@
     <value>en-US</value>
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>https://labs.cyclomedia.com/streetsmart-api/branch/pointcloud-in-api-develop/api-dotnet.html</value>
+    <value />
     <comment>https://labs.cyclomedia.com/streetsmart-api/branch/develop/api-dotnet.html</comment>
   </data>
   <data name="ConfigurationUrl" xml:space="preserve">

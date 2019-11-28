@@ -1,6 +1,12 @@
 ﻿Release notes:
 ==============
 
+
+Version: 19.18.0
+================
+- Implemented all the point cloud functions + events + viewers
+
+
 Version: 19.17.0
 ================
 - added the public function: Initialize() in the StreetSmartAPIFactory class
