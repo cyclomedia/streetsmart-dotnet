@@ -39,6 +39,9 @@
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
       this.grCloseViewers = new System.Windows.Forms.GroupBox();
+      this.btnSetPointStyle = new System.Windows.Forms.Button();
+      this.cbPointStyle = new System.Windows.Forms.ComboBox();
+      this.btnGetPointStyle = new System.Windows.Forms.Button();
       this.btnCloseObliqueViewer = new System.Windows.Forms.Button();
       this.btnClosePointViewer = new System.Windows.Forms.Button();
       this.grPanoramaList = new System.Windows.Forms.GroupBox();
@@ -116,6 +119,18 @@
       this.btnOpenByImageId = new System.Windows.Forms.Button();
       this.txtImageId = new System.Windows.Forms.TextBox();
       this.grCoordinate = new System.Windows.Forms.GroupBox();
+      this.btnSetPointSize = new System.Windows.Forms.Button();
+      this.txtPointSize = new System.Windows.Forms.TextBox();
+      this.btnGetPointSize = new System.Windows.Forms.Button();
+      this.btnSetPointBudget = new System.Windows.Forms.Button();
+      this.cbPointBudget = new System.Windows.Forms.ComboBox();
+      this.btnGetPointBudget = new System.Windows.Forms.Button();
+      this.btnEdges = new System.Windows.Forms.Button();
+      this.btnCameraPosition = new System.Windows.Forms.Button();
+      this.txtlkAtX = new System.Windows.Forms.TextBox();
+      this.txtlkAtY = new System.Windows.Forms.TextBox();
+      this.txtlkAtZ = new System.Windows.Forms.TextBox();
+      this.btnFlyTo = new System.Windows.Forms.Button();
       this.txtX = new System.Windows.Forms.TextBox();
       this.txtY = new System.Windows.Forms.TextBox();
       this.txtZ = new System.Windows.Forms.TextBox();
@@ -131,6 +146,7 @@
       this.btnApplicationVersion = new System.Windows.Forms.Button();
       this.btnApplicationName = new System.Windows.Forms.Button();
       this.grViewerToggles = new System.Windows.Forms.GroupBox();
+      this.btnGetType = new System.Windows.Forms.Button();
       this.btnToggleSidebarExpandable = new System.Windows.Forms.Button();
       this.btnToggleSidebar = new System.Windows.Forms.Button();
       this.btnToggle3DCursor = new System.Windows.Forms.Button();
@@ -156,7 +172,11 @@
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.btnGetType = new System.Windows.Forms.Button();
+      this.btnPointCloudLookAt = new System.Windows.Forms.Button();
+      this.btnDown = new System.Windows.Forms.Button();
+      this.btnLeft = new System.Windows.Forms.Button();
+      this.btnRight = new System.Windows.Forms.Button();
+      this.btnUp = new System.Windows.Forms.Button();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grCloseViewers.SuspendLayout();
@@ -303,6 +323,14 @@
       // 
       // grCloseViewers
       // 
+      this.grCloseViewers.Controls.Add(this.btnUp);
+      this.grCloseViewers.Controls.Add(this.btnRight);
+      this.grCloseViewers.Controls.Add(this.btnLeft);
+      this.grCloseViewers.Controls.Add(this.btnDown);
+      this.grCloseViewers.Controls.Add(this.btnPointCloudLookAt);
+      this.grCloseViewers.Controls.Add(this.btnSetPointStyle);
+      this.grCloseViewers.Controls.Add(this.cbPointStyle);
+      this.grCloseViewers.Controls.Add(this.btnGetPointStyle);
       this.grCloseViewers.Controls.Add(this.btnCloseObliqueViewer);
       this.grCloseViewers.Controls.Add(this.btnClosePointViewer);
       this.grCloseViewers.Location = new System.Drawing.Point(700, 1);
@@ -311,6 +339,34 @@
       this.grCloseViewers.TabIndex = 74;
       this.grCloseViewers.TabStop = false;
       this.grCloseViewers.Text = "Close viewers";
+      // 
+      // btnSetPointStyle
+      // 
+      this.btnSetPointStyle.Location = new System.Drawing.Point(95, 58);
+      this.btnSetPointStyle.Name = "btnSetPointStyle";
+      this.btnSetPointStyle.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointStyle.TabIndex = 76;
+      this.btnSetPointStyle.Text = "Set";
+      this.btnSetPointStyle.UseVisualStyleBackColor = true;
+      this.btnSetPointStyle.Click += new System.EventHandler(this.btnSetPointStyle_Click);
+      // 
+      // cbPointStyle
+      // 
+      this.cbPointStyle.FormattingEnabled = true;
+      this.cbPointStyle.Location = new System.Drawing.Point(50, 61);
+      this.cbPointStyle.Name = "cbPointStyle";
+      this.cbPointStyle.Size = new System.Drawing.Size(40, 21);
+      this.cbPointStyle.TabIndex = 75;
+      // 
+      // btnGetPointStyle
+      // 
+      this.btnGetPointStyle.Location = new System.Drawing.Point(5, 58);
+      this.btnGetPointStyle.Name = "btnGetPointStyle";
+      this.btnGetPointStyle.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointStyle.TabIndex = 74;
+      this.btnGetPointStyle.Text = "Get";
+      this.btnGetPointStyle.UseVisualStyleBackColor = true;
+      this.btnGetPointStyle.Click += new System.EventHandler(this.btnGetPointStyle_Click);
       // 
       // btnCloseObliqueViewer
       // 
@@ -1094,6 +1150,18 @@
       // 
       // grCoordinate
       // 
+      this.grCoordinate.Controls.Add(this.btnSetPointSize);
+      this.grCoordinate.Controls.Add(this.txtPointSize);
+      this.grCoordinate.Controls.Add(this.btnGetPointSize);
+      this.grCoordinate.Controls.Add(this.btnSetPointBudget);
+      this.grCoordinate.Controls.Add(this.cbPointBudget);
+      this.grCoordinate.Controls.Add(this.btnGetPointBudget);
+      this.grCoordinate.Controls.Add(this.btnEdges);
+      this.grCoordinate.Controls.Add(this.btnCameraPosition);
+      this.grCoordinate.Controls.Add(this.txtlkAtX);
+      this.grCoordinate.Controls.Add(this.txtlkAtY);
+      this.grCoordinate.Controls.Add(this.txtlkAtZ);
+      this.grCoordinate.Controls.Add(this.btnFlyTo);
       this.grCoordinate.Controls.Add(this.txtX);
       this.grCoordinate.Controls.Add(this.txtY);
       this.grCoordinate.Controls.Add(this.txtZ);
@@ -1104,16 +1172,126 @@
       this.grCoordinate.Controls.Add(this.btnLookAtCoordinate);
       this.grCoordinate.Location = new System.Drawing.Point(484, 124);
       this.grCoordinate.Name = "grCoordinate";
-      this.grCoordinate.Size = new System.Drawing.Size(240, 90);
+      this.grCoordinate.Size = new System.Drawing.Size(415, 90);
       this.grCoordinate.TabIndex = 0;
       this.grCoordinate.TabStop = false;
       this.grCoordinate.Text = "Coordinate";
+      // 
+      // btnSetPointSize
+      // 
+      this.btnSetPointSize.Location = new System.Drawing.Point(375, 39);
+      this.btnSetPointSize.Name = "btnSetPointSize";
+      this.btnSetPointSize.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointSize.TabIndex = 56;
+      this.btnSetPointSize.Text = "Set";
+      this.btnSetPointSize.UseVisualStyleBackColor = true;
+      this.btnSetPointSize.Click += new System.EventHandler(this.btnSetPointSize_Click);
+      // 
+      // txtPointSize
+      // 
+      this.txtPointSize.Location = new System.Drawing.Point(330, 42);
+      this.txtPointSize.Name = "txtPointSize";
+      this.txtPointSize.Size = new System.Drawing.Size(40, 20);
+      this.txtPointSize.TabIndex = 55;
+      this.txtPointSize.Text = "0";
+      // 
+      // btnGetPointSize
+      // 
+      this.btnGetPointSize.Location = new System.Drawing.Point(285, 39);
+      this.btnGetPointSize.Name = "btnGetPointSize";
+      this.btnGetPointSize.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointSize.TabIndex = 54;
+      this.btnGetPointSize.Text = "Get";
+      this.btnGetPointSize.UseVisualStyleBackColor = true;
+      this.btnGetPointSize.Click += new System.EventHandler(this.btnGetPointSize_Click);
+      // 
+      // btnSetPointBudget
+      // 
+      this.btnSetPointBudget.Location = new System.Drawing.Point(375, 62);
+      this.btnSetPointBudget.Name = "btnSetPointBudget";
+      this.btnSetPointBudget.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointBudget.TabIndex = 53;
+      this.btnSetPointBudget.Text = "Set";
+      this.btnSetPointBudget.UseVisualStyleBackColor = true;
+      this.btnSetPointBudget.Click += new System.EventHandler(this.btnSetPointBudget_Click);
+      // 
+      // cbPointBudget
+      // 
+      this.cbPointBudget.FormattingEnabled = true;
+      this.cbPointBudget.Location = new System.Drawing.Point(330, 65);
+      this.cbPointBudget.Name = "cbPointBudget";
+      this.cbPointBudget.Size = new System.Drawing.Size(40, 21);
+      this.cbPointBudget.TabIndex = 52;
+      // 
+      // btnGetPointBudget
+      // 
+      this.btnGetPointBudget.Location = new System.Drawing.Point(285, 62);
+      this.btnGetPointBudget.Name = "btnGetPointBudget";
+      this.btnGetPointBudget.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointBudget.TabIndex = 51;
+      this.btnGetPointBudget.Text = "Get";
+      this.btnGetPointBudget.UseVisualStyleBackColor = true;
+      this.btnGetPointBudget.Click += new System.EventHandler(this.btnGetPointBudget_Click);
+      // 
+      // btnEdges
+      // 
+      this.btnEdges.Location = new System.Drawing.Point(375, 15);
+      this.btnEdges.Name = "btnEdges";
+      this.btnEdges.Size = new System.Drawing.Size(40, 25);
+      this.btnEdges.TabIndex = 50;
+      this.btnEdges.Text = "Edges";
+      this.btnEdges.UseVisualStyleBackColor = true;
+      this.btnEdges.Click += new System.EventHandler(this.btnEdges_Click);
+      // 
+      // btnCameraPosition
+      // 
+      this.btnCameraPosition.Location = new System.Drawing.Point(330, 15);
+      this.btnCameraPosition.Name = "btnCameraPosition";
+      this.btnCameraPosition.Size = new System.Drawing.Size(40, 25);
+      this.btnCameraPosition.TabIndex = 49;
+      this.btnCameraPosition.Text = "Pos";
+      this.btnCameraPosition.UseVisualStyleBackColor = true;
+      this.btnCameraPosition.Click += new System.EventHandler(this.btnCameraPosition_Click);
+      // 
+      // txtlkAtX
+      // 
+      this.txtlkAtX.Location = new System.Drawing.Point(215, 15);
+      this.txtlkAtX.Name = "txtlkAtX";
+      this.txtlkAtX.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtX.TabIndex = 46;
+      this.txtlkAtX.Text = "160855.585";
+      // 
+      // txtlkAtY
+      // 
+      this.txtlkAtY.Location = new System.Drawing.Point(215, 40);
+      this.txtlkAtY.Name = "txtlkAtY";
+      this.txtlkAtY.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtY.TabIndex = 47;
+      this.txtlkAtY.Text = "383928.326";
+      // 
+      // txtlkAtZ
+      // 
+      this.txtlkAtZ.Location = new System.Drawing.Point(215, 65);
+      this.txtlkAtZ.Name = "txtlkAtZ";
+      this.txtlkAtZ.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtZ.TabIndex = 48;
+      this.txtlkAtZ.Text = "4.5";
+      // 
+      // btnFlyTo
+      // 
+      this.btnFlyTo.Location = new System.Drawing.Point(285, 15);
+      this.btnFlyTo.Name = "btnFlyTo";
+      this.btnFlyTo.Size = new System.Drawing.Size(40, 25);
+      this.btnFlyTo.TabIndex = 45;
+      this.btnFlyTo.Text = "Fly to";
+      this.btnFlyTo.UseVisualStyleBackColor = true;
+      this.btnFlyTo.Click += new System.EventHandler(this.btnFlyTo_Click);
       // 
       // txtX
       // 
       this.txtX.Location = new System.Drawing.Point(145, 15);
       this.txtX.Name = "txtX";
-      this.txtX.Size = new System.Drawing.Size(90, 20);
+      this.txtX.Size = new System.Drawing.Size(65, 20);
       this.txtX.TabIndex = 30;
       this.txtX.Text = "160850.585";
       // 
@@ -1121,7 +1299,7 @@
       // 
       this.txtY.Location = new System.Drawing.Point(145, 40);
       this.txtY.Name = "txtY";
-      this.txtY.Size = new System.Drawing.Size(90, 20);
+      this.txtY.Size = new System.Drawing.Size(65, 20);
       this.txtY.TabIndex = 31;
       this.txtY.Text = "383923.326";
       // 
@@ -1129,8 +1307,9 @@
       // 
       this.txtZ.Location = new System.Drawing.Point(145, 65);
       this.txtZ.Name = "txtZ";
-      this.txtZ.Size = new System.Drawing.Size(90, 20);
+      this.txtZ.Size = new System.Drawing.Size(65, 20);
       this.txtZ.TabIndex = 32;
+      this.txtZ.Text = "4.0";
       // 
       // lblX
       // 
@@ -1256,6 +1435,16 @@
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
+      // 
+      // btnGetType
+      // 
+      this.btnGetType.Location = new System.Drawing.Point(5, 215);
+      this.btnGetType.Name = "btnGetType";
+      this.btnGetType.Size = new System.Drawing.Size(154, 22);
+      this.btnGetType.TabIndex = 44;
+      this.btnGetType.Text = "Get viewer type";
+      this.btnGetType.UseVisualStyleBackColor = true;
+      this.btnGetType.Click += new System.EventHandler(this.btnGetType_Click);
       // 
       // btnToggleSidebarExpandable
       // 
@@ -1496,15 +1685,55 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // btnGetType
+      // btnPointCloudLookAt
       // 
-      this.btnGetType.Location = new System.Drawing.Point(5, 215);
-      this.btnGetType.Name = "btnGetType";
-      this.btnGetType.Size = new System.Drawing.Size(154, 22);
-      this.btnGetType.TabIndex = 44;
-      this.btnGetType.Text = "Get viewer type";
-      this.btnGetType.UseVisualStyleBackColor = true;
-      this.btnGetType.Click += new System.EventHandler(this.btnGetType_Click);
+      this.btnPointCloudLookAt.Location = new System.Drawing.Point(136, 58);
+      this.btnPointCloudLookAt.Name = "btnPointCloudLookAt";
+      this.btnPointCloudLookAt.Size = new System.Drawing.Size(55, 25);
+      this.btnPointCloudLookAt.TabIndex = 77;
+      this.btnPointCloudLookAt.Text = "Look At";
+      this.btnPointCloudLookAt.UseVisualStyleBackColor = true;
+      this.btnPointCloudLookAt.Click += new System.EventHandler(this.btnPointCloudLookAt_Click);
+      // 
+      // btnDown
+      // 
+      this.btnDown.Location = new System.Drawing.Point(5, 87);
+      this.btnDown.Name = "btnDown";
+      this.btnDown.Size = new System.Drawing.Size(40, 25);
+      this.btnDown.TabIndex = 78;
+      this.btnDown.Text = "Down";
+      this.btnDown.UseVisualStyleBackColor = true;
+      this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+      // 
+      // btnLeft
+      // 
+      this.btnLeft.Location = new System.Drawing.Point(50, 86);
+      this.btnLeft.Name = "btnLeft";
+      this.btnLeft.Size = new System.Drawing.Size(40, 25);
+      this.btnLeft.TabIndex = 79;
+      this.btnLeft.Text = "Left";
+      this.btnLeft.UseVisualStyleBackColor = true;
+      this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+      // 
+      // btnRight
+      // 
+      this.btnRight.Location = new System.Drawing.Point(95, 86);
+      this.btnRight.Name = "btnRight";
+      this.btnRight.Size = new System.Drawing.Size(40, 25);
+      this.btnRight.TabIndex = 80;
+      this.btnRight.Text = "Right";
+      this.btnRight.UseVisualStyleBackColor = true;
+      this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+      // 
+      // btnUp
+      // 
+      this.btnUp.Location = new System.Drawing.Point(136, 86);
+      this.btnUp.Name = "btnUp";
+      this.btnUp.Size = new System.Drawing.Size(40, 25);
+      this.btnUp.TabIndex = 81;
+      this.btnUp.Text = "Up";
+      this.btnUp.UseVisualStyleBackColor = true;
+      this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
       // 
       // Demo
       // 
@@ -1680,12 +1909,31 @@
     private System.Windows.Forms.ListBox lbPanoramaList;
         private System.Windows.Forms.Button btnToggleSidebar;
         private System.Windows.Forms.Button btnToggleSidebarExpandable;
-    private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.CheckBox cbPointCloud;
+        private System.Windows.Forms.CheckBox cbPointCloud;
     private System.Windows.Forms.Button btnClosePointViewer;
     private System.Windows.Forms.Button btnCloseObliqueViewer;
     private System.Windows.Forms.GroupBox grCloseViewers;
     private System.Windows.Forms.Button btnGetType;
+    private System.Windows.Forms.Button btnFlyTo;
+    private System.Windows.Forms.TextBox txtlkAtX;
+    private System.Windows.Forms.TextBox txtlkAtY;
+    private System.Windows.Forms.TextBox txtlkAtZ;
+    private System.Windows.Forms.Button btnCameraPosition;
+    private System.Windows.Forms.Button btnEdges;
+    private System.Windows.Forms.Button btnGetPointBudget;
+    private System.Windows.Forms.ComboBox cbPointBudget;
+    private System.Windows.Forms.Button btnSetPointBudget;
+    private System.Windows.Forms.TextBox txtPointSize;
+    private System.Windows.Forms.Button btnGetPointSize;
+    private System.Windows.Forms.Button btnSetPointSize;
+    private System.Windows.Forms.Button btnSetPointStyle;
+    private System.Windows.Forms.ComboBox cbPointStyle;
+    private System.Windows.Forms.Button btnGetPointStyle;
+    private System.Windows.Forms.Button btnPointCloudLookAt;
+    private System.Windows.Forms.Button btnUp;
+    private System.Windows.Forms.Button btnRight;
+    private System.Windows.Forms.Button btnLeft;
+    private System.Windows.Forms.Button btnDown;
   }
 }
 

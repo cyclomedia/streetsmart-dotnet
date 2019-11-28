@@ -22,46 +22,46 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
-  internal class AddressSettings : DataConvert, IAddressSettings
+  internal class Camera : DataConvert, ICamera
   {
-    private string _locale;
-    private string _database;
+    private ICoordinate _position;
+    private ICoordinate _target;
 
-    public AddressSettings(string locale, string database)
+    public Camera(Dictionary<string, object> camera)
     {
-      Locale = locale;
-      Database = database;
+      var position = GetDictValue(camera, "cameraPosition");
+      var target = GetDictValue(camera, "cameraTarget");
+
+      double? px = ToNullDouble(position, "x");
+      double? py = ToNullDouble(position, "y");
+      double? pz = ToNullDouble(position, "z");
+
+      double? tx = ToNullDouble(target, "x");
+      double? ty = ToNullDouble(target, "y");
+      double? tz = ToNullDouble(target, "z");
+
+      Position = new Coordinate(px, py, pz);
+      Target = new Coordinate(tx, ty, tz);
     }
 
-    public AddressSettings(Dictionary<string, object> addressSettings)
+    public ICoordinate Position
     {
-      Locale = ToString(addressSettings, "locale");
-      Database = ToString(addressSettings, "database");
-    }
-
-    public string Locale
-    {
-      get => _locale;
+      get => _position;
       set
       {
-        _locale = value;
+        _position = value;
         RaisePropertyChanged();
       }
     }
 
-    public string Database
+    public ICoordinate Target
     {
-      get => _database;
+      get => _target;
       set
       {
-        _database = value;
+        _target = value;
         RaisePropertyChanged();
       }
-    }
-
-    public override string ToString()
-    {
-      return $",addressSettings:{{locale:'{Locale}',database:'{Database}'}}";
     }
   }
 }

@@ -187,6 +187,15 @@ namespace Demo.WinForms
       {
         cbViewerButton.Items.Add(new ViewerButtonsBox(pnButton));
       }
+
+      cbPointBudget.Items.Add(PointBudget.Low);
+      cbPointBudget.Items.Add(PointBudget.Med);
+      cbPointBudget.Items.Add(PointBudget.High);
+
+      cbPointStyle.Items.Add(PointStyle.Elevation);
+      cbPointStyle.Items.Add(PointStyle.Height);
+      cbPointStyle.Items.Add(PointStyle.Intensity);
+      cbPointStyle.Items.Add(PointStyle.Rgb);
     }
 
     #region events api
@@ -259,6 +268,12 @@ namespace Demo.WinForms
       if (viewer is IPointCloudViewer pointCloudViewer)
       {
         _pointCloudViewers.Add(pointCloudViewer);
+
+        pointCloudViewer.ViewChange += OnPointCloudViewChange;
+        pointCloudViewer.EdgesChanged += OnEdgesChange;
+        pointCloudViewer.PointBudgedChanged += OnBudgedChanged;
+        pointCloudViewer.PointSizeChanged += OnPointSizeChanged;
+        pointCloudViewer.PointStyleChanged += OnPointStyleChanged;
       }
     }
 
@@ -411,6 +426,40 @@ namespace Demo.WinForms
     private void ckShowAttributePanelOnFeatureClick_CheckedChanged(object sender, EventArgs e)
     {
       PanoramaViewer.ShowAttributePanelOnFeatureClick(ckShowAttributePanelOnFeatureClick.Checked);
+    }
+
+    #endregion
+
+    #region events point cloud viewer
+
+    private void OnPointCloudViewChange(object sencer, IEventArgs<ICamera> args)
+    {
+      string text = "On point cloud view change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnEdgesChange(object sender, IEventArgs<bool> args)
+    {
+      string text = "On edges change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnBudgedChanged(object sender, IEventArgs<PointBudget> args)
+    {
+      string text = "On point budget change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnPointSizeChanged(object sender, IEventArgs<int> args)
+    {
+      string text = "On point size change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnPointStyleChanged(object sender, IEventArgs<PointStyle> args)
+    {
+      string text = "On point style change";
+      AddViewerEventsText(text);
     }
 
     #endregion
@@ -1489,6 +1538,116 @@ namespace Demo.WinForms
     {
       ViewerType type = await _viewer.GetType();
       MessageBox.Show($"Get viewer type: {type}");
+    }
+
+    private void btnFlyTo_Click(object sender, EventArgs e)
+    {
+      ICoordinate position =
+        CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
+      ICoordinate lookAt =
+        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
+      PointCloudViewer.FlyTo(position, lookAt);
+    }
+
+    private async void btnCameraPosition_Click(object sender, EventArgs e)
+    {
+      ICamera camera = await PointCloudViewer.GetCameraPosition();
+      txtX.Text = camera?.Position?.X.ToString();
+      txtY.Text = camera?.Position?.Y.ToString();
+      txtZ.Text = camera?.Position?.Z.ToString();
+      txtlkAtX.Text = camera?.Target?.X.ToString();
+      txtlkAtY.Text = camera?.Target?.Y.ToString();
+      txtlkAtZ.Text = camera?.Target?.Z.ToString();
+    }
+
+    private async void btnEdges_Click(object sender, EventArgs e)
+    {
+      bool visible = await PointCloudViewer.GetEdgesVisibility();
+      PointCloudViewer.ToggleEdges(!visible);
+    }
+
+    private async void btnGetPointBudget_Click(object sender, EventArgs e)
+    {
+      PointBudget budget = await PointCloudViewer.GetPointBudget();
+
+      foreach (var item in cbPointBudget.Items)
+      {
+        if ((PointBudget) item == budget)
+        {
+          cbPointBudget.SelectedItem = item;
+        }
+      }
+    }
+
+    private void btnSetPointBudget_Click(object sender, EventArgs e)
+    {
+      if (cbPointBudget.SelectedItem is PointBudget budget)
+      {
+        PointCloudViewer.SetPointBudget(budget);
+      }
+    }
+
+    private async void btnGetPointSize_Click(object sender, EventArgs e)
+    {
+      txtPointSize.Text = (await PointCloudViewer.GetPointSize()).ToString();
+    }
+
+    private void btnSetPointSize_Click(object sender, EventArgs e)
+    {
+      int.TryParse(txtPointSize.Text, out int size);
+      PointCloudViewer.SetPointSize(size);
+    }
+
+    private async void btnGetPointStyle_Click(object sender, EventArgs e)
+    {
+      PointStyle style = await PointCloudViewer.GetPointStyle();
+
+      foreach (var item in cbPointStyle.Items)
+      {
+        if ((PointStyle) item == style)
+        {
+          cbPointStyle.SelectedItem = item;
+        }
+      }
+    }
+
+    private void btnSetPointStyle_Click(object sender, EventArgs e)
+    {
+      if (cbPointStyle.SelectedItem is PointStyle style)
+      {
+        PointCloudViewer.SetPointStyle(style);
+      }
+    }
+
+    private void btnPointCloudLookAt_Click(object sender, EventArgs e)
+    {
+      ICoordinate lookAt =
+        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
+      PointCloudViewer.LookAtCoordinate(lookAt);
+    }
+
+    private void btnDown_Click(object sender, EventArgs e)
+    {
+      double size = ParseDouble(txtPointSize.Text);
+      PointCloudViewer.RotateDown(size);
+    }
+
+    private void btnLeft_Click(object sender, EventArgs e)
+    {
+      double size = ParseDouble(txtPointSize.Text);
+      PointCloudViewer.RotateLeft(size);
+    }
+
+    private void btnRight_Click(object sender, EventArgs e)
+    {
+      double size = ParseDouble(txtPointSize.Text);
+      PointCloudViewer.RotateRight(size);
+    }
+
+    private void btnUp_Click(object sender, EventArgs e)
+    {
+      double size = ParseDouble(txtPointSize.Text);
+      PointCloudViewer.RotateUp(size);
     }
   }
 }

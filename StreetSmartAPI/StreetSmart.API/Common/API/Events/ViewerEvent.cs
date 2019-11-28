@@ -18,13 +18,28 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class PanoramaViewerEvent: ViewerEvent
+  internal class ViewerEvent: ApiEvent
   {
-    protected override string Events => "Events.panoramaViewer";
+    private readonly Viewer _viewer;
 
-    public PanoramaViewerEvent(Viewer viewer, string type, string funcName)
-      : base(viewer, type, funcName)
+    protected string Name => _viewer.Name;
+
+    protected string JsThis => _viewer.JsThis;
+
+    protected override string Events => "Events.viewer";
+
+    public override string Destroy => $@"{Name}.off({JsApi}.{Events}.{Type},{FuncName}{Name});";
+
+    public ViewerEvent(Viewer viewer, string type, string funcName)
+      : base(type, funcName)
     {
+      _viewer = viewer;
+    }
+
+    public override string ToString()
+    {
+      return $@"{Name}.on({JsApi}.{Events}.{Type},{FuncName}{Name}=function(e)
+             {{{JsThis}.{FuncName}('{Name}',e);}});";
     }
   }
 }

@@ -16,30 +16,37 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
+using System.ComponentModel;
+
+namespace StreetSmart.Common.Interfaces.Data
 {
-  internal class PanoramaObliqueViewerEvent: ApiEvent
+  /// <summary>
+  /// Definition of PointStyles
+  /// </summary>
+  public enum PointStyle
   {
-    private readonly Viewer _viewer;
+    /// <summary>
+    /// RGB
+    /// </summary>
+    [Description("0")]
+    Rgb = 0,
 
-    protected string Name => _viewer.Name;
+    /// <summary>
+    /// Height
+    /// </summary>
+    [Description("3")]
+    Height = 3,
 
-    protected string JsThis => _viewer.JsThis;
+    /// <summary>
+    /// Elevation
+    /// </summary>
+    [Description("3")]
+    Elevation = 3,
 
-    protected override string Events => "Events.viewer";
-
-    public override string Destroy => $@"{Name}.off({JsApi}.{Events}.{Type},{FuncName}{Name});";
-
-    public PanoramaObliqueViewerEvent(Viewer viewer, string type, string funcName)
-      : base(type, funcName)
-    {
-      _viewer = viewer;
-    }
-
-    public override string ToString()
-    {
-      return $@"{Name}.on({JsApi}.{Events}.{Type},{FuncName}{Name}=function(e)
-             {{{JsThis}.{FuncName}('{Name}',e);}});";
-    }
+    /// <summary>
+    /// Intensity
+    /// </summary>
+    [Description("4")]
+    Intensity = 4
   }
 }

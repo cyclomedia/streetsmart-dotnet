@@ -16,15 +16,31 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
-{
-  internal class PanoramaViewerEvent: ViewerEvent
-  {
-    protected override string Events => "Events.panoramaViewer";
+using System.ComponentModel;
 
-    public PanoramaViewerEvent(Viewer viewer, string type, string funcName)
-      : base(viewer, type, funcName)
-    {
-    }
+namespace StreetSmart.Common.Interfaces.Data
+{
+  /// <summary>
+  /// Defines the Point budget
+  /// </summary>
+  public enum PointBudget
+  {
+    /// <summary>
+    /// Low
+    /// </summary>
+    [Description("Low")]
+    Low = 1,
+
+    /// <summary>
+    /// Oblique image
+    /// </summary>
+    [Description("Med")]
+    Med = 2,
+
+    /// <summary>
+    /// Point cloud viewer
+    /// </summary>
+    [Description("High")]
+    High = 3
   }
 }

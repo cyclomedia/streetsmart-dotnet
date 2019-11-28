@@ -161,7 +161,7 @@ namespace StreetSmart.Common.API
     {
       _viewerEventList = new ApiEventList
       {
-        new PanoramaObliqueViewerEvent(this, "LAYER_VISIBILITY_CHANGE", JsLayerVisibilityChange),
+        new ViewerEvent(this, "LAYER_VISIBILITY_CHANGE", JsLayerVisibilityChange),
       };
 
       Browser.ExecuteScriptAsync($"{_viewerEventList}");

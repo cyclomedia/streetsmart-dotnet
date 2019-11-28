@@ -16,15 +16,21 @@
  * License along with this library.
  */
 
-namespace StreetSmart.Common.API.Events
+namespace StreetSmart.Common.Interfaces.Data
 {
-  internal class PanoramaViewerEvent: ViewerEvent
+  /// <summary>
+  /// Camera definition
+  /// </summary>
+  public interface ICamera
   {
-    protected override string Events => "Events.panoramaViewer";
+    /// <summary>
+    /// Current position of the camera
+    /// </summary>
+    ICoordinate Position { get; set; }
 
-    public PanoramaViewerEvent(Viewer viewer, string type, string funcName)
-      : base(viewer, type, funcName)
-    {
-    }
+    /// <summary>
+    /// Current position of target the camera is looking at
+    /// </summary>
+    ICoordinate Target { get; set; }
   }
 }

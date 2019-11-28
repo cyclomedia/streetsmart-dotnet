@@ -89,20 +89,23 @@
     <Compile Include="..\Common\API\Events\MeasurementEvent.cs">
       <Link>API\Events\MeasurementEvent.cs</Link>
     </Compile>
-    <Compile Include="..\Common\API\Events\PanoramaObliqueViewerEvent.cs">
-      <Link>API\Events\PanoramaObliqueViewerEvent.cs</Link>
-    </Compile>
     <Compile Include="..\Common\API\Events\PanoramaRecordingClickViewerEvent.cs">
       <Link>API\Events\PanoramaRecordingClickViewerEvent.cs</Link>
     </Compile>
     <Compile Include="..\Common\API\Events\PanoramaViewerEvent.cs">
       <Link>API\Events\PanoramaViewerEvent.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\Events\PointCloudViewerEvent.cs">
+      <Link>API\Events\PointCloudViewerEvent.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\Events\StreetSmartApiEvent.cs">
       <Link>API\Events\StreetSmartApiEvent.cs</Link>
     </Compile>
     <Compile Include="..\Common\API\Events\ViewerAddedEvent.cs">
       <Link>API\Events\ViewerAddedEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\Events\ViewerEvent.cs">
+      <Link>API\Events\ViewerEvent.cs</Link>
     </Compile>
     <Compile Include="..\Common\API\Events\ViewerRemovedEvent.cs">
       <Link>API\Events\ViewerRemovedEvent.cs</Link>
@@ -145,6 +148,9 @@
     </Compile>
     <Compile Include="..\Common\Data\BaseViewerOptions.cs">
       <Link>Data\BaseViewerOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Camera.cs">
+      <Link>Data\Camera.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\Coordinate.cs">
       <Link>Data\Coordinate.cs</Link>
@@ -512,6 +518,9 @@
     <Compile Include="..\Common\Interfaces\Data\IBaseViewerOptions.cs">
       <Link>Interfaces\Data\IBaseViewerOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\ICamera.cs">
+      <Link>Interfaces\Data\ICamera.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\ICoordinate.cs">
       <Link>Interfaces\Data\ICoordinate.cs</Link>
     </Compile>
@@ -574,6 +583,12 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\MeasurementGeometryType.cs">
       <Link>Interfaces\Data\MeasurementGeometryType.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\PointBudget.cs">
+      <Link>Interfaces\Data\PointBudget.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\PointStyle.cs">
+      <Link>Interfaces\Data\PointStyle.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\ProductType.cs">
       <Link>Interfaces\Data\ProductType.cs</Link>
