@@ -17,13 +17,17 @@
  */
 
 // ReSharper disable once CheckNamespace
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace System
 {
   internal static class StringExtensions
   {
     public static string FirstCharacterToLower(this string str)
     {
-      return (string.IsNullOrEmpty(str) || char.IsLower(str, 0))
+      return string.IsNullOrEmpty(str) || char.IsLower(str, 0)
         ? str : $"{char.ToLowerInvariant(str[0])}{str.Substring(1)}";
     }
 
@@ -40,6 +44,44 @@ namespace System
     public static string ToDoubleQuote(this string txt)
     {
       return $"\"{txt}\"";
+    }
+
+    public static bool IsValidJson(this string input)
+    {
+      input = input.Trim();
+      bool result = true;
+
+      if (input.StartsWith("{") && input.EndsWith("}") || input.StartsWith("[") && input.EndsWith("]"))
+      {
+        try
+        {
+          var jObject = JObject.Parse(input);
+
+          foreach (var jo in jObject)
+          {
+            JToken value = jo.Value;
+
+            if (value.Type == JTokenType.Undefined)
+            {
+              result = false;
+            }
+          }
+        }
+        catch (JsonReaderException)
+        {
+          result = false;
+        }
+        catch (Exception)
+        {
+          result = false;
+        }
+      }
+      else
+      {
+        result = false;
+      }
+
+      return result;
     }
   }
 }

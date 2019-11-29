@@ -40,6 +40,7 @@ using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Data.GeoJson;
 using StreetSmart.Common.Events;
+using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Handlers;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
@@ -168,9 +169,12 @@ namespace StreetSmart.Common.API
 
     public async Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay)
     {
-      int processId = GetProcessId;
-      string script = GetScript($"addOverlay({overlay})", processId);
-      ((Overlay) overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
+      if (!overlay?.GeoJson?.IsValidJson() ?? true)
+      {
+        throw new StreetSmartJsonException("Json is not valid");
+      }
+
+      ((Overlay) overlay).FillInParameters(ToDictionary(await CallJsGetScriptAsync($"addOverlay({overlay})")));
       return overlay;
     }
 

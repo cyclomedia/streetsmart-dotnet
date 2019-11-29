@@ -77,6 +77,8 @@ namespace StreetSmart.Common.API
 
     protected string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
 
+    protected string JsStreetSmartException => $"{nameof(OnStreetSmartException).FirstCharacterToLower()}";
+
     #endregion
 
     #region Constructors
@@ -139,6 +141,12 @@ namespace StreetSmart.Common.API
       _resultTask[funcName].TrySetResult(new StreetSmartCloseViewerException(message));
     }
 
+    public void OnStreetSmartException(string message, string funcName)
+    {
+      CheckResultTask(funcName);
+      _resultTask[funcName].TrySetResult(new StreetSmartException(message));
+    }
+
     #endregion
 
     #region Functions
@@ -165,7 +173,19 @@ namespace StreetSmart.Common.API
     protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
     {
       int processId = GetProcessId;
-      return await CallJsAsync(GetScript(script, processId, memberName), processId, memberName);
+      object result = await CallJsAsync(AddTryCatch(GetScript(script, processId, memberName), $"{memberName}{processId}"), processId, memberName);
+
+      if (result is Exception exception)
+      {
+        throw exception;
+      }
+
+      return result;
+    }
+
+    protected string AddTryCatch(string script, string funcName)
+    {
+      return $"try{{{script}}}catch(e){{{JsThis}.{JsStreetSmartException}(e.message,{funcName.ToQuote()});}}";
     }
 
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")

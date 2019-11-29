@@ -64,6 +64,9 @@
     <AssemblyOriginatorKeyFile>StreetSmart.WinForms.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -398,8 +401,14 @@
     <Compile Include="..\Common\Exceptions\StreetSmartCloseViewerException.cs">
       <Link>Exceptions\StreetSmartCloseViewerException.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartException.cs">
+      <Link>Exceptions\StreetSmartException.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Exceptions\StreetSmartImageNotFoundException.cs">
       <Link>Exceptions\StreetSmartImageNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Exceptions\StreetSmartJsonException.cs">
+      <Link>Exceptions\StreetSmartJsonException.cs</Link>
     </Compile>
     <Compile Include="..\Common\Exceptions\StreetSmartLoginFailedException.cs">
       <Link>Exceptions\StreetSmartLoginFailedException.cs</Link>

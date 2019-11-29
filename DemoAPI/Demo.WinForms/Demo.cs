@@ -1121,7 +1121,18 @@ namespace Demo.WinForms
           overlay = OverlayFactory.Create(geoJson, name, txtSrs.Text, txtOverlayColor.BackColor);
         }
 
-        _overlay = await _api.AddOverlay(overlay);
+        try
+        {
+          _overlay = await _api.AddOverlay(overlay);
+        }
+        catch (StreetSmartJsonException ex)
+        {
+          MessageBox.Show("Json exception", ex.Message);
+        }
+        catch (StreetSmartException ex)
+        {
+          MessageBox.Show("Street smart exception", ex.Message);
+        }
       }
     }
 
