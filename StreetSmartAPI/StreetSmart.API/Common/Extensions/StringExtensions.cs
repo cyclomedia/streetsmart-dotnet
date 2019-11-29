@@ -59,12 +59,7 @@ namespace System
 
           foreach (var jo in jObject)
           {
-            JToken value = jo.Value;
-
-            if (value.Type == JTokenType.Undefined)
-            {
-              result = false;
-            }
+            result = CheckToken(jo.Value) && result;
           }
         }
         catch (JsonReaderException)
@@ -77,6 +72,23 @@ namespace System
         }
       }
       else
+      {
+        result = false;
+      }
+
+      return result;
+    }
+
+    private static bool CheckToken(JToken value)
+    {
+      bool result = true;
+
+      foreach (JToken token in value.Children())
+      {
+        result = CheckToken(token) && result;
+      }
+
+      if (value.Type == JTokenType.Undefined)
       {
         result = false;
       }
