@@ -791,14 +791,16 @@ namespace Demo.WinForms
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await _viewer.GetNavbarVisible();
-      _viewer.ToggleNavbarVisible(!visible);
+      IViewer viewer = _viewer ?? PanoramaViewer;
+      bool visible = await viewer.GetNavbarVisible();
+      viewer.ToggleNavbarVisible(!visible);
     }
 
     private async void btnToggleNavbarExpanded_Click(object sender, EventArgs e)
     {
-      bool expanded = await _viewer.GetNavbarExpanded();
-      _viewer.ToggleNavbarExpanded(!expanded);
+      IViewer viewer = _viewer ?? PanoramaViewer;
+      bool expanded = await viewer.GetNavbarExpanded();
+      viewer.ToggleNavbarExpanded(!expanded);
     }
 
     private async void btnToggleTimeTravelVisible_Click(object sender, EventArgs e)
@@ -1547,7 +1549,7 @@ namespace Demo.WinForms
 
     private async void btnGetType_Click(object sender, EventArgs e)
     {
-      ViewerType type = await _viewer.GetType();
+      ViewerType type = await (_viewer ?? PanoramaViewer).GetType();
       MessageBox.Show($"Get viewer type: {type}");
     }
 
