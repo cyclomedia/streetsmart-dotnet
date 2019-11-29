@@ -5,6 +5,7 @@
 Version: 19.18.0
 ================
 - Implemented all the point cloud functions + events + viewers
+- Improved parsing of geoJson layers + exception handling
 
 
 Version: 19.17.0
