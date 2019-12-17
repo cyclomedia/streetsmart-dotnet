@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -133,24 +134,27 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region CefSharp Functions
-
+    #if WINFORMS
     public void ShowDevTools()
     {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.ShowDevTools();
-      }
+      ShowDeveloperTools();
     }
 
     public void CloseDevTools()
     {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.CloseDevTools();
-      }
+      CloseDeveloperTools();
+    }
+    #else
+    public void ShowDevTools()
+    {
+      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
     }
 
-    #if WPF
+    public void CloseDevTools()
+    {
+      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
+    }
+
     public void RestartStreetSmart()
     {
       RestartStreetSmart(Resources.StreetSmartLocation);
@@ -482,6 +486,22 @@ namespace StreetSmart.Common.API
       {
         Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
         _apiMeasurementEventList = null;
+      }
+    }
+
+    private void ShowDeveloperTools()
+    {
+      if (Browser.IsBrowserInitialized)
+      {
+        Browser?.ShowDevTools();
+      }
+    }
+
+    private void CloseDeveloperTools()
+    {
+      if (Browser.IsBrowserInitialized)
+      {
+        Browser?.CloseDevTools();
       }
     }
 
