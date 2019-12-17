@@ -1,6 +1,10 @@
 ﻿Release notes:
 ==============
 
+Version: 19.19.0
+================
+- fixed some geojson generation with polygons, triangolation wasn't working
+
 
 Version: 19.18.0
 ================

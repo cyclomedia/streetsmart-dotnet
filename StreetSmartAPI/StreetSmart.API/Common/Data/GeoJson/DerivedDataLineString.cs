@@ -157,8 +157,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
         foreach (IProperty property in propertyList)
         {
-          string valueStr = property?.Value?.ToString(ci);
-          string stdevStr = property?.Stdev?.ToString(ci);
+          string valueStr = double.IsNaN(property?.Value ?? double.NaN) ? null : property?.Value?.ToString(ci);
+          string stdevStr = double.IsNaN(property?.Stdev ?? double.NaN) ? null : property?.Stdev?.ToString(ci);
           valueStr = string.IsNullOrEmpty(valueStr) ? "null" : valueStr;
           stdevStr = string.IsNullOrEmpty(stdevStr) ? "null" : stdevStr;
           value = $"{value}{valueStr},";

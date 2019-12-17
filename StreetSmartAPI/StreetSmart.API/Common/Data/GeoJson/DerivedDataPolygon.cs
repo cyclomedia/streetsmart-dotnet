@@ -70,8 +70,15 @@ namespace StreetSmart.Common.Data.GeoJson
       string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
       string comma = subStr.Length >= 2 ? "," : string.Empty;
       subStr = $"{subStr}{comma}";
-      string triangles = Triangles.Aggregate("[", (current, triangle) => $"{current}{triangle},");
-      return $"{subStr}{GetValueString(Area, "area")}\"triangles\":{triangles.Substring(0, Math.Max(triangles.Length - 1, 1))}]}}";
+      string triangles = "null";
+
+      if (Triangles.Count >= 1)
+      {
+        triangles = Triangles.Aggregate("[", (current, triangle) => $"{current}{triangle},");
+        triangles = $"{triangles.Substring(0, Math.Max(triangles.Length - 1, 1))}]";
+      }
+
+      return $"{subStr}{GetValueString(Area, "area")}\"triangles\":{triangles}}}";
     }
   }
 }
