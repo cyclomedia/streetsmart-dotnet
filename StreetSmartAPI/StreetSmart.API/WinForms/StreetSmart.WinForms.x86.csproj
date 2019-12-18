@@ -641,6 +641,9 @@
     <Compile Include="..\Common\Interfaces\Data\MeasurementGeometryType.cs">
       <Link>Interfaces\Data\MeasurementGeometryType.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\MeasureMethods.cs">
+      <Link>Interfaces\Data\MeasureMethods.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\PointBudget.cs">
       <Link>Interfaces\Data\PointBudget.cs</Link>
     </Compile>

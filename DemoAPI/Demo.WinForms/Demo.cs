@@ -1059,6 +1059,8 @@ namespace Demo.WinForms
     private async void btnStartMeasurementMode_Click(object sender, EventArgs e)
     {
       MeasurementGeometryType? type = null;
+      MeasureMethods? method = null;
+      IMeasurementOptions options = null;
 
       if (rbMeasPoint.Checked)
       {
@@ -1073,9 +1075,35 @@ namespace Demo.WinForms
         type = MeasurementGeometryType.Polygon;
       }
 
-      IMeasurementOptions options = (type == null)
-        ? MeasurementOptionsFactory.Create()
-        : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
+      if (rbMethodDepthMap.Checked)
+      {
+        method = MeasureMethods.DepthMap;
+      }
+      else if (rbMethodSmartClick.Checked)
+      {
+        method = MeasureMethods.SmartClick;
+      }
+      else if (rbMethodForwardIntersection.Checked)
+      {
+        method = MeasureMethods.ForwardIntersection;
+      }
+
+      if (type == null && method == null)
+      {
+        options = MeasurementOptionsFactory.Create();
+      }
+      else if (type == null)
+      {
+        options = MeasurementOptionsFactory.Create((MeasureMethods) method);
+      }
+      else if (method == null)
+      {
+        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
+      }
+      else
+      {
+        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type, (MeasureMethods) method);
+      }
 
       IViewer viewer = _viewer ?? PanoramaViewer;
 

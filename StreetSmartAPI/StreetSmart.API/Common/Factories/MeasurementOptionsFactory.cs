@@ -93,6 +93,24 @@ namespace StreetSmart.Common.Factories
     /// </example>
     /// <param name="geometryType">The <c>MeasurementGeometryType</c> of the measurement</param>
     /// <returns>The measurement options object that is needed to make a measurement</returns>
-    public static IMeasurementOptions Create(MeasurementGeometryType geometryType) => new MeasurementOptions(geometryType);
+    public static IMeasurementOptions Create(MeasurementGeometryType geometryType) =>
+      new MeasurementOptions(geometryType, null);
+
+    /// <summary>
+    /// Create a measurement options object with a specific measure method.
+    /// </summary>
+    /// <param name="measureMethods">The <c>measureMethod</c> of the measurement</param>
+    /// <returns></returns>
+    public static IMeasurementOptions Create(MeasureMethods measureMethods) =>
+      new MeasurementOptions(null, measureMethods);
+
+    /// <summary>
+    /// Create a measurement options object with a specific geometry type and a specific measure method
+    /// </summary>
+    /// <param name="geometryType">The <c>MeasurementGeometryType</c> of the measurement</param>
+    /// <param name="measureMethods">The <c>measureMethod</c> of the measurement</param>
+    /// <returns></returns>
+    public static IMeasurementOptions Create(MeasurementGeometryType geometryType, MeasureMethods measureMethods) =>
+      new MeasurementOptions(geometryType, measureMethods);
   }
 }

@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -32,6 +31,8 @@ using CefSharp.WinForms;
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
 #else
+using System.Threading;
+
 using CefSharp.Wpf;
 
 using StreetSmart.Wpf.Properties;

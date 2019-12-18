@@ -31,15 +31,18 @@ namespace StreetSmart.Common.Data
   internal class MeasurementOptions : NotifyPropertyChanged, IMeasurementOptions
   {
     private MeasurementGeometryType? _geometryType;
+    private MeasureMethods? _measureMethods;
 
     public MeasurementOptions()
     {
       _geometryType = null;
+      _measureMethods = null;
     }
 
-    public MeasurementOptions(MeasurementGeometryType geometryType)
+    public MeasurementOptions(MeasurementGeometryType? geometryType, MeasureMethods? measureMethods)
     {
       _geometryType = geometryType;
+      _measureMethods = measureMethods;
     }
 
     public MeasurementGeometryType? GeometryType
@@ -52,11 +55,40 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public MeasureMethods? MeasureMethods
+    {
+      get => _measureMethods;
+      set
+      {
+        _measureMethods = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
-      return (GeometryType == null)
-        ? string.Empty
-        : $",{{geometry:{Resources.JsApi}.{((MeasurementGeometryType) GeometryType).Description()}}}";
+      string result = string.Empty;
+
+      if (GeometryType != null || MeasureMethods != null)
+      {
+        string geometryPart = string.Empty;
+        string measureMethodPart = string.Empty;
+        string midPart = GeometryType != null && MeasureMethods != null ? "," : string.Empty;
+
+        if (GeometryType != null)
+        {
+          geometryPart = $"geometry:{Resources.JsApi}.{((MeasurementGeometryType) GeometryType).Description()}";
+        }
+
+        if (MeasureMethods != null)
+        {
+          measureMethodPart = $"measureMethod:{Resources.JsApi}.{((MeasureMethods) MeasureMethods).Description()}";
+        }
+
+        result = $",{{{geometryPart}{midPart}{measureMethodPart}}}";
+      }
+
+      return result;
     }
   }
 }

@@ -4,6 +4,8 @@
 Version: 19.19.0
 ================
 - fixed some geojson generation with polygons, triangolation wasn't working
+- in case of a WPF API, show and close developer tools are running now in the UI thread
+- pass an optional measure method to the start measurement call
 
 
 Version: 19.18.0
