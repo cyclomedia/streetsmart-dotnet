@@ -36,19 +36,19 @@ using StreetSmart.Common.Interfaces.API;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal sealed class Settings : APIBase, ISettings
+  internal sealed class Shortcuts : APIBase, IShortcuts
   {
     #region Properties
 
     private string JsApi => Resources.JsApi;
 
-    protected override string CallFunctionBase => $"{JsApi}.Settings";
+    protected override string CallFunctionBase => $"{JsApi}.ShortCuts";
 
     #endregion
 
     #region Constructors
 
-    public Settings(ChromiumWebBrowser browser)
+    public Shortcuts(ChromiumWebBrowser browser)
       : base(browser)
     {
       Browser.RegisterJsObject(JsThis, this);
@@ -58,30 +58,14 @@ namespace StreetSmart.Common.API
 
     #region Interface Functions
 
-    public void SetUnitPreference(UnitPreference unitPreference)
+    public async Task<bool> DisableShortcut(ShortcutNames shortcutNames)
     {
-      Browser.ExecuteScriptAsync(GetScript($"setUnitPreference({unitPreference.Description()})"));
+      return ToBool(await CallJsGetScriptAsync($"enableShortcut({shortcutNames.Description()})"));
     }
 
-    public async Task<UnitPreference> GetUnitPreference()
+    public async Task<bool> EnableShortcut(ShortcutNames shortcutNames)
     {
-      string type = ToString(await CallJsGetScriptAsync("getUnitPreference()"));
-      UnitPreference preference = UnitPreference.Default;
-
-      switch (type)
-      {
-        case "default":
-          preference = UnitPreference.Default;
-          break;
-        case "ft":
-          preference = UnitPreference.Feet;
-          break;
-        case "m":
-          preference = UnitPreference.Meter;
-          break;
-      }
-
-      return preference;
+      return ToBool(await CallJsGetScriptAsync($"disableShortcut({shortcutNames.Description()})"));
     }
 
     #endregion

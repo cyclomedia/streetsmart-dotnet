@@ -1,5 +1,2 @@
 ﻿To do:
 ==============
-
-- add: Feet / Metric toggle
-- add: enable / disable buttons

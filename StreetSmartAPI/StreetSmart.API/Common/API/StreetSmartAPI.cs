@@ -74,9 +74,11 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #region Settings object
+    #region Settings / Shortcuts
 
     public ISettings Settings { get; private set; }
+
+    public IShortcuts Shortcuts { get; private set; }
 
     #endregion
 
@@ -438,6 +440,7 @@ namespace StreetSmart.Common.API
     public void RegisterBrowser()
     {
       Settings = new Settings(Browser);
+      Shortcuts = new Shortcuts(Browser);
       Browser.RegisterJsObject(JsThis, this);
       ViewerList.CreateViewerList(ApiId);
       ViewerList.RegisterJsObjects(ApiId, Browser);

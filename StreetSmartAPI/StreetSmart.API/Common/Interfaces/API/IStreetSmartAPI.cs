@@ -38,12 +38,17 @@ namespace StreetSmart.Common.Interfaces.API
   /// </summary>
   public interface IStreetSmartAPI
   {
-    #region Settings object
+    #region Settings / Shortcuts
 
     /// <summary>
-    /// Street Smart settings
+    /// Object which is an Interface for changing certain settings withing the api
     /// </summary>
     ISettings Settings { get; }
+
+    /// <summary>
+    /// Object which is an Interface for enabeling/disabeling shortcuts
+    /// </summary>
+    IShortcuts Shortcuts { get; }
 
     #endregion
 

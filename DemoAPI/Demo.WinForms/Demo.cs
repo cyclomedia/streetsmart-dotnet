@@ -200,6 +200,17 @@ namespace Demo.WinForms
       cbUnit.Items.Add(UnitPreference.Default);
       cbUnit.Items.Add(UnitPreference.Feet);
       cbUnit.Items.Add(UnitPreference.Meter);
+
+      cbShortCuts.Items.Add(ShortcutNames.CopyCoordinateToClipboard);
+      cbShortCuts.Items.Add(ShortcutNames.CloseAllPanoramas);
+      cbShortCuts.Items.Add(ShortcutNames.MoveToPanoramaPosition);
+      cbShortCuts.Items.Add(ShortcutNames.MovePanoramaWithArrowKeys);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromPanorama);
+      cbShortCuts.Items.Add(ShortcutNames.ClosePanorama);
+      cbShortCuts.Items.Add(ShortcutNames.CloseOtherPanorama);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromMap);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromOblique);
+      cbShortCuts.Items.Add(ShortcutNames.CloseOblique);
     }
 
     #region events api
@@ -1707,6 +1718,24 @@ namespace Demo.WinForms
     {
       UnitPreference unit = await _api.Settings.GetUnitPreference();
       cbUnit.SelectedItem = unit;
+    }
+
+    private async void btnEnableShortCut_Click(object sender, EventArgs e)
+    {
+      if (cbShortCuts.SelectedItem != null)
+      {
+        txtShortcutResult.Text =
+          (await _api.Shortcuts.EnableShortcut((ShortcutNames) cbShortCuts.SelectedItem)).ToString();
+      }
+    }
+
+    private async void btnDisableShortCut_Click(object sender, EventArgs e)
+    {
+      if (cbShortCuts.SelectedItem != null)
+      {
+        txtShortcutResult.Text =
+          (await _api.Shortcuts.DisableShortcut((ShortcutNames) cbShortCuts.SelectedItem)).ToString();
+      }
     }
   }
 }

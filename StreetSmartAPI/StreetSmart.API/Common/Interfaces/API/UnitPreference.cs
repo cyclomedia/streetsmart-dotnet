@@ -18,7 +18,7 @@
 
 using System.ComponentModel;
 
-namespace StreetSmart.Common.Interfaces.Data
+namespace StreetSmart.Common.Interfaces.API
 {
   /// <summary>
   /// Unit Preference of measurements

@@ -23,21 +23,29 @@ namespace StreetSmart.Common.Interfaces.API
   /// <summary>
   /// API used to use and modify various StreetSmart components.
   /// </summary>
-  public interface ISettings
+  public interface IShortcuts
   {
     #region Interface functions
 
     /// <summary>
-    /// Sets the units used to show measurement and other geological data.
+    /// Removes a shortcut from the list of enabledShortcuts. Can be added with enableShortcut
     /// </summary>
-    /// <param name="unitPreference">The name of unit</param>
-    void SetUnitPreference(UnitPreference unitPreference);
+    /// <param name="shortcutNames"> The name of the shortcut</param>
+    /// <returns>
+    /// - true : if shortcut has been disabled.
+    /// - false: if unknown shortcut or already disallowed.
+    /// </returns>
+    Task<bool> DisableShortcut(ShortcutNames shortcutNames);
 
     /// <summary>
-    /// Gets the units used to show measurement and other geological data.
+    /// Add a shortcut to the list of enabledShortcuts. Can be removed with disableShortcut
     /// </summary>
-    /// <returns>Returns the currently set unit preference</returns>
-    Task<UnitPreference> GetUnitPreference();
+    /// <param name="shortcutNames">The name of the shortcut</param>
+    /// <returns>
+    /// - true : true if shortcut has been enabled.
+    /// - false: if unknown shortcut or already allowed.
+    /// </returns>
+    Task<bool> EnableShortcut(ShortcutNames shortcutNames);
 
     #endregion
   }

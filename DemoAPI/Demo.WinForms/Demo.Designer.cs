@@ -38,6 +38,11 @@
       this.cbOblique = new System.Windows.Forms.CheckBox();
       this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
       this.plControl = new System.Windows.Forms.Panel();
+      this.grShortCuts = new System.Windows.Forms.GroupBox();
+      this.txtShortcutResult = new System.Windows.Forms.TextBox();
+      this.cbShortCuts = new System.Windows.Forms.ComboBox();
+      this.btnDisableShortCut = new System.Windows.Forms.Button();
+      this.btnEnableShortCut = new System.Windows.Forms.Button();
       this.grCloseViewers = new System.Windows.Forms.GroupBox();
       this.btnUp = new System.Windows.Forms.Button();
       this.btnRight = new System.Windows.Forms.Button();
@@ -188,6 +193,7 @@
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
+      this.grShortCuts.SuspendLayout();
       this.grCloseViewers.SuspendLayout();
       this.grPanoramaList.SuspendLayout();
       this.grColorOverlay.SuspendLayout();
@@ -306,6 +312,7 @@
       // 
       // plControl
       // 
+      this.plControl.Controls.Add(this.grShortCuts);
       this.plControl.Controls.Add(this.grCloseViewers);
       this.plControl.Controls.Add(this.grPanoramaList);
       this.plControl.Controls.Add(this.grColorOverlay);
@@ -331,6 +338,54 @@
       this.plControl.Name = "plControl";
       this.plControl.Size = new System.Drawing.Size(902, 701);
       this.plControl.TabIndex = 1;
+      // 
+      // grShortCuts
+      // 
+      this.grShortCuts.Controls.Add(this.txtShortcutResult);
+      this.grShortCuts.Controls.Add(this.cbShortCuts);
+      this.grShortCuts.Controls.Add(this.btnDisableShortCut);
+      this.grShortCuts.Controls.Add(this.btnEnableShortCut);
+      this.grShortCuts.Location = new System.Drawing.Point(731, 218);
+      this.grShortCuts.Name = "grShortCuts";
+      this.grShortCuts.Size = new System.Drawing.Size(160, 65);
+      this.grShortCuts.TabIndex = 75;
+      this.grShortCuts.TabStop = false;
+      this.grShortCuts.Text = "Short cuts";
+      // 
+      // txtShortcutResult
+      // 
+      this.txtShortcutResult.Location = new System.Drawing.Point(110, 40);
+      this.txtShortcutResult.Name = "txtShortcutResult";
+      this.txtShortcutResult.Size = new System.Drawing.Size(40, 20);
+      this.txtShortcutResult.TabIndex = 68;
+      // 
+      // cbShortCuts
+      // 
+      this.cbShortCuts.FormattingEnabled = true;
+      this.cbShortCuts.Location = new System.Drawing.Point(5, 40);
+      this.cbShortCuts.Name = "cbShortCuts";
+      this.cbShortCuts.Size = new System.Drawing.Size(100, 21);
+      this.cbShortCuts.TabIndex = 67;
+      // 
+      // btnDisableShortCut
+      // 
+      this.btnDisableShortCut.Location = new System.Drawing.Point(65, 15);
+      this.btnDisableShortCut.Name = "btnDisableShortCut";
+      this.btnDisableShortCut.Size = new System.Drawing.Size(55, 20);
+      this.btnDisableShortCut.TabIndex = 66;
+      this.btnDisableShortCut.Text = "Disable";
+      this.btnDisableShortCut.UseVisualStyleBackColor = true;
+      this.btnDisableShortCut.Click += new System.EventHandler(this.btnDisableShortCut_Click);
+      // 
+      // btnEnableShortCut
+      // 
+      this.btnEnableShortCut.Location = new System.Drawing.Point(5, 15);
+      this.btnEnableShortCut.Name = "btnEnableShortCut";
+      this.btnEnableShortCut.Size = new System.Drawing.Size(55, 20);
+      this.btnEnableShortCut.TabIndex = 65;
+      this.btnEnableShortCut.Text = "Enable";
+      this.btnEnableShortCut.UseVisualStyleBackColor = true;
+      this.btnEnableShortCut.Click += new System.EventHandler(this.btnEnableShortCut_Click);
       // 
       // grCloseViewers
       // 
@@ -452,9 +507,9 @@
       // grPanoramaList
       // 
       this.grPanoramaList.Controls.Add(this.lbPanoramaList);
-      this.grPanoramaList.Location = new System.Drawing.Point(731, 243);
+      this.grPanoramaList.Location = new System.Drawing.Point(731, 283);
       this.grPanoramaList.Name = "grPanoramaList";
-      this.grPanoramaList.Size = new System.Drawing.Size(160, 160);
+      this.grPanoramaList.Size = new System.Drawing.Size(160, 120);
       this.grPanoramaList.TabIndex = 71;
       this.grPanoramaList.TabStop = false;
       this.grPanoramaList.Text = "Viewer list";
@@ -464,7 +519,7 @@
       this.lbPanoramaList.FormattingEnabled = true;
       this.lbPanoramaList.Location = new System.Drawing.Point(5, 15);
       this.lbPanoramaList.Name = "lbPanoramaList";
-      this.lbPanoramaList.Size = new System.Drawing.Size(150, 134);
+      this.lbPanoramaList.Size = new System.Drawing.Size(150, 95);
       this.lbPanoramaList.TabIndex = 70;
       this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
       // 
@@ -1856,6 +1911,8 @@
       this.grOpenByQuery.ResumeLayout(false);
       this.grOpenByQuery.PerformLayout();
       this.plControl.ResumeLayout(false);
+      this.grShortCuts.ResumeLayout(false);
+      this.grShortCuts.PerformLayout();
       this.grCloseViewers.ResumeLayout(false);
       this.grPanoramaList.ResumeLayout(false);
       this.grColorOverlay.ResumeLayout(false);
@@ -2054,6 +2111,11 @@
         private System.Windows.Forms.ComboBox cbUnit;
         private System.Windows.Forms.Button btnGetUnitPreference;
         private System.Windows.Forms.Button btnSetUnitPreference;
+        private System.Windows.Forms.GroupBox grShortCuts;
+        private System.Windows.Forms.ComboBox cbShortCuts;
+        private System.Windows.Forms.Button btnDisableShortCut;
+        private System.Windows.Forms.Button btnEnableShortCut;
+        private System.Windows.Forms.TextBox txtShortcutResult;
     }
 }
 
