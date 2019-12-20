@@ -38,6 +38,15 @@ namespace StreetSmart.Common.Interfaces.API
   /// </summary>
   public interface IStreetSmartAPI
   {
+    #region Settings object
+
+    /// <summary>
+    /// Street Smart settings
+    /// </summary>
+    ISettings Settings { get; }
+
+    #endregion
+
     #region API events
 
     /// <summary>

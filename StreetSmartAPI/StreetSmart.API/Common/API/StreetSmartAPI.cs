@@ -74,6 +74,12 @@ namespace StreetSmart.Common.API
 
     #endregion
 
+    #region Settings object
+
+    public ISettings Settings { get; private set; }
+
+    #endregion
+
     #if WINFORMS
     #region GUI
 
@@ -431,6 +437,7 @@ namespace StreetSmart.Common.API
 
     public void RegisterBrowser()
     {
+      Settings = new Settings(Browser);
       Browser.RegisterJsObject(JsThis, this);
       ViewerList.CreateViewerList(ApiId);
       ViewerList.RegisterJsObjects(ApiId, Browser);

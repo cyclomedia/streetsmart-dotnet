@@ -196,6 +196,10 @@ namespace Demo.WinForms
       cbPointStyle.Items.Add(PointStyle.Height);
       cbPointStyle.Items.Add(PointStyle.Intensity);
       cbPointStyle.Items.Add(PointStyle.Rgb);
+
+      cbUnit.Items.Add(UnitPreference.Default);
+      cbUnit.Items.Add(UnitPreference.Feet);
+      cbUnit.Items.Add(UnitPreference.Meter);
     }
 
     #region events api
@@ -1689,6 +1693,20 @@ namespace Demo.WinForms
     {
       double size = ParseDouble(txtPointSize.Text);
       PointCloudViewer.RotateUp(size);
+    }
+
+    private void btnSetUnitPreference_Click(object sender, EventArgs e)
+    {
+      if (cbUnit.SelectedItem != null)
+      {
+        _api.Settings.SetUnitPreference((UnitPreference) cbUnit.SelectedItem);
+      }
+    }
+
+    private async void btnGetUnitPreference_Click(object sender, EventArgs e)
+    {
+      UnitPreference unit = await _api.Settings.GetUnitPreference();
+      cbUnit.SelectedItem = unit;
     }
   }
 }

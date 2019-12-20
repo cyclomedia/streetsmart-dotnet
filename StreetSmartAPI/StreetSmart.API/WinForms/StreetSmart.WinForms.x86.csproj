@@ -185,6 +185,9 @@
     <Compile Include="..\Common\API\PointCloudViewerList.cs">
       <Link>API\PointCloudViewerList.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\Settings.cs">
+      <Link>API\Settings.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\StreetSmartAPI.cs">
       <Link>API\StreetSmartAPI.cs</Link>
     </Compile>
@@ -554,6 +557,9 @@
     <Compile Include="..\Common\Interfaces\API\IPointCloudViewer.cs">
       <Link>Interfaces\API\IPointCloudViewer.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\API\ISettings.cs">
+      <Link>Interfaces\API\ISettings.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\API\IStreetSmartAPI.cs">
       <Link>Interfaces\API\IStreetSmartAPI.cs</Link>
     </Compile>
@@ -658,6 +664,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\Unit.cs">
       <Link>Interfaces\Data\Unit.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\UnitPreference.cs">
+      <Link>Interfaces\Data\UnitPreference.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\ViewerType.cs">
       <Link>Interfaces\Data\ViewerType.cs</Link>

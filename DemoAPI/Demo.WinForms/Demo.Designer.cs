@@ -78,11 +78,20 @@
       this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
       this.btnAddOverlay = new System.Windows.Forms.Button();
       this.grMeasurement = new System.Windows.Forms.GroupBox();
-      this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
+      this.cbUnit = new System.Windows.Forms.ComboBox();
+      this.btnGetUnitPreference = new System.Windows.Forms.Button();
+      this.btnSetUnitPreference = new System.Windows.Forms.Button();
+      this.grMeasurementMethod = new System.Windows.Forms.GroupBox();
+      this.rbMethodDefault = new System.Windows.Forms.RadioButton();
+      this.rbMethodDepthMap = new System.Windows.Forms.RadioButton();
+      this.rbMethodForwardIntersection = new System.Windows.Forms.RadioButton();
+      this.rbMethodSmartClick = new System.Windows.Forms.RadioButton();
+      this.grMeasurementType = new System.Windows.Forms.GroupBox();
+      this.rbMeasDefault = new System.Windows.Forms.RadioButton();
+      this.rbMeasPoint = new System.Windows.Forms.RadioButton();
       this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
       this.rbMeasLineString = new System.Windows.Forms.RadioButton();
-      this.rbMeasPoint = new System.Windows.Forms.RadioButton();
-      this.rbMeasDefault = new System.Windows.Forms.RadioButton();
+      this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
       this.btnStartMeasurementMode = new System.Windows.Forms.Button();
       this.btnStopMeasurementMode = new System.Windows.Forms.Button();
       this.grDevTools = new System.Windows.Forms.GroupBox();
@@ -177,12 +186,6 @@
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.btnLogin = new System.Windows.Forms.Button();
       this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.grMeasurementType = new System.Windows.Forms.GroupBox();
-      this.grMeasurementMethod = new System.Windows.Forms.GroupBox();
-      this.rbMethodDefault = new System.Windows.Forms.RadioButton();
-      this.rbMethodDepthMap = new System.Windows.Forms.RadioButton();
-      this.rbMethodForwardIntersection = new System.Windows.Forms.RadioButton();
-      this.rbMethodSmartClick = new System.Windows.Forms.RadioButton();
       this.grOpenByQuery.SuspendLayout();
       this.plControl.SuspendLayout();
       this.grCloseViewers.SuspendLayout();
@@ -193,6 +196,8 @@
       this.grButtonVisibility.SuspendLayout();
       this.grOverlay.SuspendLayout();
       this.grMeasurement.SuspendLayout();
+      this.grMeasurementMethod.SuspendLayout();
+      this.grMeasurementType.SuspendLayout();
       this.grDevTools.SuspendLayout();
       this.grRotationsZoomInOut.SuspendLayout();
       this.grEvents.SuspendLayout();
@@ -204,8 +209,6 @@
       this.grViewerToggles.SuspendLayout();
       this.grOpenByAddress.SuspendLayout();
       this.grLogin.SuspendLayout();
-      this.grMeasurementType.SuspendLayout();
-      this.grMeasurementMethod.SuspendLayout();
       this.SuspendLayout();
       // 
       // plStreetSmart
@@ -734,6 +737,9 @@
       // 
       // grMeasurement
       // 
+      this.grMeasurement.Controls.Add(this.cbUnit);
+      this.grMeasurement.Controls.Add(this.btnGetUnitPreference);
+      this.grMeasurement.Controls.Add(this.btnSetUnitPreference);
       this.grMeasurement.Controls.Add(this.grMeasurementMethod);
       this.grMeasurement.Controls.Add(this.grMeasurementType);
       this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
@@ -746,15 +752,123 @@
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
       // 
-      // btnGetActiveMeasurement
+      // cbUnit
       // 
-      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(5, 85);
-      this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
-      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(105, 30);
-      this.btnGetActiveMeasurement.TabIndex = 62;
-      this.btnGetActiveMeasurement.Text = "Get Measurement";
-      this.btnGetActiveMeasurement.UseVisualStyleBackColor = true;
-      this.btnGetActiveMeasurement.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
+      this.cbUnit.FormattingEnabled = true;
+      this.cbUnit.Location = new System.Drawing.Point(115, 110);
+      this.cbUnit.Name = "cbUnit";
+      this.cbUnit.Size = new System.Drawing.Size(100, 21);
+      this.cbUnit.TabIndex = 67;
+      // 
+      // btnGetUnitPreference
+      // 
+      this.btnGetUnitPreference.Location = new System.Drawing.Point(175, 85);
+      this.btnGetUnitPreference.Name = "btnGetUnitPreference";
+      this.btnGetUnitPreference.Size = new System.Drawing.Size(55, 20);
+      this.btnGetUnitPreference.TabIndex = 66;
+      this.btnGetUnitPreference.Text = "Get Unit";
+      this.btnGetUnitPreference.UseVisualStyleBackColor = true;
+      this.btnGetUnitPreference.Click += new System.EventHandler(this.btnGetUnitPreference_Click);
+      // 
+      // btnSetUnitPreference
+      // 
+      this.btnSetUnitPreference.Location = new System.Drawing.Point(115, 85);
+      this.btnSetUnitPreference.Name = "btnSetUnitPreference";
+      this.btnSetUnitPreference.Size = new System.Drawing.Size(55, 20);
+      this.btnSetUnitPreference.TabIndex = 65;
+      this.btnSetUnitPreference.Text = "Set Unit";
+      this.btnSetUnitPreference.UseVisualStyleBackColor = true;
+      this.btnSetUnitPreference.Click += new System.EventHandler(this.btnSetUnitPreference_Click);
+      // 
+      // grMeasurementMethod
+      // 
+      this.grMeasurementMethod.Controls.Add(this.rbMethodDefault);
+      this.grMeasurementMethod.Controls.Add(this.rbMethodDepthMap);
+      this.grMeasurementMethod.Controls.Add(this.rbMethodForwardIntersection);
+      this.grMeasurementMethod.Controls.Add(this.rbMethodSmartClick);
+      this.grMeasurementMethod.Location = new System.Drawing.Point(190, 0);
+      this.grMeasurementMethod.Name = "grMeasurementMethod";
+      this.grMeasurementMethod.Size = new System.Drawing.Size(80, 80);
+      this.grMeasurementMethod.TabIndex = 64;
+      this.grMeasurementMethod.TabStop = false;
+      this.grMeasurementMethod.Text = "Method";
+      // 
+      // rbMethodDefault
+      // 
+      this.rbMethodDefault.AutoSize = true;
+      this.rbMethodDefault.Checked = true;
+      this.rbMethodDefault.Location = new System.Drawing.Point(5, 15);
+      this.rbMethodDefault.Name = "rbMethodDefault";
+      this.rbMethodDefault.Size = new System.Drawing.Size(59, 17);
+      this.rbMethodDefault.TabIndex = 58;
+      this.rbMethodDefault.TabStop = true;
+      this.rbMethodDefault.Text = "Default";
+      this.rbMethodDefault.UseVisualStyleBackColor = true;
+      // 
+      // rbMethodDepthMap
+      // 
+      this.rbMethodDepthMap.AutoSize = true;
+      this.rbMethodDepthMap.Location = new System.Drawing.Point(5, 30);
+      this.rbMethodDepthMap.Name = "rbMethodDepthMap";
+      this.rbMethodDepthMap.Size = new System.Drawing.Size(75, 17);
+      this.rbMethodDepthMap.TabIndex = 59;
+      this.rbMethodDepthMap.Text = "DepthMap";
+      this.rbMethodDepthMap.UseVisualStyleBackColor = true;
+      // 
+      // rbMethodForwardIntersection
+      // 
+      this.rbMethodForwardIntersection.AutoSize = true;
+      this.rbMethodForwardIntersection.Location = new System.Drawing.Point(5, 60);
+      this.rbMethodForwardIntersection.Name = "rbMethodForwardIntersection";
+      this.rbMethodForwardIntersection.Size = new System.Drawing.Size(69, 17);
+      this.rbMethodForwardIntersection.TabIndex = 61;
+      this.rbMethodForwardIntersection.Text = "Forw. Int.";
+      this.rbMethodForwardIntersection.UseVisualStyleBackColor = true;
+      // 
+      // rbMethodSmartClick
+      // 
+      this.rbMethodSmartClick.AutoSize = true;
+      this.rbMethodSmartClick.Location = new System.Drawing.Point(5, 45);
+      this.rbMethodSmartClick.Name = "rbMethodSmartClick";
+      this.rbMethodSmartClick.Size = new System.Drawing.Size(78, 17);
+      this.rbMethodSmartClick.TabIndex = 60;
+      this.rbMethodSmartClick.Text = "Smart Click";
+      this.rbMethodSmartClick.UseVisualStyleBackColor = true;
+      // 
+      // grMeasurementType
+      // 
+      this.grMeasurementType.Controls.Add(this.rbMeasDefault);
+      this.grMeasurementType.Controls.Add(this.rbMeasPoint);
+      this.grMeasurementType.Controls.Add(this.rbMeasPolygon);
+      this.grMeasurementType.Controls.Add(this.rbMeasLineString);
+      this.grMeasurementType.Location = new System.Drawing.Point(110, 0);
+      this.grMeasurementType.Name = "grMeasurementType";
+      this.grMeasurementType.Size = new System.Drawing.Size(80, 80);
+      this.grMeasurementType.TabIndex = 63;
+      this.grMeasurementType.TabStop = false;
+      this.grMeasurementType.Text = "Type";
+      // 
+      // rbMeasDefault
+      // 
+      this.rbMeasDefault.AutoSize = true;
+      this.rbMeasDefault.Checked = true;
+      this.rbMeasDefault.Location = new System.Drawing.Point(5, 15);
+      this.rbMeasDefault.Name = "rbMeasDefault";
+      this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
+      this.rbMeasDefault.TabIndex = 58;
+      this.rbMeasDefault.TabStop = true;
+      this.rbMeasDefault.Text = "Default";
+      this.rbMeasDefault.UseVisualStyleBackColor = true;
+      // 
+      // rbMeasPoint
+      // 
+      this.rbMeasPoint.AutoSize = true;
+      this.rbMeasPoint.Location = new System.Drawing.Point(5, 30);
+      this.rbMeasPoint.Name = "rbMeasPoint";
+      this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
+      this.rbMeasPoint.TabIndex = 59;
+      this.rbMeasPoint.Text = "Point";
+      this.rbMeasPoint.UseVisualStyleBackColor = true;
       // 
       // rbMeasPolygon
       // 
@@ -776,27 +890,15 @@
       this.rbMeasLineString.Text = "Line string";
       this.rbMeasLineString.UseVisualStyleBackColor = true;
       // 
-      // rbMeasPoint
+      // btnGetActiveMeasurement
       // 
-      this.rbMeasPoint.AutoSize = true;
-      this.rbMeasPoint.Location = new System.Drawing.Point(5, 30);
-      this.rbMeasPoint.Name = "rbMeasPoint";
-      this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
-      this.rbMeasPoint.TabIndex = 59;
-      this.rbMeasPoint.Text = "Point";
-      this.rbMeasPoint.UseVisualStyleBackColor = true;
-      // 
-      // rbMeasDefault
-      // 
-      this.rbMeasDefault.AutoSize = true;
-      this.rbMeasDefault.Checked = true;
-      this.rbMeasDefault.Location = new System.Drawing.Point(5, 15);
-      this.rbMeasDefault.Name = "rbMeasDefault";
-      this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
-      this.rbMeasDefault.TabIndex = 58;
-      this.rbMeasDefault.TabStop = true;
-      this.rbMeasDefault.Text = "Default";
-      this.rbMeasDefault.UseVisualStyleBackColor = true;
+      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(5, 85);
+      this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
+      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(105, 30);
+      this.btnGetActiveMeasurement.TabIndex = 62;
+      this.btnGetActiveMeasurement.Text = "Get Measurement";
+      this.btnGetActiveMeasurement.UseVisualStyleBackColor = true;
+      this.btnGetActiveMeasurement.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
       // 
       // btnStartMeasurementMode
       // 
@@ -1741,74 +1843,6 @@
       this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
       this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
       // 
-      // grMeasurementType
-      // 
-      this.grMeasurementType.Controls.Add(this.rbMeasDefault);
-      this.grMeasurementType.Controls.Add(this.rbMeasPoint);
-      this.grMeasurementType.Controls.Add(this.rbMeasPolygon);
-      this.grMeasurementType.Controls.Add(this.rbMeasLineString);
-      this.grMeasurementType.Location = new System.Drawing.Point(110, 0);
-      this.grMeasurementType.Name = "grMeasurementType";
-      this.grMeasurementType.Size = new System.Drawing.Size(80, 80);
-      this.grMeasurementType.TabIndex = 63;
-      this.grMeasurementType.TabStop = false;
-      this.grMeasurementType.Text = "Type";
-      // 
-      // grMeasurementMethod
-      // 
-      this.grMeasurementMethod.Controls.Add(this.rbMethodDefault);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodDepthMap);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodForwardIntersection);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodSmartClick);
-      this.grMeasurementMethod.Location = new System.Drawing.Point(190, 0);
-      this.grMeasurementMethod.Name = "grMeasurementMethod";
-      this.grMeasurementMethod.Size = new System.Drawing.Size(80, 80);
-      this.grMeasurementMethod.TabIndex = 64;
-      this.grMeasurementMethod.TabStop = false;
-      this.grMeasurementMethod.Text = "Method";
-      // 
-      // rbMethodDefault
-      // 
-      this.rbMethodDefault.AutoSize = true;
-      this.rbMethodDefault.Checked = true;
-      this.rbMethodDefault.Location = new System.Drawing.Point(5, 15);
-      this.rbMethodDefault.Name = "rbMethodDefault";
-      this.rbMethodDefault.Size = new System.Drawing.Size(59, 17);
-      this.rbMethodDefault.TabIndex = 58;
-      this.rbMethodDefault.TabStop = true;
-      this.rbMethodDefault.Text = "Default";
-      this.rbMethodDefault.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodDepthMap
-      // 
-      this.rbMethodDepthMap.AutoSize = true;
-      this.rbMethodDepthMap.Location = new System.Drawing.Point(5, 30);
-      this.rbMethodDepthMap.Name = "rbMethodDepthMap";
-      this.rbMethodDepthMap.Size = new System.Drawing.Size(75, 17);
-      this.rbMethodDepthMap.TabIndex = 59;
-      this.rbMethodDepthMap.Text = "DepthMap";
-      this.rbMethodDepthMap.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodForwardIntersection
-      // 
-      this.rbMethodForwardIntersection.AutoSize = true;
-      this.rbMethodForwardIntersection.Location = new System.Drawing.Point(5, 60);
-      this.rbMethodForwardIntersection.Name = "rbMethodForwardIntersection";
-      this.rbMethodForwardIntersection.Size = new System.Drawing.Size(69, 17);
-      this.rbMethodForwardIntersection.TabIndex = 61;
-      this.rbMethodForwardIntersection.Text = "Forw. Int.";
-      this.rbMethodForwardIntersection.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodSmartClick
-      // 
-      this.rbMethodSmartClick.AutoSize = true;
-      this.rbMethodSmartClick.Location = new System.Drawing.Point(5, 45);
-      this.rbMethodSmartClick.Name = "rbMethodSmartClick";
-      this.rbMethodSmartClick.Size = new System.Drawing.Size(78, 17);
-      this.rbMethodSmartClick.TabIndex = 60;
-      this.rbMethodSmartClick.Text = "Smart Click";
-      this.rbMethodSmartClick.UseVisualStyleBackColor = true;
-      // 
       // Demo
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1834,6 +1868,10 @@
       this.grOverlay.ResumeLayout(false);
       this.grOverlay.PerformLayout();
       this.grMeasurement.ResumeLayout(false);
+      this.grMeasurementMethod.ResumeLayout(false);
+      this.grMeasurementMethod.PerformLayout();
+      this.grMeasurementType.ResumeLayout(false);
+      this.grMeasurementType.PerformLayout();
       this.grDevTools.ResumeLayout(false);
       this.grRotationsZoomInOut.ResumeLayout(false);
       this.grRotationsZoomInOut.PerformLayout();
@@ -1853,10 +1891,6 @@
       this.grOpenByAddress.PerformLayout();
       this.grLogin.ResumeLayout(false);
       this.grLogin.PerformLayout();
-      this.grMeasurementType.ResumeLayout(false);
-      this.grMeasurementType.PerformLayout();
-      this.grMeasurementMethod.ResumeLayout(false);
-      this.grMeasurementMethod.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -2017,6 +2051,9 @@
         private System.Windows.Forms.RadioButton rbMethodForwardIntersection;
         private System.Windows.Forms.RadioButton rbMethodSmartClick;
         private System.Windows.Forms.GroupBox grMeasurementType;
+        private System.Windows.Forms.ComboBox cbUnit;
+        private System.Windows.Forms.Button btnGetUnitPreference;
+        private System.Windows.Forms.Button btnSetUnitPreference;
     }
 }
 
