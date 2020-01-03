@@ -16,23 +16,36 @@
  * License along with this library.
  */
 
-using System.Security;
-
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Credential information
+  /// Orientation Object that contains values.
   /// </summary>
-  public interface ICredentials
+  public interface IObliqueOrientation
   {
     /// <summary>
-    /// Username of the user.
+    /// The center of the oblique image
     /// </summary>
-    string Username { get; set; }
+    IImageCoordinate Center { get; set; }
 
     /// <summary>
-    /// Password of the user.
+    /// Optional value of the pitch.
     /// </summary>
-    SecureString Password { get; set; }
+    IExtent Extent { get; set; }
+
+    /// <summary>
+    /// Optional value of the hFov.
+    /// </summary>    
+    int Resolution { get; set; }
+
+    /// <summary>
+    /// The rotation of the oblique image
+    /// </summary>
+    double Rotation { get; set; }
+
+    /// <summary>
+    /// The SRS of the oblique image
+    /// </summary>
+    string Srs { get; set; }
   }
 }

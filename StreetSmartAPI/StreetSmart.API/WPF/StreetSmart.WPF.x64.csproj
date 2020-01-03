@@ -96,6 +96,9 @@
     <Compile Include="..\Common\API\Events\MeasurementEvent.cs">
       <Link>API\Events\MeasurementEvent.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\Events\ObliqueViewerEvent.cs">
+      <Link>API\Events\ObliqueViewerEvent.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\Events\PanoramaRecordingClickViewerEvent.cs">
       <Link>API\Events\PanoramaRecordingClickViewerEvent.cs</Link>
     </Compile>
@@ -177,6 +180,9 @@
     <Compile Include="..\Common\Data\DepthInfo.cs">
       <Link>Data\DepthInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\DirectionInfo.cs">
+      <Link>Data\DirectionInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\DomElement\DomElement.cs">
       <Link>Data\DomElement\DomElement.cs</Link>
     </Compile>
@@ -194,6 +200,9 @@
     </Compile>
     <Compile Include="..\Common\Data\ElevationInfo.cs">
       <Link>Data\ElevationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\Extent.cs">
+      <Link>Data\Extent.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\FeatureInfo.cs">
       <Link>Data\FeatureInfo.cs</Link>
@@ -303,6 +312,9 @@
     <Compile Include="..\Common\Data\GeoJson\Triangle.cs">
       <Link>Data\GeoJson\Triangle.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\ImageCoordinate.cs">
+      <Link>Data\ImageCoordinate.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\Json.cs">
       <Link>Data\Json.cs</Link>
     </Compile>
@@ -314,6 +326,12 @@
     </Compile>
     <Compile Include="..\Common\Data\NotifyPropertyChanged.cs">
       <Link>Data\NotifyPropertyChanged.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\ObliqueImageInfo.cs">
+      <Link>Data\ObliqueImageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Data\ObliqueOrientation.cs">
+      <Link>Data\ObliqueOrientation.cs</Link>
     </Compile>
     <Compile Include="..\Common\Data\ObliqueViewerOptions.cs">
       <Link>Data\ObliqueViewerOptions.cs</Link>
@@ -561,14 +579,23 @@
     <Compile Include="..\Common\Interfaces\Data\IDepthInfo.cs">
       <Link>Interfaces\Data\IDepthInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IDirectionInfo.cs">
+      <Link>Interfaces\Data\IDirectionInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\IElevationInfo.cs">
       <Link>Interfaces\Data\IElevationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IExtent.cs">
+      <Link>Interfaces\Data\IExtent.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IFeatureInfo.cs">
       <Link>Interfaces\Data\IFeatureInfo.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IGeoJsonOverlay.cs">
       <Link>Interfaces\Data\IGeoJsonOverlay.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IImageCoordinate.cs">
+      <Link>Interfaces\IImageCoordinate.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IJson.cs">
       <Link>Interfaces\Data\IJson.cs</Link>
@@ -578,6 +605,12 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IMeasurementOptions.cs">
       <Link>Interfaces\Data\IMeasurementOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IObliqueImageInfo.cs">
+      <Link>Interfaces\Data\IObliqueImageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IObliqueOrientation.cs">
+      <Link>Interfaces\Data\IObliqueOrientation.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\IObliqueViewerOptions.cs">
       <Link>Interfaces\Data\IObliqueViewerOptions.cs</Link>

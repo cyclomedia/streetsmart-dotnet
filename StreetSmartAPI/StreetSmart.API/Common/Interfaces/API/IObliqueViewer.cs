@@ -16,7 +16,11 @@
  * License along with this library.
  */
 
+using System;
 using System.Threading.Tasks;
+
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.Interfaces.API
 {
@@ -26,6 +30,45 @@ namespace StreetSmart.Common.Interfaces.API
   /// </summary>
   public interface IObliqueViewer : IImageViewer
   {
+    #region Interface events
+
+    /// <summary>
+    /// Triggers when oblique viewing direction is clicked.
+    /// </summary>
+    event EventHandler<IEventArgs<IDirectionInfo>> SwitchViewingDir;
+
+    /// <summary>
+    /// Triggers when a feature is clicked inside the obliqueViewer.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
+
+    /// <summary>
+    /// Triggers when a feature is selected / deselected inside the obliqueViewer.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureSelectionChange;
+
+    /// <summary>
+    /// Triggers when loaded another oblique image.
+    /// </summary>
+    event EventHandler<IEventArgs<IObliqueImageInfo>> ImageChange;
+
+    /// <summary>
+    /// Triggers when the view (center, resolution, rotation) of the oblique changed.
+    /// </summary>
+    event EventHandler<IEventArgs<IObliqueOrientation>> ViewChange;
+
+    /// <summary>
+    /// Triggers when the surface cursor is changed
+    /// </summary>
+    event EventHandler<EventArgs> ViewLoadEnd;
+
+    /// <summary>
+    /// Triggers when time travel date changed
+    /// </summary>
+    event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
+
+    #endregion
+
     /// <summary>
     /// Get the visibility of a button
     /// </summary>

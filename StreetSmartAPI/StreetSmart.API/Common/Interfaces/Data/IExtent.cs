@@ -16,23 +16,31 @@
  * License along with this library.
  */
 
-using System.Security;
-
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Credential information
+  /// Extent definition
   /// </summary>
-  public interface ICredentials
+  public interface IExtent
   {
     /// <summary>
-    /// Username of the user.
+    /// X1 of the extent
     /// </summary>
-    string Username { get; set; }
+    double X1 { get; set; }
 
     /// <summary>
-    /// Password of the user.
+    /// X2 of the extent
     /// </summary>
-    SecureString Password { get; set; }
+    double X2 { get; set; }
+
+    /// <summary>
+    /// Y1 of the extent
+    /// </summary>
+    double Y1 { get; set; }
+
+    /// <summary>
+    /// Y2 of the extent
+    /// </summary>
+    double Y2 { get; set; }
   }
 }

@@ -70,6 +70,23 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
+    public Polygon(IList<object> coordinates)
+    {
+      Type = GeometryType.Polygon;
+
+      foreach (var ring in coordinates)
+      {
+        List<ICoordinate> coordinateList = new List<ICoordinate>();
+
+        foreach (IList<object> coordinate in ring as IList<object> ?? new List<object>())
+        {
+          coordinateList.Add(new Coordinate(coordinate));
+        }
+
+        Add(coordinateList);
+      }
+    }
+
     public GeometryType Type { get; }
 
     public override string ToString()

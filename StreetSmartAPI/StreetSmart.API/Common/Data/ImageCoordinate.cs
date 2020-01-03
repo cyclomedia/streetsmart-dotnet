@@ -16,23 +16,41 @@
  * License along with this library.
  */
 
-using System.Security;
+using System.Collections.Generic;
 
-namespace StreetSmart.Common.Interfaces.Data
+using StreetSmart.Common.Interfaces.Data;
+
+namespace StreetSmart.Common.Data
 {
-  /// <summary>
-  /// Credential information
-  /// </summary>
-  public interface ICredentials
+  internal class ImageCoordinate : DataConvert, IImageCoordinate
   {
-    /// <summary>
-    /// Username of the user.
-    /// </summary>
-    string Username { get; set; }
+    private double? _x;
+    private double? _y;
 
-    /// <summary>
-    /// Password of the user.
-    /// </summary>
-    SecureString Password { get; set; }
+    public ImageCoordinate(IList<object> coordinate)
+    {
+      X = coordinate?.Count >= 1 ? ToNullDouble(coordinate[0]) : null;
+      Y = coordinate?.Count >= 2 ? ToNullDouble(coordinate[1]) : null;
+    }
+
+    public double? X
+    {
+      get => _x;
+      set
+      {
+        _x = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public double? Y
+    {
+      get => _y;
+      set
+      {
+        _y = value;
+        RaisePropertyChanged();
+      }
+    }
   }
 }

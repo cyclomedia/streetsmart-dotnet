@@ -16,23 +16,15 @@
  * License along with this library.
  */
 
-using System.Security;
-
-namespace StreetSmart.Common.Interfaces.Data
+namespace StreetSmart.Common.API.Events
 {
-  /// <summary>
-  /// Credential information
-  /// </summary>
-  public interface ICredentials
+  internal class ObliqueViewerEvent: ViewerEvent
   {
-    /// <summary>
-    /// Username of the user.
-    /// </summary>
-    string Username { get; set; }
+    protected override string Events => "Events.obliqueViewer";
 
-    /// <summary>
-    /// Password of the user.
-    /// </summary>
-    SecureString Password { get; set; }
+    public ObliqueViewerEvent(Viewer viewer, string type, string funcName)
+      : base(viewer, type, funcName)
+    {
+    }
   }
 }

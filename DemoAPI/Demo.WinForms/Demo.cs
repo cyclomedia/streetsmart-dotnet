@@ -278,6 +278,14 @@ namespace Demo.WinForms
       if (viewer is IObliqueViewer obliqueViewer)
       {
         _obliqueViewers.Add(obliqueViewer);
+
+        obliqueViewer.SwitchViewingDir += OnSwitchDirection;
+        obliqueViewer.FeatureClick += OnObliqueFeatureClick;
+        obliqueViewer.FeatureSelectionChange += OnObliqueFeatureSelectionChange;
+        obliqueViewer.ImageChange += OnObliqueImageChange;
+        obliqueViewer.ViewChange += OnObliqueViewChange;
+        obliqueViewer.ViewLoadEnd += OnObliqueViewLoadEnd;
+        obliqueViewer.TimeTravelChange += OnObliqueTimeTravelChange;
       }
 
       if (viewer is IPointCloudViewer pointCloudViewer)
@@ -332,6 +340,14 @@ namespace Demo.WinForms
         if (viewer is IObliqueViewer obliqueViewer)
         {
           _obliqueViewers.Remove(obliqueViewer);
+
+          obliqueViewer.SwitchViewingDir -= OnSwitchDirection;
+          obliqueViewer.FeatureClick -= OnObliqueFeatureClick;
+          obliqueViewer.FeatureSelectionChange -= OnObliqueFeatureSelectionChange;
+          obliqueViewer.ImageChange -= OnObliqueImageChange;
+          obliqueViewer.ViewChange -= OnObliqueViewChange;
+          obliqueViewer.ViewLoadEnd -= OnObliqueViewLoadEnd;
+          obliqueViewer.TimeTravelChange -= OnObliqueTimeTravelChange;
         }
 
         if (viewer is IPointCloudViewer pointCloudViewer)
@@ -351,6 +367,52 @@ namespace Demo.WinForms
           }
         }
       }
+    }
+
+    #endregion
+
+    #region events oblique viewer 
+
+    private void OnSwitchDirection(object sender, IEventArgs<IDirectionInfo> args)
+    {
+      string text = "Switch Direction";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueFeatureClick(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "feature Oblique Clicked";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueFeatureSelectionChange(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "feature Oblique Selection Change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueImageChange(object sender, IEventArgs<IObliqueImageInfo> args)
+    {
+      string text = "Oblique Image change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueViewChange(object sender, IEventArgs<IObliqueOrientation> args)
+    {
+      string text = "Oblique View change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueViewLoadEnd(object sender, EventArgs args)
+    {
+      string text = "Oblique view load end";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
+    {
+      string text = "Oblique Time travel change";
+      AddViewerEventsText(text);
     }
 
     #endregion

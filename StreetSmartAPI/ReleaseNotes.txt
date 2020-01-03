@@ -8,6 +8,7 @@ Version: 19.19.0
 - pass an optional measure method to the start measurement call
 - feet / metric toggle (SetUnitPreference / GetUnitPreference)
 - enable / disable shortcuts (enableShortcut / disableShortcut)
+- added oblique viewer events: SWITCH_VIEWING_DIRECTION, FEATURE_CLICK, FEATURE_SELECTION_CHANGE, IMAGE_CHANGE, VIEW_CHANGE, VIEW_LOAD_END, TIME_TRAVEL_CHANGE
 
 
 Version: 19.18.0

@@ -16,23 +16,33 @@
  * License along with this library.
  */
 
-using System.Security;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Credential information
+  /// Oblique image info
   /// </summary>
-  public interface ICredentials
+  public interface IObliqueImageInfo
   {
     /// <summary>
-    /// Username of the user.
+    /// The footprint of the oblique image
     /// </summary>
-    string Username { get; set; }
+    IPolygon Footprint { get; set; }
 
     /// <summary>
-    /// Password of the user.
+    /// The center of the footprint
     /// </summary>
-    SecureString Password { get; set; }
+    ICoordinate FootprintCentre { get; set; }
+
+    /// <summary>
+    /// The rotation of the oblique image
+    /// </summary>
+    double Rotation { get; set; }
+
+    /// <summary>
+    /// The SRS of the oblique image
+    /// </summary>
+    string Srs { get; set; }
   }
 }

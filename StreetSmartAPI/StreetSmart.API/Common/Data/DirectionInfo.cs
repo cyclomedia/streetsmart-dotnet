@@ -16,23 +16,29 @@
  * License along with this library.
  */
 
-using System.Security;
+using System.Collections.Generic;
 
-namespace StreetSmart.Common.Interfaces.Data
+using StreetSmart.Common.Interfaces.Data;
+
+namespace StreetSmart.Common.Data
 {
-  /// <summary>
-  /// Credential information
-  /// </summary>
-  public interface ICredentials
+  internal class DirectionInfo : DataConvert, IDirectionInfo
   {
-    /// <summary>
-    /// Username of the user.
-    /// </summary>
-    string Username { get; set; }
+    private int _direction;
 
-    /// <summary>
-    /// Password of the user.
-    /// </summary>
-    SecureString Password { get; set; }
+    public DirectionInfo(Dictionary<string, object> directionInfo)
+    {
+      Direction = ToInt(directionInfo, "direction");
+    }
+
+    public int Direction
+    {
+      get => _direction;
+      set
+      {
+        _direction = value;
+        RaisePropertyChanged();
+      }
+    }
   }
 }

@@ -16,23 +16,16 @@
  * License along with this library.
  */
 
-using System.Security;
-
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Credential information
+  /// Direction info
   /// </summary>
-  public interface ICredentials
+  public interface IDirectionInfo
   {
     /// <summary>
-    /// Username of the user.
+    /// The direction
     /// </summary>
-    string Username { get; set; }
-
-    /// <summary>
-    /// Password of the user.
-    /// </summary>
-    SecureString Password { get; set; }
+    int Direction { get; set; }
   }
 }

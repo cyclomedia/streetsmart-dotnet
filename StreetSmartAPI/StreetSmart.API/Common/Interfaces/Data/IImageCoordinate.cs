@@ -16,23 +16,21 @@
  * License along with this library.
  */
 
-using System.Security;
-
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Credential information
+  /// Image coordinate definition
   /// </summary>
-  public interface ICredentials
+  public interface IImageCoordinate
   {
     /// <summary>
-    /// Username of the user.
+    ///  X value of the coordinate
     /// </summary>
-    string Username { get; set; }
+    double? X { get; set; }
 
     /// <summary>
-    /// Password of the user.
+    /// Y value of the coordinate
     /// </summary>
-    SecureString Password { get; set; }
+    double? Y { get; set; }
   }
 }
