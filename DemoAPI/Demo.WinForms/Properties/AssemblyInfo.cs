@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2020, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CycloMedia")]
 [assembly: AssemblyProduct("StreetSmart API")]
-[assembly: AssemblyCopyright("Copyright © CycloMedia 2016 - 2019")]
+[assembly: AssemblyCopyright("Copyright © CycloMedia 2016 - 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -49,5 +49,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("19.19.0")]
-[assembly: AssemblyFileVersion("19.19.0.0")]
+[assembly: AssemblyVersion("20.2.0")]
+[assembly: AssemblyFileVersion("20.2.0.0")]
