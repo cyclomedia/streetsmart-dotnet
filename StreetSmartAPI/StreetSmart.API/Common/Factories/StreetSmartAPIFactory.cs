@@ -46,6 +46,7 @@ namespace StreetSmart.Common.Factories
       if (settings != null && !Cef.IsInitialized)
       {
         CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+        CefSharpSettings.WcfEnabled = true;
         BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
 
         if (enableHighDPISupport)

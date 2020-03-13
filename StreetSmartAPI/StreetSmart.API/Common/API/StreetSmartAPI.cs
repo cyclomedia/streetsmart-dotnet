@@ -441,7 +441,7 @@ namespace StreetSmart.Common.API
     {
       Settings = new Settings(Browser);
       Shortcuts = new Shortcuts(Browser);
-      Browser.RegisterJsObject(JsThis, this);
+      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
       ViewerList.CreateViewerList(ApiId);
       ViewerList.RegisterJsObjects(ApiId, Browser);
       Browser.FrameLoadEnd += OnFrameLoadEnd;

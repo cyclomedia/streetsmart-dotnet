@@ -62,7 +62,7 @@ namespace StreetSmart.Common.API
     public void RegisterJsObject(ChromiumWebBrowser browser)
     {
       Browser = browser;
-      browser.RegisterJsObject(JsThis, this);
+      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
     }
 
     public abstract IViewer AddViewer(string name);

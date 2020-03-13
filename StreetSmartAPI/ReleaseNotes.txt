@@ -3,6 +3,7 @@
 
 Version: 20.2.0
 ================
+- Updated to CefSharp version 0.79
 
 
 Version: 19.19.0
