@@ -151,6 +151,11 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
+    protected void RegisterThisJsObject()
+    {
+      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
+    }
+
     protected bool CheckResultTask(string funcName)
     {
       bool result = true;

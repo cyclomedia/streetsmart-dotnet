@@ -51,7 +51,7 @@ namespace StreetSmart.Common.API
     public Settings(ChromiumWebBrowser browser)
       : base(browser)
     {
-      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
+      RegisterThisJsObject();
     }
 
     #endregion
