@@ -1,6 +1,10 @@
 ﻿Release notes:
 ==============
 
+Version: 20.6.0
+================
+
+
 Version: 20.2.0
 ================
 - Updated to CefSharp version 0.79
