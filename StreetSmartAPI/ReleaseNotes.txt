@@ -1,6 +1,10 @@
 ﻿Release notes:
 ==============
 
+Version: 20.8.0
+================
+
+
 Version: 20.6.0
 ================
 - parse the property year in the recording object
