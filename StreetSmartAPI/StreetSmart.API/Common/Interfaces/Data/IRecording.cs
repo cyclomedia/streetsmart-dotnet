@@ -103,5 +103,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Expired at date
     /// </summary>
     DateTime? ExpiredAt { get; set; }
+
+    /// <summary>
+    /// year of recording
+    /// </summary>
+    int? Year { get; set; }
   }
 }
