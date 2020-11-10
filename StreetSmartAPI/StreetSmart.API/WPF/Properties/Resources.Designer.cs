@@ -97,7 +97,7 @@ namespace StreetSmart.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v20.9/api-dotnet.html.
+        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v20.10/api-dotnet.html.
         /// </summary>
         internal static string StreetSmartLocation {
             get {
