@@ -31,18 +31,18 @@ namespace StreetSmart.Common.Data
     private Color? _color;
     private bool _visible;
 
-    public Overlay(string name, string sld)
+    public Overlay(string name, string sld, bool visible = true)
     {
       Name = name;
       Sld = sld;
-      Visible = true;
+      Visible = visible;
     }
 
-    public Overlay(string name, Color color)
+    public Overlay(string name, Color color, bool visible = true)
     {
       Name = name;
       Color = color;
-      Visible = true;
+      Visible = visible;
     }
 
     public void FillInParameters(Dictionary<string, object> overlay)

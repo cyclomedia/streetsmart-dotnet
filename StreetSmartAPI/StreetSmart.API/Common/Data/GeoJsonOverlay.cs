@@ -28,15 +28,15 @@ namespace StreetSmart.Common.Data
     private string _geoJson;
     private string _srs;
 
-    public GeoJsonOverlay(string geoJson, string name, string srs, string sld)
-      : base(name, sld)
+    public GeoJsonOverlay(string geoJson, string name, string srs, string sld, bool visible = true)
+      : base(name, sld, visible)
     {
       GeoJson = geoJson;
       Srs = srs;
     }
 
-    public GeoJsonOverlay(string geoJson, string name, string srs, Color color)
-      : base(name, color)
+    public GeoJsonOverlay(string geoJson, string name, string srs, Color color, bool visible = true)
+      : base(name, color, visible)
     {
       GeoJson = geoJson;
       Srs = srs;
