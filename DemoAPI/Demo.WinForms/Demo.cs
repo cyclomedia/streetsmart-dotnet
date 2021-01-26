@@ -166,7 +166,8 @@ namespace Demo.WinForms
       {
         PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
         PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
-        PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+        PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections,
+        PointCloudViewerButtons.ToggleAerialStreet,
       };
 
       foreach (var pcButton in pcButtons)
@@ -1279,7 +1280,8 @@ namespace Demo.WinForms
         {
           PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
           PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
-          PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+          PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections,
+          PointCloudViewerButtons.ToggleAerialStreet
         };
 
         foreach (var button in buttons)

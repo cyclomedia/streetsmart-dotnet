@@ -392,6 +392,9 @@
     <Compile Include="..\Common\Data\PanoramaViewerOptions.cs">
       <Link>Data\PanoramaViewerOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Data\PointCloudViewerOptions.cs">
+      <Link>Data\PointCloudViewerOptions.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Data\Recording.cs">
       <Link>Data\Recording.cs</Link>
     </Compile>
@@ -548,6 +551,9 @@
     <Compile Include="..\Common\Factories\PanoramaViewerOptionsFactory.cs">
       <Link>Factories\PanoramaViewerOptionsFactory.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Factories\PointCloudViewerOptionsFactory.cs">
+      <Link>Factories\PointCloudViewerOptionsFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Factories\SLDFactory.cs">
       <Link>Factories\SLDFactory.cs</Link>
     </Compile>
@@ -671,6 +677,9 @@
     <Compile Include="..\Common\Interfaces\Data\IPanoramaViewerOptions.cs">
       <Link>Interfaces\Data\IPanoramaViewerOptions.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Interfaces\Data\IPointCloudViewerOptions.cs">
+      <Link>Interfaces\Data\IPointCloudViewerOptions.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Interfaces\Data\IRecording.cs">
       <Link>Interfaces\Data\IRecording.cs</Link>
     </Compile>
@@ -697,6 +706,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\PointBudget.cs">
       <Link>Interfaces\Data\PointBudget.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\Data\PointCloudType.cs">
+      <Link>Interfaces\Data\PointCloudType.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\Data\PointStyle.cs">
       <Link>Interfaces\Data\PointStyle.cs</Link>

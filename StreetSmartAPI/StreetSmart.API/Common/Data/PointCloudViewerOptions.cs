@@ -16,47 +16,51 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using StreetSmart.Common.Interfaces.Data;
 
+#if WINFORMS
+using StreetSmart.WinForms.Properties;
+#else
+using StreetSmart.Wpf.Properties;
+#endif
+
 namespace StreetSmart.Common.Data
 {
-  internal class ObliqueViewerOptions : BaseViewerOptions, IObliqueViewerOptions
+  internal class PointCloudViewerOptions : BaseViewerOptions, IPointCloudViewerOptions
   {
-    private bool? _timeTravelVisible;
+    private PointCloudType _pointCloudType;
 
-    public ObliqueViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible) :
-      base(closable, maximizable, navBarVisible)
+    public PointCloudViewerOptions(bool? closable, bool? maximizable, bool? navBarVisible,
+      PointCloudType pointCloudType = PointCloudType.Street) : base(closable, maximizable, navBarVisible)
     {
-      TimeTravelVisible = timeTravelVisible;
+      PointCloudType = pointCloudType;
     }
 
-    public bool? TimeTravelVisible
+    public PointCloudType PointCloudType
     {
-      get => _timeTravelVisible;
+      get => _pointCloudType;
       set
       {
-        _timeTravelVisible = value;
+        _pointCloudType = value;
         RaisePropertyChanged();
       }
     }
 
     public override string ToString()
     {
-      List<string> options = new List<string>();
-
-      if (TimeTravelVisible != null)
-      {
-        options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
-      }
+      List<string> options = new List<string> {$"pointCloudType:{Resources.JsApi}.{PointCloudType.Description()}"};
 
       string baseOptions = base.ToString();
       string result = options.Aggregate(baseOptions, (current, part) => $"{current},{part}");
+      result = result.Length >= 1 && result.Substring(0, 1) == ","
+        ? result.Substring(1, result.Length - 1) : result;
       return options.Count == 0 && string.IsNullOrEmpty(baseOptions)
         ? string.Empty
-        : $",obliqueViewer:{{{result}}}";
+        : $",pointcloudViewer:{{{result}}}";
     }
   }
 }

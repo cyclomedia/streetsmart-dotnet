@@ -59,6 +59,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// download
     /// </summary>
     [Description("StreetSmartApi.PointCloudViewerUi.buttons.DOWNLOAD")]
-    Download = 6
+    Download = 6,
+
+    /// <summary>
+    /// toggle aerial street
+    /// </summary>
+    [Description("StreetSmartApi.PointCloudViewerUi.buttons.TOGGLE_AERIAL_STREET")]
+    ToggleAerialStreet = 7
   }
 }

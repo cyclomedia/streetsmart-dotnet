@@ -28,14 +28,12 @@ namespace StreetSmart.Common.Data
   {
     private bool? _closable;
     private bool? _maximizable;
-    private bool? _timeTravelVisible;
     private bool? _navBarVisible;
 
-    public BaseViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible)
+    public BaseViewerOptions(bool? closable, bool? maximizable, bool? navBarVisible)
     {
       Closable = closable;
       Maximizable = maximizable;
-      TimeTravelVisible = timeTravelVisible;
       NavbarVisible = navBarVisible;
     }
 
@@ -55,16 +53,6 @@ namespace StreetSmart.Common.Data
       set
       {
         _maximizable = value;
-        RaisePropertyChanged();
-      }
-    }
-
-    public bool? TimeTravelVisible
-    {
-      get => _timeTravelVisible;
-      set
-      {
-        _timeTravelVisible = value;
         RaisePropertyChanged();
       }
     }
@@ -91,11 +79,6 @@ namespace StreetSmart.Common.Data
       if (Maximizable != null)
       {
         options.Add($"maximizable:{Maximizable.ToString().ToLower()}");
-      }
-
-      if (TimeTravelVisible != null)
-      {
-        options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
       }
 
       if (NavbarVisible != null)

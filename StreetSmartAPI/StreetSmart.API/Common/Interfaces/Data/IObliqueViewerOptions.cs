@@ -23,5 +23,9 @@ namespace StreetSmart.Common.Interfaces.Data
   /// </summary>
   public interface IObliqueViewerOptions : IBaseViewerOptions
   {
+    /// <summary>
+    /// If time travel is enabled
+    /// </summary>
+    bool? TimeTravelVisible { get; set; }
   }
 }

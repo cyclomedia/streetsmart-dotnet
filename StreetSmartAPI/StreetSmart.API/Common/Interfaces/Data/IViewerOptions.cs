@@ -42,5 +42,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Options to initialize the oblique viewer with
     /// </summary>
     IObliqueViewerOptions ObliqueViewer { get; set; }
+
+    /// <summary>
+    /// Options to initialize the point cloud viewer with
+    /// </summary>
+    IPointCloudViewerOptions PointCloudViewer { get; set; }
   }
 }

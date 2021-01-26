@@ -29,14 +29,16 @@ namespace StreetSmart.Common.Data
     private string _srs;
     private IPanoramaViewerOptions _panoramaViewer;
     private IObliqueViewerOptions _obliqueViewer;
+    private IPointCloudViewerOptions _pointCloudViewer;
 
     public ViewerOptions(IList<ViewerType> viewerTypes, string srs, IPanoramaViewerOptions panoramaViewer,
-      IObliqueViewerOptions obliqueViewer)
+      IObliqueViewerOptions obliqueViewer, IPointCloudViewerOptions pointCloudViewer)
     {
       ViewerTypes = new ViewerTypes(viewerTypes);
       Srs = srs;
       PanoramaViewer = panoramaViewer;
       ObliqueViewer = obliqueViewer;
+      PointCloudViewer = pointCloudViewer;
     }
 
     public IViewerTypes ViewerTypes
@@ -79,9 +81,19 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public IPointCloudViewerOptions PointCloudViewer
+    {
+      get => _pointCloudViewer;
+      set
+      {
+        _pointCloudViewer = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
-      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()}{PanoramaViewer}{ObliqueViewer}}}";
+      return $",{{viewerType:{ViewerTypes},srs:{Srs.ToQuote()}{PanoramaViewer}{ObliqueViewer}{PointCloudViewer}}}";
     }
   }
 }

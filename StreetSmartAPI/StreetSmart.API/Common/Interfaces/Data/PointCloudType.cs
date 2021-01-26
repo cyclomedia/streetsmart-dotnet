@@ -16,26 +16,25 @@
  * License along with this library.
  */
 
+using System.ComponentModel;
+
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Options to initialize the viewer with
+  /// Defines the viewerTypes of the API
   /// </summary>
-  public interface IBaseViewerOptions
+  public enum PointCloudType
   {
     /// <summary>
-    /// Whether the viewer window should be closable.
+    /// Aerial point cloud
     /// </summary>
-    bool? Closable { get; set; }
+    [Description("PointCloudType.AERIAL")]
+    Aerial = 1,
 
     /// <summary>
-    /// Whether the viewer window should be maximizable.
+    /// Street point cloud
     /// </summary>
-    bool? Maximizable { get; set; }
-
-    /// <summary>
-    /// If navbar is enabled
-    /// </summary>
-    bool? NavbarVisible { get; set; }
+    [Description("PointCloudType.STREET")]
+    Street = 2,
   }
 }

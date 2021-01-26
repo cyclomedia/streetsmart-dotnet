@@ -47,5 +47,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Start new measurement when clicking on measurement type button in measurement the navigation bar. Default is true.
     /// </summary>
     bool? MeasureTypeButtonStart { get; set; }
+
+    /// <summary>
+    /// If time travel is enabled
+    /// </summary>
+    bool? TimeTravelVisible { get; set; }
   }
 }

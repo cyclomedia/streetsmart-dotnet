@@ -169,6 +169,11 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleEdges({visible.ToJsBool()});");
     }
 
+    public void TogglePointCloudType()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.TogglePointCloudType();");
+    }
+
     #endregion
 
     #region Events from StreetSmartAPI

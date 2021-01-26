@@ -30,12 +30,14 @@ namespace StreetSmart.Common.Data
     private bool? _measureTypeButtonVisible;
     private bool? _measureTypeButtonToggle;
     private bool? _measureTypeButtonStart;
+    private bool? _timeTravelVisible;
 
     public PanoramaViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible,
-      bool? replace, bool? recordingsVisible) : base(closable, maximizable, timeTravelVisible, navBarVisible)
+      bool? replace, bool? recordingsVisible) : base(closable, maximizable, navBarVisible)
     {
       Replace = replace;
       RecordingsVisible = recordingsVisible;
+      TimeTravelVisible = timeTravelVisible;
     }
 
     public bool? Replace
@@ -88,6 +90,16 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public bool? TimeTravelVisible
+    {
+      get => _timeTravelVisible;
+      set
+      {
+        _timeTravelVisible = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
       List<string> options = new List<string>();
@@ -115,6 +127,11 @@ namespace StreetSmart.Common.Data
       if (MeasureTypeButtonStart != null)
       {
         options.Add($"measureTypeButtonStart:{MeasureTypeButtonStart.ToString().ToLower()}");
+      }
+
+      if (TimeTravelVisible != null)
+      {
+        options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
       }
 
       string baseOptions = base.ToString();

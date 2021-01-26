@@ -19,23 +19,13 @@
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Options to initialize the viewer with
+  /// Options to initialize the point cloud viewer with
   /// </summary>
-  public interface IBaseViewerOptions
+  public interface IPointCloudViewerOptions : IBaseViewerOptions
   {
     /// <summary>
-    /// Whether the viewer window should be closable.
+    /// The point cloud type of the viewer
     /// </summary>
-    bool? Closable { get; set; }
-
-    /// <summary>
-    /// Whether the viewer window should be maximizable.
-    /// </summary>
-    bool? Maximizable { get; set; }
-
-    /// <summary>
-    /// If navbar is enabled
-    /// </summary>
-    bool? NavbarVisible { get; set; }
+    PointCloudType PointCloudType { get; set; }
   }
 }

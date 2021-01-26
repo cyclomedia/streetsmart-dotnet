@@ -158,6 +158,11 @@ namespace StreetSmart.Common.Interfaces.API
     /// Toggles or sets the visibility of edges around points.
     /// </summary>
     /// <param name="visible">if available, set visibility to this value</param>
-    void ToggleEdges(bool visible);
+    void ToggleEdges(bool visible); 
+  
+    /// <summary>
+    /// Toggles between aerial point cloud and street point cloud
+    /// </summary>
+    void TogglePointCloudType();
   }
 }
