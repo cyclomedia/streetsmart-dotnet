@@ -135,7 +135,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.x86.csproj">
+    <ProjectReference Include="..\StreetSmart.API\WinForms.v73\StreetSmart.WinForms.x86.csproj">
       <Project>{11d8ce67-dc5b-4fc9-871b-968b97b5c990}</Project>
       <Name>StreetSmart.WinForms.x86</Name>
     </ProjectReference>
