@@ -3,6 +3,11 @@
 
 Version 21.1.0
 ================
+- added Aerial point cloud support (including interface functions
+
+
+Version 21.1.0
+================
 - added Aerial point cloud support (including interface functions)
 - it is posible for add a layer which is standard turned off
 
