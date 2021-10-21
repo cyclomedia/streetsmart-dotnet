@@ -1,6 +1,14 @@
 ﻿Release notes:
 ==============
 
+Version 21.10.0
+================
+- implemented DCR9+ Tileschema
+
+Version 21.4.0
+================
+- replaced the poitscene pointcloud viewer with the bluebird viewer
+
 Version 21.1.0
 ================
 - added Aerial point cloud support (including interface functions
