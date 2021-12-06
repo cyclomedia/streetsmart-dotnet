@@ -13,7 +13,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,72 +28,85 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\DemoAPI\Demo.WinForms\Debug\x86\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\DemoAPI\Demo.WinForms\Debug\x64\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-    <WarningLevel>1</WarningLevel>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\DemoAPI\Demo.WinForms\Release\x64\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\DemoAPI\Demo.WinForms\Debug\x86\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
     <OutputPath>..\..\DemoAPI\Demo.WinForms\Release\x86\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x86|x86'">
-    <OutputPath>bin\x86\Release x86\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.cs">
-      <Link>Demo.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.designer.cs">
-      <Link>Demo.designer.cs</Link>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs">
       <Link>Login.cs</Link>
     </Compile>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs">
-      <Link>Program.cs</Link>
-    </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs" />
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources1.Designer.cs">
+      <Link>Properties\Resources1.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="..\..\DemoAPI\Demo.WinForms\viewerButtonsBox.cs">
       <Link>viewerButtonsBox.cs</Link>
@@ -103,24 +115,17 @@
       <Link>viewerElement.cs</Link>
     </Compile>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Demo.resx">
-      <Link>Demo.resx</Link>
       <DependentUpon>Demo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources.resx">
-      <Link>Properties\Resources.resx</Link>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <Link>Properties\Resources.resx</Link>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\Resources1.Designer.cs">
-      <Link>Properties\Resources1.Designer.cs</Link>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="..\..\DemoAPI\Demo.WinForms\App.config">
-      <Link>App.config</Link>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\DemoAPI\Demo.WinForms\App.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -135,9 +140,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.x86.csproj">
+    <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj">
       <Project>{11d8ce67-dc5b-4fc9-871b-968b97b5c990}</Project>
-      <Name>StreetSmart.WinForms.x86</Name>
+      <Name>StreetSmart.WinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
