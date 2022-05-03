@@ -1,6 +1,15 @@
 ﻿Release notes:
 ==============
 
+Version 22.8.0
+================
+- Connected to new Street Smart 22.8 API
+- Implemented new PointCloudViewer
+- Added interface fuction for linkedViewers
+- added the functionality of compass, which can be set with function `toggleCompass'
+- added the function to set an elevationLevel in the panorama viewer
+
+
 Version 21.10.0
 ================
 - implemented DCR9+ Tileschema
