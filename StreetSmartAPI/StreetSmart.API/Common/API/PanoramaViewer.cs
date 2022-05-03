@@ -62,7 +62,6 @@ namespace StreetSmart.Common.API
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<EventArgs> ViewLoadEnd;
-    public event EventHandler<EventArgs> ViewLoadStart;
 
     #endregion
 
@@ -83,8 +82,6 @@ namespace StreetSmart.Common.API
     public string JsViewChange => (ViewerList as PanoramaViewerList)?.JsViewChange;
 
     public string JsViewLoadEnd => (ViewerList as PanoramaViewerList)?.JsViewLoadEnd;
-
-    public string JsViewLoadStart => (ViewerList as PanoramaViewerList)?.JsViewLoadStart;
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
@@ -184,22 +181,27 @@ namespace StreetSmart.Common.API
 
     public void RotateDown(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch.ToString(ci)});");
     }
 
     public void RotateLeft(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw.ToString(ci)});");
     }
 
     public void RotateRight(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw.ToString(ci)});");
     }
 
     public void RotateUp(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch.ToString(ci)});");
+    }
+
+    public void SetElevationSliderLevel(double elevationLevel)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setElevationSliderLevel({elevationLevel.ToString(ci)});");
     }
 
     public void SetOrientation(IOrientation orientation)
@@ -225,6 +227,11 @@ namespace StreetSmart.Common.API
     public void Toggle3DCursor(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
+    }
+
+    public void ToggleLinkedViewers()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleLinkedViewers();");
     }
 
     public void ToggleAddressesVisible(bool visible)
@@ -310,11 +317,6 @@ namespace StreetSmart.Common.API
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnViewLoadStart(Dictionary<string, object> args)
-    {
-      ViewLoadStart?.Invoke(this, EventArgs.Empty);
-    }
-
     public void OnTimeTravelChange(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
@@ -341,7 +343,6 @@ namespace StreetSmart.Common.API
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
         new PanoramaViewerEvent(this, "SURFACE_CURSOR_CHANGE", JsSurfaceCursorChange),
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
-        new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
         new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
         new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError),
         new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange),

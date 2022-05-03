@@ -412,7 +412,6 @@
       this.btnUp.Name = "btnUp";
       this.btnUp.Size = new System.Drawing.Size(40, 25);
       this.btnUp.TabIndex = 81;
-      this.btnUp.Text = "Up";
       this.btnUp.UseVisualStyleBackColor = true;
       this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
       // 
@@ -422,7 +421,6 @@
       this.btnRight.Name = "btnRight";
       this.btnRight.Size = new System.Drawing.Size(40, 25);
       this.btnRight.TabIndex = 80;
-      this.btnRight.Text = "Right";
       this.btnRight.UseVisualStyleBackColor = true;
       this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
       // 
@@ -432,7 +430,6 @@
       this.btnLeft.Name = "btnLeft";
       this.btnLeft.Size = new System.Drawing.Size(40, 25);
       this.btnLeft.TabIndex = 79;
-      this.btnLeft.Text = "Left";
       this.btnLeft.UseVisualStyleBackColor = true;
       this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
       // 
@@ -442,7 +439,6 @@
       this.btnDown.Name = "btnDown";
       this.btnDown.Size = new System.Drawing.Size(40, 25);
       this.btnDown.TabIndex = 78;
-      this.btnDown.Text = "Down";
       this.btnDown.UseVisualStyleBackColor = true;
       this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
       // 
@@ -452,7 +448,6 @@
       this.btnPointCloudLookAt.Name = "btnPointCloudLookAt";
       this.btnPointCloudLookAt.Size = new System.Drawing.Size(55, 25);
       this.btnPointCloudLookAt.TabIndex = 77;
-      this.btnPointCloudLookAt.Text = "Look At";
       this.btnPointCloudLookAt.UseVisualStyleBackColor = true;
       this.btnPointCloudLookAt.Click += new System.EventHandler(this.btnPointCloudLookAt_Click);
       // 
@@ -1462,7 +1457,6 @@
       this.btnCameraPosition.Name = "btnCameraPosition";
       this.btnCameraPosition.Size = new System.Drawing.Size(40, 25);
       this.btnCameraPosition.TabIndex = 49;
-      this.btnCameraPosition.Text = "Pos";
       this.btnCameraPosition.UseVisualStyleBackColor = true;
       this.btnCameraPosition.Click += new System.EventHandler(this.btnCameraPosition_Click);
       // 
@@ -1496,7 +1490,6 @@
       this.btnFlyTo.Name = "btnFlyTo";
       this.btnFlyTo.Size = new System.Drawing.Size(40, 25);
       this.btnFlyTo.TabIndex = 45;
-      this.btnFlyTo.Text = "Fly to";
       this.btnFlyTo.UseVisualStyleBackColor = true;
       this.btnFlyTo.Click += new System.EventHandler(this.btnFlyTo_Click);
       // 

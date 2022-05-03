@@ -87,6 +87,16 @@ namespace StreetSmart.Common.API
       return ToBool(await CallJsGetScriptAsync("getTimeTravelExpanded()"));
     }
 
+    public void ToggleCompass(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleCompass({visible.ToJsBool()});");
+    }
+
+    public void ToggleCompass()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleCompass();");
+    }
+
     public async Task<bool> GetTimeTravelVisible()
     {
       return ToBool(await CallJsGetScriptAsync("getTimeTravelVisible()"));

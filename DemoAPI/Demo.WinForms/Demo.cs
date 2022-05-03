@@ -189,14 +189,14 @@ namespace Demo.WinForms
         cbViewerButton.Items.Add(new ViewerButtonsBox(pnButton));
       }
 
-      cbPointBudget.Items.Add(PointBudget.Low);
-      cbPointBudget.Items.Add(PointBudget.Med);
-      cbPointBudget.Items.Add(PointBudget.High);
+      cbPointBudget.Items.Add(Quality.Low);
+      cbPointBudget.Items.Add(Quality.Medium);
+      cbPointBudget.Items.Add(Quality.High);
 
-      cbPointStyle.Items.Add(PointStyle.Elevation);
-      cbPointStyle.Items.Add(PointStyle.Height);
-      cbPointStyle.Items.Add(PointStyle.Intensity);
-      cbPointStyle.Items.Add(PointStyle.Rgb);
+      cbPointStyle.Items.Add(ColorizationMode.Classification);
+      cbPointStyle.Items.Add(ColorizationMode.Height);
+      cbPointStyle.Items.Add(ColorizationMode.Intensity);
+      cbPointStyle.Items.Add(ColorizationMode.Rgb);
 
       cbUnit.Items.Add(UnitPreference.Default);
       cbUnit.Items.Add(UnitPreference.Feet);
@@ -270,7 +270,6 @@ namespace Demo.WinForms
         panoramaViewer.ViewChange += OnViewChange;
         panoramaViewer.SurfaceCursorChange += OnSurfaceCursorChange;
         panoramaViewer.ViewLoadEnd += OnViewLoadEnd;
-        panoramaViewer.ViewLoadStart += OnViewLoadStart;
         panoramaViewer.TimeTravelChange += OnTimeTravelChange;
         panoramaViewer.FeatureClick += OnFeatureClick;
         panoramaViewer.FeatureSelectionChange += OnFeatureSelectionChange;
@@ -298,6 +297,7 @@ namespace Demo.WinForms
         pointCloudViewer.PointBudgedChanged += OnBudgedChanged;
         pointCloudViewer.PointSizeChanged += OnPointSizeChanged;
         pointCloudViewer.PointStyleChanged += OnPointStyleChanged;
+        pointCloudViewer.BackGroundChanged += OnBackGroundChanged;
       }
     }
 
@@ -332,7 +332,6 @@ namespace Demo.WinForms
           panoramaViewer.ViewChange -= OnViewChange;
           panoramaViewer.SurfaceCursorChange -= OnSurfaceCursorChange;
           panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
-          panoramaViewer.ViewLoadStart -= OnViewLoadStart;
           panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
           panoramaViewer.FeatureClick -= OnFeatureClick;
           panoramaViewer.FeatureSelectionChange -= OnFeatureSelectionChange;
@@ -471,12 +470,6 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadStart(object sender, EventArgs args)
-    {
-      string text = "Image load start";
-      AddViewerEventsText(text);
-    }
-
     private void OnTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
     {
       string text = "Time travel change";
@@ -522,21 +515,27 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnBudgedChanged(object sender, IEventArgs<PointBudget> args)
+    private void OnBudgedChanged(object sender, IEventArgs<Quality> args)
     {
       string text = "On point budget change";
       AddViewerEventsText(text);
     }
 
-    private void OnPointSizeChanged(object sender, IEventArgs<int> args)
+    private void OnPointSizeChanged(object sender, IEventArgs<PointSize> args)
     {
       string text = "On point size change";
       AddViewerEventsText(text);
     }
 
-    private void OnPointStyleChanged(object sender, IEventArgs<PointStyle> args)
+    private void OnPointStyleChanged(object sender, IEventArgs<ColorizationMode> args)
     {
       string text = "On point style change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnBackGroundChanged(object sender, IEventArgs<BackgroundPreset> args)
+    {
+      string text = "On back ground preset change";
       AddViewerEventsText(text);
     }
 
@@ -863,8 +862,10 @@ namespace Demo.WinForms
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await PanoramaViewer.GetRecordingsVisible();
-      PanoramaViewer.ToggleRecordingsVisible(!visible);
+      PanoramaViewer.ToggleLinkedViewers();
+//      setElevationLevel(2.5);
+//      bool visible = await PanoramaViewer.GetRecordingsVisible();
+//      PanoramaViewer.ToggleRecordingsVisible(!visible);
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
@@ -1662,22 +1663,10 @@ namespace Demo.WinForms
 
     private void btnFlyTo_Click(object sender, EventArgs e)
     {
-      ICoordinate position =
-        CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
-      ICoordinate lookAt =
-        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
-      PointCloudViewer.FlyTo(position, lookAt);
     }
 
     private async void btnCameraPosition_Click(object sender, EventArgs e)
     {
-      ICamera camera = await PointCloudViewer.GetCameraPosition();
-      txtX.Text = camera?.Position?.X.ToString();
-      txtY.Text = camera?.Position?.Y.ToString();
-      txtZ.Text = camera?.Position?.Z.ToString();
-      txtlkAtX.Text = camera?.Target?.X.ToString();
-      txtlkAtY.Text = camera?.Target?.Y.ToString();
-      txtlkAtZ.Text = camera?.Target?.Z.ToString();
     }
 
     private async void btnEdges_Click(object sender, EventArgs e)
@@ -1688,11 +1677,11 @@ namespace Demo.WinForms
 
     private async void btnGetPointBudget_Click(object sender, EventArgs e)
     {
-      PointBudget budget = await PointCloudViewer.GetPointBudget();
+      Quality budget = await PointCloudViewer.GetPointAmount();
 
       foreach (var item in cbPointBudget.Items)
       {
-        if ((PointBudget) item == budget)
+        if ((Quality) item == budget)
         {
           cbPointBudget.SelectedItem = item;
         }
@@ -1701,9 +1690,9 @@ namespace Demo.WinForms
 
     private void btnSetPointBudget_Click(object sender, EventArgs e)
     {
-      if (cbPointBudget.SelectedItem is PointBudget budget)
+      if (cbPointBudget.SelectedItem is Quality budget)
       {
-        PointCloudViewer.SetPointBudget(budget);
+        PointCloudViewer.SetPointAmount(budget);
       }
     }
 
@@ -1715,16 +1704,17 @@ namespace Demo.WinForms
     private void btnSetPointSize_Click(object sender, EventArgs e)
     {
       int.TryParse(txtPointSize.Text, out int size);
-      PointCloudViewer.SetPointSize(size);
+      PointSize pointSize = size == 1 ? PointSize.Single : size == 2 ? PointSize.Double : PointSize.Large;
+      PointCloudViewer.SetPointSize(pointSize);
     }
 
     private async void btnGetPointStyle_Click(object sender, EventArgs e)
     {
-      PointStyle style = await PointCloudViewer.GetPointStyle();
+      ColorizationMode style = await PointCloudViewer.GetPointStyle();
 
       foreach (var item in cbPointStyle.Items)
       {
-        if ((PointStyle) item == style)
+        if ((ColorizationMode) item == style)
         {
           cbPointStyle.SelectedItem = item;
         }
@@ -1733,7 +1723,7 @@ namespace Demo.WinForms
 
     private void btnSetPointStyle_Click(object sender, EventArgs e)
     {
-      if (cbPointStyle.SelectedItem is PointStyle style)
+      if (cbPointStyle.SelectedItem is ColorizationMode style)
       {
         PointCloudViewer.SetPointStyle(style);
       }
@@ -1741,33 +1731,22 @@ namespace Demo.WinForms
 
     private void btnPointCloudLookAt_Click(object sender, EventArgs e)
     {
-      ICoordinate lookAt =
-        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
-      PointCloudViewer.LookAtCoordinate(lookAt);
     }
 
     private void btnDown_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateDown(size);
     }
 
     private void btnLeft_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateLeft(size);
     }
 
     private void btnRight_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateRight(size);
     }
 
     private void btnUp_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateUp(size);
     }
 
     private void btnSetUnitPreference_Click(object sender, EventArgs e)
@@ -1800,6 +1779,12 @@ namespace Demo.WinForms
         txtShortcutResult.Text =
           (await _api.Shortcuts.DisableShortcut((ShortcutNames) cbShortCuts.SelectedItem)).ToString();
       }
+    }
+
+
+    private void setElevationLevel(double elevationLevel)
+    {
+      PanoramaViewer.SetElevationSliderLevel(elevationLevel);
     }
   }
 }

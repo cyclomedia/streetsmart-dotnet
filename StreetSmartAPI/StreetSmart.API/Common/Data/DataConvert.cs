@@ -18,11 +18,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace StreetSmart.Common.Data
 {
   class DataConvert : NotifyPropertyChanged
   {
+    protected static CultureInfo ci => CultureInfo.InvariantCulture;
+
     public double ToDouble(object value)
     {
       return double.TryParse(value?.ToString(), out var outValue) ? outValue : 0.0;

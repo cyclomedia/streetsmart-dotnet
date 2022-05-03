@@ -21,32 +21,32 @@ using System.ComponentModel;
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Definition of PointStyles
+  /// Defines the Quality
   /// </summary>
-  public enum PointStyle
+  public enum Quality
   {
     /// <summary>
-    /// RGB
+    /// Low
     /// </summary>
-    [Description("0")]
-    Rgb = 0,
+    [Description("low")]
+    Low = 1,
+
+    /// <summary>
+    /// Medium
+    /// </summary>
+    [Description("medium")]
+    Medium = 2,
 
     /// <summary>
     /// Height
     /// </summary>
-    [Description("3")]
-    Height = 3,
+    [Description("high")]
+    High = 3,
 
     /// <summary>
-    /// Elevation
+    /// Ultra
     /// </summary>
-    [Description("3")]
-    Elevation = 3,
-
-    /// <summary>
-    /// Intensity
-    /// </summary>
-    [Description("4")]
-    Intensity = 4
+    [Description("ultra")]
+    Ultra = 4
   }
 }

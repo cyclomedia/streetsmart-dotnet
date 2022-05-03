@@ -68,6 +68,17 @@ namespace StreetSmart.Common.Interfaces.API
     void SetContrast(double value);
 
     /// <summary>
+    /// Toggles the visibility of the compass in the Panorama / Oblique Viewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleCompass(bool visible);
+
+    /// <summary>
+    /// Toggles the visibility of the compass in the Panorama / Oblique Viewer.
+    /// </summary>
+    void ToggleCompass();
+
+    /// <summary>
     /// Toggles the visibility of an overlay.
     /// </summary>
     /// <param name="overlay">Sets the visibility of the layer to this value.</param>

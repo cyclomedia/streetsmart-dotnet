@@ -21,26 +21,32 @@ using System.ComponentModel;
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>
-  /// Defines the Point budget
+  /// Definition of PointStyles
   /// </summary>
-  public enum PointBudget
+  public enum ColorizationMode
   {
     /// <summary>
-    /// Low
+    /// RGB
     /// </summary>
-    [Description("Low")]
-    Low = 1,
+    [Description("RGB")]
+    Rgb = 1,
 
     /// <summary>
-    /// Oblique image
+    /// Height
     /// </summary>
-    [Description("Med")]
-    Med = 2,
+    [Description("Height")]
+    Height = 2,
 
     /// <summary>
-    /// Point cloud viewer
+    /// Intensity
     /// </summary>
-    [Description("High")]
-    High = 3
+    [Description("Intensity")]
+    Intensity = 3,
+
+    /// <summary>
+    /// Classification
+    /// </summary>
+    [Description("Classification")]
+    Classification = 4
   }
 }

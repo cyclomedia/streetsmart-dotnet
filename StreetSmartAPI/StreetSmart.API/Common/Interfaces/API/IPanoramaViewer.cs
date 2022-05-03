@@ -84,11 +84,6 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     event EventHandler<EventArgs> ViewLoadEnd;
 
-    /// <summary>
-    /// Triggers when the view is altered and needs to be (partly) reloaded.
-    /// </summary>
-    event EventHandler<EventArgs> ViewLoadStart;
-
     #endregion
 
     #region Interface functions
@@ -206,6 +201,12 @@ namespace StreetSmart.Common.Interfaces.API
     void RotateUp(double deltaPitch);
 
     /// <summary>
+    /// Set the elevation slider level
+    /// </summary>
+    /// <param name="elevationLevel">The elevation level at which the elevation slider should be set, as a number in feet or meter.</param>
+    void SetElevationSliderLevel(double elevationLevel);
+
+    /// <summary>
     /// Sets the orientation {yaw, pitch, hFov} of the PanoramaViewer to specific values all at once.
     /// </summary>
     /// <param name="orientation">Orientation object that contains values to change.</param>
@@ -248,6 +249,11 @@ namespace StreetSmart.Common.Interfaces.API
     /// <param name="buttonId"></param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled);
+
+    /// <summary>
+    /// Toggle viewers from linked to unlinked and vice versa
+    /// </summary>
+    void ToggleLinkedViewers();
 
     /// <summary>
     /// Toggles the visibility of the recording features in the PanoramaViewer.

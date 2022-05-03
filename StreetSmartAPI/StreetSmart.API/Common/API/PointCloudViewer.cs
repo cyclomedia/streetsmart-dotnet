@@ -51,9 +51,10 @@ namespace StreetSmart.Common.API
 
     public event EventHandler<IEventArgs<ICamera>> ViewChange;
     public event EventHandler<IEventArgs<bool>> EdgesChanged;
-    public event EventHandler<IEventArgs<int>> PointSizeChanged;
-    public event EventHandler<IEventArgs<PointStyle>> PointStyleChanged;
-    public event EventHandler<IEventArgs<PointBudget>> PointBudgedChanged;
+    public event EventHandler<IEventArgs<PointSize>> PointSizeChanged;
+    public event EventHandler<IEventArgs<ColorizationMode>> PointStyleChanged;
+    public event EventHandler<IEventArgs<Quality>> PointBudgedChanged;
+    public event EventHandler<IEventArgs<BackgroundPreset>> BackGroundChanged;
 
     #endregion
 
@@ -68,6 +69,8 @@ namespace StreetSmart.Common.API
     public string JsPointStyleChanged => (ViewerList as PointCloudViewerList)?.JsPointStyleChanged;
 
     public string JsPointBudgetChanged => (ViewerList as PointCloudViewerList)?.JsPointBudgetChanged;
+
+    public string JsBackGroundChanged => (ViewerList as PointCloudViewerList)?.JsBackGroundChanged;
 
     #endregion
 
@@ -84,9 +87,9 @@ namespace StreetSmart.Common.API
 
     #region Interface Functions
 
-    public void FlyTo(ICoordinate position, ICoordinate lookAt)
+    public async Task<BackgroundPreset> GetBackgroundPreset()
     {
-      Browser.ExecuteScriptAsync($"{Name}.flyTo({position},{lookAt});");
+      return (BackgroundPreset)ToEnum(typeof(BackgroundPreset), await CallJsGetScriptAsync("getBackgroundPreset()"));
     }
 
     public async Task<bool> GetButtonEnabled(PointCloudViewerButtons buttonId)
@@ -94,69 +97,64 @@ namespace StreetSmart.Common.API
       return await base.GetButtonEnabled(buttonId);
     }
 
-    public async Task<ICamera> GetCameraPosition()
-    {
-      return new Camera(ToDictionary(await CallJsGetScriptAsync("getCameraPosition()")));
-    }
-
     public async Task<bool> GetEdgesVisibility()
     {
       return ToBool(await CallJsGetScriptAsync("getEdgesVisibility()"));
     }
 
-    public async Task<PointBudget> GetPointBudget()
+    public async Task<double> GetMaxHeightColorization()
     {
-      return (PointBudget) ToEnum(typeof(PointBudget), await CallJsGetScriptAsync("getPointBudget()"));
+      return ToDouble(await CallJsGetScriptAsync("getMaxHeightColorization()"));
     }
 
-    public async Task<int> GetPointSize()
+    public async Task<double> GetMinHeightColorization()
     {
-      return ToInt(await CallJsGetScriptAsync("getPointSize()"));
+      return ToDouble(await CallJsGetScriptAsync("getMinHeightColorization()"));
     }
 
-    public async Task<PointStyle> GetPointStyle()
+    public async Task<Quality> GetPointAmount()
     {
-      return (PointStyle) ToEnum(typeof(PointStyle), await CallJsGetScriptAsync("getPointStyle()"));
+      return (Quality)ToEnum(typeof(Quality), await CallJsGetScriptAsync("getPointAmount()"));
     }
 
-    public void LookAtCoordinate(ICoordinate lookAt)
+    public async Task<PointSize> GetPointSize()
     {
-      Browser.ExecuteScriptAsync($"{Name}.lookAtCoordinate({lookAt});");
+      return (PointSize)ToEnum(typeof(PointSize), await CallJsGetScriptAsync("getPointSize()"));
     }
 
-    public void RotateDown(double deg)
+    public async Task<ColorizationMode> GetPointStyle()
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deg.ToString(_ci)});");
+      return (ColorizationMode)ToEnum(typeof(ColorizationMode), await CallJsGetScriptAsync("getPointStyle()"));
     }
 
-    public void RotateLeft(double deg)
+    public void SetBackgroundPreset(BackgroundPreset background)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deg.ToString(_ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.setBackgroundPreset({background.Description().ToQuote()});");
     }
 
-    public void RotateRight(double deg)
+    public void SetMaxHeightColorization(double heightColorization)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deg.ToString(_ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.setMaxHeightColorization({heightColorization.ToString(_ci)});");
     }
 
-    public void RotateUp(double deg)
+    public void SetMinHeightColorization(double heightColorization)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deg.ToString(_ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.setMinHeightColorization({heightColorization.ToString(_ci)});");
     }
 
-    public void SetPointBudget(PointBudget pointBudget)
+    public void SetPointAmount(Quality amount)
     {
-      Browser.ExecuteScriptAsync($"{Name}.setPointBudget({pointBudget.Description().ToQuote()});");
+      Browser.ExecuteScriptAsync($"{Name}.setPointAmount({amount.Description().ToQuote()});");
     }
 
-    public void SetPointSize(int size)
+    public void SetPointSize(PointSize size)
     {
-      Browser.ExecuteScriptAsync($"{Name}.setPointSize({size});");
+      Browser.ExecuteScriptAsync($"{Name}.setPointSize({size.Description().ToQuote()});");
     }
 
-    public void SetPointStyle(PointStyle pointStyle)
+    public void SetPointStyle(ColorizationMode style)
     {
-      Browser.ExecuteScriptAsync($"{Name}.setPointStyle({pointStyle.Description()});");
+      Browser.ExecuteScriptAsync($"{Name}.setPointStyle({style.Description().ToQuote()});");
     }
 
     public void ToggleButtonEnabled(PointCloudViewerButtons buttonId, bool enabled)
@@ -169,9 +167,9 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.toggleEdges({visible.ToJsBool()});");
     }
 
-    public void TogglePointCloudType()
+    public void TogglePointCloudType(PointCloudType? value)
     {
-      Browser.ExecuteScriptAsync($"{Name}.TogglePointCloudType();");
+      Browser.ExecuteScriptAsync($"{Name}.TogglePointCloudType({value?.Description().ToQuote() ?? string.Empty});");
     }
 
     #endregion
@@ -194,22 +192,29 @@ namespace StreetSmart.Common.API
     public void OnPointSizeChanged(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
-      int value = ToInt(detail, "value");
-      PointSizeChanged?.Invoke(this, new EventArgs<int> (value));
+      PointSize value = (PointSize)ToEnum(typeof(PointSize), detail, "value");
+      PointSizeChanged?.Invoke(this, new EventArgs<PointSize> (value));
     }
 
     public void OnPointStyleChanged(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
-      PointStyle value = (PointStyle) ToEnum(typeof(PointStyle), detail, "value");
-      PointStyleChanged?.Invoke(this, new EventArgs<PointStyle>(value));
+      ColorizationMode value = (ColorizationMode)ToEnum(typeof(ColorizationMode), detail, "value");
+      PointStyleChanged?.Invoke(this, new EventArgs<ColorizationMode>(value));
     }
 
     public void OnPointBudgedChanged(Dictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
-      PointBudget value = (PointBudget) ToEnum(typeof(PointBudget), detail, "value");
-      PointBudgedChanged?.Invoke(this, new EventArgs<PointBudget>(value));
+      Quality value = (Quality)ToEnum(typeof(Quality), detail, "value");
+      PointBudgedChanged?.Invoke(this, new EventArgs<Quality>(value));
+    }
+
+    public void OnBackGroundChanged(Dictionary<string, object> args)
+    {
+      Dictionary<string, object> detail = GetDictValue(args, "detail");
+      BackgroundPreset value = (BackgroundPreset)ToEnum(typeof(BackgroundPreset), detail, "value");
+      BackGroundChanged?.Invoke(this, new EventArgs<BackgroundPreset>(value));
     }
 
     #endregion
@@ -225,6 +230,7 @@ namespace StreetSmart.Common.API
         new PointCloudViewerEvent(this, "POINT_SIZE_CHANGED", JsPointSizeChanged),
         new PointCloudViewerEvent(this, "POINT_STYLE_CHANGED", JsPointStyleChanged),
         new PointCloudViewerEvent(this, "POINT_BUDGET_CHANGED", JsPointBudgetChanged),
+        new PointCloudViewerEvent(this, "BACKGROUND_CHANGED", JsBackGroundChanged)
       };
 
       Browser.ExecuteScriptAsync($"{_pointCloudViewerEventList}");

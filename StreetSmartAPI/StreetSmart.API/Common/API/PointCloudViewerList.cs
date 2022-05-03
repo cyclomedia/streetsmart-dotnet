@@ -43,6 +43,8 @@ namespace StreetSmart.Common.API
 
     public string JsPointBudgetChanged => $"{nameof(OnPointBudgedChanged).FirstCharacterToLower()}";
 
+    public string JsBackGroundChanged => $"{nameof(OnBackGroundChanged).FirstCharacterToLower()}";
+
     #endregion
 
     #region Functions
@@ -93,6 +95,14 @@ namespace StreetSmart.Common.API
       if (Viewers.ContainsKey(name))
       {
         (Viewers[name] as PointCloudViewer)?.OnPointBudgedChanged(args);
+      }
+    }
+
+    public void OnBackGroundChanged(string name, Dictionary<string, object> args)
+    {
+      if (Viewers.ContainsKey(name))
+      {
+        (Viewers[name] as PointCloudViewer)?.OnBackGroundChanged(args);
       }
     }
 

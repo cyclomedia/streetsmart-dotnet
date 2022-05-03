@@ -50,8 +50,6 @@ namespace StreetSmart.Common.API
 
     public string JsViewLoadEnd => $"{nameof(OnViewLoadEnd).FirstCharacterToLower()}";
 
-    public string JsViewLoadStart => $"{nameof(OnViewLoadStart).FirstCharacterToLower()}";
-
     public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
 
     public string JsFeatureSelectionChange => $"{nameof(OnFeatureSelectionChange).FirstCharacterToLower()}";
@@ -153,14 +151,6 @@ namespace StreetSmart.Common.API
       if (Viewers.ContainsKey(name))
       {
         (Viewers[name] as PanoramaViewer)?.OnViewLoadEnd(args);
-      }
-    }
-
-    public void OnViewLoadStart(string name, Dictionary<string, object> args)
-    {
-      if (Viewers.ContainsKey(name))
-      {
-        (Viewers[name] as PanoramaViewer)?.OnViewLoadStart(args);
       }
     }
 
