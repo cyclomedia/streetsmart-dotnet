@@ -18,7 +18,7 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.x64.csproj" configuration="Debug" platform="X64" />
+      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj" configuration="Debug" platform="X64" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
