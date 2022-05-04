@@ -862,10 +862,8 @@ namespace Demo.WinForms
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      PanoramaViewer.ToggleLinkedViewers();
-//      setElevationLevel(2.5);
-//      bool visible = await PanoramaViewer.GetRecordingsVisible();
-//      PanoramaViewer.ToggleRecordingsVisible(!visible);
+      bool visible = await PanoramaViewer.GetRecordingsVisible();
+      PanoramaViewer.ToggleRecordingsVisible(!visible);
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
