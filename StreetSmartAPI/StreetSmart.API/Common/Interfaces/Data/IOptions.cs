@@ -17,7 +17,6 @@
  */
 
 using System;
-using System.Globalization;
 using System.Security;
 
 using StreetSmart.Common.Interfaces.DomElement;
@@ -45,6 +44,11 @@ namespace StreetSmart.Common.Interfaces.Data
     /// ApiKey given to the user.
     /// </summary>
     string APIKey { get; set; }
+
+    /// <summary>
+    /// Flag for login with oauth
+    /// </summary>
+    bool? LoginOauth { get; set; }
 
     /// <summary>
     /// Coordinate system used in the API. E.g. "EPSG:29882".

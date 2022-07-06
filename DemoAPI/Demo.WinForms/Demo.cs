@@ -549,7 +549,7 @@ namespace Demo.WinForms
       IDomElement element = DomElementFactory.Create();
 
       _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
-        ConfigurationUrl, addressSettings, element);
+        ConfigurationUrl, addressSettings, element, true);
 
       try
       {

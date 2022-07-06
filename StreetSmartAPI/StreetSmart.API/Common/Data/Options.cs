@@ -17,7 +17,6 @@
  */
 
 using System;
-using System.Globalization;
 using System.Security;
 
 using StreetSmart.Common.Interfaces.Data;
@@ -37,9 +36,10 @@ namespace StreetSmart.Common.Data
     private Uri _configurationURL;
     private IAddressSettings _addressSettings;
     private IDomElement _element;
+    private bool? _loginOauth;
 
     public Options(string userName, SecureString password, string apiKey, string srs, string locale,
-      Uri configurationURL, IAddressSettings addressSettings, IDomElement element)
+      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth)
     {
       Username = userName;
       Password = password;
@@ -49,6 +49,7 @@ namespace StreetSmart.Common.Data
       ConfigurationURL = configurationURL;
       AddressSettings = addressSettings;
       Element = element;
+      LoginOauth = loginOauth;
     }
 
     // ReSharper restore InconsistentNaming
@@ -79,6 +80,16 @@ namespace StreetSmart.Common.Data
       set
       {
         _apiKey = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool? LoginOauth
+    {
+      get => _loginOauth;
+      set
+      {
+        _loginOauth = value;
         RaisePropertyChanged();
       }
     }
@@ -136,11 +147,12 @@ namespace StreetSmart.Common.Data
     public override string ToString()
     {
       // ReSharper disable once InconsistentNaming
-      string configurationURL = (ConfigurationURL == null) ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
+      string configurationURL = ConfigurationURL == null ? string.Empty : $",configurationUrl:'{ConfigurationURL}'";
       string locale = string.IsNullOrEmpty(Locale) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
-      return $@"{{targetElement:{_element.Name},username:'{Username}',password:'{Password.ConvertToUnsecureString()}',apiKey:'{APIKey}'
-             ,srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
+      string userNamePassword = string.IsNullOrEmpty(Username) ? string.Empty : $",username:'{Username}',password:'{Password.ConvertToUnsecureString()}'";
+      string loginOauth = LoginOauth == null ? string.Empty : $",loginOauth:{((bool)LoginOauth).ToJsBool()}";
+      return $"{{targetElement:{_element.Name}{userNamePassword},apiKey:'{APIKey}'{loginOauth},srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }
 }
