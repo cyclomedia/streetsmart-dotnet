@@ -36,5 +36,10 @@ namespace StreetSmart.Common.Handlers
     public void OnDownloadUpdated(IWebBrowser webBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
     {
     }
+
+    public bool CanDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, string url, string requestMethod)
+    {
+      return true;
+    }
   }
 }

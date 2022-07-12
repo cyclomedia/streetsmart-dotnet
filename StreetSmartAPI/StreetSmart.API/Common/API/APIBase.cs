@@ -154,7 +154,7 @@ namespace StreetSmart.Common.API
     protected void RegisterThisJsObject()
     {
       Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
-      Browser.JavascriptObjectRepository.Register(JsThis, this, true);
+      Browser.JavascriptObjectRepository.Register(JsThis, this);
     }
 
     protected bool CheckResultTask(string funcName)

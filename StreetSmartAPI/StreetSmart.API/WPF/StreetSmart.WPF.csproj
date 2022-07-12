@@ -877,20 +877,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common" Version="100.0.230" />
-    <PackageReference Include="CefSharp.Wpf" Version="100.0.230" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="103.0.90" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="103.0.90" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.330701">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="CefSharp">
-      <HintPath>..\..\..\..\..\Users\HBr\.nuget\packages\cefsharp.common\100.0.230\lib\net452\CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CefSharp.Core">
-      <HintPath>..\..\..\..\..\Users\HBr\.nuget\packages\cefsharp.common\100.0.230\lib\net452\CefSharp.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
