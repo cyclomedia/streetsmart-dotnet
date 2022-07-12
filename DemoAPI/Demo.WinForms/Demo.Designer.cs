@@ -223,9 +223,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.plStreetSmart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
+      this.plStreetSmart.Location = new System.Drawing.Point(0, 2);
+      this.plStreetSmart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.plStreetSmart.Name = "plStreetSmart";
-      this.plStreetSmart.Size = new System.Drawing.Size(647, 701);
+      this.plStreetSmart.Size = new System.Drawing.Size(720, 1076);
       this.plStreetSmart.TabIndex = 0;
       // 
       // grOpenByQuery
@@ -236,9 +237,11 @@
       this.grOpenByQuery.Controls.Add(this.cbPanorama);
       this.grOpenByQuery.Controls.Add(this.cbOblique);
       this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
-      this.grOpenByQuery.Location = new System.Drawing.Point(480, 1);
+      this.grOpenByQuery.Location = new System.Drawing.Point(640, 2);
+      this.grOpenByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grOpenByQuery.Name = "grOpenByQuery";
-      this.grOpenByQuery.Size = new System.Drawing.Size(220, 120);
+      this.grOpenByQuery.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grOpenByQuery.Size = new System.Drawing.Size(293, 185);
       this.grOpenByQuery.TabIndex = 0;
       this.grOpenByQuery.TabStop = false;
       this.grOpenByQuery.Text = "Open / Close Viewer";
@@ -248,9 +251,10 @@
       this.cbPointCloud.AutoSize = true;
       this.cbPointCloud.Checked = true;
       this.cbPointCloud.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbPointCloud.Location = new System.Drawing.Point(146, 97);
+      this.cbPointCloud.Location = new System.Drawing.Point(195, 149);
+      this.cbPointCloud.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbPointCloud.Name = "cbPointCloud";
-      this.cbPointCloud.Size = new System.Drawing.Size(80, 17);
+      this.cbPointCloud.Size = new System.Drawing.Size(107, 24);
       this.cbPointCloud.TabIndex = 69;
       this.cbPointCloud.Text = "Point Cloud";
       this.cbPointCloud.UseVisualStyleBackColor = true;
@@ -260,19 +264,21 @@
       this.ckReplace.AutoSize = true;
       this.ckReplace.Checked = true;
       this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckReplace.Location = new System.Drawing.Point(125, 15);
+      this.ckReplace.Location = new System.Drawing.Point(167, 23);
+      this.ckReplace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ckReplace.Name = "ckReplace";
-      this.ckReplace.Size = new System.Drawing.Size(66, 17);
+      this.ckReplace.Size = new System.Drawing.Size(84, 24);
       this.ckReplace.TabIndex = 68;
       this.ckReplace.Text = "Replace";
       this.ckReplace.UseVisualStyleBackColor = true;
       // 
       // txtOpenByQuery
       // 
-      this.txtOpenByQuery.Location = new System.Drawing.Point(15, 50);
+      this.txtOpenByQuery.Location = new System.Drawing.Point(20, 77);
+      this.txtOpenByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtOpenByQuery.Multiline = true;
       this.txtOpenByQuery.Name = "txtOpenByQuery";
-      this.txtOpenByQuery.Size = new System.Drawing.Size(200, 40);
+      this.txtOpenByQuery.Size = new System.Drawing.Size(265, 59);
       this.txtOpenByQuery.TabIndex = 67;
       this.txtOpenByQuery.Text = "Lange Haven 145, Schiedam";
       // 
@@ -281,9 +287,10 @@
       this.cbPanorama.AutoSize = true;
       this.cbPanorama.Checked = true;
       this.cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbPanorama.Location = new System.Drawing.Point(73, 95);
+      this.cbPanorama.Location = new System.Drawing.Point(97, 146);
+      this.cbPanorama.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbPanorama.Name = "cbPanorama";
-      this.cbPanorama.Size = new System.Drawing.Size(74, 17);
+      this.cbPanorama.Size = new System.Drawing.Size(97, 24);
       this.cbPanorama.TabIndex = 66;
       this.cbPanorama.Text = "Panorama";
       this.cbPanorama.UseVisualStyleBackColor = true;
@@ -293,18 +300,20 @@
       this.cbOblique.AutoSize = true;
       this.cbOblique.Checked = true;
       this.cbOblique.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbOblique.Location = new System.Drawing.Point(15, 95);
+      this.cbOblique.Location = new System.Drawing.Point(20, 146);
+      this.cbOblique.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbOblique.Name = "cbOblique";
-      this.cbOblique.Size = new System.Drawing.Size(62, 17);
+      this.cbOblique.Size = new System.Drawing.Size(84, 24);
       this.cbOblique.TabIndex = 65;
       this.cbOblique.Text = "Oblique";
       this.cbOblique.UseVisualStyleBackColor = true;
       // 
       // btnOpenViewerByQuery
       // 
-      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(15, 15);
+      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(20, 23);
+      this.btnOpenViewerByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnOpenViewerByQuery.Name = "btnOpenViewerByQuery";
-      this.btnOpenViewerByQuery.Size = new System.Drawing.Size(100, 30);
+      this.btnOpenViewerByQuery.Size = new System.Drawing.Size(133, 46);
       this.btnOpenViewerByQuery.TabIndex = 64;
       this.btnOpenViewerByQuery.Text = "Open by query";
       this.btnOpenViewerByQuery.UseVisualStyleBackColor = true;
@@ -334,9 +343,10 @@
       this.plControl.Controls.Add(this.grOpenByAddress);
       this.plControl.Controls.Add(this.grLogin);
       this.plControl.Dock = System.Windows.Forms.DockStyle.Right;
-      this.plControl.Location = new System.Drawing.Point(647, 0);
+      this.plControl.Location = new System.Drawing.Point(721, 0);
+      this.plControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.plControl.Name = "plControl";
-      this.plControl.Size = new System.Drawing.Size(902, 701);
+      this.plControl.Size = new System.Drawing.Size(1203, 1055);
       this.plControl.TabIndex = 1;
       // 
       // grShortCuts
@@ -345,33 +355,38 @@
       this.grShortCuts.Controls.Add(this.cbShortCuts);
       this.grShortCuts.Controls.Add(this.btnDisableShortCut);
       this.grShortCuts.Controls.Add(this.btnEnableShortCut);
-      this.grShortCuts.Location = new System.Drawing.Point(731, 218);
+      this.grShortCuts.Location = new System.Drawing.Point(975, 335);
+      this.grShortCuts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grShortCuts.Name = "grShortCuts";
-      this.grShortCuts.Size = new System.Drawing.Size(160, 65);
+      this.grShortCuts.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grShortCuts.Size = new System.Drawing.Size(213, 100);
       this.grShortCuts.TabIndex = 75;
       this.grShortCuts.TabStop = false;
       this.grShortCuts.Text = "Short cuts";
       // 
       // txtShortcutResult
       // 
-      this.txtShortcutResult.Location = new System.Drawing.Point(110, 40);
+      this.txtShortcutResult.Location = new System.Drawing.Point(147, 62);
+      this.txtShortcutResult.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtShortcutResult.Name = "txtShortcutResult";
-      this.txtShortcutResult.Size = new System.Drawing.Size(40, 20);
+      this.txtShortcutResult.Size = new System.Drawing.Size(52, 27);
       this.txtShortcutResult.TabIndex = 68;
       // 
       // cbShortCuts
       // 
       this.cbShortCuts.FormattingEnabled = true;
-      this.cbShortCuts.Location = new System.Drawing.Point(5, 40);
+      this.cbShortCuts.Location = new System.Drawing.Point(7, 62);
+      this.cbShortCuts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbShortCuts.Name = "cbShortCuts";
-      this.cbShortCuts.Size = new System.Drawing.Size(100, 21);
+      this.cbShortCuts.Size = new System.Drawing.Size(132, 28);
       this.cbShortCuts.TabIndex = 67;
       // 
       // btnDisableShortCut
       // 
-      this.btnDisableShortCut.Location = new System.Drawing.Point(65, 15);
+      this.btnDisableShortCut.Location = new System.Drawing.Point(87, 23);
+      this.btnDisableShortCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnDisableShortCut.Name = "btnDisableShortCut";
-      this.btnDisableShortCut.Size = new System.Drawing.Size(55, 20);
+      this.btnDisableShortCut.Size = new System.Drawing.Size(73, 31);
       this.btnDisableShortCut.TabIndex = 66;
       this.btnDisableShortCut.Text = "Disable";
       this.btnDisableShortCut.UseVisualStyleBackColor = true;
@@ -379,9 +394,10 @@
       // 
       // btnEnableShortCut
       // 
-      this.btnEnableShortCut.Location = new System.Drawing.Point(5, 15);
+      this.btnEnableShortCut.Location = new System.Drawing.Point(7, 23);
+      this.btnEnableShortCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnEnableShortCut.Name = "btnEnableShortCut";
-      this.btnEnableShortCut.Size = new System.Drawing.Size(55, 20);
+      this.btnEnableShortCut.Size = new System.Drawing.Size(73, 31);
       this.btnEnableShortCut.TabIndex = 65;
       this.btnEnableShortCut.Text = "Enable";
       this.btnEnableShortCut.UseVisualStyleBackColor = true;
@@ -399,63 +415,71 @@
       this.grCloseViewers.Controls.Add(this.btnGetPointStyle);
       this.grCloseViewers.Controls.Add(this.btnCloseObliqueViewer);
       this.grCloseViewers.Controls.Add(this.btnClosePointViewer);
-      this.grCloseViewers.Location = new System.Drawing.Point(700, 1);
+      this.grCloseViewers.Location = new System.Drawing.Point(933, 2);
+      this.grCloseViewers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grCloseViewers.Name = "grCloseViewers";
-      this.grCloseViewers.Size = new System.Drawing.Size(200, 120);
+      this.grCloseViewers.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grCloseViewers.Size = new System.Drawing.Size(267, 185);
       this.grCloseViewers.TabIndex = 74;
       this.grCloseViewers.TabStop = false;
       this.grCloseViewers.Text = "Close viewers";
       // 
       // btnUp
       // 
-      this.btnUp.Location = new System.Drawing.Point(136, 86);
+      this.btnUp.Location = new System.Drawing.Point(181, 132);
+      this.btnUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnUp.Name = "btnUp";
-      this.btnUp.Size = new System.Drawing.Size(40, 25);
+      this.btnUp.Size = new System.Drawing.Size(53, 38);
       this.btnUp.TabIndex = 81;
       this.btnUp.UseVisualStyleBackColor = true;
       this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
       // 
       // btnRight
       // 
-      this.btnRight.Location = new System.Drawing.Point(95, 86);
+      this.btnRight.Location = new System.Drawing.Point(127, 132);
+      this.btnRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnRight.Name = "btnRight";
-      this.btnRight.Size = new System.Drawing.Size(40, 25);
+      this.btnRight.Size = new System.Drawing.Size(53, 38);
       this.btnRight.TabIndex = 80;
       this.btnRight.UseVisualStyleBackColor = true;
       this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
       // 
       // btnLeft
       // 
-      this.btnLeft.Location = new System.Drawing.Point(50, 86);
+      this.btnLeft.Location = new System.Drawing.Point(67, 132);
+      this.btnLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnLeft.Name = "btnLeft";
-      this.btnLeft.Size = new System.Drawing.Size(40, 25);
+      this.btnLeft.Size = new System.Drawing.Size(53, 38);
       this.btnLeft.TabIndex = 79;
       this.btnLeft.UseVisualStyleBackColor = true;
       this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
       // 
       // btnDown
       // 
-      this.btnDown.Location = new System.Drawing.Point(5, 87);
+      this.btnDown.Location = new System.Drawing.Point(7, 134);
+      this.btnDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnDown.Name = "btnDown";
-      this.btnDown.Size = new System.Drawing.Size(40, 25);
+      this.btnDown.Size = new System.Drawing.Size(53, 38);
       this.btnDown.TabIndex = 78;
       this.btnDown.UseVisualStyleBackColor = true;
       this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
       // 
       // btnPointCloudLookAt
       // 
-      this.btnPointCloudLookAt.Location = new System.Drawing.Point(136, 58);
+      this.btnPointCloudLookAt.Location = new System.Drawing.Point(181, 89);
+      this.btnPointCloudLookAt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnPointCloudLookAt.Name = "btnPointCloudLookAt";
-      this.btnPointCloudLookAt.Size = new System.Drawing.Size(55, 25);
+      this.btnPointCloudLookAt.Size = new System.Drawing.Size(73, 38);
       this.btnPointCloudLookAt.TabIndex = 77;
       this.btnPointCloudLookAt.UseVisualStyleBackColor = true;
       this.btnPointCloudLookAt.Click += new System.EventHandler(this.btnPointCloudLookAt_Click);
       // 
       // btnSetPointStyle
       // 
-      this.btnSetPointStyle.Location = new System.Drawing.Point(95, 58);
+      this.btnSetPointStyle.Location = new System.Drawing.Point(127, 89);
+      this.btnSetPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetPointStyle.Name = "btnSetPointStyle";
-      this.btnSetPointStyle.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointStyle.Size = new System.Drawing.Size(53, 38);
       this.btnSetPointStyle.TabIndex = 76;
       this.btnSetPointStyle.Text = "Set";
       this.btnSetPointStyle.UseVisualStyleBackColor = true;
@@ -464,16 +488,18 @@
       // cbPointStyle
       // 
       this.cbPointStyle.FormattingEnabled = true;
-      this.cbPointStyle.Location = new System.Drawing.Point(50, 61);
+      this.cbPointStyle.Location = new System.Drawing.Point(67, 94);
+      this.cbPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbPointStyle.Name = "cbPointStyle";
-      this.cbPointStyle.Size = new System.Drawing.Size(40, 21);
+      this.cbPointStyle.Size = new System.Drawing.Size(52, 28);
       this.cbPointStyle.TabIndex = 75;
       // 
       // btnGetPointStyle
       // 
-      this.btnGetPointStyle.Location = new System.Drawing.Point(5, 58);
+      this.btnGetPointStyle.Location = new System.Drawing.Point(7, 89);
+      this.btnGetPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetPointStyle.Name = "btnGetPointStyle";
-      this.btnGetPointStyle.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointStyle.Size = new System.Drawing.Size(53, 38);
       this.btnGetPointStyle.TabIndex = 74;
       this.btnGetPointStyle.Text = "Get";
       this.btnGetPointStyle.UseVisualStyleBackColor = true;
@@ -481,9 +507,10 @@
       // 
       // btnCloseObliqueViewer
       // 
-      this.btnCloseObliqueViewer.Location = new System.Drawing.Point(5, 15);
+      this.btnCloseObliqueViewer.Location = new System.Drawing.Point(7, 23);
+      this.btnCloseObliqueViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnCloseObliqueViewer.Name = "btnCloseObliqueViewer";
-      this.btnCloseObliqueViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnCloseObliqueViewer.Size = new System.Drawing.Size(107, 58);
       this.btnCloseObliqueViewer.TabIndex = 72;
       this.btnCloseObliqueViewer.Text = "Close obl. viewer";
       this.btnCloseObliqueViewer.UseVisualStyleBackColor = true;
@@ -491,9 +518,10 @@
       // 
       // btnClosePointViewer
       // 
-      this.btnClosePointViewer.Location = new System.Drawing.Point(90, 15);
+      this.btnClosePointViewer.Location = new System.Drawing.Point(120, 23);
+      this.btnClosePointViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnClosePointViewer.Name = "btnClosePointViewer";
-      this.btnClosePointViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnClosePointViewer.Size = new System.Drawing.Size(107, 58);
       this.btnClosePointViewer.TabIndex = 73;
       this.btnClosePointViewer.Text = "Close point. viewer";
       this.btnClosePointViewer.UseVisualStyleBackColor = true;
@@ -502,9 +530,11 @@
       // grPanoramaList
       // 
       this.grPanoramaList.Controls.Add(this.lbPanoramaList);
-      this.grPanoramaList.Location = new System.Drawing.Point(731, 283);
+      this.grPanoramaList.Location = new System.Drawing.Point(975, 435);
+      this.grPanoramaList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grPanoramaList.Name = "grPanoramaList";
-      this.grPanoramaList.Size = new System.Drawing.Size(160, 120);
+      this.grPanoramaList.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grPanoramaList.Size = new System.Drawing.Size(213, 185);
       this.grPanoramaList.TabIndex = 71;
       this.grPanoramaList.TabStop = false;
       this.grPanoramaList.Text = "Viewer list";
@@ -512,9 +542,11 @@
       // lbPanoramaList
       // 
       this.lbPanoramaList.FormattingEnabled = true;
-      this.lbPanoramaList.Location = new System.Drawing.Point(5, 15);
+      this.lbPanoramaList.ItemHeight = 20;
+      this.lbPanoramaList.Location = new System.Drawing.Point(7, 23);
+      this.lbPanoramaList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.lbPanoramaList.Name = "lbPanoramaList";
-      this.lbPanoramaList.Size = new System.Drawing.Size(150, 95);
+      this.lbPanoramaList.Size = new System.Drawing.Size(199, 144);
       this.lbPanoramaList.TabIndex = 70;
       this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
       // 
@@ -526,18 +558,21 @@
       this.grColorOverlay.Controls.Add(this.btnColorOverlay);
       this.grColorOverlay.Controls.Add(this.rbColor);
       this.grColorOverlay.Controls.Add(this.rbSLD);
-      this.grColorOverlay.Location = new System.Drawing.Point(731, 403);
+      this.grColorOverlay.Location = new System.Drawing.Point(975, 620);
+      this.grColorOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grColorOverlay.Name = "grColorOverlay";
-      this.grColorOverlay.Size = new System.Drawing.Size(160, 160);
+      this.grColorOverlay.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grColorOverlay.Size = new System.Drawing.Size(213, 246);
       this.grColorOverlay.TabIndex = 69;
       this.grColorOverlay.TabStop = false;
       this.grColorOverlay.Text = "Overlay";
       // 
       // btnDemoWFSLayer
       // 
-      this.btnDemoWFSLayer.Location = new System.Drawing.Point(5, 115);
+      this.btnDemoWFSLayer.Location = new System.Drawing.Point(7, 177);
+      this.btnDemoWFSLayer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnDemoWFSLayer.Name = "btnDemoWFSLayer";
-      this.btnDemoWFSLayer.Size = new System.Drawing.Size(140, 30);
+      this.btnDemoWFSLayer.Size = new System.Drawing.Size(187, 46);
       this.btnDemoWFSLayer.TabIndex = 69;
       this.btnDemoWFSLayer.Text = "Add demo WFS Layer";
       this.btnDemoWFSLayer.UseVisualStyleBackColor = true;
@@ -546,16 +581,18 @@
       // txtOverlayColor
       // 
       this.txtOverlayColor.Enabled = false;
-      this.txtOverlayColor.Location = new System.Drawing.Point(5, 40);
+      this.txtOverlayColor.Location = new System.Drawing.Point(7, 62);
+      this.txtOverlayColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtOverlayColor.Name = "txtOverlayColor";
-      this.txtOverlayColor.Size = new System.Drawing.Size(140, 20);
+      this.txtOverlayColor.Size = new System.Drawing.Size(185, 27);
       this.txtOverlayColor.TabIndex = 68;
       // 
       // btnToggleAddressOverlays
       // 
-      this.btnToggleAddressOverlays.Location = new System.Drawing.Point(5, 80);
+      this.btnToggleAddressOverlays.Location = new System.Drawing.Point(7, 123);
+      this.btnToggleAddressOverlays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleAddressOverlays.Name = "btnToggleAddressOverlays";
-      this.btnToggleAddressOverlays.Size = new System.Drawing.Size(140, 30);
+      this.btnToggleAddressOverlays.Size = new System.Drawing.Size(187, 46);
       this.btnToggleAddressOverlays.TabIndex = 57;
       this.btnToggleAddressOverlays.Text = "Toggle Address overlays";
       this.btnToggleAddressOverlays.UseVisualStyleBackColor = true;
@@ -563,9 +600,10 @@
       // 
       // btnColorOverlay
       // 
-      this.btnColorOverlay.Location = new System.Drawing.Point(5, 15);
+      this.btnColorOverlay.Location = new System.Drawing.Point(7, 23);
+      this.btnColorOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnColorOverlay.Name = "btnColorOverlay";
-      this.btnColorOverlay.Size = new System.Drawing.Size(140, 23);
+      this.btnColorOverlay.Size = new System.Drawing.Size(187, 35);
       this.btnColorOverlay.TabIndex = 58;
       this.btnColorOverlay.Text = "Color overlay";
       this.btnColorOverlay.UseVisualStyleBackColor = true;
@@ -574,9 +612,10 @@
       // rbColor
       // 
       this.rbColor.AutoSize = true;
-      this.rbColor.Location = new System.Drawing.Point(50, 60);
+      this.rbColor.Location = new System.Drawing.Point(67, 92);
+      this.rbColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbColor.Name = "rbColor";
-      this.rbColor.Size = new System.Drawing.Size(49, 17);
+      this.rbColor.Size = new System.Drawing.Size(66, 24);
       this.rbColor.TabIndex = 59;
       this.rbColor.Text = "Color";
       this.rbColor.UseVisualStyleBackColor = true;
@@ -585,9 +624,10 @@
       // 
       this.rbSLD.AutoSize = true;
       this.rbSLD.Checked = true;
-      this.rbSLD.Location = new System.Drawing.Point(5, 60);
+      this.rbSLD.Location = new System.Drawing.Point(7, 92);
+      this.rbSLD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbSLD.Name = "rbSLD";
-      this.rbSLD.Size = new System.Drawing.Size(46, 17);
+      this.rbSLD.Size = new System.Drawing.Size(56, 24);
       this.rbSLD.TabIndex = 58;
       this.rbSLD.TabStop = true;
       this.rbSLD.Text = "SLD";
@@ -601,9 +641,11 @@
       this.grSelectFeature.Controls.Add(this.txtName);
       this.grSelectFeature.Controls.Add(this.lblPropertyName);
       this.grSelectFeature.Controls.Add(this.btnSelectFeature);
-      this.grSelectFeature.Location = new System.Drawing.Point(731, 563);
+      this.grSelectFeature.Location = new System.Drawing.Point(975, 866);
+      this.grSelectFeature.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grSelectFeature.Name = "grSelectFeature";
-      this.grSelectFeature.Size = new System.Drawing.Size(160, 130);
+      this.grSelectFeature.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grSelectFeature.Size = new System.Drawing.Size(213, 200);
       this.grSelectFeature.TabIndex = 56;
       this.grSelectFeature.TabStop = false;
       this.grSelectFeature.Text = "Select Feature";
@@ -613,9 +655,10 @@
       this.ckShowAttributePanelOnFeatureClick.AutoSize = true;
       this.ckShowAttributePanelOnFeatureClick.Checked = true;
       this.ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(6, 96);
+      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(8, 148);
+      this.ckShowAttributePanelOnFeatureClick.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
-      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(161, 17);
+      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(217, 24);
       this.ckShowAttributePanelOnFeatureClick.TabIndex = 67;
       this.ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
       this.ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
@@ -623,43 +666,48 @@
       // 
       // txtValue
       // 
-      this.txtValue.Location = new System.Drawing.Point(85, 70);
+      this.txtValue.Location = new System.Drawing.Point(113, 108);
+      this.txtValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtValue.Name = "txtValue";
-      this.txtValue.Size = new System.Drawing.Size(70, 20);
+      this.txtValue.Size = new System.Drawing.Size(92, 27);
       this.txtValue.TabIndex = 58;
       this.txtValue.Text = "Polygon-feature-cj7hkzyaj000b3e65n0c1brht";
       // 
       // lblValue
       // 
       this.lblValue.AutoSize = true;
-      this.lblValue.Location = new System.Drawing.Point(85, 50);
+      this.lblValue.Location = new System.Drawing.Point(113, 77);
+      this.lblValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblValue.Name = "lblValue";
-      this.lblValue.Size = new System.Drawing.Size(75, 13);
+      this.lblValue.Size = new System.Drawing.Size(104, 20);
       this.lblValue.TabIndex = 59;
       this.lblValue.Text = "Property value";
       // 
       // txtName
       // 
-      this.txtName.Location = new System.Drawing.Point(5, 70);
+      this.txtName.Location = new System.Drawing.Point(7, 108);
+      this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtName.Name = "txtName";
-      this.txtName.Size = new System.Drawing.Size(70, 20);
+      this.txtName.Size = new System.Drawing.Size(92, 27);
       this.txtName.TabIndex = 56;
       this.txtName.Text = "name";
       // 
       // lblPropertyName
       // 
       this.lblPropertyName.AutoSize = true;
-      this.lblPropertyName.Location = new System.Drawing.Point(5, 50);
+      this.lblPropertyName.Location = new System.Drawing.Point(7, 77);
+      this.lblPropertyName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblPropertyName.Name = "lblPropertyName";
-      this.lblPropertyName.Size = new System.Drawing.Size(75, 13);
+      this.lblPropertyName.Size = new System.Drawing.Size(106, 20);
       this.lblPropertyName.TabIndex = 57;
       this.lblPropertyName.Text = "Property name";
       // 
       // btnSelectFeature
       // 
-      this.btnSelectFeature.Location = new System.Drawing.Point(5, 15);
+      this.btnSelectFeature.Location = new System.Drawing.Point(7, 23);
+      this.btnSelectFeature.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSelectFeature.Name = "btnSelectFeature";
-      this.btnSelectFeature.Size = new System.Drawing.Size(150, 30);
+      this.btnSelectFeature.Size = new System.Drawing.Size(200, 46);
       this.btnSelectFeature.TabIndex = 55;
       this.btnSelectFeature.Text = "Select feature";
       this.btnSelectFeature.UseVisualStyleBackColor = true;
@@ -668,19 +716,22 @@
       // grSld
       // 
       this.grSld.Controls.Add(this.txtSld);
-      this.grSld.Location = new System.Drawing.Point(561, 563);
+      this.grSld.Location = new System.Drawing.Point(748, 866);
+      this.grSld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grSld.Name = "grSld";
-      this.grSld.Size = new System.Drawing.Size(170, 130);
+      this.grSld.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grSld.Size = new System.Drawing.Size(227, 200);
       this.grSld.TabIndex = 55;
       this.grSld.TabStop = false;
       this.grSld.Text = "Sld";
       // 
       // txtSld
       // 
-      this.txtSld.Location = new System.Drawing.Point(6, 19);
+      this.txtSld.Location = new System.Drawing.Point(8, 29);
+      this.txtSld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtSld.Multiline = true;
       this.txtSld.Name = "txtSld";
-      this.txtSld.Size = new System.Drawing.Size(160, 105);
+      this.txtSld.Size = new System.Drawing.Size(212, 159);
       this.txtSld.TabIndex = 1;
       this.txtSld.Text = resources.GetString("txtSld.Text");
       // 
@@ -689,9 +740,11 @@
       this.grButtonVisibility.Controls.Add(this.cbViewerButton);
       this.grButtonVisibility.Controls.Add(this.btnSetButtonVisibility);
       this.grButtonVisibility.Controls.Add(this.btnGetButtonEnabled);
-      this.grButtonVisibility.Location = new System.Drawing.Point(329, 323);
+      this.grButtonVisibility.Location = new System.Drawing.Point(439, 497);
+      this.grButtonVisibility.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grButtonVisibility.Name = "grButtonVisibility";
-      this.grButtonVisibility.Size = new System.Drawing.Size(151, 120);
+      this.grButtonVisibility.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grButtonVisibility.Size = new System.Drawing.Size(201, 185);
       this.grButtonVisibility.TabIndex = 54;
       this.grButtonVisibility.TabStop = false;
       this.grButtonVisibility.Text = "Button visibility";
@@ -699,16 +752,18 @@
       // cbViewerButton
       // 
       this.cbViewerButton.FormattingEnabled = true;
-      this.cbViewerButton.Location = new System.Drawing.Point(5, 85);
+      this.cbViewerButton.Location = new System.Drawing.Point(7, 131);
+      this.cbViewerButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbViewerButton.Name = "cbViewerButton";
-      this.cbViewerButton.Size = new System.Drawing.Size(140, 21);
+      this.cbViewerButton.Size = new System.Drawing.Size(185, 28);
       this.cbViewerButton.TabIndex = 51;
       // 
       // btnSetButtonVisibility
       // 
-      this.btnSetButtonVisibility.Location = new System.Drawing.Point(5, 45);
+      this.btnSetButtonVisibility.Location = new System.Drawing.Point(7, 69);
+      this.btnSetButtonVisibility.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetButtonVisibility.Name = "btnSetButtonVisibility";
-      this.btnSetButtonVisibility.Size = new System.Drawing.Size(140, 30);
+      this.btnSetButtonVisibility.Size = new System.Drawing.Size(187, 46);
       this.btnSetButtonVisibility.TabIndex = 50;
       this.btnSetButtonVisibility.Text = "Toggle button enabled";
       this.btnSetButtonVisibility.UseVisualStyleBackColor = true;
@@ -716,9 +771,10 @@
       // 
       // btnGetButtonEnabled
       // 
-      this.btnGetButtonEnabled.Location = new System.Drawing.Point(5, 15);
+      this.btnGetButtonEnabled.Location = new System.Drawing.Point(7, 23);
+      this.btnGetButtonEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetButtonEnabled.Name = "btnGetButtonEnabled";
-      this.btnGetButtonEnabled.Size = new System.Drawing.Size(141, 30);
+      this.btnGetButtonEnabled.Size = new System.Drawing.Size(188, 46);
       this.btnGetButtonEnabled.TabIndex = 49;
       this.btnGetButtonEnabled.Text = "Get button enabled";
       this.btnGetButtonEnabled.UseVisualStyleBackColor = true;
@@ -731,18 +787,21 @@
       this.grOverlay.Controls.Add(this.btnRemoveOverlay);
       this.grOverlay.Controls.Add(this.txtOverlayGeoJson);
       this.grOverlay.Controls.Add(this.btnAddOverlay);
-      this.grOverlay.Location = new System.Drawing.Point(277, 563);
+      this.grOverlay.Location = new System.Drawing.Point(369, 866);
+      this.grOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grOverlay.Name = "grOverlay";
-      this.grOverlay.Size = new System.Drawing.Size(280, 130);
+      this.grOverlay.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grOverlay.Size = new System.Drawing.Size(373, 200);
       this.grOverlay.TabIndex = 53;
       this.grOverlay.TabStop = false;
       this.grOverlay.Text = "Load GeoJSON overlay";
       // 
       // btnDrawDistance
       // 
-      this.btnDrawDistance.Location = new System.Drawing.Point(178, 75);
+      this.btnDrawDistance.Location = new System.Drawing.Point(237, 115);
+      this.btnDrawDistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnDrawDistance.Name = "btnDrawDistance";
-      this.btnDrawDistance.Size = new System.Drawing.Size(100, 23);
+      this.btnDrawDistance.Size = new System.Drawing.Size(133, 35);
       this.btnDrawDistance.TabIndex = 68;
       this.btnDrawDistance.Text = "Set draw distance";
       this.btnDrawDistance.UseVisualStyleBackColor = true;
@@ -750,17 +809,19 @@
       // 
       // txtDrawDistance
       // 
-      this.txtDrawDistance.Location = new System.Drawing.Point(178, 105);
+      this.txtDrawDistance.Location = new System.Drawing.Point(237, 162);
+      this.txtDrawDistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtDrawDistance.Name = "txtDrawDistance";
-      this.txtDrawDistance.Size = new System.Drawing.Size(100, 20);
+      this.txtDrawDistance.Size = new System.Drawing.Size(132, 27);
       this.txtDrawDistance.TabIndex = 67;
       this.txtDrawDistance.Text = "30";
       // 
       // btnRemoveOverlay
       // 
-      this.btnRemoveOverlay.Location = new System.Drawing.Point(178, 15);
+      this.btnRemoveOverlay.Location = new System.Drawing.Point(237, 23);
+      this.btnRemoveOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnRemoveOverlay.Name = "btnRemoveOverlay";
-      this.btnRemoveOverlay.Size = new System.Drawing.Size(100, 23);
+      this.btnRemoveOverlay.Size = new System.Drawing.Size(133, 35);
       this.btnRemoveOverlay.TabIndex = 2;
       this.btnRemoveOverlay.Text = "Remove overlay";
       this.btnRemoveOverlay.UseVisualStyleBackColor = true;
@@ -768,18 +829,20 @@
       // 
       // txtOverlayGeoJson
       // 
-      this.txtOverlayGeoJson.Location = new System.Drawing.Point(6, 19);
+      this.txtOverlayGeoJson.Location = new System.Drawing.Point(8, 29);
+      this.txtOverlayGeoJson.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtOverlayGeoJson.Multiline = true;
       this.txtOverlayGeoJson.Name = "txtOverlayGeoJson";
-      this.txtOverlayGeoJson.Size = new System.Drawing.Size(168, 105);
+      this.txtOverlayGeoJson.Size = new System.Drawing.Size(223, 159);
       this.txtOverlayGeoJson.TabIndex = 1;
       this.txtOverlayGeoJson.Text = resources.GetString("txtOverlayGeoJson.Text");
       // 
       // btnAddOverlay
       // 
-      this.btnAddOverlay.Location = new System.Drawing.Point(178, 45);
+      this.btnAddOverlay.Location = new System.Drawing.Point(237, 69);
+      this.btnAddOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnAddOverlay.Name = "btnAddOverlay";
-      this.btnAddOverlay.Size = new System.Drawing.Size(100, 23);
+      this.btnAddOverlay.Size = new System.Drawing.Size(133, 35);
       this.btnAddOverlay.TabIndex = 0;
       this.btnAddOverlay.Text = "Add overlay";
       this.btnAddOverlay.UseVisualStyleBackColor = true;
@@ -795,9 +858,11 @@
       this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
       this.grMeasurement.Controls.Add(this.btnStartMeasurementMode);
       this.grMeasurement.Controls.Add(this.btnStopMeasurementMode);
-      this.grMeasurement.Location = new System.Drawing.Point(7, 558);
+      this.grMeasurement.Location = new System.Drawing.Point(9, 858);
+      this.grMeasurement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grMeasurement.Name = "grMeasurement";
-      this.grMeasurement.Size = new System.Drawing.Size(264, 135);
+      this.grMeasurement.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grMeasurement.Size = new System.Drawing.Size(352, 208);
       this.grMeasurement.TabIndex = 52;
       this.grMeasurement.TabStop = false;
       this.grMeasurement.Text = "Measurement";
@@ -805,16 +870,18 @@
       // cbUnit
       // 
       this.cbUnit.FormattingEnabled = true;
-      this.cbUnit.Location = new System.Drawing.Point(115, 110);
+      this.cbUnit.Location = new System.Drawing.Point(153, 169);
+      this.cbUnit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbUnit.Name = "cbUnit";
-      this.cbUnit.Size = new System.Drawing.Size(100, 21);
+      this.cbUnit.Size = new System.Drawing.Size(132, 28);
       this.cbUnit.TabIndex = 67;
       // 
       // btnGetUnitPreference
       // 
-      this.btnGetUnitPreference.Location = new System.Drawing.Point(175, 85);
+      this.btnGetUnitPreference.Location = new System.Drawing.Point(233, 131);
+      this.btnGetUnitPreference.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetUnitPreference.Name = "btnGetUnitPreference";
-      this.btnGetUnitPreference.Size = new System.Drawing.Size(55, 20);
+      this.btnGetUnitPreference.Size = new System.Drawing.Size(73, 31);
       this.btnGetUnitPreference.TabIndex = 66;
       this.btnGetUnitPreference.Text = "Get Unit";
       this.btnGetUnitPreference.UseVisualStyleBackColor = true;
@@ -822,9 +889,10 @@
       // 
       // btnSetUnitPreference
       // 
-      this.btnSetUnitPreference.Location = new System.Drawing.Point(115, 85);
+      this.btnSetUnitPreference.Location = new System.Drawing.Point(153, 131);
+      this.btnSetUnitPreference.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetUnitPreference.Name = "btnSetUnitPreference";
-      this.btnSetUnitPreference.Size = new System.Drawing.Size(55, 20);
+      this.btnSetUnitPreference.Size = new System.Drawing.Size(73, 31);
       this.btnSetUnitPreference.TabIndex = 65;
       this.btnSetUnitPreference.Text = "Set Unit";
       this.btnSetUnitPreference.UseVisualStyleBackColor = true;
@@ -836,9 +904,11 @@
       this.grMeasurementMethod.Controls.Add(this.rbMethodDepthMap);
       this.grMeasurementMethod.Controls.Add(this.rbMethodForwardIntersection);
       this.grMeasurementMethod.Controls.Add(this.rbMethodSmartClick);
-      this.grMeasurementMethod.Location = new System.Drawing.Point(190, 0);
+      this.grMeasurementMethod.Location = new System.Drawing.Point(253, 0);
+      this.grMeasurementMethod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grMeasurementMethod.Name = "grMeasurementMethod";
-      this.grMeasurementMethod.Size = new System.Drawing.Size(80, 80);
+      this.grMeasurementMethod.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grMeasurementMethod.Size = new System.Drawing.Size(107, 123);
       this.grMeasurementMethod.TabIndex = 64;
       this.grMeasurementMethod.TabStop = false;
       this.grMeasurementMethod.Text = "Method";
@@ -847,9 +917,10 @@
       // 
       this.rbMethodDefault.AutoSize = true;
       this.rbMethodDefault.Checked = true;
-      this.rbMethodDefault.Location = new System.Drawing.Point(5, 15);
+      this.rbMethodDefault.Location = new System.Drawing.Point(7, 23);
+      this.rbMethodDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMethodDefault.Name = "rbMethodDefault";
-      this.rbMethodDefault.Size = new System.Drawing.Size(59, 17);
+      this.rbMethodDefault.Size = new System.Drawing.Size(79, 24);
       this.rbMethodDefault.TabIndex = 58;
       this.rbMethodDefault.TabStop = true;
       this.rbMethodDefault.Text = "Default";
@@ -858,9 +929,10 @@
       // rbMethodDepthMap
       // 
       this.rbMethodDepthMap.AutoSize = true;
-      this.rbMethodDepthMap.Location = new System.Drawing.Point(5, 30);
+      this.rbMethodDepthMap.Location = new System.Drawing.Point(7, 46);
+      this.rbMethodDepthMap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMethodDepthMap.Name = "rbMethodDepthMap";
-      this.rbMethodDepthMap.Size = new System.Drawing.Size(75, 17);
+      this.rbMethodDepthMap.Size = new System.Drawing.Size(101, 24);
       this.rbMethodDepthMap.TabIndex = 59;
       this.rbMethodDepthMap.Text = "DepthMap";
       this.rbMethodDepthMap.UseVisualStyleBackColor = true;
@@ -868,9 +940,10 @@
       // rbMethodForwardIntersection
       // 
       this.rbMethodForwardIntersection.AutoSize = true;
-      this.rbMethodForwardIntersection.Location = new System.Drawing.Point(5, 60);
+      this.rbMethodForwardIntersection.Location = new System.Drawing.Point(7, 92);
+      this.rbMethodForwardIntersection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMethodForwardIntersection.Name = "rbMethodForwardIntersection";
-      this.rbMethodForwardIntersection.Size = new System.Drawing.Size(69, 17);
+      this.rbMethodForwardIntersection.Size = new System.Drawing.Size(89, 24);
       this.rbMethodForwardIntersection.TabIndex = 61;
       this.rbMethodForwardIntersection.Text = "Forw. Int.";
       this.rbMethodForwardIntersection.UseVisualStyleBackColor = true;
@@ -878,9 +951,10 @@
       // rbMethodSmartClick
       // 
       this.rbMethodSmartClick.AutoSize = true;
-      this.rbMethodSmartClick.Location = new System.Drawing.Point(5, 45);
+      this.rbMethodSmartClick.Location = new System.Drawing.Point(7, 69);
+      this.rbMethodSmartClick.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMethodSmartClick.Name = "rbMethodSmartClick";
-      this.rbMethodSmartClick.Size = new System.Drawing.Size(78, 17);
+      this.rbMethodSmartClick.Size = new System.Drawing.Size(104, 24);
       this.rbMethodSmartClick.TabIndex = 60;
       this.rbMethodSmartClick.Text = "Smart Click";
       this.rbMethodSmartClick.UseVisualStyleBackColor = true;
@@ -891,9 +965,11 @@
       this.grMeasurementType.Controls.Add(this.rbMeasPoint);
       this.grMeasurementType.Controls.Add(this.rbMeasPolygon);
       this.grMeasurementType.Controls.Add(this.rbMeasLineString);
-      this.grMeasurementType.Location = new System.Drawing.Point(110, 0);
+      this.grMeasurementType.Location = new System.Drawing.Point(147, 0);
+      this.grMeasurementType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grMeasurementType.Name = "grMeasurementType";
-      this.grMeasurementType.Size = new System.Drawing.Size(80, 80);
+      this.grMeasurementType.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grMeasurementType.Size = new System.Drawing.Size(107, 123);
       this.grMeasurementType.TabIndex = 63;
       this.grMeasurementType.TabStop = false;
       this.grMeasurementType.Text = "Type";
@@ -902,9 +978,10 @@
       // 
       this.rbMeasDefault.AutoSize = true;
       this.rbMeasDefault.Checked = true;
-      this.rbMeasDefault.Location = new System.Drawing.Point(5, 15);
+      this.rbMeasDefault.Location = new System.Drawing.Point(7, 23);
+      this.rbMeasDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMeasDefault.Name = "rbMeasDefault";
-      this.rbMeasDefault.Size = new System.Drawing.Size(59, 17);
+      this.rbMeasDefault.Size = new System.Drawing.Size(79, 24);
       this.rbMeasDefault.TabIndex = 58;
       this.rbMeasDefault.TabStop = true;
       this.rbMeasDefault.Text = "Default";
@@ -913,9 +990,10 @@
       // rbMeasPoint
       // 
       this.rbMeasPoint.AutoSize = true;
-      this.rbMeasPoint.Location = new System.Drawing.Point(5, 30);
+      this.rbMeasPoint.Location = new System.Drawing.Point(7, 46);
+      this.rbMeasPoint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMeasPoint.Name = "rbMeasPoint";
-      this.rbMeasPoint.Size = new System.Drawing.Size(49, 17);
+      this.rbMeasPoint.Size = new System.Drawing.Size(63, 24);
       this.rbMeasPoint.TabIndex = 59;
       this.rbMeasPoint.Text = "Point";
       this.rbMeasPoint.UseVisualStyleBackColor = true;
@@ -923,9 +1001,10 @@
       // rbMeasPolygon
       // 
       this.rbMeasPolygon.AutoSize = true;
-      this.rbMeasPolygon.Location = new System.Drawing.Point(5, 60);
+      this.rbMeasPolygon.Location = new System.Drawing.Point(7, 92);
+      this.rbMeasPolygon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMeasPolygon.Name = "rbMeasPolygon";
-      this.rbMeasPolygon.Size = new System.Drawing.Size(63, 17);
+      this.rbMeasPolygon.Size = new System.Drawing.Size(83, 24);
       this.rbMeasPolygon.TabIndex = 61;
       this.rbMeasPolygon.Text = "Polygon";
       this.rbMeasPolygon.UseVisualStyleBackColor = true;
@@ -933,18 +1012,20 @@
       // rbMeasLineString
       // 
       this.rbMeasLineString.AutoSize = true;
-      this.rbMeasLineString.Location = new System.Drawing.Point(5, 45);
+      this.rbMeasLineString.Location = new System.Drawing.Point(7, 69);
+      this.rbMeasLineString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.rbMeasLineString.Name = "rbMeasLineString";
-      this.rbMeasLineString.Size = new System.Drawing.Size(73, 17);
+      this.rbMeasLineString.Size = new System.Drawing.Size(98, 24);
       this.rbMeasLineString.TabIndex = 60;
       this.rbMeasLineString.Text = "Line string";
       this.rbMeasLineString.UseVisualStyleBackColor = true;
       // 
       // btnGetActiveMeasurement
       // 
-      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(5, 85);
+      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(7, 131);
+      this.btnGetActiveMeasurement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
-      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(105, 30);
+      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(140, 46);
       this.btnGetActiveMeasurement.TabIndex = 62;
       this.btnGetActiveMeasurement.Text = "Get Measurement";
       this.btnGetActiveMeasurement.UseVisualStyleBackColor = true;
@@ -952,9 +1033,10 @@
       // 
       // btnStartMeasurementMode
       // 
-      this.btnStartMeasurementMode.Location = new System.Drawing.Point(5, 15);
+      this.btnStartMeasurementMode.Location = new System.Drawing.Point(7, 23);
+      this.btnStartMeasurementMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnStartMeasurementMode.Name = "btnStartMeasurementMode";
-      this.btnStartMeasurementMode.Size = new System.Drawing.Size(105, 30);
+      this.btnStartMeasurementMode.Size = new System.Drawing.Size(140, 46);
       this.btnStartMeasurementMode.TabIndex = 57;
       this.btnStartMeasurementMode.Text = "Start Measurement";
       this.btnStartMeasurementMode.UseVisualStyleBackColor = true;
@@ -962,9 +1044,10 @@
       // 
       // btnStopMeasurementMode
       // 
-      this.btnStopMeasurementMode.Location = new System.Drawing.Point(6, 49);
+      this.btnStopMeasurementMode.Location = new System.Drawing.Point(8, 75);
+      this.btnStopMeasurementMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnStopMeasurementMode.Name = "btnStopMeasurementMode";
-      this.btnStopMeasurementMode.Size = new System.Drawing.Size(105, 30);
+      this.btnStopMeasurementMode.Size = new System.Drawing.Size(140, 46);
       this.btnStopMeasurementMode.TabIndex = 56;
       this.btnStopMeasurementMode.Text = "Stop Measurement";
       this.btnStopMeasurementMode.UseVisualStyleBackColor = true;
@@ -974,18 +1057,21 @@
       // 
       this.grDevTools.Controls.Add(this.btnCloseDefTools);
       this.grDevTools.Controls.Add(this.btnShowDefTools);
-      this.grDevTools.Location = new System.Drawing.Point(345, 265);
+      this.grDevTools.Location = new System.Drawing.Point(460, 408);
+      this.grDevTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grDevTools.Name = "grDevTools";
-      this.grDevTools.Size = new System.Drawing.Size(135, 54);
+      this.grDevTools.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grDevTools.Size = new System.Drawing.Size(180, 83);
       this.grDevTools.TabIndex = 51;
       this.grDevTools.TabStop = false;
       this.grDevTools.Text = "Dev tools";
       // 
       // btnCloseDefTools
       // 
-      this.btnCloseDefTools.Location = new System.Drawing.Point(70, 15);
+      this.btnCloseDefTools.Location = new System.Drawing.Point(93, 23);
+      this.btnCloseDefTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnCloseDefTools.Name = "btnCloseDefTools";
-      this.btnCloseDefTools.Size = new System.Drawing.Size(60, 35);
+      this.btnCloseDefTools.Size = new System.Drawing.Size(80, 54);
       this.btnCloseDefTools.TabIndex = 49;
       this.btnCloseDefTools.Text = "Close dev tools";
       this.btnCloseDefTools.UseVisualStyleBackColor = true;
@@ -993,9 +1079,10 @@
       // 
       // btnShowDefTools
       // 
-      this.btnShowDefTools.Location = new System.Drawing.Point(5, 15);
+      this.btnShowDefTools.Location = new System.Drawing.Point(7, 23);
+      this.btnShowDefTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnShowDefTools.Name = "btnShowDefTools";
-      this.btnShowDefTools.Size = new System.Drawing.Size(60, 35);
+      this.btnShowDefTools.Size = new System.Drawing.Size(80, 54);
       this.btnShowDefTools.TabIndex = 48;
       this.btnShowDefTools.Text = "Show dev tools";
       this.btnShowDefTools.UseVisualStyleBackColor = true;
@@ -1013,18 +1100,21 @@
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
       this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
       this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 153);
+      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 235);
+      this.grRotationsZoomInOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(180, 162);
+      this.grRotationsZoomInOut.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grRotationsZoomInOut.Size = new System.Drawing.Size(240, 249);
       this.grRotationsZoomInOut.TabIndex = 0;
       this.grRotationsZoomInOut.TabStop = false;
       this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
       // 
       // btnGetViewers
       // 
-      this.btnGetViewers.Location = new System.Drawing.Point(95, 119);
+      this.btnGetViewers.Location = new System.Drawing.Point(127, 183);
+      this.btnGetViewers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetViewers.Name = "btnGetViewers";
-      this.btnGetViewers.Size = new System.Drawing.Size(80, 25);
+      this.btnGetViewers.Size = new System.Drawing.Size(107, 38);
       this.btnGetViewers.TabIndex = 62;
       this.btnGetViewers.Text = "Get viewers";
       this.btnGetViewers.UseVisualStyleBackColor = true;
@@ -1032,9 +1122,10 @@
       // 
       // btnClosePanoramaViewer
       // 
-      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(6, 119);
+      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(8, 183);
+      this.btnClosePanoramaViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
-      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(80, 38);
+      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(107, 58);
       this.btnClosePanoramaViewer.TabIndex = 61;
       this.btnClosePanoramaViewer.Text = "Close pan. viewer";
       this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
@@ -1043,25 +1134,28 @@
       // lblDeltaYawPitch
       // 
       this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(5, 97);
+      this.lblDeltaYawPitch.Location = new System.Drawing.Point(7, 149);
+      this.lblDeltaYawPitch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
-      this.lblDeltaYawPitch.Size = new System.Drawing.Size(86, 13);
+      this.lblDeltaYawPitch.Size = new System.Drawing.Size(120, 20);
       this.lblDeltaYawPitch.TabIndex = 20;
       this.lblDeltaYawPitch.Text = "delta yaw / pitch";
       // 
       // txtDeltaYawPitch
       // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(95, 97);
+      this.txtDeltaYawPitch.Location = new System.Drawing.Point(127, 149);
+      this.txtDeltaYawPitch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
-      this.txtDeltaYawPitch.Size = new System.Drawing.Size(80, 20);
+      this.txtDeltaYawPitch.Size = new System.Drawing.Size(105, 27);
       this.txtDeltaYawPitch.TabIndex = 21;
       this.txtDeltaYawPitch.Text = "1";
       // 
       // btnRotateDown
       // 
-      this.btnRotateDown.Location = new System.Drawing.Point(95, 15);
+      this.btnRotateDown.Location = new System.Drawing.Point(127, 23);
+      this.btnRotateDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnRotateDown.Name = "btnRotateDown";
-      this.btnRotateDown.Size = new System.Drawing.Size(80, 25);
+      this.btnRotateDown.Size = new System.Drawing.Size(107, 38);
       this.btnRotateDown.TabIndex = 19;
       this.btnRotateDown.Text = "Rotate down";
       this.btnRotateDown.UseVisualStyleBackColor = true;
@@ -1069,9 +1163,10 @@
       // 
       // btnRotateUp
       // 
-      this.btnRotateUp.Location = new System.Drawing.Point(6, 15);
+      this.btnRotateUp.Location = new System.Drawing.Point(8, 23);
+      this.btnRotateUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnRotateUp.Name = "btnRotateUp";
-      this.btnRotateUp.Size = new System.Drawing.Size(80, 25);
+      this.btnRotateUp.Size = new System.Drawing.Size(107, 38);
       this.btnRotateUp.TabIndex = 18;
       this.btnRotateUp.Text = "Rotate up";
       this.btnRotateUp.UseVisualStyleBackColor = true;
@@ -1079,9 +1174,10 @@
       // 
       // btnRotateRight
       // 
-      this.btnRotateRight.Location = new System.Drawing.Point(6, 41);
+      this.btnRotateRight.Location = new System.Drawing.Point(8, 63);
+      this.btnRotateRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnRotateRight.Name = "btnRotateRight";
-      this.btnRotateRight.Size = new System.Drawing.Size(80, 25);
+      this.btnRotateRight.Size = new System.Drawing.Size(107, 38);
       this.btnRotateRight.TabIndex = 6;
       this.btnRotateRight.Text = "Rotate right";
       this.btnRotateRight.UseVisualStyleBackColor = true;
@@ -1089,9 +1185,10 @@
       // 
       // btnZoomOut
       // 
-      this.btnZoomOut.Location = new System.Drawing.Point(95, 68);
+      this.btnZoomOut.Location = new System.Drawing.Point(127, 105);
+      this.btnZoomOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnZoomOut.Name = "btnZoomOut";
-      this.btnZoomOut.Size = new System.Drawing.Size(80, 25);
+      this.btnZoomOut.Size = new System.Drawing.Size(107, 38);
       this.btnZoomOut.TabIndex = 46;
       this.btnZoomOut.Text = "Zoom out";
       this.btnZoomOut.UseVisualStyleBackColor = true;
@@ -1099,9 +1196,10 @@
       // 
       // btRotateLeft
       // 
-      this.btRotateLeft.Location = new System.Drawing.Point(6, 69);
+      this.btRotateLeft.Location = new System.Drawing.Point(8, 106);
+      this.btRotateLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btRotateLeft.Name = "btRotateLeft";
-      this.btRotateLeft.Size = new System.Drawing.Size(80, 25);
+      this.btRotateLeft.Size = new System.Drawing.Size(107, 38);
       this.btRotateLeft.TabIndex = 0;
       this.btRotateLeft.Text = "Rotate left";
       this.btRotateLeft.UseVisualStyleBackColor = true;
@@ -1109,9 +1207,10 @@
       // 
       // btnZoomIn
       // 
-      this.btnZoomIn.Location = new System.Drawing.Point(95, 41);
+      this.btnZoomIn.Location = new System.Drawing.Point(127, 63);
+      this.btnZoomIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnZoomIn.Name = "btnZoomIn";
-      this.btnZoomIn.Size = new System.Drawing.Size(80, 25);
+      this.btnZoomIn.Size = new System.Drawing.Size(107, 38);
       this.btnZoomIn.TabIndex = 45;
       this.btnZoomIn.Text = "Zoom in";
       this.btnZoomIn.UseVisualStyleBackColor = true;
@@ -1120,9 +1219,11 @@
       // grEvents
       // 
       this.grEvents.Controls.Add(this.lbViewerEvents);
-      this.grEvents.Location = new System.Drawing.Point(6, 452);
+      this.grEvents.Location = new System.Drawing.Point(8, 695);
+      this.grEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grEvents.Name = "grEvents";
-      this.grEvents.Size = new System.Drawing.Size(728, 100);
+      this.grEvents.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grEvents.Size = new System.Drawing.Size(971, 154);
       this.grEvents.TabIndex = 50;
       this.grEvents.TabStop = false;
       this.grEvents.Text = "Viewer events";
@@ -1130,9 +1231,11 @@
       // lbViewerEvents
       // 
       this.lbViewerEvents.FormattingEnabled = true;
-      this.lbViewerEvents.Location = new System.Drawing.Point(5, 15);
+      this.lbViewerEvents.ItemHeight = 20;
+      this.lbViewerEvents.Location = new System.Drawing.Point(7, 23);
+      this.lbViewerEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.lbViewerEvents.Name = "lbViewerEvents";
-      this.lbViewerEvents.Size = new System.Drawing.Size(714, 82);
+      this.lbViewerEvents.Size = new System.Drawing.Size(951, 124);
       this.lbViewerEvents.TabIndex = 0;
       // 
       // grRecordingViewerColorPermissions
@@ -1141,27 +1244,31 @@
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetPermissions);
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetRecording);
       this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetViewerColor);
-      this.grRecordingViewerColorPermissions.Location = new System.Drawing.Point(5, 316);
+      this.grRecordingViewerColorPermissions.Location = new System.Drawing.Point(7, 486);
+      this.grRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grRecordingViewerColorPermissions.Name = "grRecordingViewerColorPermissions";
-      this.grRecordingViewerColorPermissions.Size = new System.Drawing.Size(320, 135);
+      this.grRecordingViewerColorPermissions.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grRecordingViewerColorPermissions.Size = new System.Drawing.Size(427, 208);
       this.grRecordingViewerColorPermissions.TabIndex = 0;
       this.grRecordingViewerColorPermissions.TabStop = false;
       this.grRecordingViewerColorPermissions.Text = "Recording / Viewer color / Permissions";
       // 
       // txtRecordingViewerColorPermissions
       // 
-      this.txtRecordingViewerColorPermissions.Location = new System.Drawing.Point(110, 15);
+      this.txtRecordingViewerColorPermissions.Location = new System.Drawing.Point(147, 23);
+      this.txtRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtRecordingViewerColorPermissions.Multiline = true;
       this.txtRecordingViewerColorPermissions.Name = "txtRecordingViewerColorPermissions";
       this.txtRecordingViewerColorPermissions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.txtRecordingViewerColorPermissions.Size = new System.Drawing.Size(205, 115);
+      this.txtRecordingViewerColorPermissions.Size = new System.Drawing.Size(272, 175);
       this.txtRecordingViewerColorPermissions.TabIndex = 49;
       // 
       // btnGetPermissions
       // 
-      this.btnGetPermissions.Location = new System.Drawing.Point(5, 15);
+      this.btnGetPermissions.Location = new System.Drawing.Point(7, 23);
+      this.btnGetPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetPermissions.Name = "btnGetPermissions";
-      this.btnGetPermissions.Size = new System.Drawing.Size(100, 30);
+      this.btnGetPermissions.Size = new System.Drawing.Size(133, 46);
       this.btnGetPermissions.TabIndex = 11;
       this.btnGetPermissions.Text = "Get Permissions";
       this.btnGetPermissions.UseVisualStyleBackColor = true;
@@ -1169,9 +1276,10 @@
       // 
       // btnGetRecording
       // 
-      this.btnGetRecording.Location = new System.Drawing.Point(5, 65);
+      this.btnGetRecording.Location = new System.Drawing.Point(7, 100);
+      this.btnGetRecording.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetRecording.Name = "btnGetRecording";
-      this.btnGetRecording.Size = new System.Drawing.Size(100, 30);
+      this.btnGetRecording.Size = new System.Drawing.Size(133, 46);
       this.btnGetRecording.TabIndex = 28;
       this.btnGetRecording.Text = "Get Recording";
       this.btnGetRecording.UseVisualStyleBackColor = true;
@@ -1179,9 +1287,10 @@
       // 
       // btnGetViewerColor
       // 
-      this.btnGetViewerColor.Location = new System.Drawing.Point(5, 100);
+      this.btnGetViewerColor.Location = new System.Drawing.Point(7, 154);
+      this.btnGetViewerColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetViewerColor.Name = "btnGetViewerColor";
-      this.btnGetViewerColor.Size = new System.Drawing.Size(100, 30);
+      this.btnGetViewerColor.Size = new System.Drawing.Size(133, 46);
       this.btnGetViewerColor.TabIndex = 17;
       this.btnGetViewerColor.Text = "Get Viewer Color";
       this.btnGetViewerColor.UseVisualStyleBackColor = true;
@@ -1198,18 +1307,21 @@
       this.grOrientation.Controls.Add(this.txthFov);
       this.grOrientation.Controls.Add(this.btnGetOrientation);
       this.grOrientation.Controls.Add(this.btnSetOrientation);
-      this.grOrientation.Location = new System.Drawing.Point(489, 220);
+      this.grOrientation.Location = new System.Drawing.Point(652, 338);
+      this.grOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grOrientation.Name = "grOrientation";
-      this.grOrientation.Size = new System.Drawing.Size(240, 115);
+      this.grOrientation.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grOrientation.Size = new System.Drawing.Size(320, 177);
       this.grOrientation.TabIndex = 0;
       this.grOrientation.TabStop = false;
       this.grOrientation.Text = "Orientation";
       // 
       // btnGetDebugLogs
       // 
-      this.btnGetDebugLogs.Location = new System.Drawing.Point(5, 45);
+      this.btnGetDebugLogs.Location = new System.Drawing.Point(7, 69);
+      this.btnGetDebugLogs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetDebugLogs.Name = "btnGetDebugLogs";
-      this.btnGetDebugLogs.Size = new System.Drawing.Size(100, 30);
+      this.btnGetDebugLogs.Size = new System.Drawing.Size(133, 46);
       this.btnGetDebugLogs.TabIndex = 28;
       this.btnGetDebugLogs.Text = "Get Debug logs";
       this.btnGetDebugLogs.UseVisualStyleBackColor = true;
@@ -1217,60 +1329,67 @@
       // 
       // txtYaw
       // 
-      this.txtYaw.Location = new System.Drawing.Point(145, 15);
+      this.txtYaw.Location = new System.Drawing.Point(193, 23);
+      this.txtYaw.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtYaw.Name = "txtYaw";
-      this.txtYaw.Size = new System.Drawing.Size(90, 20);
+      this.txtYaw.Size = new System.Drawing.Size(119, 27);
       this.txtYaw.TabIndex = 23;
       this.txtYaw.Text = "0.0";
       // 
       // lblYaw
       // 
       this.lblYaw.AutoSize = true;
-      this.lblYaw.Location = new System.Drawing.Point(110, 15);
+      this.lblYaw.Location = new System.Drawing.Point(147, 23);
+      this.lblYaw.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblYaw.Name = "lblYaw";
-      this.lblYaw.Size = new System.Drawing.Size(28, 13);
+      this.lblYaw.Size = new System.Drawing.Size(35, 20);
       this.lblYaw.TabIndex = 21;
       this.lblYaw.Text = "Yaw";
       // 
       // lblPitch
       // 
       this.lblPitch.AutoSize = true;
-      this.lblPitch.Location = new System.Drawing.Point(110, 40);
+      this.lblPitch.Location = new System.Drawing.Point(147, 62);
+      this.lblPitch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblPitch.Name = "lblPitch";
-      this.lblPitch.Size = new System.Drawing.Size(31, 13);
+      this.lblPitch.Size = new System.Drawing.Size(41, 20);
       this.lblPitch.TabIndex = 22;
       this.lblPitch.Text = "Pitch";
       // 
       // txtPitch
       // 
-      this.txtPitch.Location = new System.Drawing.Point(145, 40);
+      this.txtPitch.Location = new System.Drawing.Point(193, 62);
+      this.txtPitch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtPitch.Name = "txtPitch";
-      this.txtPitch.Size = new System.Drawing.Size(90, 20);
+      this.txtPitch.Size = new System.Drawing.Size(119, 27);
       this.txtPitch.TabIndex = 24;
       this.txtPitch.Text = "0.0";
       // 
       // lblhFov
       // 
       this.lblhFov.AutoSize = true;
-      this.lblhFov.Location = new System.Drawing.Point(110, 65);
+      this.lblhFov.Location = new System.Drawing.Point(147, 100);
+      this.lblhFov.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblhFov.Name = "lblhFov";
-      this.lblhFov.Size = new System.Drawing.Size(31, 13);
+      this.lblhFov.Size = new System.Drawing.Size(40, 20);
       this.lblhFov.TabIndex = 25;
       this.lblhFov.Text = "hFov";
       // 
       // txthFov
       // 
-      this.txthFov.Location = new System.Drawing.Point(145, 65);
+      this.txthFov.Location = new System.Drawing.Point(193, 100);
+      this.txthFov.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txthFov.Name = "txthFov";
-      this.txthFov.Size = new System.Drawing.Size(90, 20);
+      this.txthFov.Size = new System.Drawing.Size(119, 27);
       this.txthFov.TabIndex = 26;
       this.txthFov.Text = "90.0";
       // 
       // btnGetOrientation
       // 
-      this.btnGetOrientation.Location = new System.Drawing.Point(5, 15);
+      this.btnGetOrientation.Location = new System.Drawing.Point(7, 23);
+      this.btnGetOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetOrientation.Name = "btnGetOrientation";
-      this.btnGetOrientation.Size = new System.Drawing.Size(100, 30);
+      this.btnGetOrientation.Size = new System.Drawing.Size(133, 46);
       this.btnGetOrientation.TabIndex = 20;
       this.btnGetOrientation.Text = "Get Orientation";
       this.btnGetOrientation.UseVisualStyleBackColor = true;
@@ -1278,9 +1397,10 @@
       // 
       // btnSetOrientation
       // 
-      this.btnSetOrientation.Location = new System.Drawing.Point(5, 80);
+      this.btnSetOrientation.Location = new System.Drawing.Point(7, 123);
+      this.btnSetOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetOrientation.Name = "btnSetOrientation";
-      this.btnSetOrientation.Size = new System.Drawing.Size(100, 30);
+      this.btnSetOrientation.Size = new System.Drawing.Size(133, 46);
       this.btnSetOrientation.TabIndex = 27;
       this.btnSetOrientation.Text = "Set Orientation";
       this.btnSetOrientation.UseVisualStyleBackColor = true;
@@ -1294,25 +1414,29 @@
       this.grOpenByImageId.Controls.Add(this.btnGetAddress);
       this.grOpenByImageId.Controls.Add(this.btnOpenByImageId);
       this.grOpenByImageId.Controls.Add(this.txtImageId);
-      this.grOpenByImageId.Location = new System.Drawing.Point(491, 338);
+      this.grOpenByImageId.Location = new System.Drawing.Point(655, 520);
+      this.grOpenByImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grOpenByImageId.Name = "grOpenByImageId";
-      this.grOpenByImageId.Size = new System.Drawing.Size(238, 105);
+      this.grOpenByImageId.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grOpenByImageId.Size = new System.Drawing.Size(317, 162);
       this.grOpenByImageId.TabIndex = 44;
       this.grOpenByImageId.TabStop = false;
       this.grOpenByImageId.Text = "Open by imageId";
       // 
       // txtBrightnessContrast
       // 
-      this.txtBrightnessContrast.Location = new System.Drawing.Point(120, 81);
+      this.txtBrightnessContrast.Location = new System.Drawing.Point(160, 125);
+      this.txtBrightnessContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtBrightnessContrast.Name = "txtBrightnessContrast";
-      this.txtBrightnessContrast.Size = new System.Drawing.Size(110, 20);
+      this.txtBrightnessContrast.Size = new System.Drawing.Size(145, 27);
       this.txtBrightnessContrast.TabIndex = 52;
       // 
       // btnContrast
       // 
-      this.btnContrast.Location = new System.Drawing.Point(120, 47);
+      this.btnContrast.Location = new System.Drawing.Point(160, 72);
+      this.btnContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnContrast.Name = "btnContrast";
-      this.btnContrast.Size = new System.Drawing.Size(110, 30);
+      this.btnContrast.Size = new System.Drawing.Size(147, 46);
       this.btnContrast.TabIndex = 51;
       this.btnContrast.Text = "Set Contrast";
       this.btnContrast.UseVisualStyleBackColor = true;
@@ -1320,9 +1444,10 @@
       // 
       // btnBrightness
       // 
-      this.btnBrightness.Location = new System.Drawing.Point(120, 15);
+      this.btnBrightness.Location = new System.Drawing.Point(160, 23);
+      this.btnBrightness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnBrightness.Name = "btnBrightness";
-      this.btnBrightness.Size = new System.Drawing.Size(110, 30);
+      this.btnBrightness.Size = new System.Drawing.Size(147, 46);
       this.btnBrightness.TabIndex = 50;
       this.btnBrightness.Text = "Set Brightness";
       this.btnBrightness.UseVisualStyleBackColor = true;
@@ -1330,9 +1455,10 @@
       // 
       // btnGetAddress
       // 
-      this.btnGetAddress.Location = new System.Drawing.Point(5, 75);
+      this.btnGetAddress.Location = new System.Drawing.Point(7, 115);
+      this.btnGetAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetAddress.Name = "btnGetAddress";
-      this.btnGetAddress.Size = new System.Drawing.Size(100, 30);
+      this.btnGetAddress.Size = new System.Drawing.Size(133, 46);
       this.btnGetAddress.TabIndex = 49;
       this.btnGetAddress.Text = "Get address settings";
       this.btnGetAddress.UseVisualStyleBackColor = true;
@@ -1340,9 +1466,10 @@
       // 
       // btnOpenByImageId
       // 
-      this.btnOpenByImageId.Location = new System.Drawing.Point(5, 40);
+      this.btnOpenByImageId.Location = new System.Drawing.Point(7, 62);
+      this.btnOpenByImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnOpenByImageId.Name = "btnOpenByImageId";
-      this.btnOpenByImageId.Size = new System.Drawing.Size(100, 30);
+      this.btnOpenByImageId.Size = new System.Drawing.Size(133, 46);
       this.btnOpenByImageId.TabIndex = 43;
       this.btnOpenByImageId.Text = "Open by ImageId";
       this.btnOpenByImageId.UseVisualStyleBackColor = true;
@@ -1350,9 +1477,10 @@
       // 
       // txtImageId
       // 
-      this.txtImageId.Location = new System.Drawing.Point(8, 15);
+      this.txtImageId.Location = new System.Drawing.Point(11, 23);
+      this.txtImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtImageId.Name = "txtImageId";
-      this.txtImageId.Size = new System.Drawing.Size(100, 20);
+      this.txtImageId.Size = new System.Drawing.Size(132, 27);
       this.txtImageId.TabIndex = 42;
       this.txtImageId.Text = "5D4KX5SM";
       // 
@@ -1378,18 +1506,21 @@
       this.grCoordinate.Controls.Add(this.lblZ);
       this.grCoordinate.Controls.Add(this.btnOpenByCoordinate);
       this.grCoordinate.Controls.Add(this.btnLookAtCoordinate);
-      this.grCoordinate.Location = new System.Drawing.Point(484, 124);
+      this.grCoordinate.Location = new System.Drawing.Point(645, 191);
+      this.grCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grCoordinate.Name = "grCoordinate";
-      this.grCoordinate.Size = new System.Drawing.Size(415, 90);
+      this.grCoordinate.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grCoordinate.Size = new System.Drawing.Size(553, 138);
       this.grCoordinate.TabIndex = 0;
       this.grCoordinate.TabStop = false;
       this.grCoordinate.Text = "Coordinate";
       // 
       // btnSetPointSize
       // 
-      this.btnSetPointSize.Location = new System.Drawing.Point(375, 39);
+      this.btnSetPointSize.Location = new System.Drawing.Point(500, 60);
+      this.btnSetPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetPointSize.Name = "btnSetPointSize";
-      this.btnSetPointSize.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointSize.Size = new System.Drawing.Size(53, 38);
       this.btnSetPointSize.TabIndex = 56;
       this.btnSetPointSize.Text = "Set";
       this.btnSetPointSize.UseVisualStyleBackColor = true;
@@ -1397,17 +1528,19 @@
       // 
       // txtPointSize
       // 
-      this.txtPointSize.Location = new System.Drawing.Point(330, 42);
+      this.txtPointSize.Location = new System.Drawing.Point(440, 65);
+      this.txtPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtPointSize.Name = "txtPointSize";
-      this.txtPointSize.Size = new System.Drawing.Size(40, 20);
+      this.txtPointSize.Size = new System.Drawing.Size(52, 27);
       this.txtPointSize.TabIndex = 55;
       this.txtPointSize.Text = "0";
       // 
       // btnGetPointSize
       // 
-      this.btnGetPointSize.Location = new System.Drawing.Point(285, 39);
+      this.btnGetPointSize.Location = new System.Drawing.Point(380, 60);
+      this.btnGetPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetPointSize.Name = "btnGetPointSize";
-      this.btnGetPointSize.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointSize.Size = new System.Drawing.Size(53, 38);
       this.btnGetPointSize.TabIndex = 54;
       this.btnGetPointSize.Text = "Get";
       this.btnGetPointSize.UseVisualStyleBackColor = true;
@@ -1415,9 +1548,10 @@
       // 
       // btnSetPointBudget
       // 
-      this.btnSetPointBudget.Location = new System.Drawing.Point(375, 62);
+      this.btnSetPointBudget.Location = new System.Drawing.Point(500, 95);
+      this.btnSetPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSetPointBudget.Name = "btnSetPointBudget";
-      this.btnSetPointBudget.Size = new System.Drawing.Size(40, 25);
+      this.btnSetPointBudget.Size = new System.Drawing.Size(53, 38);
       this.btnSetPointBudget.TabIndex = 53;
       this.btnSetPointBudget.Text = "Set";
       this.btnSetPointBudget.UseVisualStyleBackColor = true;
@@ -1426,16 +1560,18 @@
       // cbPointBudget
       // 
       this.cbPointBudget.FormattingEnabled = true;
-      this.cbPointBudget.Location = new System.Drawing.Point(330, 65);
+      this.cbPointBudget.Location = new System.Drawing.Point(440, 100);
+      this.cbPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.cbPointBudget.Name = "cbPointBudget";
-      this.cbPointBudget.Size = new System.Drawing.Size(40, 21);
+      this.cbPointBudget.Size = new System.Drawing.Size(52, 28);
       this.cbPointBudget.TabIndex = 52;
       // 
       // btnGetPointBudget
       // 
-      this.btnGetPointBudget.Location = new System.Drawing.Point(285, 62);
+      this.btnGetPointBudget.Location = new System.Drawing.Point(380, 95);
+      this.btnGetPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetPointBudget.Name = "btnGetPointBudget";
-      this.btnGetPointBudget.Size = new System.Drawing.Size(40, 25);
+      this.btnGetPointBudget.Size = new System.Drawing.Size(53, 38);
       this.btnGetPointBudget.TabIndex = 51;
       this.btnGetPointBudget.Text = "Get";
       this.btnGetPointBudget.UseVisualStyleBackColor = true;
@@ -1443,9 +1579,10 @@
       // 
       // btnEdges
       // 
-      this.btnEdges.Location = new System.Drawing.Point(375, 15);
+      this.btnEdges.Location = new System.Drawing.Point(500, 23);
+      this.btnEdges.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnEdges.Name = "btnEdges";
-      this.btnEdges.Size = new System.Drawing.Size(40, 25);
+      this.btnEdges.Size = new System.Drawing.Size(53, 38);
       this.btnEdges.TabIndex = 50;
       this.btnEdges.Text = "Edges";
       this.btnEdges.UseVisualStyleBackColor = true;
@@ -1453,102 +1590,114 @@
       // 
       // btnCameraPosition
       // 
-      this.btnCameraPosition.Location = new System.Drawing.Point(330, 15);
+      this.btnCameraPosition.Location = new System.Drawing.Point(440, 23);
+      this.btnCameraPosition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnCameraPosition.Name = "btnCameraPosition";
-      this.btnCameraPosition.Size = new System.Drawing.Size(40, 25);
+      this.btnCameraPosition.Size = new System.Drawing.Size(53, 38);
       this.btnCameraPosition.TabIndex = 49;
       this.btnCameraPosition.UseVisualStyleBackColor = true;
       this.btnCameraPosition.Click += new System.EventHandler(this.btnCameraPosition_Click);
       // 
       // txtlkAtX
       // 
-      this.txtlkAtX.Location = new System.Drawing.Point(215, 15);
+      this.txtlkAtX.Location = new System.Drawing.Point(287, 23);
+      this.txtlkAtX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtlkAtX.Name = "txtlkAtX";
-      this.txtlkAtX.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtX.Size = new System.Drawing.Size(85, 27);
       this.txtlkAtX.TabIndex = 46;
       this.txtlkAtX.Text = "160855.585";
       // 
       // txtlkAtY
       // 
-      this.txtlkAtY.Location = new System.Drawing.Point(215, 40);
+      this.txtlkAtY.Location = new System.Drawing.Point(287, 62);
+      this.txtlkAtY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtlkAtY.Name = "txtlkAtY";
-      this.txtlkAtY.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtY.Size = new System.Drawing.Size(85, 27);
       this.txtlkAtY.TabIndex = 47;
       this.txtlkAtY.Text = "383928.326";
       // 
       // txtlkAtZ
       // 
-      this.txtlkAtZ.Location = new System.Drawing.Point(215, 65);
+      this.txtlkAtZ.Location = new System.Drawing.Point(287, 100);
+      this.txtlkAtZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtlkAtZ.Name = "txtlkAtZ";
-      this.txtlkAtZ.Size = new System.Drawing.Size(65, 20);
+      this.txtlkAtZ.Size = new System.Drawing.Size(85, 27);
       this.txtlkAtZ.TabIndex = 48;
       this.txtlkAtZ.Text = "4.5";
       // 
       // btnFlyTo
       // 
-      this.btnFlyTo.Location = new System.Drawing.Point(285, 15);
+      this.btnFlyTo.Location = new System.Drawing.Point(380, 23);
+      this.btnFlyTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnFlyTo.Name = "btnFlyTo";
-      this.btnFlyTo.Size = new System.Drawing.Size(40, 25);
+      this.btnFlyTo.Size = new System.Drawing.Size(53, 38);
       this.btnFlyTo.TabIndex = 45;
       this.btnFlyTo.UseVisualStyleBackColor = true;
       this.btnFlyTo.Click += new System.EventHandler(this.btnFlyTo_Click);
       // 
       // txtX
       // 
-      this.txtX.Location = new System.Drawing.Point(145, 15);
+      this.txtX.Location = new System.Drawing.Point(193, 23);
+      this.txtX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtX.Name = "txtX";
-      this.txtX.Size = new System.Drawing.Size(65, 20);
+      this.txtX.Size = new System.Drawing.Size(85, 27);
       this.txtX.TabIndex = 30;
       this.txtX.Text = "160850.585";
       // 
       // txtY
       // 
-      this.txtY.Location = new System.Drawing.Point(145, 40);
+      this.txtY.Location = new System.Drawing.Point(193, 62);
+      this.txtY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtY.Name = "txtY";
-      this.txtY.Size = new System.Drawing.Size(65, 20);
+      this.txtY.Size = new System.Drawing.Size(85, 27);
       this.txtY.TabIndex = 31;
       this.txtY.Text = "383923.326";
       // 
       // txtZ
       // 
-      this.txtZ.Location = new System.Drawing.Point(145, 65);
+      this.txtZ.Location = new System.Drawing.Point(193, 100);
+      this.txtZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtZ.Name = "txtZ";
-      this.txtZ.Size = new System.Drawing.Size(65, 20);
+      this.txtZ.Size = new System.Drawing.Size(85, 27);
       this.txtZ.TabIndex = 32;
       this.txtZ.Text = "4.0";
       // 
       // lblX
       // 
       this.lblX.AutoSize = true;
-      this.lblX.Location = new System.Drawing.Point(120, 15);
+      this.lblX.Location = new System.Drawing.Point(160, 23);
+      this.lblX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblX.Name = "lblX";
-      this.lblX.Size = new System.Drawing.Size(14, 13);
+      this.lblX.Size = new System.Drawing.Size(18, 20);
       this.lblX.TabIndex = 33;
       this.lblX.Text = "X";
       // 
       // lblY
       // 
       this.lblY.AutoSize = true;
-      this.lblY.Location = new System.Drawing.Point(120, 40);
+      this.lblY.Location = new System.Drawing.Point(160, 62);
+      this.lblY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblY.Name = "lblY";
-      this.lblY.Size = new System.Drawing.Size(14, 13);
+      this.lblY.Size = new System.Drawing.Size(17, 20);
       this.lblY.TabIndex = 34;
       this.lblY.Text = "Y";
       // 
       // lblZ
       // 
       this.lblZ.AutoSize = true;
-      this.lblZ.Location = new System.Drawing.Point(120, 65);
+      this.lblZ.Location = new System.Drawing.Point(160, 100);
+      this.lblZ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblZ.Name = "lblZ";
-      this.lblZ.Size = new System.Drawing.Size(14, 13);
+      this.lblZ.Size = new System.Drawing.Size(18, 20);
       this.lblZ.TabIndex = 35;
       this.lblZ.Text = "Z";
       // 
       // btnOpenByCoordinate
       // 
-      this.btnOpenByCoordinate.Location = new System.Drawing.Point(5, 15);
+      this.btnOpenByCoordinate.Location = new System.Drawing.Point(7, 23);
+      this.btnOpenByCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnOpenByCoordinate.Name = "btnOpenByCoordinate";
-      this.btnOpenByCoordinate.Size = new System.Drawing.Size(110, 30);
+      this.btnOpenByCoordinate.Size = new System.Drawing.Size(147, 46);
       this.btnOpenByCoordinate.TabIndex = 44;
       this.btnOpenByCoordinate.Text = "Open by coordinate";
       this.btnOpenByCoordinate.UseVisualStyleBackColor = true;
@@ -1556,9 +1705,10 @@
       // 
       // btnLookAtCoordinate
       // 
-      this.btnLookAtCoordinate.Location = new System.Drawing.Point(5, 50);
+      this.btnLookAtCoordinate.Location = new System.Drawing.Point(7, 77);
+      this.btnLookAtCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnLookAtCoordinate.Name = "btnLookAtCoordinate";
-      this.btnLookAtCoordinate.Size = new System.Drawing.Size(110, 30);
+      this.btnLookAtCoordinate.Size = new System.Drawing.Size(147, 46);
       this.btnLookAtCoordinate.TabIndex = 29;
       this.btnLookAtCoordinate.Text = "Look at coordinate";
       this.btnLookAtCoordinate.UseVisualStyleBackColor = true;
@@ -1571,9 +1721,11 @@
       this.grAPIInfo.Controls.Add(this.btnApiReadyState);
       this.grAPIInfo.Controls.Add(this.btnApplicationVersion);
       this.grAPIInfo.Controls.Add(this.btnApplicationName);
-      this.grAPIInfo.Location = new System.Drawing.Point(360, 78);
+      this.grAPIInfo.Location = new System.Drawing.Point(480, 120);
+      this.grAPIInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grAPIInfo.Name = "grAPIInfo";
-      this.grAPIInfo.Size = new System.Drawing.Size(120, 190);
+      this.grAPIInfo.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grAPIInfo.Size = new System.Drawing.Size(160, 292);
       this.grAPIInfo.TabIndex = 0;
       this.grAPIInfo.TabStop = false;
       this.grAPIInfo.Text = "API Info";
@@ -1581,24 +1733,27 @@
       // lblResult
       // 
       this.lblResult.AutoSize = true;
-      this.lblResult.Location = new System.Drawing.Point(5, 120);
+      this.lblResult.Location = new System.Drawing.Point(7, 185);
+      this.lblResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblResult.Name = "lblResult";
-      this.lblResult.Size = new System.Drawing.Size(40, 13);
+      this.lblResult.Size = new System.Drawing.Size(52, 20);
       this.lblResult.TabIndex = 22;
       this.lblResult.Text = "Result:";
       // 
       // txtAPIResult
       // 
-      this.txtAPIResult.Location = new System.Drawing.Point(5, 155);
+      this.txtAPIResult.Location = new System.Drawing.Point(7, 238);
+      this.txtAPIResult.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtAPIResult.Name = "txtAPIResult";
-      this.txtAPIResult.Size = new System.Drawing.Size(110, 20);
+      this.txtAPIResult.Size = new System.Drawing.Size(145, 27);
       this.txtAPIResult.TabIndex = 23;
       // 
       // btnApiReadyState
       // 
-      this.btnApiReadyState.Location = new System.Drawing.Point(5, 15);
+      this.btnApiReadyState.Location = new System.Drawing.Point(7, 23);
+      this.btnApiReadyState.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnApiReadyState.Name = "btnApiReadyState";
-      this.btnApiReadyState.Size = new System.Drawing.Size(110, 30);
+      this.btnApiReadyState.Size = new System.Drawing.Size(147, 46);
       this.btnApiReadyState.TabIndex = 8;
       this.btnApiReadyState.Text = "API Ready State";
       this.btnApiReadyState.UseVisualStyleBackColor = true;
@@ -1606,9 +1761,10 @@
       // 
       // btnApplicationVersion
       // 
-      this.btnApplicationVersion.Location = new System.Drawing.Point(5, 50);
+      this.btnApplicationVersion.Location = new System.Drawing.Point(7, 77);
+      this.btnApplicationVersion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnApplicationVersion.Name = "btnApplicationVersion";
-      this.btnApplicationVersion.Size = new System.Drawing.Size(110, 30);
+      this.btnApplicationVersion.Size = new System.Drawing.Size(147, 46);
       this.btnApplicationVersion.TabIndex = 9;
       this.btnApplicationVersion.Text = "Application version";
       this.btnApplicationVersion.UseVisualStyleBackColor = true;
@@ -1616,9 +1772,10 @@
       // 
       // btnApplicationName
       // 
-      this.btnApplicationName.Location = new System.Drawing.Point(5, 85);
+      this.btnApplicationName.Location = new System.Drawing.Point(7, 131);
+      this.btnApplicationName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnApplicationName.Name = "btnApplicationName";
-      this.btnApplicationName.Size = new System.Drawing.Size(110, 30);
+      this.btnApplicationName.Size = new System.Drawing.Size(147, 46);
       this.btnApplicationName.TabIndex = 10;
       this.btnApplicationName.Text = "Application name";
       this.btnApplicationName.UseVisualStyleBackColor = true;
@@ -1635,18 +1792,21 @@
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarExpanded);
       this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelVisible);
       this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
-      this.grViewerToggles.Location = new System.Drawing.Point(180, 78);
+      this.grViewerToggles.Location = new System.Drawing.Point(240, 120);
+      this.grViewerToggles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Size = new System.Drawing.Size(180, 237);
+      this.grViewerToggles.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grViewerToggles.Size = new System.Drawing.Size(240, 365);
       this.grViewerToggles.TabIndex = 0;
       this.grViewerToggles.TabStop = false;
       this.grViewerToggles.Text = "Viewer toggles";
       // 
       // btnGetType
       // 
-      this.btnGetType.Location = new System.Drawing.Point(5, 215);
+      this.btnGetType.Location = new System.Drawing.Point(7, 331);
+      this.btnGetType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnGetType.Name = "btnGetType";
-      this.btnGetType.Size = new System.Drawing.Size(154, 22);
+      this.btnGetType.Size = new System.Drawing.Size(205, 34);
       this.btnGetType.TabIndex = 44;
       this.btnGetType.Text = "Get viewer type";
       this.btnGetType.UseVisualStyleBackColor = true;
@@ -1654,9 +1814,10 @@
       // 
       // btnToggleSidebarExpandable
       // 
-      this.btnToggleSidebarExpandable.Location = new System.Drawing.Point(5, 191);
+      this.btnToggleSidebarExpandable.Location = new System.Drawing.Point(7, 294);
+      this.btnToggleSidebarExpandable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleSidebarExpandable.Name = "btnToggleSidebarExpandable";
-      this.btnToggleSidebarExpandable.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleSidebarExpandable.Size = new System.Drawing.Size(205, 34);
       this.btnToggleSidebarExpandable.TabIndex = 43;
       this.btnToggleSidebarExpandable.Text = "Toggle Sidebar expandable";
       this.btnToggleSidebarExpandable.UseVisualStyleBackColor = true;
@@ -1664,9 +1825,10 @@
       // 
       // btnToggleSidebar
       // 
-      this.btnToggleSidebar.Location = new System.Drawing.Point(5, 165);
+      this.btnToggleSidebar.Location = new System.Drawing.Point(7, 254);
+      this.btnToggleSidebar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleSidebar.Name = "btnToggleSidebar";
-      this.btnToggleSidebar.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleSidebar.Size = new System.Drawing.Size(205, 34);
       this.btnToggleSidebar.TabIndex = 42;
       this.btnToggleSidebar.Text = "Toggle Sidebar expanded";
       this.btnToggleSidebar.UseVisualStyleBackColor = true;
@@ -1674,9 +1836,10 @@
       // 
       // btnToggle3DCursor
       // 
-      this.btnToggle3DCursor.Location = new System.Drawing.Point(5, 140);
+      this.btnToggle3DCursor.Location = new System.Drawing.Point(7, 215);
+      this.btnToggle3DCursor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggle3DCursor.Name = "btnToggle3DCursor";
-      this.btnToggle3DCursor.Size = new System.Drawing.Size(154, 22);
+      this.btnToggle3DCursor.Size = new System.Drawing.Size(205, 34);
       this.btnToggle3DCursor.TabIndex = 41;
       this.btnToggle3DCursor.Text = "Toggle 3D Cursor";
       this.btnToggle3DCursor.UseVisualStyleBackColor = true;
@@ -1684,9 +1847,10 @@
       // 
       // btnToggleRecordingsVisible
       // 
-      this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(5, 14);
+      this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(7, 22);
+      this.btnToggleRecordingsVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
-      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(205, 34);
       this.btnToggleRecordingsVisible.TabIndex = 36;
       this.btnToggleRecordingsVisible.Text = "Toggle recordings visible";
       this.btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
@@ -1694,9 +1858,10 @@
       // 
       // btnToggleTimeTravelExpanded
       // 
-      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(5, 40);
+      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(7, 62);
+      this.btnToggleTimeTravelExpanded.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
-      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(205, 34);
       this.btnToggleTimeTravelExpanded.TabIndex = 40;
       this.btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
       this.btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
@@ -1704,9 +1869,10 @@
       // 
       // btnToggleNavbarExpanded
       // 
-      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(5, 65);
+      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(7, 100);
+      this.btnToggleNavbarExpanded.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
-      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(205, 34);
       this.btnToggleNavbarExpanded.TabIndex = 38;
       this.btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
       this.btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
@@ -1714,9 +1880,10 @@
       // 
       // btnToggleTimeTravelVisible
       // 
-      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(5, 90);
+      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(7, 138);
+      this.btnToggleTimeTravelVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
-      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(205, 34);
       this.btnToggleTimeTravelVisible.TabIndex = 39;
       this.btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
       this.btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
@@ -1724,9 +1891,10 @@
       // 
       // btnToggleNavbarVisible
       // 
-      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(5, 115);
+      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(7, 177);
+      this.btnToggleNavbarVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
-      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(154, 22);
+      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(205, 34);
       this.btnToggleNavbarVisible.TabIndex = 37;
       this.btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
       this.btnToggleNavbarVisible.UseVisualStyleBackColor = true;
@@ -1737,9 +1905,11 @@
       this.grOpenByAddress.Controls.Add(this.lblAddress);
       this.grOpenByAddress.Controls.Add(this.txtAdress);
       this.grOpenByAddress.Controls.Add(this.btnOpenByAddress);
-      this.grOpenByAddress.Location = new System.Drawing.Point(180, 0);
+      this.grOpenByAddress.Location = new System.Drawing.Point(240, 0);
+      this.grOpenByAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grOpenByAddress.Name = "grOpenByAddress";
-      this.grOpenByAddress.Size = new System.Drawing.Size(300, 75);
+      this.grOpenByAddress.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grOpenByAddress.Size = new System.Drawing.Size(400, 115);
       this.grOpenByAddress.TabIndex = 0;
       this.grOpenByAddress.TabStop = false;
       this.grOpenByAddress.Text = "Open by address";
@@ -1747,25 +1917,28 @@
       // lblAddress
       // 
       this.lblAddress.AutoSize = true;
-      this.lblAddress.Location = new System.Drawing.Point(5, 15);
+      this.lblAddress.Location = new System.Drawing.Point(7, 23);
+      this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblAddress.Name = "lblAddress";
-      this.lblAddress.Size = new System.Drawing.Size(45, 13);
+      this.lblAddress.Size = new System.Drawing.Size(62, 20);
       this.lblAddress.TabIndex = 12;
       this.lblAddress.Text = "Address";
       // 
       // txtAdress
       // 
-      this.txtAdress.Location = new System.Drawing.Point(65, 15);
+      this.txtAdress.Location = new System.Drawing.Point(87, 23);
+      this.txtAdress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtAdress.Name = "txtAdress";
-      this.txtAdress.Size = new System.Drawing.Size(230, 20);
+      this.txtAdress.Size = new System.Drawing.Size(305, 27);
       this.txtAdress.TabIndex = 14;
       this.txtAdress.Text = "Lange Haven 145, Schiedam";
       // 
       // btnOpenByAddress
       // 
-      this.btnOpenByAddress.Location = new System.Drawing.Point(5, 40);
+      this.btnOpenByAddress.Location = new System.Drawing.Point(7, 62);
+      this.btnOpenByAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnOpenByAddress.Name = "btnOpenByAddress";
-      this.btnOpenByAddress.Size = new System.Drawing.Size(290, 30);
+      this.btnOpenByAddress.Size = new System.Drawing.Size(387, 46);
       this.btnOpenByAddress.TabIndex = 16;
       this.btnOpenByAddress.Text = "Open by address";
       this.btnOpenByAddress.UseVisualStyleBackColor = true;
@@ -1785,8 +1958,10 @@
       this.grLogin.Controls.Add(this.txtPassword);
       this.grLogin.Controls.Add(this.btnLogin);
       this.grLogin.Location = new System.Drawing.Point(0, 0);
+      this.grLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.grLogin.Name = "grLogin";
-      this.grLogin.Size = new System.Drawing.Size(180, 152);
+      this.grLogin.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.grLogin.Size = new System.Drawing.Size(240, 234);
       this.grLogin.TabIndex = 49;
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
@@ -1794,25 +1969,28 @@
       // lblSRS
       // 
       this.lblSRS.AutoSize = true;
-      this.lblSRS.Location = new System.Drawing.Point(5, 90);
+      this.lblSRS.Location = new System.Drawing.Point(7, 138);
+      this.lblSRS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblSRS.Name = "lblSRS";
-      this.lblSRS.Size = new System.Drawing.Size(29, 13);
+      this.lblSRS.Size = new System.Drawing.Size(34, 20);
       this.lblSRS.TabIndex = 47;
       this.lblSRS.Text = "SRS";
       // 
       // txtSrs
       // 
-      this.txtSrs.Location = new System.Drawing.Point(65, 90);
+      this.txtSrs.Location = new System.Drawing.Point(87, 138);
+      this.txtSrs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtSrs.Name = "txtSrs";
-      this.txtSrs.Size = new System.Drawing.Size(110, 20);
+      this.txtSrs.Size = new System.Drawing.Size(145, 27);
       this.txtSrs.TabIndex = 48;
       this.txtSrs.Text = "EPSG:28992";
       // 
       // btnSave
       // 
-      this.btnSave.Location = new System.Drawing.Point(125, 114);
+      this.btnSave.Location = new System.Drawing.Point(167, 175);
+      this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnSave.Name = "btnSave";
-      this.btnSave.Size = new System.Drawing.Size(50, 30);
+      this.btnSave.Size = new System.Drawing.Size(67, 46);
       this.btnSave.TabIndex = 9;
       this.btnSave.Text = "Save";
       this.btnSave.UseVisualStyleBackColor = true;
@@ -1820,9 +1998,10 @@
       // 
       // btnLogout
       // 
-      this.btnLogout.Location = new System.Drawing.Point(65, 114);
+      this.btnLogout.Location = new System.Drawing.Point(87, 175);
+      this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnLogout.Name = "btnLogout";
-      this.btnLogout.Size = new System.Drawing.Size(50, 30);
+      this.btnLogout.Size = new System.Drawing.Size(67, 46);
       this.btnLogout.TabIndex = 8;
       this.btnLogout.Text = "Logout";
       this.btnLogout.UseVisualStyleBackColor = true;
@@ -1831,60 +2010,67 @@
       // lblAPIKey
       // 
       this.lblAPIKey.AutoSize = true;
-      this.lblAPIKey.Location = new System.Drawing.Point(5, 65);
+      this.lblAPIKey.Location = new System.Drawing.Point(7, 100);
+      this.lblAPIKey.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblAPIKey.Name = "lblAPIKey";
-      this.lblAPIKey.Size = new System.Drawing.Size(45, 13);
+      this.lblAPIKey.Size = new System.Drawing.Size(59, 20);
       this.lblAPIKey.TabIndex = 6;
       this.lblAPIKey.Text = "API Key";
       // 
       // txtAPIKey
       // 
-      this.txtAPIKey.Location = new System.Drawing.Point(65, 65);
+      this.txtAPIKey.Location = new System.Drawing.Point(87, 100);
+      this.txtAPIKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtAPIKey.Name = "txtAPIKey";
-      this.txtAPIKey.Size = new System.Drawing.Size(110, 20);
+      this.txtAPIKey.Size = new System.Drawing.Size(145, 27);
       this.txtAPIKey.TabIndex = 7;
       this.txtAPIKey.TextChanged += new System.EventHandler(this.txtAPIKey_TextChanged);
       // 
       // lblUsername
       // 
       this.lblUsername.AutoSize = true;
-      this.lblUsername.Location = new System.Drawing.Point(5, 15);
+      this.lblUsername.Location = new System.Drawing.Point(7, 23);
+      this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblUsername.Name = "lblUsername";
-      this.lblUsername.Size = new System.Drawing.Size(55, 13);
+      this.lblUsername.Size = new System.Drawing.Size(75, 20);
       this.lblUsername.TabIndex = 1;
       this.lblUsername.Text = "Username";
       // 
       // lblPassword
       // 
       this.lblPassword.AutoSize = true;
-      this.lblPassword.Location = new System.Drawing.Point(5, 40);
+      this.lblPassword.Location = new System.Drawing.Point(7, 62);
+      this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblPassword.Name = "lblPassword";
-      this.lblPassword.Size = new System.Drawing.Size(53, 13);
+      this.lblPassword.Size = new System.Drawing.Size(70, 20);
       this.lblPassword.TabIndex = 2;
       this.lblPassword.Text = "Password";
       // 
       // txtUsername
       // 
-      this.txtUsername.Location = new System.Drawing.Point(65, 15);
+      this.txtUsername.Location = new System.Drawing.Point(87, 23);
+      this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtUsername.Name = "txtUsername";
-      this.txtUsername.Size = new System.Drawing.Size(110, 20);
+      this.txtUsername.Size = new System.Drawing.Size(145, 27);
       this.txtUsername.TabIndex = 3;
       this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
       // 
       // txtPassword
       // 
-      this.txtPassword.Location = new System.Drawing.Point(65, 40);
+      this.txtPassword.Location = new System.Drawing.Point(87, 62);
+      this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtPassword.Name = "txtPassword";
       this.txtPassword.PasswordChar = '*';
-      this.txtPassword.Size = new System.Drawing.Size(110, 20);
+      this.txtPassword.Size = new System.Drawing.Size(145, 27);
       this.txtPassword.TabIndex = 4;
       this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
       // 
       // btnLogin
       // 
-      this.btnLogin.Location = new System.Drawing.Point(5, 114);
+      this.btnLogin.Location = new System.Drawing.Point(7, 175);
+      this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.btnLogin.Name = "btnLogin";
-      this.btnLogin.Size = new System.Drawing.Size(50, 30);
+      this.btnLogin.Size = new System.Drawing.Size(67, 46);
       this.btnLogin.TabIndex = 5;
       this.btnLogin.Text = "Login";
       this.btnLogin.UseVisualStyleBackColor = true;
@@ -1893,12 +2079,13 @@
       // 
       // Demo
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1549, 701);
+      this.ClientSize = new System.Drawing.Size(1924, 1055);
       this.Controls.Add(this.plControl);
       this.Controls.Add(this.plStreetSmart);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.Name = "Demo";
       this.Text = "Demo StreetSmart";
       this.grOpenByQuery.ResumeLayout(false);
