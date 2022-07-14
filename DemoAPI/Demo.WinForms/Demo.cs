@@ -61,7 +61,7 @@ namespace Demo.WinForms
 
     private IPanoramaViewer PanoramaViewer
     {
-      get => _panoramaViewer ?? (_panoramaViewers.Count == 0 ? null : _panoramaViewers[_panoramaViewers.Count - 1]);
+      get => _panoramaViewer = _panoramaViewers.Count == 0 ? null : _panoramaViewers[^1];
       set => _panoramaViewer = value;
     }
 
@@ -862,8 +862,11 @@ namespace Demo.WinForms
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await PanoramaViewer.GetRecordingsVisible();
-      PanoramaViewer.ToggleRecordingsVisible(!visible);
+      if (PanoramaViewer != null)
+      {
+        bool visible = await PanoramaViewer.GetRecordingsVisible();
+        PanoramaViewer.ToggleRecordingsVisible(!visible);
+      }
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)

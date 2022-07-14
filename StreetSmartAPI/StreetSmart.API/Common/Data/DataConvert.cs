@@ -18,7 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
+using System.Linq;
 
 namespace StreetSmart.Common.Data
 {
@@ -128,7 +130,22 @@ namespace StreetSmart.Common.Data
 
     public Dictionary<string, object> ToDictionary(object value)
     {
-      return value as Dictionary<string, object> ?? new Dictionary<string, object>();
+      Dictionary<string, object> result;
+
+      if (value is Dictionary<string, object> objects)
+      {
+        result = objects;
+      }
+      else if (value is ExpandoObject expandoObject)
+      {
+        result = expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
+      }
+      else
+      {
+        result = new Dictionary<string, object>();
+      }
+
+      return result;
     }
 
     public IList<object> ToList(object value)
