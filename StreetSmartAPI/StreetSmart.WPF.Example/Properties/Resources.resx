@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApiKey" xml:space="preserve">
-    <value>test</value>
+    <value />
   </data>
   <data name="Password" xml:space="preserve">
-    <value>MJUygv01</value>
+    <value />
   </data>
   <data name="Username" xml:space="preserve">
-    <value>hbr</value>
+    <value />
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
     <value>http://localinstallation.cyclomedia.com/streetsmart/v18.1/api/api-dotnet.html</value>
