@@ -56,7 +56,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var feature in features)
       {
-        Features.Add(new Feature(feature as Dictionary<string, object>, measurementProperties));
+        Features.Add(new Feature(feature, measurementProperties));
       }
     }
 
