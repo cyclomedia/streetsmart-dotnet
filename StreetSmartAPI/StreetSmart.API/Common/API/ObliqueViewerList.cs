@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Dynamic;
 using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
@@ -60,7 +60,7 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnSwitchViewingDirection(string name, Dictionary<string, object> args)
+    public void OnSwitchViewingDirection(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -68,7 +68,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnFeatureClick(string name, Dictionary<string, object> args)
+    public void OnFeatureClick(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -76,7 +76,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnFeatureSelectionChange(string name, Dictionary<string, object> args)
+    public void OnFeatureSelectionChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -84,7 +84,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnImageChange(string name, Dictionary<string, object> args)
+    public void OnImageChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -92,7 +92,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnViewChange(string name, Dictionary<string, object> args)
+    public void OnViewChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -100,7 +100,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnViewLoadEnd(string name, Dictionary<string, object> args)
+    public void OnViewLoadEnd(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -108,7 +108,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnTimeTravelChange(string name, Dictionary<string, object> args)
+    public void OnTimeTravelChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {

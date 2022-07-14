@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 
 using CefSharp;
@@ -106,42 +107,42 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnSwitchViewingDirection(Dictionary<string, object> args)
+    public void OnSwitchViewingDirection(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SwitchViewingDir?.Invoke(this, new EventArgs<IDirectionInfo>(new DirectionInfo(detail)));
     }
 
-    public void OnFeatureClick(Dictionary<string, object> args)
+    public void OnFeatureClick(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnFeatureSelectionChange(Dictionary<string, object> args)
+    public void OnFeatureSelectionChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnImageChange(Dictionary<string, object> args)
+    public void OnImageChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ImageChange?.Invoke(this, new EventArgs<ObliqueImageInfo>(new ObliqueImageInfo(detail)));
     }
 
-    public void OnViewChange(Dictionary<string, object> args)
+    public void OnViewChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<ObliqueOrientation>(new ObliqueOrientation(detail)));
     }
 
-    public void OnViewLoadEnd(Dictionary<string, object> args)
+    public void OnViewLoadEnd(ExpandoObject args)
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnTimeTravelChange(Dictionary<string, object> args)
+    public void OnTimeTravelChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));

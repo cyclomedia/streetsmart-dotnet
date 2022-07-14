@@ -155,7 +155,7 @@ namespace StreetSmart.Common.Data
 
     public object[] ToArray(object value)
     {
-      return value as object[] ?? new object[0];
+      return value as object[] ?? Array.Empty<object>();
     }
 
     public object[] GetArrayValue(Dictionary<string, object> details, string value)
@@ -163,9 +163,19 @@ namespace StreetSmart.Common.Data
       return ToArray(GetValue(details, value));
     }
 
+    public object GetValue(ExpandoObject details, string value)
+    {
+      return GetValue(ToDictionary(details), value);
+    }
+
     public object GetValue(Dictionary<string, object> details, string value)
     {
       return details?.ContainsKey(value) ?? false ? details[value] : null;
+    }
+
+    public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
+    {
+      return ToDictionary(GetValue(details, value));
     }
 
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)

@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 
 using StreetSmart.Common.API.Events;
@@ -147,7 +148,7 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-    public void OnLayerVisibilityChange(Dictionary<string, object> args)
+    public void OnLayerVisibilityChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));

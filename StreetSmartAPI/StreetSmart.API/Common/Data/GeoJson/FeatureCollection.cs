@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 using StreetSmart.Common.Interfaces.GeoJson;
@@ -26,7 +27,17 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class FeatureCollection: DataConvert, IFeatureCollection
   {
+    public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
+    {
+      GetFeatures(ToDictionary(featureCollection), measurementProperties);
+    }
+
     public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
+    {
+      GetFeatures(featureCollection, measurementProperties);
+    }
+
+    private void GetFeatures(Dictionary<string, object> featureCollection, bool measurementProperties)
     {
       var features = GetListValue(featureCollection, "features");
       var crs = GetDictValue(featureCollection, "crs");
@@ -36,7 +47,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (FeatureType) ToEnum(typeof(FeatureType), featureCollection, "type");
+        Type = (FeatureType)ToEnum(typeof(FeatureType), featureCollection, "type");
       }
       catch (ArgumentException)
       {
@@ -76,12 +87,12 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
-    public FeatureType Type { get; }
+    public FeatureType Type { get; private set; }
 
-    public IList<IFeature> Features { get; }
+    public IList<IFeature> Features { get; private set; }
 
     // ReSharper disable once InconsistentNaming
-    public ICRS CRS { get; }
+    public ICRS CRS { get; private set; }
 
     public override string ToString()
     {

@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -380,7 +381,7 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnMeasurementChanged(Dictionary<string, object> args)
+    public void OnMeasurementChanged(ExpandoObject args)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }

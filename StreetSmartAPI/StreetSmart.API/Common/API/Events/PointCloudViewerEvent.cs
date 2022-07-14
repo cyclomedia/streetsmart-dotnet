@@ -20,7 +20,7 @@ namespace StreetSmart.Common.API.Events
 {
   internal class PointCloudViewerEvent: ViewerEvent
   {
-    protected override string Events => "Events.pointcloudViewer";
+    protected override string Events => "Events.pointCloudViewer";
 
     public PointCloudViewerEvent(Viewer viewer, string type, string funcName)
       : base(viewer, type, funcName)

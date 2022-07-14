@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -268,18 +269,18 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnElevationChange(Dictionary<string, object> args)
+    public void OnElevationChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ElevationChange?.Invoke(this, new EventArgs<ElevationInfo>(new ElevationInfo(detail)));
     }
 
-    public void OnImageChange(Dictionary<string, object> args)
+    public void OnImageChange(ExpandoObject args)
     {
       ImageChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnRecordingClick(Dictionary<string, object> args)
+    public void OnRecordingClick(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       Dictionary<string, object> recording = GetDictValue(detail, "recording");
@@ -287,43 +288,43 @@ namespace StreetSmart.Common.API
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
-    public void OnFeatureClick(Dictionary<string, object> args)
+    public void OnFeatureClick(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnTileLoadError(Dictionary<string, object> args)
+    public void OnTileLoadError(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>
         (GetDictValue(detail, "request")));
     }
 
-    public void OnViewChange(Dictionary<string, object> args)
+    public void OnViewChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
-    public void OnSurfaceCursorChange(Dictionary<string, object> args)
+    public void OnSurfaceCursorChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SurfaceCursorChange?.Invoke(this, new EventArgs<IDepthInfo>(new DepthInfo(detail)));
     }
 
-    public void OnViewLoadEnd(Dictionary<string, object> args)
+    public void OnViewLoadEnd(ExpandoObject args)
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnTimeTravelChange(Dictionary<string, object> args)
+    public void OnTimeTravelChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 
-    public void OnFeatureSelectionChange(Dictionary<string, object> args)
+    public void OnFeatureSelectionChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));

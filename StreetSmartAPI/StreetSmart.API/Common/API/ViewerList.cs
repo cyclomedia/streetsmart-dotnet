@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -173,7 +174,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
+    public void OnLayerVisibilityChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
