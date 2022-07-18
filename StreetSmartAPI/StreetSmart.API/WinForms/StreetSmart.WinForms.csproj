@@ -35,6 +35,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>StreetSmart.WinForms.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	 <Version>$(VersionPrefix)</Version>
+	 <Authors>$(Authors)</Authors>
+	 <Company>$(Company)</Company>
+	 <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
+	 <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>

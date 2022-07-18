@@ -29,6 +29,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>$(VersionPrefix)</Version>
+    <Authors>$(Authors)</Authors>
+    <Company>$(Company)</Company>
+    <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
