@@ -123,13 +123,13 @@ namespace Demo.WinForms
       _addressLayerOverlayVisible = true;
       txtOverlayColor.BackColor = Color.Blue;
 
-      IAPISettings apiSettings = CefSettingsFactory.Create();
+      // IAPISettings apiSettings = CefSettingsFactory.Create();
       //      IAPISettings apiSettings = CefSettingsFactory.Create(
       //        @"D:\StreetSmartFiles\Cache",
       //        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
       //        @"D:\StreetSmartFiles\Locales",
       //        @"D:\StreetSmartFiles\Resources");
-      //    IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
+      IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartAPI\Cache");
       apiSettings.DisableGPUCache = true;
       apiSettings.AllowInsecureContent = true;
 
@@ -549,7 +549,7 @@ namespace Demo.WinForms
       IDomElement element = DomElementFactory.Create();
 
       _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
-        ConfigurationUrl, addressSettings, element, false);
+        ConfigurationUrl, addressSettings, element, true);
 
       try
       {

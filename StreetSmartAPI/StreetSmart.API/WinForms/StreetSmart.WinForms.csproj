@@ -41,6 +41,7 @@
 	 <Company>$(Company)</Company>
 	 <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
 	 <FileVersion>$(AssemblyVersion)</FileVersion>
+	 <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
