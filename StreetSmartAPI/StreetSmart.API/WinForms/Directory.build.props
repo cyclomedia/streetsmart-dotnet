@@ -2,9 +2,9 @@
 <Project>
 	<PropertyGroup>
 		<AssemblyName>StreetSmart.WinForms</AssemblyName>
-		<VersionPrefix>22.11.0</VersionPrefix>
+		<VersionPrefix>22.12.0</VersionPrefix>
 		<Authors>Cyclomedia</Authors>
 		<Company>Cyclomedia</Company>
-		<AssemblyVersion>22.11.0</AssemblyVersion>
+		<AssemblyVersion>22.12.0</AssemblyVersion>
 	</PropertyGroup>
 </Project>

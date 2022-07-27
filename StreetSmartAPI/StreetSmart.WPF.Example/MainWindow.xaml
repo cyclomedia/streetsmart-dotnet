@@ -31,7 +31,7 @@
   </Window.DataContext>
   <StackPanel>
     <streetSmart:StreetSmartGUI Height="350"
-      Api="{Binding Api, Mode=OneWay}" />
+      WpfApi="{Binding WpfApi, Mode=OneWay}" />
     <StackPanel>
       <Grid>
         <Grid.ColumnDefinitions>

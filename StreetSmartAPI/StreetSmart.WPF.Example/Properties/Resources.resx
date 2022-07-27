@@ -127,9 +127,11 @@
     <value />
   </data>
   <data name="StreetSmartLocation" xml:space="preserve">
-    <value>http://localinstallation.cyclomedia.com/streetsmart/v18.1/api/api-dotnet.html</value>
+    <value>https://streetsmart.cyclomedia.com/api/v22.1/api-dotnet.html</value>
+    <comment>http://localinstallation.cyclomedia.com/streetsmart/v18.1/api/api-dotnet.html</comment>
   </data>
   <data name="ConfigurationUrl" xml:space="preserve">
-    <value>http://localinstallation.cyclomedia.com:8080/configuration</value>
+    <value />
+    <comment>http://localinstallation.cyclomedia.com:8080/configuration</comment>
   </data>
 </root>

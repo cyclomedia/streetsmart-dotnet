@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 using StreetSmart.WPF.Example.Properties;
@@ -50,6 +51,8 @@ namespace StreetSmart.WPF.Example
     private string _password;
 
     public IStreetSmartAPI Api { get; set; }
+
+    public WpfApi WpfApi { get; set; }
 
     public string RestartUrl
     {
@@ -105,8 +108,20 @@ namespace StreetSmart.WPF.Example
       Username = Resources.Username;
       Password = Resources.Password;
       ConfigurationUrl = "https://atlas.cyclomedia.com/configuration";
-      Api = StreetSmartAPIFactory.Create();
-      Api.APIReady += ApiReady;
+      WpfApi = new WpfApi();
+      WpfApi.PropertyChanged += onPropertyChanged;
+    }
+
+    private void onPropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+      if (args != null)
+      {
+        if (args.PropertyName == "Api")
+        {
+          Api = WpfApi.Api;
+          Api.APIReady += ApiReady;
+        }
+      }
     }
 
     #endregion

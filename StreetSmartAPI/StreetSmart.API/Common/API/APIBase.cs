@@ -154,7 +154,20 @@ namespace StreetSmart.Common.API
     protected void RegisterThisJsObject()
     {
       Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+
+      #if WINFORMS
       Browser.JavascriptObjectRepository.Register(JsThis, this);
+      #else
+      Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
+      {
+        var repo = e.ObjectRepository;
+
+        if (e.ObjectName == "Legacy")
+        {
+          repo.Register(JsThis, this);
+        }
+      };
+      #endif
     }
 
     protected bool CheckResultTask(string funcName)

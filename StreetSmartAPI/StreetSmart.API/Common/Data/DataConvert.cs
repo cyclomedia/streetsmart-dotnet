@@ -155,7 +155,12 @@ namespace StreetSmart.Common.Data
 
     public object[] ToArray(object value)
     {
-      return value as object[] ?? Array.Empty<object>();
+      if (value is IList<object>)
+      {
+        return (value as List<object>)?.ToArray() ?? Array.Empty<object>();
+      }
+
+      return Array.Empty<object>();
     }
 
     public object[] GetArrayValue(Dictionary<string, object> details, string value)

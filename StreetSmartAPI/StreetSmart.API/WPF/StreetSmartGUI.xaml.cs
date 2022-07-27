@@ -19,7 +19,8 @@
 using System.Windows;
 
 using StreetSmart.Common.API;
-using StreetSmart.Common.Interfaces.API;
+using StreetSmart.Common.Factories;
+using StreetSmart.WPF;
 
 namespace StreetSmart.Wpf
 {
@@ -30,11 +31,13 @@ namespace StreetSmart.Wpf
   {
     #region dependency property API
 
+    private readonly StreetSmartAPI _api;
+
     /// <summary>
     /// Dependency property of the api
     /// </summary>
     public static readonly DependencyProperty ApiProperty =
-      DependencyProperty.Register("Api", typeof(IStreetSmartAPI), typeof(StreetSmartGUI),
+      DependencyProperty.Register("WpfApi", typeof(WpfApi), typeof(StreetSmartGUI),
         new PropertyMetadata(null, OnApiChanged));
 
     /// <summary>
@@ -44,7 +47,7 @@ namespace StreetSmart.Wpf
     {
       if (e.NewValue != null)
       {
-        ((StreetSmartGUI) sender).InitApi((StreetSmartAPI) e.NewValue);
+        ((StreetSmartGUI) sender).InitApi((WpfApi) e.NewValue);
       }
     }
 
@@ -55,9 +58,9 @@ namespace StreetSmart.Wpf
     /// <summary>
     /// The StreetSmart API
     /// </summary>
-    public IStreetSmartAPI Api
+    public WpfApi WpfApi
     {
-      get => (IStreetSmartAPI) GetValue(ApiProperty);
+      get => (WpfApi) GetValue(ApiProperty);
       set => SetValue(ApiProperty, value);
     }
 
@@ -71,15 +74,18 @@ namespace StreetSmart.Wpf
     public StreetSmartGUI()
     {
       InitializeComponent();
+
+      _api = StreetSmartAPIFactory.Create() as StreetSmartAPI;
+      _api?.InitBrowser(Browser);
     }
 
     #endregion
 
     #region private function - init the API
 
-    private void InitApi(StreetSmartAPI api)
+    private void InitApi(WpfApi api)
     {
-      api.InitBrowser(Browser);
+      api.Api = _api;
     }
 
     #endregion
