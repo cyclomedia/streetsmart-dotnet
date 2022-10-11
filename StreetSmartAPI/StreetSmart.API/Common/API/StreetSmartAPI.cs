@@ -69,6 +69,10 @@ namespace StreetSmart.Common.API
 
     public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
@@ -105,6 +109,10 @@ namespace StreetSmart.Common.API
 
     public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
 
+    public string JsOnMeasurementStarted => $"{nameof(OnMeasurementStarted).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementStopped => $"{nameof(OnMeasurementStopped).FirstCharacterToLower()}";
+
     public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
 
     public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
@@ -134,6 +142,14 @@ namespace StreetSmart.Common.API
       Browser.Address = _streetSmartLocation;
       RegisterBrowser();
     }
+/*
+    public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
+
+    public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
+    {
+      Browser.CreateBrowser(parentWindowHwndSource, initialSize);
+    }
+*/
     #endif
 
     ~StreetSmartAPI()
@@ -381,9 +397,19 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnMeasurementChanged(ExpandoObject args)
+    public void OnMeasurementChanged(ExpandoObject args, string viewerId)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
+    public void OnMeasurementStarted(ExpandoObject args, string viewerId)
+    {
+      MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
+    public void OnMeasurementStopped(ExpandoObject args, string viewerId)
+    {
+      MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
     public void OnViewerAdded(string id, string type, string name)
@@ -476,7 +502,9 @@ namespace StreetSmart.Common.API
       {
         _apiMeasurementEventList = new ApiEventList
         {
-          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged),
+          new MeasurementEvent(this, "MEASUREMENT_STARTED", JsOnMeasurementStarted),
+          new MeasurementEvent(this, "MEASUREMENT_STOPPED", JsOnMeasurementStopped)
         };
 
         Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");

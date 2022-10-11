@@ -70,6 +70,16 @@ namespace StreetSmart.Common.Interfaces.API
     event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
     /// <summary>
+    /// Measurement started
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+
+    /// <summary>
+    /// Measurement stopped.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+
+    /// <summary>
     /// Viewer is added (panoramic or oblique)
     /// </summary>
     event EventHandler<IEventArgs<IViewer>> ViewerAdded;
@@ -119,6 +129,19 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="streetSmartLocation">The location of Street Smart</param>
     void RestartStreetSmart(string streetSmartLocation);
+/*
+    /// <summary>
+    /// Returns true if the browser object is disposed
+    /// </summary>
+    bool BrowserIsDisposed { get; }
+
+    /// <summary>
+    /// Create a new webbrowser
+    /// </summary>
+    /// <param name="parentWindowHwndSource"><reference to the window/param>
+    /// <param name="initialSize">initial size</param>
+    void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
+*/
     #endif
 
     /// <summary>

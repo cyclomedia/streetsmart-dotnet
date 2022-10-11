@@ -138,6 +138,8 @@ namespace Demo.WinForms
         : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings, true);
       _api.APIReady += OnAPIReady;
       _api.MeasurementChanged += OnMeasurementChanged;
+      _api.MeasurementStarted += OnMeasurementStarted;
+      _api.MeasurementStopped += OnMeasurementStopped;
       _api.ViewerAdded += OnViewerAdded;
       _api.ViewerRemoved += OnViewerRemoved;
       plStreetSmart.Controls.Add(_api.GUI);
@@ -233,6 +235,18 @@ namespace Demo.WinForms
     private void OnMeasurementChanged(object sender, IEventArgs<IFeatureCollection> args)
     {
       string text = "Measurement changed";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementStarted(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement started";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementStopped(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement stopped";
       AddViewerEventsText(text);
     }
 

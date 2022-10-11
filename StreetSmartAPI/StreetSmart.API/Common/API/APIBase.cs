@@ -210,7 +210,7 @@ namespace StreetSmart.Common.API
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
       object funcResult = null;
-      IBrowser myBrowser = Browser?.GetBrowser();
+      IBrowser myBrowser = !(Browser?.IsDisposed ?? true) ? Browser?.GetBrowser() : null;
 
       if (myBrowser != null)
       {
