@@ -71,6 +71,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 8
+    ToggleNadir = 8,
+
+    /// <summary>
+    /// save measurement button
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.SAVE_MEASUREMENT")]
+    SaveMeasurement = 9
   }
 }

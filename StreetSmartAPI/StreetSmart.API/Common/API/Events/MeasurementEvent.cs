@@ -28,7 +28,7 @@ namespace StreetSmart.Common.API.Events
     public override string ToString()
     {
       return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{JsThis}.{FuncName}(e.detail.activeMeasurement,e.detail.panoramaViewer.getId());}});";
+             {{{JsThis}.{FuncName}(e.detail.activeMeasurement,e.detail.panoramaViewer?.getId());}});";
     }
   }
 }

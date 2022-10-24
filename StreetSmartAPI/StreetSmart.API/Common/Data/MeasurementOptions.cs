@@ -32,6 +32,7 @@ namespace StreetSmart.Common.Data
   {
     private MeasurementGeometryType? _geometryType;
     private MeasureMethods? _measureMethods;
+    private bool? _showSaveMeasurementButton;
 
     public MeasurementOptions()
     {
@@ -39,10 +40,11 @@ namespace StreetSmart.Common.Data
       _measureMethods = null;
     }
 
-    public MeasurementOptions(MeasurementGeometryType? geometryType, MeasureMethods? measureMethods)
+    public MeasurementOptions(MeasurementGeometryType? geometryType, MeasureMethods? measureMethods, bool? showSaveMeasurementButton)
     {
       _geometryType = geometryType;
       _measureMethods = measureMethods;
+      _showSaveMeasurementButton = showSaveMeasurementButton;
     }
 
     public MeasurementGeometryType? GeometryType
@@ -65,15 +67,29 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public bool? ShowSaveMeasurementButton
+    {
+      get => _showSaveMeasurementButton;
+      set
+      {
+        _showSaveMeasurementButton = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
       string result = string.Empty;
 
-      if (GeometryType != null || MeasureMethods != null)
+      if (GeometryType != null || MeasureMethods != null || ShowSaveMeasurementButton != null)
       {
         string geometryPart = string.Empty;
         string measureMethodPart = string.Empty;
+        string showSaveMeasurementButtonPart = string.Empty;
         string midPart = GeometryType != null && MeasureMethods != null ? "," : string.Empty;
+        string mid2Part = (GeometryType != null || MeasureMethods != null) && ShowSaveMeasurementButton != null
+          ? ","
+          : string.Empty;
 
         if (GeometryType != null)
         {
@@ -85,7 +101,12 @@ namespace StreetSmart.Common.Data
           measureMethodPart = $"measureMethod:{Resources.JsApi}.{((MeasureMethods) MeasureMethods).Description()}";
         }
 
-        result = $",{{{geometryPart}{midPart}{measureMethodPart}}}";
+        if (ShowSaveMeasurementButton != null)
+        {
+          showSaveMeasurementButtonPart = $"showSaveMeasurementButton:{((bool)ShowSaveMeasurementButton).ToJsBool()}";
+        }
+
+        result = $",{{{geometryPart}{midPart}{measureMethodPart}{mid2Part}{showSaveMeasurementButtonPart}}}";
       }
 
       return result;

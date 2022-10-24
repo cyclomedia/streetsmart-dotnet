@@ -80,6 +80,11 @@ namespace StreetSmart.Common.Interfaces.API
     event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
 
     /// <summary>
+    /// Measurement saved.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
+
+    /// <summary>
     /// Viewer is added (panoramic or oblique)
     /// </summary>
     event EventHandler<IEventArgs<IViewer>> ViewerAdded;

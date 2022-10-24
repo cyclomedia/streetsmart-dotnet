@@ -67,7 +67,7 @@ namespace Demo.WinForms
 
     private IObliqueViewer ObliqueViewer
     {
-      get => _obliqueViewers.Count == 0 ? null : _obliqueViewers [_obliqueViewers.Count - 1];
+      get => _obliqueViewers.Count == 0 ? null : _obliqueViewers [^1];
       set
       {
         if (_obliqueViewers.Count == 0)
@@ -76,14 +76,14 @@ namespace Demo.WinForms
         }
         else
         {
-          _obliqueViewers[_obliqueViewers.Count - 1] = value;
+          _obliqueViewers[^1] = value;
         }
       }
     }
 
     private IPointCloudViewer PointCloudViewer
     {
-      get => _pointCloudViewers.Count == 0 ? null : _pointCloudViewers[_pointCloudViewers.Count - 1];
+      get => _pointCloudViewers.Count == 0 ? null : _pointCloudViewers[^1];
       set
       {
         if (_pointCloudViewers.Count == 0)
@@ -92,7 +92,7 @@ namespace Demo.WinForms
         }
         else
         {
-          _pointCloudViewers[_pointCloudViewers.Count - 1] = value;
+          _pointCloudViewers[^1] = value;
         }
       }
     }
@@ -140,6 +140,7 @@ namespace Demo.WinForms
       _api.MeasurementChanged += OnMeasurementChanged;
       _api.MeasurementStarted += OnMeasurementStarted;
       _api.MeasurementStopped += OnMeasurementStopped;
+      _api.MeasurementSaved += OnMeasurementSaved;
       _api.ViewerAdded += OnViewerAdded;
       _api.ViewerRemoved += OnViewerRemoved;
       plStreetSmart.Controls.Add(_api.GUI);
@@ -157,6 +158,7 @@ namespace Demo.WinForms
         ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
         ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
         ObliqueViewerButtons.ToggleNadir, ObliqueViewerButtons.Measure,
+        ObliqueViewerButtons.SaveMeasurement
       };
 
       foreach (var obButton in obButtons)
@@ -169,7 +171,7 @@ namespace Demo.WinForms
         PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
         PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
         PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections,
-        PointCloudViewerButtons.ToggleAerialStreet,
+        PointCloudViewerButtons.ToggleAerialStreet, PointCloudViewerButtons.SaveMeasurement
       };
 
       foreach (var pcButton in pcButtons)
@@ -183,7 +185,8 @@ namespace Demo.WinForms
         PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
         PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
         PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow
+        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow,
+        PanoramaViewerButtons.SaveMeasurement
       };
 
       foreach (var pnButton in pnButtons)
@@ -247,6 +250,12 @@ namespace Demo.WinForms
     private void OnMeasurementStopped(object sender, IEventArgs<IFeatureCollection> args)
     {
       string text = "Measurement stopped";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementSaved(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement saved";
       AddViewerEventsText(text);
     }
 
@@ -1196,7 +1205,7 @@ namespace Demo.WinForms
       }
       else
       {
-        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type, (MeasureMethods) method);
+        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type, (MeasureMethods) method, true);
       }
 
       IViewer viewer = _viewer ?? PanoramaViewer;

@@ -73,6 +73,8 @@ namespace StreetSmart.Common.API
 
     public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
 
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
+
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
@@ -112,6 +114,8 @@ namespace StreetSmart.Common.API
     public string JsOnMeasurementStarted => $"{nameof(OnMeasurementStarted).FirstCharacterToLower()}";
 
     public string JsOnMeasurementStopped => $"{nameof(OnMeasurementStopped).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementSaved => $"{nameof(OnMeasurementSaved).FirstCharacterToLower()}";
 
     public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
 
@@ -412,6 +416,11 @@ namespace StreetSmart.Common.API
       MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
+    public void OnMeasurementSaved(ExpandoObject args, string viewerId)
+    {
+      MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
     public void OnViewerAdded(string id, string type, string name)
     {
       string jsName = $"type{Guid.NewGuid():N}";
@@ -504,7 +513,8 @@ namespace StreetSmart.Common.API
         {
           new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged),
           new MeasurementEvent(this, "MEASUREMENT_STARTED", JsOnMeasurementStarted),
-          new MeasurementEvent(this, "MEASUREMENT_STOPPED", JsOnMeasurementStopped)
+          new MeasurementEvent(this, "MEASUREMENT_STOPPED", JsOnMeasurementStopped),
+          new MeasurementEvent(this, "MEASUREMENT_SAVED", JsOnMeasurementSaved)
         };
 
         Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
