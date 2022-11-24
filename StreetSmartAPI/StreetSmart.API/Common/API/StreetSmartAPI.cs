@@ -366,6 +366,11 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
     }
 
+    public void SetSnapping(bool enabled)
+    {
+      Browser.ExecuteScriptAsync(GetScript($"setSnapping({enabled.ToJsBool()})"));
+    }
+
     public async Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options)
     {
       int processId = GetProcessId;

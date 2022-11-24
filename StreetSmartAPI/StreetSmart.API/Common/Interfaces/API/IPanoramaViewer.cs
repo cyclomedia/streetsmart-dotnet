@@ -213,14 +213,6 @@ namespace StreetSmart.Common.Interfaces.API
     void SetOrientation(IOrientation orientation);
 
     /// <summary>
-    /// Sets the selected feature using the given properties. The selected feature can only be selected
-    /// if the feature is in sight on the panorama viewer.
-    /// </summary>
-    /// <param name="properties">The properties by which the feature should be determined</param>
-    /// <param name="layerId">The layerId to which the feature is selected</param>
-    void SetSelectedFeatureByProperties(IJson properties, string layerId);
-
-    /// <summary>
     /// Toggles the visibility of the Attribute information panel, decided if it should be shown on clicking on a feature.
     /// </summary>
     void ShowAttributePanelOnFeatureClick();

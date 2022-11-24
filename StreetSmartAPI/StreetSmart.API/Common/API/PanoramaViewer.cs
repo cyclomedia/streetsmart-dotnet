@@ -210,11 +210,6 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
     }
 
-    public void SetSelectedFeatureByProperties(IJson properties, string layerId)
-    {
-      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
-    }
-
     public void ShowAttributePanelOnFeatureClick()
     {
       Browser.ExecuteScriptAsync($"{Name}.showAttributePanelOnFeatureClick();");

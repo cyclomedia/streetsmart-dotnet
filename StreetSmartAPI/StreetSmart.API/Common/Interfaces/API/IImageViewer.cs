@@ -68,6 +68,14 @@ namespace StreetSmart.Common.Interfaces.API
     void SetContrast(double value);
 
     /// <summary>
+    /// Sets the selected feature using the given properties. The selected feature can only be selected
+    /// if the feature is in sight on the viewer.
+    /// </summary>
+    /// <param name="properties">The properties by which the feature should be determined</param>
+    /// <param name="layerId">The layerId to which the feature is selected</param>
+    void SetSelectedFeatureByProperties(IJson properties, string layerId);
+
+    /// <summary>
     /// Toggles the visibility of the compass in the Panorama / Oblique Viewer.
     /// </summary>
     /// <param name="visible">Sets visibility to this value.</param>

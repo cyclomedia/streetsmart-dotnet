@@ -361,6 +361,12 @@ namespace StreetSmart.Common.Interfaces.API
     void SetOverlayDrawDistance(int distance);
 
     /// <summary>
+    /// Sets whether or not cursor movements will snap to nearby features while in measurement mode
+    /// </summary>
+    /// <param name="enabled">Whether or not to enable or disable snapping</param>
+    void SetSnapping(bool enabled);
+
+    /// <summary>
     /// Starts the measurement
     /// </summary>
     /// <param name="viewer">Panorama viewer for start the measurement inside</param>

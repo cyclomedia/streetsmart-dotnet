@@ -124,6 +124,11 @@ namespace StreetSmart.Common.API
       overlay.Visible = !overlay.Visible;
     }
 
+    public void SetSelectedFeatureByProperties(IJson properties, string layerId)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
+    }
+
     public void ToggleTimeTravelExpanded(bool expanded)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleTimeTravelExpanded({expanded.ToJsBool()});");
