@@ -38,6 +38,11 @@ namespace StreetSmart.Common.Interfaces.Data
     /// </summary>
     SecureString Password { get; set; }
 
+    /// <summary>
+    /// ClientId given to the user (for OAuth log in)
+    /// </summary>
+    string ClientId { get; set; }
+
     // ReSharper disable InconsistentNaming
 
     /// <summary>

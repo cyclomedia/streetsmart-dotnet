@@ -30,6 +30,7 @@ namespace StreetSmart.Common.Data
 
     private string _userName;
     private SecureString _password;
+    private string _clientId;
     private string _apiKey;
     private string _srs;
     private string _locale;
@@ -39,7 +40,7 @@ namespace StreetSmart.Common.Data
     private bool? _loginOauth;
 
     public Options(string userName, SecureString password, string apiKey, string srs, string locale,
-      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth)
+      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth, string clientId)
     {
       Username = userName;
       Password = password;
@@ -50,6 +51,7 @@ namespace StreetSmart.Common.Data
       AddressSettings = addressSettings;
       Element = element;
       LoginOauth = loginOauth;
+      ClientId = clientId;
     }
 
     // ReSharper restore InconsistentNaming
@@ -70,6 +72,16 @@ namespace StreetSmart.Common.Data
       set
       {
         _password = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public string ClientId
+    {
+      get => _clientId;
+      set
+      {
+        _clientId = value;
         RaisePropertyChanged();
       }
     }
@@ -151,7 +163,8 @@ namespace StreetSmart.Common.Data
       string locale = string.IsNullOrEmpty(Locale) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
       string userNamePassword = string.IsNullOrEmpty(Username) ? string.Empty : $",username:'{Username}',password:'{Password.ConvertToUnsecureString()}'";
-      string loginOauth = LoginOauth == null ? string.Empty : $",loginOauth:{((bool)LoginOauth).ToJsBool()}";
+      string clientId = string.IsNullOrEmpty(ClientId) ? string.Empty : $",clientId:'{ClientId}'";
+      string loginOauth = LoginOauth == null ? string.Empty : $",loginOauth:{((bool)LoginOauth).ToJsBool()}{clientId}";
       return $"{{targetElement:{_element.Name}{userNamePassword},apiKey:'{APIKey}'{loginOauth},srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }

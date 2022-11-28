@@ -47,12 +47,13 @@ namespace StreetSmart.Common.Factories
     /// <summary>
     /// Create the options object which used for initializing the API for use oAuth authorization
     /// </summary>
+    /// <param name="clientId">The clientId of the OAuth user.</param>
     /// <param name="apiKey">ApiKey given to the user.</param>
     /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
     /// <returns>Object containing the options used for initializing the API</returns>
-    public static IOptions CreateOauth(string apiKey, string srs, IDomElement element)
-      => CreateOauth(apiKey, srs, null, element);
+    public static IOptions CreateOauth(string clientId, string apiKey, string srs, IDomElement element)
+      => CreateOauth(clientId, apiKey, srs, null, element);
 
     /// <summary>
     /// Create the options object which used for initializing the API
@@ -66,18 +67,22 @@ namespace StreetSmart.Common.Factories
     /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs,
       IAddressSettings addressSettings, IDomElement element)
-      => Create(userName, password, apiKey, srs, string.Empty, string.Empty, addressSettings, element, false);
+      => Create(userName, password, null, apiKey, srs, string.Empty, string.Empty,
+        addressSettings, element, false);
 
     /// <summary>
     /// Create the options object which used for initializing the API for use oAuth authorization
     /// </summary>
+    /// <param name="clientId">The clientId of the OAuth user.</param>
     /// <param name="apiKey">ApiKey given to the user.</param>
     /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
     /// <param name="addressSettings">The address settings to use for address searches.</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
     /// <returns>Object containing the options used for initializing the API</returns>
-    public static IOptions CreateOauth(string apiKey, string srs, IAddressSettings addressSettings, IDomElement element)
-      => Create(null, null, apiKey, srs, string.Empty, string.Empty, addressSettings, element, true);
+    public static IOptions CreateOauth(string clientId, string apiKey, string srs, IAddressSettings addressSettings,
+      IDomElement element)
+      => Create(null, null, clientId, apiKey, srs, string.Empty, string.Empty,
+        addressSettings, element, true);
 
     /// <summary>
     /// Create the options object which used for initializing the API
@@ -92,25 +97,30 @@ namespace StreetSmart.Common.Factories
     /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
       IAddressSettings addressSettings, IDomElement element)
-      => Create(userName, password, apiKey, srs, locale, string.Empty, addressSettings, element, false);
+      => Create(userName, password, null, apiKey, srs, locale, string.Empty,
+        addressSettings, element, false);
 
     /// <summary>
     /// Create the options object which used for initializing the API for use oAuth authorization
     /// </summary>
+    /// <param name="clientId">The clientId of the OAuth user.</param>
     /// <param name="apiKey">ApiKey given to the user.</param>
     /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
     /// <param name="locale">Language used as default in the API.</param>
     /// <param name="addressSettings">The address settings to use for address searches.</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
     /// <returns>Object containing the options used for initializing the API</returns>
-    public static IOptions CreateOauth(string apiKey, string srs, string locale, IAddressSettings addressSettings, IDomElement element)
-      => Create(null, null, apiKey, srs, locale, string.Empty, addressSettings, element, true);
+    public static IOptions CreateOauth(string clientId, string apiKey, string srs, string locale, IAddressSettings addressSettings,
+      IDomElement element)
+      => Create(null, null, clientId, apiKey, srs, locale, string.Empty, addressSettings, element,
+        true);
 
     /// <summary>
     /// Create the options object which used for initializing the API
     /// </summary>
     /// <param name="userName">Username of the user.</param>
     /// <param name="password">Password of the user.</param>
+    /// <param name="clientId">The clientId of the OAuth user.</param>
     /// <param name="apiKey">ApiKey given to the user.</param>
     /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
     /// <param name="locale">Language used as default in the API.</param>
@@ -120,7 +130,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="loginOauth">Indicates whether to log in via oauth</param>
     /// <returns>Object containing the options used for initializing the API</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static IOptions Create(string userName, string password, string apiKey, string srs, string locale,
+    public static IOptions Create(string userName, string password, string clientId, string apiKey, string srs, string locale,
       string configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth = null)
     {
       bool loginByOauth = loginOauth is true;
@@ -133,6 +143,11 @@ namespace StreetSmart.Common.Factories
       if (!loginByOauth && string.IsNullOrEmpty(password))
       {
         throw new ArgumentNullException(nameof(password));
+      }
+
+      if (loginByOauth && string.IsNullOrEmpty(clientId))
+      {
+        throw new ArgumentNullException(nameof(clientId));
       }
 
       if (string.IsNullOrEmpty(apiKey))
@@ -154,7 +169,7 @@ namespace StreetSmart.Common.Factories
 
       return new Options(userName, Password, apiKey, srs, locale,
         string.IsNullOrEmpty(configurationURL) ? null : new Uri(configurationURL), addressSettings, element,
-        loginOauth);
+        loginOauth, clientId);
     }
 
     // ReSharper restore InconsistentNaming

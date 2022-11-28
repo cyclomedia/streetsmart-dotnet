@@ -151,6 +151,7 @@ namespace Demo.WinForms
       txtUsername.Text = _login.Username;
       txtPassword.Text = _login.Password;
       txtAPIKey.Text = _login.ApiKey;
+      txtClientId.Text = _login.ClientId;
 
       ObliqueViewerButtons[] obButtons =
       {
@@ -571,7 +572,7 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMdatabase");
       IDomElement element = DomElementFactory.Create();
 
-      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
+      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtClientId.Text, txtAPIKey.Text, txtSrs.Text, locale,
         ConfigurationUrl, addressSettings, element, true);
 
       try
@@ -718,6 +719,11 @@ namespace Demo.WinForms
     private void txtAPIKey_TextChanged(object sender, EventArgs e)
     {
       _login.ApiKey = txtAPIKey.Text;
+    }
+
+    private void txtClientId_TextChanged(object sender, EventArgs e)
+    {
+      _login.ClientId = txtClientId.Text;
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -1689,7 +1695,7 @@ namespace Demo.WinForms
     {
     }
 
-    private async void btnCameraPosition_Click(object sender, EventArgs e)
+    private void btnCameraPosition_Click(object sender, EventArgs e)
     {
     }
 

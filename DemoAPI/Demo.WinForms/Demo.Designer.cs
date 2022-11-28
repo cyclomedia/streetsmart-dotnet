@@ -179,6 +179,8 @@
       this.txtAdress = new System.Windows.Forms.TextBox();
       this.btnOpenByAddress = new System.Windows.Forms.Button();
       this.grLogin = new System.Windows.Forms.GroupBox();
+      this.lblClientId = new System.Windows.Forms.Label();
+      this.txtClientId = new System.Windows.Forms.TextBox();
       this.lblSRS = new System.Windows.Forms.Label();
       this.txtSrs = new System.Windows.Forms.TextBox();
       this.btnSave = new System.Windows.Forms.Button();
@@ -1946,6 +1948,8 @@
       // 
       // grLogin
       // 
+      this.grLogin.Controls.Add(this.lblClientId);
+      this.grLogin.Controls.Add(this.txtClientId);
       this.grLogin.Controls.Add(this.lblSRS);
       this.grLogin.Controls.Add(this.txtSrs);
       this.grLogin.Controls.Add(this.btnSave);
@@ -1966,10 +1970,29 @@
       this.grLogin.TabStop = false;
       this.grLogin.Text = "Login";
       // 
+      // lblClientId
+      // 
+      this.lblClientId.AutoSize = true;
+      this.lblClientId.Location = new System.Drawing.Point(7, 105);
+      this.lblClientId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.lblClientId.Name = "lblClientId";
+      this.lblClientId.Size = new System.Drawing.Size(60, 20);
+      this.lblClientId.TabIndex = 50;
+      this.lblClientId.Text = "ClientId";
+      // 
+      // txtClientId
+      // 
+      this.txtClientId.Location = new System.Drawing.Point(87, 105);
+      this.txtClientId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+      this.txtClientId.Name = "txtClientId";
+      this.txtClientId.Size = new System.Drawing.Size(145, 27);
+      this.txtClientId.TabIndex = 49;
+      this.txtClientId.TextChanged += new System.EventHandler(this.txtClientId_TextChanged);
+      // 
       // lblSRS
       // 
       this.lblSRS.AutoSize = true;
-      this.lblSRS.Location = new System.Drawing.Point(7, 138);
+      this.lblSRS.Location = new System.Drawing.Point(7, 135);
       this.lblSRS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblSRS.Name = "lblSRS";
       this.lblSRS.Size = new System.Drawing.Size(34, 20);
@@ -1978,7 +2001,7 @@
       // 
       // txtSrs
       // 
-      this.txtSrs.Location = new System.Drawing.Point(87, 138);
+      this.txtSrs.Location = new System.Drawing.Point(87, 135);
       this.txtSrs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtSrs.Name = "txtSrs";
       this.txtSrs.Size = new System.Drawing.Size(145, 27);
@@ -2010,7 +2033,7 @@
       // lblAPIKey
       // 
       this.lblAPIKey.AutoSize = true;
-      this.lblAPIKey.Location = new System.Drawing.Point(7, 100);
+      this.lblAPIKey.Location = new System.Drawing.Point(7, 75);
       this.lblAPIKey.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblAPIKey.Name = "lblAPIKey";
       this.lblAPIKey.Size = new System.Drawing.Size(59, 20);
@@ -2019,7 +2042,7 @@
       // 
       // txtAPIKey
       // 
-      this.txtAPIKey.Location = new System.Drawing.Point(87, 100);
+      this.txtAPIKey.Location = new System.Drawing.Point(87, 75);
       this.txtAPIKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtAPIKey.Name = "txtAPIKey";
       this.txtAPIKey.Size = new System.Drawing.Size(145, 27);
@@ -2029,7 +2052,7 @@
       // lblUsername
       // 
       this.lblUsername.AutoSize = true;
-      this.lblUsername.Location = new System.Drawing.Point(7, 23);
+      this.lblUsername.Location = new System.Drawing.Point(7, 15);
       this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblUsername.Name = "lblUsername";
       this.lblUsername.Size = new System.Drawing.Size(75, 20);
@@ -2039,7 +2062,7 @@
       // lblPassword
       // 
       this.lblPassword.AutoSize = true;
-      this.lblPassword.Location = new System.Drawing.Point(7, 62);
+      this.lblPassword.Location = new System.Drawing.Point(7, 45);
       this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
       this.lblPassword.Name = "lblPassword";
       this.lblPassword.Size = new System.Drawing.Size(70, 20);
@@ -2048,7 +2071,7 @@
       // 
       // txtUsername
       // 
-      this.txtUsername.Location = new System.Drawing.Point(87, 23);
+      this.txtUsername.Location = new System.Drawing.Point(87, 15);
       this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtUsername.Name = "txtUsername";
       this.txtUsername.Size = new System.Drawing.Size(145, 27);
@@ -2057,7 +2080,7 @@
       // 
       // txtPassword
       // 
-      this.txtPassword.Location = new System.Drawing.Point(87, 62);
+      this.txtPassword.Location = new System.Drawing.Point(87, 45);
       this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
       this.txtPassword.Name = "txtPassword";
       this.txtPassword.PasswordChar = '*';
@@ -2296,6 +2319,8 @@
         private System.Windows.Forms.Button btnDisableShortCut;
         private System.Windows.Forms.Button btnEnableShortCut;
         private System.Windows.Forms.TextBox txtShortcutResult;
+        private System.Windows.Forms.Label lblClientId;
+        private System.Windows.Forms.TextBox txtClientId;
     }
 }
 

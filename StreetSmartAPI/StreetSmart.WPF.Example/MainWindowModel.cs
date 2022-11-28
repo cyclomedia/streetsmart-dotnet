@@ -134,7 +134,7 @@ namespace StreetSmart.WPF.Example
       IDomElement element = DomElementFactory.Create();
       _options = string.IsNullOrEmpty(ConfigurationUrl)
         ? OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, addressSettings, element)
-        : OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, ConfigurationUrl,
+        : OptionsFactory.Create(Username, Password, null, Resources.ApiKey, Srs, Language, ConfigurationUrl,
           addressSettings, element);
       await Api.Init(_options);
 
