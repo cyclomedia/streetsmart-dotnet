@@ -36,6 +36,8 @@
     <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
@@ -884,10 +886,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\LICENSE.md" Link="LICENSE.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\..\README.md" Link="README.md" />
+    <None Include="..\..\..\LICENSE.md" Link="LICENSE.md">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\README.md" Link="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.Common.NETCore" Version="107.1.90" />
