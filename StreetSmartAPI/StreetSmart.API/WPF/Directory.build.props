@@ -2,9 +2,9 @@
 <Project>
 	<PropertyGroup>
 		<AssemblyName>StreetSmart.WPF</AssemblyName>
-		<VersionPrefix>22.18.0</VersionPrefix>
+		<VersionPrefix>22.19.0</VersionPrefix>
 		<Authors>Cyclomedia</Authors>
 		<Company>Cyclomedia</Company>
-		<AssemblyVersion>22.18.0</AssemblyVersion>
+		<AssemblyVersion>22.19.0</AssemblyVersion>
 	</PropertyGroup>
 </Project>
