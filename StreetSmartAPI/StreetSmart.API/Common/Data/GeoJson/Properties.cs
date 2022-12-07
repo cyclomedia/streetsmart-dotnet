@@ -63,7 +63,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var property in this)
       {
-        properties = $"{properties},\"{property.Key}\":\"{property.Value}\"";
+        string value = property.Value.ToString()?.Replace('\"', '\'');
+        properties = $"{properties},\"{property.Key}\":\"{value}\"";
       }
 
       properties = properties.Substring(Math.Min(properties.Length, 1));

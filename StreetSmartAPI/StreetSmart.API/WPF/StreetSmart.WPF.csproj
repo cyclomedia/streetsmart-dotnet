@@ -897,12 +897,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="107.1.90" />
-    <PackageReference Include="CefSharp.Wpf.NETCore" Version="107.1.90" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.355802">
+    <PackageReference Include="CefSharp.Common.NETCore" Version="107.1.120" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="107.1.120" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.330701">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
 </Project>
