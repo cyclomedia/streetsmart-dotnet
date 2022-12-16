@@ -1,6 +1,16 @@
 ﻿Release notes:
 ==============
 
+Version 22.20.0
+================
+- Updated to .net 6.0
+- Connected to the latest Street Smart 22.20 API
+- Added a OAuth property in the api.init for login by OAuth
+- Added clientId (needed to login by oauth) to the init function of the api
+- Added events: measurementStart, measurementStop, measurementSaved
+- Added a save measurement button function to the api
+
+
 Version 22.8.0
 ================
 - Connected to new Street Smart 22.8 API
