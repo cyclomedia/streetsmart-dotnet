@@ -45,6 +45,10 @@ namespace StreetSmart.Common.Factories
     {
       if (settings != null && !Cef.IsInitialized)
       {
+#if WPF
+        CefSharpSettings.LegacyJavascriptBindingEnabled = true;
+#endif
+
         CefSharpSettings.WcfEnabled = true;
         BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
 

@@ -153,7 +153,10 @@ namespace StreetSmart.Common.API
 
     protected void RegisterThisJsObject()
     {
+#if WINFORMS
       Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+#endif
+
       Browser.JavascriptObjectRepository.Register(JsThis, this, false);
     }
 
