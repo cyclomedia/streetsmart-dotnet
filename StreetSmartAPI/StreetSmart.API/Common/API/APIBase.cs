@@ -155,20 +155,28 @@ namespace StreetSmart.Common.API
     {
       Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
 
-      #if WINFORMS
+#if WINFORMS
+#if NETCOREAPP
       Browser.JavascriptObjectRepository.Register(JsThis, this);
-      #else
+#else
+      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
+#endif
+#else
       Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
       {
         var repo = e.ObjectRepository;
 
         if (e.ObjectName == "Legacy")
         {
+#if NETCOREAPP
           repo.Register(JsThis, this);
+#else
+          repo.Register(JsThis, this, false);
+#endif
         }
       };
-      #endif
-    }
+#endif
+        }
 
     protected bool CheckResultTask(string funcName)
     {

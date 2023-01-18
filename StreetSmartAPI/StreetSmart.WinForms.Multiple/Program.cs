@@ -30,7 +30,11 @@ namespace MultipleAPI.WinForms
     static void Main()
     {
       Application.EnableVisualStyles();
+
+#if DOT_6_0
       Application.SetHighDpiMode(HighDpiMode.SystemAware);
+#endif
+
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new FrmBase());
     }

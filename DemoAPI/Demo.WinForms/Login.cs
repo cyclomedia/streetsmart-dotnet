@@ -42,7 +42,7 @@ namespace Demo.WinForms
 
     public string ClientId { get; set; }
 
-    public static Login Instance => _login ??= Load();
+    public static Login Instance => _login ?? (_login = Load());
 
     private static Login Load()
     {

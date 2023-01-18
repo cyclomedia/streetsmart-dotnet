@@ -61,13 +61,13 @@ namespace Demo.WinForms
 
     private IPanoramaViewer PanoramaViewer
     {
-      get => _panoramaViewer = _panoramaViewers.Count == 0 ? null : _panoramaViewers[^1];
+      get => _panoramaViewer ?? (_panoramaViewers.Count == 0 ? null : _panoramaViewers[_panoramaViewers.Count - 1]);
       set => _panoramaViewer = value;
     }
 
     private IObliqueViewer ObliqueViewer
     {
-      get => _obliqueViewers.Count == 0 ? null : _obliqueViewers [^1];
+      get => _obliqueViewers.Count == 0 ? null : _obliqueViewers [_obliqueViewers.Count - 1];
       set
       {
         if (_obliqueViewers.Count == 0)
@@ -76,14 +76,14 @@ namespace Demo.WinForms
         }
         else
         {
-          _obliqueViewers[^1] = value;
+          _obliqueViewers[_obliqueViewers.Count - 1] = value;
         }
       }
     }
 
     private IPointCloudViewer PointCloudViewer
     {
-      get => _pointCloudViewers.Count == 0 ? null : _pointCloudViewers[^1];
+      get => _pointCloudViewers.Count == 0 ? null : _pointCloudViewers[_pointCloudViewers.Count - 1];
       set
       {
         if (_pointCloudViewers.Count == 0)
@@ -92,7 +92,7 @@ namespace Demo.WinForms
         }
         else
         {
-          _pointCloudViewers[^1] = value;
+          _pointCloudViewers[_pointCloudViewers.Count - 1] = value;
         }
       }
     }

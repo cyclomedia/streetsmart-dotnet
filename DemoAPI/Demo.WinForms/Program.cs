@@ -30,7 +30,11 @@ namespace Demo.WinForms
     static void Main()
     {
       Application.EnableVisualStyles();
+
+#if NET6_0
       Application.SetHighDpiMode(HighDpiMode.SystemAware);
+#endif
+
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new Demo());
     }
