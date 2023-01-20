@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms", "StreetSmart.API\WinForms\StreetSmart.WinForms.NET6.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.NET6", "StreetSmart.API\WinForms\StreetSmart.WinForms.NET6.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF", "StreetSmart.API\WPF\StreetSmart.WPF.NET6.csproj", "{011EC44B-B881-4523-8E5A-F37D47A9EDD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.NET6", "StreetSmart.API\WPF\StreetSmart.WPF.NET6.csproj", "{011EC44B-B881-4523-8E5A-F37D47A9EDD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Demo", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.NET6.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Demo.NET6", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.NET6.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multiple", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.NET6.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multiple.NET6", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.NET6.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.NET6.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example.NET6", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.NET6.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,12 +55,14 @@ Global
 		{011EC44B-B881-4523-8E5A-F37D47A9EDD3}.Release|x64.Build.0 = Release|Any CPU
 		{011EC44B-B881-4523-8E5A-F37D47A9EDD3}.Release|x86.ActiveCfg = Release|Any CPU
 		{011EC44B-B881-4523-8E5A-F37D47A9EDD3}.Release|x86.Build.0 = Release|Any CPU
-		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|x64.Build.0 = Debug|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|x86.ActiveCfg = Debug|x86
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Debug|x86.Build.0 = Debug|x86
-		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|Any CPU.ActiveCfg = Release|x86
+		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|x64.ActiveCfg = Release|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|x64.Build.0 = Release|Any CPU
 		{F46B85C7-BE14-42EB-826A-54C579AB1F94}.Release|x86.ActiveCfg = Release|Any CPU
