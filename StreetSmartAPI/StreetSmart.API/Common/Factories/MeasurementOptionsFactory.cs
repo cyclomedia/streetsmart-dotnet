@@ -100,7 +100,7 @@ namespace StreetSmart.Common.Factories
     /// Create a measurement options object with a specific measure method.
     /// </summary>
     /// <param name="measureMethods">The <c>measureMethod</c> of the measurement</param>
-    /// <returns></returns>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create(MeasureMethods measureMethods) =>
       new MeasurementOptions(null, measureMethods, null);
 
@@ -108,7 +108,7 @@ namespace StreetSmart.Common.Factories
     /// Create a measurement object and show the save measurement button during the measurement.
     /// </summary>
     /// <param name="showSaveMeasurementButton">>Show the measurement button while taking a measurement</param>
-    /// <returns></returns>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create(bool showSaveMeasurementButton) =>
       new MeasurementOptions(null, null, showSaveMeasurementButton);
 
@@ -117,7 +117,7 @@ namespace StreetSmart.Common.Factories
     /// </summary>
     /// <param name="geometryType">The <c>MeasurementGeometryType</c> of the measurement</param>
     /// <param name="measureMethods">The <c>measureMethod</c> of the measurement</param>
-    /// <returns></returns>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create(MeasurementGeometryType geometryType, MeasureMethods measureMethods) =>
       new MeasurementOptions(geometryType, measureMethods, null);
 
@@ -127,7 +127,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="geometryType">The <c>MeasurementGeometryType</c> of the measurement</param>
     /// <param name="measureMethods">The <c>measureMethod</c> of the measurement</param>
     /// <param name="showSaveMeasurementButton">Show the measurement button while taking a measurement</param>
-    /// <returns></returns>
+    /// <returns>The measurement options object that is needed to make a measurement</returns>
     public static IMeasurementOptions Create(MeasurementGeometryType geometryType, MeasureMethods measureMethods,
       bool? showSaveMeasurementButton) =>
       new MeasurementOptions(geometryType, measureMethods, showSaveMeasurementButton);

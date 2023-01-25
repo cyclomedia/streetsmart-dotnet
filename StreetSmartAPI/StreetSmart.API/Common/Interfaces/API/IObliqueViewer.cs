@@ -72,8 +72,8 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Get the visibility of a button
     /// </summary>
-    /// <param name="buttonId"></param>
-    /// <returns></returns>
+    /// <param name="buttonId">The buttonId of which the visibility is requested</param>
+    /// <returns>Visibility of the button</returns>
     Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId);
 
     /// <summary>
@@ -85,7 +85,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
-    /// <param name="buttonId"></param>
+    /// <param name="buttonId">The buttonId where the visibility is changed.</param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled);
   }

@@ -29,13 +29,16 @@ namespace StreetSmart.Common.Factories
   public static class JsonFactory
   {
     /// <summary>
-    /// returns JSon object, which contains the specified properties
+    /// Create JSON object with given properties
     /// </summary>
+    /// <param name="properties">The properties of the JSON object</param>
+    /// <returns>JSon object, which contains the specified properties</returns>
     public static IJson Create(Dictionary<string, string> properties) => new Json(properties);
 
     /// <summary>
-    /// returns JSon object
+    /// create a JSON object
     /// </summary>
+    /// <returns>JSon object</returns>
     public static IJson Create() => new Json();
   }
 }

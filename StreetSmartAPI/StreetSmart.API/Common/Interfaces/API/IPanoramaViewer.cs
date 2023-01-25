@@ -98,26 +98,26 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Get the visibility of a button
     /// </summary>
-    /// <param name="buttonId"></param>
-    /// <returns></returns>
+    /// <param name="buttonId">The buttonId of which the visibility is requested</param>
+    /// <returns>Visibility of the button</returns>
     Task<bool> GetButtonEnabled(PanoramaViewerButtons buttonId);
 
     /// <summary>
-    /// Get the visibility of the panorama Sidebar
+    /// Returns the visibility state of the sidebar.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Visibility of the panorama sidebar</returns>
     Task<bool> GetSidebarVisible();
 
     /// <summary>
-    /// Get the expandability of the panorama Sidebar
+    /// Get the enabled state of the sidebar
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Expandability of the panorama sidebar</returns>
     Task<bool> GetSidebarEnabled();
 
     /// <summary>
-    /// Get the expanded state of the panorama Sidebar
+    /// Returns the expanded state of the sidebar.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Expandability of the sidebar</returns>
     Task<bool> GetSidebarExpanded();
 
     /// <summary>
@@ -153,6 +153,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="coordinate">Coordinate to look to.</param>
     /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
+    /// <returns>Async function go to the coordinate</returns>
     Task LookAtCoordinate(ICoordinate coordinate, string srs = null);
 
     /// <summary>
@@ -160,6 +161,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="query">Address you want to search.</param>
     /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
+    /// <returns>Recording information of the opened address</returns>
     Task<IRecording> OpenByAddress(string query, string srs = null);
 
     /// <summary>
@@ -167,6 +169,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="coordinate">Coordinate of location to open a panorama.</param>
     /// <param name="srs">(optional) Will use to convert coordinate to viewer srs.</param>
+    /// <returns>Recording information of the opened coordinate</returns>
     Task<IRecording> OpenByCoordinate(ICoordinate coordinate, string srs = null);
 
     /// <summary>
@@ -174,6 +177,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="imageId">ID of the image that needs to be opened.</param>
     /// <param name="srs">(optional) Coordinate system in which the panorama will be opened.</param>
+    /// <returns>Recording information of the opened imageId</returns>
     Task<IRecording> OpenByImageId(string imageId, string srs = null);
 
     /// <summary>
@@ -238,7 +242,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
-    /// <param name="buttonId"></param>
+    /// <param name="buttonId">The buttonId to be toggled.</param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(PanoramaViewerButtons buttonId, bool enabled);
 

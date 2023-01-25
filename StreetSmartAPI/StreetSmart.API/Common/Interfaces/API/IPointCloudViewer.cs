@@ -61,16 +61,16 @@ namespace StreetSmart.Common.Interfaces.API
     event EventHandler<IEventArgs<BackgroundPreset>> BackGroundChanged;
 
     /// <summary>
-    /// Get the background of the pointcloud. See the background enum
+    /// Get the background of the PointCloud. See the background enum
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The background of the PointCloud</returns>
     Task<BackgroundPreset> GetBackgroundPreset();
 
     /// <summary>
     /// Get the visibility of a button
     /// </summary>
-    /// <param name="buttonId"></param>
-    /// <returns></returns>
+    /// <param name="buttonId">The buttonId of which the visibility is requested</param>
+    /// <returns>Visibility of the button</returns>
     Task<bool> GetButtonEnabled(PointCloudViewerButtons buttonId);
 
     /// <summary>

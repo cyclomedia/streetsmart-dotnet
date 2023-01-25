@@ -47,6 +47,7 @@ namespace StreetSmart.Common.Factories
     /// <summary>
     /// Create measure details
     /// </summary>
+    /// <returns>Measurement details</returns>
     public static IMeasureDetails CreateMeasureDetails() => new MeasureDetails();
 
     /// <summary>
