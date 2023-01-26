@@ -159,7 +159,7 @@ namespace StreetSmart.Common.API
 #if NETCOREAPP
       Browser.JavascriptObjectRepository.Register(JsThis, this);
 #else
-      Browser.JavascriptObjectRepository.Register(JsThis, this, false);
+      Browser.JavascriptObjectRepository.Register(JsThis, this, true);
 #endif
 #else
       Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
