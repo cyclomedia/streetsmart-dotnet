@@ -45,6 +45,7 @@
 	 <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	 <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 	 <PackageReadmeFile>README.md</PackageReadmeFile>
+	 <RootNamespace>StreetSmart.WinForms</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
