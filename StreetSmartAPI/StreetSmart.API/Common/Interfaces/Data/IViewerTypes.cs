@@ -34,13 +34,13 @@ namespace StreetSmart.Common.Interfaces.Data
     /// <summary>
     /// Add the viewerType
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">The type of the viewer</param>
     void AddType(ViewerType type);
 
     /// <summary>
     /// Remove the viewerType
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">The type of the viewer</param>
     void RemoveType(ViewerType type);
   }
 }

@@ -148,7 +148,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
-    /// <param name="buttonId"></param>
+    /// <param name="buttonId">The buttonId to be toggled.</param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(PointCloudViewerButtons buttonId, bool enabled);
 

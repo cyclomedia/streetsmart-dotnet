@@ -28,6 +28,9 @@ namespace StreetSmart.Common.Interfaces.Data
     /// </summary>
     MeasurementGeometryType? GeometryType { get; set; }
 
+    /// <summary>
+    /// Indicates whether the save measurement button should be visible.
+    /// </summary>
     bool? ShowSaveMeasurementButton { get; set; }
   }
 }

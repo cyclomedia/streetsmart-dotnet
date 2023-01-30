@@ -175,11 +175,13 @@ namespace StreetSmart.Common.Interfaces.API
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>
+    /// <returns>Async function to destroy api</returns>
     Task Destroy(IOptions options);
 
     /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
+    /// <returns>The measurement in GeoJSON format</returns>
     Task<IFeatureCollection> GetActiveMeasurement();
 
     /// <summary>
@@ -346,6 +348,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Removes a GeoJSON overlay from the panorama viewer.
     /// </summary>
     /// <param name="id">The id of the overlay</param>
+    /// <returns>Async function to remove an overlay</returns>
     Task RemoveOverlay(string id);
 
     /// <summary>
@@ -371,6 +374,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="viewer">Panorama viewer for start the measurement inside</param>
     /// <param name="options">Measurement options</param>
+    /// <returns>Async function to starts the measurement</returns>
     Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options);
 
     /// <summary>

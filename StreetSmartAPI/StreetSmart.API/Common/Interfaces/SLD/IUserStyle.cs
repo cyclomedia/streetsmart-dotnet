@@ -21,12 +21,12 @@ using StreetSmart.Common.Data.SLD;
 namespace StreetSmart.Common.Interfaces.SLD
 {
   /// <summary>
-  /// 
+  /// Userstyle definition
   /// </summary>
   public interface IUserStyle
   {
     /// <summary>
-    /// 
+    /// Feature type style
     /// </summary>
     FeatureTypeStyle FeatureTypeStyle { get; set; }
   }
