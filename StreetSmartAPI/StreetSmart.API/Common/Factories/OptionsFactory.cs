@@ -162,9 +162,12 @@ namespace StreetSmart.Common.Factories
 
       SecureString Password = new SecureString();
 
-      foreach (var character in password)
+      if (!loginByOauth)
       {
-        Password.AppendChar(character);
+        foreach (var character in password)
+        {
+          Password.AppendChar(character);
+        }
       }
 
       return new Options(userName, Password, apiKey, srs, locale,

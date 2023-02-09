@@ -572,8 +572,17 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMdatabase");
       IDomElement element = DomElementFactory.Create();
 
-      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtClientId.Text, txtAPIKey.Text, txtSrs.Text, locale,
-        ConfigurationUrl, addressSettings, element, true);
+      _options = OptionsFactory.CreateOauth(
+        txtClientId.Text,
+        txtAPIKey.Text,
+        txtSrs.Text,
+        locale,
+        addressSettings, // address settings
+        element // target element
+      );
+
+      //_options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtClientId.Text, txtAPIKey.Text, txtSrs.Text, locale,
+      //  ConfigurationUrl, addressSettings, element, true);
 
       try
       {
