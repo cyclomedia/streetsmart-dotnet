@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version 23.7.0
+================
+- Removed hight dpi support
+
+
 Version 22.20.0
 ================
 - Updated to .net 6.0
