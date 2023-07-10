@@ -86,7 +86,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var measureDetail in measureDetails)
       {
-        MeasureDetails.Add(new MeasureDetails(measureDetail as Dictionary<string, object>, MeasurementTool));
+        MeasureDetails.Add(new MeasureDetails(converter.ToDictionary(measureDetail), MeasurementTool));
       }
 
       try

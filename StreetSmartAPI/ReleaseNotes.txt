@@ -1,6 +1,12 @@
 ﻿Release notes:
 ==============
 
+Version 23.8.0
+================
+- Fixed bug parsing mearurement changed
+- Added the meshviewer object
+
+
 Version 23.7.0
 ================
 - Removed hight dpi support

@@ -37,7 +37,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       if (coordinateStdevs.Count >= 1)
       {
-        Position = new PositionStdev(position, coordinateStdevs[0] as Dictionary<string, object>);
+        Position = new PositionStdev(position, ToDictionary(coordinateStdevs[0]));
       }
 
       if (GetValue(positionXY, "value") is IList<object> valueXY)
