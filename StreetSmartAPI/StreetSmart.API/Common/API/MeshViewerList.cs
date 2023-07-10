@@ -16,28 +16,25 @@
  * License along with this library.
  */
 
-using System.Threading.Tasks;
-
 using StreetSmart.Common.Interfaces.API;
 
-namespace Demo.WinForms
+namespace StreetSmart.Common.API
 {
-  class ViewerElement
+  internal class MeshViewerList : ViewerList
   {
-    public IViewer Viewer { get; set; }
+    #region Properties
 
-    private string _id;
+    public static string Type => "@@ViewerType/MESHVIEWER";
 
-    public async Task AddViewer(IViewer viewer)
+    #endregion
+
+    #region Functions
+
+    public override IViewer AddViewer(string name)
     {
-      Viewer = viewer;
-      _id = await viewer.GetId();
+      return RegisterViewer(new MeshViewer(Browser, this, name));
     }
 
-    public override string ToString()
-    {
-      string type = Viewer is IObliqueViewer ? "O" : Viewer is IPanoramaViewer ? "P" : Viewer is IMeshViewer ? "M" : "C";
-      return $"({type}):{_id}";
-    }
+    #endregion
   }
 }

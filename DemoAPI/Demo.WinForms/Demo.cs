@@ -44,6 +44,7 @@ namespace Demo.WinForms
     private readonly List<IPanoramaViewer> _panoramaViewers;
     private readonly List<IObliqueViewer> _obliqueViewers;
     private readonly List<IPointCloudViewer> _pointCloudViewers;
+    private readonly List<IMeshViewer> _meshViewers;
     private readonly CultureInfo _ci;
     private readonly Login _login;
 
@@ -97,6 +98,22 @@ namespace Demo.WinForms
       }
     }
 
+    private IMeshViewer MeshViewer
+    {
+      get => _meshViewers.Count == 0 ? null : _meshViewers[_meshViewers.Count - 1];
+      set
+      {
+        if (_meshViewers.Count == 0)
+        {
+          _meshViewers.Add(value);
+        }
+        else
+        {
+          _meshViewers[_meshViewers.Count - 1] = value;
+        }
+      }
+    }
+
     private int DeltaYawPitch
     {
       get
@@ -120,6 +137,7 @@ namespace Demo.WinForms
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
       _pointCloudViewers = new List<IPointCloudViewer>();
+      _meshViewers = new List<IMeshViewer>();
       _addressLayerOverlayVisible = true;
       txtOverlayColor.BackColor = Color.Blue;
 
@@ -323,6 +341,11 @@ namespace Demo.WinForms
         pointCloudViewer.PointStyleChanged += OnPointStyleChanged;
         pointCloudViewer.BackGroundChanged += OnBackGroundChanged;
       }
+
+      if (viewer is IMeshViewer meshViewer)
+      {
+        _meshViewers.Add(meshViewer);
+      }
     }
 
     private void OnViewerRemoved(object sender, IEventArgs<IViewer> args)
@@ -377,6 +400,11 @@ namespace Demo.WinForms
         if (viewer is IPointCloudViewer pointCloudViewer)
         {
           _pointCloudViewers.Remove(pointCloudViewer);
+        }
+
+        if (viewer is IMeshViewer meshViewer)
+        {
+          _meshViewers.Remove(meshViewer);
         }
 
         if (remove != null)

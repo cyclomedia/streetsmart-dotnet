@@ -193,7 +193,8 @@ namespace StreetSmart.Common.API
     {
       { ViewerType.Panorama, PanoramaViewerList.Type },
       { ViewerType.Oblique, ObliqueViewerList.Type },
-      { ViewerType.PointCloud, PointCloudViewerList.Type }
+      { ViewerType.PointCloud, PointCloudViewerList.Type },
+      { ViewerType.MeshViewer, MeshViewerList.Type }
     };
 
     public static PanoramaViewerList GetPanoramaViewerList(string apiId)
@@ -209,7 +210,8 @@ namespace StreetSmart.Common.API
         {
           {PanoramaViewerList.Type, new PanoramaViewerList()},
           {ObliqueViewerList.Type, new ObliqueViewerList()},
-          {PointCloudViewerList.Type, new PointCloudViewerList()}
+          {PointCloudViewerList.Type, new PointCloudViewerList()},
+          {MeshViewerList.Type, new MeshViewerList()}
         });
       }
     }

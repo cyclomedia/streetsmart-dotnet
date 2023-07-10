@@ -108,6 +108,12 @@
     <Compile Include="..\Common\API\ImageViewer.cs">
       <Link>API\ImageViewer.cs</Link>
     </Compile>
+    <Compile Include="..\Common\API\MeshViewer.cs">
+      <Link>API\MeshViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\API\MeshViewerList.cs">
+      <Link>API\MeshViewerList.cs</Link>
+    </Compile>
     <Compile Include="..\Common\API\ObliqueViewer.cs">
       <Link>API\ObliqueViewer.cs</Link>
     </Compile>
@@ -512,6 +518,9 @@
     </Compile>
     <Compile Include="..\Common\Interfaces\API\IImageViewer.cs">
       <Link>Interfaces\API\IImageViewer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Interfaces\API\IMeshViewer.cs">
+      <Link>Interfaces\API\IMeshViewer.cs</Link>
     </Compile>
     <Compile Include="..\Common\Interfaces\API\IObliqueViewer.cs">
       <Link>Interfaces\API\IObliqueViewer.cs</Link>

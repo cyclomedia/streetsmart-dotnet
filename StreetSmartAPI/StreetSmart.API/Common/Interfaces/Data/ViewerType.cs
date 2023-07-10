@@ -41,6 +41,12 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Point cloud viewer
     /// </summary>
     [Description("ViewerType.POINTCLOUD")]
-    PointCloud = 3
+    PointCloud = 3,
+
+    /// <summary>
+    /// Mesh viewer
+    /// </summary>
+    [Description("ViewerType.MESHVIEWER")]
+    MeshViewer = 4
   }
 }
