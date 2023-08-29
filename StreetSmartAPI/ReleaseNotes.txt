@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version 23.9.0
+================
+- React 18 API
+
+
 Version 23.8.0
 ================
 - Fixed bug parsing mearurement changed
