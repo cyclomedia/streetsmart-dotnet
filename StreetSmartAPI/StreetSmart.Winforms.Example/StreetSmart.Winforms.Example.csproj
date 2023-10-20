@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs" Link="Login.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.NET6.csproj" />
   </ItemGroup>
 

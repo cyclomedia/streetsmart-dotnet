@@ -32,29 +32,33 @@
       plControls = new Panel();
       tbFunctionality = new TabControl();
       tpLogin = new TabPage();
+      panel1 = new Panel();
+      txtAPIKey = new TextBox();
+      btnLogin = new Button();
+      lblSRS = new Label();
+      lblAPIKey = new Label();
+      txtSrs = new TextBox();
+      btnLogout = new Button();
+      btnSave = new Button();
       grLogin = new GroupBox();
-      label1 = new Label();
-      textBox1 = new TextBox();
+      plLoginWay = new Panel();
       grLoginWay = new GroupBox();
       rbBasicLogin = new RadioButton();
       rbOAuthLogin = new RadioButton();
-      txtUsername = new TextBox();
-      txtPassword = new TextBox();
-      lblPassword = new Label();
-      lblUsername = new Label();
-      lblSRS = new Label();
-      txtSrs = new TextBox();
-      btnSave = new Button();
-      btnLogout = new Button();
-      lblAPIKey = new Label();
-      txtAPIKey = new TextBox();
-      btnLogin = new Button();
-      tabPage2 = new TabPage();
       plUsernamePassword = new Panel();
+      lblUsername = new Label();
+      lblClientId = new Label();
+      lblPassword = new Label();
+      txtClientId = new TextBox();
+      txtPassword = new TextBox();
+      txtUsername = new TextBox();
+      tabPage2 = new TabPage();
       plControls.SuspendLayout();
       tbFunctionality.SuspendLayout();
       tpLogin.SuspendLayout();
+      panel1.SuspendLayout();
       grLogin.SuspendLayout();
+      plLoginWay.SuspendLayout();
       grLoginWay.SuspendLayout();
       plUsernamePassword.SuspendLayout();
       SuspendLayout();
@@ -89,14 +93,8 @@
       // 
       // tpLogin
       // 
+      tpLogin.Controls.Add(panel1);
       tpLogin.Controls.Add(grLogin);
-      tpLogin.Controls.Add(lblSRS);
-      tpLogin.Controls.Add(txtSrs);
-      tpLogin.Controls.Add(btnSave);
-      tpLogin.Controls.Add(btnLogout);
-      tpLogin.Controls.Add(lblAPIKey);
-      tpLogin.Controls.Add(txtAPIKey);
-      tpLogin.Controls.Add(btnLogin);
       tpLogin.Location = new Point(4, 24);
       tpLogin.Name = "tpLogin";
       tpLogin.Padding = new Padding(3);
@@ -105,10 +103,93 @@
       tpLogin.Text = "Login";
       tpLogin.UseVisualStyleBackColor = true;
       // 
+      // panel1
+      // 
+      panel1.Controls.Add(txtAPIKey);
+      panel1.Controls.Add(btnLogin);
+      panel1.Controls.Add(lblSRS);
+      panel1.Controls.Add(lblAPIKey);
+      panel1.Controls.Add(txtSrs);
+      panel1.Controls.Add(btnLogout);
+      panel1.Controls.Add(btnSave);
+      panel1.Dock = DockStyle.Fill;
+      panel1.Location = new Point(503, 3);
+      panel1.Name = "panel1";
+      panel1.Size = new Size(623, 251);
+      panel1.TabIndex = 65;
+      // 
+      // txtAPIKey
+      // 
+      txtAPIKey.Location = new Point(88, 26);
+      txtAPIKey.Margin = new Padding(4);
+      txtAPIKey.Name = "txtAPIKey";
+      txtAPIKey.Size = new Size(127, 23);
+      txtAPIKey.TabIndex = 57;
+      // 
+      // btnLogin
+      // 
+      btnLogin.Location = new Point(9, 88);
+      btnLogin.Margin = new Padding(4);
+      btnLogin.Name = "btnLogin";
+      btnLogin.Size = new Size(100, 35);
+      btnLogin.TabIndex = 55;
+      btnLogin.Text = "Login";
+      btnLogin.UseVisualStyleBackColor = true;
+      btnLogin.Click += btnLogin_Click;
+      // 
+      // lblSRS
+      // 
+      lblSRS.AutoSize = true;
+      lblSRS.Location = new Point(12, 55);
+      lblSRS.Margin = new Padding(4, 0, 4, 0);
+      lblSRS.Name = "lblSRS";
+      lblSRS.Size = new Size(26, 15);
+      lblSRS.TabIndex = 60;
+      lblSRS.Text = "SRS";
+      // 
+      // lblAPIKey
+      // 
+      lblAPIKey.AutoSize = true;
+      lblAPIKey.Location = new Point(12, 25);
+      lblAPIKey.Margin = new Padding(4, 0, 4, 0);
+      lblAPIKey.Name = "lblAPIKey";
+      lblAPIKey.Size = new Size(47, 15);
+      lblAPIKey.TabIndex = 56;
+      lblAPIKey.Text = "API Key";
+      // 
+      // txtSrs
+      // 
+      txtSrs.Location = new Point(88, 57);
+      txtSrs.Margin = new Padding(4);
+      txtSrs.Name = "txtSrs";
+      txtSrs.Size = new Size(127, 23);
+      txtSrs.TabIndex = 61;
+      txtSrs.Text = "EPSG:28992";
+      // 
+      // btnLogout
+      // 
+      btnLogout.Location = new Point(115, 88);
+      btnLogout.Margin = new Padding(4);
+      btnLogout.Name = "btnLogout";
+      btnLogout.Size = new Size(100, 35);
+      btnLogout.TabIndex = 58;
+      btnLogout.Text = "Logout";
+      btnLogout.UseVisualStyleBackColor = true;
+      // 
+      // btnSave
+      // 
+      btnSave.Location = new Point(9, 131);
+      btnSave.Margin = new Padding(4);
+      btnSave.Name = "btnSave";
+      btnSave.Size = new Size(206, 34);
+      btnSave.TabIndex = 59;
+      btnSave.Text = "Save";
+      btnSave.UseVisualStyleBackColor = true;
+      // 
       // grLogin
       // 
+      grLogin.Controls.Add(plLoginWay);
       grLogin.Controls.Add(plUsernamePassword);
-      grLogin.Controls.Add(grLoginWay);
       grLogin.Dock = DockStyle.Left;
       grLogin.Location = new Point(3, 3);
       grLogin.Name = "grLogin";
@@ -117,33 +198,25 @@
       grLogin.TabStop = false;
       grLogin.Text = "login information";
       // 
-      // label1
+      // plLoginWay
       // 
-      label1.AutoSize = true;
-      label1.Location = new Point(244, 15);
-      label1.Margin = new Padding(4, 0, 4, 0);
-      label1.Name = "label1";
-      label1.Size = new Size(48, 15);
-      label1.TabIndex = 66;
-      label1.Text = "ClientId";
-      // 
-      // textBox1
-      // 
-      textBox1.Location = new Point(314, 15);
-      textBox1.Margin = new Padding(4);
-      textBox1.Name = "textBox1";
-      textBox1.Size = new Size(150, 23);
-      textBox1.TabIndex = 65;
+      plLoginWay.Controls.Add(grLoginWay);
+      plLoginWay.Dock = DockStyle.Fill;
+      plLoginWay.Location = new Point(3, 132);
+      plLoginWay.Name = "plLoginWay";
+      plLoginWay.Size = new Size(494, 116);
+      plLoginWay.TabIndex = 68;
       // 
       // grLoginWay
       // 
       grLoginWay.Controls.Add(rbBasicLogin);
       grLoginWay.Controls.Add(rbOAuthLogin);
-      grLoginWay.Location = new Point(7, 147);
+      grLoginWay.Dock = DockStyle.Fill;
+      grLoginWay.Location = new Point(0, 0);
       grLoginWay.Margin = new Padding(4);
       grLoginWay.Name = "grLoginWay";
       grLoginWay.Padding = new Padding(4);
-      grLoginWay.Size = new Size(200, 50);
+      grLoginWay.Size = new Size(494, 116);
       grLoginWay.TabIndex = 64;
       grLoginWay.TabStop = false;
       grLoginWay.Text = "Login way";
@@ -172,32 +245,19 @@
       rbOAuthLogin.Text = "OAuth";
       rbOAuthLogin.UseVisualStyleBackColor = true;
       // 
-      // txtUsername
+      // plUsernamePassword
       // 
-      txtUsername.Location = new Point(74, 15);
-      txtUsername.Margin = new Padding(4);
-      txtUsername.Name = "txtUsername";
-      txtUsername.Size = new Size(150, 23);
-      txtUsername.TabIndex = 53;
-      // 
-      // txtPassword
-      // 
-      txtPassword.Location = new Point(74, 45);
-      txtPassword.Margin = new Padding(4);
-      txtPassword.Name = "txtPassword";
-      txtPassword.PasswordChar = '*';
-      txtPassword.Size = new Size(150, 23);
-      txtPassword.TabIndex = 54;
-      // 
-      // lblPassword
-      // 
-      lblPassword.AutoSize = true;
-      lblPassword.Location = new Point(4, 45);
-      lblPassword.Margin = new Padding(4, 0, 4, 0);
-      lblPassword.Name = "lblPassword";
-      lblPassword.Size = new Size(57, 15);
-      lblPassword.TabIndex = 52;
-      lblPassword.Text = "Password";
+      plUsernamePassword.Controls.Add(lblUsername);
+      plUsernamePassword.Controls.Add(lblClientId);
+      plUsernamePassword.Controls.Add(lblPassword);
+      plUsernamePassword.Controls.Add(txtClientId);
+      plUsernamePassword.Controls.Add(txtPassword);
+      plUsernamePassword.Controls.Add(txtUsername);
+      plUsernamePassword.Dock = DockStyle.Top;
+      plUsernamePassword.Location = new Point(3, 19);
+      plUsernamePassword.Name = "plUsernamePassword";
+      plUsernamePassword.Size = new Size(494, 113);
+      plUsernamePassword.TabIndex = 67;
       // 
       // lblUsername
       // 
@@ -209,72 +269,50 @@
       lblUsername.TabIndex = 51;
       lblUsername.Text = "Username";
       // 
-      // lblSRS
+      // lblClientId
       // 
-      lblSRS.AutoSize = true;
-      lblSRS.Location = new Point(655, 120);
-      lblSRS.Margin = new Padding(4, 0, 4, 0);
-      lblSRS.Name = "lblSRS";
-      lblSRS.Size = new Size(26, 15);
-      lblSRS.TabIndex = 60;
-      lblSRS.Text = "SRS";
+      lblClientId.AutoSize = true;
+      lblClientId.Location = new Point(244, 15);
+      lblClientId.Margin = new Padding(4, 0, 4, 0);
+      lblClientId.Name = "lblClientId";
+      lblClientId.Size = new Size(48, 15);
+      lblClientId.TabIndex = 66;
+      lblClientId.Text = "ClientId";
       // 
-      // txtSrs
+      // lblPassword
       // 
-      txtSrs.Location = new Point(724, 120);
-      txtSrs.Margin = new Padding(4);
-      txtSrs.Name = "txtSrs";
-      txtSrs.Size = new Size(127, 23);
-      txtSrs.TabIndex = 61;
-      txtSrs.Text = "EPSG:28992";
+      lblPassword.AutoSize = true;
+      lblPassword.Location = new Point(4, 45);
+      lblPassword.Margin = new Padding(4, 0, 4, 0);
+      lblPassword.Name = "lblPassword";
+      lblPassword.Size = new Size(57, 15);
+      lblPassword.TabIndex = 52;
+      lblPassword.Text = "Password";
       // 
-      // btnSave
+      // txtClientId
       // 
-      btnSave.Location = new Point(794, 150);
-      btnSave.Margin = new Padding(4);
-      btnSave.Name = "btnSave";
-      btnSave.Size = new Size(59, 34);
-      btnSave.TabIndex = 59;
-      btnSave.Text = "Save";
-      btnSave.UseVisualStyleBackColor = true;
+      txtClientId.Location = new Point(314, 15);
+      txtClientId.Margin = new Padding(4);
+      txtClientId.Name = "txtClientId";
+      txtClientId.Size = new Size(150, 23);
+      txtClientId.TabIndex = 65;
       // 
-      // btnLogout
+      // txtPassword
       // 
-      btnLogout.Location = new Point(724, 150);
-      btnLogout.Margin = new Padding(4);
-      btnLogout.Name = "btnLogout";
-      btnLogout.Size = new Size(59, 34);
-      btnLogout.TabIndex = 58;
-      btnLogout.Text = "Logout";
-      btnLogout.UseVisualStyleBackColor = true;
+      txtPassword.Location = new Point(74, 45);
+      txtPassword.Margin = new Padding(4);
+      txtPassword.Name = "txtPassword";
+      txtPassword.PasswordChar = '*';
+      txtPassword.Size = new Size(150, 23);
+      txtPassword.TabIndex = 54;
       // 
-      // lblAPIKey
+      // txtUsername
       // 
-      lblAPIKey.AutoSize = true;
-      lblAPIKey.Location = new Point(655, 76);
-      lblAPIKey.Margin = new Padding(4, 0, 4, 0);
-      lblAPIKey.Name = "lblAPIKey";
-      lblAPIKey.Size = new Size(47, 15);
-      lblAPIKey.TabIndex = 56;
-      lblAPIKey.Text = "API Key";
-      // 
-      // txtAPIKey
-      // 
-      txtAPIKey.Location = new Point(724, 75);
-      txtAPIKey.Margin = new Padding(4);
-      txtAPIKey.Name = "txtAPIKey";
-      txtAPIKey.Size = new Size(127, 23);
-      txtAPIKey.TabIndex = 57;
-      // 
-      // btnLogin
-      // 
-      btnLogin.Location = new Point(654, 150);
-      btnLogin.Margin = new Padding(4);
-      btnLogin.Name = "btnLogin";
-      btnLogin.Size = new Size(59, 34);
-      btnLogin.TabIndex = 55;
-      btnLogin.Text = "Login";
-      btnLogin.UseVisualStyleBackColor = true;
+      txtUsername.Location = new Point(74, 15);
+      txtUsername.Margin = new Padding(4);
+      txtUsername.Name = "txtUsername";
+      txtUsername.Size = new Size(150, 23);
+      txtUsername.TabIndex = 53;
       // 
       // tabPage2
       // 
@@ -285,20 +323,6 @@
       tabPage2.TabIndex = 1;
       tabPage2.Text = "tabPage2";
       tabPage2.UseVisualStyleBackColor = true;
-      // 
-      // plUsernamePassword
-      // 
-      plUsernamePassword.Controls.Add(lblUsername);
-      plUsernamePassword.Controls.Add(label1);
-      plUsernamePassword.Controls.Add(lblPassword);
-      plUsernamePassword.Controls.Add(textBox1);
-      plUsernamePassword.Controls.Add(txtPassword);
-      plUsernamePassword.Controls.Add(txtUsername);
-      plUsernamePassword.Dock = DockStyle.Top;
-      plUsernamePassword.Location = new Point(3, 19);
-      plUsernamePassword.Name = "plUsernamePassword";
-      plUsernamePassword.Size = new Size(494, 113);
-      plUsernamePassword.TabIndex = 67;
       // 
       // Demo
       // 
@@ -312,8 +336,10 @@
       plControls.ResumeLayout(false);
       tbFunctionality.ResumeLayout(false);
       tpLogin.ResumeLayout(false);
-      tpLogin.PerformLayout();
+      panel1.ResumeLayout(false);
+      panel1.PerformLayout();
       grLogin.ResumeLayout(false);
+      plLoginWay.ResumeLayout(false);
       grLoginWay.ResumeLayout(false);
       grLoginWay.PerformLayout();
       plUsernamePassword.ResumeLayout(false);
@@ -340,11 +366,13 @@
     private TextBox txtPassword;
     private Button btnLogin;
     private GroupBox grLogin;
-    private Label label1;
-    private TextBox textBox1;
+    private Label lblClientId;
+    private TextBox txtClientId;
     private GroupBox grLoginWay;
     private RadioButton rbBasicLogin;
     private RadioButton rbOAuthLogin;
     private Panel plUsernamePassword;
+    private Panel plLoginWay;
+    private Panel panel1;
   }
 }

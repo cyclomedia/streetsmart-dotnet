@@ -52,9 +52,7 @@
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Demo.Designer.cs">
       <DependentUpon>Demo.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs">
-      <Link>Login.cs</Link>
-    </Compile>
+    <Compile Include="..\..\DemoAPI\Demo.WinForms\Login.cs" Link="Login.cs" />
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Program.cs" />
     <Compile Include="..\..\DemoAPI\Demo.WinForms\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
