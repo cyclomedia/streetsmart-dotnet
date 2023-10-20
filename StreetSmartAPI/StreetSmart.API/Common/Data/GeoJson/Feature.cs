@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -25,7 +26,12 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Feature : DataConvert, IFeature
   {
-    public Feature(Dictionary<string, object> feature, bool measurementProperties)
+    public Feature(object feature, bool measurementProperties)
+    {
+      GetFeature(ToDictionary(feature), measurementProperties);
+    }
+
+    public void GetFeature(Dictionary<string, object> feature, bool measurementProperties)
     {
       var geometry = GetDictValue(feature, "geometry");
       var properties = GetDictValue(feature, "properties");
@@ -37,7 +43,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        Type = (FeatureType) ToEnum(typeof(FeatureType), feature, "type");
+        Type = (FeatureType)ToEnum(typeof(FeatureType), feature, "type");
       }
       catch (ArgumentException)
       {
@@ -104,11 +110,11 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
-    public FeatureType Type { get; }
+    public FeatureType Type { get; private set; }
 
     public IGeometry Geometry { get; set; }
 
-    public IProperties Properties { get; }
+    public IProperties Properties { get; private set; }
 
     public override string ToString()
     {

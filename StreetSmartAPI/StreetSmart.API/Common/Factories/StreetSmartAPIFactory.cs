@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -41,18 +41,11 @@ namespace StreetSmart.Common.Factories
   /// </summary>
   public static class StreetSmartAPIFactory
   {
-    private static void InitializeCefSharp(CefSettings settings, bool enableHighDPISupport = false)
+    private static void InitializeCefSharp(CefSettings settings)
     {
       if (settings != null && !Cef.IsInitialized)
       {
-        CefSharpSettings.LegacyJavascriptBindingEnabled = true;
         BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
-
-        if (enableHighDPISupport)
-        {
-          Cef.EnableHighDPISupport();
-        }
-
         Cef.Initialize(settings, true, browserProcessHandler);
       }
     }
@@ -61,31 +54,28 @@ namespace StreetSmart.Common.Factories
     /// Initialize the api without creating an instance of it
     /// </summary>
     /// <param name="settings">The settings of CefSharp</param>
-    /// <param name="enableHighDPISupport">enableHighDPISupport, optional, default value = false</param>
-    public static void Initialize(IAPISettings settings = null, bool enableHighDPISupport = false)
+    public static void Initialize(IAPISettings settings = null)
     {
-      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings, enableHighDPISupport);
+      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings);
     }
 
     /// <summary>
     /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
     /// <param name="settings">The settings of CefSharp</param>
-    /// <param name="enableHighDPISupport">enableHighDPISupport, optional, default value = false</param>
     /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create(IAPISettings settings = null, bool enableHighDPISupport = false) =>
-      Create(Resources.StreetSmartLocation, settings, enableHighDPISupport);
+    public static IStreetSmartAPI Create(IAPISettings settings = null) =>
+      Create(Resources.StreetSmartLocation, settings);
 
     /// <summary>
     /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
     /// <param name="streetSmartLocation">The location Uri of StreetSmart</param>
     /// <param name="settings">The settings of CefSharp</param>
-    /// <param name="enableHighDPISupport">enableHighDPISupport, optional, default value = false</param>
     /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null, bool enableHighDPISupport = false)
+    public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null)
     {
-      Initialize(settings, enableHighDPISupport);
+      Initialize(settings);
       return new StreetSmartAPI(streetSmartLocation);
     }
   }

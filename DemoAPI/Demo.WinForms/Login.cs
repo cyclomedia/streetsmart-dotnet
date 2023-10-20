@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,8 @@ namespace Demo.WinForms
     public string Password { get; set; }
 
     public string ApiKey { get; set; }
+
+    public string ClientId { get; set; }
 
     public static Login Instance => _login ?? (_login = Load());
 

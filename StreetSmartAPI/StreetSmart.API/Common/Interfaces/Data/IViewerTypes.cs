@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,13 +34,13 @@ namespace StreetSmart.Common.Interfaces.Data
     /// <summary>
     /// Add the viewerType
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">The type of the viewer</param>
     void AddType(ViewerType type);
 
     /// <summary>
     /// Remove the viewerType
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">The type of the viewer</param>
     void RemoveType(ViewerType type);
   }
 }

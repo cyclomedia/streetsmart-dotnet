@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ namespace Demo.WinForms
 
     public override string ToString()
     {
-      string type = Viewer is IObliqueViewer ? "O" : Viewer is IPanoramaViewer ? "P" : "C";
+      string type = Viewer is IObliqueViewer ? "O" : Viewer is IPanoramaViewer ? "P" : Viewer is IMeshViewer ? "M" : "C";
       return $"({type}):{_id}";
     }
   }

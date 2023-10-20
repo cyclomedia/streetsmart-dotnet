@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,9 +37,10 @@ namespace StreetSmart.Common.Factories
     /// </summary>
     /// <param name="geoJson">GeoJSON object containing the layer data</param>
     /// <param name="name">Name of the layer.</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(string geoJson, string name)
-      => Create(geoJson, name, null, null);
+    public static IGeoJsonOverlay Create(string geoJson, string name, bool visible = true)
+      => Create(geoJson, name, null, null, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -47,9 +48,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="geoJson">GeoJSON object containing the layer data</param>
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">EPSG code (srs) for the source GeoJSON</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(string geoJson, string name, string srs)
-      => Create(geoJson, name, srs, null);
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, bool visible = true)
+      => Create(geoJson, name, srs, null, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -58,9 +60,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, string sld)
-      => new GeoJsonOverlay(geoJson, name, srs, sld);
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, string sld, bool visible = true)
+      => new GeoJsonOverlay(geoJson, name, srs, sld, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -69,9 +72,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="color">Optional color for the layer</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, Color color)
-      => new GeoJsonOverlay(geoJson, name, srs, color);
+    public static IGeoJsonOverlay Create(string geoJson, string name, string srs, Color color, bool visible = true)
+      => new GeoJsonOverlay(geoJson, name, srs, color, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -80,9 +84,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, string sld)
-      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, sld);
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, string sld, bool visible = true)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, sld, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -91,9 +96,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="color">Optional color for the layer</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, Color color)
-      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, color);
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, Color color, bool visible = true)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, color, visible);
 
     /// <summary>
     /// Create the overlay object
@@ -102,9 +108,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="name">Name of the layer.</param>
     /// <param name="srs">Optional EPSG code (srs) for the source GeoJSON, if not provided, srs of API initialisation is used.</param>
     /// <param name="styledLayerDescriptor">StyledLayer descriptor contains the sld styling of the layer</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
-    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor)
-      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD);
+    public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor, bool visible = true)
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD, visible);
 
     /// <summary>
     /// Create the wfs overlay object
@@ -115,11 +122,12 @@ namespace StreetSmart.Common.Factories
     /// <param name="version">The WFS version to be used</param>
     /// <param name="color">Color for the layer</param>
     /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, Color color,
-      bool authRequired)
+      bool authRequired, bool visible = true)
     {
-      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, null);
+      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, null, visible);
     }
 
     /// <summary>
@@ -133,9 +141,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="authRequired">Whether this layer requires authentication to access</param>
     /// <param name="username">Username of the user.</param>
     /// <param name="password">Password of the user.</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, Color color,
-      bool authRequired, string username, string password)
+      bool authRequired, string username, string password, bool visible = true)
     {
       SecureString Password = new SecureString();
 
@@ -144,7 +153,7 @@ namespace StreetSmart.Common.Factories
         Password.AppendChar(character);
       }
 
-      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, new Credentials(username, Password));
+      return new WFSOverlay(name, new Uri(url), typeName, version, color, authRequired, new Credentials(username, Password), visible);
     }
 
     /// <summary>
@@ -156,11 +165,12 @@ namespace StreetSmart.Common.Factories
     /// <param name="version">The WFS version to be used</param>
     /// <param name="sld">Optional XML string for Styled Layer Descriptor</param>
     /// <param name="authRequired">Whether this layer requires authentication to access</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, string sld,
-      bool authRequired)
+      bool authRequired, bool visible = true)
     {
-      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, null);
+      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, null, visible);
     }
 
     /// <summary>
@@ -174,9 +184,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="authRequired">Whether this layer requires authentication to access</param>
     /// <param name="username">Username of the user.</param>
     /// <param name="password">Password of the user.</param>
+    /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, string sld,
-      bool authRequired, string username, string password)
+      bool authRequired, string username, string password, bool visible = true)
     {
       SecureString Password = new SecureString();
 
@@ -185,7 +196,7 @@ namespace StreetSmart.Common.Factories
         Password.AppendChar(character);
       }
 
-      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, new Credentials(username, Password));
+      return new WFSOverlay(name, new Uri(url), typeName, version, sld, authRequired, new Credentials(username, Password), visible);
     }
   }
 }

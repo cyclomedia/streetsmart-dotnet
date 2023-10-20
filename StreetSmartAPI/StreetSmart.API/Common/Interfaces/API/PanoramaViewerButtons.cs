@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -83,6 +83,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// zoom out
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_OUT")]
-    ZoomOut = 10
+    ZoomOut = 10,
+      
+    /// <summary>
+    /// save measurement button
+    /// </summary>
+    [Description("StreetSmartApi.PanoramaViewerUi.SAVE_MEASUREMENT")]
+    SaveMeasurement = 11
   }
 }

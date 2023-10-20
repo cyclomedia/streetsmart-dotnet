@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -33,8 +33,8 @@ namespace StreetSmart.Common.Data
     private ICredentials _credentials;
 
     public WFSOverlay(string name, Uri url, string typeName, string version, string sld, bool authRequired,
-      ICredentials credentials)
-      : base(name, sld)
+      ICredentials credentials, bool visible = true)
+      : base(name, sld, visible)
     {      
       Url = url;
       TypeName = typeName;
@@ -44,8 +44,8 @@ namespace StreetSmart.Common.Data
     }
 
     public WFSOverlay(string name, Uri url, string typeName, string version, Color color, bool authRequired,
-      ICredentials credentials)
-      : base(name, color)
+      ICredentials credentials, bool visible = true)
+      : base(name, color, visible)
     {
       Url = url;
       TypeName = typeName;

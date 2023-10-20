@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -47,5 +47,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// Start new measurement when clicking on measurement type button in measurement the navigation bar. Default is true.
     /// </summary>
     bool? MeasureTypeButtonStart { get; set; }
+
+    /// <summary>
+    /// If time travel is enabled
+    /// </summary>
+    bool? TimeTravelVisible { get; set; }
   }
 }

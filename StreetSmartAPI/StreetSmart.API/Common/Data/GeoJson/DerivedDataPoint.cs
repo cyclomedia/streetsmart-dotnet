@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,7 +37,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       if (coordinateStdevs.Count >= 1)
       {
-        Position = new PositionStdev(position, coordinateStdevs[0] as Dictionary<string, object>);
+        Position = new PositionStdev(position, ToDictionary(coordinateStdevs[0]));
       }
 
       if (GetValue(positionXY, "value") is IList<object> valueXY)

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,6 +38,20 @@ namespace StreetSmart.Common.Interfaces.API
   /// </summary>
   public interface IStreetSmartAPI
   {
+    #region Settings / Shortcuts
+
+    /// <summary>
+    /// Object which is an Interface for changing certain settings withing the api
+    /// </summary>
+    ISettings Settings { get; }
+
+    /// <summary>
+    /// Object which is an Interface for enabeling/disabeling shortcuts
+    /// </summary>
+    IShortcuts Shortcuts { get; }
+
+    #endregion
+
     #region API events
 
     /// <summary>
@@ -54,6 +68,21 @@ namespace StreetSmart.Common.Interfaces.API
     /// Measurement changed or added.
     /// </summary>
     event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
+
+    /// <summary>
+    /// Measurement started
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+
+    /// <summary>
+    /// Measurement stopped.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+
+    /// <summary>
+    /// Measurement saved.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
 
     /// <summary>
     /// Viewer is added (panoramic or oblique)
@@ -105,6 +134,19 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="streetSmartLocation">The location of Street Smart</param>
     void RestartStreetSmart(string streetSmartLocation);
+/*
+    /// <summary>
+    /// Returns true if the browser object is disposed
+    /// </summary>
+    bool BrowserIsDisposed { get; }
+
+    /// <summary>
+    /// Create a new webbrowser
+    /// </summary>
+    /// <param name="parentWindowHwndSource"><reference to the window/param>
+    /// <param name="initialSize">initial size</param>
+    void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
+*/
     #endif
 
     /// <summary>
@@ -133,11 +175,13 @@ namespace StreetSmart.Common.Interfaces.API
     /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
     /// </summary>
     /// <param name="options">Object containing the options used for destroying the API.</param>
+    /// <returns>Async function to destroy api</returns>
     Task Destroy(IOptions options);
 
     /// <summary>
     /// Returns the active measurement in GeoJSON format
     /// </summary>
+    /// <returns>The measurement in GeoJSON format</returns>
     Task<IFeatureCollection> GetActiveMeasurement();
 
     /// <summary>
@@ -304,6 +348,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Removes a GeoJSON overlay from the panorama viewer.
     /// </summary>
     /// <param name="id">The id of the overlay</param>
+    /// <returns>Async function to remove an overlay</returns>
     Task RemoveOverlay(string id);
 
     /// <summary>
@@ -319,10 +364,17 @@ namespace StreetSmart.Common.Interfaces.API
     void SetOverlayDrawDistance(int distance);
 
     /// <summary>
+    /// Sets whether or not cursor movements will snap to nearby features while in measurement mode
+    /// </summary>
+    /// <param name="enabled">Whether or not to enable or disable snapping</param>
+    void SetSnapping(bool enabled);
+
+    /// <summary>
     /// Starts the measurement
     /// </summary>
     /// <param name="viewer">Panorama viewer for start the measurement inside</param>
     /// <param name="options">Measurement options</param>
+    /// <returns>Async function to starts the measurement</returns>
     Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options);
 
     /// <summary>

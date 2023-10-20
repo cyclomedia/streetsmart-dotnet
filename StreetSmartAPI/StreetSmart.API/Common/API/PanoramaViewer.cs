@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -62,7 +63,6 @@ namespace StreetSmart.Common.API
     public event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
     public event EventHandler<IEventArgs<IOrientation>> ViewChange;
     public event EventHandler<EventArgs> ViewLoadEnd;
-    public event EventHandler<EventArgs> ViewLoadStart;
 
     #endregion
 
@@ -83,8 +83,6 @@ namespace StreetSmart.Common.API
     public string JsViewChange => (ViewerList as PanoramaViewerList)?.JsViewChange;
 
     public string JsViewLoadEnd => (ViewerList as PanoramaViewerList)?.JsViewLoadEnd;
-
-    public string JsViewLoadStart => (ViewerList as PanoramaViewerList)?.JsViewLoadStart;
 
     public string JsTimeTravelChange => (ViewerList as PanoramaViewerList)?.JsTimeTravelChange;
 
@@ -184,32 +182,32 @@ namespace StreetSmart.Common.API
 
     public void RotateDown(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch.ToString(ci)});");
     }
 
     public void RotateLeft(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw.ToString(ci)});");
     }
 
     public void RotateRight(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw.ToString(ci)});");
     }
 
     public void RotateUp(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch.ToString(ci)});");
+    }
+
+    public void SetElevationSliderLevel(double elevationLevel)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setElevationSliderLevel({elevationLevel.ToString(ci)});");
     }
 
     public void SetOrientation(IOrientation orientation)
     {
       Browser.ExecuteScriptAsync($"{Name}.setOrientation({orientation});");
-    }
-
-    public void SetSelectedFeatureByProperties(IJson properties, string layerId)
-    {
-      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
     }
 
     public void ShowAttributePanelOnFeatureClick()
@@ -225,6 +223,11 @@ namespace StreetSmart.Common.API
     public void Toggle3DCursor(bool visible)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggle3DCursor({visible.ToJsBool()});");
+    }
+
+    public void ToggleLinkedViewers()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleLinkedViewers();");
     }
 
     public void ToggleAddressesVisible(bool visible)
@@ -261,18 +264,18 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnElevationChange(Dictionary<string, object> args)
+    public void OnElevationChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ElevationChange?.Invoke(this, new EventArgs<ElevationInfo>(new ElevationInfo(detail)));
     }
 
-    public void OnImageChange(Dictionary<string, object> args)
+    public void OnImageChange(ExpandoObject args)
     {
       ImageChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnRecordingClick(Dictionary<string, object> args)
+    public void OnRecordingClick(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       Dictionary<string, object> recording = GetDictValue(detail, "recording");
@@ -280,48 +283,43 @@ namespace StreetSmart.Common.API
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
-    public void OnFeatureClick(Dictionary<string, object> args)
+    public void OnFeatureClick(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnTileLoadError(Dictionary<string, object> args)
+    public void OnTileLoadError(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>
         (GetDictValue(detail, "request")));
     }
 
-    public void OnViewChange(Dictionary<string, object> args)
+    public void OnViewChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
-    public void OnSurfaceCursorChange(Dictionary<string, object> args)
+    public void OnSurfaceCursorChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SurfaceCursorChange?.Invoke(this, new EventArgs<IDepthInfo>(new DepthInfo(detail)));
     }
 
-    public void OnViewLoadEnd(Dictionary<string, object> args)
+    public void OnViewLoadEnd(ExpandoObject args)
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnViewLoadStart(Dictionary<string, object> args)
-    {
-      ViewLoadStart?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void OnTimeTravelChange(Dictionary<string, object> args)
+    public void OnTimeTravelChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 
-    public void OnFeatureSelectionChange(Dictionary<string, object> args)
+    public void OnFeatureSelectionChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
@@ -341,7 +339,6 @@ namespace StreetSmart.Common.API
         new PanoramaViewerEvent(this, "IMAGE_CHANGE", JsImChange),
         new PanoramaViewerEvent(this, "SURFACE_CURSOR_CHANGE", JsSurfaceCursorChange),
         new PanoramaViewerEvent(this, "VIEW_CHANGE", JsViewChange),
-        new PanoramaViewerEvent(this, "VIEW_LOAD_START", JsViewLoadStart),
         new PanoramaViewerEvent(this, "VIEW_LOAD_END", JsViewLoadEnd),
         new PanoramaViewerEvent(this, "TILE_LOAD_ERROR", JsTileLoadError),
         new PanoramaViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange),

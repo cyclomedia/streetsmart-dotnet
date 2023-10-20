@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -151,6 +151,33 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
+    protected void RegisterThisJsObject()
+    {
+      Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+
+#if WINFORMS
+#if NETCOREAPP
+      Browser.JavascriptObjectRepository.Register(JsThis, this);
+#else
+      Browser.JavascriptObjectRepository.Register(JsThis, this, true);
+#endif
+#else
+      Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
+      {
+        var repo = e.ObjectRepository;
+
+        if (e.ObjectName == "Legacy")
+        {
+#if NETCOREAPP
+          repo.Register(JsThis, this);
+#else
+          repo.Register(JsThis, this, false);
+#endif
+        }
+      };
+#endif
+        }
+
     protected bool CheckResultTask(string funcName)
     {
       bool result = true;
@@ -191,7 +218,7 @@ namespace StreetSmart.Common.API
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
       object funcResult = null;
-      IBrowser myBrowser = Browser?.GetBrowser();
+      IBrowser myBrowser = !(Browser?.IsDisposed ?? true) ? Browser?.GetBrowser() : null;
 
       if (myBrowser != null)
       {

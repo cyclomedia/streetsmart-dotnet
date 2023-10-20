@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Project>
+	<PropertyGroup>
+		<AssemblyName>StreetSmart.WPF</AssemblyName>
+		<VersionPrefix>23.9.0</VersionPrefix>
+		<Authors>Cyclomedia</Authors>
+		<Company>Cyclomedia</Company>
+		<AssemblyVersion>23.9.0</AssemblyVersion>
+	</PropertyGroup>
+</Project>

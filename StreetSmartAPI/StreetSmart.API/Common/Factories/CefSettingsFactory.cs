@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,10 @@ namespace StreetSmart.Common.Factories
     /// <summary>
     /// Creates a new instance of the API Settings class.
     /// </summary>
+    /// <param name="cachePath">The location where cache data will be stored on disk.</param>
+    /// <param name="browserSubprocessPath">The path to a separate executable that will be launched for sub-processes.</param>
+    /// <param name="localesDirPath">The fully qualified path for the locales directory.</param>
+    /// <param name="resourcesDirPath">The fully qualified path for the resources directory.</param>
     /// <returns>API Settings class</returns>
     public static IAPISettings Create(string cachePath, string browserSubprocessPath = null, string localesDirPath = null, string resourcesDirPath = null)
     {
@@ -49,9 +53,10 @@ namespace StreetSmart.Common.Factories
     }
 
     /// <summary>
-    /// Set the language code
+    /// Set the browser language code
     /// </summary>
-    /// <param name="languageCode"></param>
+    /// <param name="languageCode">The browser language code</param>
+    /// <returns>If setting the language code was successful.</returns>
     public static bool SetLanguage(string languageCode)
     {
       bool result = false;

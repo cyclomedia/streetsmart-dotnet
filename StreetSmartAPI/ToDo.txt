@@ -1,4 +1,2 @@
 ﻿To do:
 ==============
-
-- add the measurement / feed switch

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -62,7 +63,7 @@ namespace StreetSmart.Common.API
     public void RegisterJsObject(ChromiumWebBrowser browser)
     {
       Browser = browser;
-      browser.RegisterJsObject(JsThis, this);
+      RegisterThisJsObject();
     }
 
     public abstract IViewer AddViewer(string name);
@@ -173,7 +174,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
+    public void OnLayerVisibilityChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -192,7 +193,8 @@ namespace StreetSmart.Common.API
     {
       { ViewerType.Panorama, PanoramaViewerList.Type },
       { ViewerType.Oblique, ObliqueViewerList.Type },
-      { ViewerType.PointCloud, PointCloudViewerList.Type }
+      { ViewerType.PointCloud, PointCloudViewerList.Type },
+      { ViewerType.MeshViewer, MeshViewerList.Type }
     };
 
     public static PanoramaViewerList GetPanoramaViewerList(string apiId)
@@ -208,7 +210,8 @@ namespace StreetSmart.Common.API
         {
           {PanoramaViewerList.Type, new PanoramaViewerList()},
           {ObliqueViewerList.Type, new ObliqueViewerList()},
-          {PointCloudViewerList.Type, new PointCloudViewerList()}
+          {PointCloudViewerList.Type, new PointCloudViewerList()},
+          {MeshViewerList.Type, new MeshViewerList()}
         });
       }
     }

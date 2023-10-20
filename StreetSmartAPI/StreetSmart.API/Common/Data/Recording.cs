@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -40,6 +40,7 @@ namespace StreetSmart.Common.Data
     private ProductType _productType;
     private string _heightSystem;
     private DateTime? _expiredAt;
+    private int? _year;
 
     public Recording(Dictionary<string, object> recording)
     {
@@ -63,6 +64,7 @@ namespace StreetSmart.Common.Data
       ProductType = (ProductType) ToEnum(typeof(ProductType), recording, "productType");
       HeightSystem = ToString(recording, "heightSystem");
       ExpiredAt = ToNullDateTime(recording, "expiredAt");
+      Year = ToNullInt(recording, "year");
     }
 
     public double? GroundLevelOffset
@@ -211,6 +213,16 @@ namespace StreetSmart.Common.Data
       set
       {
         _expiredAt = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public int? Year
+    {
+      get => _year;
+      set
+      {
+        _year = value;
         RaisePropertyChanged();
       }
     }

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,7 +17,6 @@
  */
 
 using System;
-using System.Globalization;
 using System.Security;
 
 using StreetSmart.Common.Interfaces.DomElement;
@@ -39,12 +38,22 @@ namespace StreetSmart.Common.Interfaces.Data
     /// </summary>
     SecureString Password { get; set; }
 
+    /// <summary>
+    /// ClientId given to the user (for OAuth log in)
+    /// </summary>
+    string ClientId { get; set; }
+
     // ReSharper disable InconsistentNaming
 
     /// <summary>
     /// ApiKey given to the user.
     /// </summary>
     string APIKey { get; set; }
+
+    /// <summary>
+    /// Flag for login with oauth
+    /// </summary>
+    bool? LoginOauth { get; set; }
 
     /// <summary>
     /// Coordinate system used in the API. E.g. "EPSG:29882".

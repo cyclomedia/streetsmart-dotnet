@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@ namespace StreetSmart.Common.API.Events
 {
   internal class PointCloudViewerEvent: ViewerEvent
   {
-    protected override string Events => "Events.pointcloudViewer";
+    protected override string Events => "Events.pointCloudViewer";
 
     public PointCloudViewerEvent(Viewer viewer, string type, string funcName)
       : base(viewer, type, funcName)

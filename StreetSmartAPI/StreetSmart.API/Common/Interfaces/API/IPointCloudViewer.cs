@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -43,37 +43,35 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Triggers on a point size change
     /// </summary>
-    event EventHandler<IEventArgs<int>> PointSizeChanged;
+    event EventHandler<IEventArgs<PointSize>> PointSizeChanged;
 
     /// <summary>
     /// Triggers on a point style change
     /// </summary>
-    event EventHandler<IEventArgs<PointStyle>> PointStyleChanged;
+    event EventHandler<IEventArgs<ColorizationMode>> PointStyleChanged;
 
     /// <summary>
     /// Triggers on a point budged change
     /// </summary>
-    event EventHandler<IEventArgs<PointBudget>> PointBudgedChanged;
+    event EventHandler<IEventArgs<Quality>> PointBudgedChanged;
 
     /// <summary>
-    /// Moves the camera of the pointcloud viewer towards a given coordinate.
+    /// Background Changed
     /// </summary>
-    /// <param name="position">coordinate to move to</param>
-    /// <param name="lookAt">coordinate to look at</param>
-    void FlyTo(ICoordinate position, ICoordinate lookAt);
+    event EventHandler<IEventArgs<BackgroundPreset>> BackGroundChanged;
+
+    /// <summary>
+    /// Get the background of the PointCloud. See the background enum
+    /// </summary>
+    /// <returns>The background of the PointCloud</returns>
+    Task<BackgroundPreset> GetBackgroundPreset();
 
     /// <summary>
     /// Get the visibility of a button
     /// </summary>
-    /// <param name="buttonId"></param>
-    /// <returns></returns>
+    /// <param name="buttonId">The buttonId of which the visibility is requested</param>
+    /// <returns>Visibility of the button</returns>
     Task<bool> GetButtonEnabled(PointCloudViewerButtons buttonId);
-
-    /// <summary>
-    /// Returns the current position of the camera, and position of the target its looking at.
-    /// </summary>
-    /// <returns>Current position of target the camera is looking at</returns>
-    Task<ICamera> GetCameraPosition();
 
     /// <summary>
     /// Get current visibility of black edges around points.
@@ -82,75 +80,75 @@ namespace StreetSmart.Common.Interfaces.API
     Task<bool> GetEdgesVisibility();
 
     /// <summary>
-    /// Get current point budget.
+    /// Get the maximal height colorization, these values are only used with the point style: Height
     /// </summary>
-    /// <returns>budget - can be 'Low', 'Med' or 'High'</returns>
-    Task<PointBudget> GetPointBudget();
+    /// <returns>Maximal height colorization can be between -10 and 50</returns>
+    Task<double> GetMaxHeightColorization();
 
     /// <summary>
-    /// Get current size of points
+    /// Get the minimal height colorization, these values are only used with the point style: Height
     /// </summary>
-    /// <returns></returns>
-    Task<int> GetPointSize();
+    /// <returns>Minimal height colorization can be between -10 and 50</returns>
+    Task<double> GetMinHeightColorization();
+
+    /// <summary>
+    /// Get current point amount, see quality enum
+    /// </summary>
+    /// <returns>Amount - can be 'low', 'medium' or 'high' or 'ultra'</returns>
+    Task<Quality> GetPointAmount();
+
+    /// <summary>
+    /// Get current size of points, see PointSize enum
+    /// </summary>
+    /// <returns>Size of points</returns>
+    Task<PointSize> GetPointSize();
 
     /// <summary>
     /// Get current style of points
     /// </summary>
-    /// <returns></returns>
-    Task<PointStyle> GetPointStyle();
+    /// <returns>style - the style of points</returns>
+    Task<ColorizationMode> GetPointStyle();
 
     /// <summary>
-    /// Rotates the camera of the pointcloud viewer towards a given coordinate.
+    /// Set the background. See the background enum.
     /// </summary>
-    /// <param name="lookAt">Coordinate to look at</param>
-    void LookAtCoordinate(ICoordinate lookAt);
+    /// <param name="background">The new background</param>
+    void SetBackgroundPreset(BackgroundPreset background);
 
     /// <summary>
-    /// Rotates the camera a given amount of degrees towards the down
+    /// Set the maximum height colorization, this function can only be used with the point style: Height
     /// </summary>
-    /// <param name="deg">amount of degrees to rotate right</param>
-    void RotateDown(double deg);
+    /// <param name="heightColorization">The maximum height colorization</param>
+    void SetMaxHeightColorization(double heightColorization);
 
     /// <summary>
-    /// Rotates the camera a given amount of degrees towards the left
+    /// Set the minimum height colorization, this function can only be used with the point style: Height
     /// </summary>
-    /// <param name="deg">amount of degrees to rotate left</param>
-    void RotateLeft(double deg);
-
-    /// <summary>
-    /// Rotates the camera a given amount of degrees towards the right
-    /// </summary>
-    /// <param name="deg">amount of degrees to rotate right</param>
-    void RotateRight(double deg);
-
-    /// <summary>
-    /// Rotates the camera a given amount of degrees towards the up
-    /// </summary>
-    /// <param name="deg">amount of degrees to rotate right</param>
-    void RotateUp(double deg);
+    /// <param name="heightColorization">The minimum height colorization</param>
+    void SetMinHeightColorization(double heightColorization);
 
     /// <summary>
     /// Set the maximum amount of point displayed in the viewer.
     /// </summary>
-    /// <param name="pointBudget">can be set to 'Low', 'Med' or 'High'</param>
-    void SetPointBudget(PointBudget pointBudget);
+    /// <param name="amount">can be set to 'Low', 'Med' or 'High'</param>
+    void SetPointAmount(Quality amount);
 
     /// <summary>
-    /// Set the size points are displayed on.
+    /// Set the size points are displayed on, see PointSize enum.
     /// </summary>
-    /// <param name="size">new size of points in the viewer. Range between 0.1 and 50.</param>
-    void SetPointSize(int size);
+    /// <param name="size">new size of points in the viewer.</param>
+    void SetPointSize(PointSize size);
 
     /// <summary>
-    /// Set the style of points. See PointStyle Enum.
+    /// Set the style of points. See colorizationMode Enum.
     /// </summary>
-    /// <param name="pointStyle">new the style of points</param>
-    void SetPointStyle(PointStyle pointStyle);
+    /// <param name="style">new the style of points</param>
+    void SetPointStyle(ColorizationMode style);
 
     /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
-    /// <param name="buttonId"></param>
+    /// <param name="buttonId">The buttonId to be toggled.</param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(PointCloudViewerButtons buttonId, bool enabled);
 
@@ -159,5 +157,11 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="visible">if available, set visibility to this value</param>
     void ToggleEdges(bool visible);
+
+    /// <summary>
+    /// Toggles between aerial point cloud and street point cloud
+    /// </summary>
+    /// <param name="value">)If available, sets visibility to this value.</param>
+    void TogglePointCloudType(PointCloudType? value);
   }
 }

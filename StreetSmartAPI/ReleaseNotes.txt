@@ -1,10 +1,84 @@
 ﻿Release notes:
 ==============
 
+Version 23.9.0
+================
+- React 18 API
+
+
+Version 23.8.0
+================
+- Fixed bug parsing mearurement changed
+- Added the meshviewer object
+
+
+Version 23.7.0
+================
+- Removed hight dpi support
+
+
+Version 22.20.0
+================
+- Updated to .net 6.0
+- Connected to the latest Street Smart 22.20 API
+- Added a OAuth property in the api.init for login by OAuth
+- Added clientId (needed to login by oauth) to the init function of the api
+- Added events: measurementStart, measurementStop, measurementSaved
+- Added a save measurement button function to the api
+
+
+Version 22.8.0
+================
+- Connected to new Street Smart 22.8 API
+- Implemented new PointCloudViewer
+- Added interface fuction for linkedViewers
+- added the functionality of compass, which can be set with function `toggleCompass'
+- added the function to set an elevationLevel in the panorama viewer
+
+
+Version 21.10.0
+================
+- implemented DCR9+ Tileschema
+
+Version 21.4.0
+================
+- replaced the poitscene pointcloud viewer with the bluebird viewer
+
+Version 21.1.0
+================
+- added Aerial point cloud support (including interface functions
+
+
+Version 21.1.0
+================
+- added Aerial point cloud support (including interface functions)
+- it is posible for add a layer which is standard turned off
+
+
+Version: 20.6.0
+================
+- parse the property year in the recording object
+
+
+Version: 20.2.0
+================
+- Updated to CefSharp version 0.79
+
+
+Version: 19.19.0
+================
+- fixed some geojson generation with polygons, triangolation wasn't working
+- in case of a WPF API, show and close developer tools are running now in the UI thread
+- pass an optional measure method to the start measurement call
+- feet / metric toggle (SetUnitPreference / GetUnitPreference)
+- enable / disable shortcuts (enableShortcut / disableShortcut)
+- added oblique viewer events: SWITCH_VIEWING_DIRECTION, FEATURE_CLICK, FEATURE_SELECTION_CHANGE, IMAGE_CHANGE, VIEW_CHANGE, VIEW_LOAD_END, TIME_TRAVEL_CHANGE
+
 
 Version: 19.18.0
 ================
 - Implemented all the point cloud functions + events + viewers
+- Improved parsing of geoJson layers + exception handling
 
 
 Version: 19.17.0

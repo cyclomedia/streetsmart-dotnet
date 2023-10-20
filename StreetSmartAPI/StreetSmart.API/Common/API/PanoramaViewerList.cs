@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,7 +17,7 @@
  */
 
 using System;
-using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 
 using StreetSmart.Common.Interfaces.API;
@@ -49,8 +49,6 @@ namespace StreetSmart.Common.API
     public string JsViewChange => $"{nameof(OnViewChange).FirstCharacterToLower()}";
 
     public string JsViewLoadEnd => $"{nameof(OnViewLoadEnd).FirstCharacterToLower()}";
-
-    public string JsViewLoadStart => $"{nameof(OnViewLoadStart).FirstCharacterToLower()}";
 
     public string JsTimeTravelChange => $"{nameof(OnTimeTravelChange).FirstCharacterToLower()}";
 
@@ -92,7 +90,7 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnElevationChange(string name, Dictionary<string, object> args)
+    public void OnElevationChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -100,7 +98,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnImageChange(string name, Dictionary<string, object> args)
+    public void OnImageChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -108,7 +106,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnRecordingClick(string name, Dictionary<string, object> args)
+    public void OnRecordingClick(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -116,7 +114,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnFeatureClick(string name, Dictionary<string, object> args)
+    public void OnFeatureClick(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -124,7 +122,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnTileLoadError(string name, Dictionary<string, object> args)
+    public void OnTileLoadError(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -132,7 +130,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnViewChange(string name, Dictionary<string, object> args)
+    public void OnViewChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -140,7 +138,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnSurfaceCursorChange(string name, Dictionary<string, object> args)
+    public void OnSurfaceCursorChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -148,7 +146,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnViewLoadEnd(string name, Dictionary<string, object> args)
+    public void OnViewLoadEnd(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -156,15 +154,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnViewLoadStart(string name, Dictionary<string, object> args)
-    {
-      if (Viewers.ContainsKey(name))
-      {
-        (Viewers[name] as PanoramaViewer)?.OnViewLoadStart(args);
-      }
-    }
-
-    public void OnTimeTravelChange(string name, Dictionary<string, object> args)
+    public void OnTimeTravelChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -172,7 +162,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnFeatureSelectionChange(string name, Dictionary<string, object> args)
+    public void OnFeatureSelectionChange(string name, ExpandoObject args)
     {
       if (Viewers.ContainsKey(name))
       {

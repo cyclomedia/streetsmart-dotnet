@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,15 +28,15 @@ namespace StreetSmart.Common.Data
     private string _geoJson;
     private string _srs;
 
-    public GeoJsonOverlay(string geoJson, string name, string srs, string sld)
-      : base(name, sld)
+    public GeoJsonOverlay(string geoJson, string name, string srs, string sld, bool visible = true)
+      : base(name, sld, visible)
     {
       GeoJson = geoJson;
       Srs = srs;
     }
 
-    public GeoJsonOverlay(string geoJson, string name, string srs, Color color)
-      : base(name, color)
+    public GeoJsonOverlay(string geoJson, string name, string srs, Color color, bool visible = true)
+      : base(name, color, visible)
     {
       GeoJson = geoJson;
       Srs = srs;

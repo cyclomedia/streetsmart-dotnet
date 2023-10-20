@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -71,6 +71,12 @@ namespace StreetSmart.Common.Interfaces.API
     /// toggle nadir
     /// </summary>
     [Description("StreetSmartApi.ObliqueViewerUi.buttons.TOGGLE_NADIR")]
-    ToggleNadir = 8
+    ToggleNadir = 8,
+
+    /// <summary>
+    /// save measurement button
+    /// </summary>
+    [Description("StreetSmartApi.ObliqueViewerUi.SAVE_MEASUREMENT")]
+    SaveMeasurement = 9
   }
 }

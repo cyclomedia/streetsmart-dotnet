@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,11 +18,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Globalization;
+using System.Linq;
 
 namespace StreetSmart.Common.Data
 {
   class DataConvert : NotifyPropertyChanged
   {
+    protected static CultureInfo ci => CultureInfo.InvariantCulture;
+
     public double ToDouble(object value)
     {
       return double.TryParse(value?.ToString(), out var outValue) ? outValue : 0.0;
@@ -125,7 +130,22 @@ namespace StreetSmart.Common.Data
 
     public Dictionary<string, object> ToDictionary(object value)
     {
-      return value as Dictionary<string, object> ?? new Dictionary<string, object>();
+      Dictionary<string, object> result;
+
+      if (value is Dictionary<string, object> objects)
+      {
+        result = objects;
+      }
+      else if (value is ExpandoObject expandoObject)
+      {
+        result = expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
+      }
+      else
+      {
+        result = new Dictionary<string, object>();
+      }
+
+      return result;
     }
 
     public IList<object> ToList(object value)
@@ -135,7 +155,12 @@ namespace StreetSmart.Common.Data
 
     public object[] ToArray(object value)
     {
-      return value as object[] ?? new object[0];
+      if (value is IList<object>)
+      {
+        return (value as List<object>)?.ToArray() ?? Array.Empty<object>();
+      }
+
+      return Array.Empty<object>();
     }
 
     public object[] GetArrayValue(Dictionary<string, object> details, string value)
@@ -143,9 +168,19 @@ namespace StreetSmart.Common.Data
       return ToArray(GetValue(details, value));
     }
 
+    public object GetValue(ExpandoObject details, string value)
+    {
+      return GetValue(ToDictionary(details), value);
+    }
+
     public object GetValue(Dictionary<string, object> details, string value)
     {
       return details?.ContainsKey(value) ?? false ? details[value] : null;
+    }
+
+    public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
+    {
+      return ToDictionary(GetValue(details, value));
     }
 
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)

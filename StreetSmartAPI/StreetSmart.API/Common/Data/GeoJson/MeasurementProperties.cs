@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -86,7 +86,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var measureDetail in measureDetails)
       {
-        MeasureDetails.Add(new MeasureDetails(measureDetail as Dictionary<string, object>, MeasurementTool));
+        MeasureDetails.Add(new MeasureDetails(converter.ToDictionary(measureDetail), MeasurementTool));
       }
 
       try

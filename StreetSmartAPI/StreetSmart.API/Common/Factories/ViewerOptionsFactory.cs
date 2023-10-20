@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,17 @@ namespace StreetSmart.Common.Factories
     /// <param name="srs">The SRS of the viewer</param>
     /// <returns>The viewer options used for open viewers</returns>
     public static IViewerOptions Create(IList<ViewerType> viewerType, string srs)
-      => Create(viewerType, srs, null, null);
+      => Create(viewerType, srs, null, null, null);
+
+    /// <summary>
+    /// Creates a viewer options object
+    /// </summary>
+    /// <param name="viewerType">An collection of viewerTypes</param>
+    /// <param name="srs">The SRS of the viewer</param>
+    /// <param name="pointCloudViewer">The panorama viewer options</param>
+    /// <returns>The viewer options used for open the viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, IPointCloudViewerOptions pointCloudViewer)
+      => Create(viewerType, srs, null, null, pointCloudViewer);
 
     /// <summary>
     /// Creates a viewer options object
@@ -45,7 +55,19 @@ namespace StreetSmart.Common.Factories
     /// <param name="panoramaViewer">The panorama viewer options</param>
     /// <returns>The viewer options used for open the viewers</returns>
     public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, IPanoramaViewerOptions panoramaViewer)
-      => Create(viewerType, srs, panoramaViewer, null);
+      => Create(viewerType, srs, panoramaViewer, null, null);
+
+    /// <summary>
+    /// Creates a viewer options object
+    /// </summary>
+    /// <param name="viewerType">An collection of viewerTypes</param>
+    /// <param name="srs">The SRS of the viewer</param>
+    /// <param name="panoramaViewer">The panorama viewer options</param>
+    /// <param name="pointCloudViewer">The panorama viewer options</param>
+    /// <returns>The viewer options used for open the viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs,
+      IPanoramaViewerOptions panoramaViewer, IPointCloudViewerOptions pointCloudViewer)
+      => Create(viewerType, srs, panoramaViewer, null, pointCloudViewer);
 
     /// <summary>
     /// Creates a viewer options object
@@ -55,8 +77,21 @@ namespace StreetSmart.Common.Factories
     /// <param name="panoramaViewer">The panorama viewer options</param>
     /// <param name="obliqueViewer">The oblique viewer options</param>
     /// <returns>The viewer options used for open the viewers</returns>
+    public static IViewerOptions Create(IList<ViewerType> viewerType, string srs,
+      IPanoramaViewerOptions panoramaViewer, IObliqueViewerOptions  obliqueViewer)
+      => Create(viewerType, srs, panoramaViewer, obliqueViewer, null);
+
+    /// <summary>
+    /// Creates a viewer options object
+    /// </summary>
+    /// <param name="viewerType">An collection of viewerTypes</param>
+    /// <param name="srs">The SRS of the viewer</param>
+    /// <param name="panoramaViewer">The panorama viewer options</param>
+    /// <param name="obliqueViewer">The oblique viewer options</param>
+    /// <param name="pointCloudViewer">The oblique viewer options</param>
+    /// <returns>The viewer options used for open the viewers</returns>
     public static IViewerOptions Create(IList<ViewerType> viewerType, string srs, IPanoramaViewerOptions panoramaViewer,
-      IObliqueViewerOptions obliqueViewer)
-      => new ViewerOptions(viewerType, srs, panoramaViewer, obliqueViewer);
+      IObliqueViewerOptions obliqueViewer, IPointCloudViewerOptions pointCloudViewer)
+      => new ViewerOptions(viewerType, srs, panoramaViewer, obliqueViewer, pointCloudViewer);
   }
 }

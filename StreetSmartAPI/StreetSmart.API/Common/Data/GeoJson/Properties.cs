@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -63,7 +63,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var property in this)
       {
-        properties = $"{properties},\"{property.Key}\":\"{property.Value}\"";
+        string value = property.Value.ToString()?.Replace('\"', '\'');
+        properties = $"{properties},\"{property.Key}\":\"{value}\"";
       }
 
       properties = properties.Substring(Math.Min(properties.Length, 1));

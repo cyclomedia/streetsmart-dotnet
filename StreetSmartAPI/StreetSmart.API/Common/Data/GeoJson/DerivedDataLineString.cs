@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -157,8 +157,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
         foreach (IProperty property in propertyList)
         {
-          string valueStr = property?.Value?.ToString(ci);
-          string stdevStr = property?.Stdev?.ToString(ci);
+          string valueStr = double.IsNaN(property?.Value ?? double.NaN) ? null : property?.Value?.ToString(ci);
+          string stdevStr = double.IsNaN(property?.Stdev ?? double.NaN) ? null : property?.Stdev?.ToString(ci);
           valueStr = string.IsNullOrEmpty(valueStr) ? "null" : valueStr;
           stdevStr = string.IsNullOrEmpty(stdevStr) ? "null" : stdevStr;
           value = $"{value}{valueStr},";

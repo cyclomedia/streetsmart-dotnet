@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 using StreetSmart.WPF.Example.Properties;
@@ -50,6 +51,8 @@ namespace StreetSmart.WPF.Example
     private string _password;
 
     public IStreetSmartAPI Api { get; set; }
+
+    public WpfApi WpfApi { get; set; }
 
     public string RestartUrl
     {
@@ -105,8 +108,20 @@ namespace StreetSmart.WPF.Example
       Username = Resources.Username;
       Password = Resources.Password;
       ConfigurationUrl = "https://atlas.cyclomedia.com/configuration";
-      Api = StreetSmartAPIFactory.Create();
-      Api.APIReady += ApiReady;
+      WpfApi = new WpfApi();
+      WpfApi.PropertyChanged += onPropertyChanged;
+    }
+
+    private void onPropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+      if (args != null)
+      {
+        if (args.PropertyName == "Api")
+        {
+          Api = WpfApi.Api;
+          Api.APIReady += ApiReady;
+        }
+      }
     }
 
     #endregion
@@ -119,7 +134,7 @@ namespace StreetSmart.WPF.Example
       IDomElement element = DomElementFactory.Create();
       _options = string.IsNullOrEmpty(ConfigurationUrl)
         ? OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, addressSettings, element)
-        : OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, ConfigurationUrl,
+        : OptionsFactory.Create(Username, Password, null, Resources.ApiKey, Srs, Language, ConfigurationUrl,
           addressSettings, element);
       await Api.Init(_options);
 

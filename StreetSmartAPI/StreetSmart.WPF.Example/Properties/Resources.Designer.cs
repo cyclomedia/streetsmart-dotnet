@@ -19,7 +19,7 @@ namespace StreetSmart.WPF.Example.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -70,7 +70,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localinstallation.cyclomedia.com:8080/configuration.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string ConfigurationUrl {
             get {
@@ -88,7 +88,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localinstallation.cyclomedia.com/streetsmart/v18.1/api/api-dotnet.html.
+        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v22.20/api-dotnet.html.
         /// </summary>
         public static string StreetSmartLocation {
             get {

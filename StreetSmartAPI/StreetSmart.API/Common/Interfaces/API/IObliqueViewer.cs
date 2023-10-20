@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,7 +16,11 @@
  * License along with this library.
  */
 
+using System;
 using System.Threading.Tasks;
+
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.Interfaces.API
 {
@@ -26,11 +30,50 @@ namespace StreetSmart.Common.Interfaces.API
   /// </summary>
   public interface IObliqueViewer : IImageViewer
   {
+    #region Interface events
+
+    /// <summary>
+    /// Triggers when oblique viewing direction is clicked.
+    /// </summary>
+    event EventHandler<IEventArgs<IDirectionInfo>> SwitchViewingDir;
+
+    /// <summary>
+    /// Triggers when a feature is clicked inside the obliqueViewer.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureClick;
+
+    /// <summary>
+    /// Triggers when a feature is selected / deselected inside the obliqueViewer.
+    /// </summary>
+    event EventHandler<IEventArgs<IFeatureInfo>> FeatureSelectionChange;
+
+    /// <summary>
+    /// Triggers when loaded another oblique image.
+    /// </summary>
+    event EventHandler<IEventArgs<IObliqueImageInfo>> ImageChange;
+
+    /// <summary>
+    /// Triggers when the view (center, resolution, rotation) of the oblique changed.
+    /// </summary>
+    event EventHandler<IEventArgs<IObliqueOrientation>> ViewChange;
+
+    /// <summary>
+    /// Triggers when the surface cursor is changed
+    /// </summary>
+    event EventHandler<EventArgs> ViewLoadEnd;
+
+    /// <summary>
+    /// Triggers when time travel date changed
+    /// </summary>
+    event EventHandler<IEventArgs<ITimeTravelInfo>> TimeTravelChange;
+
+    #endregion
+
     /// <summary>
     /// Get the visibility of a button
     /// </summary>
-    /// <param name="buttonId"></param>
-    /// <returns></returns>
+    /// <param name="buttonId">The buttonId of which the visibility is requested</param>
+    /// <returns>Visibility of the button</returns>
     Task<bool> GetButtonEnabled(ObliqueViewerButtons buttonId);
 
     /// <summary>
@@ -42,7 +85,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Toggle the visibility of a button.
     /// </summary>
-    /// <param name="buttonId"></param>
+    /// <param name="buttonId">The buttonId where the visibility is changed.</param>
     /// <param name="enabled">if available, sets enabled to this value</param>
     void ToggleButtonEnabled(ObliqueViewerButtons buttonId, bool enabled);
   }

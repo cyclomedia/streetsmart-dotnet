@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,12 +21,12 @@ using StreetSmart.Common.Data.SLD;
 namespace StreetSmart.Common.Interfaces.SLD
 {
   /// <summary>
-  /// 
+  /// Userstyle definition
   /// </summary>
   public interface IUserStyle
   {
     /// <summary>
-    /// 
+    /// Feature type style
     /// </summary>
     FeatureTypeStyle FeatureTypeStyle { get; set; }
   }

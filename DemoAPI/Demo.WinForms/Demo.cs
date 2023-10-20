@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -44,6 +44,7 @@ namespace Demo.WinForms
     private readonly List<IPanoramaViewer> _panoramaViewers;
     private readonly List<IObliqueViewer> _obliqueViewers;
     private readonly List<IPointCloudViewer> _pointCloudViewers;
+    private readonly List<IMeshViewer> _meshViewers;
     private readonly CultureInfo _ci;
     private readonly Login _login;
 
@@ -97,6 +98,22 @@ namespace Demo.WinForms
       }
     }
 
+    private IMeshViewer MeshViewer
+    {
+      get => _meshViewers.Count == 0 ? null : _meshViewers[_meshViewers.Count - 1];
+      set
+      {
+        if (_meshViewers.Count == 0)
+        {
+          _meshViewers.Add(value);
+        }
+        else
+        {
+          _meshViewers[_meshViewers.Count - 1] = value;
+        }
+      }
+    }
+
     private int DeltaYawPitch
     {
       get
@@ -120,24 +137,28 @@ namespace Demo.WinForms
       _panoramaViewers = new List<IPanoramaViewer>();
       _obliqueViewers = new List<IObliqueViewer>();
       _pointCloudViewers = new List<IPointCloudViewer>();
+      _meshViewers = new List<IMeshViewer>();
       _addressLayerOverlayVisible = true;
       txtOverlayColor.BackColor = Color.Blue;
 
-      IAPISettings apiSettings = CefSettingsFactory.Create();
+      // IAPISettings apiSettings = CefSettingsFactory.Create();
       //      IAPISettings apiSettings = CefSettingsFactory.Create(
       //        @"D:\StreetSmartFiles\Cache",
       //        @"D:\StreetSmartFiles\BrowserSubprocess\CefSharp.BrowserSubprocess.exe",
       //        @"D:\StreetSmartFiles\Locales",
       //        @"D:\StreetSmartFiles\Resources");
-      //    IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartFiles\Cache");
+      IAPISettings apiSettings = CefSettingsFactory.Create(@"D:\StreetSmartAPI\Cache");
       apiSettings.DisableGPUCache = true;
       apiSettings.AllowInsecureContent = true;
 
       _api = string.IsNullOrEmpty(StreetSmartLocation)
-        ? StreetSmartAPIFactory.Create(apiSettings, true)
-        : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings, true);
+        ? StreetSmartAPIFactory.Create(apiSettings)
+        : StreetSmartAPIFactory.Create(StreetSmartLocation, apiSettings);
       _api.APIReady += OnAPIReady;
       _api.MeasurementChanged += OnMeasurementChanged;
+      _api.MeasurementStarted += OnMeasurementStarted;
+      _api.MeasurementStopped += OnMeasurementStopped;
+      _api.MeasurementSaved += OnMeasurementSaved;
       _api.ViewerAdded += OnViewerAdded;
       _api.ViewerRemoved += OnViewerRemoved;
       plStreetSmart.Controls.Add(_api.GUI);
@@ -148,6 +169,7 @@ namespace Demo.WinForms
       txtUsername.Text = _login.Username;
       txtPassword.Text = _login.Password;
       txtAPIKey.Text = _login.ApiKey;
+      txtClientId.Text = _login.ClientId;
 
       ObliqueViewerButtons[] obButtons =
       {
@@ -155,6 +177,7 @@ namespace Demo.WinForms
         ObliqueViewerButtons.ZoomIn, ObliqueViewerButtons.ZoomOut,
         ObliqueViewerButtons.SwitchDirection, ObliqueViewerButtons.SaveImage,
         ObliqueViewerButtons.ToggleNadir, ObliqueViewerButtons.Measure,
+        ObliqueViewerButtons.SaveMeasurement
       };
 
       foreach (var obButton in obButtons)
@@ -166,7 +189,8 @@ namespace Demo.WinForms
       {
         PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
         PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
-        PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+        PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections,
+        PointCloudViewerButtons.ToggleAerialStreet, PointCloudViewerButtons.SaveMeasurement
       };
 
       foreach (var pcButton in pcButtons)
@@ -180,7 +204,8 @@ namespace Demo.WinForms
         PanoramaViewerButtons.OpenOblique, PanoramaViewerButtons.ReportBlurring,
         PanoramaViewerButtons.Measure, PanoramaViewerButtons.ImageInformation,
         PanoramaViewerButtons.SaveImage, PanoramaViewerButtons.ZoomIn,
-        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow
+        PanoramaViewerButtons.ZoomOut, PanoramaViewerButtons.ZoomWindow,
+        PanoramaViewerButtons.SaveMeasurement
       };
 
       foreach (var pnButton in pnButtons)
@@ -188,14 +213,29 @@ namespace Demo.WinForms
         cbViewerButton.Items.Add(new ViewerButtonsBox(pnButton));
       }
 
-      cbPointBudget.Items.Add(PointBudget.Low);
-      cbPointBudget.Items.Add(PointBudget.Med);
-      cbPointBudget.Items.Add(PointBudget.High);
+      cbPointBudget.Items.Add(Quality.Low);
+      cbPointBudget.Items.Add(Quality.Medium);
+      cbPointBudget.Items.Add(Quality.High);
 
-      cbPointStyle.Items.Add(PointStyle.Elevation);
-      cbPointStyle.Items.Add(PointStyle.Height);
-      cbPointStyle.Items.Add(PointStyle.Intensity);
-      cbPointStyle.Items.Add(PointStyle.Rgb);
+      cbPointStyle.Items.Add(ColorizationMode.Classification);
+      cbPointStyle.Items.Add(ColorizationMode.Height);
+      cbPointStyle.Items.Add(ColorizationMode.Intensity);
+      cbPointStyle.Items.Add(ColorizationMode.Rgb);
+
+      cbUnit.Items.Add(UnitPreference.Default);
+      cbUnit.Items.Add(UnitPreference.Feet);
+      cbUnit.Items.Add(UnitPreference.Meter);
+
+      cbShortCuts.Items.Add(ShortcutNames.CopyCoordinateToClipboard);
+      cbShortCuts.Items.Add(ShortcutNames.CloseAllPanoramas);
+      cbShortCuts.Items.Add(ShortcutNames.MoveToPanoramaPosition);
+      cbShortCuts.Items.Add(ShortcutNames.MovePanoramaWithArrowKeys);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromPanorama);
+      cbShortCuts.Items.Add(ShortcutNames.ClosePanorama);
+      cbShortCuts.Items.Add(ShortcutNames.CloseOtherPanorama);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromMap);
+      cbShortCuts.Items.Add(ShortcutNames.StartMeasurementFromOblique);
+      cbShortCuts.Items.Add(ShortcutNames.CloseOblique);
     }
 
     #region events api
@@ -217,6 +257,24 @@ namespace Demo.WinForms
     private void OnMeasurementChanged(object sender, IEventArgs<IFeatureCollection> args)
     {
       string text = "Measurement changed";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementStarted(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement started";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementStopped(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement stopped";
+      AddViewerEventsText(text);
+    }
+
+    private void OnMeasurementSaved(object sender, IEventArgs<IFeatureCollection> args)
+    {
+      string text = "Measurement saved";
       AddViewerEventsText(text);
     }
 
@@ -254,7 +312,6 @@ namespace Demo.WinForms
         panoramaViewer.ViewChange += OnViewChange;
         panoramaViewer.SurfaceCursorChange += OnSurfaceCursorChange;
         panoramaViewer.ViewLoadEnd += OnViewLoadEnd;
-        panoramaViewer.ViewLoadStart += OnViewLoadStart;
         panoramaViewer.TimeTravelChange += OnTimeTravelChange;
         panoramaViewer.FeatureClick += OnFeatureClick;
         panoramaViewer.FeatureSelectionChange += OnFeatureSelectionChange;
@@ -263,6 +320,14 @@ namespace Demo.WinForms
       if (viewer is IObliqueViewer obliqueViewer)
       {
         _obliqueViewers.Add(obliqueViewer);
+
+        obliqueViewer.SwitchViewingDir += OnSwitchDirection;
+        obliqueViewer.FeatureClick += OnObliqueFeatureClick;
+        obliqueViewer.FeatureSelectionChange += OnObliqueFeatureSelectionChange;
+        obliqueViewer.ImageChange += OnObliqueImageChange;
+        obliqueViewer.ViewChange += OnObliqueViewChange;
+        obliqueViewer.ViewLoadEnd += OnObliqueViewLoadEnd;
+        obliqueViewer.TimeTravelChange += OnObliqueTimeTravelChange;
       }
 
       if (viewer is IPointCloudViewer pointCloudViewer)
@@ -274,6 +339,12 @@ namespace Demo.WinForms
         pointCloudViewer.PointBudgedChanged += OnBudgedChanged;
         pointCloudViewer.PointSizeChanged += OnPointSizeChanged;
         pointCloudViewer.PointStyleChanged += OnPointStyleChanged;
+        pointCloudViewer.BackGroundChanged += OnBackGroundChanged;
+      }
+
+      if (viewer is IMeshViewer meshViewer)
+      {
+        _meshViewers.Add(meshViewer);
       }
     }
 
@@ -308,7 +379,6 @@ namespace Demo.WinForms
           panoramaViewer.ViewChange -= OnViewChange;
           panoramaViewer.SurfaceCursorChange -= OnSurfaceCursorChange;
           panoramaViewer.ViewLoadEnd -= OnViewLoadEnd;
-          panoramaViewer.ViewLoadStart -= OnViewLoadStart;
           panoramaViewer.TimeTravelChange -= OnTimeTravelChange;
           panoramaViewer.FeatureClick -= OnFeatureClick;
           panoramaViewer.FeatureSelectionChange -= OnFeatureSelectionChange;
@@ -317,11 +387,24 @@ namespace Demo.WinForms
         if (viewer is IObliqueViewer obliqueViewer)
         {
           _obliqueViewers.Remove(obliqueViewer);
+
+          obliqueViewer.SwitchViewingDir -= OnSwitchDirection;
+          obliqueViewer.FeatureClick -= OnObliqueFeatureClick;
+          obliqueViewer.FeatureSelectionChange -= OnObliqueFeatureSelectionChange;
+          obliqueViewer.ImageChange -= OnObliqueImageChange;
+          obliqueViewer.ViewChange -= OnObliqueViewChange;
+          obliqueViewer.ViewLoadEnd -= OnObliqueViewLoadEnd;
+          obliqueViewer.TimeTravelChange -= OnObliqueTimeTravelChange;
         }
 
         if (viewer is IPointCloudViewer pointCloudViewer)
         {
           _pointCloudViewers.Remove(pointCloudViewer);
+        }
+
+        if (viewer is IMeshViewer meshViewer)
+        {
+          _meshViewers.Remove(meshViewer);
         }
 
         if (remove != null)
@@ -336,6 +419,52 @@ namespace Demo.WinForms
           }
         }
       }
+    }
+
+    #endregion
+
+    #region events oblique viewer 
+
+    private void OnSwitchDirection(object sender, IEventArgs<IDirectionInfo> args)
+    {
+      string text = "Switch Direction";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueFeatureClick(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "feature Oblique Clicked";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueFeatureSelectionChange(object sender, IEventArgs<IFeatureInfo> args)
+    {
+      string text = "feature Oblique Selection Change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueImageChange(object sender, IEventArgs<IObliqueImageInfo> args)
+    {
+      string text = "Oblique Image change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueViewChange(object sender, IEventArgs<IObliqueOrientation> args)
+    {
+      string text = "Oblique View change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueViewLoadEnd(object sender, EventArgs args)
+    {
+      string text = "Oblique view load end";
+      AddViewerEventsText(text);
+    }
+
+    private void OnObliqueTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
+    {
+      string text = "Oblique Time travel change";
+      AddViewerEventsText(text);
     }
 
     #endregion
@@ -393,12 +522,6 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnViewLoadStart(object sender, EventArgs args)
-    {
-      string text = "Image load start";
-      AddViewerEventsText(text);
-    }
-
     private void OnTimeTravelChange(object sender, IEventArgs<ITimeTravelInfo> args)
     {
       string text = "Time travel change";
@@ -444,21 +567,27 @@ namespace Demo.WinForms
       AddViewerEventsText(text);
     }
 
-    private void OnBudgedChanged(object sender, IEventArgs<PointBudget> args)
+    private void OnBudgedChanged(object sender, IEventArgs<Quality> args)
     {
       string text = "On point budget change";
       AddViewerEventsText(text);
     }
 
-    private void OnPointSizeChanged(object sender, IEventArgs<int> args)
+    private void OnPointSizeChanged(object sender, IEventArgs<PointSize> args)
     {
       string text = "On point size change";
       AddViewerEventsText(text);
     }
 
-    private void OnPointStyleChanged(object sender, IEventArgs<PointStyle> args)
+    private void OnPointStyleChanged(object sender, IEventArgs<ColorizationMode> args)
     {
       string text = "On point style change";
+      AddViewerEventsText(text);
+    }
+
+    private void OnBackGroundChanged(object sender, IEventArgs<BackgroundPreset> args)
+    {
+      string text = "On back ground preset change";
       AddViewerEventsText(text);
     }
 
@@ -471,8 +600,17 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMdatabase");
       IDomElement element = DomElementFactory.Create();
 
-      _options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtAPIKey.Text, txtSrs.Text, locale,
-        ConfigurationUrl, addressSettings, element);
+      _options = OptionsFactory.CreateOauth(
+        txtClientId.Text,
+        txtAPIKey.Text,
+        txtSrs.Text,
+        locale,
+        addressSettings, // address settings
+        element // target element
+      );
+
+      //_options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtClientId.Text, txtAPIKey.Text, txtSrs.Text, locale,
+      //  ConfigurationUrl, addressSettings, element, true);
 
       try
       {
@@ -618,6 +756,11 @@ namespace Demo.WinForms
     private void txtAPIKey_TextChanged(object sender, EventArgs e)
     {
       _login.ApiKey = txtAPIKey.Text;
+    }
+
+    private void txtClientId_TextChanged(object sender, EventArgs e)
+    {
+      _login.ClientId = txtClientId.Text;
     }
 
     private void btRotateLeft_Click(object sender, EventArgs e)
@@ -785,8 +928,11 @@ namespace Demo.WinForms
 
     private async void btnToggleRecordingsVisible_Click(object sender, EventArgs e)
     {
-      bool visible = await PanoramaViewer.GetRecordingsVisible();
-      PanoramaViewer.ToggleRecordingsVisible(!visible);
+      if (PanoramaViewer != null)
+      {
+        bool visible = await PanoramaViewer.GetRecordingsVisible();
+        PanoramaViewer.ToggleRecordingsVisible(!visible);
+      }
     }
 
     private async void btnToggleNavbarVisible_Click(object sender, EventArgs e)
@@ -1059,6 +1205,8 @@ namespace Demo.WinForms
     private async void btnStartMeasurementMode_Click(object sender, EventArgs e)
     {
       MeasurementGeometryType? type = null;
+      MeasureMethods? method = null;
+      IMeasurementOptions options = null;
 
       if (rbMeasPoint.Checked)
       {
@@ -1073,9 +1221,35 @@ namespace Demo.WinForms
         type = MeasurementGeometryType.Polygon;
       }
 
-      IMeasurementOptions options = (type == null)
-        ? MeasurementOptionsFactory.Create()
-        : MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
+      if (rbMethodDepthMap.Checked)
+      {
+        method = MeasureMethods.DepthMap;
+      }
+      else if (rbMethodSmartClick.Checked)
+      {
+        method = MeasureMethods.SmartClick;
+      }
+      else if (rbMethodForwardIntersection.Checked)
+      {
+        method = MeasureMethods.ForwardIntersection;
+      }
+
+      if (type == null && method == null)
+      {
+        options = MeasurementOptionsFactory.Create();
+      }
+      else if (type == null)
+      {
+        options = MeasurementOptionsFactory.Create((MeasureMethods) method);
+      }
+      else if (method == null)
+      {
+        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type);
+      }
+      else
+      {
+        options = MeasurementOptionsFactory.Create((MeasurementGeometryType) type, (MeasureMethods) method, true);
+      }
 
       IViewer viewer = _viewer ?? PanoramaViewer;
 
@@ -1174,7 +1348,8 @@ namespace Demo.WinForms
         {
           PointCloudViewerButtons.Measure, PointCloudViewerButtons.Display,
           PointCloudViewerButtons.Download, PointCloudViewerButtons.ImageInformation,
-          PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections
+          PointCloudViewerButtons.Overlays, PointCloudViewerButtons.Sections,
+          PointCloudViewerButtons.ToggleAerialStreet
         };
 
         foreach (var button in buttons)
@@ -1555,22 +1730,10 @@ namespace Demo.WinForms
 
     private void btnFlyTo_Click(object sender, EventArgs e)
     {
-      ICoordinate position =
-        CoordinateFactory.Create(ParseDouble(txtX.Text), ParseDouble(txtY.Text), ParseDouble(txtZ.Text));
-      ICoordinate lookAt =
-        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
-      PointCloudViewer.FlyTo(position, lookAt);
     }
 
-    private async void btnCameraPosition_Click(object sender, EventArgs e)
+    private void btnCameraPosition_Click(object sender, EventArgs e)
     {
-      ICamera camera = await PointCloudViewer.GetCameraPosition();
-      txtX.Text = camera?.Position?.X.ToString();
-      txtY.Text = camera?.Position?.Y.ToString();
-      txtZ.Text = camera?.Position?.Z.ToString();
-      txtlkAtX.Text = camera?.Target?.X.ToString();
-      txtlkAtY.Text = camera?.Target?.Y.ToString();
-      txtlkAtZ.Text = camera?.Target?.Z.ToString();
     }
 
     private async void btnEdges_Click(object sender, EventArgs e)
@@ -1581,11 +1744,11 @@ namespace Demo.WinForms
 
     private async void btnGetPointBudget_Click(object sender, EventArgs e)
     {
-      PointBudget budget = await PointCloudViewer.GetPointBudget();
+      Quality budget = await PointCloudViewer.GetPointAmount();
 
       foreach (var item in cbPointBudget.Items)
       {
-        if ((PointBudget) item == budget)
+        if ((Quality) item == budget)
         {
           cbPointBudget.SelectedItem = item;
         }
@@ -1594,9 +1757,9 @@ namespace Demo.WinForms
 
     private void btnSetPointBudget_Click(object sender, EventArgs e)
     {
-      if (cbPointBudget.SelectedItem is PointBudget budget)
+      if (cbPointBudget.SelectedItem is Quality budget)
       {
-        PointCloudViewer.SetPointBudget(budget);
+        PointCloudViewer.SetPointAmount(budget);
       }
     }
 
@@ -1608,16 +1771,17 @@ namespace Demo.WinForms
     private void btnSetPointSize_Click(object sender, EventArgs e)
     {
       int.TryParse(txtPointSize.Text, out int size);
-      PointCloudViewer.SetPointSize(size);
+      PointSize pointSize = size == 1 ? PointSize.Single : size == 2 ? PointSize.Double : PointSize.Large;
+      PointCloudViewer.SetPointSize(pointSize);
     }
 
     private async void btnGetPointStyle_Click(object sender, EventArgs e)
     {
-      PointStyle style = await PointCloudViewer.GetPointStyle();
+      ColorizationMode style = await PointCloudViewer.GetPointStyle();
 
       foreach (var item in cbPointStyle.Items)
       {
-        if ((PointStyle) item == style)
+        if ((ColorizationMode) item == style)
         {
           cbPointStyle.SelectedItem = item;
         }
@@ -1626,7 +1790,7 @@ namespace Demo.WinForms
 
     private void btnSetPointStyle_Click(object sender, EventArgs e)
     {
-      if (cbPointStyle.SelectedItem is PointStyle style)
+      if (cbPointStyle.SelectedItem is ColorizationMode style)
       {
         PointCloudViewer.SetPointStyle(style);
       }
@@ -1634,33 +1798,60 @@ namespace Demo.WinForms
 
     private void btnPointCloudLookAt_Click(object sender, EventArgs e)
     {
-      ICoordinate lookAt =
-        CoordinateFactory.Create(ParseDouble(txtlkAtX.Text), ParseDouble(txtlkAtY.Text), ParseDouble(txtlkAtZ.Text));
-      PointCloudViewer.LookAtCoordinate(lookAt);
     }
 
     private void btnDown_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateDown(size);
     }
 
     private void btnLeft_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateLeft(size);
     }
 
     private void btnRight_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateRight(size);
     }
 
     private void btnUp_Click(object sender, EventArgs e)
     {
-      double size = ParseDouble(txtPointSize.Text);
-      PointCloudViewer.RotateUp(size);
+    }
+
+    private void btnSetUnitPreference_Click(object sender, EventArgs e)
+    {
+      if (cbUnit.SelectedItem != null)
+      {
+        _api.Settings.SetUnitPreference((UnitPreference) cbUnit.SelectedItem);
+      }
+    }
+
+    private async void btnGetUnitPreference_Click(object sender, EventArgs e)
+    {
+      UnitPreference unit = await _api.Settings.GetUnitPreference();
+      cbUnit.SelectedItem = unit;
+    }
+
+    private async void btnEnableShortCut_Click(object sender, EventArgs e)
+    {
+      if (cbShortCuts.SelectedItem != null)
+      {
+        txtShortcutResult.Text =
+          (await _api.Shortcuts.EnableShortcut((ShortcutNames) cbShortCuts.SelectedItem)).ToString();
+      }
+    }
+
+    private async void btnDisableShortCut_Click(object sender, EventArgs e)
+    {
+      if (cbShortCuts.SelectedItem != null)
+      {
+        txtShortcutResult.Text =
+          (await _api.Shortcuts.DisableShortcut((ShortcutNames) cbShortCuts.SelectedItem)).ToString();
+      }
+    }
+
+
+    private void setElevationLevel(double elevationLevel)
+    {
+      PanoramaViewer.SetElevationSliderLevel(elevationLevel);
     }
   }
 }

@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +32,8 @@ using CefSharp.WinForms;
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
 #else
+using System.Threading;
+
 using CefSharp.Wpf;
 
 using StreetSmart.Wpf.Properties;
@@ -66,9 +69,23 @@ namespace StreetSmart.Common.API
 
     public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+
+    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
+
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
+
+    #endregion
+
+    #region Settings / Shortcuts
+
+    public ISettings Settings { get; private set; }
+
+    public IShortcuts Shortcuts { get; private set; }
 
     #endregion
 
@@ -93,6 +110,12 @@ namespace StreetSmart.Common.API
     #region Callback definitions
 
     public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementStarted => $"{nameof(OnMeasurementStarted).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementStopped => $"{nameof(OnMeasurementStopped).FirstCharacterToLower()}";
+
+    public string JsOnMeasurementSaved => $"{nameof(OnMeasurementSaved).FirstCharacterToLower()}";
 
     public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
 
@@ -123,6 +146,14 @@ namespace StreetSmart.Common.API
       Browser.Address = _streetSmartLocation;
       RegisterBrowser();
     }
+/*
+    public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
+
+    public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
+    {
+      Browser.CreateBrowser(parentWindowHwndSource, initialSize);
+    }
+*/
     #endif
 
     ~StreetSmartAPI()
@@ -133,24 +164,27 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region CefSharp Functions
-
+    #if WINFORMS
     public void ShowDevTools()
     {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.ShowDevTools();
-      }
+      ShowDeveloperTools();
     }
 
     public void CloseDevTools()
     {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.CloseDevTools();
-      }
+      CloseDeveloperTools();
+    }
+    #else
+    public void ShowDevTools()
+    {
+      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
     }
 
-    #if WPF
+    public void CloseDevTools()
+    {
+      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
+    }
+
     public void RestartStreetSmart()
     {
       RestartStreetSmart(Resources.StreetSmartLocation);
@@ -332,6 +366,11 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
     }
 
+    public void SetSnapping(bool enabled)
+    {
+      Browser.ExecuteScriptAsync(GetScript($"setSnapping({enabled.ToJsBool()})"));
+    }
+
     public async Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options)
     {
       int processId = GetProcessId;
@@ -367,9 +406,24 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnMeasurementChanged(Dictionary<string, object> args)
+    public void OnMeasurementChanged(ExpandoObject args, string viewerId)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
+    public void OnMeasurementStarted(ExpandoObject args, string viewerId)
+    {
+      MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
+    public void OnMeasurementStopped(ExpandoObject args, string viewerId)
+    {
+      MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+    }
+
+    public void OnMeasurementSaved(ExpandoObject args, string viewerId)
+    {
+      MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
     public void OnViewerAdded(string id, string type, string name)
@@ -426,7 +480,9 @@ namespace StreetSmart.Common.API
 
     public void RegisterBrowser()
     {
-      Browser.RegisterJsObject(JsThis, this);
+      Settings = new Settings(Browser);
+      Shortcuts = new Shortcuts(Browser);
+      RegisterThisJsObject();
       ViewerList.CreateViewerList(ApiId);
       ViewerList.RegisterJsObjects(ApiId, Browser);
       Browser.FrameLoadEnd += OnFrameLoadEnd;
@@ -460,7 +516,10 @@ namespace StreetSmart.Common.API
       {
         _apiMeasurementEventList = new ApiEventList
         {
-          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged)
+          new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged),
+          new MeasurementEvent(this, "MEASUREMENT_STARTED", JsOnMeasurementStarted),
+          new MeasurementEvent(this, "MEASUREMENT_STOPPED", JsOnMeasurementStopped),
+          new MeasurementEvent(this, "MEASUREMENT_SAVED", JsOnMeasurementSaved)
         };
 
         Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
@@ -482,6 +541,22 @@ namespace StreetSmart.Common.API
       {
         Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
         _apiMeasurementEventList = null;
+      }
+    }
+
+    private void ShowDeveloperTools()
+    {
+      if (Browser.IsBrowserInitialized)
+      {
+        Browser?.ShowDevTools();
+      }
+    }
+
+    private void CloseDeveloperTools()
+    {
+      if (Browser.IsBrowserInitialized)
+      {
+        Browser?.CloseDevTools();
       }
     }
 

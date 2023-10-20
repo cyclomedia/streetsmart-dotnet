@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@ namespace StreetSmart.Common.API.Events
     public override string ToString()
     {
       return $@"{JsApi}.on({JsApi}.{Events}.{Type},{FuncName}{Category}=function(e)
-             {{{JsThis}.{FuncName}(e.detail.activeMeasurement);}});";
+             {{{JsThis}.{FuncName}(e.detail.activeMeasurement,e.detail.panoramaViewer?.getId());}});";
     }
   }
 }

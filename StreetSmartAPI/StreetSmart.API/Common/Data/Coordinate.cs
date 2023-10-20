@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -42,9 +42,9 @@ namespace StreetSmart.Common.Data
 
     public Coordinate(IList<object> coordinate)
     {
-      X = coordinate?.Count >= 1 ? coordinate[0] as double? : null;
-      Y = coordinate?.Count >= 2 ? coordinate[1] as double? : null;
-      Z = coordinate?.Count >= 3 ? coordinate[2] as double? : null;
+      X = coordinate?.Count >= 1 ? ToNullDouble(coordinate[0]) : null;
+      Y = coordinate?.Count >= 2 ? ToNullDouble(coordinate[1]) : null;
+      Z = coordinate?.Count >= 3 ? ToNullDouble(coordinate[2]) : null;
     }
 
     public Coordinate(ICoordinate coordinate)

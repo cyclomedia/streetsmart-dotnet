@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -66,6 +66,25 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="value">Set contrast to a positive number</param>
     void SetContrast(double value);
+
+    /// <summary>
+    /// Sets the selected feature using the given properties. The selected feature can only be selected
+    /// if the feature is in sight on the viewer.
+    /// </summary>
+    /// <param name="properties">The properties by which the feature should be determined</param>
+    /// <param name="layerId">The layerId to which the feature is selected</param>
+    void SetSelectedFeatureByProperties(IJson properties, string layerId);
+
+    /// <summary>
+    /// Toggles the visibility of the compass in the Panorama / Oblique Viewer.
+    /// </summary>
+    /// <param name="visible">Sets visibility to this value.</param>
+    void ToggleCompass(bool visible);
+
+    /// <summary>
+    /// Toggles the visibility of the compass in the Panorama / Oblique Viewer.
+    /// </summary>
+    void ToggleCompass();
 
     /// <summary>
     /// Toggles the visibility of an overlay.

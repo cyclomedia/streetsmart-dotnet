@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,18 +31,18 @@ namespace StreetSmart.Common.Data
     private Color? _color;
     private bool _visible;
 
-    public Overlay(string name, string sld)
+    public Overlay(string name, string sld, bool visible = true)
     {
       Name = name;
       Sld = sld;
-      Visible = true;
+      Visible = visible;
     }
 
-    public Overlay(string name, Color color)
+    public Overlay(string name, Color color, bool visible = true)
     {
       Name = name;
       Color = color;
-      Visible = true;
+      Visible = visible;
     }
 
     public void FillInParameters(Dictionary<string, object> overlay)

@@ -13,12 +13,12 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.6.2</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.x64.csproj" configuration="Debug" platform="X64" />
+      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.Framework.csproj" configuration="Debug" platform="X64" />
     </DocumentationSources>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
@@ -27,7 +27,7 @@
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
-    <HelpFileVersion>19.16.0</HelpFileVersion>
+    <HelpFileVersion>23.9.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>Standard</SyntaxFilters>
@@ -36,7 +36,7 @@
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>MemberName</NamingMethod>
-    <HelpTitle>Street Smart API for DotNet version 19.16.0</HelpTitle>
+    <HelpTitle>Street Smart API for DotNet version 23.9.0</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <HeaderText>
     </HeaderText>

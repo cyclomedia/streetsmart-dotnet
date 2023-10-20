@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -64,6 +64,23 @@ namespace StreetSmart.Common.Data.GeoJson
         foreach (var coordinate in ring)
         {
           coordinateList.Add(coordinate);
+        }
+
+        Add(coordinateList);
+      }
+    }
+
+    public Polygon(IList<object> coordinates)
+    {
+      Type = GeometryType.Polygon;
+
+      foreach (var ring in coordinates)
+      {
+        List<ICoordinate> coordinateList = new List<ICoordinate>();
+
+        foreach (IList<object> coordinate in ring as IList<object> ?? new List<object>())
+        {
+          coordinateList.Add(new Coordinate(coordinate));
         }
 
         Add(coordinateList);

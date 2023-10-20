@@ -1,6 +1,6 @@
 ﻿/*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 
 using StreetSmart.Common.API.Events;
@@ -87,6 +88,16 @@ namespace StreetSmart.Common.API
       return ToBool(await CallJsGetScriptAsync("getTimeTravelExpanded()"));
     }
 
+    public void ToggleCompass(bool visible)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleCompass({visible.ToJsBool()});");
+    }
+
+    public void ToggleCompass()
+    {
+      Browser.ExecuteScriptAsync($"{Name}.toggleCompass();");
+    }
+
     public async Task<bool> GetTimeTravelVisible()
     {
       return ToBool(await CallJsGetScriptAsync("getTimeTravelVisible()"));
@@ -113,6 +124,11 @@ namespace StreetSmart.Common.API
       overlay.Visible = !overlay.Visible;
     }
 
+    public void SetSelectedFeatureByProperties(IJson properties, string layerId)
+    {
+      Browser.ExecuteScriptAsync($"{Name}.setSelectedFeatureByProperties({properties},{layerId.ToQuote()});");
+    }
+
     public void ToggleTimeTravelExpanded(bool expanded)
     {
       Browser.ExecuteScriptAsync($"{Name}.toggleTimeTravelExpanded({expanded.ToJsBool()});");
@@ -137,7 +153,7 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-    public void OnLayerVisibilityChange(Dictionary<string, object> args)
+    public void OnLayerVisibilityChange(ExpandoObject args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));

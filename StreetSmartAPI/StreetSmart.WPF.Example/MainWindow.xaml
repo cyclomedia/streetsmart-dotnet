@@ -10,7 +10,7 @@
   <!--
 /*
  * Street Smart .NET integration
- * Copyright (c) 2016 - 2019, CycloMedia, All rights reserved.
+ * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,7 @@
   </Window.DataContext>
   <StackPanel>
     <streetSmart:StreetSmartGUI Height="350"
-      Api="{Binding Api, Mode=OneWay}" />
+      WpfApi="{Binding WpfApi, Mode=OneWay}" />
     <StackPanel>
       <Grid>
         <Grid.ColumnDefinitions>
