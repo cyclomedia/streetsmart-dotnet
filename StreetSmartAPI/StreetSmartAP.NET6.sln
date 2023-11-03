@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multip
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example.NET6", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.NET6.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.Winforms.Example", "StreetSmart.Winforms.Example\StreetSmart.Winforms.Example.csproj", "{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.Winforms.Example", "StreetSmart.Winforms.Example\StreetSmart.Winforms.Example.csproj", "{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.Tests.NET6", "StreetSmart.Tests.NET6\StreetSmart.Tests.NET6.csproj", "{03246068-B6C6-4DA0-AF01-6933399945FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,18 @@ Global
 		{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}.Release|x64.Build.0 = Release|Any CPU
 		{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}.Release|x86.ActiveCfg = Release|Any CPU
 		{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}.Release|x86.Build.0 = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|x64.Build.0 = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{03246068-B6C6-4DA0-AF01-6933399945FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
