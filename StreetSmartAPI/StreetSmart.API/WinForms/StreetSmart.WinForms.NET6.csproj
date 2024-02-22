@@ -917,8 +917,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="114.2.100" />
-    <PackageReference Include="CefSharp.WinForms.NETCore" Version="114.2.100" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="120.2.70" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="120.2.70" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
       <PrivateAssets>all</PrivateAssets>

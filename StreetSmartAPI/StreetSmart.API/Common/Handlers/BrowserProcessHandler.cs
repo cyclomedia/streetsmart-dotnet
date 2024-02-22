@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
 using CefSharp;
 
 namespace StreetSmart.Common.Handlers
@@ -32,6 +33,11 @@ namespace StreetSmart.Common.Handlers
 
     public virtual void OnScheduleMessagePumpWork(long delay)
     {
+    }
+
+    public bool OnAlreadyRunningAppRelaunch(IReadOnlyDictionary<string, string> commandLine, string currentDirectory)
+    {
+      return true;
     }
   }
 }
