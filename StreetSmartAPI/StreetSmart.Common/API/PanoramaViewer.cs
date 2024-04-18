@@ -182,27 +182,27 @@ namespace StreetSmart.Common.API
 
     public void RotateDown(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch.ToString(ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateDown({deltaPitch.ToString(CI)});");
     }
 
     public void RotateLeft(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw.ToString(ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateLeft({deltaYaw.ToString(CI)});");
     }
 
     public void RotateRight(double deltaYaw)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw.ToString(ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateRight({deltaYaw.ToString(CI)});");
     }
 
     public void RotateUp(double deltaPitch)
     {
-      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch.ToString(ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.rotateUp({deltaPitch.ToString(CI)});");
     }
 
     public void SetElevationSliderLevel(double elevationLevel)
     {
-      Browser.ExecuteScriptAsync($"{Name}.setElevationSliderLevel({elevationLevel.ToString(ci)});");
+      Browser.ExecuteScriptAsync($"{Name}.setElevationSliderLevel({elevationLevel.ToString(CI)});");
     }
 
     public void SetOrientation(IOrientation orientation)

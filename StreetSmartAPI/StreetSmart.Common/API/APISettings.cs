@@ -22,22 +22,12 @@ using System.Reflection;
 
 using CefSharp;
 
-#if WINFORMS
-using CefSharp.WinForms;
-
-using StreetSmart.WinForms.Properties;
-#else
-using CefSharp.Wpf;
-
-using StreetSmart.Wpf.Properties;
-#endif
-
 using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal class APISettings: CefSettings, IAPISettings
+  internal class APISettings: CefSettingsBase, IAPISettings
   {
     public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
     {

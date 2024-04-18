@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <DefineConstants>$(DefineConstants)TRACE;WINFORMS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>latest</LangVersion>
+    <DefineConstants>$(DefineConstants)TRACE;WINFORMS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x64\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINFORMS</DefineConstants>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x64\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
+    <DebugType>none</DebugType>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x64\StreetSmart.WinForms.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StreetSmart.WinForms.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	 <Version>$(VersionPrefix)</Version>
+	 <Authors>$(Authors)</Authors>
+	 <Company>$(Company)</Company>
+	 <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
+	 <FileVersion>$(AssemblyVersion)</FileVersion>
+	 <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	 <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	 <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+	 <PackageReadmeFile>README.md</PackageReadmeFile>
+	 <RootNamespace>StreetSmart.WinForms</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINFORMS</DefineConstants>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WinForms\x86\</OutputPath>
+    <DefineConstants>TRACE;WINFORMS</DefineConstants>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WinForms\x86\StreetSmart.WinForms.xml</DocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="StreetSmartGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\ReleaseNotes.txt">
+      <Link>ReleaseNotes.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+	  <PackageReference Include="CefSharp.WinForms" Version="123.0.60" />
+  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="123.0.60" />
+	    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
+		    <PrivateAssets>all</PrivateAssets>
+	    </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\StreetSmart.Common\StreetSmart.Common.csproj" />
+    </ItemGroup>
+</Project>

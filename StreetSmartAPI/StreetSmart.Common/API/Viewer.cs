@@ -62,14 +62,14 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Viewer(ChromiumWebBrowser browser, ViewerList viewerList)
+    public Viewer(IChromiumWebBrowserBase browser, ViewerList viewerList)
       : base(browser)
     {
       ViewerList = viewerList;
       Destroyed = false;
     }
 
-    public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
+    public Viewer(IChromiumWebBrowserBase browser, ViewerList viewerList, string name)
       : this(browser, viewerList)
     {
       Name = name;

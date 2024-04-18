@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>$(DefineConstants)TRACE;WPF</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WPF\x64\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x64\StreetSmart.Wpf.xml</DocumentationFile>
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WPF\x64\</OutputPath>
+    <DefineConstants>TRACE;WPF</DefineConstants>
+    <DebugType>none</DebugType>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x64\StreetSmart.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>$(VersionPrefix)</Version>
+    <Authors>$(Authors)</Authors>
+    <Company>$(Company)</Company>
+    <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RootNamespace>StreetSmart.WPF</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF</DefineConstants>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x86\StreetSmart.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
+    <DefineConstants>TRACE;WPF</DefineConstants>
+    <DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x86\StreetSmart.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;WPF</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
+    <None Include="Package.nuspec" />
+    <None Include="StreetSmart.WPF.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="StreetSmartGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\ReleaseNotes.txt">
+      <Link>ReleaseNotes.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.md" Link="LICENSE.md">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\README.md" Link="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+   <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
+    <PackageReference Include="CefSharp.Wpf" Version="123.0.60" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows' ">
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\StreetSmart.Common\StreetSmart.Common.csproj" />
+  </ItemGroup>
+</Project>

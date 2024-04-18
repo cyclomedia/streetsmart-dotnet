@@ -21,22 +21,12 @@ using System.Threading.Tasks;
 
 using CefSharp;
 
-#if WINFORMS
-using StreetSmart.WinForms.Properties;
-
-using CefSharp.WinForms;
-#else
-using StreetSmart.Wpf.Properties;
-
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal sealed class Settings : APIBase, ISettings
+  internal sealed class Settings : ISettings
   {
     #region Properties
 
@@ -48,10 +38,9 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Settings(ChromiumWebBrowser browser)
-      : base(browser)
+    public Settings(APIBase apiBase)
     {
-      RegisterThisJsObject();
+        apiBase.RegisterThisJsObject();
     }
 
     #endregion

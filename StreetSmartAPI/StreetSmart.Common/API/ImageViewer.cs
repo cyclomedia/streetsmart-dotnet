@@ -27,12 +27,6 @@ using StreetSmart.Common.Events;
 
 using CefSharp;
 
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
@@ -69,12 +63,12 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public ImageViewer(ChromiumWebBrowser browser, ViewerList viewerList)
+    public ImageViewer(IChromiumWebBrowserBase browser, ViewerList viewerList)
       : base(browser, viewerList)
     {
     }
 
-    public ImageViewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
+    public ImageViewer(IChromiumWebBrowserBase browser, ViewerList viewerList, string name)
       : base(browser, viewerList, name)
     {
     }

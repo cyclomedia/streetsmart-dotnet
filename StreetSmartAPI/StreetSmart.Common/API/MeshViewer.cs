@@ -23,15 +23,10 @@ using CefSharp;
 using StreetSmart.Common.Interfaces.API;
 using System.Globalization;
 
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
 
 namespace StreetSmart.Common.API
 {
-  internal sealed class MeshViewer : Viewer, IMeshViewer
+  internal sealed class BaseMeshViewer : Viewer, IMeshViewer
   {
     #region Members
 
@@ -41,7 +36,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public MeshViewer(ChromiumWebBrowser browser, MeshViewerList meshViewerList, string name)
+    public MeshViewer(IChromiumWebBrowserBase browser, MeshViewerList meshViewerList, string name)
       : base(browser, meshViewerList, name)
     {
       _ci = CultureInfo.InvariantCulture;

@@ -24,20 +24,9 @@ using System.Threading.Tasks;
 
 using CefSharp;
 
-#if WINFORMS
-using System.Windows.Forms;
 
-using CefSharp.WinForms;
-
-using StreetSmart.WinForms;
-using StreetSmart.WinForms.Properties;
-#else
 using System.Threading;
 
-using CefSharp.Wpf;
-
-using StreetSmart.Wpf.Properties;
-#endif
 
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
@@ -53,7 +42,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal class StreetSmartAPI : APIBase, IStreetSmartAPI
+  public abstract class StreetSmartApiBase : IStreetSmartAPI
   {
     #region Members
 
@@ -89,14 +78,6 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #if WINFORMS
-    #region GUI
-
-    public StreetSmartGUI GUI { get; }
-
-    #endregion
-    #endif
-
     #region Properties
 
     private string JsApi => Resources.JsApi;
@@ -104,6 +85,8 @@ namespace StreetSmart.Common.API
     public string ApiId { get; private set; }
 
     protected override string CallFunctionBase => $"{JsApi}";
+
+    public IBrowser Browser { get; }
 
     #endregion
 
@@ -125,43 +108,10 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #region Constructor
-    #if WINFORMS
-    public StreetSmartAPI(string streetSmartLocation)
-    {
-      InitApi(streetSmartLocation);
-      Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
-      RegisterBrowser();
-      GUI = new StreetSmartGUI(Browser);
-    }
-    #else
-    public StreetSmartAPI(string streetSmartLocation)
-    {
-      InitApi(streetSmartLocation);
-    }
-
-    public void InitBrowser(ChromiumWebBrowser browser)
-    {
-      Browser = browser;
-      Browser.Address = _streetSmartLocation;
-      RegisterBrowser();
-    }
-/*
-    public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
-
-    public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
-    {
-      Browser.CreateBrowser(parentWindowHwndSource, initialSize);
-    }
-*/
-    #endif
-
-    ~StreetSmartAPI()
+    ~StreetSmartApiBase()
     {
       ViewerList.DeleteViewerList(ApiId);
     }
-
-    #endregion
 
     #region CefSharp Functions
     #if WINFORMS

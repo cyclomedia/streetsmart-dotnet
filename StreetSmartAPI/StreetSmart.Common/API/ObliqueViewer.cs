@@ -30,12 +30,6 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 namespace StreetSmart.Common.API
 {
   internal sealed class ObliqueViewer : ImageViewer, IObliqueViewer
@@ -78,7 +72,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
+    public ObliqueViewer(IChromiumWebBrowserBase browser, ObliqueViewerList obliqueViewerList, string name)
       : base(browser, obliqueViewerList, name)
     {
       ConnectEvents();

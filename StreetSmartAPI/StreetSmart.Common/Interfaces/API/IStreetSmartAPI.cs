@@ -25,10 +25,6 @@ using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 using StreetSmart.Common.Interfaces.GeoJson;
 
-#if WINFORMS
-using StreetSmart.WinForms;
-#endif
-
 namespace StreetSmart.Common.Interfaces.API
 {
   // ReSharper disable InconsistentNaming
@@ -36,7 +32,7 @@ namespace StreetSmart.Common.Interfaces.API
   /// <summary>
   /// API used to use and modify various StreetSmart components.
   /// </summary>
-  public interface IStreetSmartAPI
+  public partial interface IStreetSmartAPI
   {
     #region Settings / Shortcuts
 
@@ -96,17 +92,6 @@ namespace StreetSmart.Common.Interfaces.API
 
     #endregion
 
-    #if WINFORMS
-    #region StreetSmartAPI
-
-    /// <summary>
-    /// The GUI of StreetSmart
-    /// </summary>
-    StreetSmartGUI GUI { get; }
-
-    #endregion
-    #endif
-
     #region CefSharp functions
 
     /// <summary>
@@ -123,31 +108,6 @@ namespace StreetSmart.Common.Interfaces.API
 
     #region Interface functions
 
-    #if WPF
-    /// <summary>
-    /// Restarts streetsmart
-    /// </summary>
-    void RestartStreetSmart();
-
-    /// <summary>
-    /// Restarts streetsmart
-    /// </summary>
-    /// <param name="streetSmartLocation">The location of Street Smart</param>
-    void RestartStreetSmart(string streetSmartLocation);
-/*
-    /// <summary>
-    /// Returns true if the browser object is disposed
-    /// </summary>
-    bool BrowserIsDisposed { get; }
-
-    /// <summary>
-    /// Create a new webbrowser
-    /// </summary>
-    /// <param name="parentWindowHwndSource"><reference to the window/param>
-    /// <param name="initialSize">initial size</param>
-    void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
-*/
-    #endif
 
     /// <summary>
     /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
