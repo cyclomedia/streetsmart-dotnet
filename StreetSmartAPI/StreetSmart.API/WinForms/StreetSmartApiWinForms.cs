@@ -1,11 +1,7 @@
-﻿using CefSharp.WinForms;
-using CefSharp;
+﻿using CefSharp;
+using CefSharp.WinForms;
 using StreetSmart.Common.API;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StreetSmart.WinForms.Properties;
 using System.Windows.Forms;
 
 namespace StreetSmart.WinForms
@@ -16,13 +12,35 @@ namespace StreetSmart.WinForms
     public sealed class StreetSmartApiWinForms : StreetSmartApiBase
     {
         public StreetSmartGUI GUI { get; }
+        private readonly ChromiumWebBrowser Browser;
 
         public StreetSmartApiWinForms(string streetSmartLocation)
+            : base(streetSmartLocation)
         {
-            InitApi(streetSmartLocation);
             Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
-            RegisterBrowser();
+            //
+            Settings = new Settings(Browser);
+            Shortcuts = new ShortcutsWinForms(Browser);
+            RegisterThisJsObject();
+            ViewerList.CreateViewerList(ApiId);
+            ViewerList.RegisterJsObjects(ApiId, Browser);
+            Browser.FrameLoadEnd += OnFrameLoadEnd;
+            Browser.DownloadHandler = new DownloadHandler();
             GUI = new StreetSmartGUI(Browser);
         }
+
+        public override void ShowDevTools()
+        {
+            ShowDeveloperTools();
+        }
+
+        public override void CloseDevTools()
+        {
+            CloseDeveloperTools();
+        }
+
+        protected override bool IsBrowserInitialized() => Browser.IsBrowserInitialized;
+
+        protected override void BrowserExecuteScriptAsync(string script) => Browser.ExecuteScriptAsync(script);
     }
 }

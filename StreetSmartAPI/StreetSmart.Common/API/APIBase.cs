@@ -48,8 +48,6 @@ namespace StreetSmart.Common.API
 
         protected IChromiumWebBrowserBase Browser { get; set; }
 
-        
-
         public virtual string JsThis => $"{GetType().Name}Events";
 
         #endregion

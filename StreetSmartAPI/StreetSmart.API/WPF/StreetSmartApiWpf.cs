@@ -1,5 +1,7 @@
 ﻿using CefSharp;
 using StreetSmart.Common.API;
+using StreetSmart.Wpf.Properties;
+using System.Threading;
 
 namespace StreetSmart.WPF
 {
@@ -25,5 +27,26 @@ namespace StreetSmart.WPF
       Browser.CreateBrowser(parentWindowHwndSource, initialSize);
     }
 */
+
+        public void ShowDevTools()
+        {
+            Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
+        }
+
+        public void CloseDevTools()
+        {
+            Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
+        }
+
+        public void RestartStreetSmart()
+        {
+            RestartStreetSmart(Resources.StreetSmartLocation);
+        }
+
+        public void RestartStreetSmart(string streetSmartLocation)
+        {
+            _streetSmartLocation = streetSmartLocation;
+            Browser.Address = streetSmartLocation;
+        }
     }
 }

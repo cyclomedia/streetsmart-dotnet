@@ -20,7 +20,7 @@ namespace StreetSmart.Common.API.Events
 {
   internal class StreetSmartApiEvent: ApiEvent
   {
-    private readonly StreetSmartAPI _api;
+    private readonly APIBase _api;
 
     protected string JsThis => _api.JsThis;
 
@@ -32,7 +32,7 @@ namespace StreetSmart.Common.API.Events
 
     public override string Destroy => $@"{JsApi}.off({JsApi}.{Events}.{Type},{FuncName}{Category});";
 
-    public StreetSmartApiEvent(StreetSmartAPI api, string type, string funcName, string category)
+    public StreetSmartApiEvent(APIBase api, string type, string funcName, string category)
       : base(type, funcName)
     {
       _api = api;

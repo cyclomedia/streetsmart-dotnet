@@ -1,17 +1,12 @@
 ﻿using CefSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StreetSmart.Common.API;
 
 namespace StreetSmart.WinForms.Properties
 {
-    public sealed class ShortcutsWinForms
+    public sealed class ShortcutsWinForms : ShortcutsBase
     {
         public ShortcutsWinForms(IChromiumWebBrowserBase browser)
-        {
-            
-        }
+            : base(new ApiWinForms(browser, $"{JsApi}.ShortCuts"))
+        { }
     }
 }

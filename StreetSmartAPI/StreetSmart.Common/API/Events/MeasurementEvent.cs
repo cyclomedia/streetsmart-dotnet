@@ -20,7 +20,7 @@ namespace StreetSmart.Common.API.Events
 {
   internal class MeasurementEvent: StreetSmartApiEvent
   {
-    public MeasurementEvent(StreetSmartAPI api, string type, string funcName)
+    public MeasurementEvent(APIBase api, string type, string funcName)
       : base(api, type, funcName, "measurement")
     {
     }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StreetSmart.Common.Interfaces.API
 {
-    internal interface IApiBase
+    public interface IApiBase
     {
         void RegisterThisJsObject();
         Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "");

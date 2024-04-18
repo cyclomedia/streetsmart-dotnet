@@ -22,7 +22,7 @@ namespace StreetSmart.Common.API.Events
   {
     private string TempType => $"temp{Type}";
 
-    public ViewerAddedEvent(StreetSmartAPI api, string type, string funcName)
+    public ViewerAddedEvent(APIBase api, string type, string funcName)
       : base(api, type, funcName, "viewer")
     {
     }

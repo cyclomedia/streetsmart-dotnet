@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.API;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal sealed class Settings : ISettings
+  public abstract class SettingsBase : ISettings
   {
     #region Properties
 
@@ -38,7 +38,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Settings(APIBase apiBase)
+    public SettingsBase(APIBase apiBase)
     {
         apiBase.RegisterThisJsObject();
     }

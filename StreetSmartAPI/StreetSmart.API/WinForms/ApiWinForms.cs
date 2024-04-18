@@ -4,6 +4,9 @@ using StreetSmart.Common.API;
 
 namespace StreetSmart.WinForms
 {
+    /// <summary>
+    /// Implementation of API base for windows forms
+    /// </summary>
     public sealed class ApiWinForms : APIBase
     {
         public ApiWinForms(IChromiumWebBrowserBase browser, string callFunctionBase)

@@ -79,7 +79,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> GetTimeTravelExpanded()
     {
-      return ToBool(await CallJsGetScriptAsync("getTimeTravelExpanded()"));
+      return DataConvert.ToBool(await CallJsGetScriptAsync("getTimeTravelExpanded()"));
     }
 
     public void ToggleCompass(bool visible)
@@ -94,7 +94,7 @@ namespace StreetSmart.Common.API
 
     public async Task<bool> GetTimeTravelVisible()
     {
-      return ToBool(await CallJsGetScriptAsync("getTimeTravelVisible()"));
+      return DataConvert.ToBool(await CallJsGetScriptAsync("getTimeTravelVisible()"));
     }
 
     public void SaveImage()
@@ -149,7 +149,7 @@ namespace StreetSmart.Common.API
 
     public void OnLayerVisibilityChange(ExpandoObject args)
     {
-      Dictionary<string, object> detail = GetDictValue(args, "detail");
+      Dictionary<string, object> detail = DataConvert.GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));
     }
 

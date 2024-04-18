@@ -18,45 +18,32 @@
 
 using System;
 using System.Threading.Tasks;
-
+using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
     // ReSharper disable once InconsistentNaming
-    internal abstract class Shortcuts : IShortcuts
+    public abstract class ShortcutsBase : IShortcuts
     {
         private readonly IApiBase _apiBase;
 
-
-        #region Properties
-
-        private string JsApi => Resources.JsApi;
-
-        protected override string CallFunctionBase => $"{JsApi}.ShortCuts";
-
-        #endregion
-
-        #region Constructors
-
-        public Shortcuts(IApiBase apiBase)
+        protected ShortcutsBase(IApiBase apiBase)
         {
             _apiBase = apiBase;
             _apiBase.RegisterThisJsObject();
         }
 
-        #endregion
-
         #region Interface Functions
 
         public async Task<bool> DisableShortcut(ShortcutNames shortcutNames)
         {
-            return  ToBool(await CallJsGetScriptAsync($"enableShortcut({shortcutNames.Description()})"));
+            return DataConvert.ToBool(await _apiBase.CallJsGetScriptAsync($"enableShortcut({shortcutNames.Description()})"));
         }
 
         public async Task<bool> EnableShortcut(ShortcutNames shortcutNames)
         {
-            return ToBool(await CallJsGetScriptAsync($"disableShortcut({shortcutNames.Description()})"));
+            return DataConvert.ToBool(await _apiBase.CallJsGetScriptAsync($"disableShortcut({shortcutNames.Description()})"));
         }
 
         #endregion
