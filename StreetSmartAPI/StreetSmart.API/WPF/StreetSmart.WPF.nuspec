@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">misc\LICENSE.md</license>
+	<readme type="file">misc\readme.md</readme>
+    <icon type="file">misc\cyclomedia.png</icon>
+    <projectUrl>https://github.com/cyclomedia/streetsmart-dotnet</projectUrl>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Tag1 Tag2</tags>
+  </metadata>
+	<files>
+		<file src="icon.png" target="misc\" />
+		<file src="LICENSE.md" target="misc\" />
+		<file src="README.md" target="misc\" />
+		<file src="bin\Release\CefSharp.BrowserSubprocess.dll" target="lib"></file>
+		<file src="bin\Release\CefSharp.BrowserSubprocess.exe" target="lib"></file>
+		<file src="bin\Release\CefSharp.BrowserSubprocess.Core.dll" target="lib"></file>
+		<file src="bin\Release\Ijwhost.dll" target="lib"></file>
+	</files>
+</package>

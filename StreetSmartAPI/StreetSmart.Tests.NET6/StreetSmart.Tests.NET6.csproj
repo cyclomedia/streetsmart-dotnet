@@ -14,7 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.json" />
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -34,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.NET6.csproj" />
+    <ProjectReference Include="..\StreetSmart.API\WPF\StreetSmart.WPF.csproj" />
   </ItemGroup>
 
 </Project>
