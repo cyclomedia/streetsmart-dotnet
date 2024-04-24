@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StreetSmart.Tests.NET6
+﻿namespace StreetSmart.Tests.NET6
 {
     public class AutoTest
     {
-        private ApiFixture _fixture;
+        private readonly ApiFixture _fixture;
         public AutoTest()
         {
             _fixture = new ApiFixture();

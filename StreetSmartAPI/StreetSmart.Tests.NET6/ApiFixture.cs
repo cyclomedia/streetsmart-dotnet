@@ -50,9 +50,9 @@ namespace StreetSmart.Tests.NET6
         }
         public async Task<State> InitWithBasicAuth()
         {
-            string username = Configuration["TestData:ApiUsername"], 
-                    password = Configuration["TestData:ApiPassword"], 
-                    apiKey = Configuration["TestData:ApiKey"];
+            string username = Configuration["TestData:ApiUsername"];
+            string password = Configuration["TestData:ApiPassword"];
+            string apiKey = Configuration["TestData:ApiKey"];
 
             IAddressSettings addressSettings = AddressSettingsFactory.Create(_language, _database);
             IDomElement element = DomElementFactory.Create();

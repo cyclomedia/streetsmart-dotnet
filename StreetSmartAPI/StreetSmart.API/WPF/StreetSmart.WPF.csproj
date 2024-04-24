@@ -6,6 +6,18 @@
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<Platforms>x86;x64;AnyCPU</Platforms>
+		<Version>24.1.1</Version>
+		<Authors>CycloMedia</Authors>
+		<Company>CycloMedia</Company>
+		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
+		<PackageReleaseNotes>ReleaseNotes.txt</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<Description>StreetSmart API for WPF</Description>
+		<Copyright>Copyright © CycloMedia 2016 - 2024</Copyright>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>anycpu</PlatformTarget>
@@ -26,23 +38,6 @@
 		<DebugType>none</DebugType>
 		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
 		<DocumentationFile>..\..\..\DemoAPI\Demo.WPF\x64\StreetSmart.Wpf.xml</DocumentationFile>
-	</PropertyGroup>
-	<PropertyGroup>
-		<SignAssembly>true</SignAssembly>
-	</PropertyGroup>
-	<PropertyGroup>
-		<AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>$(VersionPrefix)</Version>
-		<Authors>$(Authors)</Authors>
-		<Company>$(Company)</Company>
-		<AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
-		<FileVersion>$(AssemblyVersion)</FileVersion>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RootNamespace>StreetSmart.WPF</RootNamespace>
-		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
 		<OutputPath>..\..\..\DemoAPI\Demo.WPF\x86\</OutputPath>
@@ -898,7 +893,7 @@
 			<Link>ReleaseNotes.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="..\Common\cyclomedia.png" Link="cyclomedia.png" />
+		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\..\LICENSE.md" Link="LICENSE.md">
