@@ -9,14 +9,17 @@
         }
 
         [Fact]
-        public void ApiLoginWithBasicAuthTest()
+        public async Task ApiLoginWithBasicAuthTest()
         {
-            Assert.True(_fixture.InitWithBasicAuth().Result == State.ApiInitialized);
+            var result = await _fixture.InitWithBasicAuth();
+            Assert.Equal(State.ApiInitialized, result);
         }
+
         [Fact]
-        public void ApiDestroyWithBasicAuthTest()
+        public async Task ApiDestroyWithBasicAuthTest()
         {
-            Assert.True(_fixture.Destroy().Result == State.ApiReady);
+            var result = await _fixture.Destroy();
+            Assert.Equal(State.ApiReady, result);
         }
     }
 }

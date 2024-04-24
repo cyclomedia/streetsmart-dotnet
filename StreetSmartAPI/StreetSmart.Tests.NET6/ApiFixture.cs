@@ -24,7 +24,7 @@ namespace StreetSmart.Tests.NET6
         private const string _database = "CMDatabase";
 
         private readonly IStreetSmartAPI _api;
-        private IOptions _options;
+        private IOptions? _options;
         private IConfiguration Configuration { get; set; }
 
         public State ApiState { get; private set; }
@@ -40,7 +40,7 @@ namespace StreetSmart.Tests.NET6
             _api = StreetSmartAPIFactory.Create();
             _api.APIReady += OnApiReady;
         }
-        private void OnApiReady(object sender, EventArgs args)
+        private void OnApiReady(object? sender, EventArgs args)
         {
             SetApiState(State.ApiReady);
         }
@@ -50,9 +50,9 @@ namespace StreetSmart.Tests.NET6
         }
         public async Task<State> InitWithBasicAuth()
         {
-            string username = Configuration["TestData:ApiUsername"];
-            string password = Configuration["TestData:ApiPassword"];
-            string apiKey = Configuration["TestData:ApiKey"];
+            string username = Configuration["TestData:ApiUsername"]!;
+            string password = Configuration["TestData:ApiPassword"]!;
+            string apiKey = Configuration["TestData:ApiKey"]!;
 
             IAddressSettings addressSettings = AddressSettingsFactory.Create(_language, _database);
             IDomElement element = DomElementFactory.Create();

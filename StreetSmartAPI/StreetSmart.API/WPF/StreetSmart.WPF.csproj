@@ -907,7 +907,9 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60">
+			<PrivateAssets>contentFiles</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
