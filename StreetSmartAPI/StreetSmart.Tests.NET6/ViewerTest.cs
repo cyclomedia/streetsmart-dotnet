@@ -1,7 +1,5 @@
 ﻿using StreetSmart.Common.Factories;
-using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
-
 
 namespace StreetSmart.Tests.NET6
 {
@@ -9,7 +7,7 @@ namespace StreetSmart.Tests.NET6
     {
         private const string _srs = "EPSG:28992";
 
-        private ApiFixture _fixture;
+        private readonly ApiFixture _fixture;
 
         public ViewerTest(ApiFixture fixture)
         {
@@ -24,10 +22,9 @@ namespace StreetSmart.Tests.NET6
         public async Task ViewerTestByTypeAndAddress(ViewerType viewerType, string address, State expectedViewerState)
         {
             IList<ViewerType> viewerTypes = new List<ViewerType>();
-            IViewerOptions viewerOptions = null;
-            IPanoramaViewerOptions panoramaViewerOptions = null;
-            IObliqueViewerOptions obliqueViewerOptions = null;
-            IPointCloudViewerOptions pointCloudViewerOptions = null;
+            IPanoramaViewerOptions? panoramaViewerOptions = null;
+            IObliqueViewerOptions? obliqueViewerOptions = null;
+            IPointCloudViewerOptions? pointCloudViewerOptions = null;
 
             if (viewerType.Equals(ViewerType.Oblique))
             {
@@ -44,7 +41,7 @@ namespace StreetSmart.Tests.NET6
 
             viewerTypes.Add(viewerType);
 
-            viewerOptions = ViewerOptionsFactory.Create(viewerTypes, _srs, panoramaViewerOptions, obliqueViewerOptions, pointCloudViewerOptions);
+            var viewerOptions = ViewerOptionsFactory.Create(viewerTypes, _srs, panoramaViewerOptions, obliqueViewerOptions, pointCloudViewerOptions);
             var viewerState = await _fixture.OpenViewer(address, viewerOptions);
 
             Assert.Equal(expectedViewerState, viewerState);

@@ -156,9 +156,9 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (properties != null)
       {
-        Id = properties.Id != null ? string.Copy(properties.Id) : null;
-        Name = properties.Name != null ? string.Copy(properties.Name) : null;
-        Group = properties.Group != null ? string.Copy(properties.Group) : null;
+        Id = properties.Id;
+        Name = properties.Name;
+        Group = properties.Group;
         MeasurementTool = properties.MeasurementTool;
 
         if (properties.MeasureDetails != null)

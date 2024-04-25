@@ -2,22 +2,23 @@
 	<PropertyGroup>
 		<TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
 		<OutputType>Library</OutputType>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-		<Platforms>x86;x64;AnyCPU</Platforms>
-		<Version>24.1.1</Version>
+		<Platform>x64</Platform>
+		<Version>24.1.1-rc01</Version>
+		<PlatformName>windows</PlatformName>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
 		<PackageReleaseNotes>ReleaseNotes.txt</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Description>StreetSmart API for WPF</Description>
 		<Copyright>Copyright © CycloMedia 2016 - 2024</Copyright>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>anycpu</PlatformTarget>
@@ -907,9 +908,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60">
-			<PrivateAssets>contentFiles</PrivateAssets>
-		</PackageReference>
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>

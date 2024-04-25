@@ -57,7 +57,13 @@ namespace StreetSmart.Common.API
     {
       get
       {
-        string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+        string codeBase =
+#if NET462
+            Assembly.GetExecutingAssembly().CodeBase;
+#elif NET6_0
+            Assembly.GetExecutingAssembly().Location;
+#endif
+
         UriBuilder uri = new UriBuilder(codeBase);
         string path = Uri.UnescapeDataString(uri.Path);
         return Path.GetDirectoryName(path) ?? string.Empty;
