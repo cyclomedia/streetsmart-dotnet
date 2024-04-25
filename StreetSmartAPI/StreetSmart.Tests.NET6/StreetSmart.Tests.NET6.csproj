@@ -8,6 +8,7 @@
 		<IsTestProject>true</IsTestProject>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<Platform>x64</Platform>
+		<PlatformName>windows</PlatformName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,6 +38,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\StreetSmart.API\WPF\StreetSmart.WPF.csproj" />
+	  <ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.User.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>

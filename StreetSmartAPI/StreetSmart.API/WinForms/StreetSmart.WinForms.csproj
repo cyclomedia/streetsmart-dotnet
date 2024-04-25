@@ -61,6 +61,18 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="cyclomedia.png" />
+		<None Include="..\Common\locales\af.pak" Link="locales\af.pak">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Common\locales\am.pak" Link="locales\am.pak">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Common\locales\en-US.pak" Link="locales\en-US.pak">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Common\locales\en-GB.pak" Link="locales\en-GB.pak">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\Common\API\APIBase.cs">

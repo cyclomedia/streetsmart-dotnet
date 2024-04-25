@@ -49,92 +49,97 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System.Threading;
+using System.Windows;
 
 namespace StreetSmart.Common.API
 {
-  // ReSharper disable once InconsistentNaming
-  internal class StreetSmartAPI : APIBase, IStreetSmartAPI
-  {
-    #region Members
-
-    private ApiEventList _apiMeasurementEventList;
-    private ApiEventList _apiViewerEventList;
-    private string _streetSmartLocation;
-
-    #endregion
-
-    #region Events
-
-    public event EventHandler APIReady;
-
-    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
-
-    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
-
-    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
-
-    public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
-
-    public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
-
-    public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
-
-    #endregion
-
-    #region Settings / Shortcuts
-
-    public ISettings Settings { get; private set; }
-
-    public IShortcuts Shortcuts { get; private set; }
-
-    #endregion
-
-    #if WINFORMS
-    #region GUI
-
-    public StreetSmartGUI GUI { get; }
-
-    #endregion
-    #endif
-
-    #region Properties
-
-    private string JsApi => Resources.JsApi;
-
-    public string ApiId { get; private set; }
-
-    protected override string CallFunctionBase => $"{JsApi}";
-
-    #endregion
-
-    #region Callback definitions
-
-    public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
-
-    public string JsOnMeasurementStarted => $"{nameof(OnMeasurementStarted).FirstCharacterToLower()}";
-
-    public string JsOnMeasurementStopped => $"{nameof(OnMeasurementStopped).FirstCharacterToLower()}";
-
-    public string JsOnMeasurementSaved => $"{nameof(OnMeasurementSaved).FirstCharacterToLower()}";
-
-    public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
-
-    public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
-
-    public string JsOnViewerUpdated => $"{nameof(OnViewerUpdated).FirstCharacterToLower()}";
-
-    #endregion
-
-    #region Constructor
-    #if WINFORMS
-    public StreetSmartAPI(string streetSmartLocation)
+    // ReSharper disable once InconsistentNaming
+    internal class StreetSmartAPI : APIBase, IStreetSmartAPI
     {
-      InitApi(streetSmartLocation);
-      Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
-      RegisterBrowser();
-      GUI = new StreetSmartGUI(Browser);
-    }
-    #else
+        #region Members
+
+        private ApiEventList _apiMeasurementEventList;
+        private ApiEventList _apiViewerEventList;
+        private string _streetSmartLocation;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler APIReady;
+
+        public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
+
+        public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+
+        public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+
+        public event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
+
+        public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
+
+        public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
+
+        #endregion
+
+        #region Settings / Shortcuts
+
+        public ISettings Settings { get; private set; }
+
+        public IShortcuts Shortcuts { get; private set; }
+
+        #endregion
+
+#if WINFORMS
+        #region GUI
+
+        public StreetSmartGUI GUI { get; }
+
+        #endregion
+#endif
+
+        #region Properties
+
+        private readonly ManualResetEventSlim oSignalEvent = new(false);
+
+        private string JsApi => Resources.JsApi;
+
+        public string ApiId { get; private set; }
+
+        protected override string CallFunctionBase => $"{JsApi}";
+
+        #endregion
+
+        #region Callback definitions
+
+        public string JsOnMeasurementChanged => $"{nameof(OnMeasurementChanged).FirstCharacterToLower()}";
+
+        public string JsOnMeasurementStarted => $"{nameof(OnMeasurementStarted).FirstCharacterToLower()}";
+
+        public string JsOnMeasurementStopped => $"{nameof(OnMeasurementStopped).FirstCharacterToLower()}";
+
+        public string JsOnMeasurementSaved => $"{nameof(OnMeasurementSaved).FirstCharacterToLower()}";
+
+        public string JsOnViewerAdded => $"{nameof(OnViewerAdded).FirstCharacterToLower()}";
+
+        public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
+
+        public string JsOnViewerUpdated => $"{nameof(OnViewerUpdated).FirstCharacterToLower()}";
+
+        #endregion
+
+        #region Constructor
+#if WINFORMS
+        public StreetSmartAPI(string streetSmartLocation)
+        {
+            InitApi(streetSmartLocation);
+            Cef.Initialize(new CefSettings());
+            Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
+            RegisterBrowser();
+            GUI = new StreetSmartGUI(Browser);
+        }
+#else
     public StreetSmartAPI(string streetSmartLocation)
     {
       InitApi(streetSmartLocation);
@@ -154,27 +159,27 @@ namespace StreetSmart.Common.API
       Browser.CreateBrowser(parentWindowHwndSource, initialSize);
     }
 */
-    #endif
+#endif
 
-    ~StreetSmartAPI()
-    {
-      ViewerList.DeleteViewerList(ApiId);
-    }
+        ~StreetSmartAPI()
+        {
+            ViewerList.DeleteViewerList(ApiId);
+        }
 
-    #endregion
+        #endregion
 
-    #region CefSharp Functions
-    #if WINFORMS
-    public void ShowDevTools()
-    {
-      ShowDeveloperTools();
-    }
+        #region CefSharp Functions
+#if WINFORMS
+        public void ShowDevTools()
+        {
+            ShowDeveloperTools();
+        }
 
-    public void CloseDevTools()
-    {
-      CloseDeveloperTools();
-    }
-    #else
+        public void CloseDevTools()
+        {
+            CloseDeveloperTools();
+        }
+#else
     public void ShowDevTools()
     {
       Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
@@ -196,325 +201,337 @@ namespace StreetSmart.Common.API
       Browser.Address = streetSmartLocation;
     }
 
-    #endif
-    #endregion
+#endif
+        #endregion
 
-    #region Interface Functions
+        #region Interface Functions
 
-    public async Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay)
-    {
-      if (!overlay?.GeoJson?.IsValidJson() ?? true)
-      {
-        throw new StreetSmartJsonException("Json is not valid");
-      }
+        public async Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay)
+        {
+            if (!overlay?.GeoJson?.IsValidJson() ?? true)
+            {
+                throw new StreetSmartJsonException("Json is not valid");
+            }
 
-      ((Overlay) overlay).FillInParameters(ToDictionary(await CallJsGetScriptAsync($"addOverlay({overlay})")));
-      return overlay;
-    }
+          ((Overlay)overlay).FillInParameters(ToDictionary(await CallJsGetScriptAsync($"addOverlay({overlay})")));
+            return overlay;
+        }
 
-    public async Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay)
-    {
-      int processId = GetProcessId;
-      string script = GetScript($"addWFSLayer({overlay})", processId);
-      ((Overlay) overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
-      return overlay;
-    }
+        public async Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay)
+        {
+            int processId = GetProcessId;
+            string script = GetScript($"addWFSLayer({overlay})", processId);
+            ((Overlay)overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
+            return overlay;
+        }
 
-    public async Task<IList<IViewer>> CloseViewer(string viewerId)
-    {
-      string resultType = "resultCloseViewer";
-      int processId = GetProcessId;
-      string funcName = $"{nameof(CloseViewer)}{processId}".ToQuote();
+        public async Task<IList<IViewer>> CloseViewer(string viewerId)
+        {
+            string resultType = "resultCloseViewer";
+            int processId = GetProcessId;
+            string funcName = $"{nameof(CloseViewer)}{processId}".ToQuote();
 
-      string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
+            string script = $@"var {resultType};{JsApi}.closeViewer({viewerId.ToQuote()}).catch
                       (function(e){{{JsThis}.{JsCloseViewerException}(e.message,{funcName})}}).then
                       (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcName});}});";
 
-      object result = await CallJsAsync(script, processId);
+            object result = await CallJsAsync(script, processId);
 
-      if (result is Exception exception)
-      {
-        throw exception;
-      }
+            if (result is Exception exception)
+            {
+                throw exception;
+            }
 
-      IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
-      IViewer removedViewer = null;
+            IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
+              (ApiId, new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
+            IViewer removedViewer = null;
 
-      foreach (var viewer in viewerList)
-      {
-        if (await viewer.GetId() == viewerId)
-        {
-          removedViewer = viewer;
+            foreach (var viewer in viewerList)
+            {
+                if (await viewer.GetId() == viewerId)
+                {
+                    removedViewer = viewer;
+                }
+            }
+
+            if (removedViewer != null)
+            {
+                viewerList.Remove(removedViewer);
+            }
+
+            return viewerList;
         }
-      }
 
-      if (removedViewer != null)
-      {
-        viewerList.Remove(removedViewer);
-      }
+        public async Task<IList<IViewer>> GetViewers()
+        {
+            string resultType = "resultGetViewers";
+            int processId = GetProcessId;
+            string funcId = $"{nameof(GetViewers)}{processId}".ToQuote();
+            string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcId});";
+            object result = await CallJsAsync(script, processId);
 
-      return viewerList;
-    }
+            return await ViewerList.ToViewersFromJsValue(ApiId,
+              new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
+        }
 
-    public async Task<IList<IViewer>> GetViewers()
-    {
-      string resultType = "resultGetViewers";
-      int processId = GetProcessId;
-      string funcId = $"{nameof(GetViewers)}{processId}".ToQuote();
-      string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcId});";
-      object result = await CallJsAsync(script, processId);
+        public async Task RemoveOverlay(string layerId)
+        {
+            await CallJsGetScriptAsync($"removeOverlay({layerId.ToQuote()})");
+        }
 
-      return await ViewerList.ToViewersFromJsValue(ApiId,
-        new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
-    }
+        public async Task Destroy(IOptions options)
+        {
+            if (Browser != null && Browser.IsBrowserInitialized && Browser.GetBrowser() != null)
+            {
+                RemoveMeasurementEvents();
+                RemoveViewerEvents();
+                await CallJsGetScriptAsync($"destroy({options})");
+                ViewerList.ClearViewers(ApiId);
+            }
+        }
 
-    public async Task RemoveOverlay(string layerId)
-    {
-      await CallJsGetScriptAsync($"removeOverlay({layerId.ToQuote()})");
-    }
+        public async Task<IFeatureCollection> GetActiveMeasurement()
+        {
+            return new FeatureCollection(ToDictionary(await CallJsGetScriptAsync("getActiveMeasurement()")), true);
+        }
 
-    public async Task Destroy(IOptions options)
-    {
-      if (Browser.GetBrowser() != null)
-      {
-        RemoveMeasurementEvents();
-        RemoveViewerEvents();
-        await CallJsGetScriptAsync($"destroy({options})");
-        ViewerList.ClearViewers(ApiId);
-      }
-    }
+        public async Task<IAddressSettings> GetAddressSettings()
+        {
+            return new AddressSettings(ToDictionary(await CallJsGetScriptAsync("getAddressSettings()")));
+        }
 
-    public async Task<IFeatureCollection> GetActiveMeasurement()
-    {
-      return new FeatureCollection(ToDictionary(await CallJsGetScriptAsync("getActiveMeasurement()")), true);
-    }
+        public async Task<bool> GetApiReadyState()
+        {
+            return Browser != null && ToBool(await CallJsGetScriptAsync("getApiReadyState()"));
+        }
 
-    public async Task<IAddressSettings> GetAddressSettings()
-    {
-      return new AddressSettings(ToDictionary(await CallJsGetScriptAsync("getAddressSettings()")));
-    }
+        public async Task<string> GetApplicationName()
+        {
+            return ToString(await CallJsGetScriptAsync("getApplicationName()"));
+        }
 
-    public async Task<bool> GetApiReadyState()
-    {
-      return Browser != null && ToBool(await CallJsGetScriptAsync("getApiReadyState()"));
-    }
+        public async Task<string> GetApplicationVersion()
+        {
+            return ToString(await CallJsGetScriptAsync("getApplicationVersion()"));
+        }
 
-    public async Task<string> GetApplicationName()
-    {
-      return ToString(await CallJsGetScriptAsync("getApplicationName()"));
-    }
+        public async Task<string[]> GetDebugLogs()
+        {
+            return ToArray(await CallJsGetScriptAsync("getDebugLogs()")).Cast<string>().ToArray();
+        }
 
-    public async Task<string> GetApplicationVersion()
-    {
-      return ToString(await CallJsGetScriptAsync("getApplicationVersion()"));
-    }
+        public async Task<string[]> GetPermissions()
+        {
+            return ToArray(await CallJsGetScriptAsync("getPermissions()")).Cast<string>().ToArray();
+        }
 
-    public async Task<string[]> GetDebugLogs()
-    {
-      return ToArray(await CallJsGetScriptAsync("getDebugLogs()")).Cast<string>().ToArray();
-    }
-
-    public async Task<string[]> GetPermissions()
-    {
-      return ToArray(await CallJsGetScriptAsync("getPermissions()")).Cast<string>().ToArray();
-    }
-
-    public async Task Init(IOptions options)
-    {
-      int processId = GetProcessId;
-      string funcId = $"{nameof(Init)}{processId}".ToQuote();
-      string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}({funcId})}},
+        public async Task Init(IOptions options)
+        {
+            int processId = GetProcessId;
+            string funcId = $"{nameof(Init)}{processId}".ToQuote();
+            string script = $@"{options.Element}{JsApi}.init({options}).then(function(){{{JsThis}.{JsLoginSuccess}({funcId})}},
                       function(e){{{JsThis}.{JsLoginFailed}(e.message,{funcId})}});";
-      object result = await CallJsAsync(script, processId);
+            object result = await CallJsAsync(script, processId);
 
-      if (result is Exception exception)
-      {
-        throw exception;
-      }
+            if (result is Exception exception)
+            {
+                throw exception;
+            }
 
-      AddViewerEvents();
-    }
+            AddViewerEvents();
+        }
 
-    public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
-    {
-      int processId = GetProcessId;
-      string resultType = "resultOpenByQuery";
-      string funcId = $"{nameof(Open)}{processId}".ToQuote();
+        public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
+        {
+            int processId = GetProcessId;
+            string resultType = "resultOpenByQuery";
+            string funcId = $"{nameof(Open)}{processId}".ToQuote();
 
-      string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
+            string script = $@"var {resultType};{JsApi}.open({query.ToQuote()}{options}).catch
                       (function(e){{{JsThis}.{JsImNotFound}(e.message,{funcId})}}).then
                       (function(r){{{resultType}=r;{JsThis}.{JsResult}('{resultType}',{funcId});}});";
 
-      object result = await CallJsAsync(script, processId);
+            object result = await CallJsAsync(script, processId);
 
-      if (result is Exception exception)
-      {
-        throw exception;
-      }
+            if (result is Exception exception)
+            {
+                throw exception;
+            }
 
-      return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), ToString(result));
-    }
-
-    public void SetActiveMeasurement(IFeatureCollection measurement)
-    {
-      Browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
-    }
-
-    public void SetOverlayDrawDistance(int distance)
-    {
-      Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
-    }
-
-    public void SetSnapping(bool enabled)
-    {
-      Browser.ExecuteScriptAsync(GetScript($"setSnapping({enabled.ToJsBool()})"));
-    }
-
-    public async Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options)
-    {
-      int processId = GetProcessId;
-      string funcId = $"{nameof(StartMeasurementMode)}{processId}".ToQuote();
-      string startMeasurement = GetScript($"startMeasurementMode({((Viewer) viewer).Name}{options})", processId);
-      string script = $@"try{{{startMeasurement}}}catch(e){{{JsThis}.{JsMeasurementFailed}(e.message,{funcId})}}";
-      object result = await CallJsAsync(script, processId);
-
-      if (result is Exception exception)
-      {
-        throw exception;
-      }
-    }
-
-    public void StopMeasurementMode()
-    {
-      Browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
-    }
-
-    #endregion
-
-    #region events ChromiumWebBrowser
-
-    public void OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
-    {
-      if (e.Frame.IsMain)
-      {
-        APIReady?.Invoke(this, EventArgs.Empty);
-      }
-    }
-
-    #endregion
-
-    #region Callbacks StreetSmartAPI
-
-    public void OnMeasurementChanged(ExpandoObject args, string viewerId)
-    {
-      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
-    }
-
-    public void OnMeasurementStarted(ExpandoObject args, string viewerId)
-    {
-      MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
-    }
-
-    public void OnMeasurementStopped(ExpandoObject args, string viewerId)
-    {
-      MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
-    }
-
-    public void OnMeasurementSaved(ExpandoObject args, string viewerId)
-    {
-      MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
-    }
-
-    public void OnViewerAdded(string id, string type, string name)
-    {
-      string jsName = $"type{Guid.NewGuid():N}";
-      Browser.ExecuteScriptAsync($"var {jsName}={name}['{id}'];");
-      IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
-      ((Viewer) viewer).JsObjectCollection = name;
-      ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
-
-      if (viewer is PanoramaViewer)
-      {
-        ReAssignMeasurementEvents();
-      }
-    }
-
-    public async void OnViewerRemoved(string name, string type)
-    {
-      IViewer viewer = await ViewerList.RemoveViewerFromJsValue(ApiId, type, name);
-      ViewerRemoved?.Invoke(this, new EventArgs<IViewer>(viewer));
-    }
-
-    public async void OnViewerUpdated(string oldName, string name, string type)
-    {
-      string jsName = $"type{Guid.NewGuid():N}";
-      Browser.ExecuteScriptAsync($"var {jsName}={name};");
-      IViewer iViewer = await ViewerList.ToViewerFromJsValue(ApiId, type, oldName);
-      Viewer viewer = (Viewer) iViewer;
-
-      if (viewer != null)
-      {
-        viewer.DisConnectEvents();
-        string removedName = viewer.Name;
-        viewer.Name = jsName;
-        ViewerList.ReRegisterViewer(ApiId, type, removedName, viewer);
-        viewer.ReConnectEvents();
-
-        if (viewer is PanoramaViewer)
-        {
-          ReAssignMeasurementEvents();
+            return await ViewerList.ToViewersFromJsValue(ApiId, options.ViewerTypes.GetTypes(), ToString(result));
         }
-      }
-    }
 
-    #endregion
+        public void SetActiveMeasurement(IFeatureCollection measurement)
+        {
+            Browser.ExecuteScriptAsync(GetScript($"setActiveMeasurement({measurement})"));
+        }
 
-    #region Functions
+        public void SetOverlayDrawDistance(int distance)
+        {
+            Browser.ExecuteScriptAsync(GetScript($"setOverlayDrawDistance({distance})"));
+        }
 
-    public void InitApi(string streetSmartLocation)
-    {
-      ApiId = $"{Guid.NewGuid():N}";
-      _streetSmartLocation = streetSmartLocation;
-    }
+        public void SetSnapping(bool enabled)
+        {
+            Browser.ExecuteScriptAsync(GetScript($"setSnapping({enabled.ToJsBool()})"));
+        }
 
-    public void RegisterBrowser()
-    {
-      Settings = new Settings(Browser);
-      Shortcuts = new Shortcuts(Browser);
-      RegisterThisJsObject();
-      ViewerList.CreateViewerList(ApiId);
-      ViewerList.RegisterJsObjects(ApiId, Browser);
-      Browser.FrameLoadEnd += OnFrameLoadEnd;
-      Browser.DownloadHandler = new DownloadHandler();
-    }
+        public async Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options)
+        {
+            int processId = GetProcessId;
+            string funcId = $"{nameof(StartMeasurementMode)}{processId}".ToQuote();
+            string startMeasurement = GetScript($"startMeasurementMode({((Viewer)viewer).Name}{options})", processId);
+            string script = $@"try{{{startMeasurement}}}catch(e){{{JsThis}.{JsMeasurementFailed}(e.message,{funcId})}}";
+            object result = await CallJsAsync(script, processId);
 
-    private void ReAssignMeasurementEvents()
-    {
-      RemoveMeasurementEvents();
-      AddMeasurementEvents();
-    }
+            if (result is Exception exception)
+            {
+                throw exception;
+            }
+        }
 
-    private void AddViewerEvents()
-    {
-      if (_apiViewerEventList == null)
-      {
-        _apiViewerEventList = new ApiEventList
+        public void StopMeasurementMode()
+        {
+            Browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
+        }
+
+        #endregion
+
+        #region events ChromiumWebBrowser
+
+        public void OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+        {
+            if (e.Frame.IsMain)
+            {
+                APIReady?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
+        #region Callbacks StreetSmartAPI
+
+        public void OnMeasurementChanged(ExpandoObject args, string viewerId)
+        {
+            MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+        }
+
+        public void OnMeasurementStarted(ExpandoObject args, string viewerId)
+        {
+            MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+        }
+
+        public void OnMeasurementStopped(ExpandoObject args, string viewerId)
+        {
+            MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+        }
+
+        public void OnMeasurementSaved(ExpandoObject args, string viewerId)
+        {
+            MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+        }
+
+        public void OnViewerAdded(string id, string type, string name)
+        {
+            string jsName = $"type{Guid.NewGuid():N}";
+            Browser.ExecuteScriptAsync($"var {jsName}={name}['{id}'];");
+            IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
+            ((Viewer)viewer).JsObjectCollection = name;
+            ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
+
+            if (viewer is PanoramaViewer)
+            {
+                ReAssignMeasurementEvents();
+            }
+        }
+
+        public async void OnViewerRemoved(string name, string type)
+        {
+            IViewer viewer = await ViewerList.RemoveViewerFromJsValue(ApiId, type, name);
+            ViewerRemoved?.Invoke(this, new EventArgs<IViewer>(viewer));
+        }
+
+        public async void OnViewerUpdated(string oldName, string name, string type)
+        {
+            string jsName = $"type{Guid.NewGuid():N}";
+            Browser.ExecuteScriptAsync($"var {jsName}={name};");
+            IViewer iViewer = await ViewerList.ToViewerFromJsValue(ApiId, type, oldName);
+            Viewer viewer = (Viewer)iViewer;
+
+            if (viewer != null)
+            {
+                viewer.DisConnectEvents();
+                string removedName = viewer.Name;
+                viewer.Name = jsName;
+                ViewerList.ReRegisterViewer(ApiId, type, removedName, viewer);
+                viewer.ReConnectEvents();
+
+                if (viewer is PanoramaViewer)
+                {
+                    ReAssignMeasurementEvents();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Functions
+
+        public void InitApi(string streetSmartLocation)
+        {
+            ApiId = $"{Guid.NewGuid():N}";
+            _streetSmartLocation = streetSmartLocation;
+        }
+
+        public void RegisterBrowser()
+        {
+            Settings = new Settings(Browser);
+            Shortcuts = new Shortcuts(Browser);
+            RegisterThisJsObject();
+            ViewerList.CreateViewerList(ApiId);
+            ViewerList.RegisterJsObjects(ApiId, Browser);
+            Browser.FrameLoadEnd += OnFrameLoadEnd;
+            Browser.DownloadHandler = new DownloadHandler();
+            Browser.IsBrowserInitializedChanged += Browser_IsBrowserInitializedChanged;
+        }
+
+#if WPF
+        private void Browser_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            oSignalEvent.Set();
+        }
+#elif WINFORMS
+        private void Browser_IsBrowserInitializedChanged(object sender, EventArgs e)
+        {
+            oSignalEvent.Set();
+        }
+#endif
+        private void ReAssignMeasurementEvents()
+        {
+            RemoveMeasurementEvents();
+            AddMeasurementEvents();
+        }
+
+        private void AddViewerEvents()
+        {
+            if (_apiViewerEventList == null)
+            {
+                _apiViewerEventList = new ApiEventList
         {
           new ViewerAddedEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
           new ViewerRemovedEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
           new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
         };
 
-        Browser?.ExecuteScriptAsync($"{_apiViewerEventList}");
-      }
-    }
+                Browser?.ExecuteScriptAsync($"{_apiViewerEventList}");
+            }
+        }
 
-    public void AddMeasurementEvents()
-    {
-      if (_apiMeasurementEventList == null)
-      {
-        _apiMeasurementEventList = new ApiEventList
+        public void AddMeasurementEvents()
+        {
+            if (_apiMeasurementEventList == null)
+            {
+                _apiMeasurementEventList = new ApiEventList
         {
           new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged),
           new MeasurementEvent(this, "MEASUREMENT_STARTED", JsOnMeasurementStarted),
@@ -522,44 +539,44 @@ namespace StreetSmart.Common.API
           new MeasurementEvent(this, "MEASUREMENT_SAVED", JsOnMeasurementSaved)
         };
 
-        Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
-      }
-    }
+                Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
+            }
+        }
 
-    public void RemoveViewerEvents()
-    {
-      if (_apiViewerEventList != null)
-      {
-        Browser?.ExecuteScriptAsync(_apiViewerEventList.Destroy);
-        _apiViewerEventList = null;
-      }
-    }
+        public void RemoveViewerEvents()
+        {
+            if (_apiViewerEventList != null)
+            {
+                Browser?.ExecuteScriptAsync(_apiViewerEventList.Destroy);
+                _apiViewerEventList = null;
+            }
+        }
 
-    public void RemoveMeasurementEvents()
-    {
-      if (_apiMeasurementEventList != null)
-      {
-        Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
-        _apiMeasurementEventList = null;
-      }
-    }
+        public void RemoveMeasurementEvents()
+        {
+            if (_apiMeasurementEventList != null)
+            {
+                Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
+                _apiMeasurementEventList = null;
+            }
+        }
 
-    private void ShowDeveloperTools()
-    {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.ShowDevTools();
-      }
-    }
+        private void ShowDeveloperTools()
+        {
+            if (Browser.IsBrowserInitialized)
+            {
+                Browser?.ShowDevTools();
+            }
+        }
 
-    private void CloseDeveloperTools()
-    {
-      if (Browser.IsBrowserInitialized)
-      {
-        Browser?.CloseDevTools();
-      }
-    }
+        private void CloseDeveloperTools()
+        {
+            if (Browser.IsBrowserInitialized)
+            {
+                Browser?.CloseDevTools();
+            }
+        }
 
-    #endregion
-  }
+#endregion
+    }
 }

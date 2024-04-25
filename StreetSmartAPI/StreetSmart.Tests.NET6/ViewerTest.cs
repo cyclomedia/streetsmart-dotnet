@@ -11,7 +11,7 @@ namespace StreetSmart.Tests.NET6
 
         public ViewerTest(ApiFixture fixture)
         {
-            this._fixture = fixture;
+            _fixture = fixture;
         }
 
         [Theory]
