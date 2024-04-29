@@ -19,6 +19,7 @@
 		<AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>anycpu</PlatformTarget>

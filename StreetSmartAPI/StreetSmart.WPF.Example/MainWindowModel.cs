@@ -30,7 +30,7 @@ using StreetSmart.Common.Interfaces.DomElement;
 
 namespace StreetSmart.WPF.Example
 {
-  public class MainWindowModel: NotifyPropertyChanged
+    public class MainWindowModel: NotifyPropertyChanged
   {
     #region Constants
 

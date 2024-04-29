@@ -26,17 +26,15 @@ using CefSharp;
 
 #if WINFORMS
 using System.Windows.Forms;
-
 using CefSharp.WinForms;
-
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
-#else
 using System.Threading;
-
+#elif WPF
+using System.Threading;
 using CefSharp.Wpf;
-
 using StreetSmart.Wpf.Properties;
+using System.Windows;
 #endif
 
 using StreetSmart.Common.API.Events;
@@ -49,8 +47,6 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 using StreetSmart.Common.Interfaces.GeoJson;
-using System.Threading;
-using System.Windows;
 
 namespace StreetSmart.Common.API
 {
@@ -62,6 +58,7 @@ namespace StreetSmart.Common.API
         private ApiEventList _apiMeasurementEventList;
         private ApiEventList _apiViewerEventList;
         private string _streetSmartLocation;
+
 
         #endregion
 
@@ -133,32 +130,34 @@ namespace StreetSmart.Common.API
 #if WINFORMS
         public StreetSmartAPI(string streetSmartLocation)
         {
-            InitApi(streetSmartLocation);
+            ApiId = $"{Guid.NewGuid():N}";
+            _streetSmartLocation = streetSmartLocation;
             Cef.Initialize(new CefSettings());
             Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
             RegisterBrowser();
             GUI = new StreetSmartGUI(Browser);
         }
 #else
-    public StreetSmartAPI(string streetSmartLocation)
-    {
-      InitApi(streetSmartLocation);
-    }
+        public StreetSmartAPI(string streetSmartLocation)
+        {
+             ApiId = $"{Guid.NewGuid():N}";
+            _streetSmartLocation = streetSmartLocation;
+        }
 
-    public void InitBrowser(ChromiumWebBrowser browser)
-    {
-      Browser = browser;
-      Browser.Address = _streetSmartLocation;
-      RegisterBrowser();
-    }
-/*
-    public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
+        public void InitBrowser(ChromiumWebBrowser browser)
+        {
+            Browser = browser;
+            Browser.Address = _streetSmartLocation;
+            RegisterBrowser();
+        }
+        /*
+            public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
 
-    public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
-    {
-      Browser.CreateBrowser(parentWindowHwndSource, initialSize);
-    }
-*/
+            public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
+            {
+              Browser.CreateBrowser(parentWindowHwndSource, initialSize);
+            }
+        */
 #endif
 
         ~StreetSmartAPI()
@@ -180,26 +179,26 @@ namespace StreetSmart.Common.API
             CloseDeveloperTools();
         }
 #else
-    public void ShowDevTools()
-    {
-      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
-    }
+        public void ShowDevTools()
+        {
+            Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
+        }
 
-    public void CloseDevTools()
-    {
-      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
-    }
+        public void CloseDevTools()
+        {
+            Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
+        }
 
-    public void RestartStreetSmart()
-    {
-      RestartStreetSmart(Resources.StreetSmartLocation);
-    }
+        public void RestartStreetSmart()
+        {
+            RestartStreetSmart(Resources.StreetSmartLocation);
+        }
 
-    public void RestartStreetSmart(string streetSmartLocation)
-    {
-      _streetSmartLocation = streetSmartLocation;
-      Browser.Address = streetSmartLocation;
-    }
+        public void RestartStreetSmart(string streetSmartLocation)
+        {
+            _streetSmartLocation = streetSmartLocation;
+            Browser.Address = streetSmartLocation;
+        }
 
 #endif
         #endregion
@@ -274,9 +273,9 @@ namespace StreetSmart.Common.API
               new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
         }
 
-        public async Task RemoveOverlay(string layerId)
+        public async Task RemoveOverlay(string overlayId)
         {
-            await CallJsGetScriptAsync($"removeOverlay({layerId.ToQuote()})");
+            await CallJsGetScriptAsync($"removeOverlay({overlayId.ToQuote()})");
         }
 
         public async Task Destroy(IOptions options)
@@ -477,13 +476,7 @@ namespace StreetSmart.Common.API
 
         #region Functions
 
-        public void InitApi(string streetSmartLocation)
-        {
-            ApiId = $"{Guid.NewGuid():N}";
-            _streetSmartLocation = streetSmartLocation;
-        }
-
-        public void RegisterBrowser()
+        private void RegisterBrowser()
         {
             Settings = new Settings(Browser);
             Shortcuts = new Shortcuts(Browser);
@@ -517,11 +510,11 @@ namespace StreetSmart.Common.API
             if (_apiViewerEventList == null)
             {
                 _apiViewerEventList = new ApiEventList
-        {
-          new ViewerAddedEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
-          new ViewerRemovedEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
-          new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
-        };
+                {
+                  new ViewerAddedEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
+                  new ViewerRemovedEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
+                  new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
+                };
 
                 Browser?.ExecuteScriptAsync($"{_apiViewerEventList}");
             }
@@ -577,6 +570,6 @@ namespace StreetSmart.Common.API
             }
         }
 
-#endregion
+        #endregion
     }
 }

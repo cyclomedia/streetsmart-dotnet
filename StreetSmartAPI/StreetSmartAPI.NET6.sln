@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Demo.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multiple.NET6", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.NET6.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example.NET6", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.NET6.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.Winforms.Example", "StreetSmart.Winforms.Example\StreetSmart.Winforms.Example.csproj", "{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.Tests.NET6", "StreetSmart.Tests.NET6\StreetSmart.Tests.NET6.csproj", "{03246068-B6C6-4DA0-AF01-6933399945FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Tests", "StreetSmart.Tests.NET6\StreetSmart.WinForms.Tests.csproj", "{03246068-B6C6-4DA0-AF01-6933399945FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

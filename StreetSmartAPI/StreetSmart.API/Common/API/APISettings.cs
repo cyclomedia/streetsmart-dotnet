@@ -21,14 +21,14 @@ using System.IO;
 using System.Reflection;
 
 using CefSharp;
+using System.Linq;
+
 
 #if WINFORMS
 using CefSharp.WinForms;
-
 using StreetSmart.WinForms.Properties;
 #else
 using CefSharp.Wpf;
-
 using StreetSmart.Wpf.Properties;
 #endif
 
@@ -36,82 +36,93 @@ using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
-  // ReSharper disable once InconsistentNaming
-  internal class APISettings: CefSettings, IAPISettings
-  {
-    public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
+    // ReSharper disable once InconsistentNaming
+    internal class APISettings : CefSettings, IAPISettings
     {
-      LogSeverity = LogSeverity.Disable;
-      CachePath = cachePath ?? CachePath;
-      BrowserSubprocessPath = browserSubprocessPath ?? BrowserSubprocessPath;
-      LocalesDirPath = localesDirPath ?? LocalesDirPath;
-      ResourcesDirPath = resourcesDirPath ?? ResourcesDirPath;
-    }
+        public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
+        {
+            LogSeverity = LogSeverity.Disable;
+            CachePath = cachePath ?? CachePath;
+            BrowserSubprocessPath = browserSubprocessPath ?? GetDefaultBrowserSubprocessPath();
+            LocalesDirPath = localesDirPath ?? GetDefaultLocalesDirPath();
+            ResourcesDirPath = resourcesDirPath ?? GetDefaultResourcesDirPath();
+        }
 
-    public APISettings()
-      : this(null, null, null, null)
-    {
-    }
+        public APISettings()
+          : this(null, null, null, null)
+        {
+        }
 
-    private string DirectoryPath
-    {
-      get
-      {
-        string codeBase =
+        private readonly string DirectoryPath = GetDirectoryPath();
+
+        private static string GetDirectoryPath()
+        {
+            string codeBase = new Uri(
 #if NET462
-            Assembly.GetExecutingAssembly().CodeBase;
+                Assembly.GetExecutingAssembly().CodeBase
 #elif NET6_0
-            Assembly.GetExecutingAssembly().Location;
+                Assembly.GetExecutingAssembly().Location
 #endif
+                ).LocalPath;
 
-        UriBuilder uri = new UriBuilder(codeBase);
-        string path = Uri.UnescapeDataString(uri.Path);
-        return Path.GetDirectoryName(path) ?? string.Empty;
-      }
-    }
+            var indexOfLastBackslash = codeBase.LastIndexOf(@"\");
+            while (indexOfLastBackslash > 0)
+            {
+                codeBase = codeBase.Substring(0, indexOfLastBackslash + 1);
+                var files = Directory.GetFiles(codeBase, "CefSharp.dll", SearchOption.TopDirectoryOnly);
+                if(files.Any())
+                {
+                    return Path.GetDirectoryName(codeBase);
+                }
 
-    private bool GetCommandLineArgs(string commandLine)
-    {
-      return CefCommandLineArgs.ContainsKey(commandLine);
-    }
+                indexOfLastBackslash = codeBase.LastIndexOf(@"\");
+            }
 
-    private void SetCommandLineArgs(bool enabled, string commandLine)
-    {
-      if (enabled && !CefCommandLineArgs.ContainsKey(commandLine))
-      {
-        CefCommandLineArgs.Add(commandLine, "1");
-      }
-      else if (!enabled && CefCommandLineArgs.ContainsKey(commandLine))
-      {
-        CefCommandLineArgs.Remove(commandLine);
-      }
-    }
+            return ""; // if the file isn't found throw an exception
+        }
 
-    public bool DisableGPUCache
-    {
-      get => GetCommandLineArgs(CommandLineArgs.DisableGPUCache);
-      set => SetCommandLineArgs(value, CommandLineArgs.DisableGPUCache);
-    }
+        private bool GetCommandLineArgs(string commandLine)
+        {
+            return CefCommandLineArgs.ContainsKey(commandLine);
+        }
 
-    public bool AllowInsecureContent
-    {
-      get => GetCommandLineArgs(CommandLineArgs.AllowInsecureContent);
-      set => SetCommandLineArgs(value, CommandLineArgs.AllowInsecureContent);
-    }
+        private void SetCommandLineArgs(bool enabled, string commandLine)
+        {
+            if (enabled && !CefCommandLineArgs.ContainsKey(commandLine))
+            {
+                CefCommandLineArgs.Add(commandLine, "1");
+            }
+            else if (!enabled && CefCommandLineArgs.ContainsKey(commandLine))
+            {
+                CefCommandLineArgs.Remove(commandLine);
+            }
+        }
 
-    public void SetDefaultBrowserSubprocessPath()
-    {
-      BrowserSubprocessPath = Path.Combine(DirectoryPath, Resources.BrowserSubprocess);
-    }
+        public bool DisableGPUCache
+        {
+            get => GetCommandLineArgs(CommandLineArgs.DisableGPUCache);
+            set => SetCommandLineArgs(value, CommandLineArgs.DisableGPUCache);
+        }
 
-    public void SetDefaultLocalesDirPath()
-    {
-      LocalesDirPath = Path.Combine(DirectoryPath, Resources.LocalesPath);
-    }
+        public bool AllowInsecureContent
+        {
+            get => GetCommandLineArgs(CommandLineArgs.AllowInsecureContent);
+            set => SetCommandLineArgs(value, CommandLineArgs.AllowInsecureContent);
+        }
 
-    public void SetDefaultResourcesDirPath()
-    {
-      ResourcesDirPath = Path.Combine(DirectoryPath, Resources.ResourcesPath);
+        public string GetDefaultBrowserSubprocessPath()
+        {
+            return Path.Combine(DirectoryPath, Resources.BrowserSubprocess);
+        }
+
+        public string GetDefaultLocalesDirPath()
+        {
+            return Path.Combine(DirectoryPath, Resources.LocalesPath);
+        }
+
+        public string GetDefaultResourcesDirPath()
+        {
+            return Path.Combine(DirectoryPath, Resources.ResourcesPath);
+        }
     }
-  }
 }

@@ -347,9 +347,9 @@ namespace StreetSmart.Common.Interfaces.API
     /// <summary>
     /// Removes a GeoJSON overlay from the panorama viewer.
     /// </summary>
-    /// <param name="id">The id of the overlay</param>
+    /// <param name="overlayId">The id of the overlay</param>
     /// <returns>Async function to remove an overlay</returns>
-    Task RemoveOverlay(string id);
+    Task RemoveOverlay(string overlayId);
 
     /// <summary>
     /// Set the active measurement in GeoJSON format

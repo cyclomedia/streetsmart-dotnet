@@ -17,6 +17,7 @@
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>StreetSmart.WinForms.snk</AssemblyOriginatorKeyFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<CefSharpBuildAction>Content</CefSharpBuildAction>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<PlatformTarget>x64</PlatformTarget>
@@ -931,6 +932,7 @@
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
+		<None Include="C:\_Projekti\Cyclomedia\streetsmart-dotnet\StreetSmartAPI\StreetSmart.API\WinForms\.editorconfig" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
 		<PackageReference Include="CefSharp.WinForms.NETCore" Version="123.0.60" />
@@ -942,5 +944,8 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
 		<PackageReference Include="CefSharp.WinForms" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\_Projekti\Cyclomedia\streetsmart-dotnet\StreetSmartAPI\StreetSmart.API\WinForms\.editorconfig" />
 	</ItemGroup>
 </Project>

@@ -34,51 +34,51 @@ using StreetSmart.Wpf.Properties;
 
 namespace StreetSmart.Common.Factories
 {
-  // ReSharper disable InconsistentNaming
-
-  /// <summary>
-  /// Factory for creates a new instance of the API. API used to use and modify various StreetSmart components.
-  /// </summary>
-  public static class StreetSmartAPIFactory
-  {
-    private static void InitializeCefSharp(CefSettings settings)
-    {
-      if (settings != null && !Cef.IsInitialized)
-      {
-        BrowserProcessHandler browserProcessHandler = new BrowserProcessHandler();
-        Cef.Initialize(settings, true, browserProcessHandler);
-      }
-    }
+    // ReSharper disable InconsistentNaming
 
     /// <summary>
-    /// Initialize the api without creating an instance of it
+    /// Factory for creates a new instance of the API. API used to use and modify various StreetSmart components.
     /// </summary>
-    /// <param name="settings">The settings of CefSharp</param>
-    public static void Initialize(IAPISettings settings = null)
+    public static class StreetSmartAPIFactory
     {
-      InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings);
+        private static void InitializeCefSharp(CefSettings settings)
+        {
+            if (settings != null && !Cef.IsInitialized)
+            {
+                DependencyChecker.AssertAllDependenciesPresent();
+                Cef.Initialize(settings, true, browserProcessHandler: null);
+            }
+        }
+
+        /// <summary>
+        /// Initialize the api without creating an instance of it
+        /// </summary>
+        /// <param name="settings">The settings of CefSharp</param>
+        public static void Initialize(IAPISettings settings = null)
+        {
+            InitializeCefSharp((settings ?? CefSettingsFactory.Create()) as CefSettings);
+        }
+
+        /// <summary>
+        /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
+        /// </summary>
+        /// <param name="settings">The settings of CefSharp</param>
+        /// <returns>API used to use and modify various StreetSmart components.</returns>
+        public static IStreetSmartAPI Create(IAPISettings settings = null) =>
+          Create(Resources.StreetSmartLocation, settings);
+
+        /// <summary>
+        /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
+        /// </summary>
+        /// <param name="streetSmartLocation">The location Uri of StreetSmart</param>
+        /// <param name="settings">The settings of CefSharp</param>
+        /// <returns>API used to use and modify various StreetSmart components.</returns>
+        public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null)
+        {
+            Initialize(settings);
+            return new StreetSmartAPI(streetSmartLocation);
+        }
     }
 
-    /// <summary>
-    /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
-    /// </summary>
-    /// <param name="settings">The settings of CefSharp</param>
-    /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create(IAPISettings settings = null) =>
-      Create(Resources.StreetSmartLocation, settings);
-
-    /// <summary>
-    /// Creates a new instance of the API. API used to use and modify various StreetSmart components.
-    /// </summary>
-    /// <param name="streetSmartLocation">The location Uri of StreetSmart</param>
-    /// <param name="settings">The settings of CefSharp</param>
-    /// <returns>API used to use and modify various StreetSmart components.</returns>
-    public static IStreetSmartAPI Create(string streetSmartLocation, IAPISettings settings = null)
-    {
-      Initialize(settings);
-      return new StreetSmartAPI(streetSmartLocation);
-    }
-  }
-
-  // ReSharper restore InconsistentNaming
+    // ReSharper restore InconsistentNaming
 }
