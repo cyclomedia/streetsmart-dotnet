@@ -205,6 +205,13 @@ namespace StreetSmart.Common.Interfaces.API
     Task<string> GetApplicationName();
 
     /// <summary>
+    /// Returns the Bearer token from the API.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The Bearer token from the API.</returns>
+    Task<string> GetBearerToken();
+
+    /// <summary>
     /// Returns the used version of the API.
     /// This is an asynchronous function.
     /// </summary>

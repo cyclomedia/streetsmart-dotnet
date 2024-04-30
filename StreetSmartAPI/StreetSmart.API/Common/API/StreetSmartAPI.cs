@@ -305,6 +305,11 @@ namespace StreetSmart.Common.API
       return ToString(await CallJsGetScriptAsync("getApplicationName()"));
     }
 
+    public async Task<string> GetBearerToken()
+    {
+        return ToString(await CallJsGetScriptAsync("getBearerToken()"));
+    }
+
     public async Task<string> GetApplicationVersion()
     {
       return ToString(await CallJsGetScriptAsync("getApplicationVersion()"));
