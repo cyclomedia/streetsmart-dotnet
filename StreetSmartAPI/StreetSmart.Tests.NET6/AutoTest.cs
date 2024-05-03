@@ -1,11 +1,11 @@
-﻿namespace StreetSmart.Tests.NET6
+﻿namespace StreetSmart.WinForms.Tests
 {
-    public class AutoTest
+    public class AutoTest : IClassFixture<ApiFixture>
     {
         private readonly ApiFixture _fixture;
-        public AutoTest()
+        public AutoTest(ApiFixture fixture)
         {
-            _fixture = new ApiFixture();
+            _fixture = fixture;
         }
 
         [Fact]

@@ -132,7 +132,6 @@ namespace StreetSmart.Common.API
         {
             ApiId = $"{Guid.NewGuid():N}";
             _streetSmartLocation = streetSmartLocation;
-            Cef.Initialize(new CefSettings());
             Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
             RegisterBrowser();
             GUI = new StreetSmartGUI(Browser);
@@ -485,20 +484,20 @@ namespace StreetSmart.Common.API
             ViewerList.RegisterJsObjects(ApiId, Browser);
             Browser.FrameLoadEnd += OnFrameLoadEnd;
             Browser.DownloadHandler = new DownloadHandler();
-            Browser.IsBrowserInitializedChanged += Browser_IsBrowserInitializedChanged;
+            Browser.IsBrowserInitializedChanged += (s, arg) =>
+            {
+                oSignalEvent.Set();
+            };
+            Browser.LoadingStateChanged += (s, arg) =>
+            {
+                oSignalEvent.Set();
+            };
+            Browser.LoadError += (s, arg) =>
+            {
+                oSignalEvent.Set();
+            };
         }
 
-#if WPF
-        private void Browser_IsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            oSignalEvent.Set();
-        }
-#elif WINFORMS
-        private void Browser_IsBrowserInitializedChanged(object sender, EventArgs e)
-        {
-            oSignalEvent.Set();
-        }
-#endif
         private void ReAssignMeasurementEvents()
         {
             RemoveMeasurementEvents();

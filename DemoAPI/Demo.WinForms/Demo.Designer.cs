@@ -20,2138 +20,2137 @@
       base.Dispose(disposing);
     }
 
-    #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
-      this.plStreetSmart = new System.Windows.Forms.Panel();
-      this.grOpenByQuery = new System.Windows.Forms.GroupBox();
-      this.cbPointCloud = new System.Windows.Forms.CheckBox();
-      this.ckReplace = new System.Windows.Forms.CheckBox();
-      this.txtOpenByQuery = new System.Windows.Forms.TextBox();
-      this.cbPanorama = new System.Windows.Forms.CheckBox();
-      this.cbOblique = new System.Windows.Forms.CheckBox();
-      this.btnOpenViewerByQuery = new System.Windows.Forms.Button();
-      this.plControl = new System.Windows.Forms.Panel();
-      this.grShortCuts = new System.Windows.Forms.GroupBox();
-      this.txtShortcutResult = new System.Windows.Forms.TextBox();
-      this.cbShortCuts = new System.Windows.Forms.ComboBox();
-      this.btnDisableShortCut = new System.Windows.Forms.Button();
-      this.btnEnableShortCut = new System.Windows.Forms.Button();
-      this.grCloseViewers = new System.Windows.Forms.GroupBox();
-      this.btnUp = new System.Windows.Forms.Button();
-      this.btnRight = new System.Windows.Forms.Button();
-      this.btnLeft = new System.Windows.Forms.Button();
-      this.btnDown = new System.Windows.Forms.Button();
-      this.btnPointCloudLookAt = new System.Windows.Forms.Button();
-      this.btnSetPointStyle = new System.Windows.Forms.Button();
-      this.cbPointStyle = new System.Windows.Forms.ComboBox();
-      this.btnGetPointStyle = new System.Windows.Forms.Button();
-      this.btnCloseObliqueViewer = new System.Windows.Forms.Button();
-      this.btnClosePointViewer = new System.Windows.Forms.Button();
-      this.grPanoramaList = new System.Windows.Forms.GroupBox();
-      this.lbPanoramaList = new System.Windows.Forms.ListBox();
-      this.grColorOverlay = new System.Windows.Forms.GroupBox();
-      this.btnDemoWFSLayer = new System.Windows.Forms.Button();
-      this.txtOverlayColor = new System.Windows.Forms.TextBox();
-      this.btnToggleAddressOverlays = new System.Windows.Forms.Button();
-      this.btnColorOverlay = new System.Windows.Forms.Button();
-      this.rbColor = new System.Windows.Forms.RadioButton();
-      this.rbSLD = new System.Windows.Forms.RadioButton();
-      this.grSelectFeature = new System.Windows.Forms.GroupBox();
-      this.ckShowAttributePanelOnFeatureClick = new System.Windows.Forms.CheckBox();
-      this.txtValue = new System.Windows.Forms.TextBox();
-      this.lblValue = new System.Windows.Forms.Label();
-      this.txtName = new System.Windows.Forms.TextBox();
-      this.lblPropertyName = new System.Windows.Forms.Label();
-      this.btnSelectFeature = new System.Windows.Forms.Button();
-      this.grSld = new System.Windows.Forms.GroupBox();
-      this.txtSld = new System.Windows.Forms.TextBox();
-      this.grButtonVisibility = new System.Windows.Forms.GroupBox();
-      this.cbViewerButton = new System.Windows.Forms.ComboBox();
-      this.btnSetButtonVisibility = new System.Windows.Forms.Button();
-      this.btnGetButtonEnabled = new System.Windows.Forms.Button();
-      this.grOverlay = new System.Windows.Forms.GroupBox();
-      this.btnDrawDistance = new System.Windows.Forms.Button();
-      this.txtDrawDistance = new System.Windows.Forms.TextBox();
-      this.btnRemoveOverlay = new System.Windows.Forms.Button();
-      this.txtOverlayGeoJson = new System.Windows.Forms.TextBox();
-      this.btnAddOverlay = new System.Windows.Forms.Button();
-      this.grMeasurement = new System.Windows.Forms.GroupBox();
-      this.cbUnit = new System.Windows.Forms.ComboBox();
-      this.btnGetUnitPreference = new System.Windows.Forms.Button();
-      this.btnSetUnitPreference = new System.Windows.Forms.Button();
-      this.grMeasurementMethod = new System.Windows.Forms.GroupBox();
-      this.rbMethodDefault = new System.Windows.Forms.RadioButton();
-      this.rbMethodDepthMap = new System.Windows.Forms.RadioButton();
-      this.rbMethodForwardIntersection = new System.Windows.Forms.RadioButton();
-      this.rbMethodSmartClick = new System.Windows.Forms.RadioButton();
-      this.grMeasurementType = new System.Windows.Forms.GroupBox();
-      this.rbMeasDefault = new System.Windows.Forms.RadioButton();
-      this.rbMeasPoint = new System.Windows.Forms.RadioButton();
-      this.rbMeasPolygon = new System.Windows.Forms.RadioButton();
-      this.rbMeasLineString = new System.Windows.Forms.RadioButton();
-      this.btnGetActiveMeasurement = new System.Windows.Forms.Button();
-      this.btnStartMeasurementMode = new System.Windows.Forms.Button();
-      this.btnStopMeasurementMode = new System.Windows.Forms.Button();
-      this.grDevTools = new System.Windows.Forms.GroupBox();
-      this.btnCloseDefTools = new System.Windows.Forms.Button();
-      this.btnShowDefTools = new System.Windows.Forms.Button();
-      this.grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
-      this.btnGetViewers = new System.Windows.Forms.Button();
-      this.btnClosePanoramaViewer = new System.Windows.Forms.Button();
-      this.lblDeltaYawPitch = new System.Windows.Forms.Label();
-      this.txtDeltaYawPitch = new System.Windows.Forms.TextBox();
-      this.btnRotateDown = new System.Windows.Forms.Button();
-      this.btnRotateUp = new System.Windows.Forms.Button();
-      this.btnRotateRight = new System.Windows.Forms.Button();
-      this.btnZoomOut = new System.Windows.Forms.Button();
-      this.btRotateLeft = new System.Windows.Forms.Button();
-      this.btnZoomIn = new System.Windows.Forms.Button();
-      this.grEvents = new System.Windows.Forms.GroupBox();
-      this.lbViewerEvents = new System.Windows.Forms.ListBox();
-      this.grRecordingViewerColorPermissions = new System.Windows.Forms.GroupBox();
-      this.txtRecordingViewerColorPermissions = new System.Windows.Forms.TextBox();
-      this.btnGetPermissions = new System.Windows.Forms.Button();
-      this.btnGetRecording = new System.Windows.Forms.Button();
-      this.btnGetViewerColor = new System.Windows.Forms.Button();
-      this.grOrientation = new System.Windows.Forms.GroupBox();
-      this.btnGetDebugLogs = new System.Windows.Forms.Button();
-      this.txtYaw = new System.Windows.Forms.TextBox();
-      this.lblYaw = new System.Windows.Forms.Label();
-      this.lblPitch = new System.Windows.Forms.Label();
-      this.txtPitch = new System.Windows.Forms.TextBox();
-      this.lblhFov = new System.Windows.Forms.Label();
-      this.txthFov = new System.Windows.Forms.TextBox();
-      this.btnGetOrientation = new System.Windows.Forms.Button();
-      this.btnSetOrientation = new System.Windows.Forms.Button();
-      this.grOpenByImageId = new System.Windows.Forms.GroupBox();
-      this.txtBrightnessContrast = new System.Windows.Forms.TextBox();
-      this.btnContrast = new System.Windows.Forms.Button();
-      this.btnBrightness = new System.Windows.Forms.Button();
-      this.btnGetAddress = new System.Windows.Forms.Button();
-      this.btnOpenByImageId = new System.Windows.Forms.Button();
-      this.txtImageId = new System.Windows.Forms.TextBox();
-      this.grCoordinate = new System.Windows.Forms.GroupBox();
-      this.btnSetPointSize = new System.Windows.Forms.Button();
-      this.txtPointSize = new System.Windows.Forms.TextBox();
-      this.btnGetPointSize = new System.Windows.Forms.Button();
-      this.btnSetPointBudget = new System.Windows.Forms.Button();
-      this.cbPointBudget = new System.Windows.Forms.ComboBox();
-      this.btnGetPointBudget = new System.Windows.Forms.Button();
-      this.btnEdges = new System.Windows.Forms.Button();
-      this.btnCameraPosition = new System.Windows.Forms.Button();
-      this.txtlkAtX = new System.Windows.Forms.TextBox();
-      this.txtlkAtY = new System.Windows.Forms.TextBox();
-      this.txtlkAtZ = new System.Windows.Forms.TextBox();
-      this.btnFlyTo = new System.Windows.Forms.Button();
-      this.txtX = new System.Windows.Forms.TextBox();
-      this.txtY = new System.Windows.Forms.TextBox();
-      this.txtZ = new System.Windows.Forms.TextBox();
-      this.lblX = new System.Windows.Forms.Label();
-      this.lblY = new System.Windows.Forms.Label();
-      this.lblZ = new System.Windows.Forms.Label();
-      this.btnOpenByCoordinate = new System.Windows.Forms.Button();
-      this.btnLookAtCoordinate = new System.Windows.Forms.Button();
-      this.grAPIInfo = new System.Windows.Forms.GroupBox();
-      this.lblResult = new System.Windows.Forms.Label();
-      this.txtAPIResult = new System.Windows.Forms.TextBox();
-      this.btnApiReadyState = new System.Windows.Forms.Button();
-      this.btnApplicationVersion = new System.Windows.Forms.Button();
-      this.btnApplicationName = new System.Windows.Forms.Button();
-      this.grViewerToggles = new System.Windows.Forms.GroupBox();
-      this.btnGetType = new System.Windows.Forms.Button();
-      this.btnToggleSidebarExpandable = new System.Windows.Forms.Button();
-      this.btnToggleSidebar = new System.Windows.Forms.Button();
-      this.btnToggle3DCursor = new System.Windows.Forms.Button();
-      this.btnToggleRecordingsVisible = new System.Windows.Forms.Button();
-      this.btnToggleTimeTravelExpanded = new System.Windows.Forms.Button();
-      this.btnToggleNavbarExpanded = new System.Windows.Forms.Button();
-      this.btnToggleTimeTravelVisible = new System.Windows.Forms.Button();
-      this.btnToggleNavbarVisible = new System.Windows.Forms.Button();
-      this.grOpenByAddress = new System.Windows.Forms.GroupBox();
-      this.lblAddress = new System.Windows.Forms.Label();
-      this.txtAdress = new System.Windows.Forms.TextBox();
-      this.btnOpenByAddress = new System.Windows.Forms.Button();
-      this.grLogin = new System.Windows.Forms.GroupBox();
-      this.lblClientId = new System.Windows.Forms.Label();
-      this.txtClientId = new System.Windows.Forms.TextBox();
-      this.lblSRS = new System.Windows.Forms.Label();
-      this.txtSrs = new System.Windows.Forms.TextBox();
-      this.btnSave = new System.Windows.Forms.Button();
-      this.btnLogout = new System.Windows.Forms.Button();
-      this.lblAPIKey = new System.Windows.Forms.Label();
-      this.txtAPIKey = new System.Windows.Forms.TextBox();
-      this.lblUsername = new System.Windows.Forms.Label();
-      this.lblPassword = new System.Windows.Forms.Label();
-      this.txtUsername = new System.Windows.Forms.TextBox();
-      this.txtPassword = new System.Windows.Forms.TextBox();
-      this.btnLogin = new System.Windows.Forms.Button();
-      this.colorOverlay = new System.Windows.Forms.ColorDialog();
-      this.grOpenByQuery.SuspendLayout();
-      this.plControl.SuspendLayout();
-      this.grShortCuts.SuspendLayout();
-      this.grCloseViewers.SuspendLayout();
-      this.grPanoramaList.SuspendLayout();
-      this.grColorOverlay.SuspendLayout();
-      this.grSelectFeature.SuspendLayout();
-      this.grSld.SuspendLayout();
-      this.grButtonVisibility.SuspendLayout();
-      this.grOverlay.SuspendLayout();
-      this.grMeasurement.SuspendLayout();
-      this.grMeasurementMethod.SuspendLayout();
-      this.grMeasurementType.SuspendLayout();
-      this.grDevTools.SuspendLayout();
-      this.grRotationsZoomInOut.SuspendLayout();
-      this.grEvents.SuspendLayout();
-      this.grRecordingViewerColorPermissions.SuspendLayout();
-      this.grOrientation.SuspendLayout();
-      this.grOpenByImageId.SuspendLayout();
-      this.grCoordinate.SuspendLayout();
-      this.grAPIInfo.SuspendLayout();
-      this.grViewerToggles.SuspendLayout();
-      this.grOpenByAddress.SuspendLayout();
-      this.grLogin.SuspendLayout();
-      this.SuspendLayout();
-      // 
-      // plStreetSmart
-      // 
-      this.plStreetSmart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.plStreetSmart.BackColor = System.Drawing.Color.Transparent;
-      this.plStreetSmart.Location = new System.Drawing.Point(0, 0);
-      this.plStreetSmart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.plStreetSmart.Name = "plStreetSmart";
-      this.plStreetSmart.Size = new System.Drawing.Size(650, 700);
-      this.plStreetSmart.TabIndex = 0;
-      // 
-      // grOpenByQuery
-      // 
-      this.grOpenByQuery.Controls.Add(this.cbPointCloud);
-      this.grOpenByQuery.Controls.Add(this.ckReplace);
-      this.grOpenByQuery.Controls.Add(this.txtOpenByQuery);
-      this.grOpenByQuery.Controls.Add(this.cbPanorama);
-      this.grOpenByQuery.Controls.Add(this.cbOblique);
-      this.grOpenByQuery.Controls.Add(this.btnOpenViewerByQuery);
-      this.grOpenByQuery.Location = new System.Drawing.Point(640, 2);
-      this.grOpenByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByQuery.Name = "grOpenByQuery";
-      this.grOpenByQuery.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByQuery.Size = new System.Drawing.Size(293, 185);
-      this.grOpenByQuery.TabIndex = 0;
-      this.grOpenByQuery.TabStop = false;
-      this.grOpenByQuery.Text = "Open / Close Viewer";
-      // 
-      // cbPointCloud
-      // 
-      this.cbPointCloud.AutoSize = true;
-      this.cbPointCloud.Location = new System.Drawing.Point(195, 149);
-      this.cbPointCloud.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbPointCloud.Name = "cbPointCloud";
-      this.cbPointCloud.Size = new System.Drawing.Size(107, 24);
-      this.cbPointCloud.TabIndex = 69;
-      this.cbPointCloud.Text = "Point Cloud";
-      this.cbPointCloud.UseVisualStyleBackColor = true;
-      // 
-      // ckReplace
-      // 
-      this.ckReplace.AutoSize = true;
-      this.ckReplace.Checked = true;
-      this.ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckReplace.Location = new System.Drawing.Point(167, 22);
-      this.ckReplace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ckReplace.Name = "ckReplace";
-      this.ckReplace.Size = new System.Drawing.Size(84, 24);
-      this.ckReplace.TabIndex = 68;
-      this.ckReplace.Text = "Replace";
-      this.ckReplace.UseVisualStyleBackColor = true;
-      // 
-      // txtOpenByQuery
-      // 
-      this.txtOpenByQuery.Location = new System.Drawing.Point(20, 78);
-      this.txtOpenByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtOpenByQuery.Multiline = true;
-      this.txtOpenByQuery.Name = "txtOpenByQuery";
-      this.txtOpenByQuery.Size = new System.Drawing.Size(265, 59);
-      this.txtOpenByQuery.TabIndex = 67;
-      this.txtOpenByQuery.Text = "Lange Haven 145, Schiedam";
-      // 
-      // cbPanorama
-      // 
-      this.cbPanorama.AutoSize = true;
-      this.cbPanorama.Checked = true;
-      this.cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.cbPanorama.Location = new System.Drawing.Point(97, 146);
-      this.cbPanorama.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbPanorama.Name = "cbPanorama";
-      this.cbPanorama.Size = new System.Drawing.Size(97, 24);
-      this.cbPanorama.TabIndex = 66;
-      this.cbPanorama.Text = "Panorama";
-      this.cbPanorama.UseVisualStyleBackColor = true;
-      // 
-      // cbOblique
-      // 
-      this.cbOblique.AutoSize = true;
-      this.cbOblique.Location = new System.Drawing.Point(20, 146);
-      this.cbOblique.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbOblique.Name = "cbOblique";
-      this.cbOblique.Size = new System.Drawing.Size(84, 24);
-      this.cbOblique.TabIndex = 65;
-      this.cbOblique.Text = "Oblique";
-      this.cbOblique.UseVisualStyleBackColor = true;
-      // 
-      // btnOpenViewerByQuery
-      // 
-      this.btnOpenViewerByQuery.Location = new System.Drawing.Point(20, 22);
-      this.btnOpenViewerByQuery.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnOpenViewerByQuery.Name = "btnOpenViewerByQuery";
-      this.btnOpenViewerByQuery.Size = new System.Drawing.Size(133, 46);
-      this.btnOpenViewerByQuery.TabIndex = 64;
-      this.btnOpenViewerByQuery.Text = "Open by query";
-      this.btnOpenViewerByQuery.UseVisualStyleBackColor = true;
-      this.btnOpenViewerByQuery.Click += new System.EventHandler(this.btnOpenViewerByQuery_Click);
-      // 
-      // plControl
-      // 
-      this.plControl.Controls.Add(this.grShortCuts);
-      this.plControl.Controls.Add(this.grCloseViewers);
-      this.plControl.Controls.Add(this.grPanoramaList);
-      this.plControl.Controls.Add(this.grColorOverlay);
-      this.plControl.Controls.Add(this.grSelectFeature);
-      this.plControl.Controls.Add(this.grSld);
-      this.plControl.Controls.Add(this.grButtonVisibility);
-      this.plControl.Controls.Add(this.grOverlay);
-      this.plControl.Controls.Add(this.grOpenByQuery);
-      this.plControl.Controls.Add(this.grMeasurement);
-      this.plControl.Controls.Add(this.grDevTools);
-      this.plControl.Controls.Add(this.grRotationsZoomInOut);
-      this.plControl.Controls.Add(this.grEvents);
-      this.plControl.Controls.Add(this.grRecordingViewerColorPermissions);
-      this.plControl.Controls.Add(this.grOrientation);
-      this.plControl.Controls.Add(this.grOpenByImageId);
-      this.plControl.Controls.Add(this.grCoordinate);
-      this.plControl.Controls.Add(this.grAPIInfo);
-      this.plControl.Controls.Add(this.grViewerToggles);
-      this.plControl.Controls.Add(this.grOpenByAddress);
-      this.plControl.Controls.Add(this.grLogin);
-      this.plControl.Dock = System.Windows.Forms.DockStyle.Right;
-      this.plControl.Location = new System.Drawing.Point(721, 0);
-      this.plControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.plControl.Name = "plControl";
-      this.plControl.Size = new System.Drawing.Size(1203, 1055);
-      this.plControl.TabIndex = 1;
-      // 
-      // grShortCuts
-      // 
-      this.grShortCuts.Controls.Add(this.txtShortcutResult);
-      this.grShortCuts.Controls.Add(this.cbShortCuts);
-      this.grShortCuts.Controls.Add(this.btnDisableShortCut);
-      this.grShortCuts.Controls.Add(this.btnEnableShortCut);
-      this.grShortCuts.Location = new System.Drawing.Point(975, 335);
-      this.grShortCuts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grShortCuts.Name = "grShortCuts";
-      this.grShortCuts.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grShortCuts.Size = new System.Drawing.Size(213, 100);
-      this.grShortCuts.TabIndex = 75;
-      this.grShortCuts.TabStop = false;
-      this.grShortCuts.Text = "Short cuts";
-      // 
-      // txtShortcutResult
-      // 
-      this.txtShortcutResult.Location = new System.Drawing.Point(147, 62);
-      this.txtShortcutResult.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtShortcutResult.Name = "txtShortcutResult";
-      this.txtShortcutResult.Size = new System.Drawing.Size(52, 27);
-      this.txtShortcutResult.TabIndex = 68;
-      // 
-      // cbShortCuts
-      // 
-      this.cbShortCuts.FormattingEnabled = true;
-      this.cbShortCuts.Location = new System.Drawing.Point(7, 62);
-      this.cbShortCuts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbShortCuts.Name = "cbShortCuts";
-      this.cbShortCuts.Size = new System.Drawing.Size(132, 28);
-      this.cbShortCuts.TabIndex = 67;
-      // 
-      // btnDisableShortCut
-      // 
-      this.btnDisableShortCut.Location = new System.Drawing.Point(87, 22);
-      this.btnDisableShortCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnDisableShortCut.Name = "btnDisableShortCut";
-      this.btnDisableShortCut.Size = new System.Drawing.Size(73, 31);
-      this.btnDisableShortCut.TabIndex = 66;
-      this.btnDisableShortCut.Text = "Disable";
-      this.btnDisableShortCut.UseVisualStyleBackColor = true;
-      this.btnDisableShortCut.Click += new System.EventHandler(this.btnDisableShortCut_Click);
-      // 
-      // btnEnableShortCut
-      // 
-      this.btnEnableShortCut.Location = new System.Drawing.Point(7, 22);
-      this.btnEnableShortCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnEnableShortCut.Name = "btnEnableShortCut";
-      this.btnEnableShortCut.Size = new System.Drawing.Size(73, 31);
-      this.btnEnableShortCut.TabIndex = 65;
-      this.btnEnableShortCut.Text = "Enable";
-      this.btnEnableShortCut.UseVisualStyleBackColor = true;
-      this.btnEnableShortCut.Click += new System.EventHandler(this.btnEnableShortCut_Click);
-      // 
-      // grCloseViewers
-      // 
-      this.grCloseViewers.Controls.Add(this.btnUp);
-      this.grCloseViewers.Controls.Add(this.btnRight);
-      this.grCloseViewers.Controls.Add(this.btnLeft);
-      this.grCloseViewers.Controls.Add(this.btnDown);
-      this.grCloseViewers.Controls.Add(this.btnPointCloudLookAt);
-      this.grCloseViewers.Controls.Add(this.btnSetPointStyle);
-      this.grCloseViewers.Controls.Add(this.cbPointStyle);
-      this.grCloseViewers.Controls.Add(this.btnGetPointStyle);
-      this.grCloseViewers.Controls.Add(this.btnCloseObliqueViewer);
-      this.grCloseViewers.Controls.Add(this.btnClosePointViewer);
-      this.grCloseViewers.Location = new System.Drawing.Point(933, 2);
-      this.grCloseViewers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grCloseViewers.Name = "grCloseViewers";
-      this.grCloseViewers.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grCloseViewers.Size = new System.Drawing.Size(267, 185);
-      this.grCloseViewers.TabIndex = 74;
-      this.grCloseViewers.TabStop = false;
-      this.grCloseViewers.Text = "Close viewers";
-      // 
-      // btnUp
-      // 
-      this.btnUp.Location = new System.Drawing.Point(181, 132);
-      this.btnUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnUp.Name = "btnUp";
-      this.btnUp.Size = new System.Drawing.Size(53, 38);
-      this.btnUp.TabIndex = 81;
-      this.btnUp.UseVisualStyleBackColor = true;
-      this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
-      // 
-      // btnRight
-      // 
-      this.btnRight.Location = new System.Drawing.Point(127, 132);
-      this.btnRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnRight.Name = "btnRight";
-      this.btnRight.Size = new System.Drawing.Size(53, 38);
-      this.btnRight.TabIndex = 80;
-      this.btnRight.UseVisualStyleBackColor = true;
-      this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
-      // 
-      // btnLeft
-      // 
-      this.btnLeft.Location = new System.Drawing.Point(67, 132);
-      this.btnLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnLeft.Name = "btnLeft";
-      this.btnLeft.Size = new System.Drawing.Size(53, 38);
-      this.btnLeft.TabIndex = 79;
-      this.btnLeft.UseVisualStyleBackColor = true;
-      this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-      // 
-      // btnDown
-      // 
-      this.btnDown.Location = new System.Drawing.Point(7, 134);
-      this.btnDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnDown.Name = "btnDown";
-      this.btnDown.Size = new System.Drawing.Size(53, 38);
-      this.btnDown.TabIndex = 78;
-      this.btnDown.UseVisualStyleBackColor = true;
-      this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-      // 
-      // btnPointCloudLookAt
-      // 
-      this.btnPointCloudLookAt.Location = new System.Drawing.Point(181, 89);
-      this.btnPointCloudLookAt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnPointCloudLookAt.Name = "btnPointCloudLookAt";
-      this.btnPointCloudLookAt.Size = new System.Drawing.Size(73, 38);
-      this.btnPointCloudLookAt.TabIndex = 77;
-      this.btnPointCloudLookAt.UseVisualStyleBackColor = true;
-      this.btnPointCloudLookAt.Click += new System.EventHandler(this.btnPointCloudLookAt_Click);
-      // 
-      // btnSetPointStyle
-      // 
-      this.btnSetPointStyle.Location = new System.Drawing.Point(127, 89);
-      this.btnSetPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetPointStyle.Name = "btnSetPointStyle";
-      this.btnSetPointStyle.Size = new System.Drawing.Size(53, 38);
-      this.btnSetPointStyle.TabIndex = 76;
-      this.btnSetPointStyle.Text = "Set";
-      this.btnSetPointStyle.UseVisualStyleBackColor = true;
-      this.btnSetPointStyle.Click += new System.EventHandler(this.btnSetPointStyle_Click);
-      // 
-      // cbPointStyle
-      // 
-      this.cbPointStyle.FormattingEnabled = true;
-      this.cbPointStyle.Location = new System.Drawing.Point(67, 94);
-      this.cbPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbPointStyle.Name = "cbPointStyle";
-      this.cbPointStyle.Size = new System.Drawing.Size(52, 28);
-      this.cbPointStyle.TabIndex = 75;
-      // 
-      // btnGetPointStyle
-      // 
-      this.btnGetPointStyle.Location = new System.Drawing.Point(7, 89);
-      this.btnGetPointStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetPointStyle.Name = "btnGetPointStyle";
-      this.btnGetPointStyle.Size = new System.Drawing.Size(53, 38);
-      this.btnGetPointStyle.TabIndex = 74;
-      this.btnGetPointStyle.Text = "Get";
-      this.btnGetPointStyle.UseVisualStyleBackColor = true;
-      this.btnGetPointStyle.Click += new System.EventHandler(this.btnGetPointStyle_Click);
-      // 
-      // btnCloseObliqueViewer
-      // 
-      this.btnCloseObliqueViewer.Location = new System.Drawing.Point(7, 22);
-      this.btnCloseObliqueViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnCloseObliqueViewer.Name = "btnCloseObliqueViewer";
-      this.btnCloseObliqueViewer.Size = new System.Drawing.Size(107, 58);
-      this.btnCloseObliqueViewer.TabIndex = 72;
-      this.btnCloseObliqueViewer.Text = "Close obl. viewer";
-      this.btnCloseObliqueViewer.UseVisualStyleBackColor = true;
-      this.btnCloseObliqueViewer.Click += new System.EventHandler(this.btnCloseObliqueViewer_Click);
-      // 
-      // btnClosePointViewer
-      // 
-      this.btnClosePointViewer.Location = new System.Drawing.Point(120, 22);
-      this.btnClosePointViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnClosePointViewer.Name = "btnClosePointViewer";
-      this.btnClosePointViewer.Size = new System.Drawing.Size(107, 58);
-      this.btnClosePointViewer.TabIndex = 73;
-      this.btnClosePointViewer.Text = "Close point. viewer";
-      this.btnClosePointViewer.UseVisualStyleBackColor = true;
-      this.btnClosePointViewer.Click += new System.EventHandler(this.btnClosePointViewer_Click);
-      // 
-      // grPanoramaList
-      // 
-      this.grPanoramaList.Controls.Add(this.lbPanoramaList);
-      this.grPanoramaList.Location = new System.Drawing.Point(975, 435);
-      this.grPanoramaList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grPanoramaList.Name = "grPanoramaList";
-      this.grPanoramaList.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grPanoramaList.Size = new System.Drawing.Size(213, 185);
-      this.grPanoramaList.TabIndex = 71;
-      this.grPanoramaList.TabStop = false;
-      this.grPanoramaList.Text = "Viewer list";
-      // 
-      // lbPanoramaList
-      // 
-      this.lbPanoramaList.FormattingEnabled = true;
-      this.lbPanoramaList.ItemHeight = 20;
-      this.lbPanoramaList.Location = new System.Drawing.Point(7, 22);
-      this.lbPanoramaList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.lbPanoramaList.Name = "lbPanoramaList";
-      this.lbPanoramaList.Size = new System.Drawing.Size(199, 144);
-      this.lbPanoramaList.TabIndex = 70;
-      this.lbPanoramaList.SelectedIndexChanged += new System.EventHandler(this.lbPanoramaList_SelectedIndexChanged);
-      // 
-      // grColorOverlay
-      // 
-      this.grColorOverlay.Controls.Add(this.btnDemoWFSLayer);
-      this.grColorOverlay.Controls.Add(this.txtOverlayColor);
-      this.grColorOverlay.Controls.Add(this.btnToggleAddressOverlays);
-      this.grColorOverlay.Controls.Add(this.btnColorOverlay);
-      this.grColorOverlay.Controls.Add(this.rbColor);
-      this.grColorOverlay.Controls.Add(this.rbSLD);
-      this.grColorOverlay.Location = new System.Drawing.Point(975, 620);
-      this.grColorOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grColorOverlay.Name = "grColorOverlay";
-      this.grColorOverlay.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grColorOverlay.Size = new System.Drawing.Size(213, 246);
-      this.grColorOverlay.TabIndex = 69;
-      this.grColorOverlay.TabStop = false;
-      this.grColorOverlay.Text = "Overlay";
-      // 
-      // btnDemoWFSLayer
-      // 
-      this.btnDemoWFSLayer.Location = new System.Drawing.Point(7, 178);
-      this.btnDemoWFSLayer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnDemoWFSLayer.Name = "btnDemoWFSLayer";
-      this.btnDemoWFSLayer.Size = new System.Drawing.Size(187, 46);
-      this.btnDemoWFSLayer.TabIndex = 69;
-      this.btnDemoWFSLayer.Text = "Add demo WFS Layer";
-      this.btnDemoWFSLayer.UseVisualStyleBackColor = true;
-      this.btnDemoWFSLayer.Click += new System.EventHandler(this.btnDemoWFSLayer_Click);
-      // 
-      // txtOverlayColor
-      // 
-      this.txtOverlayColor.Enabled = false;
-      this.txtOverlayColor.Location = new System.Drawing.Point(7, 62);
-      this.txtOverlayColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtOverlayColor.Name = "txtOverlayColor";
-      this.txtOverlayColor.Size = new System.Drawing.Size(185, 27);
-      this.txtOverlayColor.TabIndex = 68;
-      // 
-      // btnToggleAddressOverlays
-      // 
-      this.btnToggleAddressOverlays.Location = new System.Drawing.Point(7, 122);
-      this.btnToggleAddressOverlays.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleAddressOverlays.Name = "btnToggleAddressOverlays";
-      this.btnToggleAddressOverlays.Size = new System.Drawing.Size(187, 46);
-      this.btnToggleAddressOverlays.TabIndex = 57;
-      this.btnToggleAddressOverlays.Text = "Toggle Address overlays";
-      this.btnToggleAddressOverlays.UseVisualStyleBackColor = true;
-      this.btnToggleAddressOverlays.Click += new System.EventHandler(this.btnToggleAddressOverlays_Click);
-      // 
-      // btnColorOverlay
-      // 
-      this.btnColorOverlay.Location = new System.Drawing.Point(7, 22);
-      this.btnColorOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnColorOverlay.Name = "btnColorOverlay";
-      this.btnColorOverlay.Size = new System.Drawing.Size(187, 35);
-      this.btnColorOverlay.TabIndex = 58;
-      this.btnColorOverlay.Text = "Color overlay";
-      this.btnColorOverlay.UseVisualStyleBackColor = true;
-      this.btnColorOverlay.Click += new System.EventHandler(this.btnColorOverlay_Click);
-      // 
-      // rbColor
-      // 
-      this.rbColor.AutoSize = true;
-      this.rbColor.Location = new System.Drawing.Point(67, 92);
-      this.rbColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbColor.Name = "rbColor";
-      this.rbColor.Size = new System.Drawing.Size(66, 24);
-      this.rbColor.TabIndex = 59;
-      this.rbColor.Text = "Color";
-      this.rbColor.UseVisualStyleBackColor = true;
-      // 
-      // rbSLD
-      // 
-      this.rbSLD.AutoSize = true;
-      this.rbSLD.Checked = true;
-      this.rbSLD.Location = new System.Drawing.Point(7, 92);
-      this.rbSLD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbSLD.Name = "rbSLD";
-      this.rbSLD.Size = new System.Drawing.Size(56, 24);
-      this.rbSLD.TabIndex = 58;
-      this.rbSLD.TabStop = true;
-      this.rbSLD.Text = "SLD";
-      this.rbSLD.UseVisualStyleBackColor = true;
-      // 
-      // grSelectFeature
-      // 
-      this.grSelectFeature.Controls.Add(this.ckShowAttributePanelOnFeatureClick);
-      this.grSelectFeature.Controls.Add(this.txtValue);
-      this.grSelectFeature.Controls.Add(this.lblValue);
-      this.grSelectFeature.Controls.Add(this.txtName);
-      this.grSelectFeature.Controls.Add(this.lblPropertyName);
-      this.grSelectFeature.Controls.Add(this.btnSelectFeature);
-      this.grSelectFeature.Location = new System.Drawing.Point(975, 866);
-      this.grSelectFeature.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grSelectFeature.Name = "grSelectFeature";
-      this.grSelectFeature.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grSelectFeature.Size = new System.Drawing.Size(213, 200);
-      this.grSelectFeature.TabIndex = 56;
-      this.grSelectFeature.TabStop = false;
-      this.grSelectFeature.Text = "Select Feature";
-      // 
-      // ckShowAttributePanelOnFeatureClick
-      // 
-      this.ckShowAttributePanelOnFeatureClick.AutoSize = true;
-      this.ckShowAttributePanelOnFeatureClick.Checked = true;
-      this.ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(8, 148);
-      this.ckShowAttributePanelOnFeatureClick.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
-      this.ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(217, 24);
-      this.ckShowAttributePanelOnFeatureClick.TabIndex = 67;
-      this.ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
-      this.ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
-      this.ckShowAttributePanelOnFeatureClick.CheckedChanged += new System.EventHandler(this.ckShowAttributePanelOnFeatureClick_CheckedChanged);
-      // 
-      // txtValue
-      // 
-      this.txtValue.Location = new System.Drawing.Point(113, 108);
-      this.txtValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtValue.Name = "txtValue";
-      this.txtValue.Size = new System.Drawing.Size(92, 27);
-      this.txtValue.TabIndex = 58;
-      this.txtValue.Text = "Polygon-feature-cj7hkzyaj000b3e65n0c1brht";
-      // 
-      // lblValue
-      // 
-      this.lblValue.AutoSize = true;
-      this.lblValue.Location = new System.Drawing.Point(113, 78);
-      this.lblValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblValue.Name = "lblValue";
-      this.lblValue.Size = new System.Drawing.Size(104, 20);
-      this.lblValue.TabIndex = 59;
-      this.lblValue.Text = "Property value";
-      // 
-      // txtName
-      // 
-      this.txtName.Location = new System.Drawing.Point(7, 108);
-      this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtName.Name = "txtName";
-      this.txtName.Size = new System.Drawing.Size(92, 27);
-      this.txtName.TabIndex = 56;
-      this.txtName.Text = "name";
-      // 
-      // lblPropertyName
-      // 
-      this.lblPropertyName.AutoSize = true;
-      this.lblPropertyName.Location = new System.Drawing.Point(7, 78);
-      this.lblPropertyName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblPropertyName.Name = "lblPropertyName";
-      this.lblPropertyName.Size = new System.Drawing.Size(106, 20);
-      this.lblPropertyName.TabIndex = 57;
-      this.lblPropertyName.Text = "Property name";
-      // 
-      // btnSelectFeature
-      // 
-      this.btnSelectFeature.Location = new System.Drawing.Point(7, 22);
-      this.btnSelectFeature.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSelectFeature.Name = "btnSelectFeature";
-      this.btnSelectFeature.Size = new System.Drawing.Size(200, 46);
-      this.btnSelectFeature.TabIndex = 55;
-      this.btnSelectFeature.Text = "Select feature";
-      this.btnSelectFeature.UseVisualStyleBackColor = true;
-      this.btnSelectFeature.Click += new System.EventHandler(this.btnSelectFeature_Click);
-      // 
-      // grSld
-      // 
-      this.grSld.Controls.Add(this.txtSld);
-      this.grSld.Location = new System.Drawing.Point(748, 866);
-      this.grSld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grSld.Name = "grSld";
-      this.grSld.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grSld.Size = new System.Drawing.Size(227, 200);
-      this.grSld.TabIndex = 55;
-      this.grSld.TabStop = false;
-      this.grSld.Text = "Sld";
-      // 
-      // txtSld
-      // 
-      this.txtSld.Location = new System.Drawing.Point(8, 29);
-      this.txtSld.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtSld.Multiline = true;
-      this.txtSld.Name = "txtSld";
-      this.txtSld.Size = new System.Drawing.Size(212, 159);
-      this.txtSld.TabIndex = 1;
-      this.txtSld.Text = resources.GetString("txtSld.Text");
-      // 
-      // grButtonVisibility
-      // 
-      this.grButtonVisibility.Controls.Add(this.cbViewerButton);
-      this.grButtonVisibility.Controls.Add(this.btnSetButtonVisibility);
-      this.grButtonVisibility.Controls.Add(this.btnGetButtonEnabled);
-      this.grButtonVisibility.Location = new System.Drawing.Point(439, 498);
-      this.grButtonVisibility.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grButtonVisibility.Name = "grButtonVisibility";
-      this.grButtonVisibility.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grButtonVisibility.Size = new System.Drawing.Size(201, 185);
-      this.grButtonVisibility.TabIndex = 54;
-      this.grButtonVisibility.TabStop = false;
-      this.grButtonVisibility.Text = "Button visibility";
-      // 
-      // cbViewerButton
-      // 
-      this.cbViewerButton.FormattingEnabled = true;
-      this.cbViewerButton.Location = new System.Drawing.Point(7, 131);
-      this.cbViewerButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbViewerButton.Name = "cbViewerButton";
-      this.cbViewerButton.Size = new System.Drawing.Size(185, 28);
-      this.cbViewerButton.TabIndex = 51;
-      // 
-      // btnSetButtonVisibility
-      // 
-      this.btnSetButtonVisibility.Location = new System.Drawing.Point(7, 69);
-      this.btnSetButtonVisibility.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetButtonVisibility.Name = "btnSetButtonVisibility";
-      this.btnSetButtonVisibility.Size = new System.Drawing.Size(187, 46);
-      this.btnSetButtonVisibility.TabIndex = 50;
-      this.btnSetButtonVisibility.Text = "Toggle button enabled";
-      this.btnSetButtonVisibility.UseVisualStyleBackColor = true;
-      this.btnSetButtonVisibility.Click += new System.EventHandler(this.btnSetButtonVisibility_Click);
-      // 
-      // btnGetButtonEnabled
-      // 
-      this.btnGetButtonEnabled.Location = new System.Drawing.Point(7, 22);
-      this.btnGetButtonEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetButtonEnabled.Name = "btnGetButtonEnabled";
-      this.btnGetButtonEnabled.Size = new System.Drawing.Size(188, 46);
-      this.btnGetButtonEnabled.TabIndex = 49;
-      this.btnGetButtonEnabled.Text = "Get button enabled";
-      this.btnGetButtonEnabled.UseVisualStyleBackColor = true;
-      this.btnGetButtonEnabled.Click += new System.EventHandler(this.btnGetButtonEnabled_Click);
-      // 
-      // grOverlay
-      // 
-      this.grOverlay.Controls.Add(this.btnDrawDistance);
-      this.grOverlay.Controls.Add(this.txtDrawDistance);
-      this.grOverlay.Controls.Add(this.btnRemoveOverlay);
-      this.grOverlay.Controls.Add(this.txtOverlayGeoJson);
-      this.grOverlay.Controls.Add(this.btnAddOverlay);
-      this.grOverlay.Location = new System.Drawing.Point(369, 866);
-      this.grOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOverlay.Name = "grOverlay";
-      this.grOverlay.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOverlay.Size = new System.Drawing.Size(373, 200);
-      this.grOverlay.TabIndex = 53;
-      this.grOverlay.TabStop = false;
-      this.grOverlay.Text = "Load GeoJSON overlay";
-      // 
-      // btnDrawDistance
-      // 
-      this.btnDrawDistance.Location = new System.Drawing.Point(237, 115);
-      this.btnDrawDistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnDrawDistance.Name = "btnDrawDistance";
-      this.btnDrawDistance.Size = new System.Drawing.Size(133, 35);
-      this.btnDrawDistance.TabIndex = 68;
-      this.btnDrawDistance.Text = "Set draw distance";
-      this.btnDrawDistance.UseVisualStyleBackColor = true;
-      this.btnDrawDistance.Click += new System.EventHandler(this.btnDrawDistance_Click);
-      // 
-      // txtDrawDistance
-      // 
-      this.txtDrawDistance.Location = new System.Drawing.Point(237, 162);
-      this.txtDrawDistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtDrawDistance.Name = "txtDrawDistance";
-      this.txtDrawDistance.Size = new System.Drawing.Size(132, 27);
-      this.txtDrawDistance.TabIndex = 67;
-      this.txtDrawDistance.Text = "30";
-      // 
-      // btnRemoveOverlay
-      // 
-      this.btnRemoveOverlay.Location = new System.Drawing.Point(237, 22);
-      this.btnRemoveOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnRemoveOverlay.Name = "btnRemoveOverlay";
-      this.btnRemoveOverlay.Size = new System.Drawing.Size(133, 35);
-      this.btnRemoveOverlay.TabIndex = 2;
-      this.btnRemoveOverlay.Text = "Remove overlay";
-      this.btnRemoveOverlay.UseVisualStyleBackColor = true;
-      this.btnRemoveOverlay.Click += new System.EventHandler(this.btnRemoveOverlay_Click);
-      // 
-      // txtOverlayGeoJson
-      // 
-      this.txtOverlayGeoJson.Location = new System.Drawing.Point(8, 29);
-      this.txtOverlayGeoJson.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtOverlayGeoJson.Multiline = true;
-      this.txtOverlayGeoJson.Name = "txtOverlayGeoJson";
-      this.txtOverlayGeoJson.Size = new System.Drawing.Size(223, 159);
-      this.txtOverlayGeoJson.TabIndex = 1;
-      this.txtOverlayGeoJson.Text = resources.GetString("txtOverlayGeoJson.Text");
-      // 
-      // btnAddOverlay
-      // 
-      this.btnAddOverlay.Location = new System.Drawing.Point(237, 69);
-      this.btnAddOverlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnAddOverlay.Name = "btnAddOverlay";
-      this.btnAddOverlay.Size = new System.Drawing.Size(133, 35);
-      this.btnAddOverlay.TabIndex = 0;
-      this.btnAddOverlay.Text = "Add overlay";
-      this.btnAddOverlay.UseVisualStyleBackColor = true;
-      this.btnAddOverlay.Click += new System.EventHandler(this.btnAddOverlay_Click);
-      // 
-      // grMeasurement
-      // 
-      this.grMeasurement.Controls.Add(this.cbUnit);
-      this.grMeasurement.Controls.Add(this.btnGetUnitPreference);
-      this.grMeasurement.Controls.Add(this.btnSetUnitPreference);
-      this.grMeasurement.Controls.Add(this.grMeasurementMethod);
-      this.grMeasurement.Controls.Add(this.grMeasurementType);
-      this.grMeasurement.Controls.Add(this.btnGetActiveMeasurement);
-      this.grMeasurement.Controls.Add(this.btnStartMeasurementMode);
-      this.grMeasurement.Controls.Add(this.btnStopMeasurementMode);
-      this.grMeasurement.Location = new System.Drawing.Point(9, 858);
-      this.grMeasurement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurement.Name = "grMeasurement";
-      this.grMeasurement.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurement.Size = new System.Drawing.Size(352, 208);
-      this.grMeasurement.TabIndex = 52;
-      this.grMeasurement.TabStop = false;
-      this.grMeasurement.Text = "Measurement";
-      // 
-      // cbUnit
-      // 
-      this.cbUnit.FormattingEnabled = true;
-      this.cbUnit.Location = new System.Drawing.Point(153, 169);
-      this.cbUnit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbUnit.Name = "cbUnit";
-      this.cbUnit.Size = new System.Drawing.Size(132, 28);
-      this.cbUnit.TabIndex = 67;
-      // 
-      // btnGetUnitPreference
-      // 
-      this.btnGetUnitPreference.Location = new System.Drawing.Point(233, 131);
-      this.btnGetUnitPreference.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetUnitPreference.Name = "btnGetUnitPreference";
-      this.btnGetUnitPreference.Size = new System.Drawing.Size(73, 31);
-      this.btnGetUnitPreference.TabIndex = 66;
-      this.btnGetUnitPreference.Text = "Get Unit";
-      this.btnGetUnitPreference.UseVisualStyleBackColor = true;
-      this.btnGetUnitPreference.Click += new System.EventHandler(this.btnGetUnitPreference_Click);
-      // 
-      // btnSetUnitPreference
-      // 
-      this.btnSetUnitPreference.Location = new System.Drawing.Point(153, 131);
-      this.btnSetUnitPreference.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetUnitPreference.Name = "btnSetUnitPreference";
-      this.btnSetUnitPreference.Size = new System.Drawing.Size(73, 31);
-      this.btnSetUnitPreference.TabIndex = 65;
-      this.btnSetUnitPreference.Text = "Set Unit";
-      this.btnSetUnitPreference.UseVisualStyleBackColor = true;
-      this.btnSetUnitPreference.Click += new System.EventHandler(this.btnSetUnitPreference_Click);
-      // 
-      // grMeasurementMethod
-      // 
-      this.grMeasurementMethod.Controls.Add(this.rbMethodDefault);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodDepthMap);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodForwardIntersection);
-      this.grMeasurementMethod.Controls.Add(this.rbMethodSmartClick);
-      this.grMeasurementMethod.Location = new System.Drawing.Point(253, 0);
-      this.grMeasurementMethod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurementMethod.Name = "grMeasurementMethod";
-      this.grMeasurementMethod.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurementMethod.Size = new System.Drawing.Size(107, 122);
-      this.grMeasurementMethod.TabIndex = 64;
-      this.grMeasurementMethod.TabStop = false;
-      this.grMeasurementMethod.Text = "Method";
-      // 
-      // rbMethodDefault
-      // 
-      this.rbMethodDefault.AutoSize = true;
-      this.rbMethodDefault.Checked = true;
-      this.rbMethodDefault.Location = new System.Drawing.Point(7, 22);
-      this.rbMethodDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMethodDefault.Name = "rbMethodDefault";
-      this.rbMethodDefault.Size = new System.Drawing.Size(79, 24);
-      this.rbMethodDefault.TabIndex = 58;
-      this.rbMethodDefault.TabStop = true;
-      this.rbMethodDefault.Text = "Default";
-      this.rbMethodDefault.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodDepthMap
-      // 
-      this.rbMethodDepthMap.AutoSize = true;
-      this.rbMethodDepthMap.Location = new System.Drawing.Point(7, 46);
-      this.rbMethodDepthMap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMethodDepthMap.Name = "rbMethodDepthMap";
-      this.rbMethodDepthMap.Size = new System.Drawing.Size(101, 24);
-      this.rbMethodDepthMap.TabIndex = 59;
-      this.rbMethodDepthMap.Text = "DepthMap";
-      this.rbMethodDepthMap.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodForwardIntersection
-      // 
-      this.rbMethodForwardIntersection.AutoSize = true;
-      this.rbMethodForwardIntersection.Location = new System.Drawing.Point(7, 92);
-      this.rbMethodForwardIntersection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMethodForwardIntersection.Name = "rbMethodForwardIntersection";
-      this.rbMethodForwardIntersection.Size = new System.Drawing.Size(89, 24);
-      this.rbMethodForwardIntersection.TabIndex = 61;
-      this.rbMethodForwardIntersection.Text = "Forw. Int.";
-      this.rbMethodForwardIntersection.UseVisualStyleBackColor = true;
-      // 
-      // rbMethodSmartClick
-      // 
-      this.rbMethodSmartClick.AutoSize = true;
-      this.rbMethodSmartClick.Location = new System.Drawing.Point(7, 69);
-      this.rbMethodSmartClick.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMethodSmartClick.Name = "rbMethodSmartClick";
-      this.rbMethodSmartClick.Size = new System.Drawing.Size(104, 24);
-      this.rbMethodSmartClick.TabIndex = 60;
-      this.rbMethodSmartClick.Text = "Smart Click";
-      this.rbMethodSmartClick.UseVisualStyleBackColor = true;
-      // 
-      // grMeasurementType
-      // 
-      this.grMeasurementType.Controls.Add(this.rbMeasDefault);
-      this.grMeasurementType.Controls.Add(this.rbMeasPoint);
-      this.grMeasurementType.Controls.Add(this.rbMeasPolygon);
-      this.grMeasurementType.Controls.Add(this.rbMeasLineString);
-      this.grMeasurementType.Location = new System.Drawing.Point(147, 0);
-      this.grMeasurementType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurementType.Name = "grMeasurementType";
-      this.grMeasurementType.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grMeasurementType.Size = new System.Drawing.Size(107, 122);
-      this.grMeasurementType.TabIndex = 63;
-      this.grMeasurementType.TabStop = false;
-      this.grMeasurementType.Text = "Type";
-      // 
-      // rbMeasDefault
-      // 
-      this.rbMeasDefault.AutoSize = true;
-      this.rbMeasDefault.Checked = true;
-      this.rbMeasDefault.Location = new System.Drawing.Point(7, 22);
-      this.rbMeasDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMeasDefault.Name = "rbMeasDefault";
-      this.rbMeasDefault.Size = new System.Drawing.Size(79, 24);
-      this.rbMeasDefault.TabIndex = 58;
-      this.rbMeasDefault.TabStop = true;
-      this.rbMeasDefault.Text = "Default";
-      this.rbMeasDefault.UseVisualStyleBackColor = true;
-      // 
-      // rbMeasPoint
-      // 
-      this.rbMeasPoint.AutoSize = true;
-      this.rbMeasPoint.Location = new System.Drawing.Point(7, 46);
-      this.rbMeasPoint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMeasPoint.Name = "rbMeasPoint";
-      this.rbMeasPoint.Size = new System.Drawing.Size(63, 24);
-      this.rbMeasPoint.TabIndex = 59;
-      this.rbMeasPoint.Text = "Point";
-      this.rbMeasPoint.UseVisualStyleBackColor = true;
-      // 
-      // rbMeasPolygon
-      // 
-      this.rbMeasPolygon.AutoSize = true;
-      this.rbMeasPolygon.Location = new System.Drawing.Point(7, 92);
-      this.rbMeasPolygon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMeasPolygon.Name = "rbMeasPolygon";
-      this.rbMeasPolygon.Size = new System.Drawing.Size(83, 24);
-      this.rbMeasPolygon.TabIndex = 61;
-      this.rbMeasPolygon.Text = "Polygon";
-      this.rbMeasPolygon.UseVisualStyleBackColor = true;
-      // 
-      // rbMeasLineString
-      // 
-      this.rbMeasLineString.AutoSize = true;
-      this.rbMeasLineString.Location = new System.Drawing.Point(7, 69);
-      this.rbMeasLineString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.rbMeasLineString.Name = "rbMeasLineString";
-      this.rbMeasLineString.Size = new System.Drawing.Size(98, 24);
-      this.rbMeasLineString.TabIndex = 60;
-      this.rbMeasLineString.Text = "Line string";
-      this.rbMeasLineString.UseVisualStyleBackColor = true;
-      // 
-      // btnGetActiveMeasurement
-      // 
-      this.btnGetActiveMeasurement.Location = new System.Drawing.Point(7, 131);
-      this.btnGetActiveMeasurement.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
-      this.btnGetActiveMeasurement.Size = new System.Drawing.Size(140, 46);
-      this.btnGetActiveMeasurement.TabIndex = 62;
-      this.btnGetActiveMeasurement.Text = "Get Measurement";
-      this.btnGetActiveMeasurement.UseVisualStyleBackColor = true;
-      this.btnGetActiveMeasurement.Click += new System.EventHandler(this.btnGetMeasurementInfo_Click);
-      // 
-      // btnStartMeasurementMode
-      // 
-      this.btnStartMeasurementMode.Location = new System.Drawing.Point(7, 22);
-      this.btnStartMeasurementMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnStartMeasurementMode.Name = "btnStartMeasurementMode";
-      this.btnStartMeasurementMode.Size = new System.Drawing.Size(140, 46);
-      this.btnStartMeasurementMode.TabIndex = 57;
-      this.btnStartMeasurementMode.Text = "Start Measurement";
-      this.btnStartMeasurementMode.UseVisualStyleBackColor = true;
-      this.btnStartMeasurementMode.Click += new System.EventHandler(this.btnStartMeasurementMode_Click);
-      // 
-      // btnStopMeasurementMode
-      // 
-      this.btnStopMeasurementMode.Location = new System.Drawing.Point(8, 75);
-      this.btnStopMeasurementMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnStopMeasurementMode.Name = "btnStopMeasurementMode";
-      this.btnStopMeasurementMode.Size = new System.Drawing.Size(140, 46);
-      this.btnStopMeasurementMode.TabIndex = 56;
-      this.btnStopMeasurementMode.Text = "Stop Measurement";
-      this.btnStopMeasurementMode.UseVisualStyleBackColor = true;
-      this.btnStopMeasurementMode.Click += new System.EventHandler(this.btnStopMeasurementMode_Click);
-      // 
-      // grDevTools
-      // 
-      this.grDevTools.Controls.Add(this.btnCloseDefTools);
-      this.grDevTools.Controls.Add(this.btnShowDefTools);
-      this.grDevTools.Location = new System.Drawing.Point(460, 408);
-      this.grDevTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grDevTools.Name = "grDevTools";
-      this.grDevTools.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grDevTools.Size = new System.Drawing.Size(180, 82);
-      this.grDevTools.TabIndex = 51;
-      this.grDevTools.TabStop = false;
-      this.grDevTools.Text = "Dev tools";
-      // 
-      // btnCloseDefTools
-      // 
-      this.btnCloseDefTools.Location = new System.Drawing.Point(93, 22);
-      this.btnCloseDefTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnCloseDefTools.Name = "btnCloseDefTools";
-      this.btnCloseDefTools.Size = new System.Drawing.Size(80, 54);
-      this.btnCloseDefTools.TabIndex = 49;
-      this.btnCloseDefTools.Text = "Close dev tools";
-      this.btnCloseDefTools.UseVisualStyleBackColor = true;
-      this.btnCloseDefTools.Click += new System.EventHandler(this.btnCloseDevTools_Click);
-      // 
-      // btnShowDefTools
-      // 
-      this.btnShowDefTools.Location = new System.Drawing.Point(7, 22);
-      this.btnShowDefTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnShowDefTools.Name = "btnShowDefTools";
-      this.btnShowDefTools.Size = new System.Drawing.Size(80, 54);
-      this.btnShowDefTools.TabIndex = 48;
-      this.btnShowDefTools.Text = "Show dev tools";
-      this.btnShowDefTools.UseVisualStyleBackColor = true;
-      this.btnShowDefTools.Click += new System.EventHandler(this.btnShowDevTools_Click);
-      // 
-      // grRotationsZoomInOut
-      // 
-      this.grRotationsZoomInOut.Controls.Add(this.btnGetViewers);
-      this.grRotationsZoomInOut.Controls.Add(this.btnClosePanoramaViewer);
-      this.grRotationsZoomInOut.Controls.Add(this.lblDeltaYawPitch);
-      this.grRotationsZoomInOut.Controls.Add(this.txtDeltaYawPitch);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateDown);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateUp);
-      this.grRotationsZoomInOut.Controls.Add(this.btnRotateRight);
-      this.grRotationsZoomInOut.Controls.Add(this.btnZoomOut);
-      this.grRotationsZoomInOut.Controls.Add(this.btRotateLeft);
-      this.grRotationsZoomInOut.Controls.Add(this.btnZoomIn);
-      this.grRotationsZoomInOut.Location = new System.Drawing.Point(0, 235);
-      this.grRotationsZoomInOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grRotationsZoomInOut.Name = "grRotationsZoomInOut";
-      this.grRotationsZoomInOut.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grRotationsZoomInOut.Size = new System.Drawing.Size(240, 249);
-      this.grRotationsZoomInOut.TabIndex = 0;
-      this.grRotationsZoomInOut.TabStop = false;
-      this.grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
-      // 
-      // btnGetViewers
-      // 
-      this.btnGetViewers.Location = new System.Drawing.Point(127, 182);
-      this.btnGetViewers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetViewers.Name = "btnGetViewers";
-      this.btnGetViewers.Size = new System.Drawing.Size(107, 38);
-      this.btnGetViewers.TabIndex = 62;
-      this.btnGetViewers.Text = "Get viewers";
-      this.btnGetViewers.UseVisualStyleBackColor = true;
-      this.btnGetViewers.Click += new System.EventHandler(this.btnGetViewers_Click);
-      // 
-      // btnClosePanoramaViewer
-      // 
-      this.btnClosePanoramaViewer.Location = new System.Drawing.Point(8, 182);
-      this.btnClosePanoramaViewer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
-      this.btnClosePanoramaViewer.Size = new System.Drawing.Size(107, 58);
-      this.btnClosePanoramaViewer.TabIndex = 61;
-      this.btnClosePanoramaViewer.Text = "Close pan. viewer";
-      this.btnClosePanoramaViewer.UseVisualStyleBackColor = true;
-      this.btnClosePanoramaViewer.Click += new System.EventHandler(this.btnClosePanoramaViewer_Click);
-      // 
-      // lblDeltaYawPitch
-      // 
-      this.lblDeltaYawPitch.AutoSize = true;
-      this.lblDeltaYawPitch.Location = new System.Drawing.Point(7, 149);
-      this.lblDeltaYawPitch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblDeltaYawPitch.Name = "lblDeltaYawPitch";
-      this.lblDeltaYawPitch.Size = new System.Drawing.Size(120, 20);
-      this.lblDeltaYawPitch.TabIndex = 20;
-      this.lblDeltaYawPitch.Text = "delta yaw / pitch";
-      // 
-      // txtDeltaYawPitch
-      // 
-      this.txtDeltaYawPitch.Location = new System.Drawing.Point(127, 149);
-      this.txtDeltaYawPitch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtDeltaYawPitch.Name = "txtDeltaYawPitch";
-      this.txtDeltaYawPitch.Size = new System.Drawing.Size(105, 27);
-      this.txtDeltaYawPitch.TabIndex = 21;
-      this.txtDeltaYawPitch.Text = "1";
-      // 
-      // btnRotateDown
-      // 
-      this.btnRotateDown.Location = new System.Drawing.Point(127, 22);
-      this.btnRotateDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnRotateDown.Name = "btnRotateDown";
-      this.btnRotateDown.Size = new System.Drawing.Size(107, 38);
-      this.btnRotateDown.TabIndex = 19;
-      this.btnRotateDown.Text = "Rotate down";
-      this.btnRotateDown.UseVisualStyleBackColor = true;
-      this.btnRotateDown.Click += new System.EventHandler(this.btnRotateDown_Click);
-      // 
-      // btnRotateUp
-      // 
-      this.btnRotateUp.Location = new System.Drawing.Point(8, 22);
-      this.btnRotateUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnRotateUp.Name = "btnRotateUp";
-      this.btnRotateUp.Size = new System.Drawing.Size(107, 38);
-      this.btnRotateUp.TabIndex = 18;
-      this.btnRotateUp.Text = "Rotate up";
-      this.btnRotateUp.UseVisualStyleBackColor = true;
-      this.btnRotateUp.Click += new System.EventHandler(this.btnRotateUp_Click);
-      // 
-      // btnRotateRight
-      // 
-      this.btnRotateRight.Location = new System.Drawing.Point(8, 62);
-      this.btnRotateRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnRotateRight.Name = "btnRotateRight";
-      this.btnRotateRight.Size = new System.Drawing.Size(107, 38);
-      this.btnRotateRight.TabIndex = 6;
-      this.btnRotateRight.Text = "Rotate right";
-      this.btnRotateRight.UseVisualStyleBackColor = true;
-      this.btnRotateRight.Click += new System.EventHandler(this.btnRotateRight_Click);
-      // 
-      // btnZoomOut
-      // 
-      this.btnZoomOut.Location = new System.Drawing.Point(127, 105);
-      this.btnZoomOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnZoomOut.Name = "btnZoomOut";
-      this.btnZoomOut.Size = new System.Drawing.Size(107, 38);
-      this.btnZoomOut.TabIndex = 46;
-      this.btnZoomOut.Text = "Zoom out";
-      this.btnZoomOut.UseVisualStyleBackColor = true;
-      this.btnZoomOut.Click += new System.EventHandler(this.btnZoomOut_Click);
-      // 
-      // btRotateLeft
-      // 
-      this.btRotateLeft.Location = new System.Drawing.Point(8, 106);
-      this.btRotateLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btRotateLeft.Name = "btRotateLeft";
-      this.btRotateLeft.Size = new System.Drawing.Size(107, 38);
-      this.btRotateLeft.TabIndex = 0;
-      this.btRotateLeft.Text = "Rotate left";
-      this.btRotateLeft.UseVisualStyleBackColor = true;
-      this.btRotateLeft.Click += new System.EventHandler(this.btRotateLeft_Click);
-      // 
-      // btnZoomIn
-      // 
-      this.btnZoomIn.Location = new System.Drawing.Point(127, 62);
-      this.btnZoomIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnZoomIn.Name = "btnZoomIn";
-      this.btnZoomIn.Size = new System.Drawing.Size(107, 38);
-      this.btnZoomIn.TabIndex = 45;
-      this.btnZoomIn.Text = "Zoom in";
-      this.btnZoomIn.UseVisualStyleBackColor = true;
-      this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
-      // 
-      // grEvents
-      // 
-      this.grEvents.Controls.Add(this.lbViewerEvents);
-      this.grEvents.Location = new System.Drawing.Point(8, 695);
-      this.grEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grEvents.Name = "grEvents";
-      this.grEvents.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grEvents.Size = new System.Drawing.Size(971, 154);
-      this.grEvents.TabIndex = 50;
-      this.grEvents.TabStop = false;
-      this.grEvents.Text = "Viewer events";
-      // 
-      // lbViewerEvents
-      // 
-      this.lbViewerEvents.FormattingEnabled = true;
-      this.lbViewerEvents.ItemHeight = 20;
-      this.lbViewerEvents.Location = new System.Drawing.Point(7, 22);
-      this.lbViewerEvents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.lbViewerEvents.Name = "lbViewerEvents";
-      this.lbViewerEvents.Size = new System.Drawing.Size(951, 124);
-      this.lbViewerEvents.TabIndex = 0;
-      // 
-      // grRecordingViewerColorPermissions
-      // 
-      this.grRecordingViewerColorPermissions.Controls.Add(this.txtRecordingViewerColorPermissions);
-      this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetPermissions);
-      this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetRecording);
-      this.grRecordingViewerColorPermissions.Controls.Add(this.btnGetViewerColor);
-      this.grRecordingViewerColorPermissions.Location = new System.Drawing.Point(7, 486);
-      this.grRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grRecordingViewerColorPermissions.Name = "grRecordingViewerColorPermissions";
-      this.grRecordingViewerColorPermissions.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grRecordingViewerColorPermissions.Size = new System.Drawing.Size(427, 208);
-      this.grRecordingViewerColorPermissions.TabIndex = 0;
-      this.grRecordingViewerColorPermissions.TabStop = false;
-      this.grRecordingViewerColorPermissions.Text = "Recording / Viewer color / Permissions";
-      // 
-      // txtRecordingViewerColorPermissions
-      // 
-      this.txtRecordingViewerColorPermissions.Location = new System.Drawing.Point(147, 22);
-      this.txtRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtRecordingViewerColorPermissions.Multiline = true;
-      this.txtRecordingViewerColorPermissions.Name = "txtRecordingViewerColorPermissions";
-      this.txtRecordingViewerColorPermissions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.txtRecordingViewerColorPermissions.Size = new System.Drawing.Size(272, 175);
-      this.txtRecordingViewerColorPermissions.TabIndex = 49;
-      // 
-      // btnGetPermissions
-      // 
-      this.btnGetPermissions.Location = new System.Drawing.Point(7, 22);
-      this.btnGetPermissions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetPermissions.Name = "btnGetPermissions";
-      this.btnGetPermissions.Size = new System.Drawing.Size(133, 46);
-      this.btnGetPermissions.TabIndex = 11;
-      this.btnGetPermissions.Text = "Get Permissions";
-      this.btnGetPermissions.UseVisualStyleBackColor = true;
-      this.btnGetPermissions.Click += new System.EventHandler(this.btnPermissions_Click);
-      // 
-      // btnGetRecording
-      // 
-      this.btnGetRecording.Location = new System.Drawing.Point(7, 100);
-      this.btnGetRecording.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetRecording.Name = "btnGetRecording";
-      this.btnGetRecording.Size = new System.Drawing.Size(133, 46);
-      this.btnGetRecording.TabIndex = 28;
-      this.btnGetRecording.Text = "Get Recording";
-      this.btnGetRecording.UseVisualStyleBackColor = true;
-      this.btnGetRecording.Click += new System.EventHandler(this.btnGetRecording_Click);
-      // 
-      // btnGetViewerColor
-      // 
-      this.btnGetViewerColor.Location = new System.Drawing.Point(7, 154);
-      this.btnGetViewerColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetViewerColor.Name = "btnGetViewerColor";
-      this.btnGetViewerColor.Size = new System.Drawing.Size(133, 46);
-      this.btnGetViewerColor.TabIndex = 17;
-      this.btnGetViewerColor.Text = "Get Viewer Color";
-      this.btnGetViewerColor.UseVisualStyleBackColor = true;
-      this.btnGetViewerColor.Click += new System.EventHandler(this.btnGetViewerColor_Click);
-      // 
-      // grOrientation
-      // 
-      this.grOrientation.Controls.Add(this.btnGetDebugLogs);
-      this.grOrientation.Controls.Add(this.txtYaw);
-      this.grOrientation.Controls.Add(this.lblYaw);
-      this.grOrientation.Controls.Add(this.lblPitch);
-      this.grOrientation.Controls.Add(this.txtPitch);
-      this.grOrientation.Controls.Add(this.lblhFov);
-      this.grOrientation.Controls.Add(this.txthFov);
-      this.grOrientation.Controls.Add(this.btnGetOrientation);
-      this.grOrientation.Controls.Add(this.btnSetOrientation);
-      this.grOrientation.Location = new System.Drawing.Point(652, 338);
-      this.grOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOrientation.Name = "grOrientation";
-      this.grOrientation.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOrientation.Size = new System.Drawing.Size(320, 178);
-      this.grOrientation.TabIndex = 0;
-      this.grOrientation.TabStop = false;
-      this.grOrientation.Text = "Orientation";
-      // 
-      // btnGetDebugLogs
-      // 
-      this.btnGetDebugLogs.Location = new System.Drawing.Point(7, 69);
-      this.btnGetDebugLogs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetDebugLogs.Name = "btnGetDebugLogs";
-      this.btnGetDebugLogs.Size = new System.Drawing.Size(133, 46);
-      this.btnGetDebugLogs.TabIndex = 28;
-      this.btnGetDebugLogs.Text = "Get Debug logs";
-      this.btnGetDebugLogs.UseVisualStyleBackColor = true;
-      this.btnGetDebugLogs.Click += new System.EventHandler(this.btnGetDebugLogs_Click);
-      // 
-      // txtYaw
-      // 
-      this.txtYaw.Location = new System.Drawing.Point(193, 22);
-      this.txtYaw.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtYaw.Name = "txtYaw";
-      this.txtYaw.Size = new System.Drawing.Size(119, 27);
-      this.txtYaw.TabIndex = 23;
-      this.txtYaw.Text = "0.0";
-      // 
-      // lblYaw
-      // 
-      this.lblYaw.AutoSize = true;
-      this.lblYaw.Location = new System.Drawing.Point(147, 22);
-      this.lblYaw.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblYaw.Name = "lblYaw";
-      this.lblYaw.Size = new System.Drawing.Size(35, 20);
-      this.lblYaw.TabIndex = 21;
-      this.lblYaw.Text = "Yaw";
-      // 
-      // lblPitch
-      // 
-      this.lblPitch.AutoSize = true;
-      this.lblPitch.Location = new System.Drawing.Point(147, 62);
-      this.lblPitch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblPitch.Name = "lblPitch";
-      this.lblPitch.Size = new System.Drawing.Size(41, 20);
-      this.lblPitch.TabIndex = 22;
-      this.lblPitch.Text = "Pitch";
-      // 
-      // txtPitch
-      // 
-      this.txtPitch.Location = new System.Drawing.Point(193, 62);
-      this.txtPitch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtPitch.Name = "txtPitch";
-      this.txtPitch.Size = new System.Drawing.Size(119, 27);
-      this.txtPitch.TabIndex = 24;
-      this.txtPitch.Text = "0.0";
-      // 
-      // lblhFov
-      // 
-      this.lblhFov.AutoSize = true;
-      this.lblhFov.Location = new System.Drawing.Point(147, 100);
-      this.lblhFov.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblhFov.Name = "lblhFov";
-      this.lblhFov.Size = new System.Drawing.Size(40, 20);
-      this.lblhFov.TabIndex = 25;
-      this.lblhFov.Text = "hFov";
-      // 
-      // txthFov
-      // 
-      this.txthFov.Location = new System.Drawing.Point(193, 100);
-      this.txthFov.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txthFov.Name = "txthFov";
-      this.txthFov.Size = new System.Drawing.Size(119, 27);
-      this.txthFov.TabIndex = 26;
-      this.txthFov.Text = "90.0";
-      // 
-      // btnGetOrientation
-      // 
-      this.btnGetOrientation.Location = new System.Drawing.Point(7, 22);
-      this.btnGetOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetOrientation.Name = "btnGetOrientation";
-      this.btnGetOrientation.Size = new System.Drawing.Size(133, 46);
-      this.btnGetOrientation.TabIndex = 20;
-      this.btnGetOrientation.Text = "Get Orientation";
-      this.btnGetOrientation.UseVisualStyleBackColor = true;
-      this.btnGetOrientation.Click += new System.EventHandler(this.btnOrientation_Click);
-      // 
-      // btnSetOrientation
-      // 
-      this.btnSetOrientation.Location = new System.Drawing.Point(7, 122);
-      this.btnSetOrientation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetOrientation.Name = "btnSetOrientation";
-      this.btnSetOrientation.Size = new System.Drawing.Size(133, 46);
-      this.btnSetOrientation.TabIndex = 27;
-      this.btnSetOrientation.Text = "Set Orientation";
-      this.btnSetOrientation.UseVisualStyleBackColor = true;
-      this.btnSetOrientation.Click += new System.EventHandler(this.btnSetOrientation_Click);
-      // 
-      // grOpenByImageId
-      // 
-      this.grOpenByImageId.Controls.Add(this.txtBrightnessContrast);
-      this.grOpenByImageId.Controls.Add(this.btnContrast);
-      this.grOpenByImageId.Controls.Add(this.btnBrightness);
-      this.grOpenByImageId.Controls.Add(this.btnGetAddress);
-      this.grOpenByImageId.Controls.Add(this.btnOpenByImageId);
-      this.grOpenByImageId.Controls.Add(this.txtImageId);
-      this.grOpenByImageId.Location = new System.Drawing.Point(655, 520);
-      this.grOpenByImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByImageId.Name = "grOpenByImageId";
-      this.grOpenByImageId.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByImageId.Size = new System.Drawing.Size(317, 162);
-      this.grOpenByImageId.TabIndex = 44;
-      this.grOpenByImageId.TabStop = false;
-      this.grOpenByImageId.Text = "Open by imageId";
-      // 
-      // txtBrightnessContrast
-      // 
-      this.txtBrightnessContrast.Location = new System.Drawing.Point(160, 125);
-      this.txtBrightnessContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtBrightnessContrast.Name = "txtBrightnessContrast";
-      this.txtBrightnessContrast.Size = new System.Drawing.Size(145, 27);
-      this.txtBrightnessContrast.TabIndex = 52;
-      // 
-      // btnContrast
-      // 
-      this.btnContrast.Location = new System.Drawing.Point(160, 72);
-      this.btnContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnContrast.Name = "btnContrast";
-      this.btnContrast.Size = new System.Drawing.Size(147, 46);
-      this.btnContrast.TabIndex = 51;
-      this.btnContrast.Text = "Set Contrast";
-      this.btnContrast.UseVisualStyleBackColor = true;
-      this.btnContrast.Click += new System.EventHandler(this.btnContrast_Click);
-      // 
-      // btnBrightness
-      // 
-      this.btnBrightness.Location = new System.Drawing.Point(160, 22);
-      this.btnBrightness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnBrightness.Name = "btnBrightness";
-      this.btnBrightness.Size = new System.Drawing.Size(147, 46);
-      this.btnBrightness.TabIndex = 50;
-      this.btnBrightness.Text = "Set Brightness";
-      this.btnBrightness.UseVisualStyleBackColor = true;
-      this.btnBrightness.Click += new System.EventHandler(this.btnBrightness_Click);
-      // 
-      // btnGetAddress
-      // 
-      this.btnGetAddress.Location = new System.Drawing.Point(7, 115);
-      this.btnGetAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetAddress.Name = "btnGetAddress";
-      this.btnGetAddress.Size = new System.Drawing.Size(133, 46);
-      this.btnGetAddress.TabIndex = 49;
-      this.btnGetAddress.Text = "Get address settings";
-      this.btnGetAddress.UseVisualStyleBackColor = true;
-      this.btnGetAddress.Click += new System.EventHandler(this.btnGetAddress_Click);
-      // 
-      // btnOpenByImageId
-      // 
-      this.btnOpenByImageId.Location = new System.Drawing.Point(7, 62);
-      this.btnOpenByImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnOpenByImageId.Name = "btnOpenByImageId";
-      this.btnOpenByImageId.Size = new System.Drawing.Size(133, 46);
-      this.btnOpenByImageId.TabIndex = 43;
-      this.btnOpenByImageId.Text = "Open by ImageId";
-      this.btnOpenByImageId.UseVisualStyleBackColor = true;
-      this.btnOpenByImageId.Click += new System.EventHandler(this.btnOpenByImageId_Click);
-      // 
-      // txtImageId
-      // 
-      this.txtImageId.Location = new System.Drawing.Point(11, 22);
-      this.txtImageId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtImageId.Name = "txtImageId";
-      this.txtImageId.Size = new System.Drawing.Size(132, 27);
-      this.txtImageId.TabIndex = 42;
-      this.txtImageId.Text = "5D4KX5SM";
-      // 
-      // grCoordinate
-      // 
-      this.grCoordinate.Controls.Add(this.btnSetPointSize);
-      this.grCoordinate.Controls.Add(this.txtPointSize);
-      this.grCoordinate.Controls.Add(this.btnGetPointSize);
-      this.grCoordinate.Controls.Add(this.btnSetPointBudget);
-      this.grCoordinate.Controls.Add(this.cbPointBudget);
-      this.grCoordinate.Controls.Add(this.btnGetPointBudget);
-      this.grCoordinate.Controls.Add(this.btnEdges);
-      this.grCoordinate.Controls.Add(this.btnCameraPosition);
-      this.grCoordinate.Controls.Add(this.txtlkAtX);
-      this.grCoordinate.Controls.Add(this.txtlkAtY);
-      this.grCoordinate.Controls.Add(this.txtlkAtZ);
-      this.grCoordinate.Controls.Add(this.btnFlyTo);
-      this.grCoordinate.Controls.Add(this.txtX);
-      this.grCoordinate.Controls.Add(this.txtY);
-      this.grCoordinate.Controls.Add(this.txtZ);
-      this.grCoordinate.Controls.Add(this.lblX);
-      this.grCoordinate.Controls.Add(this.lblY);
-      this.grCoordinate.Controls.Add(this.lblZ);
-      this.grCoordinate.Controls.Add(this.btnOpenByCoordinate);
-      this.grCoordinate.Controls.Add(this.btnLookAtCoordinate);
-      this.grCoordinate.Location = new System.Drawing.Point(645, 191);
-      this.grCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grCoordinate.Name = "grCoordinate";
-      this.grCoordinate.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grCoordinate.Size = new System.Drawing.Size(553, 138);
-      this.grCoordinate.TabIndex = 0;
-      this.grCoordinate.TabStop = false;
-      this.grCoordinate.Text = "Coordinate";
-      // 
-      // btnSetPointSize
-      // 
-      this.btnSetPointSize.Location = new System.Drawing.Point(500, 60);
-      this.btnSetPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetPointSize.Name = "btnSetPointSize";
-      this.btnSetPointSize.Size = new System.Drawing.Size(53, 38);
-      this.btnSetPointSize.TabIndex = 56;
-      this.btnSetPointSize.Text = "Set";
-      this.btnSetPointSize.UseVisualStyleBackColor = true;
-      this.btnSetPointSize.Click += new System.EventHandler(this.btnSetPointSize_Click);
-      // 
-      // txtPointSize
-      // 
-      this.txtPointSize.Location = new System.Drawing.Point(440, 65);
-      this.txtPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtPointSize.Name = "txtPointSize";
-      this.txtPointSize.Size = new System.Drawing.Size(52, 27);
-      this.txtPointSize.TabIndex = 55;
-      this.txtPointSize.Text = "0";
-      // 
-      // btnGetPointSize
-      // 
-      this.btnGetPointSize.Location = new System.Drawing.Point(380, 60);
-      this.btnGetPointSize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetPointSize.Name = "btnGetPointSize";
-      this.btnGetPointSize.Size = new System.Drawing.Size(53, 38);
-      this.btnGetPointSize.TabIndex = 54;
-      this.btnGetPointSize.Text = "Get";
-      this.btnGetPointSize.UseVisualStyleBackColor = true;
-      this.btnGetPointSize.Click += new System.EventHandler(this.btnGetPointSize_Click);
-      // 
-      // btnSetPointBudget
-      // 
-      this.btnSetPointBudget.Location = new System.Drawing.Point(500, 95);
-      this.btnSetPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSetPointBudget.Name = "btnSetPointBudget";
-      this.btnSetPointBudget.Size = new System.Drawing.Size(53, 38);
-      this.btnSetPointBudget.TabIndex = 53;
-      this.btnSetPointBudget.Text = "Set";
-      this.btnSetPointBudget.UseVisualStyleBackColor = true;
-      this.btnSetPointBudget.Click += new System.EventHandler(this.btnSetPointBudget_Click);
-      // 
-      // cbPointBudget
-      // 
-      this.cbPointBudget.FormattingEnabled = true;
-      this.cbPointBudget.Location = new System.Drawing.Point(440, 100);
-      this.cbPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.cbPointBudget.Name = "cbPointBudget";
-      this.cbPointBudget.Size = new System.Drawing.Size(52, 28);
-      this.cbPointBudget.TabIndex = 52;
-      // 
-      // btnGetPointBudget
-      // 
-      this.btnGetPointBudget.Location = new System.Drawing.Point(380, 95);
-      this.btnGetPointBudget.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetPointBudget.Name = "btnGetPointBudget";
-      this.btnGetPointBudget.Size = new System.Drawing.Size(53, 38);
-      this.btnGetPointBudget.TabIndex = 51;
-      this.btnGetPointBudget.Text = "Get";
-      this.btnGetPointBudget.UseVisualStyleBackColor = true;
-      this.btnGetPointBudget.Click += new System.EventHandler(this.btnGetPointBudget_Click);
-      // 
-      // btnEdges
-      // 
-      this.btnEdges.Location = new System.Drawing.Point(500, 22);
-      this.btnEdges.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnEdges.Name = "btnEdges";
-      this.btnEdges.Size = new System.Drawing.Size(53, 38);
-      this.btnEdges.TabIndex = 50;
-      this.btnEdges.Text = "Edges";
-      this.btnEdges.UseVisualStyleBackColor = true;
-      this.btnEdges.Click += new System.EventHandler(this.btnEdges_Click);
-      // 
-      // btnCameraPosition
-      // 
-      this.btnCameraPosition.Location = new System.Drawing.Point(440, 22);
-      this.btnCameraPosition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnCameraPosition.Name = "btnCameraPosition";
-      this.btnCameraPosition.Size = new System.Drawing.Size(53, 38);
-      this.btnCameraPosition.TabIndex = 49;
-      this.btnCameraPosition.UseVisualStyleBackColor = true;
-      this.btnCameraPosition.Click += new System.EventHandler(this.btnCameraPosition_Click);
-      // 
-      // txtlkAtX
-      // 
-      this.txtlkAtX.Location = new System.Drawing.Point(287, 22);
-      this.txtlkAtX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtlkAtX.Name = "txtlkAtX";
-      this.txtlkAtX.Size = new System.Drawing.Size(85, 27);
-      this.txtlkAtX.TabIndex = 46;
-      this.txtlkAtX.Text = "160855.585";
-      // 
-      // txtlkAtY
-      // 
-      this.txtlkAtY.Location = new System.Drawing.Point(287, 62);
-      this.txtlkAtY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtlkAtY.Name = "txtlkAtY";
-      this.txtlkAtY.Size = new System.Drawing.Size(85, 27);
-      this.txtlkAtY.TabIndex = 47;
-      this.txtlkAtY.Text = "383928.326";
-      // 
-      // txtlkAtZ
-      // 
-      this.txtlkAtZ.Location = new System.Drawing.Point(287, 100);
-      this.txtlkAtZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtlkAtZ.Name = "txtlkAtZ";
-      this.txtlkAtZ.Size = new System.Drawing.Size(85, 27);
-      this.txtlkAtZ.TabIndex = 48;
-      this.txtlkAtZ.Text = "4.5";
-      // 
-      // btnFlyTo
-      // 
-      this.btnFlyTo.Location = new System.Drawing.Point(380, 22);
-      this.btnFlyTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnFlyTo.Name = "btnFlyTo";
-      this.btnFlyTo.Size = new System.Drawing.Size(53, 38);
-      this.btnFlyTo.TabIndex = 45;
-      this.btnFlyTo.UseVisualStyleBackColor = true;
-      this.btnFlyTo.Click += new System.EventHandler(this.btnFlyTo_Click);
-      // 
-      // txtX
-      // 
-      this.txtX.Location = new System.Drawing.Point(193, 22);
-      this.txtX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtX.Name = "txtX";
-      this.txtX.Size = new System.Drawing.Size(85, 27);
-      this.txtX.TabIndex = 30;
-      this.txtX.Text = "160850.585";
-      // 
-      // txtY
-      // 
-      this.txtY.Location = new System.Drawing.Point(193, 62);
-      this.txtY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtY.Name = "txtY";
-      this.txtY.Size = new System.Drawing.Size(85, 27);
-      this.txtY.TabIndex = 31;
-      this.txtY.Text = "383923.326";
-      // 
-      // txtZ
-      // 
-      this.txtZ.Location = new System.Drawing.Point(193, 100);
-      this.txtZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtZ.Name = "txtZ";
-      this.txtZ.Size = new System.Drawing.Size(85, 27);
-      this.txtZ.TabIndex = 32;
-      this.txtZ.Text = "4.0";
-      // 
-      // lblX
-      // 
-      this.lblX.AutoSize = true;
-      this.lblX.Location = new System.Drawing.Point(160, 22);
-      this.lblX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblX.Name = "lblX";
-      this.lblX.Size = new System.Drawing.Size(18, 20);
-      this.lblX.TabIndex = 33;
-      this.lblX.Text = "X";
-      // 
-      // lblY
-      // 
-      this.lblY.AutoSize = true;
-      this.lblY.Location = new System.Drawing.Point(160, 62);
-      this.lblY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblY.Name = "lblY";
-      this.lblY.Size = new System.Drawing.Size(17, 20);
-      this.lblY.TabIndex = 34;
-      this.lblY.Text = "Y";
-      // 
-      // lblZ
-      // 
-      this.lblZ.AutoSize = true;
-      this.lblZ.Location = new System.Drawing.Point(160, 100);
-      this.lblZ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblZ.Name = "lblZ";
-      this.lblZ.Size = new System.Drawing.Size(18, 20);
-      this.lblZ.TabIndex = 35;
-      this.lblZ.Text = "Z";
-      // 
-      // btnOpenByCoordinate
-      // 
-      this.btnOpenByCoordinate.Location = new System.Drawing.Point(7, 22);
-      this.btnOpenByCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnOpenByCoordinate.Name = "btnOpenByCoordinate";
-      this.btnOpenByCoordinate.Size = new System.Drawing.Size(147, 46);
-      this.btnOpenByCoordinate.TabIndex = 44;
-      this.btnOpenByCoordinate.Text = "Open by coordinate";
-      this.btnOpenByCoordinate.UseVisualStyleBackColor = true;
-      this.btnOpenByCoordinate.Click += new System.EventHandler(this.btnOpenByCoordinate_Click);
-      // 
-      // btnLookAtCoordinate
-      // 
-      this.btnLookAtCoordinate.Location = new System.Drawing.Point(7, 78);
-      this.btnLookAtCoordinate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnLookAtCoordinate.Name = "btnLookAtCoordinate";
-      this.btnLookAtCoordinate.Size = new System.Drawing.Size(147, 46);
-      this.btnLookAtCoordinate.TabIndex = 29;
-      this.btnLookAtCoordinate.Text = "Look at coordinate";
-      this.btnLookAtCoordinate.UseVisualStyleBackColor = true;
-      this.btnLookAtCoordinate.Click += new System.EventHandler(this.btnLookAtCoordinate_Click);
-      // 
-      // grAPIInfo
-      // 
-      this.grAPIInfo.Controls.Add(this.lblResult);
-      this.grAPIInfo.Controls.Add(this.txtAPIResult);
-      this.grAPIInfo.Controls.Add(this.btnApiReadyState);
-      this.grAPIInfo.Controls.Add(this.btnApplicationVersion);
-      this.grAPIInfo.Controls.Add(this.btnApplicationName);
-      this.grAPIInfo.Location = new System.Drawing.Point(480, 120);
-      this.grAPIInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grAPIInfo.Name = "grAPIInfo";
-      this.grAPIInfo.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grAPIInfo.Size = new System.Drawing.Size(160, 292);
-      this.grAPIInfo.TabIndex = 0;
-      this.grAPIInfo.TabStop = false;
-      this.grAPIInfo.Text = "API Info";
-      // 
-      // lblResult
-      // 
-      this.lblResult.AutoSize = true;
-      this.lblResult.Location = new System.Drawing.Point(7, 185);
-      this.lblResult.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblResult.Name = "lblResult";
-      this.lblResult.Size = new System.Drawing.Size(52, 20);
-      this.lblResult.TabIndex = 22;
-      this.lblResult.Text = "Result:";
-      // 
-      // txtAPIResult
-      // 
-      this.txtAPIResult.Location = new System.Drawing.Point(7, 238);
-      this.txtAPIResult.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtAPIResult.Name = "txtAPIResult";
-      this.txtAPIResult.Size = new System.Drawing.Size(145, 27);
-      this.txtAPIResult.TabIndex = 23;
-      // 
-      // btnApiReadyState
-      // 
-      this.btnApiReadyState.Location = new System.Drawing.Point(7, 22);
-      this.btnApiReadyState.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnApiReadyState.Name = "btnApiReadyState";
-      this.btnApiReadyState.Size = new System.Drawing.Size(147, 46);
-      this.btnApiReadyState.TabIndex = 8;
-      this.btnApiReadyState.Text = "API Ready State";
-      this.btnApiReadyState.UseVisualStyleBackColor = true;
-      this.btnApiReadyState.Click += new System.EventHandler(this.btnApiReadyState_Click);
-      // 
-      // btnApplicationVersion
-      // 
-      this.btnApplicationVersion.Location = new System.Drawing.Point(7, 78);
-      this.btnApplicationVersion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnApplicationVersion.Name = "btnApplicationVersion";
-      this.btnApplicationVersion.Size = new System.Drawing.Size(147, 46);
-      this.btnApplicationVersion.TabIndex = 9;
-      this.btnApplicationVersion.Text = "Application version";
-      this.btnApplicationVersion.UseVisualStyleBackColor = true;
-      this.btnApplicationVersion.Click += new System.EventHandler(this.btnApplicationVersion_Click);
-      // 
-      // btnApplicationName
-      // 
-      this.btnApplicationName.Location = new System.Drawing.Point(7, 131);
-      this.btnApplicationName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnApplicationName.Name = "btnApplicationName";
-      this.btnApplicationName.Size = new System.Drawing.Size(147, 46);
-      this.btnApplicationName.TabIndex = 10;
-      this.btnApplicationName.Text = "Application name";
-      this.btnApplicationName.UseVisualStyleBackColor = true;
-      this.btnApplicationName.Click += new System.EventHandler(this.btnApplicationName_Click);
-      // 
-      // grViewerToggles
-      // 
-      this.grViewerToggles.Controls.Add(this.btnGetType);
-      this.grViewerToggles.Controls.Add(this.btnToggleSidebarExpandable);
-      this.grViewerToggles.Controls.Add(this.btnToggleSidebar);
-      this.grViewerToggles.Controls.Add(this.btnToggle3DCursor);
-      this.grViewerToggles.Controls.Add(this.btnToggleRecordingsVisible);
-      this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelExpanded);
-      this.grViewerToggles.Controls.Add(this.btnToggleNavbarExpanded);
-      this.grViewerToggles.Controls.Add(this.btnToggleTimeTravelVisible);
-      this.grViewerToggles.Controls.Add(this.btnToggleNavbarVisible);
-      this.grViewerToggles.Location = new System.Drawing.Point(240, 120);
-      this.grViewerToggles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grViewerToggles.Name = "grViewerToggles";
-      this.grViewerToggles.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grViewerToggles.Size = new System.Drawing.Size(240, 365);
-      this.grViewerToggles.TabIndex = 0;
-      this.grViewerToggles.TabStop = false;
-      this.grViewerToggles.Text = "Viewer toggles";
-      // 
-      // btnGetType
-      // 
-      this.btnGetType.Location = new System.Drawing.Point(7, 331);
-      this.btnGetType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnGetType.Name = "btnGetType";
-      this.btnGetType.Size = new System.Drawing.Size(205, 34);
-      this.btnGetType.TabIndex = 44;
-      this.btnGetType.Text = "Get viewer type";
-      this.btnGetType.UseVisualStyleBackColor = true;
-      this.btnGetType.Click += new System.EventHandler(this.btnGetType_Click);
-      // 
-      // btnToggleSidebarExpandable
-      // 
-      this.btnToggleSidebarExpandable.Location = new System.Drawing.Point(7, 294);
-      this.btnToggleSidebarExpandable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleSidebarExpandable.Name = "btnToggleSidebarExpandable";
-      this.btnToggleSidebarExpandable.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleSidebarExpandable.TabIndex = 43;
-      this.btnToggleSidebarExpandable.Text = "Toggle Sidebar expandable";
-      this.btnToggleSidebarExpandable.UseVisualStyleBackColor = true;
-      this.btnToggleSidebarExpandable.Click += new System.EventHandler(this.btnToggleSidebarExpandable_Click);
-      // 
-      // btnToggleSidebar
-      // 
-      this.btnToggleSidebar.Location = new System.Drawing.Point(7, 254);
-      this.btnToggleSidebar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleSidebar.Name = "btnToggleSidebar";
-      this.btnToggleSidebar.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleSidebar.TabIndex = 42;
-      this.btnToggleSidebar.Text = "Toggle Sidebar expanded";
-      this.btnToggleSidebar.UseVisualStyleBackColor = true;
-      this.btnToggleSidebar.Click += new System.EventHandler(this.btnToggleSidebar_Click);
-      // 
-      // btnToggle3DCursor
-      // 
-      this.btnToggle3DCursor.Location = new System.Drawing.Point(7, 215);
-      this.btnToggle3DCursor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggle3DCursor.Name = "btnToggle3DCursor";
-      this.btnToggle3DCursor.Size = new System.Drawing.Size(205, 34);
-      this.btnToggle3DCursor.TabIndex = 41;
-      this.btnToggle3DCursor.Text = "Toggle 3D Cursor";
-      this.btnToggle3DCursor.UseVisualStyleBackColor = true;
-      this.btnToggle3DCursor.Click += new System.EventHandler(this.btnToggle3DCursor_Click);
-      // 
-      // btnToggleRecordingsVisible
-      // 
-      this.btnToggleRecordingsVisible.Location = new System.Drawing.Point(7, 22);
-      this.btnToggleRecordingsVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
-      this.btnToggleRecordingsVisible.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleRecordingsVisible.TabIndex = 36;
-      this.btnToggleRecordingsVisible.Text = "Toggle recordings visible";
-      this.btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
-      this.btnToggleRecordingsVisible.Click += new System.EventHandler(this.btnToggleRecordingsVisible_Click);
-      // 
-      // btnToggleTimeTravelExpanded
-      // 
-      this.btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(7, 62);
-      this.btnToggleTimeTravelExpanded.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
-      this.btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleTimeTravelExpanded.TabIndex = 40;
-      this.btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
-      this.btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
-      this.btnToggleTimeTravelExpanded.Click += new System.EventHandler(this.btnToggleTimeTravelExpanded_Click);
-      // 
-      // btnToggleNavbarExpanded
-      // 
-      this.btnToggleNavbarExpanded.Location = new System.Drawing.Point(7, 100);
-      this.btnToggleNavbarExpanded.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
-      this.btnToggleNavbarExpanded.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleNavbarExpanded.TabIndex = 38;
-      this.btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
-      this.btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
-      this.btnToggleNavbarExpanded.Click += new System.EventHandler(this.btnToggleNavbarExpanded_Click);
-      // 
-      // btnToggleTimeTravelVisible
-      // 
-      this.btnToggleTimeTravelVisible.Location = new System.Drawing.Point(7, 138);
-      this.btnToggleTimeTravelVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
-      this.btnToggleTimeTravelVisible.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleTimeTravelVisible.TabIndex = 39;
-      this.btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
-      this.btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
-      this.btnToggleTimeTravelVisible.Click += new System.EventHandler(this.btnToggleTimeTravelVisible_Click);
-      // 
-      // btnToggleNavbarVisible
-      // 
-      this.btnToggleNavbarVisible.Location = new System.Drawing.Point(7, 178);
-      this.btnToggleNavbarVisible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
-      this.btnToggleNavbarVisible.Size = new System.Drawing.Size(205, 34);
-      this.btnToggleNavbarVisible.TabIndex = 37;
-      this.btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
-      this.btnToggleNavbarVisible.UseVisualStyleBackColor = true;
-      this.btnToggleNavbarVisible.Click += new System.EventHandler(this.btnToggleNavbarVisible_Click);
-      // 
-      // grOpenByAddress
-      // 
-      this.grOpenByAddress.Controls.Add(this.lblAddress);
-      this.grOpenByAddress.Controls.Add(this.txtAdress);
-      this.grOpenByAddress.Controls.Add(this.btnOpenByAddress);
-      this.grOpenByAddress.Location = new System.Drawing.Point(240, 0);
-      this.grOpenByAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByAddress.Name = "grOpenByAddress";
-      this.grOpenByAddress.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grOpenByAddress.Size = new System.Drawing.Size(400, 115);
-      this.grOpenByAddress.TabIndex = 0;
-      this.grOpenByAddress.TabStop = false;
-      this.grOpenByAddress.Text = "Open by address";
-      // 
-      // lblAddress
-      // 
-      this.lblAddress.AutoSize = true;
-      this.lblAddress.Location = new System.Drawing.Point(7, 22);
-      this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblAddress.Name = "lblAddress";
-      this.lblAddress.Size = new System.Drawing.Size(62, 20);
-      this.lblAddress.TabIndex = 12;
-      this.lblAddress.Text = "Address";
-      // 
-      // txtAdress
-      // 
-      this.txtAdress.Location = new System.Drawing.Point(87, 22);
-      this.txtAdress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtAdress.Name = "txtAdress";
-      this.txtAdress.Size = new System.Drawing.Size(305, 27);
-      this.txtAdress.TabIndex = 14;
-      this.txtAdress.Text = "Lange Haven 145, Schiedam";
-      // 
-      // btnOpenByAddress
-      // 
-      this.btnOpenByAddress.Location = new System.Drawing.Point(7, 62);
-      this.btnOpenByAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnOpenByAddress.Name = "btnOpenByAddress";
-      this.btnOpenByAddress.Size = new System.Drawing.Size(387, 46);
-      this.btnOpenByAddress.TabIndex = 16;
-      this.btnOpenByAddress.Text = "Open by address";
-      this.btnOpenByAddress.UseVisualStyleBackColor = true;
-      this.btnOpenByAddress.Click += new System.EventHandler(this.btnOpenByAddress_Click);
-      // 
-      // grLogin
-      // 
-      this.grLogin.Controls.Add(this.lblClientId);
-      this.grLogin.Controls.Add(this.txtClientId);
-      this.grLogin.Controls.Add(this.lblSRS);
-      this.grLogin.Controls.Add(this.txtSrs);
-      this.grLogin.Controls.Add(this.btnSave);
-      this.grLogin.Controls.Add(this.btnLogout);
-      this.grLogin.Controls.Add(this.lblAPIKey);
-      this.grLogin.Controls.Add(this.txtAPIKey);
-      this.grLogin.Controls.Add(this.lblUsername);
-      this.grLogin.Controls.Add(this.lblPassword);
-      this.grLogin.Controls.Add(this.txtUsername);
-      this.grLogin.Controls.Add(this.txtPassword);
-      this.grLogin.Controls.Add(this.btnLogin);
-      this.grLogin.Location = new System.Drawing.Point(0, 0);
-      this.grLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grLogin.Name = "grLogin";
-      this.grLogin.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.grLogin.Size = new System.Drawing.Size(240, 234);
-      this.grLogin.TabIndex = 49;
-      this.grLogin.TabStop = false;
-      this.grLogin.Text = "Login";
-      // 
-      // lblClientId
-      // 
-      this.lblClientId.AutoSize = true;
-      this.lblClientId.Location = new System.Drawing.Point(7, 105);
-      this.lblClientId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblClientId.Name = "lblClientId";
-      this.lblClientId.Size = new System.Drawing.Size(60, 20);
-      this.lblClientId.TabIndex = 50;
-      this.lblClientId.Text = "ClientId";
-      // 
-      // txtClientId
-      // 
-      this.txtClientId.Location = new System.Drawing.Point(87, 105);
-      this.txtClientId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtClientId.Name = "txtClientId";
-      this.txtClientId.Size = new System.Drawing.Size(145, 27);
-      this.txtClientId.TabIndex = 49;
-      this.txtClientId.TextChanged += new System.EventHandler(this.txtClientId_TextChanged);
-      // 
-      // lblSRS
-      // 
-      this.lblSRS.AutoSize = true;
-      this.lblSRS.Location = new System.Drawing.Point(7, 135);
-      this.lblSRS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblSRS.Name = "lblSRS";
-      this.lblSRS.Size = new System.Drawing.Size(34, 20);
-      this.lblSRS.TabIndex = 47;
-      this.lblSRS.Text = "SRS";
-      // 
-      // txtSrs
-      // 
-      this.txtSrs.Location = new System.Drawing.Point(87, 135);
-      this.txtSrs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtSrs.Name = "txtSrs";
-      this.txtSrs.Size = new System.Drawing.Size(145, 27);
-      this.txtSrs.TabIndex = 48;
-      this.txtSrs.Text = "EPSG:28992";
-      // 
-      // btnSave
-      // 
-      this.btnSave.Location = new System.Drawing.Point(167, 175);
-      this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnSave.Name = "btnSave";
-      this.btnSave.Size = new System.Drawing.Size(67, 46);
-      this.btnSave.TabIndex = 9;
-      this.btnSave.Text = "Save";
-      this.btnSave.UseVisualStyleBackColor = true;
-      this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-      // 
-      // btnLogout
-      // 
-      this.btnLogout.Location = new System.Drawing.Point(87, 175);
-      this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnLogout.Name = "btnLogout";
-      this.btnLogout.Size = new System.Drawing.Size(67, 46);
-      this.btnLogout.TabIndex = 8;
-      this.btnLogout.Text = "Logout";
-      this.btnLogout.UseVisualStyleBackColor = true;
-      this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-      // 
-      // lblAPIKey
-      // 
-      this.lblAPIKey.AutoSize = true;
-      this.lblAPIKey.Location = new System.Drawing.Point(7, 75);
-      this.lblAPIKey.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblAPIKey.Name = "lblAPIKey";
-      this.lblAPIKey.Size = new System.Drawing.Size(59, 20);
-      this.lblAPIKey.TabIndex = 6;
-      this.lblAPIKey.Text = "API Key";
-      // 
-      // txtAPIKey
-      // 
-      this.txtAPIKey.Location = new System.Drawing.Point(87, 75);
-      this.txtAPIKey.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtAPIKey.Name = "txtAPIKey";
-      this.txtAPIKey.Size = new System.Drawing.Size(145, 27);
-      this.txtAPIKey.TabIndex = 7;
-      this.txtAPIKey.TextChanged += new System.EventHandler(this.txtAPIKey_TextChanged);
-      // 
-      // lblUsername
-      // 
-      this.lblUsername.AutoSize = true;
-      this.lblUsername.Location = new System.Drawing.Point(7, 15);
-      this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblUsername.Name = "lblUsername";
-      this.lblUsername.Size = new System.Drawing.Size(75, 20);
-      this.lblUsername.TabIndex = 1;
-      this.lblUsername.Text = "Username";
-      // 
-      // lblPassword
-      // 
-      this.lblPassword.AutoSize = true;
-      this.lblPassword.Location = new System.Drawing.Point(7, 45);
-      this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-      this.lblPassword.Name = "lblPassword";
-      this.lblPassword.Size = new System.Drawing.Size(70, 20);
-      this.lblPassword.TabIndex = 2;
-      this.lblPassword.Text = "Password";
-      // 
-      // txtUsername
-      // 
-      this.txtUsername.Location = new System.Drawing.Point(87, 15);
-      this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtUsername.Name = "txtUsername";
-      this.txtUsername.Size = new System.Drawing.Size(145, 27);
-      this.txtUsername.TabIndex = 3;
-      this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
-      // 
-      // txtPassword
-      // 
-      this.txtPassword.Location = new System.Drawing.Point(87, 45);
-      this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.txtPassword.Name = "txtPassword";
-      this.txtPassword.PasswordChar = '*';
-      this.txtPassword.Size = new System.Drawing.Size(145, 27);
-      this.txtPassword.TabIndex = 4;
-      this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
-      // 
-      // btnLogin
-      // 
-      this.btnLogin.Location = new System.Drawing.Point(7, 175);
-      this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.btnLogin.Name = "btnLogin";
-      this.btnLogin.Size = new System.Drawing.Size(67, 46);
-      this.btnLogin.TabIndex = 5;
-      this.btnLogin.Text = "Login";
-      this.btnLogin.UseVisualStyleBackColor = true;
-      this.btnLogin.EnabledChanged += new System.EventHandler(this.btnLogin_EnabledChanged);
-      this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-      // 
-      // Demo
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1924, 1055);
-      this.Controls.Add(this.plControl);
-      this.Controls.Add(this.plStreetSmart);
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-      this.Name = "Demo";
-      this.Text = "Demo StreetSmart";
-      this.grOpenByQuery.ResumeLayout(false);
-      this.grOpenByQuery.PerformLayout();
-      this.plControl.ResumeLayout(false);
-      this.grShortCuts.ResumeLayout(false);
-      this.grShortCuts.PerformLayout();
-      this.grCloseViewers.ResumeLayout(false);
-      this.grPanoramaList.ResumeLayout(false);
-      this.grColorOverlay.ResumeLayout(false);
-      this.grColorOverlay.PerformLayout();
-      this.grSelectFeature.ResumeLayout(false);
-      this.grSelectFeature.PerformLayout();
-      this.grSld.ResumeLayout(false);
-      this.grSld.PerformLayout();
-      this.grButtonVisibility.ResumeLayout(false);
-      this.grOverlay.ResumeLayout(false);
-      this.grOverlay.PerformLayout();
-      this.grMeasurement.ResumeLayout(false);
-      this.grMeasurementMethod.ResumeLayout(false);
-      this.grMeasurementMethod.PerformLayout();
-      this.grMeasurementType.ResumeLayout(false);
-      this.grMeasurementType.PerformLayout();
-      this.grDevTools.ResumeLayout(false);
-      this.grRotationsZoomInOut.ResumeLayout(false);
-      this.grRotationsZoomInOut.PerformLayout();
-      this.grEvents.ResumeLayout(false);
-      this.grRecordingViewerColorPermissions.ResumeLayout(false);
-      this.grRecordingViewerColorPermissions.PerformLayout();
-      this.grOrientation.ResumeLayout(false);
-      this.grOrientation.PerformLayout();
-      this.grOpenByImageId.ResumeLayout(false);
-      this.grOpenByImageId.PerformLayout();
-      this.grCoordinate.ResumeLayout(false);
-      this.grCoordinate.PerformLayout();
-      this.grAPIInfo.ResumeLayout(false);
-      this.grAPIInfo.PerformLayout();
-      this.grViewerToggles.ResumeLayout(false);
-      this.grOpenByAddress.ResumeLayout(false);
-      this.grOpenByAddress.PerformLayout();
-      this.grLogin.ResumeLayout(false);
-      this.grLogin.PerformLayout();
-      this.ResumeLayout(false);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Demo));
+            plStreetSmart = new System.Windows.Forms.Panel();
+            grOpenByQuery = new System.Windows.Forms.GroupBox();
+            cbPointCloud = new System.Windows.Forms.CheckBox();
+            ckReplace = new System.Windows.Forms.CheckBox();
+            txtOpenByQuery = new System.Windows.Forms.TextBox();
+            cbPanorama = new System.Windows.Forms.CheckBox();
+            cbOblique = new System.Windows.Forms.CheckBox();
+            btnOpenViewerByQuery = new System.Windows.Forms.Button();
+            plControl = new System.Windows.Forms.Panel();
+            grShortCuts = new System.Windows.Forms.GroupBox();
+            txtShortcutResult = new System.Windows.Forms.TextBox();
+            cbShortCuts = new System.Windows.Forms.ComboBox();
+            btnDisableShortCut = new System.Windows.Forms.Button();
+            btnEnableShortCut = new System.Windows.Forms.Button();
+            grCloseViewers = new System.Windows.Forms.GroupBox();
+            btnUp = new System.Windows.Forms.Button();
+            btnRight = new System.Windows.Forms.Button();
+            btnLeft = new System.Windows.Forms.Button();
+            btnDown = new System.Windows.Forms.Button();
+            btnPointCloudLookAt = new System.Windows.Forms.Button();
+            btnSetPointStyle = new System.Windows.Forms.Button();
+            cbPointStyle = new System.Windows.Forms.ComboBox();
+            btnGetPointStyle = new System.Windows.Forms.Button();
+            btnCloseObliqueViewer = new System.Windows.Forms.Button();
+            btnClosePointViewer = new System.Windows.Forms.Button();
+            grPanoramaList = new System.Windows.Forms.GroupBox();
+            lbPanoramaList = new System.Windows.Forms.ListBox();
+            grColorOverlay = new System.Windows.Forms.GroupBox();
+            btnDemoWFSLayer = new System.Windows.Forms.Button();
+            txtOverlayColor = new System.Windows.Forms.TextBox();
+            btnToggleAddressOverlays = new System.Windows.Forms.Button();
+            btnColorOverlay = new System.Windows.Forms.Button();
+            rbColor = new System.Windows.Forms.RadioButton();
+            rbSLD = new System.Windows.Forms.RadioButton();
+            grSelectFeature = new System.Windows.Forms.GroupBox();
+            ckShowAttributePanelOnFeatureClick = new System.Windows.Forms.CheckBox();
+            txtValue = new System.Windows.Forms.TextBox();
+            lblValue = new System.Windows.Forms.Label();
+            txtName = new System.Windows.Forms.TextBox();
+            lblPropertyName = new System.Windows.Forms.Label();
+            btnSelectFeature = new System.Windows.Forms.Button();
+            grSld = new System.Windows.Forms.GroupBox();
+            txtSld = new System.Windows.Forms.TextBox();
+            grButtonVisibility = new System.Windows.Forms.GroupBox();
+            cbViewerButton = new System.Windows.Forms.ComboBox();
+            btnSetButtonVisibility = new System.Windows.Forms.Button();
+            btnGetButtonEnabled = new System.Windows.Forms.Button();
+            grOverlay = new System.Windows.Forms.GroupBox();
+            btnDrawDistance = new System.Windows.Forms.Button();
+            txtDrawDistance = new System.Windows.Forms.TextBox();
+            btnRemoveOverlay = new System.Windows.Forms.Button();
+            txtOverlayGeoJson = new System.Windows.Forms.TextBox();
+            btnAddOverlay = new System.Windows.Forms.Button();
+            grMeasurement = new System.Windows.Forms.GroupBox();
+            cbUnit = new System.Windows.Forms.ComboBox();
+            btnGetUnitPreference = new System.Windows.Forms.Button();
+            btnSetUnitPreference = new System.Windows.Forms.Button();
+            grMeasurementMethod = new System.Windows.Forms.GroupBox();
+            rbMethodDefault = new System.Windows.Forms.RadioButton();
+            rbMethodDepthMap = new System.Windows.Forms.RadioButton();
+            rbMethodForwardIntersection = new System.Windows.Forms.RadioButton();
+            rbMethodSmartClick = new System.Windows.Forms.RadioButton();
+            grMeasurementType = new System.Windows.Forms.GroupBox();
+            rbMeasDefault = new System.Windows.Forms.RadioButton();
+            rbMeasPoint = new System.Windows.Forms.RadioButton();
+            rbMeasPolygon = new System.Windows.Forms.RadioButton();
+            rbMeasLineString = new System.Windows.Forms.RadioButton();
+            btnGetActiveMeasurement = new System.Windows.Forms.Button();
+            btnStartMeasurementMode = new System.Windows.Forms.Button();
+            btnStopMeasurementMode = new System.Windows.Forms.Button();
+            grDevTools = new System.Windows.Forms.GroupBox();
+            btnCloseDefTools = new System.Windows.Forms.Button();
+            btnShowDefTools = new System.Windows.Forms.Button();
+            grRotationsZoomInOut = new System.Windows.Forms.GroupBox();
+            btnGetViewers = new System.Windows.Forms.Button();
+            btnClosePanoramaViewer = new System.Windows.Forms.Button();
+            lblDeltaYawPitch = new System.Windows.Forms.Label();
+            txtDeltaYawPitch = new System.Windows.Forms.TextBox();
+            btnRotateDown = new System.Windows.Forms.Button();
+            btnRotateUp = new System.Windows.Forms.Button();
+            btnRotateRight = new System.Windows.Forms.Button();
+            btnZoomOut = new System.Windows.Forms.Button();
+            btRotateLeft = new System.Windows.Forms.Button();
+            btnZoomIn = new System.Windows.Forms.Button();
+            grEvents = new System.Windows.Forms.GroupBox();
+            lbViewerEvents = new System.Windows.Forms.ListBox();
+            grRecordingViewerColorPermissions = new System.Windows.Forms.GroupBox();
+            txtRecordingViewerColorPermissions = new System.Windows.Forms.TextBox();
+            btnGetPermissions = new System.Windows.Forms.Button();
+            btnGetRecording = new System.Windows.Forms.Button();
+            btnGetViewerColor = new System.Windows.Forms.Button();
+            grOrientation = new System.Windows.Forms.GroupBox();
+            btnGetDebugLogs = new System.Windows.Forms.Button();
+            txtYaw = new System.Windows.Forms.TextBox();
+            lblYaw = new System.Windows.Forms.Label();
+            lblPitch = new System.Windows.Forms.Label();
+            txtPitch = new System.Windows.Forms.TextBox();
+            lblhFov = new System.Windows.Forms.Label();
+            txthFov = new System.Windows.Forms.TextBox();
+            btnGetOrientation = new System.Windows.Forms.Button();
+            btnSetOrientation = new System.Windows.Forms.Button();
+            grOpenByImageId = new System.Windows.Forms.GroupBox();
+            txtBrightnessContrast = new System.Windows.Forms.TextBox();
+            btnContrast = new System.Windows.Forms.Button();
+            btnBrightness = new System.Windows.Forms.Button();
+            btnGetAddress = new System.Windows.Forms.Button();
+            btnOpenByImageId = new System.Windows.Forms.Button();
+            txtImageId = new System.Windows.Forms.TextBox();
+            grCoordinate = new System.Windows.Forms.GroupBox();
+            btnSetPointSize = new System.Windows.Forms.Button();
+            txtPointSize = new System.Windows.Forms.TextBox();
+            btnGetPointSize = new System.Windows.Forms.Button();
+            btnSetPointBudget = new System.Windows.Forms.Button();
+            cbPointBudget = new System.Windows.Forms.ComboBox();
+            btnGetPointBudget = new System.Windows.Forms.Button();
+            btnEdges = new System.Windows.Forms.Button();
+            btnCameraPosition = new System.Windows.Forms.Button();
+            txtlkAtX = new System.Windows.Forms.TextBox();
+            txtlkAtY = new System.Windows.Forms.TextBox();
+            txtlkAtZ = new System.Windows.Forms.TextBox();
+            btnFlyTo = new System.Windows.Forms.Button();
+            txtX = new System.Windows.Forms.TextBox();
+            txtY = new System.Windows.Forms.TextBox();
+            txtZ = new System.Windows.Forms.TextBox();
+            lblX = new System.Windows.Forms.Label();
+            lblY = new System.Windows.Forms.Label();
+            lblZ = new System.Windows.Forms.Label();
+            btnOpenByCoordinate = new System.Windows.Forms.Button();
+            btnLookAtCoordinate = new System.Windows.Forms.Button();
+            grAPIInfo = new System.Windows.Forms.GroupBox();
+            lblResult = new System.Windows.Forms.Label();
+            txtAPIResult = new System.Windows.Forms.TextBox();
+            btnApiReadyState = new System.Windows.Forms.Button();
+            btnApplicationVersion = new System.Windows.Forms.Button();
+            btnApplicationName = new System.Windows.Forms.Button();
+            grViewerToggles = new System.Windows.Forms.GroupBox();
+            btnGetType = new System.Windows.Forms.Button();
+            btnToggleSidebarExpandable = new System.Windows.Forms.Button();
+            btnToggleSidebar = new System.Windows.Forms.Button();
+            btnToggle3DCursor = new System.Windows.Forms.Button();
+            btnToggleRecordingsVisible = new System.Windows.Forms.Button();
+            btnToggleTimeTravelExpanded = new System.Windows.Forms.Button();
+            btnToggleNavbarExpanded = new System.Windows.Forms.Button();
+            btnToggleTimeTravelVisible = new System.Windows.Forms.Button();
+            btnToggleNavbarVisible = new System.Windows.Forms.Button();
+            grOpenByAddress = new System.Windows.Forms.GroupBox();
+            lblAddress = new System.Windows.Forms.Label();
+            txtAdress = new System.Windows.Forms.TextBox();
+            btnOpenByAddress = new System.Windows.Forms.Button();
+            grLogin = new System.Windows.Forms.GroupBox();
+            lblClientId = new System.Windows.Forms.Label();
+            txtClientId = new System.Windows.Forms.TextBox();
+            lblSRS = new System.Windows.Forms.Label();
+            txtSrs = new System.Windows.Forms.TextBox();
+            btnSave = new System.Windows.Forms.Button();
+            btnLogout = new System.Windows.Forms.Button();
+            lblAPIKey = new System.Windows.Forms.Label();
+            txtAPIKey = new System.Windows.Forms.TextBox();
+            lblUsername = new System.Windows.Forms.Label();
+            lblPassword = new System.Windows.Forms.Label();
+            txtUsername = new System.Windows.Forms.TextBox();
+            txtPassword = new System.Windows.Forms.TextBox();
+            btnLogin = new System.Windows.Forms.Button();
+            colorOverlay = new System.Windows.Forms.ColorDialog();
+            grOpenByQuery.SuspendLayout();
+            plControl.SuspendLayout();
+            grShortCuts.SuspendLayout();
+            grCloseViewers.SuspendLayout();
+            grPanoramaList.SuspendLayout();
+            grColorOverlay.SuspendLayout();
+            grSelectFeature.SuspendLayout();
+            grSld.SuspendLayout();
+            grButtonVisibility.SuspendLayout();
+            grOverlay.SuspendLayout();
+            grMeasurement.SuspendLayout();
+            grMeasurementMethod.SuspendLayout();
+            grMeasurementType.SuspendLayout();
+            grDevTools.SuspendLayout();
+            grRotationsZoomInOut.SuspendLayout();
+            grEvents.SuspendLayout();
+            grRecordingViewerColorPermissions.SuspendLayout();
+            grOrientation.SuspendLayout();
+            grOpenByImageId.SuspendLayout();
+            grCoordinate.SuspendLayout();
+            grAPIInfo.SuspendLayout();
+            grViewerToggles.SuspendLayout();
+            grOpenByAddress.SuspendLayout();
+            grLogin.SuspendLayout();
+            SuspendLayout();
+            // 
+            // plStreetSmart
+            // 
+            plStreetSmart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            plStreetSmart.BackColor = System.Drawing.Color.Transparent;
+            plStreetSmart.Location = new System.Drawing.Point(0, 0);
+            plStreetSmart.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            plStreetSmart.Name = "plStreetSmart";
+            plStreetSmart.Size = new System.Drawing.Size(1219, 1295);
+            plStreetSmart.TabIndex = 0;
+            // 
+            // grOpenByQuery
+            // 
+            grOpenByQuery.Controls.Add(cbPointCloud);
+            grOpenByQuery.Controls.Add(ckReplace);
+            grOpenByQuery.Controls.Add(txtOpenByQuery);
+            grOpenByQuery.Controls.Add(cbPanorama);
+            grOpenByQuery.Controls.Add(cbOblique);
+            grOpenByQuery.Controls.Add(btnOpenViewerByQuery);
+            grOpenByQuery.Location = new System.Drawing.Point(1200, 4);
+            grOpenByQuery.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByQuery.Name = "grOpenByQuery";
+            grOpenByQuery.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByQuery.Size = new System.Drawing.Size(549, 342);
+            grOpenByQuery.TabIndex = 0;
+            grOpenByQuery.TabStop = false;
+            grOpenByQuery.Text = "Open / Close Viewer";
+            // 
+            // cbPointCloud
+            // 
+            cbPointCloud.AutoSize = true;
+            cbPointCloud.Location = new System.Drawing.Point(366, 276);
+            cbPointCloud.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbPointCloud.Name = "cbPointCloud";
+            cbPointCloud.Size = new System.Drawing.Size(188, 41);
+            cbPointCloud.TabIndex = 69;
+            cbPointCloud.Text = "Point Cloud";
+            cbPointCloud.UseVisualStyleBackColor = true;
+            // 
+            // ckReplace
+            // 
+            ckReplace.AutoSize = true;
+            ckReplace.Checked = true;
+            ckReplace.CheckState = System.Windows.Forms.CheckState.Checked;
+            ckReplace.Location = new System.Drawing.Point(313, 41);
+            ckReplace.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            ckReplace.Name = "ckReplace";
+            ckReplace.Size = new System.Drawing.Size(141, 41);
+            ckReplace.TabIndex = 68;
+            ckReplace.Text = "Replace";
+            ckReplace.UseVisualStyleBackColor = true;
+            // 
+            // txtOpenByQuery
+            // 
+            txtOpenByQuery.Location = new System.Drawing.Point(38, 144);
+            txtOpenByQuery.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtOpenByQuery.Multiline = true;
+            txtOpenByQuery.Name = "txtOpenByQuery";
+            txtOpenByQuery.Size = new System.Drawing.Size(493, 106);
+            txtOpenByQuery.TabIndex = 67;
+            txtOpenByQuery.Text = "Lange Haven 145, Schiedam";
+            // 
+            // cbPanorama
+            // 
+            cbPanorama.AutoSize = true;
+            cbPanorama.Checked = true;
+            cbPanorama.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbPanorama.Location = new System.Drawing.Point(182, 270);
+            cbPanorama.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbPanorama.Name = "cbPanorama";
+            cbPanorama.Size = new System.Drawing.Size(168, 41);
+            cbPanorama.TabIndex = 66;
+            cbPanorama.Text = "Panorama";
+            cbPanorama.UseVisualStyleBackColor = true;
+            // 
+            // cbOblique
+            // 
+            cbOblique.AutoSize = true;
+            cbOblique.Location = new System.Drawing.Point(38, 270);
+            cbOblique.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbOblique.Name = "cbOblique";
+            cbOblique.Size = new System.Drawing.Size(144, 41);
+            cbOblique.TabIndex = 65;
+            cbOblique.Text = "Oblique";
+            cbOblique.UseVisualStyleBackColor = true;
+            // 
+            // btnOpenViewerByQuery
+            // 
+            btnOpenViewerByQuery.Location = new System.Drawing.Point(38, 41);
+            btnOpenViewerByQuery.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnOpenViewerByQuery.Name = "btnOpenViewerByQuery";
+            btnOpenViewerByQuery.Size = new System.Drawing.Size(249, 85);
+            btnOpenViewerByQuery.TabIndex = 64;
+            btnOpenViewerByQuery.Text = "Open by query";
+            btnOpenViewerByQuery.UseVisualStyleBackColor = true;
+            btnOpenViewerByQuery.Click += btnOpenViewerByQuery_Click;
+            // 
+            // plControl
+            // 
+            plControl.Controls.Add(grShortCuts);
+            plControl.Controls.Add(grCloseViewers);
+            plControl.Controls.Add(grPanoramaList);
+            plControl.Controls.Add(grColorOverlay);
+            plControl.Controls.Add(grSelectFeature);
+            plControl.Controls.Add(grSld);
+            plControl.Controls.Add(grButtonVisibility);
+            plControl.Controls.Add(grOverlay);
+            plControl.Controls.Add(grOpenByQuery);
+            plControl.Controls.Add(grMeasurement);
+            plControl.Controls.Add(grDevTools);
+            plControl.Controls.Add(grRotationsZoomInOut);
+            plControl.Controls.Add(grEvents);
+            plControl.Controls.Add(grRecordingViewerColorPermissions);
+            plControl.Controls.Add(grOrientation);
+            plControl.Controls.Add(grOpenByImageId);
+            plControl.Controls.Add(grCoordinate);
+            plControl.Controls.Add(grAPIInfo);
+            plControl.Controls.Add(grViewerToggles);
+            plControl.Controls.Add(grOpenByAddress);
+            plControl.Controls.Add(grLogin);
+            plControl.Dock = System.Windows.Forms.DockStyle.Right;
+            plControl.Location = new System.Drawing.Point(1352, 0);
+            plControl.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            plControl.Name = "plControl";
+            plControl.Size = new System.Drawing.Size(2256, 1952);
+            plControl.TabIndex = 1;
+            // 
+            // grShortCuts
+            // 
+            grShortCuts.Controls.Add(txtShortcutResult);
+            grShortCuts.Controls.Add(cbShortCuts);
+            grShortCuts.Controls.Add(btnDisableShortCut);
+            grShortCuts.Controls.Add(btnEnableShortCut);
+            grShortCuts.Location = new System.Drawing.Point(1828, 620);
+            grShortCuts.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grShortCuts.Name = "grShortCuts";
+            grShortCuts.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grShortCuts.Size = new System.Drawing.Size(399, 185);
+            grShortCuts.TabIndex = 75;
+            grShortCuts.TabStop = false;
+            grShortCuts.Text = "Short cuts";
+            // 
+            // txtShortcutResult
+            // 
+            txtShortcutResult.Location = new System.Drawing.Point(276, 115);
+            txtShortcutResult.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtShortcutResult.Name = "txtShortcutResult";
+            txtShortcutResult.Size = new System.Drawing.Size(94, 43);
+            txtShortcutResult.TabIndex = 68;
+            // 
+            // cbShortCuts
+            // 
+            cbShortCuts.FormattingEnabled = true;
+            cbShortCuts.Location = new System.Drawing.Point(13, 115);
+            cbShortCuts.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbShortCuts.Name = "cbShortCuts";
+            cbShortCuts.Size = new System.Drawing.Size(244, 45);
+            cbShortCuts.TabIndex = 67;
+            // 
+            // btnDisableShortCut
+            // 
+            btnDisableShortCut.Location = new System.Drawing.Point(163, 41);
+            btnDisableShortCut.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnDisableShortCut.Name = "btnDisableShortCut";
+            btnDisableShortCut.Size = new System.Drawing.Size(137, 57);
+            btnDisableShortCut.TabIndex = 66;
+            btnDisableShortCut.Text = "Disable";
+            btnDisableShortCut.UseVisualStyleBackColor = true;
+            btnDisableShortCut.Click += btnDisableShortCut_Click;
+            // 
+            // btnEnableShortCut
+            // 
+            btnEnableShortCut.Location = new System.Drawing.Point(13, 41);
+            btnEnableShortCut.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnEnableShortCut.Name = "btnEnableShortCut";
+            btnEnableShortCut.Size = new System.Drawing.Size(137, 57);
+            btnEnableShortCut.TabIndex = 65;
+            btnEnableShortCut.Text = "Enable";
+            btnEnableShortCut.UseVisualStyleBackColor = true;
+            btnEnableShortCut.Click += btnEnableShortCut_Click;
+            // 
+            // grCloseViewers
+            // 
+            grCloseViewers.Controls.Add(btnUp);
+            grCloseViewers.Controls.Add(btnRight);
+            grCloseViewers.Controls.Add(btnLeft);
+            grCloseViewers.Controls.Add(btnDown);
+            grCloseViewers.Controls.Add(btnPointCloudLookAt);
+            grCloseViewers.Controls.Add(btnSetPointStyle);
+            grCloseViewers.Controls.Add(cbPointStyle);
+            grCloseViewers.Controls.Add(btnGetPointStyle);
+            grCloseViewers.Controls.Add(btnCloseObliqueViewer);
+            grCloseViewers.Controls.Add(btnClosePointViewer);
+            grCloseViewers.Location = new System.Drawing.Point(1749, 4);
+            grCloseViewers.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grCloseViewers.Name = "grCloseViewers";
+            grCloseViewers.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grCloseViewers.Size = new System.Drawing.Size(501, 342);
+            grCloseViewers.TabIndex = 74;
+            grCloseViewers.TabStop = false;
+            grCloseViewers.Text = "Close viewers";
+            // 
+            // btnUp
+            // 
+            btnUp.Location = new System.Drawing.Point(339, 244);
+            btnUp.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnUp.Name = "btnUp";
+            btnUp.Size = new System.Drawing.Size(99, 70);
+            btnUp.TabIndex = 81;
+            btnUp.UseVisualStyleBackColor = true;
+            btnUp.Click += btnUp_Click;
+            // 
+            // btnRight
+            // 
+            btnRight.Location = new System.Drawing.Point(238, 244);
+            btnRight.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnRight.Name = "btnRight";
+            btnRight.Size = new System.Drawing.Size(99, 70);
+            btnRight.TabIndex = 80;
+            btnRight.UseVisualStyleBackColor = true;
+            btnRight.Click += btnRight_Click;
+            // 
+            // btnLeft
+            // 
+            btnLeft.Location = new System.Drawing.Point(126, 244);
+            btnLeft.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnLeft.Name = "btnLeft";
+            btnLeft.Size = new System.Drawing.Size(99, 70);
+            btnLeft.TabIndex = 79;
+            btnLeft.UseVisualStyleBackColor = true;
+            btnLeft.Click += btnLeft_Click;
+            // 
+            // btnDown
+            // 
+            btnDown.Location = new System.Drawing.Point(13, 248);
+            btnDown.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnDown.Name = "btnDown";
+            btnDown.Size = new System.Drawing.Size(99, 70);
+            btnDown.TabIndex = 78;
+            btnDown.UseVisualStyleBackColor = true;
+            btnDown.Click += btnDown_Click;
+            // 
+            // btnPointCloudLookAt
+            // 
+            btnPointCloudLookAt.Location = new System.Drawing.Point(339, 165);
+            btnPointCloudLookAt.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnPointCloudLookAt.Name = "btnPointCloudLookAt";
+            btnPointCloudLookAt.Size = new System.Drawing.Size(137, 70);
+            btnPointCloudLookAt.TabIndex = 77;
+            btnPointCloudLookAt.UseVisualStyleBackColor = true;
+            btnPointCloudLookAt.Click += btnPointCloudLookAt_Click;
+            // 
+            // btnSetPointStyle
+            // 
+            btnSetPointStyle.Location = new System.Drawing.Point(238, 165);
+            btnSetPointStyle.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetPointStyle.Name = "btnSetPointStyle";
+            btnSetPointStyle.Size = new System.Drawing.Size(99, 70);
+            btnSetPointStyle.TabIndex = 76;
+            btnSetPointStyle.Text = "Set";
+            btnSetPointStyle.UseVisualStyleBackColor = true;
+            btnSetPointStyle.Click += btnSetPointStyle_Click;
+            // 
+            // cbPointStyle
+            // 
+            cbPointStyle.FormattingEnabled = true;
+            cbPointStyle.Location = new System.Drawing.Point(126, 174);
+            cbPointStyle.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbPointStyle.Name = "cbPointStyle";
+            cbPointStyle.Size = new System.Drawing.Size(94, 45);
+            cbPointStyle.TabIndex = 75;
+            // 
+            // btnGetPointStyle
+            // 
+            btnGetPointStyle.Location = new System.Drawing.Point(13, 165);
+            btnGetPointStyle.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetPointStyle.Name = "btnGetPointStyle";
+            btnGetPointStyle.Size = new System.Drawing.Size(99, 70);
+            btnGetPointStyle.TabIndex = 74;
+            btnGetPointStyle.Text = "Get";
+            btnGetPointStyle.UseVisualStyleBackColor = true;
+            btnGetPointStyle.Click += btnGetPointStyle_Click;
+            // 
+            // btnCloseObliqueViewer
+            // 
+            btnCloseObliqueViewer.Location = new System.Drawing.Point(13, 41);
+            btnCloseObliqueViewer.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnCloseObliqueViewer.Name = "btnCloseObliqueViewer";
+            btnCloseObliqueViewer.Size = new System.Drawing.Size(201, 107);
+            btnCloseObliqueViewer.TabIndex = 72;
+            btnCloseObliqueViewer.Text = "Close obl. viewer";
+            btnCloseObliqueViewer.UseVisualStyleBackColor = true;
+            btnCloseObliqueViewer.Click += btnCloseObliqueViewer_Click;
+            // 
+            // btnClosePointViewer
+            // 
+            btnClosePointViewer.Location = new System.Drawing.Point(225, 41);
+            btnClosePointViewer.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnClosePointViewer.Name = "btnClosePointViewer";
+            btnClosePointViewer.Size = new System.Drawing.Size(201, 107);
+            btnClosePointViewer.TabIndex = 73;
+            btnClosePointViewer.Text = "Close point. viewer";
+            btnClosePointViewer.UseVisualStyleBackColor = true;
+            btnClosePointViewer.Click += btnClosePointViewer_Click;
+            // 
+            // grPanoramaList
+            // 
+            grPanoramaList.Controls.Add(lbPanoramaList);
+            grPanoramaList.Location = new System.Drawing.Point(1828, 805);
+            grPanoramaList.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grPanoramaList.Name = "grPanoramaList";
+            grPanoramaList.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grPanoramaList.Size = new System.Drawing.Size(399, 342);
+            grPanoramaList.TabIndex = 71;
+            grPanoramaList.TabStop = false;
+            grPanoramaList.Text = "Viewer list";
+            // 
+            // lbPanoramaList
+            // 
+            lbPanoramaList.FormattingEnabled = true;
+            lbPanoramaList.ItemHeight = 37;
+            lbPanoramaList.Location = new System.Drawing.Point(13, 41);
+            lbPanoramaList.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            lbPanoramaList.Name = "lbPanoramaList";
+            lbPanoramaList.Size = new System.Drawing.Size(370, 263);
+            lbPanoramaList.TabIndex = 70;
+            lbPanoramaList.SelectedIndexChanged += lbPanoramaList_SelectedIndexChanged;
+            // 
+            // grColorOverlay
+            // 
+            grColorOverlay.Controls.Add(btnDemoWFSLayer);
+            grColorOverlay.Controls.Add(txtOverlayColor);
+            grColorOverlay.Controls.Add(btnToggleAddressOverlays);
+            grColorOverlay.Controls.Add(btnColorOverlay);
+            grColorOverlay.Controls.Add(rbColor);
+            grColorOverlay.Controls.Add(rbSLD);
+            grColorOverlay.Location = new System.Drawing.Point(1828, 1147);
+            grColorOverlay.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grColorOverlay.Name = "grColorOverlay";
+            grColorOverlay.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grColorOverlay.Size = new System.Drawing.Size(399, 455);
+            grColorOverlay.TabIndex = 69;
+            grColorOverlay.TabStop = false;
+            grColorOverlay.Text = "Overlay";
+            // 
+            // btnDemoWFSLayer
+            // 
+            btnDemoWFSLayer.Location = new System.Drawing.Point(13, 329);
+            btnDemoWFSLayer.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnDemoWFSLayer.Name = "btnDemoWFSLayer";
+            btnDemoWFSLayer.Size = new System.Drawing.Size(351, 85);
+            btnDemoWFSLayer.TabIndex = 69;
+            btnDemoWFSLayer.Text = "Add demo WFS Layer";
+            btnDemoWFSLayer.UseVisualStyleBackColor = true;
+            btnDemoWFSLayer.Click += btnDemoWFSLayer_Click;
+            // 
+            // txtOverlayColor
+            // 
+            txtOverlayColor.Enabled = false;
+            txtOverlayColor.Location = new System.Drawing.Point(13, 115);
+            txtOverlayColor.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtOverlayColor.Name = "txtOverlayColor";
+            txtOverlayColor.Size = new System.Drawing.Size(343, 43);
+            txtOverlayColor.TabIndex = 68;
+            // 
+            // btnToggleAddressOverlays
+            // 
+            btnToggleAddressOverlays.Location = new System.Drawing.Point(13, 226);
+            btnToggleAddressOverlays.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleAddressOverlays.Name = "btnToggleAddressOverlays";
+            btnToggleAddressOverlays.Size = new System.Drawing.Size(351, 85);
+            btnToggleAddressOverlays.TabIndex = 57;
+            btnToggleAddressOverlays.Text = "Toggle Address overlays";
+            btnToggleAddressOverlays.UseVisualStyleBackColor = true;
+            btnToggleAddressOverlays.Click += btnToggleAddressOverlays_Click;
+            // 
+            // btnColorOverlay
+            // 
+            btnColorOverlay.Location = new System.Drawing.Point(13, 41);
+            btnColorOverlay.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnColorOverlay.Name = "btnColorOverlay";
+            btnColorOverlay.Size = new System.Drawing.Size(351, 65);
+            btnColorOverlay.TabIndex = 58;
+            btnColorOverlay.Text = "Color overlay";
+            btnColorOverlay.UseVisualStyleBackColor = true;
+            btnColorOverlay.Click += btnColorOverlay_Click;
+            // 
+            // rbColor
+            // 
+            rbColor.AutoSize = true;
+            rbColor.Location = new System.Drawing.Point(126, 170);
+            rbColor.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbColor.Name = "rbColor";
+            rbColor.Size = new System.Drawing.Size(113, 41);
+            rbColor.TabIndex = 59;
+            rbColor.Text = "Color";
+            rbColor.UseVisualStyleBackColor = true;
+            // 
+            // rbSLD
+            // 
+            rbSLD.AutoSize = true;
+            rbSLD.Checked = true;
+            rbSLD.Location = new System.Drawing.Point(13, 170);
+            rbSLD.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbSLD.Name = "rbSLD";
+            rbSLD.Size = new System.Drawing.Size(94, 41);
+            rbSLD.TabIndex = 58;
+            rbSLD.TabStop = true;
+            rbSLD.Text = "SLD";
+            rbSLD.UseVisualStyleBackColor = true;
+            // 
+            // grSelectFeature
+            // 
+            grSelectFeature.Controls.Add(ckShowAttributePanelOnFeatureClick);
+            grSelectFeature.Controls.Add(txtValue);
+            grSelectFeature.Controls.Add(lblValue);
+            grSelectFeature.Controls.Add(txtName);
+            grSelectFeature.Controls.Add(lblPropertyName);
+            grSelectFeature.Controls.Add(btnSelectFeature);
+            grSelectFeature.Location = new System.Drawing.Point(1828, 1602);
+            grSelectFeature.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grSelectFeature.Name = "grSelectFeature";
+            grSelectFeature.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grSelectFeature.Size = new System.Drawing.Size(399, 370);
+            grSelectFeature.TabIndex = 56;
+            grSelectFeature.TabStop = false;
+            grSelectFeature.Text = "Select Feature";
+            // 
+            // ckShowAttributePanelOnFeatureClick
+            // 
+            ckShowAttributePanelOnFeatureClick.AutoSize = true;
+            ckShowAttributePanelOnFeatureClick.Checked = true;
+            ckShowAttributePanelOnFeatureClick.CheckState = System.Windows.Forms.CheckState.Checked;
+            ckShowAttributePanelOnFeatureClick.Location = new System.Drawing.Point(15, 274);
+            ckShowAttributePanelOnFeatureClick.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            ckShowAttributePanelOnFeatureClick.Name = "ckShowAttributePanelOnFeatureClick";
+            ckShowAttributePanelOnFeatureClick.Size = new System.Drawing.Size(380, 41);
+            ckShowAttributePanelOnFeatureClick.TabIndex = 67;
+            ckShowAttributePanelOnFeatureClick.Text = "Show att. panel feature click";
+            ckShowAttributePanelOnFeatureClick.UseVisualStyleBackColor = true;
+            ckShowAttributePanelOnFeatureClick.CheckedChanged += ckShowAttributePanelOnFeatureClick_CheckedChanged;
+            // 
+            // txtValue
+            // 
+            txtValue.Location = new System.Drawing.Point(212, 200);
+            txtValue.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtValue.Name = "txtValue";
+            txtValue.Size = new System.Drawing.Size(169, 43);
+            txtValue.TabIndex = 58;
+            txtValue.Text = "Polygon-feature-cj7hkzyaj000b3e65n0c1brht";
+            // 
+            // lblValue
+            // 
+            lblValue.AutoSize = true;
+            lblValue.Location = new System.Drawing.Point(212, 144);
+            lblValue.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblValue.Name = "lblValue";
+            lblValue.Size = new System.Drawing.Size(188, 37);
+            lblValue.TabIndex = 59;
+            lblValue.Text = "Property value";
+            // 
+            // txtName
+            // 
+            txtName.Location = new System.Drawing.Point(13, 200);
+            txtName.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(169, 43);
+            txtName.TabIndex = 56;
+            txtName.Text = "name";
+            // 
+            // lblPropertyName
+            // 
+            lblPropertyName.AutoSize = true;
+            lblPropertyName.Location = new System.Drawing.Point(13, 144);
+            lblPropertyName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblPropertyName.Name = "lblPropertyName";
+            lblPropertyName.Size = new System.Drawing.Size(191, 37);
+            lblPropertyName.TabIndex = 57;
+            lblPropertyName.Text = "Property name";
+            // 
+            // btnSelectFeature
+            // 
+            btnSelectFeature.Location = new System.Drawing.Point(13, 41);
+            btnSelectFeature.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSelectFeature.Name = "btnSelectFeature";
+            btnSelectFeature.Size = new System.Drawing.Size(375, 85);
+            btnSelectFeature.TabIndex = 55;
+            btnSelectFeature.Text = "Select feature";
+            btnSelectFeature.UseVisualStyleBackColor = true;
+            btnSelectFeature.Click += btnSelectFeature_Click;
+            // 
+            // grSld
+            // 
+            grSld.Controls.Add(txtSld);
+            grSld.Location = new System.Drawing.Point(1402, 1602);
+            grSld.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grSld.Name = "grSld";
+            grSld.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grSld.Size = new System.Drawing.Size(426, 370);
+            grSld.TabIndex = 55;
+            grSld.TabStop = false;
+            grSld.Text = "Sld";
+            // 
+            // txtSld
+            // 
+            txtSld.Location = new System.Drawing.Point(15, 54);
+            txtSld.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtSld.Multiline = true;
+            txtSld.Name = "txtSld";
+            txtSld.Size = new System.Drawing.Size(394, 291);
+            txtSld.TabIndex = 1;
+            txtSld.Text = resources.GetString("txtSld.Text");
+            // 
+            // grButtonVisibility
+            // 
+            grButtonVisibility.Controls.Add(cbViewerButton);
+            grButtonVisibility.Controls.Add(btnSetButtonVisibility);
+            grButtonVisibility.Controls.Add(btnGetButtonEnabled);
+            grButtonVisibility.Location = new System.Drawing.Point(823, 921);
+            grButtonVisibility.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grButtonVisibility.Name = "grButtonVisibility";
+            grButtonVisibility.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grButtonVisibility.Size = new System.Drawing.Size(377, 342);
+            grButtonVisibility.TabIndex = 54;
+            grButtonVisibility.TabStop = false;
+            grButtonVisibility.Text = "Button visibility";
+            // 
+            // cbViewerButton
+            // 
+            cbViewerButton.FormattingEnabled = true;
+            cbViewerButton.Location = new System.Drawing.Point(13, 242);
+            cbViewerButton.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbViewerButton.Name = "cbViewerButton";
+            cbViewerButton.Size = new System.Drawing.Size(343, 45);
+            cbViewerButton.TabIndex = 51;
+            // 
+            // btnSetButtonVisibility
+            // 
+            btnSetButtonVisibility.Location = new System.Drawing.Point(13, 128);
+            btnSetButtonVisibility.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetButtonVisibility.Name = "btnSetButtonVisibility";
+            btnSetButtonVisibility.Size = new System.Drawing.Size(351, 85);
+            btnSetButtonVisibility.TabIndex = 50;
+            btnSetButtonVisibility.Text = "Toggle button enabled";
+            btnSetButtonVisibility.UseVisualStyleBackColor = true;
+            btnSetButtonVisibility.Click += btnSetButtonVisibility_Click;
+            // 
+            // btnGetButtonEnabled
+            // 
+            btnGetButtonEnabled.Location = new System.Drawing.Point(13, 41);
+            btnGetButtonEnabled.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetButtonEnabled.Name = "btnGetButtonEnabled";
+            btnGetButtonEnabled.Size = new System.Drawing.Size(352, 85);
+            btnGetButtonEnabled.TabIndex = 49;
+            btnGetButtonEnabled.Text = "Get button enabled";
+            btnGetButtonEnabled.UseVisualStyleBackColor = true;
+            btnGetButtonEnabled.Click += btnGetButtonEnabled_Click;
+            // 
+            // grOverlay
+            // 
+            grOverlay.Controls.Add(btnDrawDistance);
+            grOverlay.Controls.Add(txtDrawDistance);
+            grOverlay.Controls.Add(btnRemoveOverlay);
+            grOverlay.Controls.Add(txtOverlayGeoJson);
+            grOverlay.Controls.Add(btnAddOverlay);
+            grOverlay.Location = new System.Drawing.Point(692, 1602);
+            grOverlay.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOverlay.Name = "grOverlay";
+            grOverlay.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOverlay.Size = new System.Drawing.Size(699, 370);
+            grOverlay.TabIndex = 53;
+            grOverlay.TabStop = false;
+            grOverlay.Text = "Load GeoJSON overlay";
+            // 
+            // btnDrawDistance
+            // 
+            btnDrawDistance.Location = new System.Drawing.Point(444, 213);
+            btnDrawDistance.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnDrawDistance.Name = "btnDrawDistance";
+            btnDrawDistance.Size = new System.Drawing.Size(249, 65);
+            btnDrawDistance.TabIndex = 68;
+            btnDrawDistance.Text = "Set draw distance";
+            btnDrawDistance.UseVisualStyleBackColor = true;
+            btnDrawDistance.Click += btnDrawDistance_Click;
+            // 
+            // txtDrawDistance
+            // 
+            txtDrawDistance.Location = new System.Drawing.Point(444, 300);
+            txtDrawDistance.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtDrawDistance.Name = "txtDrawDistance";
+            txtDrawDistance.Size = new System.Drawing.Size(244, 43);
+            txtDrawDistance.TabIndex = 67;
+            txtDrawDistance.Text = "30";
+            // 
+            // btnRemoveOverlay
+            // 
+            btnRemoveOverlay.Location = new System.Drawing.Point(444, 41);
+            btnRemoveOverlay.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnRemoveOverlay.Name = "btnRemoveOverlay";
+            btnRemoveOverlay.Size = new System.Drawing.Size(249, 65);
+            btnRemoveOverlay.TabIndex = 2;
+            btnRemoveOverlay.Text = "Remove overlay";
+            btnRemoveOverlay.UseVisualStyleBackColor = true;
+            btnRemoveOverlay.Click += btnRemoveOverlay_Click;
+            // 
+            // txtOverlayGeoJson
+            // 
+            txtOverlayGeoJson.Location = new System.Drawing.Point(15, 54);
+            txtOverlayGeoJson.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtOverlayGeoJson.Multiline = true;
+            txtOverlayGeoJson.Name = "txtOverlayGeoJson";
+            txtOverlayGeoJson.Size = new System.Drawing.Size(415, 291);
+            txtOverlayGeoJson.TabIndex = 1;
+            txtOverlayGeoJson.Text = resources.GetString("txtOverlayGeoJson.Text");
+            // 
+            // btnAddOverlay
+            // 
+            btnAddOverlay.Location = new System.Drawing.Point(444, 128);
+            btnAddOverlay.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnAddOverlay.Name = "btnAddOverlay";
+            btnAddOverlay.Size = new System.Drawing.Size(249, 65);
+            btnAddOverlay.TabIndex = 0;
+            btnAddOverlay.Text = "Add overlay";
+            btnAddOverlay.UseVisualStyleBackColor = true;
+            btnAddOverlay.Click += btnAddOverlay_Click;
+            // 
+            // grMeasurement
+            // 
+            grMeasurement.Controls.Add(cbUnit);
+            grMeasurement.Controls.Add(btnGetUnitPreference);
+            grMeasurement.Controls.Add(btnSetUnitPreference);
+            grMeasurement.Controls.Add(grMeasurementMethod);
+            grMeasurement.Controls.Add(grMeasurementType);
+            grMeasurement.Controls.Add(btnGetActiveMeasurement);
+            grMeasurement.Controls.Add(btnStartMeasurementMode);
+            grMeasurement.Controls.Add(btnStopMeasurementMode);
+            grMeasurement.Location = new System.Drawing.Point(17, 1587);
+            grMeasurement.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurement.Name = "grMeasurement";
+            grMeasurement.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurement.Size = new System.Drawing.Size(660, 385);
+            grMeasurement.TabIndex = 52;
+            grMeasurement.TabStop = false;
+            grMeasurement.Text = "Measurement";
+            // 
+            // cbUnit
+            // 
+            cbUnit.FormattingEnabled = true;
+            cbUnit.Location = new System.Drawing.Point(287, 313);
+            cbUnit.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbUnit.Name = "cbUnit";
+            cbUnit.Size = new System.Drawing.Size(244, 45);
+            cbUnit.TabIndex = 67;
+            // 
+            // btnGetUnitPreference
+            // 
+            btnGetUnitPreference.Location = new System.Drawing.Point(437, 242);
+            btnGetUnitPreference.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetUnitPreference.Name = "btnGetUnitPreference";
+            btnGetUnitPreference.Size = new System.Drawing.Size(137, 57);
+            btnGetUnitPreference.TabIndex = 66;
+            btnGetUnitPreference.Text = "Get Unit";
+            btnGetUnitPreference.UseVisualStyleBackColor = true;
+            btnGetUnitPreference.Click += btnGetUnitPreference_Click;
+            // 
+            // btnSetUnitPreference
+            // 
+            btnSetUnitPreference.Location = new System.Drawing.Point(287, 242);
+            btnSetUnitPreference.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetUnitPreference.Name = "btnSetUnitPreference";
+            btnSetUnitPreference.Size = new System.Drawing.Size(137, 57);
+            btnSetUnitPreference.TabIndex = 65;
+            btnSetUnitPreference.Text = "Set Unit";
+            btnSetUnitPreference.UseVisualStyleBackColor = true;
+            btnSetUnitPreference.Click += btnSetUnitPreference_Click;
+            // 
+            // grMeasurementMethod
+            // 
+            grMeasurementMethod.Controls.Add(rbMethodDefault);
+            grMeasurementMethod.Controls.Add(rbMethodDepthMap);
+            grMeasurementMethod.Controls.Add(rbMethodForwardIntersection);
+            grMeasurementMethod.Controls.Add(rbMethodSmartClick);
+            grMeasurementMethod.Location = new System.Drawing.Point(474, 0);
+            grMeasurementMethod.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurementMethod.Name = "grMeasurementMethod";
+            grMeasurementMethod.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurementMethod.Size = new System.Drawing.Size(201, 226);
+            grMeasurementMethod.TabIndex = 64;
+            grMeasurementMethod.TabStop = false;
+            grMeasurementMethod.Text = "Method";
+            // 
+            // rbMethodDefault
+            // 
+            rbMethodDefault.AutoSize = true;
+            rbMethodDefault.Checked = true;
+            rbMethodDefault.Location = new System.Drawing.Point(13, 41);
+            rbMethodDefault.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMethodDefault.Name = "rbMethodDefault";
+            rbMethodDefault.Size = new System.Drawing.Size(134, 41);
+            rbMethodDefault.TabIndex = 58;
+            rbMethodDefault.TabStop = true;
+            rbMethodDefault.Text = "Default";
+            rbMethodDefault.UseVisualStyleBackColor = true;
+            // 
+            // rbMethodDepthMap
+            // 
+            rbMethodDepthMap.AutoSize = true;
+            rbMethodDepthMap.Location = new System.Drawing.Point(13, 85);
+            rbMethodDepthMap.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMethodDepthMap.Name = "rbMethodDepthMap";
+            rbMethodDepthMap.Size = new System.Drawing.Size(175, 41);
+            rbMethodDepthMap.TabIndex = 59;
+            rbMethodDepthMap.Text = "DepthMap";
+            rbMethodDepthMap.UseVisualStyleBackColor = true;
+            // 
+            // rbMethodForwardIntersection
+            // 
+            rbMethodForwardIntersection.AutoSize = true;
+            rbMethodForwardIntersection.Location = new System.Drawing.Point(13, 170);
+            rbMethodForwardIntersection.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMethodForwardIntersection.Name = "rbMethodForwardIntersection";
+            rbMethodForwardIntersection.Size = new System.Drawing.Size(156, 41);
+            rbMethodForwardIntersection.TabIndex = 61;
+            rbMethodForwardIntersection.Text = "Forw. Int.";
+            rbMethodForwardIntersection.UseVisualStyleBackColor = true;
+            // 
+            // rbMethodSmartClick
+            // 
+            rbMethodSmartClick.AutoSize = true;
+            rbMethodSmartClick.Location = new System.Drawing.Point(13, 128);
+            rbMethodSmartClick.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMethodSmartClick.Name = "rbMethodSmartClick";
+            rbMethodSmartClick.Size = new System.Drawing.Size(180, 41);
+            rbMethodSmartClick.TabIndex = 60;
+            rbMethodSmartClick.Text = "Smart Click";
+            rbMethodSmartClick.UseVisualStyleBackColor = true;
+            // 
+            // grMeasurementType
+            // 
+            grMeasurementType.Controls.Add(rbMeasDefault);
+            grMeasurementType.Controls.Add(rbMeasPoint);
+            grMeasurementType.Controls.Add(rbMeasPolygon);
+            grMeasurementType.Controls.Add(rbMeasLineString);
+            grMeasurementType.Location = new System.Drawing.Point(276, 0);
+            grMeasurementType.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurementType.Name = "grMeasurementType";
+            grMeasurementType.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grMeasurementType.Size = new System.Drawing.Size(201, 226);
+            grMeasurementType.TabIndex = 63;
+            grMeasurementType.TabStop = false;
+            grMeasurementType.Text = "Type";
+            // 
+            // rbMeasDefault
+            // 
+            rbMeasDefault.AutoSize = true;
+            rbMeasDefault.Checked = true;
+            rbMeasDefault.Location = new System.Drawing.Point(13, 41);
+            rbMeasDefault.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMeasDefault.Name = "rbMeasDefault";
+            rbMeasDefault.Size = new System.Drawing.Size(134, 41);
+            rbMeasDefault.TabIndex = 58;
+            rbMeasDefault.TabStop = true;
+            rbMeasDefault.Text = "Default";
+            rbMeasDefault.UseVisualStyleBackColor = true;
+            // 
+            // rbMeasPoint
+            // 
+            rbMeasPoint.AutoSize = true;
+            rbMeasPoint.Location = new System.Drawing.Point(13, 85);
+            rbMeasPoint.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMeasPoint.Name = "rbMeasPoint";
+            rbMeasPoint.Size = new System.Drawing.Size(109, 41);
+            rbMeasPoint.TabIndex = 59;
+            rbMeasPoint.Text = "Point";
+            rbMeasPoint.UseVisualStyleBackColor = true;
+            // 
+            // rbMeasPolygon
+            // 
+            rbMeasPolygon.AutoSize = true;
+            rbMeasPolygon.Location = new System.Drawing.Point(13, 170);
+            rbMeasPolygon.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMeasPolygon.Name = "rbMeasPolygon";
+            rbMeasPolygon.Size = new System.Drawing.Size(145, 41);
+            rbMeasPolygon.TabIndex = 61;
+            rbMeasPolygon.Text = "Polygon";
+            rbMeasPolygon.UseVisualStyleBackColor = true;
+            // 
+            // rbMeasLineString
+            // 
+            rbMeasLineString.AutoSize = true;
+            rbMeasLineString.Location = new System.Drawing.Point(13, 128);
+            rbMeasLineString.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            rbMeasLineString.Name = "rbMeasLineString";
+            rbMeasLineString.Size = new System.Drawing.Size(171, 41);
+            rbMeasLineString.TabIndex = 60;
+            rbMeasLineString.Text = "Line string";
+            rbMeasLineString.UseVisualStyleBackColor = true;
+            // 
+            // btnGetActiveMeasurement
+            // 
+            btnGetActiveMeasurement.Location = new System.Drawing.Point(13, 242);
+            btnGetActiveMeasurement.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetActiveMeasurement.Name = "btnGetActiveMeasurement";
+            btnGetActiveMeasurement.Size = new System.Drawing.Size(262, 85);
+            btnGetActiveMeasurement.TabIndex = 62;
+            btnGetActiveMeasurement.Text = "Get Measurement";
+            btnGetActiveMeasurement.UseVisualStyleBackColor = true;
+            btnGetActiveMeasurement.Click += btnGetMeasurementInfo_Click;
+            // 
+            // btnStartMeasurementMode
+            // 
+            btnStartMeasurementMode.Location = new System.Drawing.Point(13, 41);
+            btnStartMeasurementMode.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnStartMeasurementMode.Name = "btnStartMeasurementMode";
+            btnStartMeasurementMode.Size = new System.Drawing.Size(262, 85);
+            btnStartMeasurementMode.TabIndex = 57;
+            btnStartMeasurementMode.Text = "Start Measurement";
+            btnStartMeasurementMode.UseVisualStyleBackColor = true;
+            btnStartMeasurementMode.Click += btnStartMeasurementMode_Click;
+            // 
+            // btnStopMeasurementMode
+            // 
+            btnStopMeasurementMode.Location = new System.Drawing.Point(15, 139);
+            btnStopMeasurementMode.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnStopMeasurementMode.Name = "btnStopMeasurementMode";
+            btnStopMeasurementMode.Size = new System.Drawing.Size(262, 85);
+            btnStopMeasurementMode.TabIndex = 56;
+            btnStopMeasurementMode.Text = "Stop Measurement";
+            btnStopMeasurementMode.UseVisualStyleBackColor = true;
+            btnStopMeasurementMode.Click += btnStopMeasurementMode_Click;
+            // 
+            // grDevTools
+            // 
+            grDevTools.Controls.Add(btnCloseDefTools);
+            grDevTools.Controls.Add(btnShowDefTools);
+            grDevTools.Location = new System.Drawing.Point(862, 755);
+            grDevTools.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grDevTools.Name = "grDevTools";
+            grDevTools.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grDevTools.Size = new System.Drawing.Size(338, 152);
+            grDevTools.TabIndex = 51;
+            grDevTools.TabStop = false;
+            grDevTools.Text = "Dev tools";
+            // 
+            // btnCloseDefTools
+            // 
+            btnCloseDefTools.Location = new System.Drawing.Point(174, 41);
+            btnCloseDefTools.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnCloseDefTools.Name = "btnCloseDefTools";
+            btnCloseDefTools.Size = new System.Drawing.Size(150, 100);
+            btnCloseDefTools.TabIndex = 49;
+            btnCloseDefTools.Text = "Close dev tools";
+            btnCloseDefTools.UseVisualStyleBackColor = true;
+            btnCloseDefTools.Click += btnCloseDevTools_Click;
+            // 
+            // btnShowDefTools
+            // 
+            btnShowDefTools.Location = new System.Drawing.Point(13, 41);
+            btnShowDefTools.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnShowDefTools.Name = "btnShowDefTools";
+            btnShowDefTools.Size = new System.Drawing.Size(150, 100);
+            btnShowDefTools.TabIndex = 48;
+            btnShowDefTools.Text = "Show dev tools";
+            btnShowDefTools.UseVisualStyleBackColor = true;
+            btnShowDefTools.Click += btnShowDevTools_Click;
+            // 
+            // grRotationsZoomInOut
+            // 
+            grRotationsZoomInOut.Controls.Add(btnGetViewers);
+            grRotationsZoomInOut.Controls.Add(btnClosePanoramaViewer);
+            grRotationsZoomInOut.Controls.Add(lblDeltaYawPitch);
+            grRotationsZoomInOut.Controls.Add(txtDeltaYawPitch);
+            grRotationsZoomInOut.Controls.Add(btnRotateDown);
+            grRotationsZoomInOut.Controls.Add(btnRotateUp);
+            grRotationsZoomInOut.Controls.Add(btnRotateRight);
+            grRotationsZoomInOut.Controls.Add(btnZoomOut);
+            grRotationsZoomInOut.Controls.Add(btRotateLeft);
+            grRotationsZoomInOut.Controls.Add(btnZoomIn);
+            grRotationsZoomInOut.Location = new System.Drawing.Point(0, 435);
+            grRotationsZoomInOut.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grRotationsZoomInOut.Name = "grRotationsZoomInOut";
+            grRotationsZoomInOut.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grRotationsZoomInOut.Size = new System.Drawing.Size(450, 461);
+            grRotationsZoomInOut.TabIndex = 0;
+            grRotationsZoomInOut.TabStop = false;
+            grRotationsZoomInOut.Text = "Rotations / zoom in / zoom out";
+            // 
+            // btnGetViewers
+            // 
+            btnGetViewers.Location = new System.Drawing.Point(238, 337);
+            btnGetViewers.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetViewers.Name = "btnGetViewers";
+            btnGetViewers.Size = new System.Drawing.Size(201, 70);
+            btnGetViewers.TabIndex = 62;
+            btnGetViewers.Text = "Get viewers";
+            btnGetViewers.UseVisualStyleBackColor = true;
+            btnGetViewers.Click += btnGetViewers_Click;
+            // 
+            // btnClosePanoramaViewer
+            // 
+            btnClosePanoramaViewer.Location = new System.Drawing.Point(15, 337);
+            btnClosePanoramaViewer.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnClosePanoramaViewer.Name = "btnClosePanoramaViewer";
+            btnClosePanoramaViewer.Size = new System.Drawing.Size(201, 107);
+            btnClosePanoramaViewer.TabIndex = 61;
+            btnClosePanoramaViewer.Text = "Close pan. viewer";
+            btnClosePanoramaViewer.UseVisualStyleBackColor = true;
+            btnClosePanoramaViewer.Click += btnClosePanoramaViewer_Click;
+            // 
+            // lblDeltaYawPitch
+            // 
+            lblDeltaYawPitch.AutoSize = true;
+            lblDeltaYawPitch.Location = new System.Drawing.Point(13, 276);
+            lblDeltaYawPitch.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblDeltaYawPitch.Name = "lblDeltaYawPitch";
+            lblDeltaYawPitch.Size = new System.Drawing.Size(215, 37);
+            lblDeltaYawPitch.TabIndex = 20;
+            lblDeltaYawPitch.Text = "delta yaw / pitch";
+            // 
+            // txtDeltaYawPitch
+            // 
+            txtDeltaYawPitch.Location = new System.Drawing.Point(238, 276);
+            txtDeltaYawPitch.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtDeltaYawPitch.Name = "txtDeltaYawPitch";
+            txtDeltaYawPitch.Size = new System.Drawing.Size(193, 43);
+            txtDeltaYawPitch.TabIndex = 21;
+            txtDeltaYawPitch.Text = "1";
+            // 
+            // btnRotateDown
+            // 
+            btnRotateDown.Location = new System.Drawing.Point(238, 41);
+            btnRotateDown.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnRotateDown.Name = "btnRotateDown";
+            btnRotateDown.Size = new System.Drawing.Size(201, 70);
+            btnRotateDown.TabIndex = 19;
+            btnRotateDown.Text = "Rotate down";
+            btnRotateDown.UseVisualStyleBackColor = true;
+            btnRotateDown.Click += btnRotateDown_Click;
+            // 
+            // btnRotateUp
+            // 
+            btnRotateUp.Location = new System.Drawing.Point(15, 41);
+            btnRotateUp.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnRotateUp.Name = "btnRotateUp";
+            btnRotateUp.Size = new System.Drawing.Size(201, 70);
+            btnRotateUp.TabIndex = 18;
+            btnRotateUp.Text = "Rotate up";
+            btnRotateUp.UseVisualStyleBackColor = true;
+            btnRotateUp.Click += btnRotateUp_Click;
+            // 
+            // btnRotateRight
+            // 
+            btnRotateRight.Location = new System.Drawing.Point(15, 115);
+            btnRotateRight.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnRotateRight.Name = "btnRotateRight";
+            btnRotateRight.Size = new System.Drawing.Size(201, 70);
+            btnRotateRight.TabIndex = 6;
+            btnRotateRight.Text = "Rotate right";
+            btnRotateRight.UseVisualStyleBackColor = true;
+            btnRotateRight.Click += btnRotateRight_Click;
+            // 
+            // btnZoomOut
+            // 
+            btnZoomOut.Location = new System.Drawing.Point(238, 194);
+            btnZoomOut.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnZoomOut.Name = "btnZoomOut";
+            btnZoomOut.Size = new System.Drawing.Size(201, 70);
+            btnZoomOut.TabIndex = 46;
+            btnZoomOut.Text = "Zoom out";
+            btnZoomOut.UseVisualStyleBackColor = true;
+            btnZoomOut.Click += btnZoomOut_Click;
+            // 
+            // btRotateLeft
+            // 
+            btRotateLeft.Location = new System.Drawing.Point(15, 196);
+            btRotateLeft.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btRotateLeft.Name = "btRotateLeft";
+            btRotateLeft.Size = new System.Drawing.Size(201, 70);
+            btRotateLeft.TabIndex = 0;
+            btRotateLeft.Text = "Rotate left";
+            btRotateLeft.UseVisualStyleBackColor = true;
+            btRotateLeft.Click += btRotateLeft_Click;
+            // 
+            // btnZoomIn
+            // 
+            btnZoomIn.Location = new System.Drawing.Point(238, 115);
+            btnZoomIn.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnZoomIn.Name = "btnZoomIn";
+            btnZoomIn.Size = new System.Drawing.Size(201, 70);
+            btnZoomIn.TabIndex = 45;
+            btnZoomIn.Text = "Zoom in";
+            btnZoomIn.UseVisualStyleBackColor = true;
+            btnZoomIn.Click += btnZoomIn_Click;
+            // 
+            // grEvents
+            // 
+            grEvents.Controls.Add(lbViewerEvents);
+            grEvents.Location = new System.Drawing.Point(15, 1286);
+            grEvents.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grEvents.Name = "grEvents";
+            grEvents.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grEvents.Size = new System.Drawing.Size(1821, 285);
+            grEvents.TabIndex = 50;
+            grEvents.TabStop = false;
+            grEvents.Text = "Viewer events";
+            // 
+            // lbViewerEvents
+            // 
+            lbViewerEvents.FormattingEnabled = true;
+            lbViewerEvents.ItemHeight = 37;
+            lbViewerEvents.Location = new System.Drawing.Point(13, 41);
+            lbViewerEvents.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            lbViewerEvents.Name = "lbViewerEvents";
+            lbViewerEvents.Size = new System.Drawing.Size(1780, 226);
+            lbViewerEvents.TabIndex = 0;
+            // 
+            // grRecordingViewerColorPermissions
+            // 
+            grRecordingViewerColorPermissions.Controls.Add(txtRecordingViewerColorPermissions);
+            grRecordingViewerColorPermissions.Controls.Add(btnGetPermissions);
+            grRecordingViewerColorPermissions.Controls.Add(btnGetRecording);
+            grRecordingViewerColorPermissions.Controls.Add(btnGetViewerColor);
+            grRecordingViewerColorPermissions.Location = new System.Drawing.Point(13, 899);
+            grRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grRecordingViewerColorPermissions.Name = "grRecordingViewerColorPermissions";
+            grRecordingViewerColorPermissions.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grRecordingViewerColorPermissions.Size = new System.Drawing.Size(801, 385);
+            grRecordingViewerColorPermissions.TabIndex = 0;
+            grRecordingViewerColorPermissions.TabStop = false;
+            grRecordingViewerColorPermissions.Text = "Recording / Viewer color / Permissions";
+            // 
+            // txtRecordingViewerColorPermissions
+            // 
+            txtRecordingViewerColorPermissions.Location = new System.Drawing.Point(276, 41);
+            txtRecordingViewerColorPermissions.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtRecordingViewerColorPermissions.Multiline = true;
+            txtRecordingViewerColorPermissions.Name = "txtRecordingViewerColorPermissions";
+            txtRecordingViewerColorPermissions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            txtRecordingViewerColorPermissions.Size = new System.Drawing.Size(506, 320);
+            txtRecordingViewerColorPermissions.TabIndex = 49;
+            // 
+            // btnGetPermissions
+            // 
+            btnGetPermissions.Location = new System.Drawing.Point(13, 41);
+            btnGetPermissions.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetPermissions.Name = "btnGetPermissions";
+            btnGetPermissions.Size = new System.Drawing.Size(249, 85);
+            btnGetPermissions.TabIndex = 11;
+            btnGetPermissions.Text = "Get Permissions";
+            btnGetPermissions.UseVisualStyleBackColor = true;
+            btnGetPermissions.Click += btnPermissions_Click;
+            // 
+            // btnGetRecording
+            // 
+            btnGetRecording.Location = new System.Drawing.Point(13, 185);
+            btnGetRecording.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetRecording.Name = "btnGetRecording";
+            btnGetRecording.Size = new System.Drawing.Size(249, 85);
+            btnGetRecording.TabIndex = 28;
+            btnGetRecording.Text = "Get Recording";
+            btnGetRecording.UseVisualStyleBackColor = true;
+            btnGetRecording.Click += btnGetRecording_Click;
+            // 
+            // btnGetViewerColor
+            // 
+            btnGetViewerColor.Location = new System.Drawing.Point(13, 285);
+            btnGetViewerColor.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetViewerColor.Name = "btnGetViewerColor";
+            btnGetViewerColor.Size = new System.Drawing.Size(249, 85);
+            btnGetViewerColor.TabIndex = 17;
+            btnGetViewerColor.Text = "Get Viewer Color";
+            btnGetViewerColor.UseVisualStyleBackColor = true;
+            btnGetViewerColor.Click += btnGetViewerColor_Click;
+            // 
+            // grOrientation
+            // 
+            grOrientation.Controls.Add(btnGetDebugLogs);
+            grOrientation.Controls.Add(txtYaw);
+            grOrientation.Controls.Add(lblYaw);
+            grOrientation.Controls.Add(lblPitch);
+            grOrientation.Controls.Add(txtPitch);
+            grOrientation.Controls.Add(lblhFov);
+            grOrientation.Controls.Add(txthFov);
+            grOrientation.Controls.Add(btnGetOrientation);
+            grOrientation.Controls.Add(btnSetOrientation);
+            grOrientation.Location = new System.Drawing.Point(1222, 625);
+            grOrientation.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOrientation.Name = "grOrientation";
+            grOrientation.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOrientation.Size = new System.Drawing.Size(600, 329);
+            grOrientation.TabIndex = 0;
+            grOrientation.TabStop = false;
+            grOrientation.Text = "Orientation";
+            // 
+            // btnGetDebugLogs
+            // 
+            btnGetDebugLogs.Location = new System.Drawing.Point(13, 128);
+            btnGetDebugLogs.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetDebugLogs.Name = "btnGetDebugLogs";
+            btnGetDebugLogs.Size = new System.Drawing.Size(249, 85);
+            btnGetDebugLogs.TabIndex = 28;
+            btnGetDebugLogs.Text = "Get Debug logs";
+            btnGetDebugLogs.UseVisualStyleBackColor = true;
+            btnGetDebugLogs.Click += btnGetDebugLogs_Click;
+            // 
+            // txtYaw
+            // 
+            txtYaw.Location = new System.Drawing.Point(362, 41);
+            txtYaw.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtYaw.Name = "txtYaw";
+            txtYaw.Size = new System.Drawing.Size(220, 43);
+            txtYaw.TabIndex = 23;
+            txtYaw.Text = "0.0";
+            // 
+            // lblYaw
+            // 
+            lblYaw.AutoSize = true;
+            lblYaw.Location = new System.Drawing.Point(276, 41);
+            lblYaw.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblYaw.Name = "lblYaw";
+            lblYaw.Size = new System.Drawing.Size(64, 37);
+            lblYaw.TabIndex = 21;
+            lblYaw.Text = "Yaw";
+            // 
+            // lblPitch
+            // 
+            lblPitch.AutoSize = true;
+            lblPitch.Location = new System.Drawing.Point(276, 115);
+            lblPitch.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblPitch.Name = "lblPitch";
+            lblPitch.Size = new System.Drawing.Size(75, 37);
+            lblPitch.TabIndex = 22;
+            lblPitch.Text = "Pitch";
+            // 
+            // txtPitch
+            // 
+            txtPitch.Location = new System.Drawing.Point(362, 115);
+            txtPitch.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtPitch.Name = "txtPitch";
+            txtPitch.Size = new System.Drawing.Size(220, 43);
+            txtPitch.TabIndex = 24;
+            txtPitch.Text = "0.0";
+            // 
+            // lblhFov
+            // 
+            lblhFov.AutoSize = true;
+            lblhFov.Location = new System.Drawing.Point(276, 185);
+            lblhFov.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblhFov.Name = "lblhFov";
+            lblhFov.Size = new System.Drawing.Size(74, 37);
+            lblhFov.TabIndex = 25;
+            lblhFov.Text = "hFov";
+            // 
+            // txthFov
+            // 
+            txthFov.Location = new System.Drawing.Point(362, 185);
+            txthFov.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txthFov.Name = "txthFov";
+            txthFov.Size = new System.Drawing.Size(220, 43);
+            txthFov.TabIndex = 26;
+            txthFov.Text = "90.0";
+            // 
+            // btnGetOrientation
+            // 
+            btnGetOrientation.Location = new System.Drawing.Point(13, 41);
+            btnGetOrientation.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetOrientation.Name = "btnGetOrientation";
+            btnGetOrientation.Size = new System.Drawing.Size(249, 85);
+            btnGetOrientation.TabIndex = 20;
+            btnGetOrientation.Text = "Get Orientation";
+            btnGetOrientation.UseVisualStyleBackColor = true;
+            btnGetOrientation.Click += btnOrientation_Click;
+            // 
+            // btnSetOrientation
+            // 
+            btnSetOrientation.Location = new System.Drawing.Point(13, 226);
+            btnSetOrientation.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetOrientation.Name = "btnSetOrientation";
+            btnSetOrientation.Size = new System.Drawing.Size(249, 85);
+            btnSetOrientation.TabIndex = 27;
+            btnSetOrientation.Text = "Set Orientation";
+            btnSetOrientation.UseVisualStyleBackColor = true;
+            btnSetOrientation.Click += btnSetOrientation_Click;
+            // 
+            // grOpenByImageId
+            // 
+            grOpenByImageId.Controls.Add(txtBrightnessContrast);
+            grOpenByImageId.Controls.Add(btnContrast);
+            grOpenByImageId.Controls.Add(btnBrightness);
+            grOpenByImageId.Controls.Add(btnGetAddress);
+            grOpenByImageId.Controls.Add(btnOpenByImageId);
+            grOpenByImageId.Controls.Add(txtImageId);
+            grOpenByImageId.Location = new System.Drawing.Point(1228, 962);
+            grOpenByImageId.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByImageId.Name = "grOpenByImageId";
+            grOpenByImageId.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByImageId.Size = new System.Drawing.Size(594, 300);
+            grOpenByImageId.TabIndex = 44;
+            grOpenByImageId.TabStop = false;
+            grOpenByImageId.Text = "Open by imageId";
+            // 
+            // txtBrightnessContrast
+            // 
+            txtBrightnessContrast.Location = new System.Drawing.Point(300, 231);
+            txtBrightnessContrast.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtBrightnessContrast.Name = "txtBrightnessContrast";
+            txtBrightnessContrast.Size = new System.Drawing.Size(268, 43);
+            txtBrightnessContrast.TabIndex = 52;
+            // 
+            // btnContrast
+            // 
+            btnContrast.Location = new System.Drawing.Point(300, 133);
+            btnContrast.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnContrast.Name = "btnContrast";
+            btnContrast.Size = new System.Drawing.Size(276, 85);
+            btnContrast.TabIndex = 51;
+            btnContrast.Text = "Set Contrast";
+            btnContrast.UseVisualStyleBackColor = true;
+            btnContrast.Click += btnContrast_Click;
+            // 
+            // btnBrightness
+            // 
+            btnBrightness.Location = new System.Drawing.Point(300, 41);
+            btnBrightness.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnBrightness.Name = "btnBrightness";
+            btnBrightness.Size = new System.Drawing.Size(276, 85);
+            btnBrightness.TabIndex = 50;
+            btnBrightness.Text = "Set Brightness";
+            btnBrightness.UseVisualStyleBackColor = true;
+            btnBrightness.Click += btnBrightness_Click;
+            // 
+            // btnGetAddress
+            // 
+            btnGetAddress.Location = new System.Drawing.Point(13, 213);
+            btnGetAddress.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetAddress.Name = "btnGetAddress";
+            btnGetAddress.Size = new System.Drawing.Size(249, 85);
+            btnGetAddress.TabIndex = 49;
+            btnGetAddress.Text = "Get address settings";
+            btnGetAddress.UseVisualStyleBackColor = true;
+            btnGetAddress.Click += btnGetAddress_Click;
+            // 
+            // btnOpenByImageId
+            // 
+            btnOpenByImageId.Location = new System.Drawing.Point(13, 115);
+            btnOpenByImageId.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnOpenByImageId.Name = "btnOpenByImageId";
+            btnOpenByImageId.Size = new System.Drawing.Size(249, 85);
+            btnOpenByImageId.TabIndex = 43;
+            btnOpenByImageId.Text = "Open by ImageId";
+            btnOpenByImageId.UseVisualStyleBackColor = true;
+            btnOpenByImageId.Click += btnOpenByImageId_Click;
+            // 
+            // txtImageId
+            // 
+            txtImageId.Location = new System.Drawing.Point(21, 41);
+            txtImageId.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtImageId.Name = "txtImageId";
+            txtImageId.Size = new System.Drawing.Size(244, 43);
+            txtImageId.TabIndex = 42;
+            txtImageId.Text = "5D4KX5SM";
+            // 
+            // grCoordinate
+            // 
+            grCoordinate.Controls.Add(btnSetPointSize);
+            grCoordinate.Controls.Add(txtPointSize);
+            grCoordinate.Controls.Add(btnGetPointSize);
+            grCoordinate.Controls.Add(btnSetPointBudget);
+            grCoordinate.Controls.Add(cbPointBudget);
+            grCoordinate.Controls.Add(btnGetPointBudget);
+            grCoordinate.Controls.Add(btnEdges);
+            grCoordinate.Controls.Add(btnCameraPosition);
+            grCoordinate.Controls.Add(txtlkAtX);
+            grCoordinate.Controls.Add(txtlkAtY);
+            grCoordinate.Controls.Add(txtlkAtZ);
+            grCoordinate.Controls.Add(btnFlyTo);
+            grCoordinate.Controls.Add(txtX);
+            grCoordinate.Controls.Add(txtY);
+            grCoordinate.Controls.Add(txtZ);
+            grCoordinate.Controls.Add(lblX);
+            grCoordinate.Controls.Add(lblY);
+            grCoordinate.Controls.Add(lblZ);
+            grCoordinate.Controls.Add(btnOpenByCoordinate);
+            grCoordinate.Controls.Add(btnLookAtCoordinate);
+            grCoordinate.Location = new System.Drawing.Point(1209, 353);
+            grCoordinate.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grCoordinate.Name = "grCoordinate";
+            grCoordinate.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grCoordinate.Size = new System.Drawing.Size(1037, 255);
+            grCoordinate.TabIndex = 0;
+            grCoordinate.TabStop = false;
+            grCoordinate.Text = "Coordinate";
+            // 
+            // btnSetPointSize
+            // 
+            btnSetPointSize.Location = new System.Drawing.Point(938, 111);
+            btnSetPointSize.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetPointSize.Name = "btnSetPointSize";
+            btnSetPointSize.Size = new System.Drawing.Size(99, 70);
+            btnSetPointSize.TabIndex = 56;
+            btnSetPointSize.Text = "Set";
+            btnSetPointSize.UseVisualStyleBackColor = true;
+            btnSetPointSize.Click += btnSetPointSize_Click;
+            // 
+            // txtPointSize
+            // 
+            txtPointSize.Location = new System.Drawing.Point(825, 120);
+            txtPointSize.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtPointSize.Name = "txtPointSize";
+            txtPointSize.Size = new System.Drawing.Size(94, 43);
+            txtPointSize.TabIndex = 55;
+            txtPointSize.Text = "0";
+            // 
+            // btnGetPointSize
+            // 
+            btnGetPointSize.Location = new System.Drawing.Point(712, 111);
+            btnGetPointSize.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetPointSize.Name = "btnGetPointSize";
+            btnGetPointSize.Size = new System.Drawing.Size(99, 70);
+            btnGetPointSize.TabIndex = 54;
+            btnGetPointSize.Text = "Get";
+            btnGetPointSize.UseVisualStyleBackColor = true;
+            btnGetPointSize.Click += btnGetPointSize_Click;
+            // 
+            // btnSetPointBudget
+            // 
+            btnSetPointBudget.Location = new System.Drawing.Point(938, 176);
+            btnSetPointBudget.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSetPointBudget.Name = "btnSetPointBudget";
+            btnSetPointBudget.Size = new System.Drawing.Size(99, 70);
+            btnSetPointBudget.TabIndex = 53;
+            btnSetPointBudget.Text = "Set";
+            btnSetPointBudget.UseVisualStyleBackColor = true;
+            btnSetPointBudget.Click += btnSetPointBudget_Click;
+            // 
+            // cbPointBudget
+            // 
+            cbPointBudget.FormattingEnabled = true;
+            cbPointBudget.Location = new System.Drawing.Point(825, 185);
+            cbPointBudget.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            cbPointBudget.Name = "cbPointBudget";
+            cbPointBudget.Size = new System.Drawing.Size(94, 45);
+            cbPointBudget.TabIndex = 52;
+            // 
+            // btnGetPointBudget
+            // 
+            btnGetPointBudget.Location = new System.Drawing.Point(712, 176);
+            btnGetPointBudget.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetPointBudget.Name = "btnGetPointBudget";
+            btnGetPointBudget.Size = new System.Drawing.Size(99, 70);
+            btnGetPointBudget.TabIndex = 51;
+            btnGetPointBudget.Text = "Get";
+            btnGetPointBudget.UseVisualStyleBackColor = true;
+            btnGetPointBudget.Click += btnGetPointBudget_Click;
+            // 
+            // btnEdges
+            // 
+            btnEdges.Location = new System.Drawing.Point(938, 41);
+            btnEdges.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnEdges.Name = "btnEdges";
+            btnEdges.Size = new System.Drawing.Size(99, 70);
+            btnEdges.TabIndex = 50;
+            btnEdges.Text = "Edges";
+            btnEdges.UseVisualStyleBackColor = true;
+            btnEdges.Click += btnEdges_Click;
+            // 
+            // btnCameraPosition
+            // 
+            btnCameraPosition.Location = new System.Drawing.Point(825, 41);
+            btnCameraPosition.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnCameraPosition.Name = "btnCameraPosition";
+            btnCameraPosition.Size = new System.Drawing.Size(99, 70);
+            btnCameraPosition.TabIndex = 49;
+            btnCameraPosition.UseVisualStyleBackColor = true;
+            btnCameraPosition.Click += btnCameraPosition_Click;
+            // 
+            // txtlkAtX
+            // 
+            txtlkAtX.Location = new System.Drawing.Point(538, 41);
+            txtlkAtX.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtlkAtX.Name = "txtlkAtX";
+            txtlkAtX.Size = new System.Drawing.Size(156, 43);
+            txtlkAtX.TabIndex = 46;
+            txtlkAtX.Text = "160855.585";
+            // 
+            // txtlkAtY
+            // 
+            txtlkAtY.Location = new System.Drawing.Point(538, 115);
+            txtlkAtY.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtlkAtY.Name = "txtlkAtY";
+            txtlkAtY.Size = new System.Drawing.Size(156, 43);
+            txtlkAtY.TabIndex = 47;
+            txtlkAtY.Text = "383928.326";
+            // 
+            // txtlkAtZ
+            // 
+            txtlkAtZ.Location = new System.Drawing.Point(538, 185);
+            txtlkAtZ.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtlkAtZ.Name = "txtlkAtZ";
+            txtlkAtZ.Size = new System.Drawing.Size(156, 43);
+            txtlkAtZ.TabIndex = 48;
+            txtlkAtZ.Text = "4.5";
+            // 
+            // btnFlyTo
+            // 
+            btnFlyTo.Location = new System.Drawing.Point(712, 41);
+            btnFlyTo.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnFlyTo.Name = "btnFlyTo";
+            btnFlyTo.Size = new System.Drawing.Size(99, 70);
+            btnFlyTo.TabIndex = 45;
+            btnFlyTo.UseVisualStyleBackColor = true;
+            btnFlyTo.Click += btnFlyTo_Click;
+            // 
+            // txtX
+            // 
+            txtX.Location = new System.Drawing.Point(362, 41);
+            txtX.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtX.Name = "txtX";
+            txtX.Size = new System.Drawing.Size(156, 43);
+            txtX.TabIndex = 30;
+            txtX.Text = "160850.585";
+            // 
+            // txtY
+            // 
+            txtY.Location = new System.Drawing.Point(362, 115);
+            txtY.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtY.Name = "txtY";
+            txtY.Size = new System.Drawing.Size(156, 43);
+            txtY.TabIndex = 31;
+            txtY.Text = "383923.326";
+            // 
+            // txtZ
+            // 
+            txtZ.Location = new System.Drawing.Point(362, 185);
+            txtZ.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtZ.Name = "txtZ";
+            txtZ.Size = new System.Drawing.Size(156, 43);
+            txtZ.TabIndex = 32;
+            txtZ.Text = "4.0";
+            // 
+            // lblX
+            // 
+            lblX.AutoSize = true;
+            lblX.Location = new System.Drawing.Point(300, 41);
+            lblX.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblX.Name = "lblX";
+            lblX.Size = new System.Drawing.Size(33, 37);
+            lblX.TabIndex = 33;
+            lblX.Text = "X";
+            // 
+            // lblY
+            // 
+            lblY.AutoSize = true;
+            lblY.Location = new System.Drawing.Point(300, 115);
+            lblY.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblY.Name = "lblY";
+            lblY.Size = new System.Drawing.Size(32, 37);
+            lblY.TabIndex = 34;
+            lblY.Text = "Y";
+            // 
+            // lblZ
+            // 
+            lblZ.AutoSize = true;
+            lblZ.Location = new System.Drawing.Point(300, 185);
+            lblZ.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblZ.Name = "lblZ";
+            lblZ.Size = new System.Drawing.Size(32, 37);
+            lblZ.TabIndex = 35;
+            lblZ.Text = "Z";
+            // 
+            // btnOpenByCoordinate
+            // 
+            btnOpenByCoordinate.Location = new System.Drawing.Point(13, 41);
+            btnOpenByCoordinate.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnOpenByCoordinate.Name = "btnOpenByCoordinate";
+            btnOpenByCoordinate.Size = new System.Drawing.Size(276, 85);
+            btnOpenByCoordinate.TabIndex = 44;
+            btnOpenByCoordinate.Text = "Open by coordinate";
+            btnOpenByCoordinate.UseVisualStyleBackColor = true;
+            btnOpenByCoordinate.Click += btnOpenByCoordinate_Click;
+            // 
+            // btnLookAtCoordinate
+            // 
+            btnLookAtCoordinate.Location = new System.Drawing.Point(13, 144);
+            btnLookAtCoordinate.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnLookAtCoordinate.Name = "btnLookAtCoordinate";
+            btnLookAtCoordinate.Size = new System.Drawing.Size(276, 85);
+            btnLookAtCoordinate.TabIndex = 29;
+            btnLookAtCoordinate.Text = "Look at coordinate";
+            btnLookAtCoordinate.UseVisualStyleBackColor = true;
+            btnLookAtCoordinate.Click += btnLookAtCoordinate_Click;
+            // 
+            // grAPIInfo
+            // 
+            grAPIInfo.Controls.Add(lblResult);
+            grAPIInfo.Controls.Add(txtAPIResult);
+            grAPIInfo.Controls.Add(btnApiReadyState);
+            grAPIInfo.Controls.Add(btnApplicationVersion);
+            grAPIInfo.Controls.Add(btnApplicationName);
+            grAPIInfo.Location = new System.Drawing.Point(900, 222);
+            grAPIInfo.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grAPIInfo.Name = "grAPIInfo";
+            grAPIInfo.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grAPIInfo.Size = new System.Drawing.Size(300, 540);
+            grAPIInfo.TabIndex = 0;
+            grAPIInfo.TabStop = false;
+            grAPIInfo.Text = "API Info";
+            // 
+            // lblResult
+            // 
+            lblResult.AutoSize = true;
+            lblResult.Location = new System.Drawing.Point(13, 342);
+            lblResult.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new System.Drawing.Size(94, 37);
+            lblResult.TabIndex = 22;
+            lblResult.Text = "Result:";
+            // 
+            // txtAPIResult
+            // 
+            txtAPIResult.Location = new System.Drawing.Point(13, 440);
+            txtAPIResult.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtAPIResult.Name = "txtAPIResult";
+            txtAPIResult.Size = new System.Drawing.Size(268, 43);
+            txtAPIResult.TabIndex = 23;
+            // 
+            // btnApiReadyState
+            // 
+            btnApiReadyState.Location = new System.Drawing.Point(13, 41);
+            btnApiReadyState.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnApiReadyState.Name = "btnApiReadyState";
+            btnApiReadyState.Size = new System.Drawing.Size(276, 85);
+            btnApiReadyState.TabIndex = 8;
+            btnApiReadyState.Text = "API Ready State";
+            btnApiReadyState.UseVisualStyleBackColor = true;
+            btnApiReadyState.Click += btnApiReadyState_Click;
+            // 
+            // btnApplicationVersion
+            // 
+            btnApplicationVersion.Location = new System.Drawing.Point(13, 144);
+            btnApplicationVersion.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnApplicationVersion.Name = "btnApplicationVersion";
+            btnApplicationVersion.Size = new System.Drawing.Size(276, 85);
+            btnApplicationVersion.TabIndex = 9;
+            btnApplicationVersion.Text = "Application version";
+            btnApplicationVersion.UseVisualStyleBackColor = true;
+            btnApplicationVersion.Click += btnApplicationVersion_Click;
+            // 
+            // btnApplicationName
+            // 
+            btnApplicationName.Location = new System.Drawing.Point(13, 242);
+            btnApplicationName.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnApplicationName.Name = "btnApplicationName";
+            btnApplicationName.Size = new System.Drawing.Size(276, 85);
+            btnApplicationName.TabIndex = 10;
+            btnApplicationName.Text = "Application name";
+            btnApplicationName.UseVisualStyleBackColor = true;
+            btnApplicationName.Click += btnApplicationName_Click;
+            // 
+            // grViewerToggles
+            // 
+            grViewerToggles.Controls.Add(btnGetType);
+            grViewerToggles.Controls.Add(btnToggleSidebarExpandable);
+            grViewerToggles.Controls.Add(btnToggleSidebar);
+            grViewerToggles.Controls.Add(btnToggle3DCursor);
+            grViewerToggles.Controls.Add(btnToggleRecordingsVisible);
+            grViewerToggles.Controls.Add(btnToggleTimeTravelExpanded);
+            grViewerToggles.Controls.Add(btnToggleNavbarExpanded);
+            grViewerToggles.Controls.Add(btnToggleTimeTravelVisible);
+            grViewerToggles.Controls.Add(btnToggleNavbarVisible);
+            grViewerToggles.Location = new System.Drawing.Point(450, 222);
+            grViewerToggles.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grViewerToggles.Name = "grViewerToggles";
+            grViewerToggles.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grViewerToggles.Size = new System.Drawing.Size(450, 675);
+            grViewerToggles.TabIndex = 0;
+            grViewerToggles.TabStop = false;
+            grViewerToggles.Text = "Viewer toggles";
+            // 
+            // btnGetType
+            // 
+            btnGetType.Location = new System.Drawing.Point(13, 612);
+            btnGetType.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnGetType.Name = "btnGetType";
+            btnGetType.Size = new System.Drawing.Size(384, 63);
+            btnGetType.TabIndex = 44;
+            btnGetType.Text = "Get viewer type";
+            btnGetType.UseVisualStyleBackColor = true;
+            btnGetType.Click += btnGetType_Click;
+            // 
+            // btnToggleSidebarExpandable
+            // 
+            btnToggleSidebarExpandable.Location = new System.Drawing.Point(13, 544);
+            btnToggleSidebarExpandable.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleSidebarExpandable.Name = "btnToggleSidebarExpandable";
+            btnToggleSidebarExpandable.Size = new System.Drawing.Size(384, 63);
+            btnToggleSidebarExpandable.TabIndex = 43;
+            btnToggleSidebarExpandable.Text = "Toggle Sidebar expandable";
+            btnToggleSidebarExpandable.UseVisualStyleBackColor = true;
+            btnToggleSidebarExpandable.Click += btnToggleSidebarExpandable_Click;
+            // 
+            // btnToggleSidebar
+            // 
+            btnToggleSidebar.Location = new System.Drawing.Point(13, 470);
+            btnToggleSidebar.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleSidebar.Name = "btnToggleSidebar";
+            btnToggleSidebar.Size = new System.Drawing.Size(384, 63);
+            btnToggleSidebar.TabIndex = 42;
+            btnToggleSidebar.Text = "Toggle Sidebar expanded";
+            btnToggleSidebar.UseVisualStyleBackColor = true;
+            btnToggleSidebar.Click += btnToggleSidebar_Click;
+            // 
+            // btnToggle3DCursor
+            // 
+            btnToggle3DCursor.Location = new System.Drawing.Point(13, 398);
+            btnToggle3DCursor.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggle3DCursor.Name = "btnToggle3DCursor";
+            btnToggle3DCursor.Size = new System.Drawing.Size(384, 63);
+            btnToggle3DCursor.TabIndex = 41;
+            btnToggle3DCursor.Text = "Toggle 3D Cursor";
+            btnToggle3DCursor.UseVisualStyleBackColor = true;
+            btnToggle3DCursor.Click += btnToggle3DCursor_Click;
+            // 
+            // btnToggleRecordingsVisible
+            // 
+            btnToggleRecordingsVisible.Location = new System.Drawing.Point(13, 41);
+            btnToggleRecordingsVisible.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleRecordingsVisible.Name = "btnToggleRecordingsVisible";
+            btnToggleRecordingsVisible.Size = new System.Drawing.Size(384, 63);
+            btnToggleRecordingsVisible.TabIndex = 36;
+            btnToggleRecordingsVisible.Text = "Toggle recordings visible";
+            btnToggleRecordingsVisible.UseVisualStyleBackColor = true;
+            btnToggleRecordingsVisible.Click += btnToggleRecordingsVisible_Click;
+            // 
+            // btnToggleTimeTravelExpanded
+            // 
+            btnToggleTimeTravelExpanded.Location = new System.Drawing.Point(13, 115);
+            btnToggleTimeTravelExpanded.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleTimeTravelExpanded.Name = "btnToggleTimeTravelExpanded";
+            btnToggleTimeTravelExpanded.Size = new System.Drawing.Size(384, 63);
+            btnToggleTimeTravelExpanded.TabIndex = 40;
+            btnToggleTimeTravelExpanded.Text = "Toggle time travel expanded";
+            btnToggleTimeTravelExpanded.UseVisualStyleBackColor = true;
+            btnToggleTimeTravelExpanded.Click += btnToggleTimeTravelExpanded_Click;
+            // 
+            // btnToggleNavbarExpanded
+            // 
+            btnToggleNavbarExpanded.Location = new System.Drawing.Point(13, 185);
+            btnToggleNavbarExpanded.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleNavbarExpanded.Name = "btnToggleNavbarExpanded";
+            btnToggleNavbarExpanded.Size = new System.Drawing.Size(384, 63);
+            btnToggleNavbarExpanded.TabIndex = 38;
+            btnToggleNavbarExpanded.Text = "Toggle navbar expanded";
+            btnToggleNavbarExpanded.UseVisualStyleBackColor = true;
+            btnToggleNavbarExpanded.Click += btnToggleNavbarExpanded_Click;
+            // 
+            // btnToggleTimeTravelVisible
+            // 
+            btnToggleTimeTravelVisible.Location = new System.Drawing.Point(13, 255);
+            btnToggleTimeTravelVisible.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleTimeTravelVisible.Name = "btnToggleTimeTravelVisible";
+            btnToggleTimeTravelVisible.Size = new System.Drawing.Size(384, 63);
+            btnToggleTimeTravelVisible.TabIndex = 39;
+            btnToggleTimeTravelVisible.Text = "Toggle time travel visible";
+            btnToggleTimeTravelVisible.UseVisualStyleBackColor = true;
+            btnToggleTimeTravelVisible.Click += btnToggleTimeTravelVisible_Click;
+            // 
+            // btnToggleNavbarVisible
+            // 
+            btnToggleNavbarVisible.Location = new System.Drawing.Point(13, 329);
+            btnToggleNavbarVisible.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnToggleNavbarVisible.Name = "btnToggleNavbarVisible";
+            btnToggleNavbarVisible.Size = new System.Drawing.Size(384, 63);
+            btnToggleNavbarVisible.TabIndex = 37;
+            btnToggleNavbarVisible.Text = "Toggle Navbar Visible";
+            btnToggleNavbarVisible.UseVisualStyleBackColor = true;
+            btnToggleNavbarVisible.Click += btnToggleNavbarVisible_Click;
+            // 
+            // grOpenByAddress
+            // 
+            grOpenByAddress.Controls.Add(lblAddress);
+            grOpenByAddress.Controls.Add(txtAdress);
+            grOpenByAddress.Controls.Add(btnOpenByAddress);
+            grOpenByAddress.Location = new System.Drawing.Point(450, 0);
+            grOpenByAddress.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByAddress.Name = "grOpenByAddress";
+            grOpenByAddress.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grOpenByAddress.Size = new System.Drawing.Size(750, 213);
+            grOpenByAddress.TabIndex = 0;
+            grOpenByAddress.TabStop = false;
+            grOpenByAddress.Text = "Open by address";
+            // 
+            // lblAddress
+            // 
+            lblAddress.AutoSize = true;
+            lblAddress.Location = new System.Drawing.Point(13, 41);
+            lblAddress.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new System.Drawing.Size(111, 37);
+            lblAddress.TabIndex = 12;
+            lblAddress.Text = "Address";
+            // 
+            // txtAdress
+            // 
+            txtAdress.Location = new System.Drawing.Point(163, 41);
+            txtAdress.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtAdress.Name = "txtAdress";
+            txtAdress.Size = new System.Drawing.Size(568, 43);
+            txtAdress.TabIndex = 14;
+            txtAdress.Text = "Lange Haven 145, Schiedam";
+            // 
+            // btnOpenByAddress
+            // 
+            btnOpenByAddress.Location = new System.Drawing.Point(13, 115);
+            btnOpenByAddress.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnOpenByAddress.Name = "btnOpenByAddress";
+            btnOpenByAddress.Size = new System.Drawing.Size(726, 85);
+            btnOpenByAddress.TabIndex = 16;
+            btnOpenByAddress.Text = "Open by address";
+            btnOpenByAddress.UseVisualStyleBackColor = true;
+            btnOpenByAddress.Click += btnOpenByAddress_Click;
+            // 
+            // grLogin
+            // 
+            grLogin.Controls.Add(lblClientId);
+            grLogin.Controls.Add(txtClientId);
+            grLogin.Controls.Add(lblSRS);
+            grLogin.Controls.Add(txtSrs);
+            grLogin.Controls.Add(btnSave);
+            grLogin.Controls.Add(btnLogout);
+            grLogin.Controls.Add(lblAPIKey);
+            grLogin.Controls.Add(txtAPIKey);
+            grLogin.Controls.Add(lblUsername);
+            grLogin.Controls.Add(lblPassword);
+            grLogin.Controls.Add(txtUsername);
+            grLogin.Controls.Add(txtPassword);
+            grLogin.Controls.Add(btnLogin);
+            grLogin.Location = new System.Drawing.Point(0, 0);
+            grLogin.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grLogin.Name = "grLogin";
+            grLogin.Padding = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            grLogin.Size = new System.Drawing.Size(450, 433);
+            grLogin.TabIndex = 49;
+            grLogin.TabStop = false;
+            grLogin.Text = "Login";
+            // 
+            // lblClientId
+            // 
+            lblClientId.AutoSize = true;
+            lblClientId.Location = new System.Drawing.Point(13, 194);
+            lblClientId.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblClientId.Name = "lblClientId";
+            lblClientId.Size = new System.Drawing.Size(109, 37);
+            lblClientId.TabIndex = 50;
+            lblClientId.Text = "ClientId";
+            // 
+            // txtClientId
+            // 
+            txtClientId.Location = new System.Drawing.Point(163, 194);
+            txtClientId.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtClientId.Name = "txtClientId";
+            txtClientId.Size = new System.Drawing.Size(268, 43);
+            txtClientId.TabIndex = 49;
+            txtClientId.TextChanged += txtClientId_TextChanged;
+            // 
+            // lblSRS
+            // 
+            lblSRS.AutoSize = true;
+            lblSRS.Location = new System.Drawing.Point(13, 250);
+            lblSRS.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblSRS.Name = "lblSRS";
+            lblSRS.Size = new System.Drawing.Size(61, 37);
+            lblSRS.TabIndex = 47;
+            lblSRS.Text = "SRS";
+            // 
+            // txtSrs
+            // 
+            txtSrs.Location = new System.Drawing.Point(163, 250);
+            txtSrs.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtSrs.Name = "txtSrs";
+            txtSrs.Size = new System.Drawing.Size(268, 43);
+            txtSrs.TabIndex = 48;
+            txtSrs.Text = "EPSG:28992";
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new System.Drawing.Point(313, 324);
+            btnSave.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(126, 85);
+            btnSave.TabIndex = 9;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnLogout
+            // 
+            btnLogout.Location = new System.Drawing.Point(163, 324);
+            btnLogout.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new System.Drawing.Size(126, 85);
+            btnLogout.TabIndex = 8;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
+            // lblAPIKey
+            // 
+            lblAPIKey.AutoSize = true;
+            lblAPIKey.Location = new System.Drawing.Point(13, 139);
+            lblAPIKey.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblAPIKey.Name = "lblAPIKey";
+            lblAPIKey.Size = new System.Drawing.Size(106, 37);
+            lblAPIKey.TabIndex = 6;
+            lblAPIKey.Text = "API Key";
+            // 
+            // txtAPIKey
+            // 
+            txtAPIKey.Location = new System.Drawing.Point(163, 139);
+            txtAPIKey.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtAPIKey.Name = "txtAPIKey";
+            txtAPIKey.Size = new System.Drawing.Size(268, 43);
+            txtAPIKey.TabIndex = 7;
+            txtAPIKey.TextChanged += txtAPIKey_TextChanged;
+            // 
+            // lblUsername
+            // 
+            lblUsername.AutoSize = true;
+            lblUsername.Location = new System.Drawing.Point(13, 28);
+            lblUsername.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new System.Drawing.Size(136, 37);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new System.Drawing.Point(13, 83);
+            lblPassword.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new System.Drawing.Size(128, 37);
+            lblPassword.TabIndex = 2;
+            lblPassword.Text = "Password";
+            // 
+            // txtUsername
+            // 
+            txtUsername.Location = new System.Drawing.Point(163, 28);
+            txtUsername.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new System.Drawing.Size(268, 43);
+            txtUsername.TabIndex = 3;
+            txtUsername.TextChanged += txtUsername_TextChanged;
+            // 
+            // txtPassword
+            // 
+            txtPassword.Location = new System.Drawing.Point(163, 83);
+            txtPassword.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new System.Drawing.Size(268, 43);
+            txtPassword.TabIndex = 4;
+            txtPassword.TextChanged += txtPassword_TextChanged;
+            // 
+            // btnLogin
+            // 
+            btnLogin.Location = new System.Drawing.Point(13, 324);
+            btnLogin.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new System.Drawing.Size(126, 85);
+            btnLogin.TabIndex = 5;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.EnabledChanged += btnLogin_EnabledChanged;
+            btnLogin.Click += btnLogin_Click;
+            // 
+            // Demo
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(3608, 1952);
+            Controls.Add(plControl);
+            Controls.Add(plStreetSmart);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            Name = "Demo";
+            Text = "Demo StreetSmart";
+            grOpenByQuery.ResumeLayout(false);
+            grOpenByQuery.PerformLayout();
+            plControl.ResumeLayout(false);
+            grShortCuts.ResumeLayout(false);
+            grShortCuts.PerformLayout();
+            grCloseViewers.ResumeLayout(false);
+            grPanoramaList.ResumeLayout(false);
+            grColorOverlay.ResumeLayout(false);
+            grColorOverlay.PerformLayout();
+            grSelectFeature.ResumeLayout(false);
+            grSelectFeature.PerformLayout();
+            grSld.ResumeLayout(false);
+            grSld.PerformLayout();
+            grButtonVisibility.ResumeLayout(false);
+            grOverlay.ResumeLayout(false);
+            grOverlay.PerformLayout();
+            grMeasurement.ResumeLayout(false);
+            grMeasurementMethod.ResumeLayout(false);
+            grMeasurementMethod.PerformLayout();
+            grMeasurementType.ResumeLayout(false);
+            grMeasurementType.PerformLayout();
+            grDevTools.ResumeLayout(false);
+            grRotationsZoomInOut.ResumeLayout(false);
+            grRotationsZoomInOut.PerformLayout();
+            grEvents.ResumeLayout(false);
+            grRecordingViewerColorPermissions.ResumeLayout(false);
+            grRecordingViewerColorPermissions.PerformLayout();
+            grOrientation.ResumeLayout(false);
+            grOrientation.PerformLayout();
+            grOpenByImageId.ResumeLayout(false);
+            grOpenByImageId.PerformLayout();
+            grCoordinate.ResumeLayout(false);
+            grCoordinate.PerformLayout();
+            grAPIInfo.ResumeLayout(false);
+            grAPIInfo.PerformLayout();
+            grViewerToggles.ResumeLayout(false);
+            grOpenByAddress.ResumeLayout(false);
+            grOpenByAddress.PerformLayout();
+            grLogin.ResumeLayout(false);
+            grLogin.PerformLayout();
+            ResumeLayout(false);
+        }
 
-    }
+        #endregion
 
-    #endregion
-
-    private System.Windows.Forms.Panel plStreetSmart;
+        private System.Windows.Forms.Panel plStreetSmart;
     private System.Windows.Forms.Panel plControl;
     private System.Windows.Forms.Button btRotateLeft;
     private System.Windows.Forms.Button btnLogin;

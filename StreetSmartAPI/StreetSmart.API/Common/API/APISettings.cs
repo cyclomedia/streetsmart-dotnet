@@ -37,7 +37,7 @@ using StreetSmart.Common.Interfaces.API;
 namespace StreetSmart.Common.API
 {
     // ReSharper disable once InconsistentNaming
-    internal class APISettings : CefSettings, IAPISettings
+    public class APISettings : CefSettings, IAPISettings
     {
         public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
         {

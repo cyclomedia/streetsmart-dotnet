@@ -1,11 +1,13 @@
 
+using CefSharp.WinForms;
 using Microsoft.Extensions.Configuration;
+using StreetSmart.Common.API;
 using StreetSmart.Common.Factories;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
 
-namespace StreetSmart.Tests.NET6
+namespace StreetSmart.WinForms.Tests
 {
     public enum State
     {
@@ -38,7 +40,7 @@ namespace StreetSmart.Tests.NET6
 
             Configuration = builder.Build();
 
-            _api = StreetSmartAPIFactory.Create();
+            _api = StreetSmartAPIFactory.Create(new APISettings() { LogSeverity = CefSharp.LogSeverity.Verbose });
             _api.APIReady += OnApiReady;
         }
         private void OnApiReady(object? sender, EventArgs args)

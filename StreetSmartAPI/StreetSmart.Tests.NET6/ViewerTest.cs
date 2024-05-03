@@ -1,7 +1,7 @@
 ﻿using StreetSmart.Common.Factories;
 using StreetSmart.Common.Interfaces.Data;
 
-namespace StreetSmart.Tests.NET6
+namespace StreetSmart.WinForms.Tests
 {
     public class ViewerTest : IClassFixture<ApiFixture>
     {
