@@ -17,6 +17,7 @@
  */
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -30,6 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © CycloMedia 2016 - 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: InternalsVisibleTo("StreetSmart.WPF.Tests.NET6, PublicKey=00240000048000009400000006020000002400005253413100040000010001006da8a4ca51ffa02d02c538c322b74c4d300a79151cb91f588414fc5ac7389f005676a275e160a9ba00c23dc34e5385ec08a3545a4c477b82185e339927b15ea629aa4fd508593e9b01189a337108716e929bdfc91bdb44da9a99574645ed5c8824883b4f71fcd37816746c5e988419b51641455db9b5834a84599ab9632effbc")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

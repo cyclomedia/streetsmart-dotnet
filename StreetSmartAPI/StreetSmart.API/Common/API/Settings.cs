@@ -48,7 +48,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Settings(ChromiumWebBrowser browser)
+    public Settings(IStreetSmartBrowser browser)
       : base(browser)
     {
       RegisterThisJsObject();

@@ -888,6 +888,8 @@
     <Compile Include="..\Common\Interfaces\SLD\VendorOptionType.cs">
       <Link>Interfaces\SLD\VendorOptionType.cs</Link>
     </Compile>
+    <Compile Include="..\Common\IStreetSmartBrowser.cs" Link="IStreetSmartBrowser.cs" />
+    <Compile Include="..\Common\StreetSmartBrowserAdapter.cs" Link="StreetSmartBrowserAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\ReleaseNotes.txt">

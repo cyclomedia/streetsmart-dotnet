@@ -33,7 +33,8 @@ namespace StreetSmart.Tests.NET6
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()) // Set the path to your appsettings.json file
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.User.json", true);
 
             Configuration = builder.Build();
 

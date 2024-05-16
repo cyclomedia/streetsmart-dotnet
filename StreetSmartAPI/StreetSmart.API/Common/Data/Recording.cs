@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-
+using Newtonsoft.Json;
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
@@ -45,12 +45,12 @@ namespace StreetSmart.Common.Data
     public Recording(Dictionary<string, object> recording)
     {
       var xyz = GetDictValue(recording, "xyz");
-      double x = ToDouble(xyz, "0");
-      double y = ToDouble(xyz, "1");
-      double z = ToDouble(xyz, "2");
+      var x = ToNullDouble(xyz, "0");
+      var y = ToNullDouble(xyz, "1");
+      var z = ToNullDouble(xyz, "2");
       XYZ = new Coordinate(x, y, z);
 
-      GroundLevelOffset = ToNullDouble(recording, "groundLevelOffset");
+      GroundLevelOffset = ToNullDouble(recording, "groundLevelOffset") ?? ToNullDouble(recording, "GroundLevelOffset");
       RecorderDirection = ToNullDouble(recording, "recorderDirection");
       Orientation = ToNullDouble(recording, "orientation");
       RecordedAt = ToNullDateTime(recording, "recordedAt");

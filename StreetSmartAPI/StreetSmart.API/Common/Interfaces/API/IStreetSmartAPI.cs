@@ -46,7 +46,7 @@ namespace StreetSmart.Common.Interfaces.API
     ISettings Settings { get; }
 
     /// <summary>
-    /// Object which is an Interface for enabeling/disabeling shortcuts
+    /// Object which is an Interface for enabling/disabling shortcuts
     /// </summary>
     IShortcuts Shortcuts { get; }
 

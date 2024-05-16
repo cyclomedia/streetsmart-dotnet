@@ -41,7 +41,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public MeshViewer(ChromiumWebBrowser browser, MeshViewerList meshViewerList, string name)
+    public MeshViewer(IStreetSmartBrowser browser, MeshViewerList meshViewerList, string name)
       : base(browser, meshViewerList, name)
     {
       _ci = CultureInfo.InvariantCulture;

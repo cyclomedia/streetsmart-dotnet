@@ -23,8 +23,6 @@ using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-using CefSharp;
-
 #if WINFORMS
 using CefSharp.WinForms;
 #else
@@ -43,7 +41,7 @@ using Orientation = StreetSmart.Common.Data.Orientation;
 
 namespace StreetSmart.Common.API
 {
-  internal sealed class PanoramaViewer : ImageViewer, IPanoramaViewer
+    public sealed class PanoramaViewer : ImageViewer, IPanoramaViewer
   {
     #region Members
 
@@ -100,7 +98,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public PanoramaViewer(ChromiumWebBrowser browser, PanoramaViewerList panoramaViewerList, string name)
+    public PanoramaViewer(IStreetSmartBrowser browser, PanoramaViewerList panoramaViewerList, string name)
       : base(browser, panoramaViewerList)
     {
       Name = name;

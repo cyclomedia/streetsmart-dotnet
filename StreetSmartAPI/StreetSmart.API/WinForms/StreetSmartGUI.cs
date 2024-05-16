@@ -17,7 +17,7 @@
  */
 
 using CefSharp.WinForms;
-
+using StreetSmart.Common;
 using System.Windows.Forms;
 
 namespace StreetSmart.WinForms
@@ -64,11 +64,11 @@ namespace StreetSmart.WinForms
   // ReSharper disable once InconsistentNaming
   public sealed partial class StreetSmartGUI : UserControl
   {
-    internal StreetSmartGUI(ChromiumWebBrowser browser)
+    internal StreetSmartGUI(IStreetSmartBrowser browser)
     {
       InitializeComponent();
       Dock = browser.Dock;
-      Controls.Add(browser);      
+      Controls.Add(browser.Control());      
     }
   }
 }

@@ -48,7 +48,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Shortcuts(ChromiumWebBrowser browser)
+    public Shortcuts(IStreetSmartBrowser browser)
       : base(browser)
     {
       RegisterThisJsObject();

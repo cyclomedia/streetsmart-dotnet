@@ -78,7 +78,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public ObliqueViewer(ChromiumWebBrowser browser, ObliqueViewerList obliqueViewerList, string name)
+    public ObliqueViewer(IStreetSmartBrowser browser, ObliqueViewerList obliqueViewerList, string name)
       : base(browser, obliqueViewerList, name)
     {
       ConnectEvents();

@@ -25,6 +25,8 @@ using StreetSmart.Common.Data;
 using StreetSmart.Common.Exceptions;
 
 using CefSharp;
+using StreetSmart.Common;
+
 
 #if WINFORMS
 using CefSharp.WinForms;
@@ -35,7 +37,7 @@ using CefSharp.Wpf;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  abstract class APIBase: DataConvert
+  public abstract class APIBase: DataConvert
   {
     #region Tasks
 
@@ -53,7 +55,7 @@ namespace StreetSmart.Common.API
 
     protected int GetProcessId => _processId = (_processId + 1) % 10000;
 
-    protected ChromiumWebBrowser Browser { get; set; }
+    protected IStreetSmartBrowser Browser { get; set; }
 
     protected virtual string CallFunctionBase => string.Empty;
 
@@ -89,7 +91,7 @@ namespace StreetSmart.Common.API
       _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
     }
 
-    protected APIBase(ChromiumWebBrowser browser)
+    protected APIBase(IStreetSmartBrowser browser)
       : this()
     {
       Browser = browser;
