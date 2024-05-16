@@ -16,11 +16,10 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -34,7 +33,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        CalculatedMethod = (CalculatedMethod) ToEnum(typeof(CalculatedMethod), resultDirection, "calculationMethod");
+        CalculatedMethod = (CalculatedMethod)ToEnum(typeof(CalculatedMethod), resultDirection, "calculationMethod");
       }
       catch (ArgumentException)
       {
@@ -74,7 +73,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
         if (resultDirection.RecordedAt != null)
         {
-          DateTime recordedAt = (DateTime) resultDirection.RecordedAt;
+          DateTime recordedAt = (DateTime)resultDirection.RecordedAt;
           RecordedAt = DateTime.FromBinary(recordedAt.ToBinary());
         }
       }

@@ -16,11 +16,10 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data.GeoJson
 {

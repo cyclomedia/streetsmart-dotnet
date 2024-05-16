@@ -16,12 +16,11 @@
  * License along with this library.
  */
 
-using System;
-using System.Security;
-
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
+using System;
+using System.Security;
 
 namespace StreetSmart.Common.Factories
 {

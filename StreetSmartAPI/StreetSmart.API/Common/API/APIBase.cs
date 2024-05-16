@@ -16,28 +16,18 @@
  * License along with this library.
  */
 
+using CefSharp;
+using StreetSmart.Common.Data;
+using StreetSmart.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-using StreetSmart.Common.Data;
-using StreetSmart.Common.Exceptions;
-
-using CefSharp;
-using StreetSmart.Common;
-
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  public abstract class APIBase: DataConvert
+  public abstract class APIBase : DataConvert
   {
     #region Tasks
 
@@ -178,7 +168,7 @@ namespace StreetSmart.Common.API
         }
       };
 #endif
-        }
+    }
 
     protected bool CheckResultTask(string funcName)
     {

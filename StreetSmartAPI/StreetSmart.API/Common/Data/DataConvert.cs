@@ -21,184 +21,183 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection.Metadata;
 
 namespace StreetSmart.Common.Data
 {
-    public class DataConvert : NotifyPropertyChanged
+  public class DataConvert : NotifyPropertyChanged
+  {
+    protected static CultureInfo ci => CultureInfo.InvariantCulture;
+
+    public double ToDouble(object value)
     {
-        protected static CultureInfo ci => CultureInfo.InvariantCulture;
-
-        public double ToDouble(object value)
-        {
-            return double.TryParse(value?.ToString(), out var outValue) ? outValue : 0.0;
-        }
-
-        public double ToDouble(Dictionary<string, object> details, string value)
-        {
-            return ToDouble(GetValue(details, value));
-        }
-
-        public double ToDouble(object[] array, int nr)
-        {
-            return array.Length > nr ? ToDouble(array[nr]) : 0.0;
-        }
-
-        public double? ToNullDouble(object value)
-        {
-            return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? null : outValue : null;
-        }
-
-        public double? ToNullDouble(Dictionary<string, object> details, string value)
-        {
-            return ToNullDouble(GetValue(details, value));
-        }
-
-        public int ToInt(object value)
-        {
-            return int.TryParse(value?.ToString(), out var outValue) ? outValue : 0;
-        }
-
-        public int? ToNullInt(object value)
-        {
-            return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
-        }
-
-        public int ToInt(object[] array, int nr)
-        {
-            return array.Length > nr ? ToInt(array[nr]) : 0;
-        }
-
-        public int ToInt(Dictionary<string, object> details, string value)
-        {
-            return ToInt(GetValue(details, value));
-        }
-
-        public int? ToNullInt(Dictionary<string, object> details, string value)
-        {
-            return ToNullInt(GetValue(details, value));
-        }
-
-        public string ToString(object value)
-        {
-            return value?.ToString() ?? string.Empty;
-        }
-
-        public string ToString(Dictionary<string, object> details, string value)
-        {
-            return ToString(GetValue(details, value));
-        }
-
-        public DateTime? ToNullDateTime(object value)
-        {
-            return value == null ? null : (DateTime?)DateTime.Parse(value.ToString());
-        }
-
-        public DateTime? ToNullDateTime(Dictionary<string, object> details, string value)
-        {
-            return ToNullDateTime(GetValue(details, value));
-        }
-
-        public DateTime ToDateTime(object value)
-        {
-            return DateTime.Parse(value?.ToString());
-        }
-
-        public DateTime ToDateTime(Dictionary<string, object> details, string value)
-        {
-            return ToDateTime(GetValue(details, value));
-        }
-
-        public object ToEnum(Type type, object value)
-        {
-            return Enum.Parse(type, ToString(value));
-        }
-
-        public object ToEnum(Type type, Dictionary<string, object> details, string value)
-        {
-            return ToEnum(type, GetValue(details, value));
-        }
-
-        public bool ToBool(object value)
-        {
-            return (bool)(value ?? false);
-        }
-
-        public bool ToBool(Dictionary<string, object> details, string value)
-        {
-            return ToBool(GetValue(details, value));
-        }
-
-        public Dictionary<string, object> ToDictionary(object value)
-        {
-            Dictionary<string, object> result;
-
-            if (value is Dictionary<string, object> objects)
-            {
-                result = objects;
-            }
-            else if (value is ExpandoObject expandoObject)
-            {
-                result = expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
-            }
-            else
-            {
-                try
-                {
-                    result = value.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(value, null));
-                }
-                catch
-                {
-                    result = new Dictionary<string, object>();
-                }
-            }
-
-            return result;
-        }
-
-        public IList<object> ToList(object value)
-        {
-            return value as IList<object> ?? new List<object>();
-        }
-
-        public object[] ToArray(object value)
-        {
-            if (value is IList<object>)
-            {
-                return (value as List<object>)?.ToArray() ?? Array.Empty<object>();
-            }
-
-            return Array.Empty<object>();
-        }
-
-        public object[] GetArrayValue(Dictionary<string, object> details, string value)
-        {
-            return ToArray(GetValue(details, value));
-        }
-
-        public object GetValue(ExpandoObject details, string value)
-        {
-            return GetValue(ToDictionary(details), value);
-        }
-
-        public object GetValue(Dictionary<string, object> details, string value)
-        { 
-            return details?.ContainsKey(value) ?? false ? details[value] : null;
-        }
-
-        public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
-        {
-            return ToDictionary(GetValue(details, value));
-        }
-
-        public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
-        {
-            return ToDictionary(GetValue(details, value));
-        }
-
-        public IList<object> GetListValue(Dictionary<string, object> details, string value)
-        {
-            return ToList(GetValue(details, value));
-        }
+      return double.TryParse(value?.ToString(), out var outValue) ? outValue : 0.0;
     }
+
+    public double ToDouble(Dictionary<string, object> details, string value)
+    {
+      return ToDouble(GetValue(details, value));
+    }
+
+    public double ToDouble(object[] array, int nr)
+    {
+      return array.Length > nr ? ToDouble(array[nr]) : 0.0;
+    }
+
+    public double? ToNullDouble(object value)
+    {
+      return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? null : outValue : null;
+    }
+
+    public double? ToNullDouble(Dictionary<string, object> details, string value)
+    {
+      return ToNullDouble(GetValue(details, value));
+    }
+
+    public int ToInt(object value)
+    {
+      return int.TryParse(value?.ToString(), out var outValue) ? outValue : 0;
+    }
+
+    public int? ToNullInt(object value)
+    {
+      return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
+    }
+
+    public int ToInt(object[] array, int nr)
+    {
+      return array.Length > nr ? ToInt(array[nr]) : 0;
+    }
+
+    public int ToInt(Dictionary<string, object> details, string value)
+    {
+      return ToInt(GetValue(details, value));
+    }
+
+    public int? ToNullInt(Dictionary<string, object> details, string value)
+    {
+      return ToNullInt(GetValue(details, value));
+    }
+
+    public string ToString(object value)
+    {
+      return value?.ToString() ?? string.Empty;
+    }
+
+    public string ToString(Dictionary<string, object> details, string value)
+    {
+      return ToString(GetValue(details, value));
+    }
+
+    public DateTime? ToNullDateTime(object value)
+    {
+      return value == null ? null : (DateTime?)DateTime.Parse(value.ToString());
+    }
+
+    public DateTime? ToNullDateTime(Dictionary<string, object> details, string value)
+    {
+      return ToNullDateTime(GetValue(details, value));
+    }
+
+    public DateTime ToDateTime(object value)
+    {
+      return DateTime.Parse(value?.ToString());
+    }
+
+    public DateTime ToDateTime(Dictionary<string, object> details, string value)
+    {
+      return ToDateTime(GetValue(details, value));
+    }
+
+    public object ToEnum(Type type, object value)
+    {
+      return Enum.Parse(type, ToString(value));
+    }
+
+    public object ToEnum(Type type, Dictionary<string, object> details, string value)
+    {
+      return ToEnum(type, GetValue(details, value));
+    }
+
+    public bool ToBool(object value)
+    {
+      return (bool)(value ?? false);
+    }
+
+    public bool ToBool(Dictionary<string, object> details, string value)
+    {
+      return ToBool(GetValue(details, value));
+    }
+
+    public Dictionary<string, object> ToDictionary(object value)
+    {
+      Dictionary<string, object> result;
+
+      if (value is Dictionary<string, object> objects)
+      {
+        result = objects;
+      }
+      else if (value is ExpandoObject expandoObject)
+      {
+        result = expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
+      }
+      else
+      {
+        try
+        {
+          result = value.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(value, null));
+        }
+        catch
+        {
+          result = new Dictionary<string, object>();
+        }
+      }
+
+      return result;
+    }
+
+    public IList<object> ToList(object value)
+    {
+      return value as IList<object> ?? new List<object>();
+    }
+
+    public object[] ToArray(object value)
+    {
+      if (value is IList<object>)
+      {
+        return (value as List<object>)?.ToArray() ?? [];
+      }
+
+      return [];
+    }
+
+    public object[] GetArrayValue(Dictionary<string, object> details, string value)
+    {
+      return ToArray(GetValue(details, value));
+    }
+
+    public object GetValue(ExpandoObject details, string value)
+    {
+      return GetValue(ToDictionary(details), value);
+    }
+
+    public object GetValue(Dictionary<string, object> details, string value)
+    {
+      return details?.ContainsKey(value) ?? false ? details[value] : null;
+    }
+
+    public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
+    {
+      return ToDictionary(GetValue(details, value));
+    }
+
+    public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
+    {
+      return ToDictionary(GetValue(details, value));
+    }
+
+    public IList<object> GetListValue(Dictionary<string, object> details, string value)
+    {
+      return ToList(GetValue(details, value));
+    }
+  }
 }

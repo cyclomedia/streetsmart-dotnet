@@ -9,32 +9,32 @@ using System.Windows.Forms;
 
 namespace StreetSmart.Common
 {
-    public interface IStreetSmartBrowser
+  public interface IStreetSmartBrowser
+  {
+    void ExecuteScriptAsync(string script);
+    IJavascriptObjectRepository JavascriptObjectRepository { get; }
+    bool IsDisposed { get; }
+    IBrowser GetBrowser();
+    string Address
     {
-        void ExecuteScriptAsync(string script);
-        IJavascriptObjectRepository JavascriptObjectRepository { get; }
-        bool IsDisposed {  get; }
-        IBrowser GetBrowser();
-        string Address 
-        { 
-            get;
+      get;
 #if WPF
-            set;
+      set;
 #endif
-        }
-        bool IsBrowserInitialized { get; }
+    }
+    bool IsBrowserInitialized { get; }
 #if WPF
-        Dispatcher Dispatcher { get; }
+    Dispatcher Dispatcher { get; }
 #endif
-        event EventHandler<FrameLoadEndEventArgs> FrameLoadEnd;
-        IDownloadHandler DownloadHandler { get; set; }
-        void ShowDevTools(IWindowInfo windowInfo = null, int inspectElementAtX = 0, int inspectElementAtY = 0);
-        void CloseDevTools();
+    event EventHandler<FrameLoadEndEventArgs> FrameLoadEnd;
+    IDownloadHandler DownloadHandler { get; set; }
+    void ShowDevTools(IWindowInfo windowInfo = null, int inspectElementAtX = 0, int inspectElementAtY = 0);
+    void CloseDevTools();
 #if WINFORMS
         DockStyle Dock { get; set; }
 
         Control Control();
 #endif
 
-    }
+  }
 }

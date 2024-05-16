@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Factories
 {
@@ -78,7 +77,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="obliqueViewer">The oblique viewer options</param>
     /// <returns>The viewer options used for open the viewers</returns>
     public static IViewerOptions Create(IList<ViewerType> viewerType, string srs,
-      IPanoramaViewerOptions panoramaViewer, IObliqueViewerOptions  obliqueViewer)
+      IPanoramaViewerOptions panoramaViewer, IObliqueViewerOptions obliqueViewer)
       => Create(viewerType, srs, panoramaViewer, obliqueViewer, null);
 
     /// <summary>

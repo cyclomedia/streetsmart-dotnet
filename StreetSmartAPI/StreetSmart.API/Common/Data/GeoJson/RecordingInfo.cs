@@ -16,11 +16,10 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -56,7 +55,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
         if (recordingInfo.RecordedAt != null)
         {
-          DateTime recordedAt = (DateTime) recordingInfo.RecordedAt;
+          DateTime recordedAt = (DateTime)recordingInfo.RecordedAt;
           RecordedAt = DateTime.FromBinary(recordedAt.ToBinary());
         }
       }

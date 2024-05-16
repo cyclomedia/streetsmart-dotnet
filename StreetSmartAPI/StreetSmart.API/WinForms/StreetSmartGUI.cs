@@ -16,7 +16,6 @@
  * License along with this library.
  */
 
-using CefSharp.WinForms;
 using StreetSmart.Common;
 using System.Windows.Forms;
 
@@ -68,7 +67,7 @@ namespace StreetSmart.WinForms
     {
       InitializeComponent();
       Dock = browser.Dock;
-      Controls.Add(browser.Control());      
+      Controls.Add(browser.Control());
     }
   }
 }

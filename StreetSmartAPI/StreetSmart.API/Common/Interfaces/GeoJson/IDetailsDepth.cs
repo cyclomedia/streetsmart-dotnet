@@ -21,7 +21,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Depth details
   /// </summary>
-  public interface IDetailsDepth: IDetails
+  public interface IDetailsDepth : IDetails
   {
     /// <summary>
     /// Position

@@ -16,11 +16,10 @@
  * License along with this library.
  */
 
-using System.Collections.ObjectModel;
-using System.Drawing;
-
 using StreetSmart.Common.Data.SLD;
 using StreetSmart.Common.Interfaces.SLD;
+using System.Collections.ObjectModel;
+using System.Drawing;
 
 namespace StreetSmart.Common.Factories
 {

@@ -16,14 +16,14 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick
+  internal class DetailsSmartClick : DetailsForwardIntersection, IDetailsSmartClick
   {
     public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
       : base(detailsSmartClick, MeasurementTools.Panorama)

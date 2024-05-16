@@ -16,13 +16,12 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
-
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.Interfaces.API
 {

@@ -25,8 +25,6 @@ using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 
-using CefSharp;
-
 #if WINFORMS
 using CefSharp.WinForms;
 #else

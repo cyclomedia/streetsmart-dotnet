@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Direction
   /// </summary>
-  public interface IDirection: ICoordinate
+  public interface IDirection : ICoordinate
   {
   }
 }

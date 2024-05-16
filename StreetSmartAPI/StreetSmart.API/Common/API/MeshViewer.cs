@@ -18,8 +18,6 @@
 
 using System;
 using System.Threading.Tasks;
-
-using CefSharp;
 using StreetSmart.Common.Interfaces.API;
 using System.Globalization;
 

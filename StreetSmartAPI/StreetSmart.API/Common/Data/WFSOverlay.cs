@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Drawing;
-
-using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
@@ -35,7 +34,7 @@ namespace StreetSmart.Common.Data
     public WFSOverlay(string name, Uri url, string typeName, string version, string sld, bool authRequired,
       ICredentials credentials, bool visible = true)
       : base(name, sld, visible)
-    {      
+    {
       Url = url;
       TypeName = typeName;
       Version = version;
