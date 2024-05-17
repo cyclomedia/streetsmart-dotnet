@@ -31,72 +31,72 @@ using StreetSmart.WinForms;
 
 namespace StreetSmart.Common.Interfaces.API
 {
-  // ReSharper disable InconsistentNaming
-
-  /// <summary>
-  /// API used to use and modify various StreetSmart components.
-  /// </summary>
-  public interface IStreetSmartAPI
-  {
-    #region Settings / Shortcuts
+    // ReSharper disable InconsistentNaming
 
     /// <summary>
-    /// Object which is an Interface for changing certain settings withing the api
+    /// API used to use and modify various StreetSmart components.
     /// </summary>
-    ISettings Settings { get; }
+    public interface IStreetSmartAPI
+    {
+        #region Settings / Shortcuts
 
-    /// <summary>
-    /// Object which is an Interface for enabeling/disabeling shortcuts
-    /// </summary>
-    IShortcuts Shortcuts { get; }
+        /// <summary>
+        /// Object which is an Interface for changing certain settings withing the api
+        /// </summary>
+        ISettings Settings { get; }
 
-    #endregion
+        /// <summary>
+        /// Object which is an Interface for enabeling/disabeling shortcuts
+        /// </summary>
+        IShortcuts Shortcuts { get; }
 
-    #region API events
+        #endregion
 
-    /// <summary>
-    /// Triggers when the frame is loaded.
-    /// After this trigger, you can login in the the API.
-    /// </summary>
-    event EventHandler APIReady;
+        #region API events
 
-    #endregion
+        /// <summary>
+        /// Triggers when the frame is loaded.
+        /// After this trigger, you can login in the the API.
+        /// </summary>
+        event EventHandler APIReady;
+    
+        #endregion
 
-    #region Interface events
+        #region Interface events
 
-    /// <summary>
-    /// Measurement changed or added.
-    /// </summary>
-    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
+        /// <summary>
+        /// Measurement changed or added.
+        /// </summary>
+        event EventHandler<IEventArgs<IFeatureCollection>> MeasurementChanged;
 
-    /// <summary>
-    /// Measurement started
-    /// </summary>
-    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
+        /// <summary>
+        /// Measurement started
+        /// </summary>
+        event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStarted;
 
-    /// <summary>
-    /// Measurement stopped.
-    /// </summary>
-    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
+        /// <summary>
+        /// Measurement stopped.
+        /// </summary>
+        event EventHandler<IEventArgs<IFeatureCollection>> MeasurementStopped;
 
-    /// <summary>
-    /// Measurement saved.
-    /// </summary>
-    event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
+        /// <summary>
+        /// Measurement saved.
+        /// </summary>
+        event EventHandler<IEventArgs<IFeatureCollection>> MeasurementSaved;
 
-    /// <summary>
-    /// Viewer is added (panoramic or oblique)
-    /// </summary>
-    event EventHandler<IEventArgs<IViewer>> ViewerAdded;
+        /// <summary>
+        /// Viewer is added (panoramic or oblique)
+        /// </summary>
+        event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
-    /// <summary>
-    /// Viewer is removed (panoramic of oblique)
-    /// </summary>
-    event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
+        /// <summary>
+        /// Viewer is removed (panoramic of oblique)
+        /// </summary>
+        event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
 
-    #endregion
+        #endregion
 
-    #if WINFORMS
+#if WINFORMS
     #region StreetSmartAPI
 
     /// <summary>
@@ -105,285 +105,292 @@ namespace StreetSmart.Common.Interfaces.API
     StreetSmartGUI GUI { get; }
 
     #endregion
-    #endif
+#endif
 
-    #region CefSharp functions
+        #region CefSharp functions
 
-    /// <summary>
-    /// Show the developer tools
-    /// </summary>
-    void ShowDevTools();
+        /// <summary>
+        /// Show the developer tools
+        /// </summary>
+        void ShowDevTools();
 
-    /// <summary>
-    /// Close the developer tools
-    /// </summary>
-    void CloseDevTools();
+        /// <summary>
+        /// Close the developer tools
+        /// </summary>
+        void CloseDevTools();
 
-    #endregion
+        #endregion
 
-    #region Interface functions
+        #region Interface functions
 
-    #if WPF
-    /// <summary>
-    /// Restarts streetsmart
-    /// </summary>
-    void RestartStreetSmart();
+#if WPF
+        /// <summary>
+        /// Restarts streetsmart
+        /// </summary>
+        void RestartStreetSmart();
 
-    /// <summary>
-    /// Restarts streetsmart
-    /// </summary>
-    /// <param name="streetSmartLocation">The location of Street Smart</param>
-    void RestartStreetSmart(string streetSmartLocation);
-/*
-    /// <summary>
-    /// Returns true if the browser object is disposed
-    /// </summary>
-    bool BrowserIsDisposed { get; }
+        /// <summary>
+        /// Restarts streetsmart
+        /// </summary>
+        /// <param name="streetSmartLocation">The location of Street Smart</param>
+        void RestartStreetSmart(string streetSmartLocation);
+        /*
+            /// <summary>
+            /// Returns true if the browser object is disposed
+            /// </summary>
+            bool BrowserIsDisposed { get; }
 
-    /// <summary>
-    /// Create a new webbrowser
-    /// </summary>
-    /// <param name="parentWindowHwndSource"><reference to the window/param>
-    /// <param name="initialSize">initial size</param>
-    void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
-*/
-    #endif
+            /// <summary>
+            /// Create a new webbrowser
+            /// </summary>
+            /// <param name="parentWindowHwndSource"><reference to the window/param>
+            /// <param name="initialSize">initial size</param>
+            void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
+        */
+#endif
 
-    /// <summary>
-    /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
-    /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
-    /// </summary>
-    /// <param name="overlay">The overlay to add</param>
-    /// <returns>the overlay object</returns>
-    Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay);
+        /// <summary>
+        /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
+        /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
+        /// </summary>
+        /// <param name="overlay">The overlay to add</param>
+        /// <returns>the overlay object</returns>
+        Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay);
 
-    /// <summary>
-    /// Add a WFS Layer as overlay to the panorama viewer. Can be removed with removeOverlay
-    /// </summary>
-    /// <param name="overlay">The WFS layer to add</param>
-    /// <returns>the overlay object</returns>
-    Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay);
+        /// <summary>
+        /// Add a WFS Layer as overlay to the panorama viewer. Can be removed with removeOverlay
+        /// </summary>
+        /// <param name="overlay">The WFS layer to add</param>
+        /// <returns>the overlay object</returns>
+        Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay);
 
-    /// <summary>
-    /// Close a panorama or oblique viewer.
-    /// </summary>
-    /// <param name="viewerId">The viewer to remove</param>
-    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
-    Task<IList<IViewer>> CloseViewer(string viewerId);
+        /// <summary>
+        /// Close a panorama or oblique viewer.
+        /// </summary>
+        /// <param name="viewerId">The viewer to remove</param>
+        /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
+        Task<IList<IViewer>> CloseViewer(string viewerId);
 
-    /// <summary>
-    /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
-    /// </summary>
-    /// <param name="options">Object containing the options used for destroying the API.</param>
-    /// <returns>Async function to destroy api</returns>
-    Task Destroy(IOptions options);
+        /// <summary>
+        /// Destroys the API. Cleans up its event handlers and makes used memory available for garbage collection.
+        /// </summary>
+        /// <param name="options">Object containing the options used for destroying the API.</param>
+        /// <returns>Async function to destroy api</returns>
+        Task Destroy(IOptions options);
 
-    /// <summary>
-    /// Returns the active measurement in GeoJSON format
-    /// </summary>
-    /// <returns>The measurement in GeoJSON format</returns>
-    Task<IFeatureCollection> GetActiveMeasurement();
+        /// <summary>
+        /// Returns the active measurement in GeoJSON format
+        /// </summary>
+        /// <returns>The measurement in GeoJSON format</returns>
+        Task<IFeatureCollection> GetActiveMeasurement();
 
-    /// <summary>
-    /// Returns the object containing the address search settings
-    /// </summary>
-    /// <returns>Object containing the address settings</returns>
-    Task<IAddressSettings> GetAddressSettings();
+        /// <summary>
+        /// Returns the object containing the address search settings
+        /// </summary>
+        /// <returns>Object containing the address settings</returns>
+        Task<IAddressSettings> GetAddressSettings();
 
-    /// <summary>
-    /// Returns the current 'ready'-state of the API.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>The current 'ready'-state of the API.</returns>
-    Task<bool> GetApiReadyState();
+        /// <summary>
+        /// Returns the current 'ready'-state of the API.
+        /// This is an asynchronous function.
+        /// </summary>
+        /// <returns>The current 'ready'-state of the API.</returns>
+        Task<bool> GetApiReadyState();
 
-    /// <summary>
-    /// Returns the application name of the API.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>The application name of the API.</returns>
-    Task<string> GetApplicationName();
+        /// <summary>
+        /// Returns the application name of the API.
+        /// This is an asynchronous function.
+        /// </summary>
+        /// <returns>The application name of the API.</returns>
+        Task<string> GetApplicationName();
 
-    /// <summary>
-    /// Returns the used version of the API.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>API version number.</returns>
-    Task<string> GetApplicationVersion();
+        /// <summary>
+        /// Returns the Bearer token.
+        /// This is an asynchronous function.
+        /// </summary>
+        /// <returns>Bearer token.</returns>
+        Task<string> GetBearerToken();
 
-    /// <summary>
-    /// Returns all logs, including ones invisible to integrators.
-    /// </summary>
-    /// <returns>Array of console logs.</returns>
-    Task<string[]> GetDebugLogs();
+        /// <summary>
+        /// Returns the used version of the API.
+        /// This is an asynchronous function.
+        /// </summary>
+        /// <returns>API version number.</returns>
+        Task<string> GetApplicationVersion();
 
-    /// <summary>
-    /// Returns the object containing functionalities that are currently permitted to use by the user.
-    /// This is an asynchronous function.
-    /// </summary>
-    /// <returns>Array containing the permissions</returns>
-    Task<string[]> GetPermissions();
+        /// <summary>
+        /// Returns all logs, including ones invisible to integrators.
+        /// </summary>
+        /// <returns>Array of console logs.</returns>
+        Task<string[]> GetDebugLogs();
 
-    /// <summary>
-    /// Return an array with references to all viewers.
-    /// </summary>
-    /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
-    Task<IList<IViewer>> GetViewers();
+        /// <summary>
+        /// Returns the object containing functionalities that are currently permitted to use by the user.
+        /// This is an asynchronous function.
+        /// </summary>
+        /// <returns>Array containing the permissions</returns>
+        Task<string[]> GetPermissions();
 
-    /// <summary>
-    /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
-    /// </summary>
-    /// <example>
-    /// This sample shows how to use the <see cref="IStreetSmartAPI.Init"/> function.
-    /// <code>
-    /// using System;
-    /// using StreetSmart.Common.Exceptions;
-    /// using StreetSmart.Common.Factories;
-    /// using StreetSmart.Common.Interfaces;
-    ///
-    /// namespace Demo
-    /// {
-    ///   public class Example
-    ///   {
-    ///     private IStreetSmartAPI _api;
-    ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
-    ///
-    ///     public void StartAPI()
-    ///     {
-    ///       _api = StreetSmartAPIFactory.Create();
-    ///       _api.APIReady += OnAPIReady;
-    ///       plStreetSmart.Controls.Add(_api.GUI);
-    ///     }
-    ///
-    ///     private async void OnAPIReady(object sender, EventArgs args)
-    ///     {
-    ///       // The dom element within the api must be rendered.
-    ///       IDomElement element = DomElementFactory.Create();
-    ///
-    ///       // The initialisation options of the api.
-    ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
-    ///
-    ///       try
-    ///       {
-    ///         // Initialize the api.
-    ///         await _api.Init(options);
-    ///         // Todo: add functionality
-    ///       }
-    ///       catch (StreetSmartLoginFailedException ex)
-    ///       {
-    ///         // login failed exception (ex)
-    ///       }
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </example>
-    /// <param name="options">Object containing the options used for initializing the API.</param>
-    /// <exception cref="StreetSmartLoginFailedException">Thrown when the login is failed</exception>
-    /// <returns>Asynchronous function</returns>
-    Task Init(IOptions options);
+        /// <summary>
+        /// Return an array with references to all viewers.
+        /// </summary>
+        /// <returns>Returns an array with references to all viewers of type PanoramaViewer and/or ObliqueViewer</returns>
+        Task<IList<IViewer>> GetViewers();
 
-    /// <summary>
-    /// Open a panorama and/or oblique viewer using a query. The query can be a coordinate,
-    /// an extent, an address or a panorama/oblique ID.
-    /// </summary>
-    /// <example>
-    /// This sample shows how to use the <see cref="IStreetSmartAPI.Open"/> function.
-    /// <code>
-    /// using System;
-    /// using System.Collections.Generic;
-    /// using StreetSmart.Common.Exceptions;
-    /// using StreetSmart.Common.Factories;
-    /// using StreetSmart.Common.Interfaces;
-    ///
-    /// namespace Demo
-    /// {
-    ///   public class Example
-    ///   {
-    ///     private IStreetSmartAPI _api;
-    ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
-    ///
-    ///     public void StartAPI()
-    ///     {
-    ///       _api = StreetSmartAPIFactory.Create();
-    ///       _api.APIReady += OnAPIReady;
-    ///       plStreetSmart.Controls.Add(_api.GUI);
-    ///     }
-    ///
-    ///     private async void OnAPIReady(object sender, EventArgs args)
-    ///     {
-    ///       // The dom element within the api must be rendered.
-    ///       IDomElement element = DomElementFactory.Create();
-    ///
-    ///       // The initialisation options of the api
-    ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
-    ///
-    ///       // Initialize the api.
-    ///       await _api.Init(options);
-    /// 
-    ///       // The open viewer options for open a new panorama viewer in EPSG:28992.
-    ///       IViewerOptions viewerOpt = ViewerOptionsFactory.Create(new List&lt;ViewerType&gt; {ViewerType.Panorama}, "EPSG:28992");
-    ///
-    ///       try
-    ///       {
-    ///         IList&lt;IViewer&gt; viewers = await _api.Open("Lange Haven 145, Schiedam", viewerOpt);
-    ///         // Todo: add functionality
-    ///       }
-    ///       catch (StreetSmartImageNotFoundException ex)
-    ///       {
-    ///         // image not found exception (ex)
-    ///       }
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </example>
-    /// <param name="query">query for open a panoramic image</param>
-    /// <param name="options">viewer options for open the panoramic image</param>
-    /// <exception cref="StreetSmartImageNotFoundException">Thrown when no image is found</exception>
-    /// <returns>Asynchronous function, A list of opened viewers</returns>
-    Task<IList<IViewer>> Open(string query, IViewerOptions options);
+        /// <summary>
+        /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
+        /// </summary>
+        /// <example>
+        /// This sample shows how to use the <see cref="IStreetSmartAPI.Init"/> function.
+        /// <code>
+        /// using System;
+        /// using StreetSmart.Common.Exceptions;
+        /// using StreetSmart.Common.Factories;
+        /// using StreetSmart.Common.Interfaces;
+        ///
+        /// namespace Demo
+        /// {
+        ///   public class Example
+        ///   {
+        ///     private IStreetSmartAPI _api;
+        ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+        ///
+        ///     public void StartAPI()
+        ///     {
+        ///       _api = StreetSmartAPIFactory.Create();
+        ///       _api.APIReady += OnAPIReady;
+        ///       plStreetSmart.Controls.Add(_api.GUI);
+        ///     }
+        ///
+        ///     private async void OnAPIReady(object sender, EventArgs args)
+        ///     {
+        ///       // The dom element within the api must be rendered.
+        ///       IDomElement element = DomElementFactory.Create();
+        ///
+        ///       // The initialisation options of the api.
+        ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+        ///
+        ///       try
+        ///       {
+        ///         // Initialize the api.
+        ///         await _api.Init(options);
+        ///         // Todo: add functionality
+        ///       }
+        ///       catch (StreetSmartLoginFailedException ex)
+        ///       {
+        ///         // login failed exception (ex)
+        ///       }
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="options">Object containing the options used for initializing the API.</param>
+        /// <exception cref="StreetSmartLoginFailedException">Thrown when the login is failed</exception>
+        /// <returns>Asynchronous function</returns>
+        Task Init(IOptions options);
 
-    /// <summary>
-    /// Removes a GeoJSON overlay from the panorama viewer.
-    /// </summary>
-    /// <param name="id">The id of the overlay</param>
-    /// <returns>Async function to remove an overlay</returns>
-    Task RemoveOverlay(string id);
+        /// <summary>
+        /// Open a panorama and/or oblique viewer using a query. The query can be a coordinate,
+        /// an extent, an address or a panorama/oblique ID.
+        /// </summary>
+        /// <example>
+        /// This sample shows how to use the <see cref="IStreetSmartAPI.Open"/> function.
+        /// <code>
+        /// using System;
+        /// using System.Collections.Generic;
+        /// using StreetSmart.Common.Exceptions;
+        /// using StreetSmart.Common.Factories;
+        /// using StreetSmart.Common.Interfaces;
+        ///
+        /// namespace Demo
+        /// {
+        ///   public class Example
+        ///   {
+        ///     private IStreetSmartAPI _api;
+        ///     private System.Windows.Forms.Panel plStreetSmart = new System.Windows.Forms.Panel();
+        ///
+        ///     public void StartAPI()
+        ///     {
+        ///       _api = StreetSmartAPIFactory.Create();
+        ///       _api.APIReady += OnAPIReady;
+        ///       plStreetSmart.Controls.Add(_api.GUI);
+        ///     }
+        ///
+        ///     private async void OnAPIReady(object sender, EventArgs args)
+        ///     {
+        ///       // The dom element within the api must be rendered.
+        ///       IDomElement element = DomElementFactory.Create();
+        ///
+        ///       // The initialisation options of the api
+        ///       IOptions options = OptionsFactory.Create("myUsername", "myPassword", "myAPIKey", "EPSG:28992", element);
+        ///
+        ///       // Initialize the api.
+        ///       await _api.Init(options);
+        /// 
+        ///       // The open viewer options for open a new panorama viewer in EPSG:28992.
+        ///       IViewerOptions viewerOpt = ViewerOptionsFactory.Create(new List&lt;ViewerType&gt; {ViewerType.Panorama}, "EPSG:28992");
+        ///
+        ///       try
+        ///       {
+        ///         IList&lt;IViewer&gt; viewers = await _api.Open("Lange Haven 145, Schiedam", viewerOpt);
+        ///         // Todo: add functionality
+        ///       }
+        ///       catch (StreetSmartImageNotFoundException ex)
+        ///       {
+        ///         // image not found exception (ex)
+        ///       }
+        ///     }
+        ///   }
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="query">query for open a panoramic image</param>
+        /// <param name="options">viewer options for open the panoramic image</param>
+        /// <exception cref="StreetSmartImageNotFoundException">Thrown when no image is found</exception>
+        /// <returns>Asynchronous function, A list of opened viewers</returns>
+        Task<IList<IViewer>> Open(string query, IViewerOptions options);
 
-    /// <summary>
-    /// Set the active measurement in GeoJSON format
-    /// </summary>
-    /// <param name="measurement">The measurement in GeoJSON format</param>
-    void SetActiveMeasurement(IFeatureCollection measurement);
+        /// <summary>
+        /// Removes a GeoJSON overlay from the panorama viewer.
+        /// </summary>
+        /// <param name="id">The id of the overlay</param>
+        /// <returns>Async function to remove an overlay</returns>
+        Task RemoveOverlay(string id);
 
-    /// <summary>
-    /// Set overlay draw distance
-    /// </summary>
-    /// <param name="distance">The overlay draw distance</param>
-    void SetOverlayDrawDistance(int distance);
+        /// <summary>
+        /// Set the active measurement in GeoJSON format
+        /// </summary>
+        /// <param name="measurement">The measurement in GeoJSON format</param>
+        void SetActiveMeasurement(IFeatureCollection measurement);
 
-    /// <summary>
-    /// Sets whether or not cursor movements will snap to nearby features while in measurement mode
-    /// </summary>
-    /// <param name="enabled">Whether or not to enable or disable snapping</param>
-    void SetSnapping(bool enabled);
+        /// <summary>
+        /// Set overlay draw distance
+        /// </summary>
+        /// <param name="distance">The overlay draw distance</param>
+        void SetOverlayDrawDistance(int distance);
 
-    /// <summary>
-    /// Starts the measurement
-    /// </summary>
-    /// <param name="viewer">Panorama viewer for start the measurement inside</param>
-    /// <param name="options">Measurement options</param>
-    /// <returns>Async function to starts the measurement</returns>
-    Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options);
+        /// <summary>
+        /// Sets whether or not cursor movements will snap to nearby features while in measurement mode
+        /// </summary>
+        /// <param name="enabled">Whether or not to enable or disable snapping</param>
+        void SetSnapping(bool enabled);
 
-    /// <summary>
-    /// Stops the measurement
-    /// </summary>
-    void StopMeasurementMode();
+        /// <summary>
+        /// Starts the measurement
+        /// </summary>
+        /// <param name="viewer">Panorama viewer for start the measurement inside</param>
+        /// <param name="options">Measurement options</param>
+        /// <returns>Async function to starts the measurement</returns>
+        Task StartMeasurementMode(IViewer viewer, IMeasurementOptions options);
 
-    #endregion
-  }
+        /// <summary>
+        /// Stops the measurement
+        /// </summary>
+        void StopMeasurementMode();
 
-  // ReSharper restore InconsistentNaming
+        #endregion
+    }
+
+    // ReSharper restore InconsistentNaming
 }

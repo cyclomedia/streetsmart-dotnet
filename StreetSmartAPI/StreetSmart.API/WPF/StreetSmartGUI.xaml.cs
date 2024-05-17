@@ -20,6 +20,7 @@ using System.Windows;
 
 using StreetSmart.Common.API;
 using StreetSmart.Common.Factories;
+using StreetSmart.Common.Interfaces.API;
 using StreetSmart.WPF;
 
 namespace StreetSmart.Wpf
@@ -64,14 +65,20 @@ namespace StreetSmart.Wpf
       set => SetValue(ApiProperty, value);
     }
 
-    #endregion
+        /// <summary>
+        /// The StreetSmart API
+        /// </summary>
 
-    #region Constructor
+        public IStreetSmartAPI Api => _api;
 
-    /// <summary>
-    /// Constructor of the StreetSmartGUI
-    /// </summary>
-    public StreetSmartGUI()
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor of the StreetSmartGUI
+        /// </summary>
+        public StreetSmartGUI()
     {
       InitializeComponent();
 
@@ -85,7 +92,7 @@ namespace StreetSmart.Wpf
 
     private void InitApi(WpfApi api)
     {
-      api.Api = _api;
+      api.Api = Api;
     }
 
     #endregion

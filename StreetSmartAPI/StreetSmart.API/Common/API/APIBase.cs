@@ -34,126 +34,126 @@ using CefSharp.Wpf;
 
 namespace StreetSmart.Common.API
 {
-  // ReSharper disable once InconsistentNaming
-  abstract class APIBase: DataConvert
-  {
-    #region Tasks
-
-    private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
-
-    #endregion
-
-    #region Members
-
-    private int _processId;
-
-    #endregion
-
-    #region Properties
-
-    protected int GetProcessId => _processId = (_processId + 1) % 10000;
-
-    protected ChromiumWebBrowser Browser { get; set; }
-
-    protected virtual string CallFunctionBase => string.Empty;
-
-    public virtual string JsThis => $"{GetType().Name}Events";
-
-    #endregion
-
-    #region Callback definitions
-
-    public virtual string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
-
-    public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
-
-    protected string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
-
-    protected string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
-
-    protected string JsMeasurementFailed => $"{nameof(OnMeasurementException).FirstCharacterToLower()}";
-
-    public virtual string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
-
-    protected string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
-
-    protected string JsStreetSmartException => $"{nameof(OnStreetSmartException).FirstCharacterToLower()}";
-
-    #endregion
-
-    #region Constructors
-
-    protected APIBase()
+    // ReSharper disable once InconsistentNaming
+    abstract class APIBase: DataConvert
     {
-      _processId = 0;
-      _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
-    }
+        #region Tasks
 
-    protected APIBase(ChromiumWebBrowser browser)
-      : this()
-    {
-      Browser = browser;
-    }
+        private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask;
 
-    #endregion
+        #endregion
 
-    #region Callbacks
+        #region Members
 
-    public void OnResult(object result, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(result);
-    }
+        private int _processId;
 
-    public void OnThisResult(bool result, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(result);
-    }
+        #endregion
 
-    public void OnLoginSuccess(string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(true);
-    }
+        #region Properties
 
-    public void OnMeasurementException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartMeasurementException(message));
-    }
+        protected int GetProcessId => _processId = (_processId + 1) % 10000;
 
-    public void OnLoginFailedException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartLoginFailedException(message));
-    }
+        protected ChromiumWebBrowser Browser { get; set; }
 
-    public void OnImageNotFoundException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
-    }
+        protected virtual string CallFunctionBase => string.Empty;
 
-    public void OnViewerCloseException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartCloseViewerException(message));
-    }
+        public virtual string JsThis => $"{GetType().Name}Events";
 
-    public void OnStreetSmartException(string message, string funcName)
-    {
-      CheckResultTask(funcName);
-      _resultTask[funcName].TrySetResult(new StreetSmartException(message));
-    }
+        #endregion
 
-    #endregion
+        #region Callback definitions
 
-    #region Functions
+        public virtual string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
 
-    protected void RegisterThisJsObject()
-    {
-      Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
+        public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
+
+        protected string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
+
+        protected string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
+
+        protected string JsMeasurementFailed => $"{nameof(OnMeasurementException).FirstCharacterToLower()}";
+
+        public virtual string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
+
+        protected string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
+
+        protected string JsStreetSmartException => $"{nameof(OnStreetSmartException).FirstCharacterToLower()}";
+
+        #endregion
+
+        #region Constructors
+
+        protected APIBase()
+        {
+            _processId = 0;
+            _resultTask = new Dictionary<string, TaskCompletionSource<object>>();
+        }
+
+        protected APIBase(ChromiumWebBrowser browser)
+          : this()
+        {
+            Browser = browser;
+        }
+
+        #endregion
+
+        #region Callbacks
+
+        public void OnResult(object result, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(result);
+        }
+
+        public void OnThisResult(bool result, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(result);
+        }
+
+        public void OnLoginSuccess(string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(true);
+        }
+
+        public void OnMeasurementException(string message, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(new StreetSmartMeasurementException(message));
+        }
+
+        public void OnLoginFailedException(string message, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(new StreetSmartLoginFailedException(message));
+        }
+
+        public void OnImageNotFoundException(string message, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(new StreetSmartImageNotFoundException(message));
+        }
+
+        public void OnViewerCloseException(string message, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(new StreetSmartCloseViewerException(message));
+        }
+
+        public void OnStreetSmartException(string message, string funcName)
+        {
+            CheckResultTask(funcName);
+            _resultTask[funcName].TrySetResult(new StreetSmartException(message));
+        }
+
+        #endregion
+
+        #region Functions
+
+        protected void RegisterThisJsObject()
+        {
+            Browser.JavascriptObjectRepository.Settings.LegacyBindingEnabled = true;
 
 #if WINFORMS
 #if NETCOREAPP
@@ -162,83 +162,83 @@ namespace StreetSmart.Common.API
       Browser.JavascriptObjectRepository.Register(JsThis, this, true);
 #endif
 #else
-      Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
-      {
-        var repo = e.ObjectRepository;
+            Browser.JavascriptObjectRepository.ResolveObject += (sender, e) =>
+            {
+                var repo = e.ObjectRepository;
 
-        if (e.ObjectName == "Legacy")
-        {
+                if (e.ObjectName == "Legacy")
+                {
 #if NETCOREAPP
-          repo.Register(JsThis, this);
+                    repo.Register(JsThis, this);
 #else
           repo.Register(JsThis, this, false);
 #endif
-        }
-      };
+                }
+            };
 #endif
         }
 
-    protected bool CheckResultTask(string funcName)
-    {
-      bool result = true;
-
-      if (!_resultTask.ContainsKey(funcName))
-      {
-        _resultTask.Add(funcName, new TaskCompletionSource<object>());
-        result = false;
-      }
-
-      return result;
-    }
-
-    protected string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
-    {
-      string memberId = $"{memberName}{processId}";
-      return $"{JsThis}.{JsResult}({CallFunctionBase}.{funcName},{memberId.ToQuote()});";
-    }
-
-    protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
-    {
-      int processId = GetProcessId;
-      object result = await CallJsAsync(AddTryCatch(GetScript(script, processId, memberName), $"{memberName}{processId}"), processId, memberName);
-
-      if (result is Exception exception)
-      {
-        throw exception;
-      }
-
-      return result;
-    }
-
-    protected string AddTryCatch(string script, string funcName)
-    {
-      return $"try{{{script}}}catch(e){{{JsThis}.{JsStreetSmartException}(e.message,{funcName.ToQuote()});}}";
-    }
-
-    protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
-    {
-      object funcResult = null;
-      IBrowser myBrowser = !(Browser?.IsDisposed ?? true) ? Browser?.GetBrowser() : null;
-
-      if (myBrowser != null)
-      {
-        string funcName = $"{memberName}{processId}";
-
-        if (CheckResultTask(funcName))
+        protected bool CheckResultTask(string funcName)
         {
-          _resultTask[funcName] = new TaskCompletionSource<object>();
+            bool result = true;
+
+            if (!_resultTask.ContainsKey(funcName))
+            {
+                _resultTask.Add(funcName, new TaskCompletionSource<object>());
+                result = false;
+            }
+
+            return result;
         }
 
-        Browser.ExecuteScriptAsync(script);
-        await _resultTask[funcName].Task;
-        TaskCompletionSource<object> result = _resultTask[funcName];
-        _resultTask.Remove(funcName);
-        funcResult = result.Task.Result;
-      }
+        protected string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
+        {
+            string memberId = $"{memberName}{processId}";
+            return $"{JsThis}.{JsResult}({CallFunctionBase}.{funcName},{memberId.ToQuote()});";
+        }
 
-      return funcResult;
+        protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
+        {
+            int processId = GetProcessId;
+            object result = await CallJsAsync(AddTryCatch(GetScript(script, processId, memberName), $"{memberName}{processId}"), processId, memberName);
+
+            if (result is Exception exception)
+            {
+                throw exception;
+            }
+
+            return result;
+        }
+
+        protected string AddTryCatch(string script, string funcName)
+        {
+            return $"try{{{script}}}catch(e){{{JsThis}.{JsStreetSmartException}(e.message,{funcName.ToQuote()});}}";
+        }
+
+        protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
+        {
+            object funcResult = null;
+            IBrowser myBrowser = !(Browser?.IsDisposed ?? true) ? Browser?.GetBrowser() : null;
+
+            if (myBrowser != null)
+            {
+                string funcName = $"{memberName}{processId}";
+
+                if (CheckResultTask(funcName))
+                {
+                    _resultTask[funcName] = new TaskCompletionSource<object>();
+                }
+
+                Browser.ExecuteScriptAsync(script);
+                await _resultTask[funcName].Task;
+                TaskCompletionSource<object> result = _resultTask[funcName];
+                _resultTask.Remove(funcName);
+                funcResult = result.Task.Result;
+            }
+
+            return funcResult;
+        }
+
+        #endregion
     }
-
-    #endregion
-  }
 }
