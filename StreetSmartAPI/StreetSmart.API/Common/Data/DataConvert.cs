@@ -78,6 +78,16 @@ namespace StreetSmart.Common.Data
       return ToNullInt(GetValue(details, value));
     }
 
+    public string ToNullString(object value)
+    {
+      return value?.ToString();
+    }
+
+    public string ToNullString(Dictionary<string, object> details, string value)
+    {
+      return ToNullString(GetValue(details, value));
+    }
+
     public string ToString(object value)
     {
       return value?.ToString() ?? string.Empty;
@@ -118,6 +128,12 @@ namespace StreetSmart.Common.Data
       return ToEnum(type, GetValue(details, value));
     }
 
+    public object ToNullEnum(Type type, Dictionary<string, object> details, string value)
+    {
+      var v = GetValue(details, value);
+      return v == null ? null : ToEnum(type, v);
+    }
+
     public bool ToBool(object value)
     {
       return (bool)(value ?? false);
@@ -128,7 +144,7 @@ namespace StreetSmart.Common.Data
       return ToBool(GetValue(details, value));
     }
 
-    public Dictionary<string, object> ToDictionary(object value)
+    public Dictionary<string, object> ToDictionary(object value, bool nullable = false)
     {
       Dictionary<string, object> result;
 
@@ -148,7 +164,7 @@ namespace StreetSmart.Common.Data
         }
         catch
         {
-          result = new Dictionary<string, object>();
+          result = nullable ? null : new Dictionary<string, object>();
         }
       }
 
@@ -193,6 +209,11 @@ namespace StreetSmart.Common.Data
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
     {
       return ToDictionary(GetValue(details, value));
+    }
+
+    public Dictionary<string, object> GetNullDictValue(Dictionary<string, object> details, string value)
+    {
+      return ToDictionary(GetValue(details, value), true);
     }
 
     public IList<object> GetListValue(Dictionary<string, object> details, string value)

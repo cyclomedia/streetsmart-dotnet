@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
@@ -44,27 +43,27 @@ namespace StreetSmart.Common.Data
 
     public Recording(Dictionary<string, object> recording)
     {
-      var xyz = GetDictValue(recording, "xyz");
+      var xyz = GetNullDictValue(recording, "xyz") ?? GetDictValue(recording, "XYZ");
       var x = ToNullDouble(xyz, "0");
       var y = ToNullDouble(xyz, "1");
       var z = ToNullDouble(xyz, "2");
       XYZ = new Coordinate(x, y, z);
 
       GroundLevelOffset = ToNullDouble(recording, "groundLevelOffset") ?? ToNullDouble(recording, "GroundLevelOffset");
-      RecorderDirection = ToNullDouble(recording, "recorderDirection");
-      Orientation = ToNullDouble(recording, "orientation");
-      RecordedAt = ToNullDateTime(recording, "recordedAt");
-      Id = ToString(recording, "id");
-      SRS = ToString(recording, "srs");
-      OrientationPrecision = ToNullDouble(recording, "orientationPrecision");
-      TileSchema = (TileSchema) ToEnum(typeof(TileSchema), recording, "tileSchema");
-      LongitudePrecision = ToNullDouble(recording, "longitudePrecision");
-      LatitudePrecision = ToNullDouble(recording, "latitudePrecision");
-      HeightPrecision = ToNullDouble(recording, "heightPrecision");
-      ProductType = (ProductType) ToEnum(typeof(ProductType), recording, "productType");
-      HeightSystem = ToString(recording, "heightSystem");
-      ExpiredAt = ToNullDateTime(recording, "expiredAt");
-      Year = ToNullInt(recording, "year");
+      RecorderDirection = ToNullDouble(recording, "recorderDirection") ?? ToNullDouble(recording, "RecorderDirection");
+      Orientation = ToNullDouble(recording, "orientation") ?? ToNullDouble(recording, "Orientation");
+      RecordedAt = ToNullDateTime(recording, "recordedAt") ?? ToNullDateTime(recording, "RecordedAt");
+      Id = ToNullString(recording, "id") ?? ToString(recording, "Id");
+      SRS = ToNullString(recording, "srs") ?? ToString(recording, "SRS");
+      OrientationPrecision = ToNullDouble(recording, "orientationPrecision") ?? ToNullDouble(recording, "OrientationPrecision");
+      TileSchema = (TileSchema)(ToNullEnum(typeof(TileSchema), recording, "tileSchema") ?? ToEnum(typeof(TileSchema), recording, "TileSchema"));
+      LongitudePrecision = ToNullDouble(recording, "longitudePrecision") ?? ToNullDouble(recording, "LongitudePrecision");
+      LatitudePrecision = ToNullDouble(recording, "latitudePrecision") ?? ToNullDouble(recording, "LatitudePrecision");
+      HeightPrecision = ToNullDouble(recording, "heightPrecision") ?? ToNullDouble(recording, "HeightPrecision");
+      ProductType = (ProductType)(ToNullEnum(typeof(ProductType), recording, "productType") ?? ToEnum(typeof(ProductType), recording, "ProductType"));
+      HeightSystem = ToNullString(recording, "heightSystem") ?? ToString(recording, "HeightSystem");
+      ExpiredAt = ToNullDateTime(recording, "expiredAt") ?? ToNullDateTime(recording, "ExpiredAt");
+      Year = ToNullInt(recording, "year") ?? ToNullInt(recording, "Year");
     }
 
     public double? GroundLevelOffset

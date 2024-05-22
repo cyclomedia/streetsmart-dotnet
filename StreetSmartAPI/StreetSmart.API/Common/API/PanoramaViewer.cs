@@ -22,21 +22,12 @@ using System.Drawing;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
-
 using StreetSmart.Common.API.Events;
-
 using Orientation = StreetSmart.Common.Data.Orientation;
 
 namespace StreetSmart.Common.API

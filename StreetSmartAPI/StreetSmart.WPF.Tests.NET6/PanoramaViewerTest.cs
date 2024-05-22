@@ -3,11 +3,14 @@ using Moq;
 using StreetSmart.Common;
 using StreetSmart.Common.API;
 using StreetSmart.Common.Data;
+using StreetSmart.Common.Events;
 using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -142,7 +145,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task GetRecording_Equivalent()
     {
       // arrange
-      var recording = new { groundLevelOffset = 5d, xyz = new { }, tileSchema = TileSchema.Dcr9Tiling, productType = ProductType.Cyclorama, id = "1", srs = "2" };
+      var recording = DataHelper.Recording;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(recording, "GetRecording1")).Verifiable(Times.Once);
@@ -151,8 +154,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.GetRecording();
 
       // assert
-      Assert.Equal(recording.id, result.Id);
-      Assert.Equal(recording.groundLevelOffset, result.GroundLevelOffset);
+      Assert.Equivalent(recording, result);
       Mock.Verify();
     }
 
@@ -205,7 +207,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task OpenByAddress_Equivalent()
     {
       // arrange
-      var recording = new { groundLevelOffset = 5d, xyz = new { }, tileSchema = TileSchema.Dcr9Tiling, productType = ProductType.Cyclorama, id = "1", srs = "2" };
+      var recording = DataHelper.Recording;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(recording, "SearchRecordingAsync1")).Verifiable(Times.Once);
@@ -214,7 +216,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByAddress("test");
 
       // assert
-      Assert.Equal(recording.groundLevelOffset, result.GroundLevelOffset);
+      Assert.Equivalent(recording, result);
       Mock.Verify();
     }
 
@@ -222,7 +224,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task OpenByCoordinate_Equivalent()
     {
       // arrange
-      var recording = new { groundLevelOffset = 5d, xyz = new { }, tileSchema = TileSchema.Dcr9Tiling, productType = ProductType.Cyclorama, id = "1", srs = "2" };
+      var recording = DataHelper.Recording;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(recording, "SearchRecordingAsync1")).Verifiable(Times.Once);
@@ -231,7 +233,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByCoordinate(new Coordinate());
 
       // assert
-      Assert.Equal(recording.groundLevelOffset, result.GroundLevelOffset);
+      Assert.Equivalent(recording, result);
       Mock.Verify();
     }
 
@@ -239,7 +241,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task OpenByImageId_Equivalent()
     {
       // arrange
-      var recording = new { groundLevelOffset = 5d, xyz = new { }, tileSchema = TileSchema.Dcr9Tiling, productType = ProductType.Cyclorama, id = "1", srs = "2" };
+      var recording = DataHelper.Recording;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(recording, "SearchRecordingAsync1")).Verifiable(Times.Once);
@@ -248,7 +250,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByImageId("test_image_id");
 
       // assert
-      Assert.Equal(recording.groundLevelOffset, result.GroundLevelOffset);
+      Assert.Equivalent(recording, result);
       Mock.Verify();
     }
 
@@ -256,7 +258,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task SearchRecordingAsync_Equivalent()
     {
       // arrange
-      var recording = new { groundLevelOffset = 5d, xyz = new { }, tileSchema = TileSchema.Dcr9Tiling, productType = ProductType.Cyclorama, id = "1", srs = "2" };
+      var recording = DataHelper.Recording;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(recording, "SearchRecordingAsync1")).Verifiable(Times.Once);
@@ -265,7 +267,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.SearchRecordingAsync(null, null, null);
 
       // assert
-      Assert.Equal(recording.groundLevelOffset, result.GroundLevelOffset);
+      Assert.Equivalent(recording, result);
       Mock.Verify();
     }
 
@@ -541,8 +543,194 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleSidebarEnabled(visible);
 
       // assert
-      Assert.Contains(".toggleSidebarEnablede", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleSidebarEnabled", script, System.StringComparison.InvariantCulture);
       Mock.Verify();
+    }
+
+    [Fact]
+    public void OnElevationChange_Equal()
+    {
+      // arrange
+      IElevationInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.ElevationChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", new { level = 5, groundLevel = 6 });
+      
+      // act
+      _viewer.OnElevationChange(obj);
+
+      // assert
+      Assert.Equal(5, receivedEvent?.Level);
+      Assert.Equal(6, receivedEvent?.GroundLevel);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnImageChange_Equal()
+    {
+      // arrange
+      EventArgs? receivedEvent = null;
+      object? sender = null;
+      _viewer.ImageChange += (s, e) => { receivedEvent = e; sender = s; };
+
+      // act
+      _viewer.OnImageChange(null);
+
+      // assert
+      Assert.Equal(EventArgs.Empty, receivedEvent);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnRecordingClick_Equivalent()
+    {
+      // arrange
+      var recording = DataHelper.Recording;
+      IRecordingClickInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.RecordingClick += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", new { recording, eventData = new { shiftKey = false, altKey = false, ctrlKey = true } });
+
+      // act
+      _viewer.OnRecordingClick(obj);
+
+      // assert
+      Assert.Equivalent(recording, receivedEvent?.Recording);
+      Assert.Equal(false, receivedEvent?.ShiftKey);
+      Assert.Equal(false, receivedEvent?.AltKey);
+      Assert.Equal(true, receivedEvent?.CtrlKey);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnFeatureClick_Equal()
+    {
+      // arrange
+      IFeatureInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.FeatureClick += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", new { layerId = "a", layerName = "b" });
+
+      // act
+      _viewer.OnFeatureClick(obj);
+
+      // assert
+      Assert.Equal("a", receivedEvent?.LayerId);
+      Assert.Equal("b", receivedEvent?.LayerName);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnTileLoadError_Equal()
+    {
+      // arrange
+      IDictionary<string, object>? receivedEvent = null;
+      object? sender = null;
+      _viewer.TileLoadError += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", new { request = new { a = "c" } });
+
+      // act
+      _viewer.OnTileLoadError(obj);
+
+      // assert
+      Assert.Equal("c", receivedEvent?["a"]);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnViewChange_Equivalent()
+    {
+      // arrange
+      var orientation = DataHelper.Orientation;
+      IOrientation? receivedEvent = null;
+      object? sender = null;
+      _viewer.ViewChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", orientation);
+
+      // act
+      _viewer.OnViewChange(obj);
+
+      // assert
+      Assert.Equivalent(orientation, receivedEvent, true);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnSurfaceCursorChange_Equivalent()
+    {
+      // arrange
+      var depthInfo = DataHelper.DepthInfo;
+      IDepthInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.SurfaceCursorChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", depthInfo);
+
+      // act
+      _viewer.OnSurfaceCursorChange(obj);
+
+      // assert
+      Assert.Equivalent(depthInfo, receivedEvent, true);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnViewLoadEnd_Equal()
+    {
+      // arrange
+      EventArgs? receivedEvent = null;
+      object? sender = null;
+      _viewer.ViewLoadEnd += (s, e) => { receivedEvent = e; sender = s; };
+
+      // act
+      _viewer.OnViewLoadEnd(null);
+
+      // assert
+      Assert.Equal(EventArgs.Empty, receivedEvent);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnTimeTravelChange_Equivalent()
+    {
+      // arrange
+      var timeTravelInfo = DataHelper.TimeTravelInfo;
+      ITimeTravelInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.TimeTravelChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", timeTravelInfo);
+
+      // act
+      _viewer.OnTimeTravelChange(obj);
+
+      // assert
+      Assert.Equivalent(timeTravelInfo, receivedEvent, true);
+      Assert.Equal(_viewer, sender);
+    }
+
+    [Fact]
+    public void OnFeatureSelectionChange_Equivalent()
+    {
+      // arrange
+      var featureInfo = DataHelper.FeatureInfo;
+      IFeatureInfo? receivedEvent = null;
+      object? sender = null;
+      _viewer.FeatureSelectionChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+      var obj = new ExpandoObject();
+      obj.TryAdd("detail", featureInfo);
+
+      // act
+      _viewer.OnFeatureSelectionChange(obj);
+
+      // assert
+      Assert.Equivalent(featureInfo, receivedEvent, true);
+      Assert.Equal(_viewer, sender);
     }
   }
 }

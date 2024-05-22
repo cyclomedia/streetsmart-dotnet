@@ -28,7 +28,7 @@ namespace StreetSmart.Common.Data
 
     public TimeTravelInfo(Dictionary<string, object> timeTravelInfo)
     {
-      Date = ToDateTime(timeTravelInfo, "date");
+      Date = ToNullDateTime(timeTravelInfo, "date") ?? ToDateTime(timeTravelInfo, "Date");
     }
 
     public DateTime Date
