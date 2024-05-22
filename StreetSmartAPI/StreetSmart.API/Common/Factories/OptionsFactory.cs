@@ -108,11 +108,31 @@ namespace StreetSmart.Common.Factories
     /// <param name="locale">Language used as default in the API.</param>
     /// <param name="addressSettings">The address settings to use for address searches.</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
+    /// <param name="loginOauthSilentOnly">Indicates to login with OAuth with silent authentication only. true means using silent authentication only. false means use silent authentication together with login popup authentication if silent authentication fails (for example when user session expired). This parameter is optional and false is default.</param>
+    /// <param name="doOAuthLogoutOnDestroy">Indicates whether to log out via oauth on destroy</param>
     /// <returns>Object containing the options used for initializing the API</returns>
     public static IOptions CreateOauth(string clientId, string apiKey, string srs, string locale, IAddressSettings addressSettings,
-      IDomElement element)
+      IDomElement element, bool? loginOauthSilentOnly = null, bool? doOAuthLogoutOnDestroy = null)
       => Create(null, null, clientId, apiKey, srs, locale, string.Empty, addressSettings, element,
-        true);
+        true, loginOauthSilentOnly, doOAuthLogoutOnDestroy);
+
+    /// <summary>
+    /// Create the options object which used for initializing the API for use oAuth authorization
+    /// </summary>
+    /// <param name="userName">Username of the user.</param>
+    /// <param name="clientId">The clientId of the OAuth user.</param>
+    /// <param name="apiKey">ApiKey given to the user.</param>
+    /// <param name="srs">Coordinate system used in the API. E.g. "EPSG:29882".</param>
+    /// <param name="locale">Language used as default in the API.</param>
+    /// <param name="addressSettings">The address settings to use for address searches.</param>
+    /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
+    /// <param name="loginOauthSilentOnly">Indicates to login with OAuth with silent authentication only. true means using silent authentication only. false means use silent authentication together with login popup authentication if silent authentication fails (for example when user session expired). This parameter is optional and false is default.</param>
+    /// <param name="doOAuthLogoutOnDestroy">Indicates whether to log out via oauth on destroy</param>
+    /// <returns>Object containing the options used for initializing the API</returns>
+    public static IOptions CreateOauth(string userName, string clientId, string apiKey, string srs, string locale, IAddressSettings addressSettings,
+      IDomElement element, bool? loginOauthSilentOnly = null, bool? doOAuthLogoutOnDestroy = null)
+      => Create(userName, null, clientId, apiKey, srs, locale, string.Empty, addressSettings, element,
+        true, loginOauthSilentOnly, doOAuthLogoutOnDestroy);
 
     /// <summary>
     /// Create the options object which used for initializing the API
@@ -127,10 +147,12 @@ namespace StreetSmart.Common.Factories
     /// <param name="addressSettings">The address settings to use for address searches.</param>
     /// <param name="element">The Domelement where in the panoramic image is rendered.</param>
     /// <param name="loginOauth">Indicates whether to log in via oauth</param>
+    /// <param name="loginOauthSilentOnly">Indicates to login with OAuth with silent authentication only. true means using silent authentication only. false means use silent authentication together with login popup authentication if silent authentication fails (for example when user session expired). This parameter is optional and false is default.</param>
+    /// <param name="doOAuthLogoutOnDestroy">Indicates whether to log out via oauth on destroy</param>
     /// <returns>Object containing the options used for initializing the API</returns>
     /// <exception cref="ArgumentNullException"></exception>
     public static IOptions Create(string userName, string password, string clientId, string apiKey, string srs, string locale,
-      string configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth = null)
+      string configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth = null, bool? loginOauthSilentOnly = null, bool? doOAuthLogoutOnDestroy = null)
     {
       bool loginByOauth = loginOauth is true;
 
@@ -171,7 +193,7 @@ namespace StreetSmart.Common.Factories
 
       return new Options(userName, Password, apiKey, srs, locale,
         string.IsNullOrEmpty(configurationURL) ? null : new Uri(configurationURL), addressSettings, element,
-        loginOauth, clientId);
+        loginOauth, loginOauthSilentOnly, doOAuthLogoutOnDestroy, clientId);
     }
 
     // ReSharper restore InconsistentNaming

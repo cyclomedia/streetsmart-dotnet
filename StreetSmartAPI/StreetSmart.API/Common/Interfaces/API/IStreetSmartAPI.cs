@@ -95,7 +95,16 @@ namespace StreetSmart.Common.Interfaces.API
 
     #endregion
 
-#if WINFORMS
+    #region Authentication events
+
+    /// <summary>
+    /// Bearer token has changed
+    /// </summary>
+    event EventHandler<IEventArgs<IBearer>> BearerTokenChanged;
+
+    #endregion
+
+    #if WINFORMS
     #region StreetSmartAPI
 
     /// <summary>
@@ -195,6 +204,13 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <returns>The current 'ready'-state of the API.</returns>
     Task<bool> GetApiReadyState();
+
+    /// <summary>
+    /// Returns the Bearer token from the API.
+    /// This is an asynchronous function.
+    /// </summary>
+    /// <returns>The Bearer token from the API.</returns>
+    Task<string> GetBearerToken();
 
     /// <summary>
     /// Returns the application name of the API.

@@ -38,9 +38,11 @@ namespace StreetSmart.Common.Data
     private IAddressSettings _addressSettings;
     private IDomElement _element;
     private bool? _loginOauth;
+    private bool? _loginOauthSilentOnly;
+    private bool? _doOAuthLogoutOnDestroy;
 
     public Options(string userName, SecureString password, string apiKey, string srs, string locale,
-      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth, string clientId)
+      Uri configurationURL, IAddressSettings addressSettings, IDomElement element, bool? loginOauth, bool? loginOauthSilentOnly, bool? doOAuthLogoutOnDestroy, string clientId)
     {
       Username = userName;
       Password = password;
@@ -51,6 +53,8 @@ namespace StreetSmart.Common.Data
       AddressSettings = addressSettings;
       Element = element;
       LoginOauth = loginOauth;
+      LoginOauthSilentOnly = loginOauthSilentOnly;
+      DoOAuthLogoutOnDestroy = doOAuthLogoutOnDestroy;
       ClientId = clientId;
     }
 
@@ -102,6 +106,26 @@ namespace StreetSmart.Common.Data
       set
       {
         _loginOauth = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool? LoginOauthSilentOnly
+    {
+      get => _loginOauthSilentOnly;
+      set
+      {
+        _loginOauthSilentOnly = value;
+        RaisePropertyChanged();
+      }
+    }
+
+    public bool? DoOAuthLogoutOnDestroy
+    {
+      get => _doOAuthLogoutOnDestroy;
+      set
+      {
+        _doOAuthLogoutOnDestroy = value;
         RaisePropertyChanged();
       }
     }
@@ -163,8 +187,10 @@ namespace StreetSmart.Common.Data
       string locale = string.IsNullOrEmpty(Locale) ? string.Empty : $",locale:'{Locale}'";
       string addressSettings = AddressSettings?.ToString() ?? string.Empty;
       string userNamePassword = string.IsNullOrEmpty(Username) ? string.Empty : $",username:'{Username}',password:'{Password.ConvertToUnsecureString()}'";
+      string doOAuthLogoutOnDestroy = DoOAuthLogoutOnDestroy == null ? string.Empty : $",doOAuthLogoutOnDestroy:{((bool)DoOAuthLogoutOnDestroy).ToJsBool()}";
+      string loginOauthSilentOnly = LoginOauthSilentOnly == null ? string.Empty : $",loginOauthSilentOnly:{((bool)LoginOauthSilentOnly).ToJsBool()}";
       string clientId = string.IsNullOrEmpty(ClientId) ? string.Empty : $",clientId:'{ClientId}'";
-      string loginOauth = LoginOauth == null ? string.Empty : $",loginOauth:{((bool)LoginOauth).ToJsBool()}{clientId}";
+      string loginOauth = LoginOauth == null ? string.Empty : $",loginOauth:{((bool)LoginOauth).ToJsBool()}{doOAuthLogoutOnDestroy}{loginOauthSilentOnly}{clientId}";
       return $"{{targetElement:{_element.Name}{userNamePassword},apiKey:'{APIKey}'{loginOauth},srs:'{SRS}'{locale}{configurationURL}{addressSettings}}}";
     }
   }
