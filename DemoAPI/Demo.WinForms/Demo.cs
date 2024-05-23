@@ -1915,5 +1915,10 @@ namespace Demo.WinForms
     {
       PanoramaViewer.SetElevationSliderLevel(elevationLevel);
     }
+
+    private void cbUseOAuth_CheckedChanged(object sender, EventArgs e)
+    {
+      _login.UseOAuth = cbUseOAuth.Checked;
+    }
   }
 }
