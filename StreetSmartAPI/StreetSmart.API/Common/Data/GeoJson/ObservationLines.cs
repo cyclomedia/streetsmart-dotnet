@@ -16,15 +16,14 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines: DataConvert, IObservationLines
+  internal class ObservationLines : DataConvert, IObservationLines
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
@@ -38,13 +37,13 @@ namespace StreetSmart.Common.Data.GeoJson
         int color1 = int.Parse(color[1].ToString());
         int color2 = int.Parse(color[2].ToString());
         double color3 = double.Parse(color[3].ToString());
-        Color = Color.FromArgb((int) (color3 * 255), color0, color1, color2);
+        Color = Color.FromArgb((int)(color3 * 255), color0, color1, color2);
       }
 
       try
       {
         SelectedMeasureMethod =
-          (MeasureMethod) ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
+          (MeasureMethod)ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
       }
       catch (ArgumentException)
       {

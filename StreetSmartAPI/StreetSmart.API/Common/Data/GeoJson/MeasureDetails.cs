@@ -16,15 +16,14 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: DataConvert, IMeasureDetails
+  internal class MeasureDetails : DataConvert, IMeasureDetails
   {
     public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
@@ -36,7 +35,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        MeasureMethod = (MeasureMethod) ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
+        MeasureMethod = (MeasureMethod)ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
       }
       catch (ArgumentException)
       {
@@ -108,13 +107,13 @@ namespace StreetSmart.Common.Data.GeoJson
         switch (measureDetails.MeasureMethod)
         {
           case MeasureMethod.DepthMap:
-            Details = new DetailsDepth((IDetailsDepth) measureDetails.Details);
+            Details = new DetailsDepth((IDetailsDepth)measureDetails.Details);
             break;
           case MeasureMethod.SmartClick:
-            Details = new DetailsSmartClick((IDetailsSmartClick) measureDetails.Details);
+            Details = new DetailsSmartClick((IDetailsSmartClick)measureDetails.Details);
             break;
           case MeasureMethod.ForwardIntersection:
-            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details, measurementTool);
+            Details = new DetailsForwardIntersection((IDetailsForwardIntersection)measureDetails.Details, measurementTool);
             break;
           case MeasureMethod.AutoFocus:
           case MeasureMethod.NotDefined:

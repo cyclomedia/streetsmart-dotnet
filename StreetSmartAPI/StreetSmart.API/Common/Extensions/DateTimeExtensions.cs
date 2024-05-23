@@ -18,7 +18,6 @@
 
 // ReSharper disable once CheckNamespace
 
-using System.Drawing;
 using System.Globalization;
 
 namespace System
@@ -28,7 +27,7 @@ namespace System
     public static string ToJsDateTime(this DateTime? value)
     {
       DateTimeFormatInfo ff = new DateTimeFormatInfo();
-      return value == null ? string.Empty : ((DateTime) value).ToString(ff.SortableDateTimePattern);
+      return value == null ? string.Empty : ((DateTime)value).ToString(ff.SortableDateTimePattern);
     }
   }
 }

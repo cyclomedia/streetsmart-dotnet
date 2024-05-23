@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -30,9 +29,9 @@ namespace StreetSmart.Common.Data
 
     public FeatureInfo(Dictionary<string, object> featureInfo)
     {
-      LayerName = ToString(featureInfo, "layerName");
-      LayerId = ToString(featureInfo, "layerId");
-      FeatureProperties = new Json(GetDictValue(featureInfo, "featureProperties"));
+      LayerName = ToNullString(featureInfo, "layerName") ?? ToString(featureInfo, "LayerName");
+      LayerId = ToNullString(featureInfo, "layerId") ?? ToNullString(featureInfo, "LayerId");
+      FeatureProperties = new Json(GetNullDictValue(featureInfo, "featureProperties") ?? GetDictValue(featureInfo, "FeatureProperties"));
     }
 
     public string LayerName

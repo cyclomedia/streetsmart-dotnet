@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class StreetSmartApiEvent: ApiEvent
+  internal class StreetSmartApiEvent : ApiEvent
   {
     private readonly StreetSmartAPI _api;
 

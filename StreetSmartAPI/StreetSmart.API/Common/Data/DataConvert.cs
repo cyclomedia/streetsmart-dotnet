@@ -24,7 +24,7 @@ using System.Linq;
 
 namespace StreetSmart.Common.Data
 {
-  class DataConvert : NotifyPropertyChanged
+  public class DataConvert : NotifyPropertyChanged
   {
     protected static CultureInfo ci => CultureInfo.InvariantCulture;
 
@@ -45,7 +45,7 @@ namespace StreetSmart.Common.Data
 
     public double? ToNullDouble(object value)
     {
-      return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? (double?) null : outValue : null;
+      return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? null : outValue : null;
     }
 
     public double? ToNullDouble(Dictionary<string, object> details, string value)
@@ -60,7 +60,7 @@ namespace StreetSmart.Common.Data
 
     public int? ToNullInt(object value)
     {
-      return int.TryParse(value?.ToString(), out var outValue) ? (int?) outValue : null;
+      return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
     }
 
     public int ToInt(object[] array, int nr)
@@ -78,6 +78,16 @@ namespace StreetSmart.Common.Data
       return ToNullInt(GetValue(details, value));
     }
 
+    public string ToNullString(object value)
+    {
+      return value?.ToString();
+    }
+
+    public string ToNullString(Dictionary<string, object> details, string value)
+    {
+      return ToNullString(GetValue(details, value));
+    }
+
     public string ToString(object value)
     {
       return value?.ToString() ?? string.Empty;
@@ -90,7 +100,7 @@ namespace StreetSmart.Common.Data
 
     public DateTime? ToNullDateTime(object value)
     {
-      return value == null ? null : (DateTime?) DateTime.Parse(value.ToString());
+      return value == null ? null : (DateTime?)DateTime.Parse(value.ToString());
     }
 
     public DateTime? ToNullDateTime(Dictionary<string, object> details, string value)
@@ -118,9 +128,15 @@ namespace StreetSmart.Common.Data
       return ToEnum(type, GetValue(details, value));
     }
 
+    public object ToNullEnum(Type type, Dictionary<string, object> details, string value)
+    {
+      var v = GetValue(details, value);
+      return v == null ? null : ToEnum(type, v);
+    }
+
     public bool ToBool(object value)
     {
-      return (bool) (value ?? false);
+      return (bool)(value ?? false);
     }
 
     public bool ToBool(Dictionary<string, object> details, string value)
@@ -128,7 +144,7 @@ namespace StreetSmart.Common.Data
       return ToBool(GetValue(details, value));
     }
 
-    public Dictionary<string, object> ToDictionary(object value)
+    public Dictionary<string, object> ToDictionary(object value, bool nullable = false)
     {
       Dictionary<string, object> result;
 
@@ -142,7 +158,14 @@ namespace StreetSmart.Common.Data
       }
       else
       {
-        result = new Dictionary<string, object>();
+        try
+        {
+          result = value.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(value, null));
+        }
+        catch
+        {
+          result = nullable ? null : new Dictionary<string, object>();
+        }
       }
 
       return result;
@@ -157,10 +180,10 @@ namespace StreetSmart.Common.Data
     {
       if (value is IList<object>)
       {
-        return (value as List<object>)?.ToArray() ?? Array.Empty<object>();
+        return (value as List<object>)?.ToArray() ?? [];
       }
 
-      return Array.Empty<object>();
+      return [];
     }
 
     public object[] GetArrayValue(Dictionary<string, object> details, string value)
@@ -186,6 +209,11 @@ namespace StreetSmart.Common.Data
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
     {
       return ToDictionary(GetValue(details, value));
+    }
+
+    public Dictionary<string, object> GetNullDictValue(Dictionary<string, object> details, string value)
+    {
+      return ToDictionary(GetValue(details, value), true);
     }
 
     public IList<object> GetListValue(Dictionary<string, object> details, string value)

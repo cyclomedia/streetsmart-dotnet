@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Derived data which contains the calculated data of a line measurement
   /// </summary>
-  public interface IDerivedDataLineString: IDerivedData
+  public interface IDerivedDataLineString : IDerivedData
   {
     /// <summary>
     /// Standard deviations of the points

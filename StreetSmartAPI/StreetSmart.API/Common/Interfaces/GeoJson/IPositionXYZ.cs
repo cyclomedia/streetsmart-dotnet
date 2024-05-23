@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Position
   /// </summary>
-  public interface IPositionXYZ: ICoordinate
+  public interface IPositionXYZ : ICoordinate
   {
     /// <summary>
     /// XYZ

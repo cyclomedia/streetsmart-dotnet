@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Derived data which contains the calculated data of a polygon measurement
   /// </summary>
-  public interface IDerivedDataPolygon: IDerivedDataLineString
+  public interface IDerivedDataPolygon : IDerivedDataLineString
   {
     /// <summary>
     /// The polygon splited in triangles

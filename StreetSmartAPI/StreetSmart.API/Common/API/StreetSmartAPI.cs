@@ -130,7 +130,7 @@ namespace StreetSmart.Common.API
     public StreetSmartAPI(string streetSmartLocation)
     {
       InitApi(streetSmartLocation);
-      Browser = new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill };
+      Browser = new StreetSmartBrowserAdapter(new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill });
       RegisterBrowser();
       GUI = new StreetSmartGUI(Browser);
     }
@@ -140,7 +140,7 @@ namespace StreetSmart.Common.API
       InitApi(streetSmartLocation);
     }
 
-    public void InitBrowser(ChromiumWebBrowser browser)
+    public void InitBrowser(IStreetSmartBrowser browser)
     {
       Browser = browser;
       Browser.Address = _streetSmartLocation;

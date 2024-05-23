@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.ObjectModel;
-
 using StreetSmart.Common.Data.SLD;
+using System.Collections.ObjectModel;
 
 namespace StreetSmart.Common.Interfaces.SLD
 {

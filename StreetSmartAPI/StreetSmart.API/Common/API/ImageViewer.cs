@@ -25,8 +25,6 @@ using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 
-using CefSharp;
-
 #if WINFORMS
 using CefSharp.WinForms;
 #else
@@ -39,7 +37,7 @@ using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.API
 {
-  internal class ImageViewer : Viewer, IImageViewer
+  public class ImageViewer : Viewer, IImageViewer
   {
     #region Members
 
@@ -69,12 +67,12 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public ImageViewer(ChromiumWebBrowser browser, ViewerList viewerList)
+    public ImageViewer(IStreetSmartBrowser browser, ViewerList viewerList)
       : base(browser, viewerList)
     {
     }
 
-    public ImageViewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
+    public ImageViewer(IStreetSmartBrowser browser, ViewerList viewerList, string name)
       : base(browser, viewerList, name)
     {
     }

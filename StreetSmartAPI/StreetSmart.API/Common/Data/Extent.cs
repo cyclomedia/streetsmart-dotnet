@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -31,10 +30,10 @@ namespace StreetSmart.Common.Data
 
     public Extent(IList<object> extent)
     {
-      X1 = extent?.Count >= 1 ? (double) extent[0] : 0.0;
-      Y1 = extent?.Count >= 2 ? (double) extent[1] : 0.0;
-      X2 = extent?.Count >= 3 ? (double) extent[2] : 0.0;
-      Y2 = extent?.Count >= 4 ? (double) extent[3] : 0.0;
+      X1 = extent?.Count >= 1 ? (double)extent[0] : 0.0;
+      Y1 = extent?.Count >= 2 ? (double)extent[1] : 0.0;
+      X2 = extent?.Count >= 3 ? (double)extent[2] : 0.0;
+      Y2 = extent?.Count >= 4 ? (double)extent[3] : 0.0;
     }
 
     public double X1

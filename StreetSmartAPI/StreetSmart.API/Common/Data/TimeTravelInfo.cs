@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
-
-using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
@@ -29,7 +28,7 @@ namespace StreetSmart.Common.Data
 
     public TimeTravelInfo(Dictionary<string, object> timeTravelInfo)
     {
-      Date = ToDateTime(timeTravelInfo, "date");
+      Date = ToNullDateTime(timeTravelInfo, "date") ?? ToDateTime(timeTravelInfo, "Date");
     }
 
     public DateTime Date

@@ -16,16 +16,15 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.SLD;
-
 namespace StreetSmart.Common.Data.SLD
 {
-  #pragma warning disable 1591
+#pragma warning disable 1591
   /// <exclude/>
   public class InlineContent : NotifyPropertyChanged, IInlineContent
   {
@@ -81,5 +80,5 @@ namespace StreetSmart.Common.Data.SLD
     }
   }
 
-  #pragma warning restore 1591
+#pragma warning restore 1591
 }

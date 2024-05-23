@@ -35,7 +35,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.API
 {
-  abstract class ViewerList: APIBase
+  public abstract class ViewerList: APIBase
   {
     #region Properties
 
@@ -60,7 +60,7 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
-    public void RegisterJsObject(ChromiumWebBrowser browser)
+    public void RegisterJsObject(IStreetSmartBrowser browser)
     {
       Browser = browser;
       RegisterThisJsObject();
@@ -228,7 +228,7 @@ namespace StreetSmart.Common.API
 
     #region Functions
 
-    public static void RegisterJsObjects(string apiId, ChromiumWebBrowser browser)
+    public static void RegisterJsObjects(string apiId, IStreetSmartBrowser browser)
     {
       foreach (var viewerList in ViewerLists[apiId])
       {

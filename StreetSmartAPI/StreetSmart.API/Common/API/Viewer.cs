@@ -19,22 +19,13 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-using CefSharp;
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.API
 {
-  internal class Viewer : APIBase, IViewer
+  public class Viewer : APIBase, IViewer
   {
     #region Properties
 
@@ -62,14 +53,14 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public Viewer(ChromiumWebBrowser browser, ViewerList viewerList)
+    public Viewer(IStreetSmartBrowser browser, ViewerList viewerList)
       : base(browser)
     {
       ViewerList = viewerList;
       Destroyed = false;
     }
 
-    public Viewer(ChromiumWebBrowser browser, ViewerList viewerList, string name)
+    public Viewer(IStreetSmartBrowser browser, ViewerList viewerList, string name)
       : this(browser, viewerList)
     {
       Name = name;

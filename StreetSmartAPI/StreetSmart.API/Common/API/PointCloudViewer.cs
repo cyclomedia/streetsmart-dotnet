@@ -77,7 +77,7 @@ namespace StreetSmart.Common.API
 
     #region Constructors
 
-    public PointCloudViewer(ChromiumWebBrowser browser, PointCloudViewerList pointCloudViewerList, string name)
+    public PointCloudViewer(IStreetSmartBrowser browser, PointCloudViewerList pointCloudViewerList, string name)
       : base(browser, pointCloudViewerList, name)
     {
       _ci = CultureInfo.InvariantCulture;

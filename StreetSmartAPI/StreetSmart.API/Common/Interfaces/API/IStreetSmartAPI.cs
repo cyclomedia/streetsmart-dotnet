@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #if WINFORMS
 using StreetSmart.WinForms;
@@ -46,7 +45,7 @@ namespace StreetSmart.Common.Interfaces.API
     ISettings Settings { get; }
 
     /// <summary>
-    /// Object which is an Interface for enabeling/disabeling shortcuts
+    /// Object which is an Interface for enabling/disabling shortcuts
     /// </summary>
     IShortcuts Shortcuts { get; }
 
@@ -96,7 +95,7 @@ namespace StreetSmart.Common.Interfaces.API
 
     #endregion
 
-    #if WINFORMS
+#if WINFORMS
     #region StreetSmartAPI
 
     /// <summary>
@@ -105,7 +104,7 @@ namespace StreetSmart.Common.Interfaces.API
     StreetSmartGUI GUI { get; }
 
     #endregion
-    #endif
+#endif
 
     #region CefSharp functions
 
@@ -123,7 +122,7 @@ namespace StreetSmart.Common.Interfaces.API
 
     #region Interface functions
 
-    #if WPF
+#if WPF
     /// <summary>
     /// Restarts streetsmart
     /// </summary>
@@ -134,20 +133,20 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     /// <param name="streetSmartLocation">The location of Street Smart</param>
     void RestartStreetSmart(string streetSmartLocation);
-/*
-    /// <summary>
-    /// Returns true if the browser object is disposed
-    /// </summary>
-    bool BrowserIsDisposed { get; }
+    /*
+      /// <summary>
+      /// Returns true if the browser object is disposed
+      /// </summary>
+      bool BrowserIsDisposed { get; }
 
-    /// <summary>
-    /// Create a new webbrowser
-    /// </summary>
-    /// <param name="parentWindowHwndSource"><reference to the window/param>
-    /// <param name="initialSize">initial size</param>
-    void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
-*/
-    #endif
+      /// <summary>
+      /// Create a new webbrowser
+      /// </summary>
+      /// <param name="parentWindowHwndSource"><reference to the window/param>
+      /// <param name="initialSize">initial size</param>
+      void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize);
+    */
+#endif
 
     /// <summary>
     /// Add a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.

@@ -17,9 +17,9 @@
  */
 
 using CefSharp;
-
-using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.API;
+using StreetSmart.Common.Interfaces.API;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.Factories
 {
@@ -57,19 +57,13 @@ namespace StreetSmart.Common.Factories
     /// </summary>
     /// <param name="languageCode">The browser language code</param>
     /// <returns>If setting the language code was successful.</returns>
-    public static bool SetLanguage(string languageCode)
+    public static async Task<bool> SetLanguage(string languageCode)
     {
-      bool result = false;
-
-      Cef.UIThreadTaskFactory.StartNew(() =>
+      return await Cef.UIThreadTaskFactory.StartNew(() =>
       {
-        using (var context = Cef.GetGlobalRequestContext())
-        {
-          result = SetLanguage(languageCode, context);
-        }
+        using var context = Cef.GetGlobalRequestContext();
+        return SetLanguage(languageCode, context);
       });
-
-      return result;
     }
 
     private static bool SetLanguage(string languageCode, IRequestContext context)

@@ -16,8 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
 using CefSharp;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Handlers
 {

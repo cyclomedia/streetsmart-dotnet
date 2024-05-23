@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System.Collections.Generic;
 using System.Globalization;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsDepth: Details, IDetailsDepth
+  internal class DetailsDepth : Details, IDetailsDepth
   {
     public DetailsDepth(Dictionary<string, object> details)
     {

@@ -894,6 +894,8 @@
     <Compile Include="..\Common\Interfaces\SLD\VendorOptionType.cs">
       <Link>Interfaces\SLD\VendorOptionType.cs</Link>
     </Compile>
+    <Compile Include="..\Common\IStreetSmartBrowser.cs" Link="IStreetSmartBrowser.cs" />
+    <Compile Include="..\Common\StreetSmartBrowserAdapter.cs" Link="StreetSmartBrowserAdapter.cs" />
     <Compile Update="StreetSmartGUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -915,6 +917,9 @@
       <PackagePath>\</PackagePath>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="..\Common\Locales\en-US.pak" Link="Locales\en-US.pak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.Common.NETCore" Version="120.2.70" />
@@ -924,5 +929,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Locales\" />
   </ItemGroup>
 </Project>

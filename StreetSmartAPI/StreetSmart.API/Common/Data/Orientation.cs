@@ -40,9 +40,9 @@ namespace StreetSmart.Common.Data
 
     public Orientation(Dictionary<string, object> orientation)
     {
-      Yaw = ToNullDouble(orientation, "yaw");
-      Pitch = ToNullDouble(orientation, "pitch");
-      HFov = ToNullDouble(orientation, "hFov");
+      Yaw = ToNullDouble(orientation, "yaw") ?? ToNullDouble(orientation, "Yaw");
+      Pitch = ToNullDouble(orientation, "pitch") ?? ToNullDouble(orientation, "Pitch");
+      HFov = ToNullDouble(orientation, "hFov") ?? ToNullDouble(orientation, "HFov");
     }
 
     public double? Yaw

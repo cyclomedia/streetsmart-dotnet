@@ -28,7 +28,7 @@ namespace System
     public static string ToJsColor(this Color value)
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      double alpha = (double) value.A / 255;
+      double alpha = (double)value.A / 255;
       return $"[{value.R},{value.G},{value.B},{alpha.ToString("0.00", ci)}]";
     }
 
