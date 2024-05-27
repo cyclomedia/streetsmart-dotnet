@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  public abstract class APIBase : DataConvert
+  internal abstract class APIBase : DataConvert
   {
     #region Tasks
 

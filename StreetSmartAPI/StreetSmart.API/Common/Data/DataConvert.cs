@@ -24,7 +24,7 @@ using System.Linq;
 
 namespace StreetSmart.Common.Data
 {
-  public class DataConvert : NotifyPropertyChanged
+  internal class DataConvert : NotifyPropertyChanged
   {
     protected static CultureInfo ci => CultureInfo.InvariantCulture;
 
@@ -171,9 +171,9 @@ namespace StreetSmart.Common.Data
       return result;
     }
 
-    public IList<object> ToList(object value)
+    public static IList<object> ToList(object value, bool nullable = false)
     {
-      return value as IList<object> ?? new List<object>();
+      return value as IList<object> ?? (nullable ? null : new List<object>());
     }
 
     public object[] ToArray(object value)
@@ -218,7 +218,12 @@ namespace StreetSmart.Common.Data
 
     public IList<object> GetListValue(Dictionary<string, object> details, string value)
     {
-      return ToList(GetValue(details, value));
+      return ToList(GetValue(details, value), false);
+    }
+
+    public IList<object> GetNullListValue(Dictionary<string, object> details, string value)
+    {
+      return ToList(GetValue(details, value), true);
     }
   }
 }

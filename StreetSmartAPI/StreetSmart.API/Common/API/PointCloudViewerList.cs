@@ -17,13 +17,12 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
-  internal class PointCloudViewerList : ViewerList
+  internal sealed class PointCloudViewerList : ViewerList
   {
     #region Properties
 

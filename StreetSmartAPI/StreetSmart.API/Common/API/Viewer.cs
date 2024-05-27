@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.API
 {
-  public class Viewer : APIBase, IViewer
+  internal abstract class Viewer : APIBase, IViewer
   {
     #region Properties
 

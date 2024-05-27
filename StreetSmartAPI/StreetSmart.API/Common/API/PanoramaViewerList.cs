@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
-  public class PanoramaViewerList : ViewerList
+  internal class PanoramaViewerList : ViewerList
   {
     #region Properties
 

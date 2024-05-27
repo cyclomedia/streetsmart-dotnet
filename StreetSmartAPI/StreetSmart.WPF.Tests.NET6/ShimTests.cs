@@ -10,11 +10,14 @@ namespace StreetSmart.WPF.Tests.NET6
     [TestMethod]
     public void Test_ReplaceConsole()
     {
-      var consoleShim = Shim.Replace(() => Console.WriteLine(Is.A<string>())).With(delegate (string s) { Console.WriteLine("Hijacked: {0}", s); });
+      string? written = null;
+      var consoleShim = Shim.Replace(() => Console.WriteLine(Is.A<string>())).With(delegate (string s) { written = string.Format("Hijacked: {0}", s); });
       PoseContext.Isolate(() =>
       {
         Console.WriteLine("Hello World!");
       }, consoleShim);
+
+      Assert.AreEqual("Hijacked: Hello World!", written);
     }
 
     [TestMethod]

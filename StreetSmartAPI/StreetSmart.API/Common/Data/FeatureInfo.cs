@@ -29,9 +29,9 @@ namespace StreetSmart.Common.Data
 
     public FeatureInfo(Dictionary<string, object> featureInfo)
     {
-      LayerName = ToNullString(featureInfo, "layerName") ?? ToString(featureInfo, "LayerName");
-      LayerId = ToNullString(featureInfo, "layerId") ?? ToNullString(featureInfo, "LayerId");
-      FeatureProperties = new Json(GetNullDictValue(featureInfo, "featureProperties") ?? GetDictValue(featureInfo, "FeatureProperties"));
+      LayerName = ToString(featureInfo, "layerName");
+      LayerId = ToString(featureInfo, "layerId");
+      FeatureProperties = new Json(GetDictValue(featureInfo, "featureProperties"));
     }
 
     public string LayerName
