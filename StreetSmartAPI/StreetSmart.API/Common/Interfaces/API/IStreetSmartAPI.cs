@@ -104,7 +104,8 @@ namespace StreetSmart.Common.Interfaces.API
 
     #endregion
 
-    #if WINFORMS
+#if WINFORMS
+
     #region StreetSmartAPI
 
     /// <summary>
@@ -113,6 +114,7 @@ namespace StreetSmart.Common.Interfaces.API
     StreetSmartGUI GUI { get; }
 
     #endregion
+
 #endif
 
     #region CefSharp functions
