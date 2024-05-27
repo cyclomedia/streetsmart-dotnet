@@ -20,24 +20,16 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
-
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 
 namespace StreetSmart.Common.API
 {
-  public class ImageViewer : Viewer, IImageViewer
+  internal class ImageViewer : Viewer, IImageViewer
   {
     #region Members
 

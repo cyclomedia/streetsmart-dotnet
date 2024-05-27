@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace StreetSmart.Common.Interfaces.Data
@@ -49,5 +50,8 @@ namespace StreetSmart.Common.Interfaces.Data
     /// visibility of the layer
     /// </summary>
     bool Visible { get; set; }
+
+
+    void FillInParameters(Dictionary<string, object> overlay);
   }
 }

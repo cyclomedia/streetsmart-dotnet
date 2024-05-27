@@ -3,7 +3,6 @@ using Moq;
 using StreetSmart.Common;
 using StreetSmart.Common.API;
 using StreetSmart.Common.Data;
-using StreetSmart.Common.Events;
 using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
@@ -16,14 +15,14 @@ using Xunit;
 
 namespace StreetSmart.WPF.Tests.NET6
 {
-  public sealed class PanoramaViewerTest
+  public sealed class PanoramaViewerTests
   {
     private readonly PanoramaViewer _viewer;
     private readonly Mock<IStreetSmartBrowser> _browserMock = new();
     private readonly Mock<PanoramaViewerList> _panoramaViewerListMock = new();
     private readonly Mock<IBrowser> _iBrowserMock = new();
 
-    public PanoramaViewerTest()
+    public PanoramaViewerTests()
     {
       _viewer = new PanoramaViewer(_browserMock.Object, _panoramaViewerListMock.Object, "PanoramaViewerTest");
     }
@@ -128,7 +127,7 @@ namespace StreetSmart.WPF.Tests.NET6
     public async Task GetOrientation_Equivalent()
     {
       // arrange
-      var orientation = new { Yaw = 2, Pitch = 3, HFov = 50.2211112 };
+      var orientation = DataHelper.Orientation;
       _browserMock.Setup(x => x.IsDisposed).Returns(false);
       _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
       _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(orientation, "GetOrientation1")).Verifiable(Times.Once);
@@ -137,7 +136,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.GetOrientation();
 
       // assert
-      Assert.Equivalent(orientation, result, true);
+      Assert.Equivalent(new Orientation(orientation), result, true);
       Mock.Verify();
     }
 
@@ -154,7 +153,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.GetRecording();
 
       // assert
-      Assert.Equivalent(recording, result);
+      Assert.Equivalent(new Recording(recording), result);
       Mock.Verify();
     }
 
@@ -216,7 +215,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByAddress("test");
 
       // assert
-      Assert.Equivalent(recording, result);
+      Assert.Equivalent(new Recording(recording), result, true);
       Mock.Verify();
     }
 
@@ -233,7 +232,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByCoordinate(new Coordinate());
 
       // assert
-      Assert.Equivalent(recording, result);
+      Assert.Equivalent(new Recording(recording), result, true);
       Mock.Verify();
     }
 
@@ -250,7 +249,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.OpenByImageId("test_image_id");
 
       // assert
-      Assert.Equivalent(recording, result);
+      Assert.Equivalent(new Recording(recording), result, true);
       Mock.Verify();
     }
 
@@ -267,7 +266,7 @@ namespace StreetSmart.WPF.Tests.NET6
       var result = await _viewer.SearchRecordingAsync(null, null, null);
 
       // assert
-      Assert.Equivalent(recording, result);
+      Assert.Equivalent(new Recording(recording), result, true);
       Mock.Verify();
     }
 
@@ -282,7 +281,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.RotateDown(54d);
 
       // assert
-      Assert.Contains(".rotateDown", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".rotateDown", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -297,7 +296,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.RotateUp(54d);
 
       // assert
-      Assert.Contains(".rotateUp", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".rotateUp", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -312,7 +311,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.RotateLeft(54d);
 
       // assert
-      Assert.Contains(".rotateLeft", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".rotateLeft", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -327,7 +326,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.RotateRight(54d);
 
       // assert
-      Assert.Contains(".rotateRight", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".rotateRight", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -342,7 +341,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.SetElevationSliderLevel(54d);
 
       // assert
-      Assert.Contains(".setElevationSliderLevel", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".setElevationSliderLevel", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -357,7 +356,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.SetOrientation(new Orientation(3d, 4d, 6d));
 
       // assert
-      Assert.Contains(".setOrientation", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".setOrientation", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -372,7 +371,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ShowAttributePanelOnFeatureClick();
 
       // assert
-      Assert.Contains(".showAttributePanelOnFeatureClick", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".showAttributePanelOnFeatureClick", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -389,7 +388,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ShowAttributePanelOnFeatureClick(visible);
 
       // assert
-      Assert.Contains(".showAttributePanelOnFeatureClick", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".showAttributePanelOnFeatureClick", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -406,7 +405,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.Toggle3DCursor(visible);
 
       // assert
-      Assert.Contains(".toggle3DCursor", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggle3DCursor", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -421,7 +420,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleLinkedViewers();
 
       // assert
-      Assert.Contains(".toggleLinkedViewers", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleLinkedViewers", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -438,7 +437,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleAddressesVisible(visible);
 
       // assert
-      Assert.Contains(".toggleAddressesVisible", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleAddressesVisible", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -475,7 +474,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleButtonEnabled(buttonId, visible);
 
       // assert
-      Assert.Contains(".toggleButtonEnabled", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleButtonEnabled", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -492,7 +491,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleRecordingsVisible(visible);
 
       // assert
-      Assert.Contains(".toggleRecordingsVisible", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleRecordingsVisible", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -509,7 +508,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleSidebarExpanded(visible);
 
       // assert
-      Assert.Contains(".toggleSidebarExpanded", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleSidebarExpanded", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -526,7 +525,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleSidebarVisible(visible);
 
       // assert
-      Assert.Contains(".toggleSidebarVisible", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleSidebarVisible", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -543,7 +542,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.ToggleSidebarEnabled(visible);
 
       // assert
-      Assert.Contains(".toggleSidebarEnabled", script, System.StringComparison.InvariantCulture);
+      Assert.Contains(".toggleSidebarEnabled", script, StringComparison.InvariantCulture);
       Mock.Verify();
     }
 
@@ -597,7 +596,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.OnRecordingClick(obj);
 
       // assert
-      Assert.Equivalent(recording, receivedEvent?.Recording);
+      Assert.Equivalent(new Recording(recording), receivedEvent?.Recording);
       Assert.Equal(false, receivedEvent?.ShiftKey);
       Assert.Equal(false, receivedEvent?.AltKey);
       Assert.Equal(true, receivedEvent?.CtrlKey);
@@ -608,18 +607,18 @@ namespace StreetSmart.WPF.Tests.NET6
     public void OnFeatureClick_Equal()
     {
       // arrange
+      var featureInfo = DataHelper.FeatureInfo;
       IFeatureInfo? receivedEvent = null;
       object? sender = null;
       _viewer.FeatureClick += (s, e) => { receivedEvent = e.Value; sender = s; };
       var obj = new ExpandoObject();
-      obj.TryAdd("detail", new { layerId = "a", layerName = "b" });
+      obj.TryAdd("detail", featureInfo);
 
       // act
       _viewer.OnFeatureClick(obj);
 
       // assert
-      Assert.Equal("a", receivedEvent?.LayerId);
-      Assert.Equal("b", receivedEvent?.LayerName);
+      Assert.Equivalent(new FeatureInfo(featureInfo), receivedEvent);
       Assert.Equal(_viewer, sender);
     }
 
@@ -627,17 +626,18 @@ namespace StreetSmart.WPF.Tests.NET6
     public void OnTileLoadError_Equal()
     {
       // arrange
+      var detail = new { request = new Dictionary<string, object> { { "a", "c" } } };
       IDictionary<string, object>? receivedEvent = null;
       object? sender = null;
       _viewer.TileLoadError += (s, e) => { receivedEvent = e.Value; sender = s; };
       var obj = new ExpandoObject();
-      obj.TryAdd("detail", new { request = new { a = "c" } });
+      obj.TryAdd("detail", detail);
 
       // act
       _viewer.OnTileLoadError(obj);
 
       // assert
-      Assert.Equal("c", receivedEvent?["a"]);
+      Assert.Equal(detail.request, receivedEvent);
       Assert.Equal(_viewer, sender);
     }
 
@@ -656,7 +656,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.OnViewChange(obj);
 
       // assert
-      Assert.Equivalent(orientation, receivedEvent, true);
+      Assert.Equivalent(new Orientation(orientation), receivedEvent, true);
       Assert.Equal(_viewer, sender);
     }
 
@@ -675,7 +675,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.OnSurfaceCursorChange(obj);
 
       // assert
-      Assert.Equivalent(depthInfo, receivedEvent, true);
+      Assert.Equivalent(new DepthInfo(depthInfo), receivedEvent, true);
       Assert.Equal(_viewer, sender);
     }
 
@@ -710,7 +710,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.OnTimeTravelChange(obj);
 
       // assert
-      Assert.Equivalent(timeTravelInfo, receivedEvent, true);
+      Assert.Equivalent(new TimeTravelInfo(timeTravelInfo), receivedEvent, true);
       Assert.Equal(_viewer, sender);
     }
 
@@ -729,7 +729,7 @@ namespace StreetSmart.WPF.Tests.NET6
       _viewer.OnFeatureSelectionChange(obj);
 
       // assert
-      Assert.Equivalent(featureInfo, receivedEvent, true);
+      Assert.Equivalent(new FeatureInfo(featureInfo), receivedEvent, true);
       Assert.Equal(_viewer, sender);
     }
   }

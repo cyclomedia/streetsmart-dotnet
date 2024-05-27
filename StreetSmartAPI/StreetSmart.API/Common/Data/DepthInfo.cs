@@ -30,10 +30,10 @@ namespace StreetSmart.Common.Data
 
     public DepthInfo(Dictionary<string, object> depthInfo)
     {
-      Depth = ToNullDouble(depthInfo, "depth") ?? ToNullDouble(depthInfo, "Depth") ?? 0d;
-      DepthInMeters = ToNullDouble(depthInfo, "depthInMeters") ?? ToNullDouble(depthInfo, "DepthInMeters") ?? 0d;
+      Depth = ToDouble(depthInfo, "depth");
+      DepthInMeters = ToDouble(depthInfo, "depthInMeters");
       XYZ = new Coordinate(GetDictValue(depthInfo, "xyz"));
-      SRS = ToNullString(depthInfo, "srs") ?? ToString(depthInfo, "SRS");
+      SRS = ToString(depthInfo, "srs");
     }
 
     public double Depth

@@ -26,16 +26,12 @@ using CefSharp;
 
 #if WINFORMS
 using System.Windows.Forms;
-
 using CefSharp.WinForms;
-
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
 #else
 using System.Threading;
-
 using CefSharp.Wpf;
-
 using StreetSmart.Wpf.Properties;
 #endif
 
@@ -53,7 +49,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal class StreetSmartAPI : APIBase, IStreetSmartAPI
+  internal sealed class StreetSmartAPI : APIBase, IStreetSmartAPI
   {
     #region Members
 
@@ -127,17 +123,20 @@ namespace StreetSmart.Common.API
 
     #region Constructor
     #if WINFORMS
-    public StreetSmartAPI(string streetSmartLocation)
+    public StreetSmartAPI(string streetSmartLocation, IStreetSmartBrowser browser)
     {
       InitApi(streetSmartLocation);
-      Browser = new StreetSmartBrowserAdapter(new ChromiumWebBrowser(streetSmartLocation) { Dock = DockStyle.Fill });
+      Browser = browser;
       RegisterBrowser();
       GUI = new StreetSmartGUI(Browser);
     }
     #else
-    public StreetSmartAPI(string streetSmartLocation)
+    public StreetSmartAPI(string streetSmartLocation, IStreetSmartBrowser browser)
     {
       InitApi(streetSmartLocation);
+      Browser = browser;
+      Browser.Address = streetSmartLocation;
+      RegisterBrowser();
     }
 
     public void InitBrowser(IStreetSmartBrowser browser)
@@ -177,12 +176,12 @@ namespace StreetSmart.Common.API
     #else
     public void ShowDevTools()
     {
-      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(ShowDeveloperTools));
+      Browser?.Dispatcher?.Invoke(new ThreadStart(ShowDeveloperTools));
     }
 
     public void CloseDevTools()
     {
-      Browser?.Dispatcher?.BeginInvoke(new ThreadStart(CloseDeveloperTools));
+      Browser?.Dispatcher?.Invoke(new ThreadStart(CloseDeveloperTools));
     }
 
     public void RestartStreetSmart()
@@ -208,7 +207,7 @@ namespace StreetSmart.Common.API
         throw new StreetSmartJsonException("Json is not valid");
       }
 
-      ((Overlay) overlay).FillInParameters(ToDictionary(await CallJsGetScriptAsync($"addOverlay({overlay})")));
+      overlay.FillInParameters(ToDictionary(await CallJsGetScriptAsync($"addOverlay({overlay})")));
       return overlay;
     }
 
@@ -216,7 +215,7 @@ namespace StreetSmart.Common.API
     {
       int processId = GetProcessId;
       string script = GetScript($"addWFSLayer({overlay})", processId);
-      ((Overlay) overlay)?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
+      overlay?.FillInParameters(ToDictionary(await CallJsAsync(script, processId)));
       return overlay;
     }
 

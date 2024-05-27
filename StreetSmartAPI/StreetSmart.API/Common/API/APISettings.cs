@@ -19,20 +19,16 @@
 using System;
 using System.IO;
 using System.Reflection;
-
 using CefSharp;
+using StreetSmart.Common.Interfaces.API;
 
 #if WINFORMS
 using CefSharp.WinForms;
-
 using StreetSmart.WinForms.Properties;
 #else
 using CefSharp.Wpf;
-
 using StreetSmart.Wpf.Properties;
 #endif
-
-using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {

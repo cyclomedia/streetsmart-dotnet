@@ -21,21 +21,12 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using CefSharp;
-
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.API
 {
-  public abstract class ViewerList: APIBase
+  internal abstract class ViewerList: APIBase
   {
     #region Properties
 

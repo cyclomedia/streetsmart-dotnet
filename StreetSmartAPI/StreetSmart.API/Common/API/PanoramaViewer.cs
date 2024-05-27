@@ -32,7 +32,7 @@ using Orientation = StreetSmart.Common.Data.Orientation;
 
 namespace StreetSmart.Common.API
 {
-    public sealed class PanoramaViewer : ImageViewer, IPanoramaViewer
+    internal sealed class PanoramaViewer : ImageViewer, IPanoramaViewer
     {
         #region Members
 

@@ -21,12 +21,6 @@ using System.Threading.Tasks;
 using StreetSmart.Common.Interfaces.API;
 using System.Globalization;
 
-#if WINFORMS
-using CefSharp.WinForms;
-#else
-using CefSharp.Wpf;
-#endif
-
 namespace StreetSmart.Common.API
 {
   internal sealed class MeshViewer : Viewer, IMeshViewer

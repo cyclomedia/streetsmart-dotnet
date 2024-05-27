@@ -19,16 +19,10 @@
 using System;
 using System.Threading.Tasks;
 
-using CefSharp;
-
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
-
-using CefSharp.WinForms;
 #else
 using StreetSmart.Wpf.Properties;
-
-using CefSharp.Wpf;
 #endif
 
 using StreetSmart.Common.Interfaces.API;

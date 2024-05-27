@@ -20,7 +20,7 @@ using StreetSmart.Common.Interfaces.API;
 
 namespace StreetSmart.Common.API
 {
-  internal class MeshViewerList : ViewerList
+  internal sealed class MeshViewerList : ViewerList
   {
     #region Properties
 
