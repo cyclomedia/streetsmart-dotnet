@@ -20,13 +20,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-
 using StreetSmart.Common.Interfaces.Data;
 
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
 #else
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.Data

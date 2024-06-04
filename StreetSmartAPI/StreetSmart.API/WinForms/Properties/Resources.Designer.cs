@@ -22,7 +22,7 @@ namespace StreetSmart.WinForms.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace StreetSmart.WinForms.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StreetSmart.WinForms.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace StreetSmart.WinForms.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace StreetSmart.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized string similar to CefSharp.BrowserSubprocess.exe.
         /// </summary>
-        internal static string BrowserSubprocess {
+        public static string BrowserSubprocess {
             get {
                 return ResourceManager.GetString("BrowserSubprocess", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace StreetSmart.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized string similar to StreetSmartApi.
         /// </summary>
-        internal static string JsApi {
+        public static string JsApi {
             get {
                 return ResourceManager.GetString("JsApi", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace StreetSmart.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized string similar to locales.
         /// </summary>
-        internal static string LocalesPath {
+        public static string LocalesPath {
             get {
                 return ResourceManager.GetString("LocalesPath", resourceCulture);
             }
@@ -90,16 +90,16 @@ namespace StreetSmart.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string ResourcesPath {
+        public static string ResourcesPath {
             get {
                 return ResourceManager.GetString("ResourcesPath", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v23.5/api-dotnet.html.
+        ///   Looks up a localized string similar to https://streetsmart.cyclomedia.com/api/v24.1/api-dotnet.html.
         /// </summary>
-        internal static string StreetSmartLocation {
+        public static string StreetSmartLocation {
             get {
                 return ResourceManager.GetString("StreetSmartLocation", resourceCulture);
             }

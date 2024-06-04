@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
@@ -9,15 +8,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms", "StreetSmart.API\WinForms\StreetSmart.WinForms.Framework.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms", "StreetSmart.API\WinForms\StreetSmart.WinForms.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WPF", "StreetSmart.API\WPF\StreetSmart.WPF.Framework.csproj", "{011EC44B-B881-4523-8E5A-F37D47A9EDD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF", "StreetSmart.API\WPF\StreetSmart.WPF.csproj", "{011EC44B-B881-4523-8E5A-F37D47A9EDD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.Demo", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.Framework.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.Demo.Framework", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.Framework.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.Multiple", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.Framework.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WinForms.Multiple.Framework", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.Framework.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetSmart.WPF.Example", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.Framework.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example.Framework", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.Framework.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Tests", "StreetSmart.WPF.Tests\StreetSmart.WPF.Tests.csproj", "{445D23DA-BBCB-428E-BD51-4781861CB94B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +89,18 @@ Global
 		{293D40C1-EECD-49CD-B6C7-32D21526FF4E}.Release|x64.Build.0 = Release|x64
 		{293D40C1-EECD-49CD-B6C7-32D21526FF4E}.Release|x86.ActiveCfg = Release|x86
 		{293D40C1-EECD-49CD-B6C7-32D21526FF4E}.Release|x86.Build.0 = Release|x86
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|x64.ActiveCfg = Debug|x64
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|x64.Build.0 = Debug|x64
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|x86.ActiveCfg = Debug|x86
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Debug|x86.Build.0 = Debug|x86
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|x64.ActiveCfg = Release|x64
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|x64.Build.0 = Release|x64
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|x86.ActiveCfg = Release|Any CPU
+		{445D23DA-BBCB-428E-BD51-4781861CB94B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

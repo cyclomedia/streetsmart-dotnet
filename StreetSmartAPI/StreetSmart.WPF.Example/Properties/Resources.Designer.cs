@@ -61,7 +61,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 123.
         /// </summary>
         public static string ApiKey {
             get {
@@ -79,7 +79,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to a3pyhcZnAtddEK?k.
         /// </summary>
         public static string Password {
             get {
@@ -97,7 +97,7 @@ namespace StreetSmart.WPF.Example.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to mskovacic@cyclomedia.com.
         /// </summary>
         public static string Username {
             get {

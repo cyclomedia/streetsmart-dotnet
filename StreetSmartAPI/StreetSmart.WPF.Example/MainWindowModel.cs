@@ -20,18 +20,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-
-using StreetSmart.WPF.Example.Properties;
-
 using StreetSmart.Common.Factories;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.DomElement;
 using System.Threading.Tasks;
+using StreetSmart.WPF.Example.Properties;
 
 namespace StreetSmart.WPF.Example
 {
-  public class MainWindowModel: NotifyPropertyChanged
+  public class MainWindowModel : NotifyPropertyChanged
   {
     #region Constants
 
@@ -115,13 +113,10 @@ namespace StreetSmart.WPF.Example
 
     private void onPropertyChanged(object sender, PropertyChangedEventArgs args)
     {
-      if (args != null)
+      if (args != null && args.PropertyName == "Api")
       {
-        if (args.PropertyName == "Api")
-        {
-          Api = WpfApi.Api;
-          Api.APIReady += ApiReady;
-        }
+        Api = WpfApi.Api;
+        Api.APIReady += ApiReady;
       }
     }
 
@@ -139,7 +134,7 @@ namespace StreetSmart.WPF.Example
           addressSettings, element);
       await Api.Init(_options);
 
-      IList<ViewerType> viewerTypes = new List<ViewerType> {ViewerType.Panorama};
+      IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
       IPanoramaViewerOptions panoramaOptions =
         PanoramaViewerOptionsFactory.Create(false, false, true, true, true, true);
       IViewerOptions viewerOptions = ViewerOptionsFactory.Create(viewerTypes, Srs, panoramaOptions);

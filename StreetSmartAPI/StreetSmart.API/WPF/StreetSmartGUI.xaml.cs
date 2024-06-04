@@ -20,9 +20,8 @@ using System.Windows;
 using StreetSmart.Common;
 using StreetSmart.Common.API;
 using StreetSmart.Common.Factories;
-using StreetSmart.WPF;
 
-namespace StreetSmart.Wpf
+namespace StreetSmart.WPF
 {
     /// <summary>
     /// Interaction logic for StreetSmartGUI.xaml

@@ -1,10 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Project>
-	<PropertyGroup>
-		<AssemblyName>StreetSmart.WinForms</AssemblyName>
-		<VersionPrefix>24.1.0</VersionPrefix>
-		<Authors>Cyclomedia</Authors>
-		<Company>Cyclomedia</Company>
-		<AssemblyVersion>24.1.0</AssemblyVersion>
-	</PropertyGroup>
+
 </Project>

@@ -25,15 +25,15 @@ using StreetSmart.Common.Interfaces.API;
 #if WINFORMS
 using CefSharp.WinForms;
 using StreetSmart.WinForms.Properties;
-#else
+#elif WPF
 using CefSharp.Wpf;
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.API
 {
   // ReSharper disable once InconsistentNaming
-  internal class APISettings: CefSettings, IAPISettings
+  internal class APISettings : CefSettings, IAPISettings
   {
     public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
     {
