@@ -21,18 +21,16 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using CefSharp;
 
 #if WINFORMS
 using System.Windows.Forms;
-using CefSharp.WinForms;
+ using CefSharp.WinForms;
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
 #else
 using System.Threading;
-using CefSharp.Wpf;
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 using StreetSmart.Common.API.Events;
@@ -268,9 +266,9 @@ namespace StreetSmart.Common.API
         new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
     }
 
-    public async Task RemoveOverlay(string layerId)
+    public async Task RemoveOverlay(string overlayId)
     {
-      await CallJsGetScriptAsync($"removeOverlay({layerId.ToQuote()})");
+      await CallJsGetScriptAsync($"removeOverlay({overlayId.ToQuote()})");
     }
 
     public async Task Destroy(IOptions options)

@@ -19,13 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using StreetSmart.Common.Interfaces.Data;
 
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
 #else
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.Data
@@ -52,7 +51,7 @@ namespace StreetSmart.Common.Data
 
     public override string ToString()
     {
-      List<string> options = new List<string> {$"pointCloudType:{Resources.JsApi}.{PointCloudType.Description()}"};
+      List<string> options = new List<string> { $"pointCloudType:{Resources.JsApi}.{PointCloudType.Description()}" };
 
       string baseOptions = base.ToString();
       string result = options.Aggregate(baseOptions, (current, part) => $"{current},{part}");

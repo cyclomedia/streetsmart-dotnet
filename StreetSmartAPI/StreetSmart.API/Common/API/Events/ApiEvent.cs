@@ -19,7 +19,7 @@
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
 #else
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.API.Events

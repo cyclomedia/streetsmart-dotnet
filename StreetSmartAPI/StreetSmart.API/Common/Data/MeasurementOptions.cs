@@ -17,13 +17,12 @@
  */
 
 using System;
-
 using StreetSmart.Common.Interfaces.Data;
 
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
 #else
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.Data
@@ -93,12 +92,12 @@ namespace StreetSmart.Common.Data
 
         if (GeometryType != null)
         {
-          geometryPart = $"geometry:{Resources.JsApi}.{((MeasurementGeometryType) GeometryType).Description()}";
+          geometryPart = $"geometry:{Resources.JsApi}.{((MeasurementGeometryType)GeometryType).Description()}";
         }
 
         if (MeasureMethods != null)
         {
-          measureMethodPart = $"measureMethod:{Resources.JsApi}.{((MeasureMethods) MeasureMethods).Description()}";
+          measureMethodPart = $"measureMethod:{Resources.JsApi}.{((MeasureMethods)MeasureMethods).Description()}";
         }
 
         if (ShowSaveMeasurementButton != null)

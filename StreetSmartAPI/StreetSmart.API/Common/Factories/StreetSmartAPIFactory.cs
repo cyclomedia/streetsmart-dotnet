@@ -28,7 +28,7 @@ using StreetSmart.WinForms.Properties;
 using System.Windows.Forms;
 #else
 using CefSharp.Wpf;
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 namespace StreetSmart.Common.Factories

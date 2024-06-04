@@ -61,7 +61,7 @@ namespace MultipleAPI.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 1234.
         /// </summary>
         internal static string APIKey {
             get {
@@ -70,7 +70,7 @@ namespace MultipleAPI.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to a3pyhcZnAtddEK?k.
         /// </summary>
         internal static string Password {
             get {
@@ -79,7 +79,7 @@ namespace MultipleAPI.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to mskovacic@cyclomedia.com.
         /// </summary>
         internal static string Username {
             get {

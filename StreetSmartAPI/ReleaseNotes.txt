@@ -1,6 +1,10 @@
 ﻿Release notes:
 ==============
 
+Version 24.1.1
+================
+- Target framework .net 4.6.2 and .net 6.0 windows
+
 Version 23.9.0
 ================
 - React 18 API

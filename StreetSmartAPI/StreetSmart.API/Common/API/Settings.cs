@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 #if WINFORMS
 using StreetSmart.WinForms.Properties;
 #else
-using StreetSmart.Wpf.Properties;
+using StreetSmart.WPF.Properties;
 #endif
 
 using StreetSmart.Common.Interfaces.API;

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:streetSmart="clr-namespace:StreetSmart.Wpf;assembly=StreetSmart.Wpf"
+        xmlns:streetSmart="clr-namespace:StreetSmart.WPF;assembly=StreetSmart.WPF"
         xmlns:example="clr-namespace:StreetSmart.WPF.Example"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">

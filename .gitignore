@@ -201,3 +201,4 @@ FakesAssemblies/
 /client-side/C#/SignKey
 /StreetSmartAPI/StreetSmart.Tests.NET6/appsettings.User.json
 /StreetSmartAPI/StreetSmart.WinForms.Tests.NET6/appsettings.User.json
+/StreetSmartAPI/StreetSmart.WinForms.Tests/appsettings.User.json
