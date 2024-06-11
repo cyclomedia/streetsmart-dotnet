@@ -1,0 +1,9 @@
+<Project>
+  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+	<ItemGroup>
+		<Locales Include="$(MSBuildThisFileDirectory)\..\locales\*.pak" />
+	</ItemGroup>
+	<Target Name="CopyLocales" BeforeTargets="Build">
+		<Copy SourceFiles="@(Locales)" DestinationFolder="$(TargetDir)locales\" />
+	</Target>
+</Project>
