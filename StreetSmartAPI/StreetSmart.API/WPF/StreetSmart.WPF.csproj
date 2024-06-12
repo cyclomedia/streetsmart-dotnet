@@ -12,10 +12,11 @@
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.1.1-rc01</Version>
+		<Version>24.1.1-rc06</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
+		<PackageIcon>cyclomedia.png</PackageIcon>
 		<PackageReleaseNotes>ReleaseNotes.txt</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -55,16 +56,16 @@
 		<DefineConstants>$(DefineConstants)TRACE;WPF</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
-	  <NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|AnyCPU'">
-	  <NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
-	  <NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
-	  <NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Include="..\Common\API\APIBase.cs">
@@ -921,21 +922,26 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="..\Common\locales\af.pak" Link="locales\af.pak">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Common\locales\am.pak" Link="locales\am.pak">
+		<None Include="Directory.build.targets" PackagePath="buildTransitive/StreetSmart.WPF.targets" Pack="true" />
+		<None Include="..\Common\locales\af.pak" Link="locales\af.pak" PackagePath="locales">
+			<Pack>true</Pack>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Common\locales\en-US.pak" Link="locales\en-US.pak">
+		<None Include="..\Common\locales\am.pak" Link="locales\am.pak" PackagePath="locales">
+			<Pack>true</Pack>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Common\locales\en-GB.pak" Link="locales\en-GB.pak">
+		<None Include="..\Common\locales\en-US.pak" Link="locales\en-US.pak" PackagePath="locales">
+			<Pack>true</Pack>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\Common\locales\en-GB.pak" Link="locales\en-GB.pak" PackagePath="locales">
+			<Pack>true</Pack>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="125.0.210" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
@@ -943,21 +949,21 @@
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.Wpf" Version="123.0.60" />
+		<PackageReference Include="CefSharp.Wpf" Version="125.0.210" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Resources.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="crash_reporter.cfg">
