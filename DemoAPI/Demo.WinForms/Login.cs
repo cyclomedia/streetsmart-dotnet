@@ -42,6 +42,8 @@ namespace Demo.WinForms
 
     public string ClientId { get; set; }
 
+    public bool UseOAuth { get; set; }
+
     public static Login Instance => _login ?? (_login = Load());
 
     private static Login Load()

@@ -74,6 +74,9 @@
 		<Compile Include="..\Common\API\APISettings.cs">
 			<Link>API\APISettings.cs</Link>
 		</Compile>
+		<Compile Include="..\Common\API\Bearer.cs">
+      		<Link>API\Bearer.cs</Link>
+    	</Compile>
 		<Compile Include="..\Common\API\CommandLineArgs.cs">
 			<Link>API\CommandLineArgs.cs</Link>
 		</Compile>
@@ -113,6 +116,9 @@
 		<Compile Include="..\Common\API\Events\ViewerUpdateEvent.cs">
 			<Link>API\Events\ViewerUpdateEvent.cs</Link>
 		</Compile>
+		<Compile Include="..\Common\API\Events\BearerTokenChangedEvent.cs">
+      		<Link>API\Events\BearerTokenChangedEvent.cs</Link>
+    	</Compile>
 		<Compile Include="..\Common\API\ImageViewer.cs">
 			<Link>API\ImageViewer.cs</Link>
 		</Compile>
@@ -524,6 +530,9 @@
 		<Compile Include="..\Common\Interfaces\API\IAPISettings.cs">
 			<Link>Interfaces\API\IAPISettings.cs</Link>
 		</Compile>
+		<Compile Include="..\Common\Interfaces\API\IBearer.cs">
+      		<Link>Interfaces\API\IBearer.cs</Link>
+    	</Compile>
 		<Compile Include="..\Common\Interfaces\API\IImageViewer.cs">
 			<Link>Interfaces\API\IImageViewer.cs</Link>
 		</Compile>

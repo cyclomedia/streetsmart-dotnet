@@ -53,6 +53,7 @@ namespace StreetSmart.Common.API
 
     private ApiEventList _apiMeasurementEventList;
     private ApiEventList _apiViewerEventList;
+    private ApiEventList _apiAuthenticationEventList;
     private string _streetSmartLocation;
 
     #endregion
@@ -72,6 +73,8 @@ namespace StreetSmart.Common.API
     public event EventHandler<IEventArgs<IViewer>> ViewerAdded;
 
     public event EventHandler<IEventArgs<IViewer>> ViewerRemoved;
+
+    public event EventHandler<IEventArgs<IBearer>> BearerTokenChanged;
 
     #endregion
 
@@ -116,6 +119,9 @@ namespace StreetSmart.Common.API
     public string JsOnViewerRemoved => $"{nameof(OnViewerRemoved).FirstCharacterToLower()}";
 
     public string JsOnViewerUpdated => $"{nameof(OnViewerUpdated).FirstCharacterToLower()}";
+
+    public string JsOnBearerTokenChanged => $"{nameof(OnBearerTokenChanged).FirstCharacterToLower()}";
+
 
     #endregion
 
@@ -277,6 +283,7 @@ namespace StreetSmart.Common.API
       {
         RemoveMeasurementEvents();
         RemoveViewerEvents();
+        RemoveAuthenticationEvents();
         await CallJsGetScriptAsync($"destroy({options})");
         ViewerList.ClearViewers(ApiId);
       }
@@ -295,6 +302,11 @@ namespace StreetSmart.Common.API
     public async Task<bool> GetApiReadyState()
     {
       return Browser != null && ToBool(await CallJsGetScriptAsync("getApiReadyState()"));
+    }
+
+    public async Task<string> GetBearerToken()
+    {
+      return ToString(await CallJsGetScriptAsync("getBearerToken()"));
     }
 
     public async Task<string> GetApplicationName()
@@ -331,6 +343,7 @@ namespace StreetSmart.Common.API
       }
 
       AddViewerEvents();
+      AddAuthenticationEvents();
     }
 
     public async Task<IList<IViewer>> Open(string query, IViewerOptions options)
@@ -465,6 +478,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+    public void OnBearerTokenChanged(string bearerToken)
+    {
+      BearerTokenChanged?.Invoke(this, new EventArgs<IBearer>(new Bearer() { BearerToken = bearerToken }));
+    }
+
     #endregion
 
     #region Functions
@@ -523,6 +541,19 @@ namespace StreetSmart.Common.API
       }
     }
 
+    public void AddAuthenticationEvents()
+    {
+      if (_apiAuthenticationEventList == null)
+      {
+        _apiAuthenticationEventList = new ApiEventList
+        {
+          new BearerTokenChangedEvent(this, "BEARER_CHANGED", JsOnBearerTokenChanged),
+        };
+
+        Browser?.ExecuteScriptAsync($"{_apiAuthenticationEventList}");
+      }
+    }
+
     public void RemoveViewerEvents()
     {
       if (_apiViewerEventList != null)
@@ -538,6 +569,15 @@ namespace StreetSmart.Common.API
       {
         Browser?.ExecuteScriptAsync(_apiMeasurementEventList.Destroy);
         _apiMeasurementEventList = null;
+      }
+    }
+
+    public void RemoveAuthenticationEvents()
+    {
+      if (_apiAuthenticationEventList != null)
+      {
+        Browser?.ExecuteScriptAsync(_apiAuthenticationEventList.Destroy);
+        _apiAuthenticationEventList = null;
       }
     }
 

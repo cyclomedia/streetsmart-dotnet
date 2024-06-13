@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Street Smart .NET integration
  * Copyright (c) 2016 - 2021, CycloMedia, All rights reserved.
  * 
@@ -161,6 +161,7 @@ namespace Demo.WinForms
       _api.MeasurementSaved += OnMeasurementSaved;
       _api.ViewerAdded += OnViewerAdded;
       _api.ViewerRemoved += OnViewerRemoved;
+      _api.BearerTokenChanged += OnBearerTokenChanged;
       plStreetSmart.Controls.Add(_api.GUI);
 
       grLogin.Enabled = false;
@@ -170,6 +171,7 @@ namespace Demo.WinForms
       txtPassword.Text = _login.Password;
       txtAPIKey.Text = _login.ApiKey;
       txtClientId.Text = _login.ClientId;
+      cbUseOAuth.Checked = _login.UseOAuth;
 
       ObliqueViewerButtons[] obButtons =
       {
@@ -421,6 +423,12 @@ namespace Demo.WinForms
       }
     }
 
+    private void OnBearerTokenChanged(object sender, IEventArgs<IBearer> args)
+    {
+      string text = "Bearer token changed";
+      AddViewerEventsText(text);
+    }
+
     #endregion
 
     #region events oblique viewer 
@@ -600,14 +608,32 @@ namespace Demo.WinForms
       IAddressSettings addressSettings = AddressSettingsFactory.Create("nl", "CMdatabase");
       IDomElement element = DomElementFactory.Create();
 
+      if (cbUseOAuth.Checked)
+      {
       _options = OptionsFactory.CreateOauth(
+          txtUsername.Text,
         txtClientId.Text,
+          txtAPIKey.Text,
+          txtSrs.Text,
+          locale,
+          addressSettings, // address settings
+          element, // target element
+          cbSilentOAuthOnly.Checked,
+          cbLogoutOnDestroy.Checked
+        );
+      }
+      else
+      {
+        _options = OptionsFactory.Create(
+          txtUsername.Text, 
+          txtPassword.Text,                
         txtAPIKey.Text,
         txtSrs.Text,
         locale,
         addressSettings, // address settings
         element // target element
       );
+      }
 
       //_options = OptionsFactory.Create(txtUsername.Text, txtPassword.Text, txtClientId.Text, txtAPIKey.Text, txtSrs.Text, locale,
       //  ConfigurationUrl, addressSettings, element, true);
@@ -708,6 +734,15 @@ namespace Demo.WinForms
         txtAPIKey.Enabled = enabled;
       }
 
+      if (txtClientId.InvokeRequired)
+      {
+        txtClientId.Invoke(new MethodInvoker(() => txtClientId.Enabled = enabled));
+      }
+      else
+      {
+        txtClientId.Enabled = enabled;
+      }
+
       if (txtSrs.InvokeRequired)
       {
         txtSrs.Invoke(new MethodInvoker(() => txtSrs.Enabled = enabled));
@@ -715,6 +750,33 @@ namespace Demo.WinForms
       else
       {
         txtSrs.Enabled = enabled;
+      }
+
+      if (cbUseOAuth.InvokeRequired)
+      {
+        cbUseOAuth.Invoke(new MethodInvoker(() => cbUseOAuth.Enabled = enabled));
+      }
+      else
+      {
+        cbUseOAuth.Enabled = enabled;
+      }
+
+      if (cbSilentOAuthOnly.InvokeRequired)
+      {
+        cbSilentOAuthOnly.Invoke(new MethodInvoker(() => cbSilentOAuthOnly.Enabled = enabled));
+      }
+      else
+      {
+        cbSilentOAuthOnly.Enabled = enabled;
+      }
+
+      if (cbLogoutOnDestroy.InvokeRequired)
+      {
+        cbLogoutOnDestroy.Invoke(new MethodInvoker(() => cbLogoutOnDestroy.Enabled = enabled));
+      }
+      else
+      {
+        cbLogoutOnDestroy.Enabled = enabled;
       }
     }
 
@@ -1852,6 +1914,11 @@ namespace Demo.WinForms
     private void setElevationLevel(double elevationLevel)
     {
       PanoramaViewer.SetElevationSliderLevel(elevationLevel);
+    }
+
+    private void cbUseOAuth_CheckedChanged(object sender, EventArgs e)
+    {
+      _login.UseOAuth = cbUseOAuth.Checked;
     }
   }
 }

@@ -56,6 +56,16 @@ namespace StreetSmart.Common.Interfaces.Data
     bool? LoginOauth { get; set; }
 
     /// <summary>
+    /// Indicates to login with OAuth with silent authentication only. true means using silent authentication only. false means use silent authentication together with login popup authentication if silent authentication fails (for example when user session expired). This parameter is optional and false is default.
+    /// </summary>
+    bool? LoginOauthSilentOnly { get; set; }
+
+    /// <summary>
+    /// Flag for oauth logout to happen with destroy
+    /// </summary>
+    bool? DoOAuthLogoutOnDestroy { get; set; }
+
+    /// <summary>
     /// Coordinate system used in the API. E.g. "EPSG:29882".
     /// </summary>
     string SRS { get; set; }
