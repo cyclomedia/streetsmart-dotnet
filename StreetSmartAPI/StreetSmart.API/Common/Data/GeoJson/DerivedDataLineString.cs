@@ -19,13 +19,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Linq;
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString
+  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString//,IEquatable<DerivedDataLineString>
   {
     public DerivedDataLineString(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -177,21 +178,43 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
+   
     protected string GetValueString(IProperty property, string propertyName)
     {
+      if (property == null)
+        return string.Empty;
+
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string value = property?.Value?.ToString(ci);
-      string stdev = property?.Stdev?.ToString(ci);
-      string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
-      string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
-      string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
-      return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
+      var sb = new StringBuilder();
+      string value = property.Value?.ToString(ci);
+      string stdev = property.Stdev?.ToString(ci);
+
+      if (!string.IsNullOrEmpty(value) || !string.IsNullOrEmpty(stdev))
+      {
+        sb.Append($"\"{propertyName}\":{{");
+
+        if (!string.IsNullOrEmpty(value))
+        {
+          sb.Append($"\"value\":{value}");
+          if (!string.IsNullOrEmpty(stdev))
+            sb.Append(",");
+        }
+
+        if (!string.IsNullOrEmpty(stdev))
+          sb.Append($"\"stdev\":{stdev}");
+
+        sb.Append("},");
+      }
+
+      return $"{sb}";
     }
 
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string stdevs = "[";
+      StringBuilder sb = new StringBuilder();
+
+      sb.Append("[");
 
       foreach (IStdev stdev in CoordinateStdev)
       {
@@ -199,20 +222,106 @@ namespace StreetSmart.Common.Data.GeoJson
         string stdevY = stdev?.Y?.ToString(ci);
         string stdevZ = stdev?.Z?.ToString(ci);
         bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
-        stdevs = noStdev ? $"{stdevs}null," : $"{stdevs}{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},";
+
+        if (noStdev)
+        {
+          sb.Append("null,");
+        }
+        else
+        {
+          sb.Append($"{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},");
+        }
       }
 
-      stdevs = $"{stdevs.Substring(0, Math.Max(stdevs.Length - 1, 1))}]";
-      string baseStr = base.ToString();
-      string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
-      string comma = subStr.Length >= 2 ? "," : string.Empty;
-      subStr = $"{subStr}{comma}";
+      if (sb.Length > 1)
+      {
+        sb.Length--;
+      }
+      sb.Append("]");
 
-      return
-        $"{subStr}{GetValueString(TotalLength, "totalLength")}{GetValueString(SegmentLengths, "segmentLengths")}" +
-        $"{GetValueString(SegmentsDeltaXY, "segmentsDeltaXY")}{GetValueString(SegmentsDeltaZ, "segmentsDeltaZ")}" +
-        $"{GetValueString(SegmentsSlopePercentage, "segmentsSlopePercentage")}{GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle")}" +
-        $"{GetValueString(DeltaXY, "deltaXY")}{GetValueString(DeltaZ, "deltaZ")}\"coordinateStdevs\":{stdevs}}}";
+      sb.Append("{");
+
+      string baseStr = base.ToString();
+      if (baseStr.Length > 0)
+      {
+        sb.Append(baseStr.Substring(0, baseStr.Length - 1));
+      }
+      string comma = (sb.Length > 1) ? "," : string.Empty;
+
+      sb.Append(comma);
+
+      sb.Append(GetValueString(TotalLength, "totalLength"));
+      sb.Append(GetValueString(SegmentLengths, "segmentLengths"));
+      sb.Append(GetValueString(SegmentsDeltaXY, "segmentsDeltaXY"));
+      sb.Append(GetValueString(SegmentsDeltaZ, "segmentsDeltaZ"));
+      sb.Append(GetValueString(SegmentsSlopePercentage, "segmentsSlopePercentage"));
+      sb.Append(GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle"));
+      sb.Append(GetValueString(DeltaXY, "deltaXY"));
+      sb.Append(GetValueString(DeltaZ, "deltaZ"));
+
+      sb.Append($"\"coordinateStdevs\":{sb.ToString()}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+    //protected string GetValueString(IProperty property, string propertyName)
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  string value = property?.Value?.ToString(ci);
+    //  string stdev = property?.Stdev?.ToString(ci);
+    //  string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
+    //  string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
+    //  string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
+    //  return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
+    //}
+    /*
+    public bool Equals(DerivedDataLineString other)
+    {
+      if (other == null) return false;
+      return CoordinateStdev.SequenceEqual(other.CoordinateStdev) &&
+             TotalLength == other.TotalLength &&
+             SegmentLengths.SequenceEqual(other.SegmentLengths) &&
+             SegmentsDeltaXY.SequenceEqual(other.SegmentsDeltaXY) &&
+             SegmentsDeltaZ.SequenceEqual(other.SegmentsDeltaZ) &&
+             SegmentsSlopePercentage.SequenceEqual(other.SegmentsSlopePercentage) &&
+             SegmentsSlopeAngle.SequenceEqual(other.SegmentsSlopeAngle) &&
+             DeltaXY == other.DeltaXY &&
+             DeltaZ == other.DeltaZ;
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DerivedDataLineString);
+    }
+
+    public override int GetHashCode() => (CoordinateStdev, TotalLength, SegmentLengths, SegmentsDeltaXY, SegmentsSlopePercentage, DeltaXY, DeltaZ, SegmentsDeltaZ, SegmentsSlopeAngle).GetHashCode();*/
+
+    //public override string ToString()
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  string stdevs = "[";
+
+    //  foreach (IStdev stdev in CoordinateStdev)
+    //  {
+    //    string stdevX = stdev?.X?.ToString(ci);
+    //    string stdevY = stdev?.Y?.ToString(ci);
+    //    string stdevZ = stdev?.Z?.ToString(ci);
+    //    bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
+    //    stdevs = noStdev ? $"{stdevs}null," : $"{stdevs}{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},";
+    //  }
+
+    //  stdevs = $"{stdevs.Substring(0, Math.Max(stdevs.Length - 1, 1))}]";
+    //  string baseStr = base.ToString();
+    //  string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
+    //  string comma = subStr.Length >= 2 ? "," : string.Empty;
+    //  subStr = $"{subStr}{comma}";
+
+    //  return
+    //    $"{subStr}{GetValueString(TotalLength, "totalLength")}{GetValueString(SegmentLengths, "segmentLengths")}" +
+    //    $"{GetValueString(SegmentsDeltaXY, "segmentsDeltaXY")}{GetValueString(SegmentsDeltaZ, "segmentsDeltaZ")}" +
+    //    $"{GetValueString(SegmentsSlopePercentage, "segmentsSlopePercentage")}{GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle")}" +
+    //    $"{GetValueString(DeltaXY, "deltaXY")}{GetValueString(DeltaZ, "deltaZ")}\"coordinateStdevs\":{stdevs}}}";
+    //}
   }
 }

@@ -18,13 +18,14 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class LineString : List<ICoordinate>, ILineString
+  internal class LineString : List<ICoordinate>, ILineString//, IEquatable<LineString>
   {
     public LineString(Dictionary<string, object> lineString)
     {
@@ -60,15 +61,52 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      string coordinates = string.Empty;
+      var coordinates = new StringBuilder();
 
       foreach (ICoordinate coordinate in this)
       {
-        coordinates = $"{coordinates},{coordinate}";
+        if (coordinates.Length > 0)
+          coordinates.Append(",");
+        coordinates.Append(coordinate);
       }
 
-      coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
     }
+
+    //public bool Equals(LineString other)
+    //{
+    //  if (other == null) return false;  
+    //  return Type.Equals(other.Type) &&
+    //         this.Select(x => x).SequenceEqual(other.Select(x => x));
+
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as LineString);
+    //}
+
+    //public override int GetHashCode() => (Type, this).GetHashCode();
+
+    //public override string ToString()
+    //{
+    //  var coordinates = string.Join(",", this.Select(coordinate => coordinate.ToString()));
+
+    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
+    //}
+
+
+    //public override string ToString()
+    //{
+    //  string coordinates = string.Empty;
+
+    //  foreach (ICoordinate coordinate in this)
+    //  {
+    //    coordinates = $"{coordinates},{coordinate}";
+    //  }
+
+    //  coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
+    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
+    //}
   }
 }

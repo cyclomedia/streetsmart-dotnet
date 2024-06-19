@@ -19,12 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint
+  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint//,IEquatable<DerivedDataPoint>
   {
     public DerivedDataPoint(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -79,21 +79,81 @@ namespace StreetSmart.Common.Data.GeoJson
       string baseStr = base.ToString();
       string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
 
-      string positionZ = PositionZ?.Value != null && PositionZ?.Stdev != null ? $"\"positionZ\":{PositionZ}," : string.Empty;
-      string positionStdev = Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
-        ? $",\"stdev\":[{Position?.StdDev?.X?.ToString(ci)},{Position?.StdDev?.Y?.ToString(ci)},{Position?.StdDev?.Z?.ToString(ci)}]"
-        : string.Empty;
-      string position = Position?.X != null && Position?.Y != null && Position?.Z != null
-        ? $"\"position\":{{\"value\":[{Position?.X?.ToString(ci)},{Position?.Y?.ToString(ci)},{Position?.Z?.ToString(ci)}]{positionStdev}}},"
-        : string.Empty;
-      string coordinateStdevs =
-        Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
-          ? $"\"coordinateStdevs\":[{{\"0\":{Position?.StdDev?.X?.ToString(ci)},\"1\":{Position?.StdDev?.Y?.ToString(ci)},\"2\":{Position?.StdDev?.Z?.ToString(ci)}}}]"
-          : string.Empty;
+      StringBuilder sb = new StringBuilder(subStr);
 
-      string derivedDataPoint = $"{PositionXY}{positionZ}{position}{coordinateStdevs}";
-      string comma = subStr.Length >= 2 && derivedDataPoint.Length >= 1 ? "," : string.Empty;
-      return $"{subStr}{comma}{derivedDataPoint}}}";
+      StringBuilder derivedDataPoint = new StringBuilder();
+
+      if (PositionZ?.Value != null && PositionZ?.Stdev != null)
+      {
+        derivedDataPoint.Append($"\"positionZ\":{PositionZ},");
+      }
+
+      if (Position?.X != null && Position?.Y != null && Position?.Z != null)
+      {
+        StringBuilder positionValue = new StringBuilder();
+        positionValue.Append($"\"value\":[{Position.X?.ToString(ci)},{Position.Y?.ToString(ci)},{Position.Z?.ToString(ci)}]");
+
+        if (Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null)
+        {
+          positionValue.Append($",\"stdev\":[{Position.StdDev.X?.ToString(ci)},{Position.StdDev.Y?.ToString(ci)},{Position.StdDev.Z?.ToString(ci)}]");
+        }
+
+        derivedDataPoint.Append($"\"position\":{{{positionValue}}},");
+      }
+
+      if (Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null)
+      {
+        derivedDataPoint.Append($"\"coordinateStdevs\":[{{\"0\":{Position.StdDev.X?.ToString(ci)},\"1\":{Position.StdDev.Y?.ToString(ci)},\"2\":{Position.StdDev.Z?.ToString(ci)}}}]");
+      }
+
+      if (derivedDataPoint.Length > 0)
+      {
+        string comma = (sb.Length >= 2 && derivedDataPoint.Length >= 1) ? "," : string.Empty;
+        sb.Append(comma);
+        sb.Append(derivedDataPoint);
+      }
+
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+    //public override string ToString()
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  string baseStr = base.ToString();
+    //  string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
+
+    //  string positionZ = PositionZ?.Value != null && PositionZ?.Stdev != null ? $"\"positionZ\":{PositionZ}," : string.Empty;
+    //  string positionStdev = Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
+    //    ? $",\"stdev\":[{Position?.StdDev?.X?.ToString(ci)},{Position?.StdDev?.Y?.ToString(ci)},{Position?.StdDev?.Z?.ToString(ci)}]"
+    //    : string.Empty;
+    //  string position = Position?.X != null && Position?.Y != null && Position?.Z != null
+    //    ? $"\"position\":{{\"value\":[{Position?.X?.ToString(ci)},{Position?.Y?.ToString(ci)},{Position?.Z?.ToString(ci)}]{positionStdev}}},"
+    //    : string.Empty;
+    //  string coordinateStdevs =
+    //    Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
+    //      ? $"\"coordinateStdevs\":[{{\"0\":{Position?.StdDev?.X?.ToString(ci)},\"1\":{Position?.StdDev?.Y?.ToString(ci)},\"2\":{Position?.StdDev?.Z?.ToString(ci)}}}]"
+    //      : string.Empty;
+
+    //  string derivedDataPoint = $"{PositionXY}{positionZ}{position}{coordinateStdevs}";
+    //  string comma = subStr.Length >= 2 && derivedDataPoint.Length >= 1 ? "," : string.Empty;
+    //  return $"{subStr}{comma}{derivedDataPoint}}}";
+    //}
+    /*
+    public bool Equals(DerivedDataPoint other)
+    {
+      if (other == null) return false;
+      return (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
+             (Position?.Equals(other.Position) ?? other.Position == null);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DerivedDataPoint);
+    }
+
+    public override int GetHashCode() => (PositionZ,Position).GetHashCode();
+    */
   }
 }

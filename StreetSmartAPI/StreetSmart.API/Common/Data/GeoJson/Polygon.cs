@@ -18,13 +18,14 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Polygon : List<IList<ICoordinate>>, IPolygon
+  internal class Polygon : List<IList<ICoordinate>>, IPolygon//, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {
@@ -91,6 +92,54 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
+      var coordinatesList = new StringBuilder();
+
+      foreach (IList<ICoordinate> coordinateList in this)
+      {
+        var coordinates = new StringBuilder();
+
+        foreach (ICoordinate coordinate in coordinateList)
+        {
+          if (coordinates.Length > 0)
+            coordinates.Append(",");
+          coordinates.Append(coordinate);
+        }
+
+        if (coordinatesList.Length > 0)
+          coordinatesList.Append(",");
+        coordinatesList.Append($"[{coordinates}]");
+      }
+
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
+    }
+
+    //public bool Equals(Polygon other)
+    //{
+    //  if (other == null) return false;
+    //  return Type.Equals(other.Type) &&
+    //         this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as Polygon);
+    //}
+
+    //public override int GetHashCode() => (Type, this).GetHashCode();
+
+    //public override string ToString()
+    //{
+    //  var coordinatesList = this.Select(coordinateList =>
+    //      $"[{string.Join(",", coordinateList)}]"
+    //  );
+
+    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{string.Join(",", coordinatesList)}]}}";
+    //}
+
+
+    /*
+    public override string ToString()
+    {
       string coordinatesList = string.Empty;
 
       foreach (IList<ICoordinate> coordinateList in this)
@@ -108,6 +157,6 @@ namespace StreetSmart.Common.Data.GeoJson
 
       coordinatesList = coordinatesList.Substring(Math.Min(coordinatesList.Length, 1));
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
-    }
+    }*/
   }
 }
