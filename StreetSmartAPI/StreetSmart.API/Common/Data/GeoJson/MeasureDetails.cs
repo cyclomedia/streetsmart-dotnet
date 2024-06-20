@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: DataConvert, IMeasureDetails//,IEquatable<MeasureDetails>
+  internal class MeasureDetails: DataConvert, IMeasureDetails,IEquatable<MeasureDetails>
   {
     public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
@@ -173,26 +173,23 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"{sb}";
     }
 
-    /*
-  public bool Equals(MeasureDetails other)
-  {
-    if (other == null) return false;
-    return PointProblems.SequenceEqual(other.PointProblems) &&
-           MeasureMethod.Equals(other.MeasureMethod) &&
-           Details == other.Details &&
-           PointReliability.Equals(other.PointReliability);
-  }
 
-  public override bool Equals(object obj)
-  {
-    return Equals(obj as MeasureDetails);
-  }
+    public bool Equals(MeasureDetails other)
+    {
+      if (other == null) return false;
+      return PointProblems.SequenceEqual(other.PointProblems) &&
+             MeasureMethod.Equals(other.MeasureMethod) &&
+             Details == other.Details &&
+             PointReliability.Equals(other.PointReliability);
+    }
 
-  public override int GetHashCode() => (PointProblems, MeasureMethod, Details, PointReliability).GetHashCode();
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as MeasureDetails);
+    }
 
+    public override int GetHashCode() => (PointProblems, MeasureMethod, Details, PointReliability).GetHashCode();
 
-
-     */
     //public override string ToString()
     //{
     //  string pointsWithProblems = PointProblems.Aggregate("[", (current, problem) => $"{current}\"{problem.Description()}\",");

@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Direction : Coordinate, IDirection//, IEquatable<Direction>
+  internal class Direction : Coordinate, IDirection, IEquatable<Direction>
   {
     public Direction(Dictionary<string, object> direction)
       : base(direction)
@@ -54,26 +54,26 @@ namespace StreetSmart.Common.Data.GeoJson
 
       return $"{sb}";
     }
+    public bool Equals(Direction other)
+    {
+      if (other == null) return false;
+      return X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
 
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Direction);
+    }
+
+    public override int GetHashCode() => (X, Y, Z).GetHashCode();
     //public override string ToString()
     //{
     //  CultureInfo ci = CultureInfo.InvariantCulture;
     //  return $"{{\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
     //}
 
-    //public bool Equals(Direction other)
-    //{
-    //  if (other == null) return false;
-    //  return X.Equals(other.X) &&
-    //         Y.Equals(other.Y) &&
-    //         Z.Equals(other.Z);
-    //}
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Direction);
-    //}
-
-    //public override int GetHashCode() => (X, Y, Z).GetHashCode();
   }
 }
