@@ -19,12 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: DataConvert, IMeasureDetails
+  internal class MeasureDetails: DataConvert, IMeasureDetails//,IEquatable<MeasureDetails>
   {
     public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
@@ -152,15 +152,58 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      string pointsWithProblems = PointProblems.Aggregate("[", (current, problem) => $"{current}\"{problem.Description()}\",");
-      string pointsWithProblemsStr = $"{pointsWithProblems.Substring(0, Math.Max(pointsWithProblems.Length - 1, 1))}]";
+      var sb = new StringBuilder();
+
+      sb.Append("[");
+      if (PointProblems.Any())
+      {
+        sb.Append(string.Join(",", PointProblems.Select(problem => $"\"{problem.Description()}\"")));
+      }
+      sb.Append("]");
 
       string measureDetails = Details == null
-        ? string.Empty
-        : $"\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details},\"pointProblems\":{pointsWithProblemsStr}," +
-          $"\"pointReliability\":\"{PointReliability.Description()}\"";
+          ? string.Empty
+          : $",\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details},\"pointProblems\":{sb},\"pointReliability\":\"{PointReliability.Description()}\"";
 
-      return $"{{{measureDetails}}}";
+      sb.Clear();
+      sb.Append("{");
+      sb.Append(measureDetails.TrimStart(','));
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+    /*
+  public bool Equals(MeasureDetails other)
+  {
+    if (other == null) return false;
+    return PointProblems.SequenceEqual(other.PointProblems) &&
+           MeasureMethod.Equals(other.MeasureMethod) &&
+           Details == other.Details &&
+           PointReliability.Equals(other.PointReliability);
+  }
+
+  public override bool Equals(object obj)
+  {
+    return Equals(obj as MeasureDetails);
+  }
+
+  public override int GetHashCode() => (PointProblems, MeasureMethod, Details, PointReliability).GetHashCode();
+
+
+
+     */
+    //public override string ToString()
+    //{
+    //  string pointsWithProblems = PointProblems.Aggregate("[", (current, problem) => $"{current}\"{problem.Description()}\",");
+    //  string pointsWithProblemsStr = $"{pointsWithProblems.Substring(0, Math.Max(pointsWithProblems.Length - 1, 1))}]";
+
+    //  string measureDetails = Details == null
+    //    ? string.Empty
+    //    : $"\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details},\"pointProblems\":{pointsWithProblemsStr}," +
+    //      $"\"pointReliability\":\"{PointReliability.Description()}\"";
+
+    //  return $"{{{measureDetails}}}";
+    //}
   }
 }

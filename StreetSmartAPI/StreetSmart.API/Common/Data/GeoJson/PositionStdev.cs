@@ -16,15 +16,16 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class PositionStdev : Coordinate, IPositionStdev
+  internal class PositionStdev : Coordinate, IPositionStdev//, IEquatable<PositionStdev>
   {
     public PositionStdev(Dictionary<string, object> position, IList<object> coordinateStdDev)
       : base(position)
@@ -55,12 +56,49 @@ namespace StreetSmart.Common.Data.GeoJson
 
     // ReSharper disable once InconsistentNaming
     public ICoordinate StdDev { get; }
-
+    
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"\"xyz\":{{\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}," +
-             $"\"xyzStdev\":[{StdDev?.X?.ToString(ci)},{StdDev?.Y?.ToString(ci)},{StdDev?.Z?.ToString(ci)}]";
+      var sb = new StringBuilder();
+
+      sb.Append("\"xyz\":{");
+      sb.Append($"\"0\":{(X?.ToString(ci) ?? "null")},");
+      sb.Append($"\"1\":{(Y?.ToString(ci) ?? "null")},");
+      sb.Append($"\"2\":{(Z?.ToString(ci) ?? "null")}");
+      sb.Append("},");
+
+      sb.Append("\"xyzStdev\":[");
+      sb.Append($"{(StdDev?.X?.ToString(ci) ?? "null")},");
+      sb.Append($"{(StdDev?.Y?.ToString(ci) ?? "null")},");
+      sb.Append($"{(StdDev?.Z?.ToString(ci) ?? "null")}");
+      sb.Append("]");
+
+      return $"{sb}";
     }
+
+
+    //public override string ToString()
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  return $"\"xyz\":{{\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}," +
+    //         $"\"xyzStdev\":[{StdDev?.X?.ToString(ci)},{StdDev?.Y?.ToString(ci)},{StdDev?.Z?.ToString(ci)}]";
+    //}
+
+    //public bool Equals(PositionStdev other)
+    //{
+    //  if (other == null) return false;
+    //  return StdDev.Equals(other.StdDev) &&
+    //         X.Equals(other.X) &&
+    //         Y.Equals(other.Y) &&
+    //         Z.Equals(other.Z);
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as PositionStdev);
+    //}
+
+    //public override int GetHashCode() => (StdDev, X, Y, Z).GetHashCode();
   }
 }
