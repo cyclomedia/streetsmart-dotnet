@@ -16,15 +16,16 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class PositionXY: IPositionXY
+  internal class PositionXY: IPositionXY, IEquatable<PositionXY>
   {
     public PositionXY(IList<object> value, double? stdev)
     {
@@ -52,11 +53,51 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string xy = X != null && Y != null ? $"\"value\":[{X?.ToString(ci)},{Y?.ToString(ci)}]" : string.Empty;
-      string stdef = Stdev != null ? $"\"stdev\":{Stdev?.ToString(ci)}" : string.Empty;
-      string comma = !string.IsNullOrEmpty(xy) && !string.IsNullOrEmpty(stdef) ? "," : string.Empty;
-      bool empty = string.IsNullOrEmpty(xy) && string.IsNullOrEmpty(stdef);
-      return empty ? string.Empty : $"\"positionXY\":{{{xy}{comma}{stdef}}},";
+      StringBuilder sb = new StringBuilder();
+
+      sb.Append("\"positionXY\":{");
+
+      if (X != null && Y != null)
+      {
+        sb.Append($"\"value\":[{X?.ToString(ci)},{Y?.ToString(ci)}]");
+      }
+
+      if (Stdev != null)
+      {
+        if (sb.Length > 13)
+        {
+          sb.Append(",");
+        }
+        sb.Append($"\"stdev\":{Stdev?.ToString(ci)}");
+      }
+
+      sb.Append("}");
+
+      return sb.Length > 14 ? $"{sb}," : string.Empty;
     }
+
+    public bool Equals(PositionXY other)
+    {
+      if (other == null) return false;
+      return X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Stdev.Equals(other.Stdev);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as PositionXY);
+    }
+
+    public override int GetHashCode() => (X, Y, Stdev).GetHashCode();
+    //public override string ToString()
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  string xy = X != null && Y != null ? $"\"value\":[{X?.ToString(ci)},{Y?.ToString(ci)}]" : string.Empty;
+    //  string stdef = Stdev != null ? $"\"stdev\":{Stdev?.ToString(ci)}" : string.Empty;
+    //  string comma = !string.IsNullOrEmpty(xy) && !string.IsNullOrEmpty(stdef) ? "," : string.Empty;
+    //  bool empty = string.IsNullOrEmpty(xy) && string.IsNullOrEmpty(stdef);
+    //  return empty ? string.Empty : $"\"positionXY\":{{{xy}{comma}{stdef}}},";
+    //}
   }
 }

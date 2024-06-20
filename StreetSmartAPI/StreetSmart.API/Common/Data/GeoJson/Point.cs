@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Point: Coordinate, IPoint//, IEquatable<Point>
+  internal class Point: Coordinate, IPoint, IEquatable<Point>
   {
     public Point(Dictionary<string, object> point)
       : base(new DataConvert().GetListValue(point, "coordinates"))
@@ -69,25 +69,25 @@ namespace StreetSmart.Common.Data.GeoJson
 
       return $"{sb}";
     }
+    public bool Equals(Point other)
+    {
+      if (other == null) return false;
+      return Type.Equals(other.Type) &&
+             base.Equals(other);
+    }
 
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Point);
+    }
+
+    public override int GetHashCode() => (Type, this).GetHashCode();
 
     //public override string ToString()
     //{
     //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":{base.ToString()}}}";
     //}
 
-    //public bool Equals(Point other)
-    //{
-    //  if (other == null) return false;
-    //  return Type.Equals(other.Type) &&
-    //         base.Equals(other);
-    //}
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Point);
-    //}
-
-    //public override int GetHashCode() => (Type, this).GetHashCode();
   }
 }

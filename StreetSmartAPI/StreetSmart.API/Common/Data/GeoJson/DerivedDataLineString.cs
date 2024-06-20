@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString//,IEquatable<DerivedDataLineString>
+  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString,IEquatable<DerivedDataLineString>
   {
     public DerivedDataLineString(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -265,17 +265,6 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"{sb}";
     }
 
-    //protected string GetValueString(IProperty property, string propertyName)
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string value = property?.Value?.ToString(ci);
-    //  string stdev = property?.Stdev?.ToString(ci);
-    //  string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
-    //  string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
-    //  string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
-    //  return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
-    //}
-    /*
     public bool Equals(DerivedDataLineString other)
     {
       if (other == null) return false;
@@ -295,7 +284,18 @@ namespace StreetSmart.Common.Data.GeoJson
       return Equals(obj as DerivedDataLineString);
     }
 
-    public override int GetHashCode() => (CoordinateStdev, TotalLength, SegmentLengths, SegmentsDeltaXY, SegmentsSlopePercentage, DeltaXY, DeltaZ, SegmentsDeltaZ, SegmentsSlopeAngle).GetHashCode();*/
+    public override int GetHashCode() => (CoordinateStdev, TotalLength, SegmentLengths, SegmentsDeltaXY, SegmentsSlopePercentage, DeltaXY, DeltaZ, SegmentsDeltaZ, SegmentsSlopeAngle).GetHashCode();
+    //protected string GetValueString(IProperty property, string propertyName)
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  string value = property?.Value?.ToString(ci);
+    //  string stdev = property?.Stdev?.ToString(ci);
+    //  string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
+    //  string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
+    //  string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
+    //  return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
+    //}
+
 
     //public override string ToString()
     //{

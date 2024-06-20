@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Polygon : List<IList<ICoordinate>>, IPolygon//, IEquatable<Polygon>
+  internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {
@@ -113,19 +113,19 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
     }
 
-    //public bool Equals(Polygon other)
-    //{
-    //  if (other == null) return false;
-    //  return Type.Equals(other.Type) &&
-    //         this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
-    //}
+    public bool Equals(Polygon other)
+    {
+      if (other == null) return false;
+      return Type.Equals(other.Type) &&
+             this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
+    }
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Polygon);
-    //}
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Polygon);
+    }
 
-    //public override int GetHashCode() => (Type, this).GetHashCode();
+    public override int GetHashCode() => (Type, this).GetHashCode();
 
     //public override string ToString()
     //{
