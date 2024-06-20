@@ -18,13 +18,13 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Point: Coordinate, IPoint
+  internal class Point: Coordinate, IPoint//, IEquatable<Point>
   {
     public Point(Dictionary<string, object> point)
       : base(new DataConvert().GetListValue(point, "coordinates"))
@@ -58,10 +58,36 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public GeometryType Type { get; }
-
     public override string ToString()
     {
-      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":{base.ToString()}}}";
+      var sb = new StringBuilder();
+
+      sb.Append("\"geometry\":{");
+      sb.Append($"\"type\":\"{Type.Description()}\",");
+      sb.Append($"\"coordinates\":{base.ToString()}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+
+    //public override string ToString()
+    //{
+    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":{base.ToString()}}}";
+    //}
+
+    //public bool Equals(Point other)
+    //{
+    //  if (other == null) return false;
+    //  return Type.Equals(other.Type) &&
+    //         base.Equals(other);
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as Point);
+    //}
+
+    //public override int GetHashCode() => (Type, this).GetHashCode();
   }
 }

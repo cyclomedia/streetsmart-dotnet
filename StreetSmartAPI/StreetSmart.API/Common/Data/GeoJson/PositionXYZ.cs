@@ -16,16 +16,17 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ
+  internal class PositionXYZ : Coordinate, IPositionXYZ//,IEquatable<PositionXYZ>
   {
     public PositionXYZ(Dictionary<string, object> position)
       : base(position)
@@ -52,8 +53,42 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"x\":{XYZ?.X?.ToString(ci) ?? "null"},\"y\":{XYZ?.Y?.ToString(ci) ?? "null"},\"z\":{XYZ?.Z?.ToString(ci) ?? "null"}," +
-             $"\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
+      var sb = new StringBuilder();
+
+      sb.Append("{");
+      sb.Append($"\"x\":{(XYZ?.X?.ToString(ci) ?? "null")},");
+      sb.Append($"\"y\":{(XYZ?.Y?.ToString(ci) ?? "null")},");
+      sb.Append($"\"z\":{(XYZ?.Z?.ToString(ci) ?? "null")},");
+      sb.Append($"\"0\":{(X?.ToString(ci) ?? "null")},");
+      sb.Append($"\"1\":{(Y?.ToString(ci) ?? "null")},");
+      sb.Append($"\"2\":{(Z?.ToString(ci) ?? "null")}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+
+    //public bool Equals(PositionXYZ other)
+    //{
+    //  if (other == null) return false;
+    //  return XYZ.Equals(other.XYZ) &&
+    //         X.Equals(other.X) &&
+    //         Y.Equals(other.Y) &&
+    //         Z.Equals(other.Z);
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as PositionXYZ);
+    //}
+
+    //public override int GetHashCode() => (XYZ, X, Y, Z).GetHashCode();
+
+    //public override string ToString()
+    //{
+    //  CultureInfo ci = CultureInfo.InvariantCulture;
+    //  return $"{{\"x\":{XYZ?.X?.ToString(ci) ?? "null"},\"y\":{XYZ?.Y?.ToString(ci) ?? "null"},\"z\":{XYZ?.Z?.ToString(ci) ?? "null"}," +
+    //         $"\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
+    //}
   }
 }

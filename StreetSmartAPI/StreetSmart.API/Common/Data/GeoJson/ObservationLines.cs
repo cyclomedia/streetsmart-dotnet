@@ -16,14 +16,15 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines : DataConvert, IObservationLines
+  internal class ObservationLines: DataConvert, IObservationLines//, IEquatable<ObservationLines>
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
@@ -37,13 +38,13 @@ namespace StreetSmart.Common.Data.GeoJson
         int color1 = int.Parse(color[1].ToString());
         int color2 = int.Parse(color[2].ToString());
         double color3 = double.Parse(color[3].ToString());
-        Color = Color.FromArgb((int)(color3 * 255), color0, color1, color2);
+        Color = Color.FromArgb((int) (color3 * 255), color0, color1, color2);
       }
 
       try
       {
         SelectedMeasureMethod =
-          (MeasureMethod)ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
+          (MeasureMethod) ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
       }
       catch (ArgumentException)
       {
@@ -56,7 +57,7 @@ namespace StreetSmart.Common.Data.GeoJson
       if (observationLines != null)
       {
         ActiveObservation = observationLines.ActiveObservation;
-        RecordingId = observationLines.RecordingId;
+        RecordingId = observationLines.RecordingId != null ? string.Copy(observationLines.RecordingId) : null;
         Color obsColor = observationLines.Color;
         Color = Color.FromArgb(obsColor.A, obsColor);
         SelectedMeasureMethod = observationLines.SelectedMeasureMethod;
@@ -73,8 +74,36 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()}," +
-             $"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"}}";
+      var sb = new StringBuilder();
+
+      sb.Append("{");
+      sb.Append($"\"activeObservation\":{ActiveObservation.ToString().ToLowerInvariant()},");
+      sb.Append($"\"recordingId\":\"{RecordingId}\",");
+      sb.Append($"\"color\":{Color.ToJsColor()},");
+      sb.Append($"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+    //public bool Equals(ObservationLines other)
+    //{
+    //  if (other == null) return false;
+    //  return ActiveObservation == other.ActiveObservation &&
+    //         RecordingId == other.RecordingId &&
+    //         Color.Equals(other.Color) &&
+    //         SelectedMeasureMethod.Equals(other.SelectedMeasureMethod);
+    //}
+
+    //public override bool Equals(object obj)
+    //{
+    //  return Equals(obj as ObservationLines);
+    //}
+
+    //public override int GetHashCode() => (ActiveObservation, RecordingId, Color, SelectedMeasureMethod).GetHashCode();
+    //public override string ToString()
+    //{
+    //  return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()}," +
+    //         $"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"}}";
+    //}
   }
 }
