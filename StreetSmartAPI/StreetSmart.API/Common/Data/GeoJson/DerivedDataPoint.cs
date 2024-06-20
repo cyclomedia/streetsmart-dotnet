@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint//,IEquatable<DerivedDataPoint>
+  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
   {
     public DerivedDataPoint(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -118,6 +118,20 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"{sb}";
     }
 
+    public bool Equals(DerivedDataPoint other)
+    {
+      if (other == null) return false;
+      return (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
+             (Position?.Equals(other.Position) ?? other.Position == null);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DerivedDataPoint);
+    }
+
+    public override int GetHashCode() => (PositionZ, Position).GetHashCode();
+
     //public override string ToString()
     //{
     //  CultureInfo ci = CultureInfo.InvariantCulture;
@@ -140,20 +154,6 @@ namespace StreetSmart.Common.Data.GeoJson
     //  string comma = subStr.Length >= 2 && derivedDataPoint.Length >= 1 ? "," : string.Empty;
     //  return $"{subStr}{comma}{derivedDataPoint}}}";
     //}
-    /*
-    public bool Equals(DerivedDataPoint other)
-    {
-      if (other == null) return false;
-      return (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
-             (Position?.Equals(other.Position) ?? other.Position == null);
-    }
 
-    public override bool Equals(object obj)
-    {
-      return Equals(obj as DerivedDataPoint);
-    }
-
-    public override int GetHashCode() => (PositionZ,Position).GetHashCode();
-    */
   }
 }

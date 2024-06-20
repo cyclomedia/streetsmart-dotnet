@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Coordinate : DataConvert, ICoordinate//, IEquatable<Coordinate>
+  internal class Coordinate : DataConvert, ICoordinate, IEquatable<Coordinate>
   {
     private double? _x;
     private double? _y;
@@ -127,6 +127,21 @@ namespace StreetSmart.Common.Data
 
       return $"{sb}";
     }
+
+    public bool Equals(Coordinate other)
+    {
+      if (other == null) return false;
+      return X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Coordinate);
+    }
+
+    public override int GetHashCode() => (X, Y, Z).GetHashCode();
     //public override string ToString()
     //{
     //  CultureInfo ci = CultureInfo.InvariantCulture;
@@ -134,20 +149,7 @@ namespace StreetSmart.Common.Data
     //  return X == null || Y == null ? "null" : $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
     //}
 
-    //public bool Equals(Coordinate other)
-    //{
-    //  if (other == null) return false;
-    //  return X.Equals(other.X) &&
-    //         Y.Equals(other.Y) &&
-    //         Z.Equals(other.Z);
-    //}
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Coordinate);
-    //}
-
-    //public override int GetHashCode() => (X,Y,Z).GetHashCode();
 
   }
 }

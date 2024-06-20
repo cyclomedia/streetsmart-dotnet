@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class FeatureCollection: DataConvert, IFeatureCollection//, IEquatable<IFeatureCollection>
+  internal class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
   {
     public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
     {
@@ -104,7 +104,34 @@ namespace StreetSmart.Common.Data.GeoJson
       }
       return $"{{\"type\":\"{Type.Description()}\",{CRS},\"features\": [{featuresBuilder}]}}";
     }
+    public bool Equals(IFeatureCollection other)
+    {
+      if (other == this)
+      {
+        return true;
+      }
 
+      if (other == null || other.Features.Count != this.Features.Count)
+      {
+        return false;
+      }
+
+      for (int i = 0; i < this.Features.Count; i++)
+      {
+        if (!this.Features[i].Equals(other.Features[i]))
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as FeatureCollection);
+    }
+
+    public override int GetHashCode() => (Type, CRS, Features).GetHashCode();
 
     //public override string ToString()
     //{
@@ -113,34 +140,7 @@ namespace StreetSmart.Common.Data.GeoJson
     //  return $"{{\"type\":\"{Type.Description()}\",{CRS},\"features\": [{features}]}}";
     //}
 
-    //public bool Equals(IFeatureCollection other)
-    //{
-    //  if (other == this)
-    //  {
-    //    return true;
-    //  }
 
-    //  if (other == null || other.Features.Count != this.Features.Count)
-    //  {
-    //    return false;
-    //  }
-
-    //  for(int i = 0; i < this.Features.Count; i++)
-    //  {
-    //    if (!this.Features[i].Equals(other.Features[i]))
-    //    {
-    //      return false;
-    //    }
-    //  }
-    //  return true;
-    //}
-
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as FeatureCollection);
-    //}
-
-    //public override int GetHashCode() => (Type, CRS, Features).GetHashCode();
 
   }
 }

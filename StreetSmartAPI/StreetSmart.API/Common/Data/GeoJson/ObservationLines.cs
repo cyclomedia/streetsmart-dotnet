@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines: DataConvert, IObservationLines//, IEquatable<ObservationLines>
+  internal class ObservationLines: DataConvert, IObservationLines, IEquatable<ObservationLines>
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
@@ -85,21 +85,21 @@ namespace StreetSmart.Common.Data.GeoJson
 
       return $"{sb}";
     }
-    //public bool Equals(ObservationLines other)
-    //{
-    //  if (other == null) return false;
-    //  return ActiveObservation == other.ActiveObservation &&
-    //         RecordingId == other.RecordingId &&
-    //         Color.Equals(other.Color) &&
-    //         SelectedMeasureMethod.Equals(other.SelectedMeasureMethod);
-    //}
+    public bool Equals(ObservationLines other)
+    {
+      if (other == null) return false;
+      return ActiveObservation == other.ActiveObservation &&
+             RecordingId == other.RecordingId &&
+             Color.Equals(other.Color) &&
+             SelectedMeasureMethod.Equals(other.SelectedMeasureMethod);
+    }
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as ObservationLines);
-    //}
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as ObservationLines);
+    }
 
-    //public override int GetHashCode() => (ActiveObservation, RecordingId, Color, SelectedMeasureMethod).GetHashCode();
+    public override int GetHashCode() => (ActiveObservation, RecordingId, Color, SelectedMeasureMethod).GetHashCode();
     //public override string ToString()
     //{
     //  return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()}," +
