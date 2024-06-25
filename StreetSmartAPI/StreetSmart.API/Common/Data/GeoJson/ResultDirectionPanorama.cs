@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirectionPanorama : ResultDirection, IResultDirectionPanorama
+  internal class ResultDirectionPanorama : ResultDirection, IResultDirectionPanorama,IEquatable<ResultDirectionPanorama>
   {
     public ResultDirectionPanorama(Dictionary<string, object> resultDirection)
       : base(resultDirection)
@@ -93,6 +93,22 @@ namespace StreetSmart.Common.Data.GeoJson
     public DateTime? RecordedAt { get; }
 
     public IResolution Resolution { get; }
+
+    public bool Equals(ResultDirectionPanorama other)
+    {
+      if (other == null) return false;
+      return Direction.Equals(other.Direction) &&
+        GroundLevelOffset.Equals(other.GroundLevelOffset) &&
+        Orientation.Stdev.Equals(other.Orientation.Stdev) &&
+        Position.Equals(other.Position) &&
+        CalculatedMethod.Equals(other.CalculatedMethod) &&
+        Resolution.Equals(other.Resolution);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as ResultDirectionPanorama);
+    }
+    public override int GetHashCode() => (Direction,GroundLevelOffset,Orientation,Position,CalculatedMethod,Resolution).GetHashCode();
 
     public override string ToString()
     {

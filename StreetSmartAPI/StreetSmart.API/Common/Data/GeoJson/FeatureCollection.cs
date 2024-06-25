@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
+  public class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
   {
     public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
     {
@@ -87,12 +87,12 @@ namespace StreetSmart.Common.Data.GeoJson
       }
     }
 
-    public FeatureType Type { get; private set; }
+    public FeatureType Type { get; set; }
 
-    public IList<IFeature> Features { get; private set; }
+    public IList<IFeature> Features { get; set; }
 
     // ReSharper disable once InconsistentNaming
-    public ICRS CRS { get; private set; }
+    public ICRS CRS { get; set; }
     public override string ToString()
     {
       var featuresBuilder = new StringBuilder();
@@ -116,6 +116,15 @@ namespace StreetSmart.Common.Data.GeoJson
         return false;
       }
 
+      if (!this.CRS.Equals(other.CRS))
+      {
+        return false;
+      }
+      
+      if(!this.Type.Equals(other.Type))
+      {
+        return false;
+      }
       for (int i = 0; i < this.Features.Count; i++)
       {
         if (!this.Features[i].Equals(other.Features[i]))

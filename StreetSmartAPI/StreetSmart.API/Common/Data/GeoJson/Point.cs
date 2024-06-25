@@ -24,13 +24,14 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Point: Coordinate, IPoint, IEquatable<Point>
+  public class Point: Coordinate, IPoint, IEquatable<Point>
   {
     public Point(Dictionary<string, object> point)
       : base(new DataConvert().GetListValue(point, "coordinates"))
     {
       try
       {
+        var p = new DataConvert().GetListValue(point,"coordinates");
         Type = (GeometryType) ToEnum(typeof(GeometryType), point, "type");
       }
       catch (ArgumentException)

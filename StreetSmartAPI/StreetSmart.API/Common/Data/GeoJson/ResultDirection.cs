@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirection : DataConvert, IResultDirection
+  internal class ResultDirection : DataConvert, IResultDirection,IEquatable<ResultDirection>
   {
     private readonly string _matchImage;
 
@@ -55,9 +55,24 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public Image MatchImage { get; }
 
+    public bool Equals(ResultDirection other)
+    {
+      if(other == null)
+        return false;
+      return Id.Equals(other.Id) && MatchImage.Equals(other.MatchImage);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as ResultDirection);
+    }
+
+    public override int GetHashCode()=>(Id).GetHashCode();
+    
     public override string ToString()
     {
       return $"{{\"Id\":\"{Id}\",\"MatchImage\":\"{_matchImage}\"}}";
     }
+
+
   }
 }

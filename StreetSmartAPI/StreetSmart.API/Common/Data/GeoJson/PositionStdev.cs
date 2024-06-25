@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class PositionStdev : Coordinate, IPositionStdev, IEquatable<PositionStdev>
+  public class PositionStdev : Coordinate, IPositionStdev, IEquatable<PositionStdev>
   {
     public PositionStdev(Dictionary<string, object> position, IList<object> coordinateStdDev)
       : base(position)

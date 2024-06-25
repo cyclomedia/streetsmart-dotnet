@@ -24,7 +24,7 @@ using System.Linq;
 
 namespace StreetSmart.Common.Data
 {
-  class DataConvert : NotifyPropertyChanged
+  public class DataConvert : NotifyPropertyChanged
   {
     protected static CultureInfo ci => CultureInfo.InvariantCulture;
 
