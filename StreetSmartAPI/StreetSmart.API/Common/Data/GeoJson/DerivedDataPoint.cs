@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
+  public class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
   {
     public DerivedDataPoint(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -121,8 +121,11 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(DerivedDataPoint other)
     {
       if (other == null) return false;
-      return (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
-             (Position?.Equals(other.Position) ?? other.Position == null);
+      return other.Unit == this.Unit &&
+             other.Precision == this.Precision &&
+             (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
+             (Position?.Equals(other.Position) ?? other.Position == null) &&
+             (PositionXY?.Equals(other.PositionXY) ?? other.PositionXY == null);
     }
 
     public override bool Equals(object obj)
