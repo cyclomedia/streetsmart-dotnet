@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString,IEquatable<DerivedDataLineString>
+  public class DerivedDataLineString : DerivedData, IDerivedDataLineString,IEquatable<DerivedDataLineString>
   {
     public DerivedDataLineString(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -268,7 +268,9 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(DerivedDataLineString other)
     {
       if (other == null) return false;
-      return CoordinateStdev.SequenceEqual(other.CoordinateStdev) &&
+      return other.Unit == this.Unit &&
+             other.Precision == this.Precision &&
+             CoordinateStdev.SequenceEqual(other.CoordinateStdev) &&
              TotalLength == other.TotalLength &&
              SegmentLengths.SequenceEqual(other.SegmentLengths) &&
              SegmentsDeltaXY.SequenceEqual(other.SegmentsDeltaXY) &&

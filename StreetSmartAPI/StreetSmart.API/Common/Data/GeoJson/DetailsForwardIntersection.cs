@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsForwardIntersection : Details, IDetailsForwardIntersection
+  public class DetailsForwardIntersection : Details, IDetailsForwardIntersection,IEquatable<DetailsForwardIntersection>
   {
     public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection, MeasurementTools measurementTool)
     {
@@ -80,6 +80,20 @@ namespace StreetSmart.Common.Data.GeoJson
     public IPosition Position { get; }
 
     public IList<IResultDirection> ResultDirections { get; }
+
+    public bool Equals(DetailsForwardIntersection other)
+    {
+      if (other == null) return false;
+      return
+          Position.Equals(other.Position) &&
+          ResultDirections.Equals(other.ResultDirections);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DetailsForwardIntersection);
+    }
+
+    public override int GetHashCode() => (Position, ResultDirections).GetHashCode();
 
     public override string ToString()
     {

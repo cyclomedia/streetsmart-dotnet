@@ -16,14 +16,14 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsSmartClick : DetailsForwardIntersection, IDetailsSmartClick
+  public class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick,IEquatable<DetailsSmartClick>
   {
     public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
       : base(detailsSmartClick, MeasurementTools.Panorama)
@@ -45,6 +45,21 @@ namespace StreetSmart.Common.Data.GeoJson
     public int Confidence { get; }
 
     public double Depth { get; }
+
+    public bool Equals(DetailsSmartClick other)
+    {
+      if (other == null) return false;
+      return
+          Confidence.Equals(other.Confidence) &&
+          Depth.Equals(other.Depth) &&
+          Position.Equals(other.Position);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DetailsSmartClick);
+    }
+
+    public override int GetHashCode() => (Position, ResultDirections).GetHashCode();
 
     public override string ToString()
     {

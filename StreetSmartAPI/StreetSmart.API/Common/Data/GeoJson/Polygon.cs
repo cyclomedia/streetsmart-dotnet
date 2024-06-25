@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
+  public class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {
@@ -116,8 +116,9 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Polygon other)
     {
       if (other == null) return false;
-      return Type.Equals(other.Type) &&
-             this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
+
+      return Type.Equals(other.Type) && this.Count == other.Count &&
+         this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
     }
 
     public override bool Equals(object obj)

@@ -16,12 +16,14 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.GeoJson;
+using System;
 using System.Globalization;
+
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Property : NotifyPropertyChanged, IProperty
+  public class Property : NotifyPropertyChanged, IProperty,IEquatable<Property>
   {
     public Property(object value, object stdev)
     {
@@ -64,5 +66,18 @@ namespace StreetSmart.Common.Data.GeoJson
       CultureInfo ci = CultureInfo.InvariantCulture;
       return $"{{\"value\":{Value?.ToString(ci)},\"stdev\":{Stdev?.ToString(ci)}}}";
     }
+
+    public bool Equals(Property other)
+    {
+      if (other == null)
+        return false;
+      return Value.Equals(other.Value) && Stdev.Equals(other.Stdev);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Property);
+    }
+
+    public override int GetHashCode() => (Value,Stdev).GetHashCode();
   }
 }

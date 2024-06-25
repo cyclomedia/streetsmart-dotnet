@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasurementProperties: Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
+  public class MeasurementProperties: Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {

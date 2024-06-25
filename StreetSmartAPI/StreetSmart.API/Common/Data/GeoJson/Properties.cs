@@ -27,7 +27,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Properties: Dictionary<string, object>, IProperties, IEquatable<Properties>
+  public class Properties: Dictionary<string, object>, IProperties, IEquatable<Properties>
   {
     public event PropertyChangedEventHandler PropertyChanged;
 
