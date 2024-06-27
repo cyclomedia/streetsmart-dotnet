@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class DetailsForwardIntersection : Details, IDetailsForwardIntersection,IEquatable<DetailsForwardIntersection>
+  internal class DetailsForwardIntersection : Details, IDetailsForwardIntersection,IEquatable<DetailsForwardIntersection>
   {
     public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection, MeasurementTools measurementTool)
     {

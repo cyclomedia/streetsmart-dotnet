@@ -24,7 +24,7 @@ using System.Globalization;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class RecordingInfo : DataConvert, IRecordingInfo,IEquatable<RecordingInfo>
+  internal class RecordingInfo : DataConvert, IRecordingInfo,IEquatable<RecordingInfo>
   {
     public RecordingInfo(Dictionary<string, object> recordingInfo)
     {

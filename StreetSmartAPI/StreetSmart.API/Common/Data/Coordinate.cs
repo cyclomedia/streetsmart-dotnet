@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data
 {
-  public class Coordinate : DataConvert, ICoordinate, IEquatable<Coordinate>
+  internal class Coordinate : DataConvert, ICoordinate, IEquatable<Coordinate>
   {
     private double? _x;
     private double? _y;

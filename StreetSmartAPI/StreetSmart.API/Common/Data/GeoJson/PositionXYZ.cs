@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class PositionXYZ : Coordinate, IPositionXYZ,IEquatable<PositionXYZ>
+  internal class PositionXYZ : Coordinate, IPositionXYZ,IEquatable<PositionXYZ>
   {
     public PositionXYZ(Dictionary<string, object> position)
       : base(position)
