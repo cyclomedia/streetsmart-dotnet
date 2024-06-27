@@ -116,9 +116,22 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Polygon other)
     {
       if (other == null) return false;
+      if(this.Count != other.Count) return false;
 
-      return Type.Equals(other.Type) && this.Count == other.Count &&
-         this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
+      for(int i = 0; i < this.Count; i++)
+      {
+        if(this[i].Count != other[i].Count) return false;
+
+        for(int j = 0; j < this[i].Count;j++)
+        {
+          if(!this[i][j].Equals(other[i][j]))
+          {
+            return false;
+          }
+        }
+      }
+
+      return Type.Equals(other.Type);
     }
 
     public override bool Equals(object obj)

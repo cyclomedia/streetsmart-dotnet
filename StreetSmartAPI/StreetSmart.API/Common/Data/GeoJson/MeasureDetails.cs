@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasureDetails: DataConvert, IMeasureDetails,IEquatable<MeasureDetails>
+  internal class MeasureDetails : DataConvert, IMeasureDetails, IEquatable<MeasureDetails>
   {
     public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
@@ -36,7 +36,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        MeasureMethod = (MeasureMethod) ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
+        MeasureMethod = (MeasureMethod)ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
       }
       catch (ArgumentException)
       {
@@ -108,13 +108,13 @@ namespace StreetSmart.Common.Data.GeoJson
         switch (measureDetails.MeasureMethod)
         {
           case MeasureMethod.DepthMap:
-            Details = new DetailsDepth((IDetailsDepth) measureDetails.Details);
+            Details = new DetailsDepth((IDetailsDepth)measureDetails.Details);
             break;
           case MeasureMethod.SmartClick:
-            Details = new DetailsSmartClick((IDetailsSmartClick) measureDetails.Details);
+            Details = new DetailsSmartClick((IDetailsSmartClick)measureDetails.Details);
             break;
           case MeasureMethod.ForwardIntersection:
-            Details = new DetailsForwardIntersection((IDetailsForwardIntersection) measureDetails.Details, measurementTool);
+            Details = new DetailsForwardIntersection((IDetailsForwardIntersection)measureDetails.Details, measurementTool);
             break;
           case MeasureMethod.AutoFocus:
           case MeasureMethod.NotDefined:
@@ -177,8 +177,20 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(MeasureDetails other)
     {
       if (other == null) return false;
-      return PointProblems.SequenceEqual(other.PointProblems) &&
-             MeasureMethod.Equals(other.MeasureMethod) &&
+
+      if ((PointProblems == null) != (other.PointProblems == null)) return false;
+
+      if (PointProblems != null && other.PointProblems != null)
+        if (PointProblems.Count == other.PointProblems.Count)
+          for (int i = 0; i < PointProblems.Count; i++)
+          {
+            if (!PointProblems[i].Equals(other.PointProblems[i]))
+              return false;
+          }
+        else
+          return false;
+
+      return MeasureMethod.Equals(other.MeasureMethod) &&
              Details == other.Details &&
              PointReliability.Equals(other.PointReliability);
     }

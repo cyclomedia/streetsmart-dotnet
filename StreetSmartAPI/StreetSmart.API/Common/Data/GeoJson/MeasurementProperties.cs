@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class MeasurementProperties: Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
+  public class MeasurementProperties : Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {
@@ -92,7 +92,7 @@ namespace StreetSmart.Common.Data.GeoJson
       try
       {
         CustomGeometryType =
-          (CustomGeometryType) converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
+          (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {
@@ -310,6 +310,31 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(MeasurementProperties other)
     {
       if (other == null) return false;
+
+      if ((MeasureDetails == null) != (other.MeasureDetails == null)) return false;
+
+      if (MeasureDetails != null && other.MeasureDetails != null)
+        if (MeasureDetails.Count == other.MeasureDetails.Count)
+          for (int i = 0; i < MeasureDetails.Count; i++)
+          {
+            if (!MeasureDetails[i].Equals(other.MeasureDetails[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if ((PointsWithErrors == null) != (other.PointsWithErrors == null)) return false;
+      
+      if (PointsWithErrors != null && other.PointsWithErrors != null)
+        if (PointsWithErrors.Count == other.PointsWithErrors.Count)
+          for (int i = 0; i < PointsWithErrors.Count; i++)
+          {
+            if (!PointsWithErrors[i].Equals(other.PointsWithErrors[i]))
+              return false;
+          }
+        else
+          return false;
+
       return Id == other.Id &&
              Name == other.Name &&
              Group == other.Group &&
@@ -321,9 +346,7 @@ namespace StreetSmart.Common.Data.GeoJson
              MeasurementTool.Equals(other.MeasurementTool) &&
              (FontSize == other.FontSize || (FontSize != null && FontSize.Equals(other.FontSize))) &&
              (CustomGeometryType == other.CustomGeometryType || CustomGeometryType.Equals(other.CustomGeometryType)) &&
-               (WgsGeometry == other.WgsGeometry || (WgsGeometry != null && WgsGeometry.Equals(other.WgsGeometry))) &&
-               PointsWithErrors.SequenceEqual(other.PointsWithErrors) &&
-               MeasureDetails.SequenceEqual(other.MeasureDetails);
+               (WgsGeometry == other.WgsGeometry || (WgsGeometry != null && WgsGeometry.Equals(other.WgsGeometry)));
     }
     public override bool Equals(object obj)
     {
