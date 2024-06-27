@@ -913,6 +913,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(areEqual);
     }
+
     [Fact]
     public void DerivedData_EqualObjects_ReturnsTrue()
     {
@@ -948,8 +949,9 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(data1.Equals(data2));
     }
+
     [Fact]
-    public void DerivedDataLineString_Equals_ReturnsTrue()
+    public void DerivedDataLineString_WhenObjectsAreEquals_ReturnsTrue()
     {
       var data1 = new DerivedData(new Dictionary<string, object>
         {
@@ -967,7 +969,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DerivedDataLineString_Equals_ReturnsFalse()
+    public void DerivedDataLineString_WhenObjectsAreNotEquals_ReturnsFalse()
     {
       var data1 = new DerivedDataLineString(new System.Collections.Generic.Dictionary<string, object>
         {
@@ -983,8 +985,9 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(data1.Equals(data2));
     }
+
     [Fact]
-    public void DerivedDataPoint_Equals_ReturnsTrue()
+    public void DerivedDataPoint_WhenObjectsAreEquals_ReturnsTrue()
     {
       var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
         {
@@ -1002,7 +1005,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DerivedDataPoint_Equals_ReturnsFalse()
+    public void DerivedDataPoint_WhenObjectsAreNotEquals_ReturnsFalse()
     {
       var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
         {
@@ -1019,7 +1022,7 @@ namespace StreetSmart.WPF.Tests
       Assert.False(data1.Equals(data2));
     }
     [Fact]
-    public void DerivedDataPolygon_Equals_ReturnsTrue()
+    public void DerivedDataPolygon_WhenObjectsAreEquals_ReturnsTrue()
     {
       var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
         {
@@ -1037,7 +1040,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DerivedDataPolygon_Equals_ReturnsFalse()
+    public void DerivedDataPolygon_WhenObjectsAreNotEquals_ReturnsFalse()
     {
       var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
         {
@@ -1053,6 +1056,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(data1.Equals(data2));
     }
+
     [Fact]
     public void PositionStdev_ConstructWithCoordinatesAndStdev_ShouldSetPropertiesCorrectly()
     {
@@ -1129,6 +1133,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(isEqual);
     }
+
     [Fact]
     public void PositionXYZ_ConstructWithCoordinates_ShouldSetPropertiesCorrectly()
     {
@@ -1255,6 +1260,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(isEqual);
     }
+
     [Fact]
     public void Geometry_ConstructWithDictionary_ShouldSetTypeCorrectly()
     {
@@ -1597,6 +1603,32 @@ namespace StreetSmart.WPF.Tests
       bool result = smartClick1.Equals(smartClick2);
 
       Assert.False(result);
+    }
+
+    [Fact]
+    public void MeasurementProperties_Equals_ShouldReturnTrueForEqualObjects()
+    {
+      var propertiesDict = new Dictionary<string, object>
+            {
+                { "id", "test-id" },
+                { "name", "test-name" },
+                { "group", "test-group" },
+                { "fontsize", 12 },
+                { "dimension", 3 },
+                { "measureReliability", "RELIABLE" },
+                { "measurementTool", "MAP" },
+                { "validGeometry", true },
+                { "pointsWithErrors", new List<object> { 1, 2, 3 } },
+                { "observationLines", new Dictionary<string, object>() },
+                { "derivedData", new Dictionary<string, object>() },
+                { "measureDetails", new List<object>{ 1, 2, 3 } },
+                { "wgsGeometry", new Dictionary<string, object>() }
+            };
+
+      var measurementProperties1 = new MeasurementProperties(propertiesDict, GeometryType.Point);
+      var measurementProperties2 = new MeasurementProperties(propertiesDict, GeometryType.Point);
+
+      Assert.Equal(measurementProperties1, measurementProperties2);
     }
   }
 }
