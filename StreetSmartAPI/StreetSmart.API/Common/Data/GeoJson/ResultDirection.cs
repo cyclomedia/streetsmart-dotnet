@@ -59,7 +59,14 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if(other == null)
         return false;
-      return Id.Equals(other.Id) && MatchImage.Equals(other.MatchImage);
+
+      if ((MatchImage == null) != (other.MatchImage == null)) return false;
+      if (MatchImage != null && other.MatchImage != null)
+      {
+        if(!MatchImage.Equals(other.MatchImage))
+        { return false; }
+      }
+      return Id.Equals(other.Id);
     }
     public override bool Equals(object obj)
     {

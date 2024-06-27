@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
+  internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {

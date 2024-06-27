@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class DerivedDataLineString : DerivedData, IDerivedDataLineString, IEquatable<DerivedDataLineString>
+  internal class DerivedDataLineString : DerivedData, IDerivedDataLineString, IEquatable<DerivedDataLineString>
   {
     public DerivedDataLineString(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -275,6 +275,8 @@ namespace StreetSmart.Common.Data.GeoJson
       if ((SegmentsDeltaZ == null) != (other.SegmentsDeltaZ == null)) return false;
       if ((SegmentsSlopePercentage == null) != (other.SegmentsSlopePercentage == null)) return false;
       if ((SegmentsSlopeAngle == null) != (other.SegmentsSlopeAngle == null)) return false;
+      if ((TotalLength == null) != (other.TotalLength == null)) return false;
+      if ((DeltaXY == null) != (other.DeltaXY == null)) return false;
 
       if (CoordinateStdev != null && other.CoordinateStdev != null)
         if (CoordinateStdev.Count == other.CoordinateStdev.Count)
@@ -336,11 +338,19 @@ namespace StreetSmart.Common.Data.GeoJson
         else
           return false;
 
+      if(TotalLength != null && other.TotalLength != null)
+      {
+        if(!TotalLength.Equals(other.TotalLength)) return false;
+      }
+
+      if (DeltaXY != null && other.DeltaXY != null)
+      {
+        if (!DeltaXY.Equals(other.DeltaXY)) return false;
+      }
+
       return other.Unit == this.Unit &&
              other.Precision == this.Precision &&
-             TotalLength == other.TotalLength &&
-             DeltaXY == other.DeltaXY &&
-             DeltaZ == other.DeltaZ;
+             DeltaZ.Equals(other.DeltaZ);
     }
 
     public override bool Equals(object obj)

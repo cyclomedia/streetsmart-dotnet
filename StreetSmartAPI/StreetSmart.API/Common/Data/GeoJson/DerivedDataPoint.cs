@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
+  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
   {
     public DerivedDataPoint(Dictionary<string, object> derivedData)
       : base(derivedData)
