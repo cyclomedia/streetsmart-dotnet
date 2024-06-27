@@ -1495,7 +1495,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DetailsForwardIntersection_Equality_Null()
+    public void DetailsForwardIntersection_Equality_NullValueOfSecondObject()
     {
       var details = new Dictionary<string, object>
             {
@@ -1510,7 +1510,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DetailsSmartClick_Equals_SameInstance()
+    public void DetailsSmartClick_EqualsMethod_SameInstance()
     {
       var details = new Dictionary<string, object>
             {
@@ -1529,7 +1529,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DetailsSmartClick_Equals_EqualObjects()
+    public void DetailsSmartClick_EqualsMethod_EqualObjects()
     {
       var details1 = new Dictionary<string, object>
             {
@@ -1558,7 +1558,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DetailsSmartClick_Equals_NullObject()
+    public void DetailsSmartClick_EqualsMethod_NullValueOfSecondObject()
     {
       var details = new Dictionary<string, object>
             {
@@ -1577,7 +1577,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void DetailsSmartClick_Equals_DifferentObjects()
+    public void DetailsSmartClick_EqualsMethod_DifferentObjects()
     {
       var details1 = new Dictionary<string, object>
             {
