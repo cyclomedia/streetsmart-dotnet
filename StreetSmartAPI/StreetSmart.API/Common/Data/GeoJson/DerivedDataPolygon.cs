@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon,IEquatable<DerivedDataPolygon>
+  public class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon, IEquatable<DerivedDataPolygon>
   {
     public DerivedDataPolygon(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -96,10 +96,26 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(DerivedDataPolygon other)
     {
       if (other == null) return false;
-      return other.Unit == this.Unit &&
-             other.Precision== this.Precision &&
-             Triangles.SequenceEqual(other.Triangles) &&
-             Area == other.Area;
+
+      if ((Triangles == null) != (other.Triangles == null)) return false;
+
+      if (Triangles != null && other.Triangles != null)
+        if (Triangles.Count == other.Triangles.Count)
+          for (int i = 0; i < Triangles.Count; i++)
+          {
+            if (!Triangles[i].Equals(other.Triangles[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if ((Area == null) != (other.Area == null)) return false;
+
+      if (Area != null && other.Area != null)
+        if (!Area.Equals(other.Area)) return false;
+
+      return other.Unit.Equals(this.Unit) &&
+             other.Precision.Equals(this.Precision);
     }
 
     public override bool Equals(object obj)

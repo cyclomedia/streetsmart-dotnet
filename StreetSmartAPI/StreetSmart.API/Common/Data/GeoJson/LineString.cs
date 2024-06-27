@@ -76,8 +76,17 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(LineString other)
     {
       if (other == null) return false;
-      return Type.Equals(other.Type) &&
-             this.Select(x => x).SequenceEqual(other.Select(x => x));
+
+      if(this.Count != other.Count) return false;
+      for (int i = 0; i < this.Count; i++)
+      {
+          if (!this[i].Equals(other[i]))
+          {
+            return false;
+          }
+        
+      }
+      return Type.Equals(other.Type);
 
     }
 

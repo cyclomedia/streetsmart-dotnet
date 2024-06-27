@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class DerivedDataLineString : DerivedData, IDerivedDataLineString,IEquatable<DerivedDataLineString>
+  public class DerivedDataLineString : DerivedData, IDerivedDataLineString, IEquatable<DerivedDataLineString>
   {
     public DerivedDataLineString(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -178,7 +178,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
-   
+
     protected string GetValueString(IProperty property, string propertyName)
     {
       if (property == null)
@@ -268,15 +268,77 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(DerivedDataLineString other)
     {
       if (other == null) return false;
+
+      if ((CoordinateStdev == null) != (other.CoordinateStdev == null)) return false;
+      if ((SegmentLengths == null) != (other.SegmentLengths == null)) return false;
+      if ((SegmentsDeltaXY == null) != (other.SegmentsDeltaXY == null)) return false;
+      if ((SegmentsDeltaZ == null) != (other.SegmentsDeltaZ == null)) return false;
+      if ((SegmentsSlopePercentage == null) != (other.SegmentsSlopePercentage == null)) return false;
+      if ((SegmentsSlopeAngle == null) != (other.SegmentsSlopeAngle == null)) return false;
+
+      if (CoordinateStdev != null && other.CoordinateStdev != null)
+        if (CoordinateStdev.Count == other.CoordinateStdev.Count)
+          for (int i = 0; i < CoordinateStdev.Count; i++)
+          {
+            if (!CoordinateStdev[i].Equals(other.CoordinateStdev[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if (SegmentLengths != null && other.SegmentLengths != null)
+        if (SegmentLengths.Count == other.SegmentLengths.Count)
+          for (int i = 0; i < SegmentLengths.Count; i++)
+          {
+            if (!SegmentLengths[i].Equals(other.SegmentLengths[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if (SegmentsDeltaXY != null && other.SegmentsDeltaXY != null)
+        if (SegmentsDeltaXY.Count == other.SegmentsDeltaXY.Count)
+          for (int i = 0; i < SegmentsDeltaXY.Count; i++)
+          {
+            if (!SegmentsDeltaXY[i].Equals(other.SegmentsDeltaXY[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if (SegmentsDeltaZ != null && other.SegmentsDeltaZ != null)
+        if (SegmentsDeltaZ.Count == other.SegmentsDeltaZ.Count)
+          for (int i = 0; i < SegmentsDeltaZ.Count; i++)
+          {
+            if (!SegmentsDeltaZ[i].Equals(other.SegmentsDeltaZ[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if (SegmentsSlopePercentage != null && other.SegmentsSlopePercentage != null)
+        if (SegmentsSlopePercentage.Count == other.SegmentsSlopePercentage.Count)
+          for (int i = 0; i < SegmentsSlopePercentage.Count; i++)
+          {
+            if (!SegmentsSlopePercentage[i].Equals(other.SegmentsSlopePercentage[i]))
+              return false;
+          }
+        else
+          return false;
+
+      if (SegmentsSlopeAngle != null && other.SegmentsSlopeAngle != null)
+        if (SegmentsSlopeAngle.Count == other.SegmentsSlopeAngle.Count)
+          for (int i = 0; i < SegmentsSlopeAngle.Count; i++)
+          {
+            if (!SegmentsSlopeAngle[i].Equals(other.SegmentsSlopeAngle[i]))
+              return false;
+          }
+        else
+          return false;
+
       return other.Unit == this.Unit &&
              other.Precision == this.Precision &&
-             CoordinateStdev.SequenceEqual(other.CoordinateStdev) &&
              TotalLength == other.TotalLength &&
-             SegmentLengths.SequenceEqual(other.SegmentLengths) &&
-             SegmentsDeltaXY.SequenceEqual(other.SegmentsDeltaXY) &&
-             SegmentsDeltaZ.SequenceEqual(other.SegmentsDeltaZ) &&
-             SegmentsSlopePercentage.SequenceEqual(other.SegmentsSlopePercentage) &&
-             SegmentsSlopeAngle.SequenceEqual(other.SegmentsSlopeAngle) &&
              DeltaXY == other.DeltaXY &&
              DeltaZ == other.DeltaZ;
     }
