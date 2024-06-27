@@ -79,12 +79,12 @@ namespace StreetSmart.Common.Data.GeoJson
 
       for (int i = 0; i < Values.Count; i++)
       {
-        // Adjust this comparison based on the type of Values[i]
         if (!Values[i].Equals(other.Values[i]))
         {
           return false;
         }
       }
+
       return true;
 
     }

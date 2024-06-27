@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
+  internal class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
   {
     public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
     {

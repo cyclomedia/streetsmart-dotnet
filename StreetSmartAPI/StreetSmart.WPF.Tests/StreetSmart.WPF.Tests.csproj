@@ -9,6 +9,7 @@
     <IsTestProject>true</IsTestProject>
     <SignAssembly>True</SignAssembly>
     <DelaySign>True</DelaySign>
+    <AssemblyOriginatorKeyFile>StreetSmart.WPF.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

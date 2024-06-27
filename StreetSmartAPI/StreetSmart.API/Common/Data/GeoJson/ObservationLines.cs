@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class ObservationLines: DataConvert, IObservationLines, IEquatable<ObservationLines>
+  internal class ObservationLines: DataConvert, IObservationLines, IEquatable<ObservationLines>
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {

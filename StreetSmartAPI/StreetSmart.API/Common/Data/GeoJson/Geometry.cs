@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class Geometry : DataConvert, IGeometry, IEquatable<Geometry>
+  internal class Geometry : DataConvert, IGeometry, IEquatable<Geometry>
   {
     public Geometry(Dictionary<string, object> geometry)
     {

@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class Point: Coordinate, IPoint, IEquatable<Point>
+  internal class Point: Coordinate, IPoint, IEquatable<Point>
   {
     public Point(Dictionary<string, object> point)
       : base(new DataConvert().GetListValue(point, "coordinates"))

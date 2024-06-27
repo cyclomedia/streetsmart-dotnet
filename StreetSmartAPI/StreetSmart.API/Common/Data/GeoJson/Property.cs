@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class Property : NotifyPropertyChanged, IProperty,IEquatable<Property>
+  internal class Property : NotifyPropertyChanged, IProperty,IEquatable<Property>
   {
     public Property(object value, object stdev)
     {

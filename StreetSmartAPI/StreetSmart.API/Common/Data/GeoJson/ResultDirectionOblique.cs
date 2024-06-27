@@ -193,9 +193,6 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (other == null) return false;
 
-      if (!base.Equals(other))
-        return false;
-
       return CamX.Equals(other.CamX) &&
              CamY.Equals(other.CamY) &&
              CamZ.Equals(other.CamZ) &&

@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick,IEquatable<DetailsSmartClick>
+  internal class DetailsSmartClick: DetailsForwardIntersection, IDetailsSmartClick,IEquatable<DetailsSmartClick>
   {
     public DetailsSmartClick(Dictionary<string, object> detailsSmartClick)
       : base(detailsSmartClick, MeasurementTools.Panorama)

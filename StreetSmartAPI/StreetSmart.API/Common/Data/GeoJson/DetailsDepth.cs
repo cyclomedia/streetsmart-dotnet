@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class DetailsDepth: Details, IDetailsDepth,IEquatable<DetailsDepth>
+  internal class DetailsDepth: Details, IDetailsDepth,IEquatable<DetailsDepth>
   {
     public DetailsDepth(Dictionary<string, object> details)
     {

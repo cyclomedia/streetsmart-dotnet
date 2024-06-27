@@ -6,6 +6,8 @@ using Xunit;
 using System.Reflection;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
+using System.Runtime.InteropServices;
+using System.Windows.Markup;
 
 namespace StreetSmart.WPF.Tests
 {
@@ -222,6 +224,23 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void FeatureCollection_Equals_SameType_NullValueOfSecondCRS_ReturnsFalse()
+    {
+      var featureCollection1 = new FeatureCollection(new Dictionary<string, object>(), true)
+      {
+        Type = FeatureType.Feature,
+        CRS = new CRS(123)
+      };
+      var featureCollection2 = new FeatureCollection(new Dictionary<string, object>(), true)
+      {
+        Type = FeatureType.Feature,
+        CRS = null
+      };
+
+      Assert.False(featureCollection1.Equals(featureCollection2));
+    }
+
+    [Fact]
     public void FeatureCollection_Equals_DifferentType_SameCRS_ReturnsFalse()
     {
       var featureCollection1 = new FeatureCollection(new Dictionary<string, object>(), true)
@@ -236,6 +255,102 @@ namespace StreetSmart.WPF.Tests
       };
 
       Assert.False(featureCollection1.Equals(featureCollection2));
+    }
+    [Fact]
+    public void Rotation_Equals_ReturnsFalse_WhenOtherIsNull()
+    {
+      var rotationValues = new Dictionary<string, object>
+        {
+            { "m", new Dictionary<string, object>
+                {
+                    { "shape", new[] { 3, 3 } },
+                    { "data", new[] { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 } }
+                }
+            }
+        };
+
+      var rotation1 = new Rotation(rotationValues);
+
+      Assert.False(rotation1.Equals(null));
+    }
+
+    [Fact]
+    public void Constructor_SetsPointProblems_Correctly()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      Assert.Contains(PointProblems.OneObservation, measureDetailsObj.PointProblems);
+      Assert.Contains(PointProblems.InvalidAngle, measureDetailsObj.PointProblems);
+      Assert.DoesNotContain(PointProblems.TooFewRecordings, measureDetailsObj.PointProblems);
+    }
+
+    [Fact]
+    public void Constructor_SetsPointReliability_Correctly()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      Assert.True(measureDetailsObj.PointReliability.Equals(Reliability.Reliable));
+    }
+
+    [Fact]
+    public void Equals_ReturnsFalse_WhenOtherIsNull()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      Assert.False(measureDetailsObj.Equals(null));
+    }
+
+    [Fact]
+    public void Rotation_Equals_ReturnsTrue_WhenRotationsAreEqual()
+    {
+      var rotationValues1 = new Dictionary<string, object>
+        {
+            { "m", new Dictionary<string, object>
+                {
+                    { "shape", new[] { 3, 3 } },
+                    { "data", new[] { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 } }
+                }
+            }
+        };
+
+      var rotationValues2 = new Dictionary<string, object>
+        {
+            { "m", new Dictionary<string, object>
+                {
+                    { "shape", new[] { 3, 3 } },
+                    { "data", new[] { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 } }
+                }
+            }
+        };
+
+      var rotation1 = new Rotation(rotationValues1);
+      var rotation2 = new Rotation(rotationValues2);
+
+      Assert.True(rotation1.Equals(rotation2));
     }
 
     [Fact]
@@ -443,7 +558,7 @@ namespace StreetSmart.WPF.Tests
     public void FeatureCollection_Equals_SameMixedFeatures_ReturnsTrue()
     {
       var point = new Feature(new Point(0, 0));
-      var lineString = new Feature(new LineString(new List<ICoordinate>{new Coordinate(1, 1),new Coordinate(2, 2)}));
+      var lineString = new Feature(new LineString(new List<ICoordinate> { new Coordinate(1, 1), new Coordinate(2, 2) }));
       var polygon = new Feature(new Polygon(new List<IList<ICoordinate>> { new List<ICoordinate> { new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(1, 1), new Coordinate(0, 0) } }));
 
       var featureCollection1 = new FeatureCollection(new Dictionary<string, object>(), true);
@@ -933,6 +1048,279 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenOtherIsNull()
+    {
+      var derivedData = new DerivedDataLineString(new Dictionary<string, object>());
+      Assert.False(derivedData.Equals(null));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenCoordinateStdevIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 } , { "1", 0.03 } } } }
+
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.03 }, { "2", 0.03 } } } }
+
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentLengthsIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0, 20.0 } }, { "stdev", new List<object> { 0.1, 0.2 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0, 20.0 } }, { "stdev", new List<object> { 0.1, 0.3 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsDeltaXYIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.2 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.3 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsDeltaZIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.2 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.3 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void ResultDirectionOblique_OtherObjectNull_ReturnsFalse()
+    {
+      var data1 = new ResultDirectionOblique(new Dictionary<string, object>());
+
+      Assert.False(data1.Equals(null));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenCoordinateStdevIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.03 }, { "2", 0.02 } } } }
+
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.03 }, { "2", 0.03 } } } }
+
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentLengthsIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0, 20.0 } }, { "stdev", new List<object> { 0.1, 0.2 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0 } }, { "stdev", new List<object> { 0.1, 0.3 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsDeltaXYIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.3 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsDeltaZIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.1 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.3 } }, { "stdev", new List<object> { 0.01, 0.02 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsSlopePercentageIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0 } }, { "stdev", new List<object> { 0.5, 1.0 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0, 11.0 } }, { "stdev", new List<object> { 0.5, 1.0 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsSlopeAngleIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+       { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0, 30.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0, 31.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenUnitIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+       { "unit", "m" }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "unit", "ft" }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenPrecisionIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+       { "precision", 2 }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "precision", 3 }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenTotalLengthIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+       { "totalLength", new Dictionary<string, object> { { "value", 100.0 }, { "stdev", 1.0 } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "totalLength", new Dictionary<string, object> { { "value", 104.0 }, { "stdev", 1.0 } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenDeltaXYIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "deltaXY", new Dictionary<string, object> { { "value", 0.5 }, { "stdev", 0.05 } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "deltaXY", new Dictionary<string, object> { { "value", 0.6 }, { "stdev", 0.05 } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenDeltaZIsNotEqual()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "deltaZ", new Dictionary<string, object> { { "value", 0.5 }, { "stdev", 0.05 } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "deltaZ", new Dictionary<string, object> { { "value", 0.6 }, { "stdev", 0.05 } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsSlopePercentageIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0 } }, { "stdev", new List<object> { 1.0 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0, 11.0 } }, { "stdev", new List<object> { 0.5, 1.0 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenSegmentsSlopeAngleIsNotEqualCount()
+    {
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+       { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0, 30.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } }
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } }
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
     public void DerivedData_NotEqualObjects_ReturnsFalse()
     {
       var data1 = new DerivedData(new Dictionary<string, object>
@@ -984,6 +1372,42 @@ namespace StreetSmart.WPF.Tests
         });
 
       Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsTrue_WhenAllPropertiesAreEqual()
+    {
+      var data1 = new DerivedDataLineString(new Dictionary<string, object>
+    {
+        { "unit", "m" },
+        { "precision", 2 },
+        { "totalLength", new Dictionary<string, object> { { "value", 100.0 }, { "stdev", 1.0 } } },
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0, 20.0 } }, { "stdev", new List<object> { 0.1, 0.2 } } } },
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.2 } }, { "stdev", new List<object> { 0.01, 0.02 } } } },
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.3, 0.4 } }, { "stdev", new List<object> { 0.03, 0.04 } } } },
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0, 10.0 } }, { "stdev", new List<object> { 0.5, 1.0 } } } },
+        { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0, 30.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } },
+        { "deltaXY", new Dictionary<string, object> { { "value", 0.5 }, { "stdev", 0.05 } } },
+        { "deltaZ", new Dictionary<string, object> { { "value", 0.1 }, { "stdev", 0.01 } } },
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.02 }, { "2", 0.03 } } } }
+    });
+
+      var data2 = new DerivedDataLineString(new Dictionary<string, object>
+    {
+        { "unit", "m" },
+        { "precision", 2 },
+        { "totalLength", new Dictionary<string, object> { { "value", 100.0 }, { "stdev", 1.0 } } },
+        { "segmentLengths", new Dictionary<string, object> { { "value", new List<object> { 10.0, 20.0 } }, { "stdev", new List<object> { 0.1, 0.2 } } } },
+        { "segmentsDeltaXY", new Dictionary<string, object> { { "value", new List<object> { 0.1, 0.2 } }, { "stdev", new List<object> { 0.01, 0.02 } } } },
+        { "segmentsDeltaZ", new Dictionary<string, object> { { "value", new List<object> { 0.3, 0.4 } }, { "stdev", new List<object> { 0.03, 0.04 } } } },
+        { "segmentsSlopePercentage", new Dictionary<string, object> { { "value", new List<object> { 5.0, 10.0 } }, { "stdev", new List<object> { 0.5, 1.0 } } } },
+        { "segmentsSlopeAngle", new Dictionary<string, object> { { "value", new List<object> { 15.0, 30.0 } }, { "stdev", new List<object> { 1.5, 3.0 } } } },
+        { "deltaXY", new Dictionary<string, object> { { "value", 0.5 }, { "stdev", 0.05 } } },
+        { "deltaZ", new Dictionary<string, object> { { "value", 0.1 }, { "stdev", 0.01 } } },
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.02 }, { "2", 0.03 } } } }
+    });
+
+      Assert.True(data1.Equals(data2));
     }
 
     [Fact]
@@ -1279,7 +1703,7 @@ namespace StreetSmart.WPF.Tests
     {
       var geometryDict = new Dictionary<string, object>
             {
-                { "type", "InvalidType" } 
+                { "type", "InvalidType" }
             };
 
       var geometry = new Geometry(geometryDict);
@@ -1630,7 +2054,392 @@ namespace StreetSmart.WPF.Tests
 
       Assert.Equal(measurementProperties1, measurementProperties2);
     }
+    [Fact]
+    public void ResultDirectionPanorama_Equals_ReturnsTrueForEqualObjects()
+    {
+      var direction1 = new Direction(1.0, 2.0, 3.0);
+      var orientation1 = new Property(45.0, 5.0);
+      var position1 = new PositionStdev(10.0, 20.0, 30.0, 1.0, 2.0, 3.0);
+      var resolution1 = new Resolution(new Dictionary<string, object>());
+      var obj1 = new ResultDirectionPanorama(new Dictionary<string, object>
+            {
+                { "DirectionX", 1.0 },
+                { "DirectionY", 2.0 },
+                { "DirectionZ", 3.0 },
+                { "GroundLevelOffset", 5.0 },
+                { "Orientation", orientation1 },
+                { "PositionX", 10.0 },
+                { "PositionY", 20.0 },
+                { "PositionZ", 30.0 },
+                { "StdX", 1.0 },
+                { "StdY", 2.0 },
+                { "StdZ", 3.0 },
+                { "calculationMethod", CalculatedMethod.NotDefined.Description() },
+                { "Resolution", resolution1 }
+            });
+
+      var obj2 = new ResultDirectionPanorama(new Dictionary<string, object>
+            {
+                { "DirectionX", 1.0 },
+                { "DirectionY", 2.0 },
+                { "DirectionZ", 3.0 },
+                { "GroundLevelOffset", 5.0 },
+                { "Orientation", orientation1 },
+                { "PositionX", 10.0 },
+                { "PositionY", 20.0 },
+                { "PositionZ", 30.0 },
+                { "StdX", 1.0 },
+                { "StdY", 2.0 },
+                { "StdZ", 3.0 },
+                { "calculationMethod", CalculatedMethod.NotDefined.Description() },
+                { "Resolution", resolution1 }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.True(result);
+    }
+
+    [Fact]
+    public void ResultDirectionPanorama_Equals_ReturnsFalseForDifferentObjects()
+    {
+      var obj1 = new ResultDirectionPanorama(new Dictionary<string, object>
+            {
+                { "DirectionX", 1.0 },
+                { "DirectionY", 2.0 },
+                { "DirectionZ", 3.0 }
+            });
+
+      var obj2 = new ResultDirectionPanorama(new Dictionary<string, object>
+            {
+                { "DirectionX", 1.0 },
+                { "DirectionY", 2.0 },
+                { "DirectionZ", 4.0 }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void ResultDirectionOblique_Equals_ReturnsTrueForEqualObjects()
+    {
+      var angle1 = new Rotation(new Dictionary<string, object>());
+      var obj1 = new ResultDirectionOblique(new Dictionary<string, object>
+            {
+                { "camX", 1.0 },
+                { "camY", 2.0 },
+                { "camZ", 3.0 },
+                { "angle", angle1 }
+            });
+
+      var obj2 = new ResultDirectionOblique(new Dictionary<string, object>
+            {
+                { "camX", 1.0 },
+                { "camY", 2.0 },
+                { "camZ", 3.0 },
+                { "angle", angle1 }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.True(result);
+    }
+
+    [Fact]
+    public void ResultDirectionOblique_Equals_ReturnsFalseForDifferentObjects()
+    {
+      var obj1 = new ResultDirectionOblique(new Dictionary<string, object>
+            {
+                { "camX", 1.0 },
+                { "camY", 2.0 },
+                { "camZ", 3.0 }
+            });
+
+      var obj2 = new ResultDirectionOblique(new Dictionary<string, object>
+            {
+                { "camX", 1.0 },
+                { "camY", 2.0 },
+                { "camZ", 4.0 }
+            });
+
+      Assert.False(obj1.Equals(obj2));
+    }
+
+    [Fact]
+    public void ResultDirection_Equals_ReturnsTrueForEqualObjects()
+    {
+      var obj1 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" }
+            });
+
+      var obj2 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.True(result);
+    }
+
+    [Fact]
+    public void ResultDirection_Equals_ReturnsFalseForDifferentObjects()
+    {
+      var obj1 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" }
+            });
+
+      var obj2 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "456" }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.False(result);
+    }
+    [Fact]
+    public void ResultDirection_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" }
+            });
+
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Resolution_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Resolution(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Property_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Property(1, 1);
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Properties_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Properties(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Coordinate_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Coordinate(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void CRS_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new CRS(123);
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void DerivedData_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new DerivedData(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void DetailsDepth_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new DetailsDepth(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void DetailsForwardIntersection_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new DetailsForwardIntersection(new Dictionary<string, object>(), MeasurementTools.Map);
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Geometry_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Geometry(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void ObservationLines_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new ObservationLines(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Point_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Point(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Polygon_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new Polygon(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void PositionStdev_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new PositionStdev(new Dictionary<string, object>(), new List<object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void PositionXY_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new PositionXY(new List<object>(),1);
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void PositionXYZ_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new PositionXYZ(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void ResultDirectionPanorama_Equals_ReturnsFalseForSecondObjectNull()
+    {
+      var obj1 = new ResultDirectionPanorama(new Dictionary<string, object>());
+      var result = obj1.Equals(null);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Matrix_Equals_ReturnsTrueForEqualMatrices()
+    {
+      var matrix1 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 3.0 },
+            }, 3, 1);
+
+      var matrix2 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 3.0 },
+            }, 3, 1);
+
+      bool result = matrix1.Equals(matrix2);
+
+      Assert.True(result);
+    }
+
+    [Fact]
+    public void Matrix_Equals_ReturnsFalseForUnequalMatrices()
+    {
+      var matrix1 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 3.0 },
+            }, 3, 1);
+
+      var matrix2 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 4.0 }, 
+            }, 3, 1);
+
+      bool result = matrix1.Equals(matrix2);
+
+      Assert.False(result);
+    }
+    [Fact]
+    public void Matrix_Equals_ReturnsFalseForUnequalSizeOfMatrices()
+    {
+      var matrix1 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 3.0 },
+            }, 3, 1);
+
+      var matrix2 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 }
+            }, 2, 1);
+
+      bool result = matrix1.Equals(matrix2);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void Matrix_Equals_ReturnsFalseForNullValurOfSecondObject()
+    {
+      var matrix1 = new Matrix(new Dictionary<string, object>
+            {
+                { "0", 1.0 },
+                { "1", 2.0 },
+                { "2", 3.0 },
+            }, 3, 1);
+;
+
+      bool result = matrix1.Equals(null);
+
+      Assert.False(result);
+    }
   }
 }
+
 
 

@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  public class LineString : List<ICoordinate>, ILineString, IEquatable<LineString>
+  internal class LineString : List<ICoordinate>, ILineString, IEquatable<LineString>
   {
     public LineString(Dictionary<string, object> lineString)
     {

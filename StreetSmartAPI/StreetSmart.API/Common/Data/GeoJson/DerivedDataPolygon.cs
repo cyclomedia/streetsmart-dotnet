@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  public class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon, IEquatable<DerivedDataPolygon>
+  internal class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon, IEquatable<DerivedDataPolygon>
   {
     public DerivedDataPolygon(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -95,6 +95,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DerivedDataPolygon other)
     {
+      
       if (other == null) return false;
 
       if ((Triangles == null) != (other.Triangles == null)) return false;

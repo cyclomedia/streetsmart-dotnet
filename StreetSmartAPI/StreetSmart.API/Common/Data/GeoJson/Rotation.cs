@@ -52,7 +52,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if(other == null)
         return false;
-      return _rotation.Equals(other._rotation) && _rotation.Equals(other._rotation);
+      return _rotation.Equals(other._rotation);
     }
 
     public override bool Equals(object obj)
