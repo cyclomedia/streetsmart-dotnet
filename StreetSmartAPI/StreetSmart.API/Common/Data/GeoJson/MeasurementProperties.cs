@@ -317,8 +317,7 @@ namespace StreetSmart.Common.Data.GeoJson
         if (MeasureDetails.Count == other.MeasureDetails.Count)
           for (int i = 0; i < MeasureDetails.Count; i++)
           {
-            if (!MeasureDetails[i].Equals(other.MeasureDetails[i]))
-              return false;
+            if (!MeasureDetails[i].Equals(other.MeasureDetails[i])) return false;
           }
         else
           return false;

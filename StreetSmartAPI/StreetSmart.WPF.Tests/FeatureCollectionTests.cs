@@ -275,7 +275,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void Constructor_SetsPointProblems_Correctly()
+    public void MeasureDetails_Constructor_SetsPointProblems_Correctly()
     {
       var measureDetails = new Dictionary<string, object>
         {
@@ -293,7 +293,85 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void Constructor_SetsPointReliability_Correctly()
+    public void MeasureDetails_Constructor_SetsPointProblemsWithDifferentCount_ReturnFalse()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      var measureDetails2 = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION"} },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj2 = new MeasureDetails(measureDetails2, MeasurementTools.NotDefined);
+
+      Assert.False(measureDetailsObj.Equals(measureDetailsObj2));
+    }
+
+    [Fact]
+    public void MeasureDetails_Constructor_SetsPointProblemsWithOneHaveAndOneDont_ReturnFalse()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      var measureDetails2 = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", null },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj2 = new MeasureDetails(measureDetails2, MeasurementTools.NotDefined);
+
+      Assert.False(measureDetailsObj.Equals(measureDetailsObj2));
+    }
+
+    [Fact]
+    public void MeasureDetails_Constructor_SetsPointProblemsWithDifferentValue_ReturnFalse()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      var measureDetails2 = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "POINT_TOO_FAR" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj2 = new MeasureDetails(measureDetails2, MeasurementTools.NotDefined);
+
+      Assert.False(measureDetailsObj.Equals(measureDetailsObj2));
+    }
+
+    [Fact]
+    public void MeasureDetails_Constructor_SetsPointReliability_Correctly()
     {
       var measureDetails = new Dictionary<string, object>
         {
@@ -309,7 +387,7 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
-    public void Equals_ReturnsFalse_WhenOtherIsNull()
+    public void MeasureDetails_Equals_ReturnsFalse_WhenOtherIsNull()
     {
       var measureDetails = new Dictionary<string, object>
         {
@@ -975,6 +1053,61 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void MeasurementProperties_EqualsMethod_ShouldReturnFalseForDifferentPointsWithErrorsCount()
+    {
+      var propertiesData1 = new Dictionary<string, object>
+        {
+            { "id", "1" },
+            { "name", "Test Feature" },
+            { "group", "Test Group" },
+            { "measureDetails", new List<object>() },
+            { "fontsize", 12 },
+            { "dimension", 2 },
+            { "derivedData", new Dictionary<string, object>() },
+            { "measureReliability", "RELIABLE" },
+            { "measurementTool", "MAP" },
+            { "pointsWithErrors", new List<object> { 1, 2, 3 } },
+            { "validGeometry", true },
+            { "observationLines", new Dictionary<string, object>() },
+            { "wgsGeometry", new Dictionary<string, object>
+                {
+                    { "type", "Point" },
+                    { "coordinates", new List<double> { 3.0, 4.0 } }
+                }
+            }
+        };
+
+      var propertiesData2 = new Dictionary<string, object>
+        {
+            { "id", "1" },
+            { "name", "Test Feature" },
+            { "group", "Test Group" },
+            { "measureDetails", new List<object>() },
+            { "fontsize", 12 },
+            { "dimension", 2 },
+            { "derivedData", new Dictionary<string, object>() },
+            { "measureReliability", "RELIABLE" },
+            { "measurementTool", "MAP" },
+            { "pointsWithErrors", new List<object> { 1, 2 } },
+            { "validGeometry", true },
+            { "observationLines", new Dictionary<string, object>() },
+            { "wgsGeometry", new Dictionary<string, object>
+                {
+                    { "type", "Point" },
+                    { "coordinates", new List<double> { 3.0, 4.0 } }
+                }
+            }
+        };
+
+      var properties1 = new MeasurementProperties(propertiesData1, GeometryType.Point);
+      var properties2 = new MeasurementProperties(propertiesData2, GeometryType.Point);
+
+      var areEqual = properties1.Equals(properties2);
+
+      Assert.False(areEqual);
+    }
+
+    [Fact]
     public void MeasurementProperties_EqualsMethod_ShouldReturnFalseForDifferentObjects()
     {
       var propertiesData1 = new Dictionary<string, object>
@@ -1065,6 +1198,58 @@ namespace StreetSmart.WPF.Tests
       var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
       {
         { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", 0.01 }, { "1", 0.03 }, { "2", 0.03 } } } }
+
+      });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenCoordinateCountSegmentsSlopePercentageIsNotEqual()
+    {
+      var slopeValues = new List<object> { 5.5, 10.2, 15.3 };
+      var slopeStdevs = new List<object> { 0.5, 1.0, 1.5 };
+
+      var slopeValues2 = new List<object> { 5.6, 10.3, 15.3 };
+      var slopeStdevs2 = new List<object> { 0.5, 1.5, 1.5 };
+
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object>
+        {
+            { "value", slopeValues },
+            { "stdev", slopeStdevs }
+        }
+
+      } });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "segmentsSlopePercentage", new Dictionary<string, object>
+        {
+            { "value", slopeValues2 },
+            { "stdev", slopeStdevs2 }
+        }
+
+      } });
+
+      Assert.False(derivedData1.Equals(derivedData2));
+    }
+
+    [Fact]
+    public void DerivedDataLineString_Equals_ReturnsFalse_WhenCoordinateCountStdevIsNotEqual()
+    {
+      var position1 = new PositionStdev(1.0, 2.0, 3.0, 0.1, 0.2, 0.3);
+      var position2 = new PositionStdev(1.0, 2.0, 3.0, 0.1, 0.2, 0.3);
+
+      var derivedData1 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", position1 } , { "1", position2 } } } }
+
+      });
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      {
+        { "coordinateStdevs", null }
 
       });
 
@@ -1476,6 +1661,90 @@ namespace StreetSmart.WPF.Tests
         {
             { "unit", "ft" },
             { "precision", 2 }
+        });
+
+      Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataPolygon_WhenSecondObjectHasDifferentTriangleCount_ReturnsFalse()
+    {
+      var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
+      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
+
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", new List<object>
+              {
+                  triangle1
+              }
+            }
+        });
+
+      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", null }
+        });
+
+      Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataPolygon_WhenSecondObjectHasDifferentTriangleValue_ReturnsFalse()
+    {
+      var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
+      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
+
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", new List<object>
+              {
+                  triangle1
+              }
+            }
+        });
+
+      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", new List<object>
+                {
+                    triangle2
+                }
+            }
+        });
+
+      Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataPolygon_WhenObjectsAreNotEqualsBasedOnArea_ReturnsFalse()
+    {
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "precision", 2 },
+            { "area", new Dictionary<string, object>
+              {
+                { "value", 2.2 },
+                { "stdev", 3.3 }
+              }
+            }
+        });
+
+      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "precision", 2 },
+            { "area", new Dictionary<string, object>
+              {
+                { "value", 2.3 },
+                { "stdev", 3.4 }
+              }
+            }
         });
 
       Assert.False(data1.Equals(data2));
@@ -2030,6 +2299,56 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void MeasurementProperties_Equals_ShouldReturnFalseForMeasureDetailsCountDifferent()
+    {
+      var measureDetail1 = new { Length = 10.5, Width = 5.2, Height = 3.8 };
+      var measureDetail2 = new { Length = 7.1, Width = 4.5, Height = 2.3 };
+
+      var propertiesDict = new Dictionary<string, object>
+            {
+                { "id", "test-id" },
+                { "name", "test-name" },
+                { "group", "test-group" },
+                { "fontsize", 12 },
+                { "dimension", 3 },
+                { "measureReliability", "RELIABLE" },
+                { "measurementTool", "MAP" },
+                { "validGeometry", true },
+                { "pointsWithErrors", new List<object> { 1, 2, 3 } },
+                { "observationLines", new Dictionary<string, object>() },
+                { "derivedData", new Dictionary<string, object>() },
+                {  "measureDetails", new List<object>
+                  {
+                      measureDetail1,
+                      measureDetail2
+                  }},
+                { "wgsGeometry", new Dictionary<string, object>() }
+            };
+
+      var propertiesDict2 = new Dictionary<string, object>
+            {
+                { "id", "test-id" },
+                { "name", "test-name" },
+                { "group", "test-group" },
+                { "fontsize", 12 },
+                { "dimension", 3 },
+                { "measureReliability", "RELIABLE" },
+                { "measurementTool", "MAP" },
+                { "validGeometry", true },
+                { "pointsWithErrors", new List<object> { 1, 2, 3 } },
+                { "observationLines", new Dictionary<string, object>() },
+                { "derivedData", new Dictionary<string, object>() },
+                {  "measureDetails", null },
+                { "wgsGeometry", new Dictionary<string, object>() }
+            };
+
+      var measurementProperties1 = new MeasurementProperties(propertiesDict, GeometryType.Point);
+      var measurementProperties2 = new MeasurementProperties(propertiesDict2, GeometryType.Point);
+
+      Assert.False(measurementProperties1.Equals(measurementProperties2));
+    }
+
+    [Fact]
     public void MeasurementProperties_Equals_ShouldReturnTrueForEqualObjects()
     {
       var propertiesDict = new Dictionary<string, object>
@@ -2053,6 +2372,31 @@ namespace StreetSmart.WPF.Tests
       var measurementProperties2 = new MeasurementProperties(propertiesDict, GeometryType.Point);
 
       Assert.Equal(measurementProperties1, measurementProperties2);
+    }
+
+    [Fact]
+    public void MeasurementProperties_Equals_ShouldReturnFalseForSecondObjectNullValue()
+    {
+      var propertiesDict = new Dictionary<string, object>
+            {
+                { "id", "test-id" },
+                { "name", "test-name" },
+                { "group", "test-group" },
+                { "fontsize", 12 },
+                { "dimension", 3 },
+                { "measureReliability", "RELIABLE" },
+                { "measurementTool", "MAP" },
+                { "validGeometry", true },
+                { "pointsWithErrors", new List<object> { 1, 2, 3 } },
+                { "observationLines", new Dictionary<string, object>() },
+                { "derivedData", new Dictionary<string, object>() },
+                { "measureDetails", new List<object>{ 1, 2, 3 } },
+                { "wgsGeometry", new Dictionary<string, object>() }
+            };
+
+      var measurementProperties1 = new MeasurementProperties(propertiesDict, GeometryType.Point);
+
+      Assert.False(measurementProperties1.Equals(null));
     }
     [Fact]
     public void ResultDirectionPanorama_Equals_ReturnsTrueForEqualObjects()
@@ -2185,6 +2529,44 @@ namespace StreetSmart.WPF.Tests
       Assert.True(result);
     }
 
+    [Fact]
+    public void ResultDirection_Equals_ReturnsFalseForEqualObjectsDifferentImage()
+    {
+      var obj1 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" },
+                { "MatchImage", "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgABAAV5u6kAAAAASUVORK5CYII="}
+            });
+
+      var obj2 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" },
+                { "MatchImage", "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFUlEQVR42mJk+A8EBwADcQH/BlgAAiUDJQQHX0YAAAAASUVORK5CYII="}
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.False(result);
+    }
+
+    [Fact]
+    public void ResultDirection_Equals_ReturnsFalseForEqualObjectsSecondImageNullValue()
+    {
+      var obj1 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" },
+                { "MatchImage", "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgABAAV5u6kAAAAASUVORK5CYII="}
+            });
+
+      var obj2 = new ResultDirection(new Dictionary<string, object>
+            {
+                { "Id", "123" }
+            });
+
+      var result = obj1.Equals(obj2);
+
+      Assert.False(result);
+    }
     [Fact]
     public void ResultDirection_Equals_ReturnsFalseForDifferentObjects()
     {
@@ -2335,7 +2717,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void PositionXY_Equals_ReturnsFalseForSecondObjectNull()
     {
-      var obj1 = new PositionXY(new List<object>(),1);
+      var obj1 = new PositionXY(new List<object>(), 1);
       var result = obj1.Equals(null);
 
       Assert.False(result);
@@ -2395,7 +2777,7 @@ namespace StreetSmart.WPF.Tests
             {
                 { "0", 1.0 },
                 { "1", 2.0 },
-                { "2", 4.0 }, 
+                { "2", 4.0 },
             }, 3, 1);
 
       bool result = matrix1.Equals(matrix2);
@@ -2432,7 +2814,7 @@ namespace StreetSmart.WPF.Tests
                 { "1", 2.0 },
                 { "2", 3.0 },
             }, 3, 1);
-;
+      ;
 
       bool result = matrix1.Equals(null);
 

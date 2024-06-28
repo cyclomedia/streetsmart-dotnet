@@ -183,10 +183,7 @@ namespace StreetSmart.Common.Data.GeoJson
       if (PointProblems != null && other.PointProblems != null)
         if (PointProblems.Count == other.PointProblems.Count)
           for (int i = 0; i < PointProblems.Count; i++)
-          {
-            if (!PointProblems[i].Equals(other.PointProblems[i]))
-              return false;
-          }
+          { if (!PointProblems[i].Equals(other.PointProblems[i])) return false; }
         else
           return false;
 

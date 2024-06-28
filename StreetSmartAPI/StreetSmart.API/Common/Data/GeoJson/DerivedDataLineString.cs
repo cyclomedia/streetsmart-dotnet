@@ -322,7 +322,7 @@ namespace StreetSmart.Common.Data.GeoJson
         if (SegmentsSlopePercentage.Count == other.SegmentsSlopePercentage.Count)
           for (int i = 0; i < SegmentsSlopePercentage.Count; i++)
           {
-            if (!SegmentsSlopePercentage[i].Equals(other.SegmentsSlopePercentage[i]))
+            if (!SegmentsSlopePercentage[i].Equals(other.SegmentsSlopePercentage[i])) 
               return false;
           }
         else

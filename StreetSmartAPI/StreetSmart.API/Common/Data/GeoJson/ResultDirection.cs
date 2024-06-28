@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirection : DataConvert, IResultDirection,IEquatable<ResultDirection>
+  internal class ResultDirection : DataConvert, IResultDirection, IEquatable<ResultDirection>
   {
     private readonly string _matchImage;
 
@@ -45,8 +45,8 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (resultDirection != null)
       {
-        Id = resultDirection.Id;
-        MatchImage = (Image) MatchImage?.Clone();
+        Id = resultDirection.Id != null ? string.Copy(resultDirection.Id) : null;
+        MatchImage = (Image)MatchImage?.Clone();
         _matchImage = (resultDirection as ResultDirection)?._matchImage;
       }
     }
@@ -57,15 +57,12 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(ResultDirection other)
     {
-      if(other == null)
+      if (other == null)
         return false;
 
       if ((MatchImage == null) != (other.MatchImage == null)) return false;
       if (MatchImage != null && other.MatchImage != null)
-      {
-        if(!MatchImage.Equals(other.MatchImage))
-        { return false; }
-      }
+        if (!MatchImage.Equals(other.MatchImage)) return false;
       return Id.Equals(other.Id);
     }
     public override bool Equals(object obj)
@@ -73,8 +70,8 @@ namespace StreetSmart.Common.Data.GeoJson
       return Equals(obj as ResultDirection);
     }
 
-    public override int GetHashCode()=>(Id).GetHashCode();
-    
+    public override int GetHashCode() => (Id).GetHashCode();
+
     public override string ToString()
     {
       return $"{{\"Id\":\"{Id}\",\"MatchImage\":\"{_matchImage}\"}}";
