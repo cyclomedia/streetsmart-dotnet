@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedData : DataConvert, IDerivedData//,IEquatable<DerivedData>
+  internal class DerivedData : DataConvert, IDerivedData,IEquatable<DerivedData>
   {
     public DerivedData(Dictionary<string, object> derivedData)
     {
@@ -79,7 +79,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       return $"{sb}";
     }
-    /*
+
     public bool Equals(DerivedData other)
     {
       if (other == null) return false;
@@ -91,7 +91,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return Equals(obj as DerivedData);
     }
 
-    public override int GetHashCode() => (Unit, Precision).GetHashCode();*/
+    public override int GetHashCode() => (Unit, Precision).GetHashCode();
     //public override string ToString()
     //{
     //  return $"{{\"unit\":\"{Unit.Description()}\",\"precision\":{Precision}}}";

@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Feature : DataConvert, IFeature//, IEquatable<IFeature>
+  internal class Feature : DataConvert, IFeature, IEquatable<IFeature>
   {
     public Feature(object feature, bool measurementProperties)
     {
@@ -125,26 +125,26 @@ namespace StreetSmart.Common.Data.GeoJson
 
       return $"{sb}";
     }
+    public bool Equals(IFeature other)
+    {
+      if (other == null) return false;
+      return Type.Equals(other.Type) &&
+             Geometry.Equals(other.Geometry) &&
+             Properties.Equals(other.Properties);
+    }
 
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Feature);
+    }
+
+    public override int GetHashCode() => (Type, Geometry, Properties).GetHashCode();
 
     //public override string ToString()
     //{
     //  return $"{{\"type\":\"{Type.Description()}\",{Geometry},{Properties}}}";
     //}
 
-    //public bool Equals(IFeature other)
-    //{
-    //  if (other == null) return false;
-    //  return Type.Equals(other.Type) &&
-    //         Geometry.Equals(other.Geometry) &&
-    //         Properties.Equals(other.Properties);
-    //}
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Feature);
-    //}
-
-    //public override int GetHashCode() => (Type, Geometry, Properties).GetHashCode();
   }
 }

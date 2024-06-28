@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Polygon : List<IList<ICoordinate>>, IPolygon//, IEquatable<Polygon>
+  internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {
@@ -113,19 +113,33 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
     }
 
-    //public bool Equals(Polygon other)
-    //{
-    //  if (other == null) return false;
-    //  return Type.Equals(other.Type) &&
-    //         this.SelectMany(x => x).SequenceEqual(other.SelectMany(x => x));
-    //}
+    public bool Equals(Polygon other)
+    {
+      if (other == null) return false;
+      if(this.Count != other.Count) return false;
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Polygon);
-    //}
+      for(int i = 0; i < this.Count; i++)
+      {
+        if(this[i].Count != other[i].Count) return false;
 
-    //public override int GetHashCode() => (Type, this).GetHashCode();
+        for(int j = 0; j < this[i].Count;j++)
+        {
+          if(!this[i][j].Equals(other[i][j]))
+          {
+            return false;
+          }
+        }
+      }
+
+      return Type.Equals(other.Type);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Polygon);
+    }
+
+    public override int GetHashCode() => (Type, this).GetHashCode();
 
     //public override string ToString()
     //{

@@ -26,7 +26,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ//,IEquatable<PositionXYZ>
+  internal class PositionXYZ : Coordinate, IPositionXYZ,IEquatable<PositionXYZ>
   {
     public PositionXYZ(Dictionary<string, object> position)
       : base(position)
@@ -68,21 +68,21 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
 
-    //public bool Equals(PositionXYZ other)
-    //{
-    //  if (other == null) return false;
-    //  return XYZ.Equals(other.XYZ) &&
-    //         X.Equals(other.X) &&
-    //         Y.Equals(other.Y) &&
-    //         Z.Equals(other.Z);
-    //}
+    public bool Equals(PositionXYZ other)
+    {
+      if (other == null) return false;
+      return XYZ.Equals(other.XYZ) &&
+             X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as PositionXYZ);
-    //}
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as PositionXYZ);
+    }
 
-    //public override int GetHashCode() => (XYZ, X, Y, Z).GetHashCode();
+    public override int GetHashCode() => (XYZ, X, Y, Z).GetHashCode();
 
     //public override string ToString()
     //{

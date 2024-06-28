@@ -16,13 +16,14 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Rotation : DataConvert, IRotation
+  internal class Rotation : DataConvert, IRotation, IEquatable<Rotation>
   {
     private readonly Matrix _rotation;
 
@@ -46,6 +47,19 @@ namespace StreetSmart.Common.Data.GeoJson
     public List<int> Shape => new List<int> {_rotation.Width, _rotation.Height};
 
     public IList<double> Data => _rotation.Values;
+
+    public bool Equals(Rotation other)
+    {
+      if(other == null)
+        return false;
+      return _rotation.Equals(other._rotation);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Rotation);
+    }
+    public override int GetHashCode() => (_rotation).GetHashCode();
 
     public override string ToString()
     {

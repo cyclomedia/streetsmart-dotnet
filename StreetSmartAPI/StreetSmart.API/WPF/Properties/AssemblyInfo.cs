@@ -17,7 +17,9 @@
  */
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -51,3 +53,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("24.1.2")]
 [assembly: AssemblyFileVersion("24.1.2.0")]
+[assembly: InternalsVisibleTo("StreetSmart.WPF.Tests, PublicKey = 0024000004800000940000000602000000240000525341310004000001000100a53c19f0928ba9c8570b4856f04eaec56bf02a362fbefaf14d63521a1aeebc03c20ac079d6c310456b535885bc9f7d2e26ab8e81883e80411be9fb041d86a90173359b4bfffeab913e83d02093d0ec1566e624d9dcb2e71170515e9237a5b1e8addd6196964f38ea6370b4abafc2cc6987073fadb2704a689b5765b9992e62c4")]

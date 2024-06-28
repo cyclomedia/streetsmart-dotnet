@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Geometry : DataConvert, IGeometry//, IEquatable<Geometry>
+  internal class Geometry : DataConvert, IGeometry, IEquatable<Geometry>
   {
     public Geometry(Dictionary<string, object> geometry)
     {
@@ -51,12 +51,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"{sb}";
     }
 
-    //public override string ToString()
-    //{
-    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\"}}";
-    //}
-    /*
-     public bool Equals(Geometry other)
+    public bool Equals(Geometry other)
     {
       if (other == null) return false;
       return Type.Equals(other.Type);
@@ -71,6 +66,11 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Type.GetHashCode();
     }
-     */
+
+    //public override string ToString()
+    //{
+    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\"}}";
+    //}
+
   }
 }

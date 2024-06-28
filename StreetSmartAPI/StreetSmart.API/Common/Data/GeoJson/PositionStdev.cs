@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class PositionStdev : Coordinate, IPositionStdev//, IEquatable<PositionStdev>
+  internal class PositionStdev : Coordinate, IPositionStdev, IEquatable<PositionStdev>
   {
     public PositionStdev(Dictionary<string, object> position, IList<object> coordinateStdDev)
       : base(position)
@@ -77,7 +77,21 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"{sb}";
     }
 
+    public bool Equals(PositionStdev other)
+    {
+      if (other == null) return false;
+      return StdDev.Equals(other.StdDev) &&
+             X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
 
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as PositionStdev);
+    }
+
+    public override int GetHashCode() => (StdDev, X, Y, Z).GetHashCode();
     //public override string ToString()
     //{
     //  CultureInfo ci = CultureInfo.InvariantCulture;
@@ -85,20 +99,6 @@ namespace StreetSmart.Common.Data.GeoJson
     //         $"\"xyzStdev\":[{StdDev?.X?.ToString(ci)},{StdDev?.Y?.ToString(ci)},{StdDev?.Z?.ToString(ci)}]";
     //}
 
-    //public bool Equals(PositionStdev other)
-    //{
-    //  if (other == null) return false;
-    //  return StdDev.Equals(other.StdDev) &&
-    //         X.Equals(other.X) &&
-    //         Y.Equals(other.Y) &&
-    //         Z.Equals(other.Z);
-    //}
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as PositionStdev);
-    //}
-
-    //public override int GetHashCode() => (StdDev, X, Y, Z).GetHashCode();
   }
 }

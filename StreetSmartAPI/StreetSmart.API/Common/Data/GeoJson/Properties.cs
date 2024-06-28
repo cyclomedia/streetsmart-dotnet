@@ -27,7 +27,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Properties: Dictionary<string, object>, IProperties//, IEquatable<Properties>
+  internal class Properties: Dictionary<string, object>, IProperties, IEquatable<Properties>
   {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -76,28 +76,28 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"\"properties\":{{{properties}}}";
     }
 
-    //public bool Equals(Properties other)
-    //{
-    //  if (other == null) return false;
-    //  if (this.Count != other.Count) return false;
+    public bool Equals(Properties other)
+    {
+      if (other == null) return false;
+      if (this.Count != other.Count) return false;
 
-    //  foreach (var pair in this)
-    //  {
-    //    var key = pair.Key;
-    //    if (!other.TryGetValue(key, out var otherValue)) return false;
+      foreach (var pair in this)
+      {
+        var key = pair.Key;
+        if (!other.TryGetValue(key, out var otherValue)) return false;
 
-    //    if (!Equals(pair.Value, otherValue)) return false;
-    //  }
+        if (!Equals(pair.Value, otherValue)) return false;
+      }
 
-    //  return true;
-    //}
+      return true;
+    }
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as Properties);
-    //}
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Properties);
+    }
 
-    //public override int GetHashCode() => (this.Keys,this.Values).GetHashCode();
+    public override int GetHashCode() => (this.Keys, this.Values).GetHashCode();
 
 
 

@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class LineString : List<ICoordinate>, ILineString//, IEquatable<LineString>
+  internal class LineString : List<ICoordinate>, ILineString, IEquatable<LineString>
   {
     public LineString(Dictionary<string, object> lineString)
     {
@@ -73,20 +73,29 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
     }
 
-    //public bool Equals(LineString other)
-    //{
-    //  if (other == null) return false;  
-    //  return Type.Equals(other.Type) &&
-    //         this.Select(x => x).SequenceEqual(other.Select(x => x));
+    public bool Equals(LineString other)
+    {
+      if (other == null) return false;
 
-    //}
+      if(this.Count != other.Count) return false;
+      for (int i = 0; i < this.Count; i++)
+      {
+          if (!this[i].Equals(other[i]))
+          {
+            return false;
+          }
+        
+      }
+      return Type.Equals(other.Type);
 
-    //public override bool Equals(object obj)
-    //{
-    //  return Equals(obj as LineString);
-    //}
+    }
 
-    //public override int GetHashCode() => (Type, this).GetHashCode();
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as LineString);
+    }
+
+    public override int GetHashCode() => (Type, this).GetHashCode();
 
     //public override string ToString()
     //{
