@@ -293,6 +293,32 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void MeasureDetails_Constructor_SetsPointProblemsWhenSecondObjectIsNull_ReturnFalse()
+    {
+      var measureDetails = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", new List<object> { "ONE_OBSERVATION", "INVALID_ANGLE" } },
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
+
+      var measureDetails2 = new Dictionary<string, object>
+        {
+            { "details", new Dictionary<string, object>() },
+            { "pointProblems", null},
+            { "measureMethod", "SmartClick" },
+            { "pointReliability", "RELIABLE" }
+        };
+
+      var measureDetailsObj2 = new MeasureDetails(measureDetails2, MeasurementTools.NotDefined);
+
+      Assert.False(measureDetailsObj.Equals(measureDetailsObj2));
+    }
+
+    [Fact]
     public void MeasureDetails_Constructor_SetsPointProblemsWithDifferentCount_ReturnFalse()
     {
       var measureDetails = new Dictionary<string, object>
@@ -569,6 +595,66 @@ namespace StreetSmart.WPF.Tests
       var featureCollection2 = new FeatureCollection(new Dictionary<string, object>(), true);
 
       Assert.True(featureCollection1.Equals(featureCollection2));
+    }
+
+    [Fact]
+    public void Polygon_WhenACountHasDifferentValue_ReturnFalse()
+    {
+      var element1 = new List<ICoordinate> { new Coordinate(0.0, 0.0, 0.0), new Coordinate(0.0, 1.0, 0.0), new Coordinate(1.0, 1.0, 0.0), new Coordinate(0.0, 0.0, 0.0) };
+      var element2 = new List<ICoordinate> { new Coordinate(0.0, 0.0, 0.0), new Coordinate(0.0, 1.0, 0.0), new Coordinate(1.0, 1.0, 0.0), new Coordinate(0.0, 0.0, 0.0) };
+      var polygon1 = new Polygon(new List<IList<ICoordinate>> { element1,element2 });
+      var polygon2 = new Polygon(new List<IList<ICoordinate>> { element1 });
+    
+      Assert.False(polygon1.Equals(polygon2));
+    }
+
+    [Fact]
+    public void Properties_WhenACountHasDifferentValue_ReturnFalse()
+    {
+      var element1 = new Dictionary<string, object>
+                {
+                    { "id", "1" },
+                    { "name", "Test Feature" },
+                    { "group", "Test Group" },
+                    { "measureDetails", new List<object>() },
+                    { "fontsize", 12 },
+                    { "dimension", 2 }
+                };
+      var element2 = new Dictionary<string, object>
+                {
+                    { "id", "1" },
+                    { "name", "Test Feature" },
+                    { "group", "Test Group" },
+                    { "measureDetails", new List<object>() },
+                    { "fontsize", 12 },
+                    { "dimension", 2 },
+                    { "derivedData", new Dictionary<string, object>() },
+                    { "measureReliability", "RELIABLE" },
+                    { "measurementTool", "MAP" },
+                    { "pointsWithErrors", new List<int> { 1, 2, 3 } },
+                    { "validGeometry", true },
+                    { "observationLines", new Dictionary<string, object>() },
+                    { "wgsGeometry", new Dictionary<string, object>
+                        {
+                            { "type", "Point" },
+                            { "coordinates", new List<double> { 3.0, 4.0 } }
+                        }
+                    }
+                };
+      var properties1 = new Properties(element1);
+      var properties2 = new Properties(element2);
+
+      Assert.False(properties1.Equals(properties2));
+    }
+
+    [Fact]
+    public void RecordingInfo_WhenSecondObjectIsNull_ReturnFalse()
+    {
+      var recordinginfo = new RecordingInfo(new Dictionary<string, object> {
+                    { "id", "1" }
+      });
+
+      Assert.False(recordinginfo.Equals(null));
     }
 
     [Fact]
@@ -1596,6 +1682,18 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void DerivedDataPoint_WhenSecondObjectNull_ReturnsFalse()
+    {
+      var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "precision", 2 }
+        });
+
+      Assert.False(data1.Equals(null));
+    }
+
+    [Fact]
     public void DerivedDataPoint_WhenObjectsAreEquals_ReturnsTrue()
     {
       var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
@@ -1692,6 +1790,47 @@ namespace StreetSmart.WPF.Tests
     }
 
     [Fact]
+    public void DerivedDataPolygon_WhenSecondObjectHasNoTriangles_ReturnsFalse()
+    {
+      var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
+      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
+
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", new List<object>
+              {
+                  triangle1
+              }
+            }
+        });
+
+      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" }
+        });
+
+      Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataPolygon_WhenSecondObjectNull_ReturnsFalse()
+    {
+      var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
+      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
+
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "triangles", new List<object>
+              {
+                  triangle1
+              }
+            }
+        });
+      Assert.False(data1.Equals(null));
+    }
+    [Fact]
     public void DerivedDataPolygon_WhenSecondObjectHasDifferentTriangleValue_ReturnsFalse()
     {
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
@@ -1745,6 +1884,30 @@ namespace StreetSmart.WPF.Tests
                 { "stdev", 3.4 }
               }
             }
+        });
+
+      Assert.False(data1.Equals(data2));
+    }
+
+    [Fact]
+    public void DerivedDataPolygon_WhenObjectsAreNotEqualsBasedOnAreaSecondDontHaveIt_ReturnsFalse()
+    {
+      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "precision", 2 },
+            { "area", new Dictionary<string, object>
+              {
+                { "value", 2.2 },
+                { "stdev", 3.3 }
+              }
+            }
+        });
+
+      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+        {
+            { "unit", "m" },
+            { "precision", 2 }
         });
 
       Assert.False(data1.Equals(data2));
@@ -2398,6 +2561,15 @@ namespace StreetSmart.WPF.Tests
 
       Assert.False(measurementProperties1.Equals(null));
     }
+
+    [Fact]
+    public void Direction_WhenSecondIsNull_ReturnFalse()
+    {
+      var direction1 = new Direction(1.0, 2.0, 3.0);
+
+      Assert.False(direction1.Equals(null));
+    }
+
     [Fact]
     public void ResultDirectionPanorama_Equals_ReturnsTrueForEqualObjects()
     {

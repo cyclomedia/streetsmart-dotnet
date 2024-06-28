@@ -89,7 +89,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (other == null) return false;
 
-      return Type == other.Type && string.Equals(Properties, other.Properties, StringComparison.Ordinal);
+      return Type.Equals(other.Type) && string.Equals(Properties, other.Properties, StringComparison.Ordinal);
     }
 
     public override int GetHashCode() => (Type, Properties).GetHashCode();
