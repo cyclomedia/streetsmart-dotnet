@@ -103,10 +103,7 @@ namespace StreetSmart.Common.Data.GeoJson
       if (Triangles != null && other.Triangles != null)
         if (Triangles.Count == other.Triangles.Count)
           for (int i = 0; i < Triangles.Count; i++)
-          {
-            if (!Triangles[i].Equals(other.Triangles[i]))
-              return false;
-          }
+          { if (!Triangles[i].Equals(other.Triangles[i])) return false; }
         else
           return false;
 
