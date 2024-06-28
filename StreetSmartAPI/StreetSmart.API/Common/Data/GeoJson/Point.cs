@@ -74,7 +74,9 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (other == null) return false;
       return Type.Equals(other.Type) &&
-             base.Equals(other);
+             X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
     }
 
     public override bool Equals(object obj)
