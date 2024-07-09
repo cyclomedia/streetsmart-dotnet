@@ -56,7 +56,7 @@ namespace StreetSmart.Common.Data.GeoJson
       if (observationLines != null)
       {
         ActiveObservation = observationLines.ActiveObservation;
-        RecordingId = observationLines.RecordingId != null ? string.Copy(observationLines.RecordingId) : null;
+        RecordingId = observationLines.RecordingId;
         Color obsColor = observationLines.Color;
         Color = Color.FromArgb(obsColor.A, obsColor);
         SelectedMeasureMethod = observationLines.SelectedMeasureMethod;

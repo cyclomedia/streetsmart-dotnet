@@ -111,7 +111,11 @@ public sealed class ObliqueViewerTests
     IDirectionInfo? receivedEvent = null;
     object? sender = null;
     _viewer.SwitchViewingDir += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", directionInfo);
 
     // act
@@ -130,7 +134,11 @@ public sealed class ObliqueViewerTests
     IFeatureInfo? receivedEvent = null;
     object? sender = null;
     _viewer.FeatureClick += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", featureInfo);
 
     // act
@@ -149,7 +157,11 @@ public sealed class ObliqueViewerTests
     IFeatureInfo? receivedEvent = null;
     object? sender = null;
     _viewer.FeatureSelectionChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", featureInfo);
 
     // act
@@ -168,7 +180,11 @@ public sealed class ObliqueViewerTests
     IObliqueImageInfo? receivedEvent = null;
     object? sender = null;
     _viewer.ImageChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", imageInfo);
 
     // act
@@ -187,7 +203,11 @@ public sealed class ObliqueViewerTests
     IObliqueOrientation? receivedEvent = null;
     object? sender = null;
     _viewer.ViewChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", orientation);
 
     // act
@@ -222,7 +242,11 @@ public sealed class ObliqueViewerTests
     ITimeTravelInfo? receivedEvent = null;
     object? sender = null;
     _viewer.TimeTravelChange += (s, e) => { receivedEvent = e.Value; sender = s; };
+#if NETCOREAPP
     var obj = new ExpandoObject();
+#else
+    var obj = new Dictionary<string, object>();
+#endif
     (obj as IDictionary<string, object>).Add("detail", timeTravelInfo);
 
     // act

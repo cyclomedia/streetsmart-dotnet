@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
@@ -27,13 +26,16 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
 
+#if NETCOREAPP
+using System.Dynamic;
+#endif
+
 namespace StreetSmart.Common.API
 {
   internal sealed class ObliqueViewer : ImageViewer, IObliqueViewer
   {
     #region Members
 
-    private ApiEventList _obliqueViewerEventList;
 
     #endregion
 
@@ -98,42 +100,70 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
+#if NETCOREAPP
     public void OnSwitchViewingDirection(ExpandoObject args)
+#else
+    public void OnSwitchViewingDirection(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SwitchViewingDir?.Invoke(this, new EventArgs<IDirectionInfo>(new DirectionInfo(detail)));
     }
 
+#if NETCOREAPP
     public void OnFeatureClick(ExpandoObject args)
+#else
+    public void OnFeatureClick(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
+#if NETCOREAPP
     public void OnFeatureSelectionChange(ExpandoObject args)
+#else
+    public void OnFeatureSelectionChange(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
+#if NETCOREAPP
     public void OnImageChange(ExpandoObject args)
+#else
+    public void OnImageChange(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ImageChange?.Invoke(this, new EventArgs<ObliqueImageInfo>(new ObliqueImageInfo(detail)));
     }
 
+#if NETCOREAPP
     public void OnViewChange(ExpandoObject args)
+#else
+    public void OnViewChange(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<ObliqueOrientation>(new ObliqueOrientation(detail)));
     }
 
+#if NETCOREAPP
     public void OnViewLoadEnd(ExpandoObject args)
+#else
+    public void OnViewLoadEnd(Dictionary<string, object> args)
+#endif
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
+#if NETCOREAPP
     public void OnTimeTravelChange(ExpandoObject args)
+#else
+    public void OnTimeTravelChange(Dictionary<string, object> args)
+#endif
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
@@ -145,7 +175,7 @@ namespace StreetSmart.Common.API
 
     public override void ConnectEvents()
     {
-      _obliqueViewerEventList = new ApiEventList
+      var obliqueViewerEventList = new ApiEventList
       {
         new ObliqueViewerEvent(this, "SWITCH_VIEWING_DIRECTION", JsSwitchViewingDirection),
         new ObliqueViewerEvent(this, "FEATURE_CLICK", JsFeatureClick),
@@ -156,7 +186,7 @@ namespace StreetSmart.Common.API
         new ObliqueViewerEvent(this, "TIME_TRAVEL_CHANGE", JsTimeTravelChange)
       };
 
-      Browser.ExecuteScriptAsync($"{_obliqueViewerEventList}");
+      Browser.ExecuteScriptAsync($"{obliqueViewerEventList}");
       base.ConnectEvents();
     }
 

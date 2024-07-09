@@ -17,8 +17,13 @@
  */
 
 using System;
-using System.Dynamic;
 using StreetSmart.Common.Interfaces.API;
+
+#if NETCOREAPP
+  using System.Dynamic;
+#else
+  using System.Collections.Generic;
+#endif
 
 namespace StreetSmart.Common.API
 {
@@ -57,7 +62,11 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
+#if NETCOREAPP
     public void OnViewChange(string name, ExpandoObject args)
+#else
+    public void OnViewChange(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -65,7 +74,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnEdgesChanged(string name, ExpandoObject args)
+#else
+    public void OnEdgesChanged(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -73,7 +86,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnPointSizeChanged(string name, ExpandoObject args)
+#else
+    public void OnPointSizeChanged(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -81,7 +98,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnPointStyleChanged(string name, ExpandoObject args)
+#else
+    public void OnPointStyleChanged(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -89,7 +110,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnPointBudgedChanged(string name, ExpandoObject args)
+#else
+    public void OnPointBudgedChanged(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -97,7 +122,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnBackGroundChanged(string name, ExpandoObject args)
+#else
+    public void OnBackGroundChanged(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {

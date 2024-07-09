@@ -44,7 +44,7 @@ namespace StreetSmart.Common.API
 
     protected ViewerList()
     {
-      Viewers = new Dictionary<string, Viewer>();
+      Viewers = [];
     }
 
     #endregion
@@ -165,7 +165,11 @@ namespace StreetSmart.Common.API
       }
     }
 
+#if NETCOREAPP
     public void OnLayerVisibilityChange(string name, ExpandoObject args)
+#else
+    public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
+#endif
     {
       if (Viewers.ContainsKey(name))
       {
@@ -177,8 +181,7 @@ namespace StreetSmart.Common.API
 
     #region Viewer lists / types
 
-    private static readonly Dictionary<string, Dictionary<string, ViewerList>> ViewerLists =
-      new Dictionary<string, Dictionary<string, ViewerList>>();
+    private static readonly Dictionary<string, Dictionary<string, ViewerList>> ViewerLists = [];
 
     private static readonly Dictionary<ViewerType, string> ToViewerTypes = new Dictionary<ViewerType, string>
     {

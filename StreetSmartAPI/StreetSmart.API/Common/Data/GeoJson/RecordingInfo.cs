@@ -46,9 +46,9 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (recordingInfo != null)
       {
-        Id = recordingInfo.Id != null ? string.Copy(recordingInfo.Id) : null;
+        Id = recordingInfo.Id;
         Position = new PositionStdev(recordingInfo.Position);
-        SRS = recordingInfo.SRS != null ? string.Copy(recordingInfo.SRS) : null;
+        SRS = recordingInfo.SRS;
         Yaw = new Property(recordingInfo.Yaw);
         DepthStdev = recordingInfo.DepthStdev;
         Resolution = new Resolution(recordingInfo.Resolution);
