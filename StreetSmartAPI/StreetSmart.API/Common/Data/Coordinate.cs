@@ -142,14 +142,5 @@ namespace StreetSmart.Common.Data
     }
 
     public override int GetHashCode() => (X, Y, Z).GetHashCode();
-    //public override string ToString()
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string zComponent = Z == null ? string.Empty : $",{((double) Z).ToString(ci)}";
-    //  return X == null || Y == null ? "null" : $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
-    //}
-
-
-
   }
 }

@@ -98,32 +98,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (this.Keys, this.Values).GetHashCode();
-
-
-
-    //public override string ToString()
-    //{
-    //  var properties = string.Join(",",
-    //      this.Select(property =>
-    //          $"\"{property.Key}\":\"{property.Value.ToString()?.Replace('\"', '\'')}\"")
-    //  );
-
-    //  return $"\"properties\":{{{properties}}}";
-    //}
-
-
-    //public override string ToString()
-    //{
-    //  string properties = string.Empty;
-
-    //  foreach (var property in this)
-    //  {
-    //    string value = property.Value.ToString()?.Replace('\"', '\'');
-    //    properties = $"{properties},\"{property.Key}\":\"{value}\"";
-    //  }
-
-    //  properties = properties.Substring(Math.Min(properties.Length, 1));
-    //  return $"\"properties\":{{{properties}}}";
-    //}
   }
 }
