@@ -19,12 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Feature : DataConvert, IFeature
+  internal class Feature : DataConvert, IFeature, IEquatable<IFeature>
   {
     public Feature(object feature, bool measurementProperties)
     {
@@ -115,10 +115,29 @@ namespace StreetSmart.Common.Data.GeoJson
     public IGeometry Geometry { get; set; }
 
     public IProperties Properties { get; private set; }
-
     public override string ToString()
     {
-      return $"{{\"type\":\"{Type.Description()}\",{Geometry},{Properties}}}";
+      var sb = new StringBuilder();
+      sb.Append($"{{\"type\":\"{Type.Description()}\",");
+      sb.Append($"{Geometry},");
+      sb.Append($"{Properties}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+    public bool Equals(IFeature other)
+    {
+      if (other == null) return false;
+      return Type.Equals(other.Type) &&
+             Geometry.Equals(other.Geometry) &&
+             Properties.Equals(other.Properties);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Feature);
+    }
+
+    public override int GetHashCode() => (Type, Geometry, Properties).GetHashCode();
   }
 }

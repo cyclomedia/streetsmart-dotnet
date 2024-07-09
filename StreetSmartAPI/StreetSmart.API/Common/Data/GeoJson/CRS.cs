@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class CRS : DataConvert, ICRS
+  internal class CRS : DataConvert, ICRS, IEquatable<CRS>
   {
     public CRS(Dictionary<string, object> crs)
     {
@@ -80,5 +80,18 @@ namespace StreetSmart.Common.Data.GeoJson
       string properties = Type == CRSType.Epsg ? "code" : "name";
       return $"\"crs\":{{\"type\":\"{Type.Description()}\",\"properties\":{{\"{properties}\":\"{Properties}\"}}}}";
     }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as CRS);
+    }
+
+    public bool Equals(CRS other)
+    {
+      if (other == null) return false;
+
+      return Type.Equals(other.Type) && string.Equals(Properties, other.Properties, StringComparison.Ordinal);
+    }
+
+    public override int GetHashCode() => (Type, Properties).GetHashCode();
   }
 }

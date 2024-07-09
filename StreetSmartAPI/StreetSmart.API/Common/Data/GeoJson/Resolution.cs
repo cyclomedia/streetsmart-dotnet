@@ -16,13 +16,15 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.GeoJson;
+using System;
 using System.Collections.Generic;
+
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class Resolution : DataConvert, IResolution
+  internal class Resolution : DataConvert, IResolution,IEquatable<Resolution>
   {
     public Resolution(Dictionary<string, object> info)
     {
@@ -47,6 +49,20 @@ namespace StreetSmart.Common.Data.GeoJson
     public int Stdev { get; }
 
     public int Error { get; }
+
+    public bool Equals(Resolution other)
+    {
+      if (other == null)
+        return false;
+      return Width.Equals(other.Width) &&
+        Stdev.Equals(other.Stdev) && Error.Equals(other.Error);
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Resolution);
+    }
+
+    public override int GetHashCode() => (Width, Stdev, Error).GetHashCode();
 
     public override string ToString()
     {

@@ -16,14 +16,15 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Direction : Coordinate, IDirection
+  internal class Direction : Coordinate, IDirection, IEquatable<Direction>
   {
     public Direction(Dictionary<string, object> direction)
       : base(direction)
@@ -43,7 +44,29 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
+      var sb = new StringBuilder();
+
+      sb.Append("{");
+      sb.Append($"\"0\":{X?.ToString(ci)},");
+      sb.Append($"\"1\":{Y?.ToString(ci)},");
+      sb.Append($"\"2\":{Z?.ToString(ci)}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+    public bool Equals(Direction other)
+    {
+      if (other == null) return false;
+      return X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Direction);
+    }
+
+    public override int GetHashCode() => (X, Y, Z).GetHashCode();
   }
 }

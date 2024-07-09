@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirectionOblique : ResultDirection, IResultDirectionOblique
+  internal class ResultDirectionOblique : ResultDirection, IResultDirectionOblique,IEquatable<ResultDirectionOblique>
   {
     public double CamX { get; }
 
@@ -183,6 +183,61 @@ namespace StreetSmart.Common.Data.GeoJson
         $"\"pitch\":{Pitch.ToString(ci)},\"heading\":{Heading.ToString(ci)},\"width\":{Width},\"height\":{Height},\"du\":{Du.ToString(ci)},\"dv\":{Dv.ToString(ci)}," +
         $"\"k1\":{K1.ToString(ci)},\"k2\":{K2.ToString(ci)},\"f\":{F.ToString(ci)},\"z\":{Z.ToString(ci)},\"pixelXY\":[{PixelXY[0].ToString(ci)},{PixelXY[1].ToString(ci)}]," +
         $"\"year\":{Year.ToString(ci)}{angleStr},{baseStr}";
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as ResultDirectionOblique);
+    }
+
+    public bool Equals(ResultDirectionOblique other)
+    {
+      if (other == null) return false;
+
+      return CamX.Equals(other.CamX) &&
+             CamY.Equals(other.CamY) &&
+             CamZ.Equals(other.CamZ) &&
+             FocalLength.Equals(other.FocalLength) &&
+             ImageWidth.Equals(other.ImageWidth) &&
+             ImageHeight.Equals(other.ImageHeight) &&
+             PpX.Equals(other.PpX) &&
+             PpY.Equals(other.PpY) &&
+             P1.Equals(other.P1) &&
+             P2.Equals(other.P2) &&
+             Rotated.Equals(other.Rotated) &&
+             AvgFootprintHeight.Equals(other.AvgFootprintHeight) &&
+             RotationMatrix.Equals(other.RotationMatrix) &&
+             Roll.Equals(other.Roll) &&
+             Pitch.Equals(other.Pitch) &&
+             Heading.Equals(other.Heading) &&
+             Width.Equals(other.Width) &&
+             Height.Equals(other.Height) &&
+             Du.Equals(other.Du) &&
+             Dv.Equals(other.Dv) &&
+             K1.Equals(other.K1) &&
+             K2.Equals(other.K2) &&
+             F.Equals(other.F) &&
+             Z.Equals(other.Z) &&
+             ArrayEquals(PixelXY, other.PixelXY) &&
+             Year.Equals(other.Year) &&
+             (Angle == null && other.Angle == null || Angle != null && Angle.Equals(other.Angle));
+    }
+    public override int GetHashCode() => (CamX,CamY,CamZ,FocalLength,ImageWidth,ImageHeight,PpX,PpY,P1,P2,Rotated,AvgFootprintHeight,RotationMatrix,Roll,Pitch,Heading,Width,Height,Du,Dv,K1,K2,F,Z,PixelXY,Year,Angle).GetHashCode();
+
+    private bool ArrayEquals(double[] arr1, double[] arr2)
+    {
+      if (arr1 == null && arr2 == null)
+        return true;
+
+      if (arr1 == null || arr2 == null || arr1.Length != arr2.Length)
+        return false;
+
+      for (int i = 0; i < arr1.Length; i++)
+      {
+        if (!arr1[i].Equals(arr2[i]))
+          return false;
+      }
+
+      return true;
     }
   }
 }

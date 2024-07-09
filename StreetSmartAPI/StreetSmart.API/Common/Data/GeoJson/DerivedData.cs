@@ -16,15 +16,16 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedData : DataConvert, IDerivedData
+  internal class DerivedData : DataConvert, IDerivedData,IEquatable<DerivedData>
   {
     public DerivedData(Dictionary<string, object> derivedData)
     {
@@ -69,7 +70,27 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      return $"{{\"unit\":\"{Unit.Description()}\",\"precision\":{Precision}}}";
+      var sb = new StringBuilder();
+
+      sb.Append("{");
+      sb.Append($"\"unit\":\"{Unit.Description()}\",");
+      sb.Append($"\"precision\":{Precision}");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+    public bool Equals(DerivedData other)
+    {
+      if (other == null) return false;
+      return Unit.Equals(other.Unit) && Precision == other.Precision;
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DerivedData);
+    }
+
+    public override int GetHashCode() => (Unit, Precision).GetHashCode();
   }
 }

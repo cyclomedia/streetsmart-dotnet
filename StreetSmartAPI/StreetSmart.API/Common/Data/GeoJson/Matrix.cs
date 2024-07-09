@@ -23,7 +23,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Matrix : DataConvert, IMatrix
+  internal class Matrix : DataConvert, IMatrix, IEquatable<Matrix>
   {
     public Matrix(Dictionary<string, object> matrixValues, int width, int height)
     {
@@ -68,5 +68,30 @@ namespace StreetSmart.Common.Data.GeoJson
       values = values.Substring(0, Math.Max(0, values.Length - 1));
       return values.Length == 0 ? "null" : $"{{{values}}}";
     }
+
+    public bool Equals(Matrix other)
+    {
+      if(other == null) return false;
+      if (Values.Count != other.Values.Count)
+      {
+        return false;
+      }
+
+      for (int i = 0; i < Values.Count; i++)
+      {
+        if (!Values[i].Equals(other.Values[i]))
+        {
+          return false;
+        }
+      }
+
+      return true;
+
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Matrix);
+    }
+    public override int GetHashCode() => (Values).GetHashCode();
   }
 }

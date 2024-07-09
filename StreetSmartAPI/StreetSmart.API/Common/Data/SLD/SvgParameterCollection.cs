@@ -25,7 +25,7 @@ using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Data.SLD
 {
-  #pragma warning disable 1591
+#pragma warning disable 1591
   /// <exclude/>
   public class SvgParameterCollection<T> : NotifyPropertyChanged, ISvgParameterCollection<T>
   {
@@ -51,7 +51,7 @@ namespace StreetSmart.Common.Data.SLD
           new SvgParameter<FillType>
           {
             Name = FillType.Fill,
-            Value = $"#{color.ToArgb().ToString("X").Substring(2)}"
+            Value = $"#{color.ToArgb().ToString("X2").Substring(2)}"
           }
         }
       };
@@ -103,5 +103,5 @@ namespace StreetSmart.Common.Data.SLD
       return result;
     }
   }
-  #pragma warning restore 1591
+#pragma warning restore 1591
 }

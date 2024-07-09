@@ -16,14 +16,16 @@
  * License along with this library.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data
 {
-  internal class Coordinate : DataConvert, ICoordinate
+  internal class Coordinate : DataConvert, ICoordinate, IEquatable<Coordinate>
   {
     private double? _x;
     private double? _y;
@@ -100,12 +102,45 @@ namespace StreetSmart.Common.Data
         RaisePropertyChanged();
       }
     }
-
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      string zComponent = Z == null ? string.Empty : $",{((double) Z).ToString(ci)}";
-      return X == null || Y == null ? "null" : $"[{X?.ToString(ci)},{Y?.ToString(ci)}{zComponent}]";
+
+      if (X == null || Y == null)
+      {
+        return "null";
+      }
+
+      var sb = new StringBuilder();
+      sb.Append("[");
+      sb.Append(X.Value.ToString(ci));
+      sb.Append(",");
+      sb.Append(Y.Value.ToString(ci));
+
+      if (Z != null)
+      {
+        sb.Append(",");
+        sb.Append(((double)Z).ToString(ci));
+      }
+
+      sb.Append("]");
+
+      return $"{sb}";
     }
+
+    public bool Equals(Coordinate other)
+    {
+      if (other == null) return false;
+      return X.Equals(other.X) &&
+             Y.Equals(other.Y) &&
+             Z.Equals(other.Z);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Coordinate);
+    }
+
+    public override int GetHashCode() => (X, Y, Z).GetHashCode();
   }
 }

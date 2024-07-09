@@ -16,15 +16,16 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon
+  internal class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon, IEquatable<DerivedDataPolygon>
   {
     public DerivedDataPolygon(Dictionary<string, object> derivedData)
       : base(derivedData)
@@ -66,18 +67,60 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       string baseStr = base.ToString();
-      string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
-      string comma = subStr.Length >= 2 ? "," : string.Empty;
-      subStr = $"{subStr}{comma}";
-      string triangles = "null";
+      string subStr = baseStr.TrimEnd(',');
+      string comma = subStr.Length >= 1 ? "," : string.Empty;
 
-      if (Triangles.Count >= 1)
+      var sb = new StringBuilder();
+      sb.Append(subStr);
+      sb.Append(comma);
+
+      if (Triangles.Count > 0)
       {
-        triangles = Triangles.Aggregate("[", (current, triangle) => $"{current}{triangle},");
-        triangles = $"{triangles.Substring(0, Math.Max(triangles.Length - 1, 1))}]";
+        sb.Append("\"triangles\":[");
+        sb.Append(string.Join(",", Triangles.Select(t => t.ToString())));
+        sb.Append("]");
+      }
+      else
+      {
+        sb.Append("\"triangles\":null");
       }
 
-      return $"{subStr}{GetValueString(Area, "area")}\"triangles\":{triangles}}}";
+      sb.Append(GetValueString(Area, "area"));
+
+      sb.Insert(0, "{");
+      sb.Append("}");
+
+      return $"{sb}";
     }
+
+    public bool Equals(DerivedDataPolygon other)
+    {
+      
+      if (other == null) return false;
+
+      if ((Triangles == null) != (other.Triangles == null)) return false;
+
+      if (Triangles != null && other.Triangles != null)
+        if (Triangles.Count == other.Triangles.Count)
+          for (int i = 0; i < Triangles.Count; i++)
+          { if (!Triangles[i].Equals(other.Triangles[i])) return false; }
+        else
+          return false;
+
+      if ((Area == null) != (other.Area == null)) return false;
+
+      if (Area != null && other.Area != null)
+        if (!Area.Equals(other.Area)) return false;
+
+      return other.Unit.Equals(this.Unit) &&
+             other.Precision.Equals(this.Precision);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as DerivedDataPolygon);
+    }
+
+    public override int GetHashCode() => (Triangles, Area).GetHashCode();
   }
 }

@@ -18,12 +18,12 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Geometry : DataConvert, IGeometry
+  internal class Geometry : DataConvert, IGeometry, IEquatable<Geometry>
   {
     public Geometry(Dictionary<string, object> geometry)
     {
@@ -39,9 +39,32 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public GeometryType Type { get; }
 
+    
+
     public override string ToString()
     {
-      return $"\"geometry\":{{\"type\":\"{Type.Description()}\"}}";
+      var sb = new StringBuilder();
+      sb.Append("\"geometry\":{");
+      sb.Append($"\"type\":\"{Type.Description()}\"");
+      sb.Append("}");
+
+      return $"{sb}";
+    }
+
+    public bool Equals(Geometry other)
+    {
+      if (other == null) return false;
+      return Type.Equals(other.Type);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Geometry);
+    }
+
+    public override int GetHashCode()
+    {
+      return Type.GetHashCode();
     }
   }
 }

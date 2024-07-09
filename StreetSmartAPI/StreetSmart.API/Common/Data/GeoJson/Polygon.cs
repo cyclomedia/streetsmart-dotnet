@@ -18,13 +18,14 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
+using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Polygon : List<IList<ICoordinate>>, IPolygon
+  internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
     public Polygon(Dictionary<string, object> polygon)
     {
@@ -91,23 +92,53 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      string coordinatesList = string.Empty;
+      var coordinatesList = new StringBuilder();
 
       foreach (IList<ICoordinate> coordinateList in this)
       {
-        string coordinates = string.Empty;
+        var coordinates = new StringBuilder();
 
         foreach (ICoordinate coordinate in coordinateList)
         {
-          coordinates = $"{coordinates},{coordinate}";
+          if (coordinates.Length > 0)
+            coordinates.Append(",");
+          coordinates.Append(coordinate);
         }
 
-        coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
-        coordinatesList = $"{coordinatesList},[{coordinates}]";
+        if (coordinatesList.Length > 0)
+          coordinatesList.Append(",");
+        coordinatesList.Append($"[{coordinates}]");
       }
 
-      coordinatesList = coordinatesList.Substring(Math.Min(coordinatesList.Length, 1));
       return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
     }
+
+    public bool Equals(Polygon other)
+    {
+      if (other == null) return false;
+      if(this.Count != other.Count) return false;
+
+      for(int i = 0; i < this.Count; i++)
+      {
+        if(this[i].Count != other[i].Count) return false;
+
+        for(int j = 0; j < this[i].Count;j++)
+        {
+          if(!this[i][j].Equals(other[i][j]))
+          {
+            return false;
+          }
+        }
+      }
+
+      return Type.Equals(other.Type);
+    }
+
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as Polygon);
+    }
+
+    public override int GetHashCode() => (Type, this).GetHashCode();
   }
 }

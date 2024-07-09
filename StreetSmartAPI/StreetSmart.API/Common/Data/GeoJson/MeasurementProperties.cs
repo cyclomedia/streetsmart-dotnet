@@ -19,12 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasurementProperties: Properties, IMeasurementProperties
+  internal class MeasurementProperties : Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {
@@ -92,7 +92,7 @@ namespace StreetSmart.Common.Data.GeoJson
       try
       {
         CustomGeometryType =
-          (CustomGeometryType) converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
+          (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {
@@ -273,25 +273,85 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      string pointsWithErrors = PointsWithErrors.Aggregate("[", (current, point) => $"{current}{point},");
-      string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
+      var pointsWithErrorsBuilder = new StringBuilder("[");
+      foreach (var point in PointsWithErrors)
+      {
+        if (pointsWithErrorsBuilder.Length > 1) pointsWithErrorsBuilder.Append(",");
+        pointsWithErrorsBuilder.Append(point);
+      }
+      pointsWithErrorsBuilder.Append("]");
+      string pointsWithErrorsStr = pointsWithErrorsBuilder.ToString();
 
-      string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
+      var measureDetailsBuilder = new StringBuilder("[");
+      foreach (var detail in MeasureDetails)
+      {
+        if (measureDetailsBuilder.Length > 1) measureDetailsBuilder.Append(",");
+        measureDetailsBuilder.Append(detail);
+      }
+      measureDetailsBuilder.Append("]");
       string measureDetailsStr = MeasureDetails.Count >= 1 || MeasurementTool == MeasurementTools.Oblique
-        ? $",\"measureDetails\":{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]"
-        : string.Empty;
+          ? $",\"measureDetails\":{measureDetailsBuilder}"
+          : string.Empty;
 
       string fontSize = FontSize == null ? string.Empty : $",\"fontSize\": {FontSize}";
       string customGeometryType = MeasurementTool == MeasurementTools.Oblique ? string.Empty : $",\"customGeometryType\":\"{CustomGeometryType.Description()}\"";
       string strGeometry = WgsGeometry == null ? string.Empty : $",{WgsGeometry.ToString().Replace("geometry", "wgsGeometry")}";
 
-      string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr}{fontSize},\"dimension\":{Dimension}" +
-                          $"{customGeometryType},\"derivedData\":{DerivedData}" +
-                          $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
-                          $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +
-                          $"{strGeometry},\"measurementTool\":\"{MeasurementTool.Description()}\"";
+      var propertiesBuilder = new StringBuilder();
+      propertiesBuilder.Append($"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr}{fontSize},\"dimension\":{Dimension}");
+      propertiesBuilder.Append($"{customGeometryType},\"derivedData\":{DerivedData}");
+      propertiesBuilder.Append($",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}");
+      propertiesBuilder.Append($",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}");
+      propertiesBuilder.Append($"{strGeometry},\"measurementTool\":\"{MeasurementTool.Description()}\"");
 
-      return $"\"properties\":{{{properties}}}";
+      return $"\"properties\":{{{propertiesBuilder}}}";
     }
+
+    public bool Equals(MeasurementProperties other)
+    {
+      if (other == null) return false;
+
+      if ((MeasureDetails == null) != (other.MeasureDetails == null)) return false;
+
+      if (MeasureDetails != null && other.MeasureDetails != null)
+        if (MeasureDetails.Count == other.MeasureDetails.Count)
+          for (int i = 0; i < MeasureDetails.Count; i++)
+          {
+            if (!MeasureDetails[i].Equals(other.MeasureDetails[i])) return false;
+          }
+        else
+          return false;
+
+      if ((PointsWithErrors == null) != (other.PointsWithErrors == null)) return false;
+      
+      if (PointsWithErrors != null && other.PointsWithErrors != null)
+        if (PointsWithErrors.Count == other.PointsWithErrors.Count)
+          for (int i = 0; i < PointsWithErrors.Count; i++)
+          {
+            if (!PointsWithErrors[i].Equals(other.PointsWithErrors[i]))
+              return false;
+          }
+        else
+          return false;
+
+      return Id == other.Id &&
+             Name == other.Name &&
+             Group == other.Group &&
+             Dimension == other.Dimension &&
+             DerivedData.Equals(other.DerivedData) &&
+             MeasureReliability.Equals(other.MeasureReliability) &&
+             ValidGeometry == other.ValidGeometry &&
+             ObservationLines.Equals(other.ObservationLines) &&
+             MeasurementTool.Equals(other.MeasurementTool) &&
+             (FontSize == other.FontSize || (FontSize != null && FontSize.Equals(other.FontSize))) &&
+             (CustomGeometryType == other.CustomGeometryType || CustomGeometryType.Equals(other.CustomGeometryType)) &&
+               (WgsGeometry == other.WgsGeometry || (WgsGeometry != null && WgsGeometry.Equals(other.WgsGeometry)));
+    }
+    public override bool Equals(object obj)
+    {
+      return Equals(obj as MeasurementProperties);
+    }
+
+    public override int GetHashCode() => (Id, Name, Group, Dimension, DerivedData, MeasureReliability, ValidGeometry, ObservationLines, MeasurementTool, FontSize, CustomGeometryType, WgsGeometry, PointsWithErrors, MeasureDetails).GetHashCode();
   }
 }
