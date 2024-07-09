@@ -141,15 +141,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (Type, CRS, Features).GetHashCode();
-
-    //public override string ToString()
-    //{
-    //  string features = Features.Aggregate(string.Empty, (current, feature) => $"{current},{feature}");
-    //  features = features.Substring(Math.Min(features.Length, 1));
-    //  return $"{{\"type\":\"{Type.Description()}\",{CRS},\"features\": [{features}]}}";
-    //}
-
-
-
   }
 }

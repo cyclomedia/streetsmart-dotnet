@@ -134,29 +134,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (PositionZ, Position).GetHashCode();
-
-    //public override string ToString()
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string baseStr = base.ToString();
-    //  string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
-
-    //  string positionZ = PositionZ?.Value != null && PositionZ?.Stdev != null ? $"\"positionZ\":{PositionZ}," : string.Empty;
-    //  string positionStdev = Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
-    //    ? $",\"stdev\":[{Position?.StdDev?.X?.ToString(ci)},{Position?.StdDev?.Y?.ToString(ci)},{Position?.StdDev?.Z?.ToString(ci)}]"
-    //    : string.Empty;
-    //  string position = Position?.X != null && Position?.Y != null && Position?.Z != null
-    //    ? $"\"position\":{{\"value\":[{Position?.X?.ToString(ci)},{Position?.Y?.ToString(ci)},{Position?.Z?.ToString(ci)}]{positionStdev}}},"
-    //    : string.Empty;
-    //  string coordinateStdevs =
-    //    Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null
-    //      ? $"\"coordinateStdevs\":[{{\"0\":{Position?.StdDev?.X?.ToString(ci)},\"1\":{Position?.StdDev?.Y?.ToString(ci)},\"2\":{Position?.StdDev?.Z?.ToString(ci)}}}]"
-    //      : string.Empty;
-
-    //  string derivedDataPoint = $"{PositionXY}{positionZ}{position}{coordinateStdevs}";
-    //  string comma = subStr.Length >= 2 && derivedDataPoint.Length >= 1 ? "," : string.Empty;
-    //  return $"{subStr}{comma}{derivedDataPoint}}}";
-    //}
-
   }
 }

@@ -90,14 +90,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (X, Y, Stdev).GetHashCode();
-    //public override string ToString()
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string xy = X != null && Y != null ? $"\"value\":[{X?.ToString(ci)},{Y?.ToString(ci)}]" : string.Empty;
-    //  string stdef = Stdev != null ? $"\"stdev\":{Stdev?.ToString(ci)}" : string.Empty;
-    //  string comma = !string.IsNullOrEmpty(xy) && !string.IsNullOrEmpty(stdef) ? "," : string.Empty;
-    //  bool empty = string.IsNullOrEmpty(xy) && string.IsNullOrEmpty(stdef);
-    //  return empty ? string.Empty : $"\"positionXY\":{{{xy}{comma}{stdef}}},";
-    //}
   }
 }
