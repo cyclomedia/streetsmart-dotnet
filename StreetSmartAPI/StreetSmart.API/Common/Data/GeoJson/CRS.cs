@@ -67,7 +67,7 @@ namespace StreetSmart.Common.Data.GeoJson
       if (crs != null)
       {
         Type = crs.Type;
-        Properties = crs.Properties != null ? string.Copy(crs.Properties): null;
+        Properties = crs.Properties;
       }
     }
 

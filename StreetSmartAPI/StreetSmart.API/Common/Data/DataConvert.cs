@@ -45,7 +45,12 @@ namespace StreetSmart.Common.Data
 
     public double? ToNullDouble(object value)
     {
-      return double.TryParse(value?.ToString(), out var outValue) ? double.IsNaN(outValue) ? null : outValue : null;
+      if(double.TryParse(value?.ToString(), out var outValue))
+      {
+        return double.IsNaN(outValue) ? null : outValue;
+      }
+
+      return null;
     }
 
     public double? ToNullDouble(Dictionary<string, object> details, string value)
@@ -58,11 +63,6 @@ namespace StreetSmart.Common.Data
       return int.TryParse(value?.ToString(), out var outValue) ? outValue : 0;
     }
 
-    public int? ToNullInt(object value)
-    {
-      return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
-    }
-
     public int ToInt(object[] array, int nr)
     {
       return array.Length > nr ? ToInt(array[nr]) : 0;
@@ -71,6 +71,11 @@ namespace StreetSmart.Common.Data
     public int ToInt(Dictionary<string, object> details, string value)
     {
       return ToInt(GetValue(details, value));
+    }
+
+    public int? ToNullInt(object value)
+    {
+      return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
     }
 
     public int? ToNullInt(Dictionary<string, object> details, string value)
@@ -201,10 +206,12 @@ namespace StreetSmart.Common.Data
       return details?.ContainsKey(value) ?? false ? details[value] : null;
     }
 
+#if NETCOREAPP
     public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
     {
       return ToDictionary(GetValue(details, value));
     }
+#endif   
 
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
     {
