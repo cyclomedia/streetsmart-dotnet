@@ -24,7 +24,7 @@ using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ObservationLines: DataConvert, IObservationLines, IEquatable<ObservationLines>
+  internal class ObservationLines : DataConvert, IObservationLines, IEquatable<ObservationLines>
   {
     public ObservationLines(Dictionary<string, object> observationLines)
     {
@@ -38,13 +38,13 @@ namespace StreetSmart.Common.Data.GeoJson
         int color1 = int.Parse(color[1].ToString());
         int color2 = int.Parse(color[2].ToString());
         double color3 = double.Parse(color[3].ToString());
-        Color = Color.FromArgb((int) (color3 * 255), color0, color1, color2);
+        Color = Color.FromArgb((int)(color3 * 255), color0, color1, color2);
       }
 
       try
       {
         SelectedMeasureMethod =
-          (MeasureMethod) ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
+          (MeasureMethod)ToEnum(typeof(MeasureMethod), observationLines, "selectedMeasureMethod");
       }
       catch (ArgumentException)
       {
@@ -100,10 +100,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (ActiveObservation, RecordingId, Color, SelectedMeasureMethod).GetHashCode();
-    //public override string ToString()
-    //{
-    //  return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()}," +
-    //         $"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"}}";
-    //}
   }
 }

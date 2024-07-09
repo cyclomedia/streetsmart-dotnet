@@ -66,11 +66,5 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Type.GetHashCode();
     }
-
-    //public override string ToString()
-    //{
-    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\"}}";
-    //}
-
   }
 }

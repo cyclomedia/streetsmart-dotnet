@@ -359,43 +359,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (CoordinateStdev, TotalLength, SegmentLengths, SegmentsDeltaXY, SegmentsSlopePercentage, DeltaXY, DeltaZ, SegmentsDeltaZ, SegmentsSlopeAngle).GetHashCode();
-    //protected string GetValueString(IProperty property, string propertyName)
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string value = property?.Value?.ToString(ci);
-    //  string stdev = property?.Stdev?.ToString(ci);
-    //  string valueStr = string.IsNullOrEmpty(value) ? string.Empty : $"\"value\":{property.Value?.ToString(ci)}";
-    //  string stdevStr = string.IsNullOrEmpty(stdev) ? string.Empty : $"\"stdev\":{property.Stdev?.ToString(ci)}";
-    //  string comma = !string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(stdev) ? "," : string.Empty;
-    //  return property == null ? string.Empty : $"\"{propertyName}\":{{{valueStr}{comma}{stdevStr}}},";
-    //}
-
-
-    //public override string ToString()
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  string stdevs = "[";
-
-    //  foreach (IStdev stdev in CoordinateStdev)
-    //  {
-    //    string stdevX = stdev?.X?.ToString(ci);
-    //    string stdevY = stdev?.Y?.ToString(ci);
-    //    string stdevZ = stdev?.Z?.ToString(ci);
-    //    bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
-    //    stdevs = noStdev ? $"{stdevs}null," : $"{stdevs}{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},";
-    //  }
-
-    //  stdevs = $"{stdevs.Substring(0, Math.Max(stdevs.Length - 1, 1))}]";
-    //  string baseStr = base.ToString();
-    //  string subStr = baseStr.Substring(0, Math.Max(baseStr.Length - 1, 1));
-    //  string comma = subStr.Length >= 2 ? "," : string.Empty;
-    //  subStr = $"{subStr}{comma}";
-
-    //  return
-    //    $"{subStr}{GetValueString(TotalLength, "totalLength")}{GetValueString(SegmentLengths, "segmentLengths")}" +
-    //    $"{GetValueString(SegmentsDeltaXY, "segmentsDeltaXY")}{GetValueString(SegmentsDeltaZ, "segmentsDeltaZ")}" +
-    //    $"{GetValueString(SegmentsSlopePercentage, "segmentsSlopePercentage")}{GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle")}" +
-    //    $"{GetValueString(DeltaXY, "deltaXY")}{GetValueString(DeltaZ, "deltaZ")}\"coordinateStdevs\":{stdevs}}}";
-    //}
   }
 }

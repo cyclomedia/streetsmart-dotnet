@@ -92,9 +92,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (Unit, Precision).GetHashCode();
-    //public override string ToString()
-    //{
-    //  return $"{{\"unit\":\"{Unit.Description()}\",\"precision\":{Precision}}}";
-    //}
   }
 }

@@ -96,26 +96,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (Type, this).GetHashCode();
-
-    //public override string ToString()
-    //{
-    //  var coordinates = string.Join(",", this.Select(coordinate => coordinate.ToString()));
-
-    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
-    //}
-
-
-    //public override string ToString()
-    //{
-    //  string coordinates = string.Empty;
-
-    //  foreach (ICoordinate coordinate in this)
-    //  {
-    //    coordinates = $"{coordinates},{coordinate}";
-    //  }
-
-    //  coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
-    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
-    //}
   }
 }

@@ -353,29 +353,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (Id, Name, Group, Dimension, DerivedData, MeasureReliability, ValidGeometry, ObservationLines, MeasurementTool, FontSize, CustomGeometryType, WgsGeometry, PointsWithErrors, MeasureDetails).GetHashCode();
-    //public override string ToString()
-    //{
-    //  string pointsWithErrors = PointsWithErrors.Aggregate("[", (current, point) => $"{current}{point},");
-    //  string pointsWithErrorsStr = $"{pointsWithErrors.Substring(0, Math.Max(pointsWithErrors.Length - 1, 1))}]";
-
-    //  string measureDetails = MeasureDetails.Aggregate("[", (current, detail) => $"{current}{detail},");
-    //  string measureDetailsStr = MeasureDetails.Count >= 1 || MeasurementTool == MeasurementTools.Oblique
-    //    ? $",\"measureDetails\":{measureDetails.Substring(0, Math.Max(measureDetails.Length - 1, 1))}]"
-    //    : string.Empty;
-
-    //  string fontSize = FontSize == null ? string.Empty : $",\"fontSize\": {FontSize}";
-    //  string customGeometryType = MeasurementTool == MeasurementTools.Oblique ? string.Empty : $",\"customGeometryType\":\"{CustomGeometryType.Description()}\"";
-    //  string strGeometry = WgsGeometry == null ? string.Empty : $",{WgsGeometry.ToString().Replace("geometry", "wgsGeometry")}";
-
-    //  string properties = $"\"id\":\"{Id}\",\"name\":\"{Name}\",\"group\":\"{Group}\"{measureDetailsStr}{fontSize},\"dimension\":{Dimension}" +
-    //                      $"{customGeometryType},\"derivedData\":{DerivedData}" +
-    //                      $",\"measureReliability\":\"{MeasureReliability.Description()}\",\"pointsWithErrors\":{pointsWithErrorsStr}" +
-    //                      $",\"validGeometry\":{ValidGeometry.ToJsBool()},\"observationLines\":{ObservationLines}" +
-    //                      $"{strGeometry},\"measurementTool\":\"{MeasurementTool.Description()}\"";
-
-    //  return $"\"properties\":{{{properties}}}";
-    //}
-
-
   }
 }

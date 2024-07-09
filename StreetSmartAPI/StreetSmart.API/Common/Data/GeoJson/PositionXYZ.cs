@@ -83,12 +83,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (XYZ, X, Y, Z).GetHashCode();
-
-    //public override string ToString()
-    //{
-    //  CultureInfo ci = CultureInfo.InvariantCulture;
-    //  return $"{{\"x\":{XYZ?.X?.ToString(ci) ?? "null"},\"y\":{XYZ?.Y?.ToString(ci) ?? "null"},\"z\":{XYZ?.Z?.ToString(ci) ?? "null"}," +
-    //         $"\"0\":{X?.ToString(ci)},\"1\":{Y?.ToString(ci)},\"2\":{Z?.ToString(ci)}}}";
-    //}
   }
 }

@@ -140,37 +140,5 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public override int GetHashCode() => (Type, this).GetHashCode();
-
-    //public override string ToString()
-    //{
-    //  var coordinatesList = this.Select(coordinateList =>
-    //      $"[{string.Join(",", coordinateList)}]"
-    //  );
-
-    //  return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{string.Join(",", coordinatesList)}]}}";
-    //}
-
-
-    /*
-    public override string ToString()
-    {
-      string coordinatesList = string.Empty;
-
-      foreach (IList<ICoordinate> coordinateList in this)
-      {
-        string coordinates = string.Empty;
-
-        foreach (ICoordinate coordinate in coordinateList)
-        {
-          coordinates = $"{coordinates},{coordinate}";
-        }
-
-        coordinates = coordinates.Substring(Math.Min(coordinates.Length, 1));
-        coordinatesList = $"{coordinatesList},[{coordinates}]";
-      }
-
-      coordinatesList = coordinatesList.Substring(Math.Min(coordinatesList.Length, 1));
-      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinatesList}]}}";
-    }*/
   }
 }
