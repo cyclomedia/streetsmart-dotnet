@@ -975,6 +975,7 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
 		<PackageReference Include="CefSharp.WinForms" Version="125.0.210" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<EditorConfigFiles Remove="C:\_Projekti\Cyclomedia\streetsmart-dotnet\StreetSmartAPI\StreetSmart.API\WinForms\.editorconfig" />
