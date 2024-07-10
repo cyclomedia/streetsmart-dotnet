@@ -641,8 +641,8 @@ namespace StreetSmart.WPF.Tests
                         }
                     }
                 };
-      var properties1 = new Properties(element1);
-      var properties2 = new Properties(element2);
+      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(element1);
+      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(element2);
 
       Assert.False(properties1.Equals(properties2));
     }
@@ -889,7 +889,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.Equal(FeatureType.Feature, feature.Type);
       Assert.IsType<Point>(feature.Geometry);
-      Assert.IsType<Properties>(feature.Properties);
+      Assert.IsType<StreetSmart.Common.Data.GeoJson.Properties>(feature.Properties);
     }
 
     [Fact]
@@ -978,7 +978,7 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group" }
         };
 
-      var properties = new Properties(propertiesData);
+      var properties = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
 
       Assert.Equal("1", properties["id"]);
       Assert.Equal("Test Feature", properties["name"]);
@@ -995,8 +995,8 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group" }
         };
 
-      var properties1 = new Properties(propertiesData);
-      var properties2 = new Properties(propertiesData);
+      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
+      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
 
       var areEqual = properties1.Equals(properties2);
 
@@ -1020,8 +1020,8 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group 2" }
         };
 
-      var properties1 = new Properties(propertiesData1);
-      var properties2 = new Properties(propertiesData2);
+      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData1);
+      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData2);
 
       var areEqual = properties1.Equals(properties2);
 
@@ -2790,7 +2790,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void Properties_Equals_ReturnsFalseForSecondObjectNull()
     {
-      var obj1 = new Properties(new Dictionary<string, object>());
+      var obj1 = new StreetSmart.Common.Data.GeoJson.Properties(new Dictionary<string, object>());
       var result = obj1.Equals(null);
 
       Assert.False(result);
