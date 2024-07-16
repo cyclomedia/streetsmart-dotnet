@@ -77,6 +77,13 @@ namespace StreetSmart.Common.Factories
     /// <summary>
     /// Create options to initialize the panorama viewer with
     /// </summary>
+    /// <param name="pitch">Possibility to override Pitch value of the initial Panorama Viewer view</param>
+    /// <returns>Options to initialize the panorama viewer with</returns>
+    public static IPanoramaViewerOptions CreatePitch(double pitch) => new PanoramaViewerOptions(null, null, null, null, null, null, pitch);
+
+    /// <summary>
+    /// Create options to initialize the panorama viewer with
+    /// </summary>
     /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions Create() => new PanoramaViewerOptions(null, null, null, null, null, null);
 
@@ -89,9 +96,10 @@ namespace StreetSmart.Common.Factories
     /// <param name="navBarVisible">If nav bar is enabled</param>
     /// <param name="replace">Replace the panorama viewer</param>
     /// <param name="recordingsVisible">If recordings should be visible</param>
+    /// <param name="pitch">Possibility to override Pitch value of the initial Panorama Viewer view</param>
     /// <returns>Options to initialize the panorama viewer with</returns>
     public static IPanoramaViewerOptions Create(bool closable, bool maximizable, bool timeTravelVisible,
-      bool navBarVisible, bool replace, bool recordingsVisible)
-      => new PanoramaViewerOptions(closable, maximizable, timeTravelVisible, navBarVisible, replace, recordingsVisible);
+      bool navBarVisible, bool replace, bool recordingsVisible, double? pitch = null)
+      => new PanoramaViewerOptions(closable, maximizable, timeTravelVisible, navBarVisible, replace, recordingsVisible, pitch);
   }
 }

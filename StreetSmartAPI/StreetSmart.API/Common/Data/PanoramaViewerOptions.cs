@@ -18,6 +18,7 @@
 
 using StreetSmart.Common.Interfaces.Data;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace StreetSmart.Common.Data
@@ -30,14 +31,18 @@ namespace StreetSmart.Common.Data
     private bool? _measureTypeButtonToggle;
     private bool? _measureTypeButtonStart;
     private bool? _timeTravelVisible;
+    private double? _pitch;
 
     public PanoramaViewerOptions(bool? closable, bool? maximizable, bool? timeTravelVisible, bool? navBarVisible,
-      bool? replace, bool? recordingsVisible) : base(closable, maximizable, navBarVisible)
+      bool? replace, bool? recordingsVisible, double? pitch = null) : base(closable, maximizable, navBarVisible)
     {
       Replace = replace;
       RecordingsVisible = recordingsVisible;
       TimeTravelVisible = timeTravelVisible;
+      Pitch = pitch;
     }
+
+    protected static CultureInfo ci => CultureInfo.InvariantCulture;
 
     public bool? Replace
     {
@@ -99,6 +104,16 @@ namespace StreetSmart.Common.Data
       }
     }
 
+    public double? Pitch
+    {
+      get => _pitch;
+      set
+      {
+        _pitch = value;
+        RaisePropertyChanged();
+      }
+    }
+
     public override string ToString()
     {
       List<string> options = new List<string>();
@@ -131,6 +146,11 @@ namespace StreetSmart.Common.Data
       if (TimeTravelVisible != null)
       {
         options.Add($"timeTravelVisible:{TimeTravelVisible.ToString().ToLower()}");
+      }
+
+      if (Pitch.HasValue)
+      {
+        options.Add($"pitch:{Pitch.Value.ToString(ci)}");
       }
 
       string baseOptions = base.ToString();
