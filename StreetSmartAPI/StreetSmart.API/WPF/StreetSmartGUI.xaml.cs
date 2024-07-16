@@ -20,77 +20,79 @@ using System.Windows;
 using StreetSmart.Common;
 using StreetSmart.Common.API;
 using StreetSmart.Common.Factories;
+using StreetSmart.Common.Handlers;
 
 namespace StreetSmart.WPF
 {
+  /// <summary>
+  /// Interaction logic for StreetSmartGUI.xaml
+  /// </summary>
+  public partial class StreetSmartGUI
+  {
+    #region dependency property API
+
+    private readonly StreetSmartAPI _api;
+
     /// <summary>
-    /// Interaction logic for StreetSmartGUI.xaml
+    /// Dependency property of the api
     /// </summary>
-    public partial class StreetSmartGUI
+    public static readonly DependencyProperty ApiProperty =
+      DependencyProperty.Register("WpfApi", typeof(WpfApi), typeof(StreetSmartGUI),
+        new PropertyMetadata(null, OnApiChanged));
+
+    /// <summary>
+    /// Changed the api
+    /// </summary>
+    private static void OnApiChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
-        #region dependency property API
-
-        private readonly StreetSmartAPI _api;
-
-        /// <summary>
-        /// Dependency property of the api
-        /// </summary>
-        public static readonly DependencyProperty ApiProperty =
-          DependencyProperty.Register("WpfApi", typeof(WpfApi), typeof(StreetSmartGUI),
-            new PropertyMetadata(null, OnApiChanged));
-
-        /// <summary>
-        /// Changed the api
-        /// </summary>
-        private static void OnApiChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue != null)
-            {
-                ((StreetSmartGUI)sender).InitApi((WpfApi)e.NewValue);
-            }
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// The StreetSmart API
-        /// </summary>
-        public WpfApi WpfApi
-        {
-            get => (WpfApi)GetValue(ApiProperty);
-            set => SetValue(ApiProperty, value);
-        }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor of the StreetSmartGUI
-        /// </summary>
-        public StreetSmartGUI()
-        {
-            InitializeComponent();
-
-            _api = StreetSmartAPIFactory.Create() as StreetSmartAPI;
-            if (Browser != null)
-            {
-                _api?.InitBrowser(new StreetSmartBrowserAdapter(Browser));
-            }
-
-        }
-
-        #endregion
-
-        #region private function - init the API
-
-        private void InitApi(WpfApi api)
-        {
-            api.Api = _api;
-        }
-
-        #endregion
+      if (e.NewValue != null)
+      {
+        ((StreetSmartGUI)sender).InitApi((WpfApi)e.NewValue);
+      }
     }
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// The StreetSmart API
+    /// </summary>
+    public WpfApi WpfApi
+    {
+      get => (WpfApi)GetValue(ApiProperty);
+      set => SetValue(ApiProperty, value);
+    }
+
+    #endregion
+
+    #region Constructor
+
+    /// <summary>
+    /// Constructor of the StreetSmartGUI
+    /// </summary>
+    public StreetSmartGUI()
+    {
+      InitializeComponent();
+
+      _api = StreetSmartAPIFactory.Create() as StreetSmartAPI;
+      if (Browser != null)
+      {
+        _api?.InitBrowser(new StreetSmartBrowserAdapter(Browser));
+        Browser.MenuHandler = new CustomMenuHandler(); 
+            }
+
+    }
+
+    #endregion
+
+    #region private function - init the API
+
+    private void InitApi(WpfApi api)
+    {
+      api.Api = _api;
+    }
+
+    #endregion
+  }
 }
