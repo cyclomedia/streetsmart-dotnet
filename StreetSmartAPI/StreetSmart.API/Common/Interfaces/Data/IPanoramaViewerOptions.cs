@@ -52,5 +52,10 @@ namespace StreetSmart.Common.Interfaces.Data
     /// If time travel is enabled
     /// </summary>
     bool? TimeTravelVisible { get; set; }
+
+    /// <summary>
+    /// Possibility to override Pitch value of the initial Panorama Viewer view
+    /// </summary>
+    public double? Pitch { get; set; }
   }
 }
