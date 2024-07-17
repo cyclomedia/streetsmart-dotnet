@@ -87,7 +87,7 @@ namespace StreetSmart.Common.Factories
     /// Create coordinates based on x and y
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="CoordinateFactory.Create(double, double)"/> method.
+    /// This sample shows how to use the <see cref="Create(double, double)"/> method.
     /// <code>
     /// // Create a x and y coordinate
     /// double x = 160850.585;
@@ -104,7 +104,7 @@ namespace StreetSmart.Common.Factories
     /// Create coordinates based on x, y and z
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="CoordinateFactory.Create(double, double, double)"/> method.
+    /// This sample shows how to use the <see cref="Create(double, double, double)"/> method.
     /// <code>
     /// // Create a x, y and z coordinate
     /// double x = 160850.585;

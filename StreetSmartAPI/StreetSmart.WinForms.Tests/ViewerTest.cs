@@ -23,10 +23,10 @@ namespace StreetSmart.Tests.NET6
         public async Task ViewerTestByTypeAndAddress(ViewerType viewerType, string address, State expectedViewerState)
         {
             IList<ViewerType> viewerTypes = new List<ViewerType>();
-            IViewerOptions viewerOptions = null;
-            IPanoramaViewerOptions panoramaViewerOptions = null;
-            IObliqueViewerOptions obliqueViewerOptions = null;
-            IPointCloudViewerOptions pointCloudViewerOptions = null;
+            IViewerOptions? viewerOptions = null;
+            IPanoramaViewerOptions? panoramaViewerOptions = null;
+            IObliqueViewerOptions? obliqueViewerOptions = null;
+            IPointCloudViewerOptions? pointCloudViewerOptions = null;
 
             if (viewerType.Equals(ViewerType.Oblique))
             {

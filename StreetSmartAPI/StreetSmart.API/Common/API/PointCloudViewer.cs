@@ -18,7 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+#if NETCOREAPP
 using System.Dynamic;
+#endif
 using System.Globalization;
 using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;

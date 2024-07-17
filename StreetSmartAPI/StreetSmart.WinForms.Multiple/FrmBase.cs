@@ -20,6 +20,7 @@ using System.Windows.Forms;
 
 namespace MultipleAPI.WinForms
 {
+  [System.Runtime.Versioning.SupportedOSPlatform("windows")]
   public partial class FrmBase : Form
   {
     public FrmBase()

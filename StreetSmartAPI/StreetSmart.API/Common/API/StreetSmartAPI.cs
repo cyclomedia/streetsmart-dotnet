@@ -18,14 +18,14 @@
 
 using System;
 using System.Collections.Generic;
+#if NETCOREAPP
 using System.Dynamic;
+#endif
 using System.Linq;
 using System.Threading.Tasks;
 using CefSharp;
 
 #if WINFORMS
-using System.Windows.Forms;
- using CefSharp.WinForms;
 using StreetSmart.WinForms;
 using StreetSmart.WinForms.Properties;
 #else
@@ -86,13 +86,13 @@ namespace StreetSmart.Common.API
 
     #endregion
 
-    #if WINFORMS
+#if WINFORMS
     #region GUI
 
     public StreetSmartGUI GUI { get; }
 
     #endregion
-    #endif
+#endif
 
     #region Properties
 
@@ -126,7 +126,7 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region Constructor
-    #if WINFORMS
+#if WINFORMS
     public StreetSmartAPI(string streetSmartLocation, IStreetSmartBrowser browser)
     {
       InitApi(streetSmartLocation);
@@ -134,7 +134,7 @@ namespace StreetSmart.Common.API
       RegisterBrowser();
       GUI = new StreetSmartGUI(Browser);
     }
-    #else
+#else
     public StreetSmartAPI(string streetSmartLocation, IStreetSmartBrowser browser)
     {
       InitApi(streetSmartLocation);
@@ -149,15 +149,15 @@ namespace StreetSmart.Common.API
       Browser.Address = _streetSmartLocation;
       RegisterBrowser();
     }
-/*
-    public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
+    /*
+        public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
 
-    public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
-    {
-      Browser.CreateBrowser(parentWindowHwndSource, initialSize);
-    }
-*/
-    #endif
+        public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
+        {
+          Browser.CreateBrowser(parentWindowHwndSource, initialSize);
+        }
+    */
+#endif
 
     ~StreetSmartAPI()
     {
@@ -167,7 +167,7 @@ namespace StreetSmart.Common.API
     #endregion
 
     #region CefSharp Functions
-    #if WINFORMS
+#if WINFORMS
     public void ShowDevTools()
     {
       ShowDeveloperTools();
@@ -177,7 +177,7 @@ namespace StreetSmart.Common.API
     {
       CloseDeveloperTools();
     }
-    #else
+#else
     public void ShowDevTools()
     {
       Browser?.Dispatcher?.Invoke(new ThreadStart(ShowDeveloperTools));
@@ -199,7 +199,7 @@ namespace StreetSmart.Common.API
       Browser.Address = streetSmartLocation;
     }
 
-    #endif
+#endif
     #endregion
 
     #region Interface Functions
@@ -241,7 +241,7 @@ namespace StreetSmart.Common.API
       }
 
       IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (ApiId, new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
+        (ApiId, new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
       IViewer removedViewer = null;
 
       foreach (var viewer in viewerList)
@@ -269,7 +269,7 @@ namespace StreetSmart.Common.API
       object result = await CallJsAsync(script, processId);
 
       return await ViewerList.ToViewersFromJsValue(ApiId,
-        new List<ViewerType> {ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud}, ToString(result));
+        new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
     }
 
     public async Task RemoveOverlay(string overlayId)
@@ -385,7 +385,7 @@ namespace StreetSmart.Common.API
     {
       int processId = GetProcessId;
       string funcId = $"{nameof(StartMeasurementMode)}{processId}".ToQuote();
-      string startMeasurement = GetScript($"startMeasurementMode({((Viewer) viewer).Name}{options})", processId);
+      string startMeasurement = GetScript($"startMeasurementMode({((Viewer)viewer).Name}{options})", processId);
       string script = $@"try{{{startMeasurement}}}catch(e){{{JsThis}.{JsMeasurementFailed}(e.message,{funcId})}}";
       object result = await CallJsAsync(script, processId);
 
@@ -416,22 +416,38 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
+#if NETCOREAPP
     public void OnMeasurementChanged(ExpandoObject args, string viewerId)
+#else
+    public void OnMeasurementChanged(Dictionary<string, object> args, string viewerId)
+#endif
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
+#if NETCOREAPP
     public void OnMeasurementStarted(ExpandoObject args, string viewerId)
+#else
+    public void OnMeasurementStarted(Dictionary<string, object> args, string viewerId)
+#endif
     {
       MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
+#if NETCOREAPP
     public void OnMeasurementStopped(ExpandoObject args, string viewerId)
+#else
+    public void OnMeasurementStopped(Dictionary<string, object> args, string viewerId)
+#endif
     {
       MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
 
+#if NETCOREAPP
     public void OnMeasurementSaved(ExpandoObject args, string viewerId)
+#else
+    public void OnMeasurementSaved(Dictionary<string, object> args, string viewerId)
+#endif
     {
       MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
     }
@@ -441,7 +457,7 @@ namespace StreetSmart.Common.API
       string jsName = $"type{Guid.NewGuid():N}";
       Browser.ExecuteScriptAsync($"var {jsName}={name}['{id}'];");
       IViewer viewer = ViewerList.ToViewer(ApiId, type, jsName);
-      ((Viewer) viewer).JsObjectCollection = name;
+      ((Viewer)viewer).JsObjectCollection = name;
       ViewerAdded?.Invoke(this, new EventArgs<IViewer>(viewer));
 
       if (viewer is PanoramaViewer)
@@ -461,7 +477,7 @@ namespace StreetSmart.Common.API
       string jsName = $"type{Guid.NewGuid():N}";
       Browser.ExecuteScriptAsync($"var {jsName}={name};");
       IViewer iViewer = await ViewerList.ToViewerFromJsValue(ApiId, type, oldName);
-      Viewer viewer = (Viewer) iViewer;
+      Viewer viewer = (Viewer)iViewer;
 
       if (viewer != null)
       {

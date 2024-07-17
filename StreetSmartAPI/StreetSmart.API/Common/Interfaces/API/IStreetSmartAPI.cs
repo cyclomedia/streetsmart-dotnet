@@ -251,7 +251,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// Initializes the API using the inserted values. Required to use functional PanoramaViewers.
     /// </summary>
     /// <example>
-    /// This sample shows how to use the <see cref="IStreetSmartAPI.Init"/> function.
+    /// This sample shows how to use the <see cref="Init"/> function.
     /// <code>
     /// using System;
     /// using StreetSmart.Common.Exceptions;
@@ -305,7 +305,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// an extent, an address or a panorama/oblique ID.
     /// </summary>
     /// <example>
-    /// This sample shows how to use the <see cref="IStreetSmartAPI.Open"/> function.
+    /// This sample shows how to use the <see cref="Open"/> function.
     /// <code>
     /// using System;
     /// using System.Collections.Generic;

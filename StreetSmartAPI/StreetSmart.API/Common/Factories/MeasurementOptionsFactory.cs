@@ -71,7 +71,7 @@ namespace StreetSmart.Common.Factories
     /// Create a default measurement options object.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="MeasurementOptionsFactory.Create()"/> method.
+    /// This sample shows how to use the <see cref="Create()"/> method.
     /// <code>
     /// // Create a measurement options object
     /// IMeasurementOptions measurementOptions = MeasurementOptionsFactory.Create();
@@ -84,7 +84,7 @@ namespace StreetSmart.Common.Factories
     /// Create a measurement options object with a specific geometry type.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="MeasurementOptionsFactory.Create(MeasurementGeometryType)"/> method.
+    /// This sample shows how to use the <see cref="Create(MeasurementGeometryType)"/> method.
     /// <code>
     /// // Create a measurement options object which can be used for start a surface measurement
     /// MeasurementGeometryType geometryType = MeasurementGeometryType.Polygon;

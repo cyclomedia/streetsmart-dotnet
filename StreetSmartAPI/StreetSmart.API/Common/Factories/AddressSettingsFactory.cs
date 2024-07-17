@@ -74,7 +74,7 @@ namespace StreetSmart.Common.Factories
     /// Create address settings to use for address searches, based on the current culture settings and the address database.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(string)"/> method.
+    /// This sample shows how to use the <see cref="Create(string)"/> method.
     /// <code>
     /// // Create an address settings that are used in the application
     /// string database = "CMDatabase";
@@ -89,7 +89,7 @@ namespace StreetSmart.Common.Factories
     /// Create address settings to use for address searches, based on the locale string and the address database.
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="AddressSettingsFactory.Create(string, string)"/> method.
+    /// This sample shows how to use the <see cref="Create(string, string)"/> method.
     /// <code>
     /// // Create an address settings that are used in the application
     /// string locale = "nl";
