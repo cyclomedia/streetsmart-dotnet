@@ -36,6 +36,7 @@ namespace MultipleAPI.WinForms
     PanoramaOpened = 2
   }
 
+  [System.Runtime.Versioning.SupportedOSPlatform("windows")]
   public partial class MultipleDemo : Form
   {
     private const string Srs = "EPSG:28992";

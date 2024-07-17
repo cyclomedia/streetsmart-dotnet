@@ -9,7 +9,9 @@ using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+#if NETCOREAPP
 using System.Dynamic;
+#endif
 using System.Threading.Tasks;
 using Xunit;
 

@@ -305,7 +305,7 @@ namespace StreetSmart.WPF.Tests
 
       var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
 
-      var measureDetails2 = new Dictionary<string, object>
+      var measureDetails2 = new Dictionary<string, object?>
         {
             { "details", new Dictionary<string, object>() },
             { "pointProblems", null},
@@ -357,7 +357,7 @@ namespace StreetSmart.WPF.Tests
 
       var measureDetailsObj = new MeasureDetails(measureDetails, MeasurementTools.NotDefined);
 
-      var measureDetails2 = new Dictionary<string, object>
+      var measureDetails2 = new Dictionary<string, object?>
         {
             { "details", new Dictionary<string, object>() },
             { "pointProblems", null },
@@ -641,8 +641,8 @@ namespace StreetSmart.WPF.Tests
                         }
                     }
                 };
-      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(element1);
-      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(element2);
+      var properties1 = new Common.Data.GeoJson.Properties(element1);
+      var properties2 = new Common.Data.GeoJson.Properties(element2);
 
       Assert.False(properties1.Equals(properties2));
     }
@@ -889,7 +889,7 @@ namespace StreetSmart.WPF.Tests
 
       Assert.Equal(FeatureType.Feature, feature.Type);
       Assert.IsType<Point>(feature.Geometry);
-      Assert.IsType<StreetSmart.Common.Data.GeoJson.Properties>(feature.Properties);
+      Assert.IsType<Common.Data.GeoJson.Properties>(feature.Properties);
     }
 
     [Fact]
@@ -978,7 +978,7 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group" }
         };
 
-      var properties = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
+      var properties = new Common.Data.GeoJson.Properties(propertiesData);
 
       Assert.Equal("1", properties["id"]);
       Assert.Equal("Test Feature", properties["name"]);
@@ -995,8 +995,8 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group" }
         };
 
-      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
-      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData);
+      var properties1 = new Common.Data.GeoJson.Properties(propertiesData);
+      var properties2 = new Common.Data.GeoJson.Properties(propertiesData);
 
       var areEqual = properties1.Equals(properties2);
 
@@ -1020,8 +1020,8 @@ namespace StreetSmart.WPF.Tests
             { "group", "Test Group 2" }
         };
 
-      var properties1 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData1);
-      var properties2 = new StreetSmart.Common.Data.GeoJson.Properties(propertiesData2);
+      var properties1 = new Common.Data.GeoJson.Properties(propertiesData1);
+      var properties2 = new Common.Data.GeoJson.Properties(propertiesData2);
 
       var areEqual = properties1.Equals(properties2);
 
@@ -1333,7 +1333,7 @@ namespace StreetSmart.WPF.Tests
         { "coordinateStdevs", new List<object> { new Dictionary<string, object> { { "0", position1 } , { "1", position2 } } } }
 
       });
-      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object>
+      var derivedData2 = new DerivedDataLineString(new Dictionary<string, object?>
       {
         { "coordinateStdevs", null }
 
@@ -1630,13 +1630,13 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataLineString_WhenObjectsAreNotEquals_ReturnsFalse()
     {
-      var data1 = new DerivedDataLineString(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataLineString(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
         });
 
-      var data2 = new DerivedDataLineString(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataLineString(new Dictionary<string, object>
         {
             { "unit", "ft" },
             { "precision", 2 }
@@ -1684,7 +1684,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPoint_WhenSecondObjectNull_ReturnsFalse()
     {
-      var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPoint(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
@@ -1696,13 +1696,13 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPoint_WhenObjectsAreEquals_ReturnsTrue()
     {
-      var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPoint(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
         });
 
-      var data2 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPoint(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
@@ -1714,13 +1714,13 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPoint_WhenObjectsAreNotEquals_ReturnsFalse()
     {
-      var data1 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPoint(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
         });
 
-      var data2 = new DerivedDataPoint(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPoint(new Dictionary<string, object>
         {
             { "unit", "ft" },
             { "precision", 2 }
@@ -1731,13 +1731,13 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPolygon_WhenObjectsAreEquals_ReturnsTrue()
     {
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
@@ -1749,13 +1749,13 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPolygon_WhenObjectsAreNotEquals_ReturnsFalse()
     {
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "ft" },
             { "precision", 2 }
@@ -1770,7 +1770,7 @@ namespace StreetSmart.WPF.Tests
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
       var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
 
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "triangles", new List<object>
@@ -1780,7 +1780,7 @@ namespace StreetSmart.WPF.Tests
             }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object?>
         {
             { "unit", "m" },
             { "triangles", null }
@@ -1795,7 +1795,7 @@ namespace StreetSmart.WPF.Tests
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
       var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
 
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "triangles", new List<object>
@@ -1805,7 +1805,7 @@ namespace StreetSmart.WPF.Tests
             }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" }
         });
@@ -1819,7 +1819,7 @@ namespace StreetSmart.WPF.Tests
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
       var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
 
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "triangles", new List<object>
@@ -1836,7 +1836,7 @@ namespace StreetSmart.WPF.Tests
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
       var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
 
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "triangles", new List<object>
@@ -1846,7 +1846,7 @@ namespace StreetSmart.WPF.Tests
             }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "triangles", new List<object>
@@ -1862,7 +1862,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPolygon_WhenObjectsAreNotEqualsBasedOnArea_ReturnsFalse()
     {
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 },
@@ -1874,7 +1874,7 @@ namespace StreetSmart.WPF.Tests
             }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 },
@@ -1892,7 +1892,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void DerivedDataPolygon_WhenObjectsAreNotEqualsBasedOnAreaSecondDontHaveIt_ReturnsFalse()
     {
-      var data1 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 },
@@ -1904,7 +1904,7 @@ namespace StreetSmart.WPF.Tests
             }
         });
 
-      var data2 = new DerivedDataPolygon(new System.Collections.Generic.Dictionary<string, object>
+      var data2 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
             { "precision", 2 }
@@ -2488,7 +2488,7 @@ namespace StreetSmart.WPF.Tests
                 { "wgsGeometry", new Dictionary<string, object>() }
             };
 
-      var propertiesDict2 = new Dictionary<string, object>
+      var propertiesDict2 = new Dictionary<string, object?>
             {
                 { "id", "test-id" },
                 { "name", "test-name" },
@@ -2790,7 +2790,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void Properties_Equals_ReturnsFalseForSecondObjectNull()
     {
-      var obj1 = new StreetSmart.Common.Data.GeoJson.Properties(new Dictionary<string, object>());
+      var obj1 = new Common.Data.GeoJson.Properties(new Dictionary<string, object>());
       var result = obj1.Equals(null);
 
       Assert.False(result);

@@ -45,7 +45,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (resultDirection != null)
       {
-        Id = resultDirection.Id != null ? string.Copy(resultDirection.Id) : null;
+        Id = resultDirection.Id;
         MatchImage = (Image)MatchImage?.Clone();
         _matchImage = (resultDirection as ResultDirection)?._matchImage;
       }

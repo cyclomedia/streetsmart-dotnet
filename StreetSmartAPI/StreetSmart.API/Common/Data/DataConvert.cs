@@ -196,10 +196,12 @@ namespace StreetSmart.Common.Data
       return ToArray(GetValue(details, value));
     }
 
+#if NETCOREAPP
     public object GetValue(ExpandoObject details, string value)
     {
       return GetValue(ToDictionary(details), value);
     }
+#endif
 
     public object GetValue(Dictionary<string, object> details, string value)
     {
@@ -211,7 +213,7 @@ namespace StreetSmart.Common.Data
     {
       return ToDictionary(GetValue(details, value));
     }
-#endif   
+#endif
 
     public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
     {

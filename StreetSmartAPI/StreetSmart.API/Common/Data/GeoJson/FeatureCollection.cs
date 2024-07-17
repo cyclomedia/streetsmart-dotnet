@@ -18,8 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+#if NETCOREAPP
 using System.Dynamic;
-using System.Linq;
+#endif
 using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
 
@@ -27,10 +28,12 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
   {
+#if NETCOREAPP
     public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
     {
       GetFeatures(ToDictionary(featureCollection), measurementProperties);
     }
+#endif
 
     public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
     {

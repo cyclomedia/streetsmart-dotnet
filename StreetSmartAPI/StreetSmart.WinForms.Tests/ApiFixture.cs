@@ -51,7 +51,7 @@ namespace StreetSmart.Tests.NET6
         }
         public async Task<State> InitWithBasicAuth()
         {
-            string username = Configuration["TestData:ApiUsername"], 
+            string? username = Configuration["TestData:ApiUsername"], 
                     password = Configuration["TestData:ApiPassword"], 
                     apiKey = Configuration["TestData:ApiKey"];
 

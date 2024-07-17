@@ -66,7 +66,7 @@ namespace StreetSmart.Common.Factories
     /// Creates a default dom element
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="DomElementFactory.Create()"/> method.
+    /// This sample shows how to use the <see cref="Create()"/> method.
     /// <code>
     /// // Create a dom element
     /// IDomElement element = DomElementFactory.Create();
@@ -88,7 +88,7 @@ namespace StreetSmart.Common.Factories
     /// Creates a dom element with a width and height in percents and a top and a left in pixels
     /// </summary>
     /// <example> 
-    /// This sample shows how to use the <see cref="DomElementFactory.Create(int, int, int, int)"/> method.
+    /// This sample shows how to use the <see cref="Create(int, int, int, int)"/> method.
     /// <code>
     /// // Create a dom element
     /// int width = 75; // width in percents

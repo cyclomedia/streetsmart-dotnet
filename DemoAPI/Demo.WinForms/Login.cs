@@ -16,59 +16,60 @@
  * License along with this library.
  */
 
+using System;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace Demo.WinForms
 {
-  public class Login
-  {
-    private static readonly XmlSerializer XmlLogin;
-
-    private static Login _login;
-
-    private const string FileName = "Login.xml";
-
-    static Login()
+    public class Login
     {
-      XmlLogin = new XmlSerializer(typeof(Login));
+        private static readonly XmlSerializer XmlLogin;
+
+        private static Login _login = Load();
+
+        private const string FileName = "Login.xml";
+
+        static Login()
+        {
+            XmlLogin = new XmlSerializer(typeof(Login));
+        }
+
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public string ApiKey { get; set; }
+
+        public string ClientId { get; set; }
+
+        public bool UseOAuth { get; set; }
+
+        public static Login Instance => _login ??= Load();
+
+        private static Login Load()
+        {
+            Login result;
+
+            if (File.Exists(FileName))
+            {
+                var streamFile = new FileStream(FileName, FileMode.OpenOrCreate);
+                result = (Login)(XmlLogin.Deserialize(streamFile) ?? throw new Exception());
+                streamFile.Close();
+            }
+            else
+            {
+                result = new Login();
+            }
+
+            return result;
+        }
+
+        public void Save()
+        {
+            FileStream streamFile = File.Open(FileName, FileMode.Create);
+            XmlLogin.Serialize(streamFile, this);
+            streamFile.Close();
+        }
     }
-
-    public string Username { get; set; }
-
-    public string Password { get; set; }
-
-    public string ApiKey { get; set; }
-
-    public string ClientId { get; set; }
-
-    public bool UseOAuth { get; set; }
-
-    public static Login Instance => _login ?? (_login = Load());
-
-    private static Login Load()
-    {
-      Login result;
-
-      if (File.Exists(FileName))
-      {
-        var streamFile = new FileStream(FileName, FileMode.OpenOrCreate);
-        result = (Login) XmlLogin.Deserialize(streamFile);
-        streamFile.Close();
-      }
-      else
-      {
-        result = new Login();
-      }
-
-      return result;
-    }
-
-    public void Save()
-    {
-      FileStream streamFile = File.Open(FileName, FileMode.Create);
-      XmlLogin.Serialize(streamFile, this);
-      streamFile.Close();
-    }
-  }
 }

@@ -7,7 +7,9 @@ using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
+#if NETCOREAPP
 using System.Dynamic;
+#endif
 using System.Threading.Tasks;
 using Xunit;
 
