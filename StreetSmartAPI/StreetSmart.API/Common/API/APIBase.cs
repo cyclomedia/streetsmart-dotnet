@@ -21,6 +21,7 @@ using StreetSmart.Common.Data;
 using StreetSmart.Common.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -55,21 +56,21 @@ namespace StreetSmart.Common.API
 
     #region Callback definitions
 
-    public virtual string JsResult => $"{nameof(OnResult).FirstCharacterToLower()}";
+    public virtual string JsResult => nameof(OnResult).FirstCharacterToLower();
 
-    public string JsThisResult => $"{nameof(OnThisResult).FirstCharacterToLower()}";
+    public string JsThisResult => nameof(OnThisResult).FirstCharacterToLower();
 
-    protected string JsLoginSuccess => $"{nameof(OnLoginSuccess).FirstCharacterToLower()}";
+    protected string JsLoginSuccess => nameof(OnLoginSuccess).FirstCharacterToLower();
 
-    protected string JsLoginFailed => $"{nameof(OnLoginFailedException).FirstCharacterToLower()}";
+    protected string JsLoginFailed => nameof(OnLoginFailedException).FirstCharacterToLower();
 
-    protected string JsMeasurementFailed => $"{nameof(OnMeasurementException).FirstCharacterToLower()}";
+    protected string JsMeasurementFailed => nameof(OnMeasurementException).FirstCharacterToLower();
 
-    public virtual string JsImNotFound => $"{nameof(OnImageNotFoundException).FirstCharacterToLower()}";
+    public virtual string JsImNotFound => nameof(OnImageNotFoundException).FirstCharacterToLower();
 
-    protected string JsCloseViewerException => $"{nameof(OnViewerCloseException).FirstCharacterToLower()}";
+    protected string JsCloseViewerException => nameof(OnViewerCloseException).FirstCharacterToLower();
 
-    protected string JsStreetSmartException => $"{nameof(OnStreetSmartException).FirstCharacterToLower()}";
+    protected string JsStreetSmartException => nameof(OnStreetSmartException).FirstCharacterToLower();
 
     #endregion
 
@@ -209,7 +210,6 @@ namespace StreetSmart.Common.API
 
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")
     {
-      object funcResult = null;
       IBrowser myBrowser = !(Browser?.IsDisposed ?? true) ? Browser?.GetBrowser() : null;
 
       if (myBrowser != null)
@@ -222,13 +222,12 @@ namespace StreetSmart.Common.API
         }
 
         Browser.ExecuteScriptAsync(script);
-        await _resultTask[funcName].Task;
-        TaskCompletionSource<object> result = _resultTask[funcName];
+        var result = await _resultTask[funcName].Task;
         _resultTask.Remove(funcName);
-        funcResult = result.Task.Result;
+        return result;
       }
 
-      return funcResult;
+      return null;
     }
 
     #endregion

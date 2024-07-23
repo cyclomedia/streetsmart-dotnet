@@ -142,21 +142,6 @@ namespace StreetSmart.Common.API
       Browser.Address = streetSmartLocation;
       RegisterBrowser();
     }
-
-    public void InitBrowser(IStreetSmartBrowser browser)
-    {
-      Browser = browser;
-      Browser.Address = _streetSmartLocation;
-      RegisterBrowser();
-    }
-    /*
-        public bool BrowserIsDisposed => Browser?.IsDisposed ?? true;
-
-        public void CreateBrowser(HwndSource parentWindowHwndSource, Size initialSize)
-        {
-          Browser.CreateBrowser(parentWindowHwndSource, initialSize);
-        }
-    */
 #endif
 
     ~StreetSmartAPI()

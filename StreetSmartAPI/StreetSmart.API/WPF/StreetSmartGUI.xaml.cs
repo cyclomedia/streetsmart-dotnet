@@ -78,10 +78,8 @@ namespace StreetSmart.WPF
       _api = StreetSmartAPIFactory.Create() as StreetSmartAPI;
       if (Browser != null)
       {
-        _api?.InitBrowser(new StreetSmartBrowserAdapter(Browser));
         Browser.MenuHandler = new CustomMenuHandler();
       }
-
     }
 
     #endregion

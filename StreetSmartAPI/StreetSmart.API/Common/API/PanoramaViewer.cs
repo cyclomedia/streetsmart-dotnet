@@ -138,7 +138,8 @@ namespace StreetSmart.Common.API
       string funcId = $"{nameof(GetRecording)}{processId}".ToQuote();
       var script = $@"recording{Name}={Name}.getRecording();delete recording{Name}.thumbs;
                    {JsThis}.{JsResult}('{Name}',recording{Name},{funcId});";
-      return new Recording(ToDictionary(await CallJsAsync(script, processId)));
+      var jsResult = await CallJsAsync(script, processId);
+      return new Recording(ToDictionary(jsResult));
     }
 
     public async Task<bool> GetRecordingsVisible()
