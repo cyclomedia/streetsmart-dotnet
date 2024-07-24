@@ -36,9 +36,9 @@ namespace StreetSmart.Common.Interfaces.SLD
     UserLayer UserLayer { get; set; }
 
     /// <summary>
-    /// The SLD
+    /// The Serialization of SLD
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    string SLD { get; }
+    string GetSerializedSld();
   }
 }
