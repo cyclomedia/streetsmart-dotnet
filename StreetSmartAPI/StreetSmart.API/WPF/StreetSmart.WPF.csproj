@@ -950,7 +950,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="125.0.210" />
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
@@ -958,7 +958,7 @@
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.Wpf" Version="125.0.210" />
+		<PackageReference Include="CefSharp.Wpf" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>

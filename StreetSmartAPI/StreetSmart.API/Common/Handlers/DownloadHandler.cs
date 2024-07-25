@@ -22,18 +22,18 @@ namespace StreetSmart.Common.Handlers
 {
   internal class DownloadHandler : IDownloadHandler
   {
-    public bool OnBeforeDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+    public void OnBeforeDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
     {
       if (!callback.IsDisposed)
       {
         using (callback)
         {
           callback.Continue(downloadItem.SuggestedFileName, true);
-          return true;
+          //return true;
         }
       }
 
-      return false;
+      //return false;
     }
 
     public void OnDownloadUpdated(IWebBrowser webBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
