@@ -5,7 +5,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.4.0-rc08</Version>
+		<Version>24.4.0-rc09</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
@@ -947,11 +947,11 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="..\..\ReleaseNotes.txt">
+		<None Include="..\..\ReleaseNotes.txt">
 			<Link>ReleaseNotes.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="..\Common\cyclomedia.png" Link="cyclomedia.png" />
+		</None>
+		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\..\LICENSE.md">
@@ -971,11 +971,13 @@
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
 		<PackageReference Include="CefSharp.WinForms" Version="125.0.210" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<EditorConfigFiles Remove="C:\_Projekti\Cyclomedia\streetsmart-dotnet\StreetSmartAPI\StreetSmart.API\WinForms\.editorconfig" />

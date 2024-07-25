@@ -111,7 +111,7 @@ namespace StreetSmart.Common.Factories
     /// <param name="visible">Visibility of the layer</param>
     /// <returns>Overlay object</returns>
     public static IGeoJsonOverlay Create(IFeatureCollection featureCollection, string name, string srs, IStyledLayerDescriptor styledLayerDescriptor, bool visible = true)
-      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.SLD, visible);
+      => new GeoJsonOverlay(featureCollection.ToString(), name, srs, styledLayerDescriptor.GetSerializedSld(), visible);
 
     /// <summary>
     /// Create the wfs overlay object

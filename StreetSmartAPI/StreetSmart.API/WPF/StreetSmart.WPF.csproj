@@ -12,7 +12,7 @@
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.4.0-rc08</Version>
+		<Version>24.4.0-rc09</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
@@ -75,8 +75,8 @@
 			<Link>API\APISettings.cs</Link>
 		</Compile>
 		<Compile Include="..\Common\API\Bearer.cs">
-      		<Link>API\Bearer.cs</Link>
-    	</Compile>
+			<Link>API\Bearer.cs</Link>
+		</Compile>
 		<Compile Include="..\Common\API\CommandLineArgs.cs">
 			<Link>API\CommandLineArgs.cs</Link>
 		</Compile>
@@ -117,8 +117,8 @@
 			<Link>API\Events\ViewerUpdateEvent.cs</Link>
 		</Compile>
 		<Compile Include="..\Common\API\Events\BearerTokenChangedEvent.cs">
-      		<Link>API\Events\BearerTokenChangedEvent.cs</Link>
-    	</Compile>
+			<Link>API\Events\BearerTokenChangedEvent.cs</Link>
+		</Compile>
 		<Compile Include="..\Common\API\ImageViewer.cs">
 			<Link>API\ImageViewer.cs</Link>
 		</Compile>
@@ -531,8 +531,8 @@
 			<Link>Interfaces\API\IAPISettings.cs</Link>
 		</Compile>
 		<Compile Include="..\Common\Interfaces\API\IBearer.cs">
-      		<Link>Interfaces\API\IBearer.cs</Link>
-    	</Compile>
+			<Link>Interfaces\API\IBearer.cs</Link>
+		</Compile>
 		<Compile Include="..\Common\Interfaces\API\IImageViewer.cs">
 			<Link>Interfaces\API\IImageViewer.cs</Link>
 		</Compile>
@@ -915,10 +915,10 @@
 		<Compile Include="..\Common\StreetSmartBrowserAdapter.cs" Link="StreetSmartBrowserAdapter.cs" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="..\..\ReleaseNotes.txt">
+		<None Include="..\..\ReleaseNotes.txt">
 			<Link>ReleaseNotes.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
+		</None>
 		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -950,17 +950,19 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="125.0.210" />
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.4" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.7" />
+		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.Wpf" Version="125.0.210" />
+		<PackageReference Include="CefSharp.Wpf" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
