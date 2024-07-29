@@ -16,6 +16,7 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -23,15 +24,12 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.SLD;
-
 namespace StreetSmart.Common.Data.SLD
 {
   /// <exclude/>
   [XmlType(AnonymousType = true, Namespace = "http://www.opengis.net/sld")]
   [XmlRoot(Namespace = "http://www.opengis.net/sld", IsNullable = false)]
-#pragma warning disable 1591
-  public class StyledLayerDescriptor : NotifyPropertyChanged, IStyledLayerDescriptor
+  public sealed class StyledLayerDescriptor : NotifyPropertyChanged, IStyledLayerDescriptor
   {
     // ReSharper disable once InconsistentNaming
     const string VersionNumber = "1.1.0";
@@ -50,7 +48,7 @@ namespace StreetSmart.Common.Data.SLD
         {
           FeatureTypeStyle = new FeatureTypeStyle
           {
-            Rules = new ObservableCollection<Rule> {rule}
+            Rules = new ObservableCollection<Rule> { rule }
           }
         }
       };
@@ -125,7 +123,7 @@ namespace StreetSmart.Common.Data.SLD
         }
       }
     }
-   
+
     public string CustomSerialization()
     {
       var sb = new StringBuilder();
@@ -154,5 +152,4 @@ namespace StreetSmart.Common.Data.SLD
       return sb.ToString();
     }
   }
-#pragma warning restore 1591
 }

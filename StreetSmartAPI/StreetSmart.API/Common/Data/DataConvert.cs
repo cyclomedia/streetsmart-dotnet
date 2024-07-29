@@ -26,7 +26,7 @@ namespace StreetSmart.Common.Data
 {
   internal class DataConvert : NotifyPropertyChanged
   {
-    protected static CultureInfo ci => CultureInfo.InvariantCulture;
+    protected static CultureInfo CI => CultureInfo.InvariantCulture;
 
     public double ToDouble(object value)
     {
@@ -45,7 +45,7 @@ namespace StreetSmart.Common.Data
 
     public double? ToNullDouble(object value)
     {
-      if(double.TryParse(value?.ToString(), out var outValue))
+      if (double.TryParse(value?.ToString(), out var outValue))
       {
         return double.IsNaN(outValue) ? null : outValue;
       }
@@ -151,29 +151,25 @@ namespace StreetSmart.Common.Data
 
     public Dictionary<string, object> ToDictionary(object value, bool nullable = false)
     {
-      Dictionary<string, object> result;
-
-      if (value is Dictionary<string, object> objects)
+      try
       {
-        result = objects;
-      }
-      else if (value is ExpandoObject expandoObject)
-      {
-        result = expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
-      }
-      else
-      {
-        try
+        if (value is Dictionary<string, object> objects)
         {
-          result = value.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(value, null));
+          return objects;
         }
-        catch
+        else if (value is ExpandoObject expandoObject)
         {
-          result = nullable ? null : new Dictionary<string, object>();
+          return expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+        else
+        {
+          return value.GetType().GetProperties().ToDictionary(x => x.Name, x => x.GetValue(value, null));
         }
       }
-
-      return result;
+      catch
+      {
+        return nullable ? null : [];
+      }
     }
 
     public static IList<object> ToList(object value, bool nullable = false)

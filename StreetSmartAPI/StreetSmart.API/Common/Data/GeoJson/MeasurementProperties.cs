@@ -16,19 +16,18 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class MeasurementProperties : Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
+  internal sealed class MeasurementProperties : Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
   {
     public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
     {
-      DataConvert converter = new DataConvert();
+      DataConvert converter = new();
       Id = converter.ToString(properties, "id");
       Name = converter.ToString(properties, "name");
       Group = converter.ToString(properties, "group");
@@ -40,11 +39,11 @@ namespace StreetSmart.Common.Data.GeoJson
       string measurementTool = converter.ToString(properties, "measurementTool");
       var pointsWithErrors = converter.GetListValue(properties, "pointsWithErrors");
       ValidGeometry = converter.ToBool(properties, "validGeometry");
-      var observationLines = converter.GetDictValue(properties, "observationLines");
+      var observationLines = converter.GetNullDictValue(properties, "observationLines");
 
-      MeasureDetails = new List<IMeasureDetails>();
-      PointsWithErrors = new List<int>();
-      ObservationLines = new ObservationLines(observationLines);
+      MeasureDetails = [];
+      PointsWithErrors = [];
+      ObservationLines = observationLines == null ? null : new ObservationLines(observationLines);
       var wgsGeometry = converter.GetDictValue(properties, "wgsGeometry");
 
       if (wgsGeometry != null)
@@ -163,7 +162,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
         if (properties.MeasureDetails != null)
         {
-          MeasureDetails = new List<IMeasureDetails>();
+          MeasureDetails = [];
 
           foreach (var measureDetail in properties.MeasureDetails)
           {
@@ -193,12 +192,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
         if (properties.PointsWithErrors != null)
         {
-          PointsWithErrors = new List<int>();
-
-          foreach (int pointWithError in properties.PointsWithErrors)
-          {
-            PointsWithErrors.Add(pointWithError);
-          }
+          PointsWithErrors = [.. properties.PointsWithErrors];
         }
 
         ValidGeometry = properties.ValidGeometry;
@@ -323,7 +317,7 @@ namespace StreetSmart.Common.Data.GeoJson
           return false;
 
       if ((PointsWithErrors == null) != (other.PointsWithErrors == null)) return false;
-      
+
       if (PointsWithErrors != null && other.PointsWithErrors != null)
         if (PointsWithErrors.Count == other.PointsWithErrors.Count)
           for (int i = 0; i < PointsWithErrors.Count; i++)

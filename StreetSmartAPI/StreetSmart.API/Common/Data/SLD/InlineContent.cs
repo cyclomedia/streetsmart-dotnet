@@ -24,7 +24,6 @@ using System.Xml.Serialization;
 
 namespace StreetSmart.Common.Data.SLD
 {
-#pragma warning disable 1591
   /// <exclude/>
   public class InlineContent : NotifyPropertyChanged, IInlineContent
   {
@@ -44,12 +43,10 @@ namespace StreetSmart.Common.Data.SLD
 
       if (encoding == Encoding.Base64)
       {
-        using (MemoryStream stream = new MemoryStream())
-        {
-          image.Save(stream, image.RawFormat);
-          byte[] imageBytes = stream.ToArray();
-          Value = Convert.ToBase64String(imageBytes);
-        }
+        using MemoryStream stream = new();
+        image.Save(stream, image.RawFormat);
+        byte[] imageBytes = stream.ToArray();
+        Value = Convert.ToBase64String(imageBytes);
       }
     }
 
@@ -79,6 +76,4 @@ namespace StreetSmart.Common.Data.SLD
       }
     }
   }
-
-#pragma warning restore 1591
 }
