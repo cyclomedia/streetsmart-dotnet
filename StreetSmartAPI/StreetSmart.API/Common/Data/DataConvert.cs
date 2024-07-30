@@ -151,6 +151,11 @@ namespace StreetSmart.Common.Data
 
     public Dictionary<string, object> ToDictionary(object value, bool nullable = false)
     {
+      if (value == null)
+      {
+        return nullable ? null : [];
+      }
+
       try
       {
         if (value is Dictionary<string, object> objects)
