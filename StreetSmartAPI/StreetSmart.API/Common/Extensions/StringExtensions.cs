@@ -49,51 +49,43 @@ namespace System
     public static bool IsValidJson(this string input)
     {
       input = input.Trim();
-      bool result = true;
 
-      if (input.StartsWith("{") && input.EndsWith("}") || input.StartsWith("[") && input.EndsWith("]"))
+      if ((input.StartsWith("{") && input.EndsWith("}")) || (input.StartsWith("[") && input.EndsWith("]")))
       {
         try
         {
-          var jObject = JObject.Parse(input);
-
-          foreach (var jo in jObject)
-          {
-            result = CheckToken(jo.Value) && result;
-          }
+          JToken token = JToken.Parse(input);
+          return IsValidToken(token);
         }
         catch (JsonReaderException)
         {
-          result = false;
+          return false;
         }
         catch (Exception)
         {
-          result = false;
+          return false;
         }
       }
-      else
-      {
-        result = false;
-      }
 
-      return result;
+      return false;
     }
 
-    private static bool CheckToken(JToken value)
+    private static bool IsValidToken(JToken token)
     {
-      bool result = true;
-
-      foreach (JToken token in value.Children())
+      if (token.Type == JTokenType.Undefined)
       {
-        result = CheckToken(token) && result;
+        return false;
       }
 
-      if (value.Type == JTokenType.Undefined)
+      foreach (var child in token.Children())
       {
-        result = false;
+        if (!IsValidToken(child))
+        {
+          return false;
+        }
       }
 
-      return result;
+      return true;
     }
   }
 }
