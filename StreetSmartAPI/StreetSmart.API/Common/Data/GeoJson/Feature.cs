@@ -35,7 +35,7 @@ namespace StreetSmart.Common.Data.GeoJson
       var geometry = GetDictValue(feature, "geometry");
       var properties = GetDictValue(feature, "properties");
 
-      Geometry geom = new Geometry(geometry);
+      Geometry geom = new(geometry);
       Properties = measurementProperties
         ? new MeasurementProperties(properties, geom.Type)
         : new Properties(properties);

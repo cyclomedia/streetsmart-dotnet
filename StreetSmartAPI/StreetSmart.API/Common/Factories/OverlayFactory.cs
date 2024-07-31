@@ -146,7 +146,7 @@ namespace StreetSmart.Common.Factories
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, Color color,
       bool authRequired, string username, string password, bool visible = true)
     {
-      SecureString Password = new SecureString();
+      SecureString Password = new();
 
       foreach (var character in password)
       {
@@ -189,7 +189,7 @@ namespace StreetSmart.Common.Factories
     public static IWFSOverlay CreateWfsOverlay(string name, string url, string typeName, string version, string sld,
       bool authRequired, string username, string password, bool visible = true)
     {
-      SecureString Password = new SecureString();
+      SecureString Password = new();
 
       foreach (var character in password)
       {

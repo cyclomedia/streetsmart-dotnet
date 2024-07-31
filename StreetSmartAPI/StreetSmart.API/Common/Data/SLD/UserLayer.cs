@@ -21,7 +21,6 @@ using System.Xml.Serialization;
 
 namespace StreetSmart.Common.Data.SLD
 {
-#pragma warning disable 1591
   /// <exclude/>
   public class UserLayer : NotifyPropertyChanged, IUserLayer
   {
@@ -38,5 +37,4 @@ namespace StreetSmart.Common.Data.SLD
       }
     }
   }
-#pragma warning restore 1591
 }

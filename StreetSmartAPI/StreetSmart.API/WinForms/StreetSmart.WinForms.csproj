@@ -5,7 +5,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.4.0-rc09</Version>
+		<Version>24.5.0.1</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
@@ -966,7 +966,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="125.0.210" />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
@@ -974,7 +974,7 @@
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.WinForms" Version="125.0.210" />
+		<PackageReference Include="CefSharp.WinForms" Version="123.0.60" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
