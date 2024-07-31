@@ -240,8 +240,7 @@ namespace StreetSmart.Common.API
         throw exception;
       }
 
-      IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue
-        (ApiId, new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
+      IList<IViewer> viewerList = await ViewerList.ToViewersFromJsValue(ApiId, [ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud], ToString(result));
       IViewer removedViewer = null;
 
       foreach (var viewer in viewerList)
@@ -268,8 +267,7 @@ namespace StreetSmart.Common.API
       string script = $@"var {resultType}={JsApi}.getViewers();{JsThis}.{JsResult}('{resultType}',{funcId});";
       object result = await CallJsAsync(script, processId);
 
-      return await ViewerList.ToViewersFromJsValue(ApiId,
-        new List<ViewerType> { ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud }, ToString(result));
+      return await ViewerList.ToViewersFromJsValue(ApiId, [ViewerType.Panorama, ViewerType.Oblique, ViewerType.PointCloud], ToString(result));
     }
 
     public async Task RemoveOverlay(string overlayId)
@@ -530,12 +528,12 @@ namespace StreetSmart.Common.API
     {
       if (_apiViewerEventList == null)
       {
-        _apiViewerEventList = new ApiEventList
-        {
+        _apiViewerEventList =
+        [
           new ViewerAddedEvent(this, "VIEWER_ADDED", JsOnViewerAdded),
           new ViewerRemovedEvent(this, "VIEWER_REMOVED", JsOnViewerRemoved),
           new ViewerUpdateEvent(this, "VIEWER_UPDATED", JsOnViewerUpdated)
-        };
+        ];
 
         Browser?.ExecuteScriptAsync($"{_apiViewerEventList}");
       }
@@ -545,13 +543,13 @@ namespace StreetSmart.Common.API
     {
       if (_apiMeasurementEventList == null)
       {
-        _apiMeasurementEventList = new ApiEventList
-        {
+        _apiMeasurementEventList =
+        [
           new MeasurementEvent(this, "MEASUREMENT_CHANGED", JsOnMeasurementChanged),
           new MeasurementEvent(this, "MEASUREMENT_STARTED", JsOnMeasurementStarted),
           new MeasurementEvent(this, "MEASUREMENT_STOPPED", JsOnMeasurementStopped),
           new MeasurementEvent(this, "MEASUREMENT_SAVED", JsOnMeasurementSaved)
-        };
+        ];
 
         Browser?.ExecuteScriptAsync($"{_apiMeasurementEventList}");
       }
@@ -561,10 +559,10 @@ namespace StreetSmart.Common.API
     {
       if (_apiAuthenticationEventList == null)
       {
-        _apiAuthenticationEventList = new ApiEventList
-        {
+        _apiAuthenticationEventList =
+        [
           new BearerTokenChangedEvent(this, "BEARER_CHANGED", JsOnBearerTokenChanged),
-        };
+        ];
 
         Browser?.ExecuteScriptAsync($"{_apiAuthenticationEventList}");
       }

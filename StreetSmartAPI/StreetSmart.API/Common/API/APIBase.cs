@@ -22,6 +22,7 @@ using StreetSmart.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
@@ -185,15 +186,27 @@ namespace StreetSmart.Common.API
 
     protected string GetScript(string funcName, int processId = 0, [CallerMemberName] string memberName = "")
     {
-      string memberId = $"{memberName}{processId}";
-      return $"{JsThis}.{JsResult}({CallFunctionBase}.{funcName},{memberId.ToQuote()});";
+      var sb = new StringBuilder();
+      sb.Append(JsThis)
+        .Append('.')
+        .Append(JsResult)
+        .Append('(')
+        .Append(CallFunctionBase)
+        .Append('.')
+        .Append(funcName)
+        .Append(",'")
+        .Append(memberName)
+        .Append(processId)
+        .Append("');");
+      return sb.ToString();
     }
 
     protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
     {
       int processId = GetProcessId;
-      object result = await CallJsAsync(AddTryCatch(GetScript(script, processId, memberName), $"{memberName}{processId}"), processId, memberName);
 
+      string fullScript = GetScriptWithTryCatch(script, processId, memberName);
+      object result = await CallJsAsync(fullScript, processId, memberName);
       if (result is Exception exception)
       {
         throw exception;
@@ -201,10 +214,17 @@ namespace StreetSmart.Common.API
 
       return result;
     }
-
-    protected string AddTryCatch(string script, string funcName)
+    protected string GetScriptWithTryCatch(string funcName, int processId, string memberName)
     {
-      return $"try{{{script}}}catch(e){{{JsThis}.{JsStreetSmartException}(e.message,{funcName.ToQuote()});}}";
+      var sb = new StringBuilder();
+      sb.Append("try{")
+        .Append(JsThis).Append('.').Append(JsResult).Append('(')
+        .Append(CallFunctionBase).Append('.').Append(funcName).Append(", '")
+        .Append(memberName).Append(processId).Append("');")
+        .Append("}catch(e){")
+        .Append(JsThis).Append('.').Append(JsStreetSmartException).Append("(e.message, ")
+        .Append(memberName).Append(processId).Append(");}");
+      return sb.ToString();
     }
 
     protected virtual async Task<object> CallJsAsync(string script, int processId, [CallerMemberName] string memberName = "")

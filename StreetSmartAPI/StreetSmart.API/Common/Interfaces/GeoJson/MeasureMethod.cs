@@ -33,6 +33,13 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     NotDefined = -1,
 
     /// <summary>
+    /// unknown measurement method
+    /// </summary>
+    [Description("Unknown")]
+    // ReSharper disable once InconsistentNaming
+    Unknown = 0,
+
+    /// <summary>
     ///  Measure using depth map (in marketing terms: Measure Smart)
     /// </summary>
     [Description("DepthMap")]
