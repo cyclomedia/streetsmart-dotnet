@@ -1,56 +1,73 @@
-﻿using Xunit;
-using System.Drawing;
+﻿using System.Drawing;
+using Xunit;
+using StreetSmart.Common.Data.SLD;
+using StreetSmart.Common.Interfaces.SLD;
 
-namespace StreetSmart.WPF.Tests
+namespace StreetSmart.WPF.Tests;
+
+public class SvgParameterCollectionTests
 {
-  public sealed class SvgParameterCollectionTests
-  {/*
-    [Fact]
-    public void GetFillObject_ValidColor_OpacityNull_ReturnsExpectedResult()
-    {
-      // Arrange
-      Color color = Color.FromArgb(0, 0, 0, 0);
-      double? opacity = null;
+  [Fact]
+  public void GetFillObject_AllZeroColor_NullOpacity_ReturnsExpectedResult()
+  {
+    // Arrange
+    Color color = Color.FromArgb(0, 0, 0, 0);
+    double? opacity = null;
 
-      // Act
-      var result = SvgParameterHelper.GetFillObject(color, opacity);
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetFillObject(color, opacity);
 
-      // Assert
-      Assert.Single(result.SvgParameter);
-      Assert.Equal("#000000", result.SvgParameter[0].Value);
-    }
+    // Assert
+    Assert.NotNull(result);
+    Assert.Single(result.SvgParameter);
+    Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
+  }
+  [Fact]
+  public void GetFillObject_DifferentColor_NullOpacity_ReturnsExpectedResult()
+  {
+    // Arrange
+    Color color = Color.FromArgb(255, 128, 64, 32); // Different color
+    double? opacity = null;
 
-    [Fact]
-    public void GetStrokeObject_ValidColor_WidthNull_OpacityNull_ReturnsExpectedResult()
-    {
-      // Arrange
-      Color color = Color.FromArgb(255, 255, 0, 0);
-      double? width = null;
-      double? opacity = null;
+    // Act
+    var result = SvgParameterCollection<FillType>.GetFillObject(color, opacity);
 
-      // Act
-      var result = SvgParameterHelper.GetStrokeObject(color, width, opacity);
+    // Assert
+    Assert.NotNull(result);
+    Assert.Single(result.SvgParameter);
+    Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
+  }
 
-      // Assert
-      Assert.Single(result.SvgParameter);
-      Assert.Equal("#FFFF0000", result.SvgParameter[0].Value);
-    }
+  [Fact]
+  public void GetStrokeObject_AllZeroColor_NullWidthAndOpacity_ReturnsExpectedResult()
+  {
+    // Arrange
+    Color color = Color.FromArgb(0, 0, 0, 0); // All zeros
+    double? width = null;
+    double? opacity = null;
 
-    [Fact]
-    public void GetStrokeObject_ValidColor_WidthProvided_OpacityNull_ReturnsExpectedResult()
-    {
-      // Arrange
-      Color color = Color.FromArgb(255, 0, 255, 0);
-      double? width = 2.5;
-      double? opacity = null;
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
 
-      // Act
-      var result = SvgParameterHelper.GetStrokeObject(color, width, opacity);
+    // Assert
+    Assert.NotNull(result);
+    Assert.Single(result.SvgParameter);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
+  }
+  [Fact]
+  public void GetStrokeObject_DifferentColor_NullWidthAndOpacity_ReturnsExpectedResult()
+  {
+    // Arrange
+    Color color = Color.FromArgb(255, 128, 64, 32);
+    double? width = null;
+    double? opacity = null;
 
-      // Assert
-      Assert.Equal(2, result.SvgParameter.Count);
-      Assert.Equal("#FF00FF00", result.SvgParameter[0].Value);
-      Assert.Equal("2.5", result.SvgParameter[1].Value);
-    }*/
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Single(result.SvgParameter);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
   }
 }
