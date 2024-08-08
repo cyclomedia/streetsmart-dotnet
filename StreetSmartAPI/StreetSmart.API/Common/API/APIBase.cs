@@ -201,7 +201,7 @@ namespace StreetSmart.Common.API
       return sb.ToString();
     }
 
-    protected async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
+    internal async Task<object> CallJsGetScriptAsync(string script, [CallerMemberName] string memberName = "")
     {
       int processId = GetProcessId;
 
@@ -214,7 +214,7 @@ namespace StreetSmart.Common.API
 
       return result;
     }
-    protected string GetScriptWithTryCatch(string funcName, int processId, string memberName)
+    internal string GetScriptWithTryCatch(string funcName, int processId, string memberName)
     {
       var sb = new StringBuilder();
       sb.Append("try{")

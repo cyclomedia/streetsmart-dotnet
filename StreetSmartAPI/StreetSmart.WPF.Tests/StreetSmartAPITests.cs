@@ -21,6 +21,8 @@ public class StreetSmartAPITests
   private readonly Mock<IStreetSmartBrowser> _browserMock = new();
   private readonly Mock<IJavascriptObjectRepository> _javascriptObjectRepoMock = new();
   private readonly Mock<IBrowser> _iBrowserMock = new();
+  private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask = new();
+
 
   public StreetSmartAPITests()
   {
@@ -131,4 +133,149 @@ public class StreetSmartAPITests
     Mock.Verify();
   }
 #endif
+  [Fact]
+  public async Task AddOverlay_ValidJson_ReturnsOverlay()
+  {
+    var geoJsonOverlay = new GeoJsonOverlay("{\"type\":\"FeatureCollection\",\"features\":[]}", "myName", "mySrs", Color.AliceBlue);
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback(() => _viewer.OnResult(new { id = 4 }, "AddOverlay1")).Verifiable(Times.Once);
+
+    var result = await _viewer.AddOverlay(geoJsonOverlay);
+
+    Assert.Equal(geoJsonOverlay, result);
+    Mock.Verify();
+  }
+
+  [Fact]
+  public async Task AddOverlay_InvalidJson_ThrowsStreetSmartJsonException()
+  {
+    var invalidJsonOverlay = new GeoJsonOverlay("{invalid json}", "myName", "mySrs", Color.AliceBlue);
+
+    await Assert.ThrowsAsync<StreetSmart.Common.Exceptions.StreetSmartJsonException>(() => _viewer.AddOverlay(invalidJsonOverlay));
+  }
+
+  [Fact]
+  public async Task AddOverlay_NullOverlay_ThrowsStreetSmartJsonException()
+  {
+    var nullJsonOverlay = new GeoJsonOverlay(null, "myName", "mySrs", Color.AliceBlue);
+
+    await Assert.ThrowsAsync<StreetSmart.Common.Exceptions.StreetSmartJsonException>(() => _viewer.AddOverlay(nullJsonOverlay));
+  }
+
+  [Theory]
+  [InlineData("{}", true)]
+  [InlineData("[]", true)]
+  [InlineData("{\"key\":\"value\"}", true)]
+  [InlineData("[{\"key\":\"value\"}]", true)]
+  [InlineData("", false)]
+  [InlineData(" ", false)]
+  [InlineData("{invalid}", false)]
+  [InlineData("[{invalid}]", false)]
+  [InlineData("{\"key\": \"value\", \"key2\": {\"nestedKey\": \"nestedValue\"}}", true)]
+  [InlineData("{\"key\": \"value\", \"key2\": {\"nestedKey\": undefined}}", false)]
+  public void IsValidJson_ValidatesJsonStringsCorrectly(string input, bool expectedResult)
+  {
+    var result = input.IsValidJson();
+
+    Assert.Equal(expectedResult, result);
+  }
+
+  [Fact]
+  public void IsValidJson_WhitespaceInput_ReturnsFalse()
+  {
+    string input = "   ";
+
+    var result = input.IsValidJson();
+
+    Assert.False(result);
+  }
+
+  [Fact]
+  public void IsValidJson_InvalidJson_ReturnsFalse()
+  {
+    string input = "{invalid json}";
+
+    var result = input.IsValidJson();
+
+    Assert.False(result);
+  }
+
+  [Fact]
+  public void IsValidJson_ValidJsonWithComplexStructure_ReturnsTrue()
+  {
+    string input = "{\"key\": \"value\", \"array\": [1, 2, 3], \"nestedObject\": {\"nestedKey\": \"nestedValue\"}}";
+
+    var result = input.IsValidJson();
+
+    Assert.True(result);
+  }
+
+  [Fact]
+  public void IsValidJson_InvalidJsonWithUndefined_ReturnsFalse()
+  {
+    string input = "{\"key\": \"value\", \"array\": [undefined, 2, 3]}";
+
+    var result = input.IsValidJson();
+
+    Assert.False(result);
+  }
+
+  [Fact]
+  public void IsValidJson_JsonWithNullValues_ReturnsTrue()
+  {
+    string input = "{\"key\": null}";
+
+    var result = input.IsValidJson();
+
+    Assert.True(result);
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_EmptyScript_ReturnsNull()
+  {
+    string script = string.Empty;
+    object expected = new();  
+
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback<string>(s =>
+    {
+      var funcName = GetFunctionNameFromScript(s); 
+      if (funcName == "CallJsGetScriptAsync")
+      {
+        _resultTask[funcName].SetResult(expected);
+      }
+    }).Verifiable();
+
+    var result = await _viewer.CallJsGetScriptAsync(script);
+
+    Assert.Null(result);
+    Mock.Verify();
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_NullScript_ReturnsNull()
+  {
+    string script = "";
+    object expected = new();  
+
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback<string>(s =>
+    {
+      var funcName = GetFunctionNameFromScript(s); 
+      if (funcName == "CallJsGetScriptAsync")
+      {
+        _resultTask[funcName].SetResult(expected);
+      }
+    }).Verifiable();
+
+    var result = await _viewer.CallJsGetScriptAsync(script);
+
+    Assert.Null(result);
+    Mock.Verify();
+  }
+
+  private string GetFunctionNameFromScript(string script)
+  {
+    return "CallJsGetScriptAsync";
+  }
+
 }
