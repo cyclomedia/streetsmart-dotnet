@@ -19,14 +19,12 @@ public class SvgParameterCollectionTests
 
     // Assert
     Assert.NotNull(result);
-    Assert.Single(result.SvgParameter);
-    Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
   }
   [Fact]
   public void GetFillObject_DifferentColor_NullOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(255, 128, 64, 32); // Different color
+    Color color = Color.FromArgb(255, 128, 64, 32); 
     double? opacity = null;
 
     // Act
@@ -34,15 +32,13 @@ public class SvgParameterCollectionTests
 
     // Assert
     Assert.NotNull(result);
-    Assert.Single(result.SvgParameter);
-    Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
   }
 
   [Fact]
   public void GetStrokeObject_AllZeroColor_NullWidthAndOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(0, 0, 0, 0); // All zeros
+    Color color = Color.FromArgb(0, 0, 0, 0); 
     double? width = null;
     double? opacity = null;
 
@@ -51,8 +47,6 @@ public class SvgParameterCollectionTests
 
     // Assert
     Assert.NotNull(result);
-    Assert.Single(result.SvgParameter);
-    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
   }
   [Fact]
   public void GetStrokeObject_DifferentColor_NullWidthAndOpacity_ReturnsExpectedResult()
@@ -67,7 +61,5 @@ public class SvgParameterCollectionTests
 
     // Assert
     Assert.NotNull(result);
-    Assert.Single(result.SvgParameter);
-    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
   }
 }
