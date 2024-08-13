@@ -76,7 +76,7 @@ namespace StreetSmart.Common.Interfaces.Data
     string Locale { get; set; }
 
     /// <summary>
-    /// Alternate configuration url to use for all configuration services
+    /// Deprecated - Alternate configuration url to use for all configuration services
     /// </summary>
     Uri ConfigurationURL { get; set; }
 
