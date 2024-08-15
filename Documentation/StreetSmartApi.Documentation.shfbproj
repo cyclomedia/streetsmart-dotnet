@@ -1,45 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Import the common properties to support NuGet restore -->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
 				 project documentation sources -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{f626261b-1119-40b9-b43c-1e74277703f9}</ProjectGuid>
+    <ProjectGuid>{4ff30a23-3991-4b82-b586-22b3f8976e20}</ProjectGuid>
     <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.6.2</FrameworkVersion>
-    <OutputPath>.\Help\</OutputPath>
+    <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
+    <OutputPath>Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
-    <DocumentationSources>
-      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.Framework.csproj" configuration="Debug" platform="X64" />
-    </DocumentationSources>
-    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
-    <IndentHtml>False</IndentHtml>
+    <SyntaxFilters>C#</SyntaxFilters>
+    <PresentationStyle>Default2022</PresentationStyle>
+    <CleanIntermediates>True</CleanIntermediates>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
-    <CleanIntermediates>True</CleanIntermediates>
-    <HelpFileVersion>23.9.0</HelpFileVersion>
-    <MaximumGroupParts>2</MaximumGroupParts>
-    <NamespaceGrouping>False</NamespaceGrouping>
-    <SyntaxFilters>Standard</SyntaxFilters>
-    <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
-    <PresentationStyle>VS2013</PresentationStyle>
-    <Preliminary>False</Preliminary>
+    <IndentHtml>False</IndentHtml>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <HelpTitle>Street Smart API for DotNet version 24.7.0</HelpTitle>
+    <HelpFileVersion>24.7.0</HelpFileVersion>
     <NamingMethod>MemberName</NamingMethod>
-    <HelpTitle>Street Smart API for DotNet version 23.9.0</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
-    <HeaderText>
-    </HeaderText>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <NamespaceGrouping>False</NamespaceGrouping>
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <Preliminary>False</Preliminary>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj" />
+    </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="StreetSmart.WinForms" isDocumented="True">&lt;summary&gt;
 This namespace contains the &lt;c&gt;StreetSmartGUI&lt;/c&gt; class for Winform applications.
@@ -104,6 +103,9 @@ This namespace contains the interfaces of the SLD generation classes
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
+    <SourceCodeBasePath>
+    </SourceCodeBasePath>
+    <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -123,8 +125,10 @@ This namespace contains the interfaces of the SLD generation classes
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
   </PropertyGroup>
-  <!-- Import the SHFB build targets -->
-  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+  <!-- Import the common build targets during NuGet restore because before the packages are being installed, $(SHFBROOT) is not set yet -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="'$(MSBuildRestoreSessionId)' != ''" />
+  <!-- Import the SHFB build targets during build -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" Condition="'$(MSBuildRestoreSessionId)' == ''" />
   <!-- The pre-build and post-build event properties must appear *after* the targets file import in order to be
 			 evaluated correctly. -->
   <PropertyGroup>
@@ -139,5 +143,13 @@ This namespace contains the interfaces of the SLD generation classes
   </ItemGroup>
   <ItemGroup>
     <Content Include="styles\branding.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CefSharp">
+      <HintPath>..\StreetSmartAPI\StreetSmart.API\WinForms\bin\windows\Debug\net462\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\StreetSmartAPI\StreetSmart.API\WinForms\bin\windows\Debug\net462\CefSharp.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
