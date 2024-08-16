@@ -20,7 +20,6 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Xml.Serialization;
-
 using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Data.SLD
@@ -56,11 +55,7 @@ namespace StreetSmart.Common.Data.SLD
         }
       };
 
-      if (result.SvgParameter[0].Value == "#")
-      {
-        result.SvgParameter[0].Value = "#000000";
-      }
-
+     
       if (opacity != null)
       {
         result.SvgParameter.Add(new SvgParameter<FillType>
@@ -86,12 +81,8 @@ namespace StreetSmart.Common.Data.SLD
           }
         }
       };
-
-      if (result.SvgParameter[0].Value == "#")
-      {
-        result.SvgParameter[0].Value = "#000000";
-      }
-
+     
+      
       if (width != null)
       {
         result.SvgParameter.Add(new SvgParameter<StrokeType>
