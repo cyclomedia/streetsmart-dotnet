@@ -13,7 +13,7 @@ public class SvgParameterCollectionTests
     // Arrange
     Color color = Color.FromArgb(0, 0, 0, 0);
     double? opacity = null;
-    string expectedColorValue = $"#{color.ToArgb().ToString("X2").Substring(2)}";
+    string expectedColorValue = "#000000";
 
     // Act
     var result = SvgParameterCollection<StrokeType>.GetFillObject(color, opacity);
@@ -34,7 +34,7 @@ public class SvgParameterCollectionTests
     // Arrange
     Color color = Color.FromArgb(255, 128, 64, 32); 
     double? opacity = null;
-    string expectedColorValue = $"#{color.ToArgb().ToString("X2").Substring(2)}";
+    string expectedColorValue = "#804020";
 
     // Act
     var result = SvgParameterCollection<FillType>.GetFillObject(color, opacity);
@@ -57,7 +57,7 @@ public class SvgParameterCollectionTests
     Color color = Color.FromArgb(0, 0, 0, 0); 
     double? width = null;
     double? opacity = null;
-    string expectedColorValue = $"#{color.ToArgb().ToString("X2").Substring(2)}";
+    string expectedColorValue = "#000000";
 
     // Act
     var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
@@ -79,7 +79,7 @@ public class SvgParameterCollectionTests
     Color color = Color.FromArgb(255, 128, 64, 32);
     double? width = null;
     double? opacity = null;
-    string expectedColorValue = $"#{color.ToArgb().ToString("X2").Substring(2)}";
+    string expectedColorValue = "#804020";
     // Act
     var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
     var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);

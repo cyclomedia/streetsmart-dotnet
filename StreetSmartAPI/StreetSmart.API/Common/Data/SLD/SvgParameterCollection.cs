@@ -56,6 +56,11 @@ namespace StreetSmart.Common.Data.SLD
         }
       };
 
+      if (result.SvgParameter[0].Value == "#")
+      {
+        result.SvgParameter[0].Value = "#000000";
+      }
+
       if (opacity != null)
       {
         result.SvgParameter.Add(new SvgParameter<FillType>
@@ -81,6 +86,11 @@ namespace StreetSmart.Common.Data.SLD
           }
         }
       };
+
+      if (result.SvgParameter[0].Value == "#")
+      {
+        result.SvgParameter[0].Value = "#000000";
+      }
 
       if (width != null)
       {
