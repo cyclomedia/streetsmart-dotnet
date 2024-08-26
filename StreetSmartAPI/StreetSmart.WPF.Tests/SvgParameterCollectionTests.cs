@@ -412,10 +412,6 @@ public class SvgParameterCollectionTests
   {
     hex = hex.TrimStart('#');
 
-    if (string.IsNullOrWhiteSpace(hex) || hex.Trim() == "#")
-    {
-      return (0, 0, 0); 
-    }
     int argb = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
 
     int red = (argb >> 16) & 0xFF;
