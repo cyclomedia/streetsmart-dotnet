@@ -50,7 +50,7 @@ namespace StreetSmart.Common.Data.SLD
           new SvgParameter<FillType>
           {
             Name = FillType.Fill,
-            Value = $"#{color.ToArgb().ToString("X8").Substring(2)}"
+            Value = $"#{color.ToArgb().ToString("X2").Substring(2)}"
           }
         }
       };
@@ -77,7 +77,7 @@ namespace StreetSmart.Common.Data.SLD
           new SvgParameter<StrokeType>
           {
             Name = StrokeType.Stroke,
-            Value = $"#{color.ToArgb().ToString("X8").Substring(2)}"
+            Value = $"#{color.ToArgb().ToString("X2").Substring(2)}"
           }
         }
       };
