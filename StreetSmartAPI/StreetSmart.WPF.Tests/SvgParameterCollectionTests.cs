@@ -11,7 +11,7 @@ public class SvgParameterCollectionTests
   public void GetFillObject_AllZeroColor_NullOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(0, 0, 0, 0);
+    Color color = Color.FromArgb(255, 0, 0, 0);
     double? opacity = null;
     string expectedColorValue = "#000000";
 
@@ -32,7 +32,7 @@ public class SvgParameterCollectionTests
   public void GetFillObject_DifferentColor_NullOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(255, 128, 64, 32); 
+    Color color = Color.FromArgb(10, 128, 64, 32); 
     double? opacity = null;
     string expectedColorValue = "#804020";
 
@@ -76,7 +76,7 @@ public class SvgParameterCollectionTests
   public void GetStrokeObject_DifferentColor_NullWidthAndOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(255, 128, 64, 32);
+    Color color = Color.FromArgb(0, 128, 64, 32);
     double? width = null;
     double? opacity = null;
     string expectedColorValue = "#804020";
