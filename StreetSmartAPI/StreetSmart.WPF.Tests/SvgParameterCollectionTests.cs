@@ -20,7 +20,7 @@ public class SvgParameterCollectionTests
     var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
 
     // Assert
-    Assert.NotNull(result); 
+    Assert.NotNull(result);
     Assert.Single(result.SvgParameter);
     Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
     Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
@@ -138,13 +138,13 @@ public class SvgParameterCollectionTests
     Assert.Equal(color.B, resultBlue);
   }
 
-  
+
 
   [Fact]
   public void GetStrokeObject_AllZeroColor_NullWidthAndOpacity_ReturnsExpectedResult()
   {
     // Arrange
-    Color color = Color.FromArgb(0, 0, 0, 0); 
+    Color color = Color.FromArgb(0, 0, 0, 0);
     double? width = null;
     double? opacity = null;
     string expectedColorValue = "#000000";
@@ -407,17 +407,10 @@ public class SvgParameterCollectionTests
     Assert.Equal(color.B, resultBlue);
   }
 
-
   public static (int Red, int Green, int Blue) HexToRgb(string hex)
   {
-    hex = hex.TrimStart('#');
-
-    int argb = int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-
-    int red = (argb >> 16) & 0xFF;
-    int green = (argb >> 8) & 0xFF;
-    int blue = argb & 0xFF;
-
-    return (red, green, blue);
+    var color = ColorTranslator.FromHtml(hex);
+    return (color.R, color.G, color.B);
   }
+
 }

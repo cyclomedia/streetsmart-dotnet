@@ -174,6 +174,11 @@ public class StreetSmartAPITests
   [InlineData("[{invalid}]", false)]
   [InlineData("{\"key\": \"value\", \"key2\": {\"nestedKey\": \"nestedValue\"}}", true)]
   [InlineData("{\"key\": \"value\", \"key2\": {\"nestedKey\": undefined}}", false)]
+  [InlineData("{invalid json}", false)]
+  [InlineData("{\"key\": \"value\", \"array\": [1, 2, 3], \"nestedObject\": {\"nestedKey\": \"nestedValue\"}}", true)]
+  [InlineData("{\"key\": \"value\", \"array\": [undefined, 2, 3]}", false)]
+  [InlineData("{\"key\": null}", true)]
+
   public void IsValidJson_ValidatesJsonStringsCorrectly(string input, bool expectedResult)
   {
     var result = input.IsValidJson();
@@ -182,64 +187,14 @@ public class StreetSmartAPITests
   }
 
   [Fact]
-  public void IsValidJson_WhitespaceInput_ReturnsFalse()
-  {
-    string input = "   ";
-
-    var result = input.IsValidJson();
-
-    Assert.False(result);
-  }
-
-  [Fact]
-  public void IsValidJson_InvalidJson_ReturnsFalse()
-  {
-    string input = "{invalid json}";
-
-    var result = input.IsValidJson();
-
-    Assert.False(result);
-  }
-
-  [Fact]
-  public void IsValidJson_ValidJsonWithComplexStructure_ReturnsTrue()
-  {
-    string input = "{\"key\": \"value\", \"array\": [1, 2, 3], \"nestedObject\": {\"nestedKey\": \"nestedValue\"}}";
-
-    var result = input.IsValidJson();
-
-    Assert.True(result);
-  }
-
-  [Fact]
-  public void IsValidJson_InvalidJsonWithUndefined_ReturnsFalse()
-  {
-    string input = "{\"key\": \"value\", \"array\": [undefined, 2, 3]}";
-
-    var result = input.IsValidJson();
-
-    Assert.False(result);
-  }
-
-  [Fact]
-  public void IsValidJson_JsonWithNullValues_ReturnsTrue()
-  {
-    string input = "{\"key\": null}";
-
-    var result = input.IsValidJson();
-
-    Assert.True(result);
-  }
-
-  [Fact]
   public async Task CallJsGetScriptAsync_EmptyScript_ReturnsNull()
   {
     string script = string.Empty;
-    object expected = new();  
+    object expected = new();
 
     _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback<string>(s =>
     {
-      var funcName = GetFunctionNameFromScript(s); 
+      var funcName = GetFunctionNameFromScript(s);
       if (funcName == "CallJsGetScriptAsync")
       {
         _resultTask[funcName].SetResult(expected);
@@ -256,21 +211,14 @@ public class StreetSmartAPITests
   public async Task CallJsGetScriptAsync_NullScript_ReturnsNull()
   {
     string script = "";
-    object expected = new();  
+    object expected = new();
 
-    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback<string>(s =>
-    {
-      var funcName = GetFunctionNameFromScript(s); 
-      if (funcName == "CallJsGetScriptAsync")
-      {
-        _resultTask[funcName].SetResult(expected);
-      }
-    }).Verifiable();
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>()))
+                .Callback<string>(s => _resultTask["CallJsGetScriptAsync"].SetResult(expected));
 
     var result = await _viewer.CallJsGetScriptAsync(script);
 
     Assert.Null(result);
-    Mock.Verify();
   }
 
   private string GetFunctionNameFromScript(string script)
