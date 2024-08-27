@@ -189,41 +189,29 @@ public class StreetSmartAPITests
   [Fact]
   public async Task CallJsGetScriptAsync_EmptyScript_ReturnsNull()
   {
-    string script = string.Empty;
-    object expected = new();
+    string expectedResult = "";
+    string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.skripta, 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.Is<string>(s => s == expectedScript))).Callback(() => _viewer.OnResult(string.Empty, "CallJsGetScriptAsync1")).Verifiable(Times.Once);
 
-    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>())).Callback<string>(s =>
-    {
-      var funcName = GetFunctionNameFromScript(s);
-      if (funcName == "CallJsGetScriptAsync")
-      {
-        _resultTask[funcName].SetResult(expected);
-      }
-    }).Verifiable();
+    var result = await _viewer.CallJsGetScriptAsync("skripta", "CallJsGetScriptAsync");
 
-    var result = await _viewer.CallJsGetScriptAsync(script);
-
-    Assert.Null(result);
+    Assert.Equal(result, expectedResult);
     Mock.Verify();
   }
 
   [Fact]
   public async Task CallJsGetScriptAsync_NullScript_ReturnsNull()
   {
-    string script = "";
-    object expected = new();
+    string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.skripta, 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.Is<string>(s => s == expectedScript))).Callback(() => _viewer.OnResult(null, "CallJsGetScriptAsync1")).Verifiable(Times.Once);
 
-    _browserMock.Setup(x => x.ExecuteScriptAsync(It.IsAny<string>()))
-                .Callback<string>(s => _resultTask["CallJsGetScriptAsync"].SetResult(expected));
-
-    var result = await _viewer.CallJsGetScriptAsync(script);
+    var result = await _viewer.CallJsGetScriptAsync("skripta", "CallJsGetScriptAsync");
 
     Assert.Null(result);
+    Mock.Verify();
   }
-
-  private string GetFunctionNameFromScript(string script)
-  {
-    return "CallJsGetScriptAsync";
-  }
-
 }

@@ -2,6 +2,7 @@
 using Xunit;
 using StreetSmart.Common.Data.SLD;
 using StreetSmart.Common.Interfaces.SLD;
+using System;
 
 namespace StreetSmart.WPF.Tests;
 
@@ -407,10 +408,33 @@ public class SvgParameterCollectionTests
     Assert.Equal(color.B, resultBlue);
   }
 
+  [Fact]
+  public void GetStrokeObject_RandomColor_NullWidthAndOpacity_ReturnsExpectedResult()
+  {
+    // Arrange
+    Color color = Color.FromArgb(255, 50, 168, 80);
+    double? width = null;
+    double? opacity = null;
+    string expectedColorValue = "#32A850";
+
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
+    var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Single(result.SvgParameter);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
+    Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(color.R, resultRed);
+    Assert.Equal(color.G, resultGreen);
+    Assert.Equal(color.B, resultBlue);
+  }
+
   public static (int Red, int Green, int Blue) HexToRgb(string hex)
   {
     var color = ColorTranslator.FromHtml(hex);
     return (color.R, color.G, color.B);
   }
-
+  
 }
