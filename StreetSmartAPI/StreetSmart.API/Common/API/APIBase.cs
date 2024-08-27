@@ -214,7 +214,7 @@ namespace StreetSmart.Common.API
 
       return result;
     }
-    internal string GetScriptWithTryCatch(string funcName, int processId, string memberName)
+    protected string GetScriptWithTryCatch(string funcName, int processId, string memberName)
     {
       var sb = new StringBuilder();
       sb.Append("try{")

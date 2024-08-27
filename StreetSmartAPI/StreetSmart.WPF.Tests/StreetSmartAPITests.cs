@@ -21,7 +21,6 @@ public class StreetSmartAPITests
   private readonly Mock<IStreetSmartBrowser> _browserMock = new();
   private readonly Mock<IJavascriptObjectRepository> _javascriptObjectRepoMock = new();
   private readonly Mock<IBrowser> _iBrowserMock = new();
-  private readonly Dictionary<string, TaskCompletionSource<object>> _resultTask = new();
 
 
   public StreetSmartAPITests()
@@ -187,7 +186,7 @@ public class StreetSmartAPITests
   }
 
   [Fact]
-  public async Task CallJsGetScriptAsync_EmptyScript_ReturnsNull()
+  public async Task CallJsGetScriptAsync_EmptyResult_ReturnEmptyString()
   {
     string expectedResult = "";
     string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.skripta, 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
@@ -202,7 +201,7 @@ public class StreetSmartAPITests
   }
 
   [Fact]
-  public async Task CallJsGetScriptAsync_NullScript_ReturnsNull()
+  public async Task CallJsGetScriptAsync_NullResult_ReturnsNull()
   {
     string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.skripta, 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
     _browserMock.Setup(x => x.IsDisposed).Returns(false);
@@ -213,5 +212,53 @@ public class StreetSmartAPITests
 
     Assert.Null(result);
     Mock.Verify();
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_ExceptionThrown()
+  {
+    string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.skripta, 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.Is<string>(s => s == expectedScript))).Callback(() => _viewer.OnResult(new Exception(), "CallJsGetScriptAsync1")).Verifiable(Times.Once);
+
+    await Assert.ThrowsAsync<Exception>(() => _viewer.CallJsGetScriptAsync("skripta", "CallJsGetScriptAsync"));
+
+    Mock.Verify();
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_NullResultEmptyScript_ReturnsNull()
+  {
+    string expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi., 'CallJsGetScriptAsync1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, CallJsGetScriptAsync1);}";
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);
+    _browserMock.Setup(x => x.ExecuteScriptAsync(It.Is<string>(s => s == expectedScript))).Callback(() => _viewer.OnResult(null, "CallJsGetScriptAsync1")).Verifiable(Times.Once);
+
+    var result = await _viewer.CallJsGetScriptAsync("", "CallJsGetScriptAsync");
+
+    Assert.Null(result);
+    Mock.Verify();
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_IsDisposedIsTrue_ReturnsNull()
+  {
+    _browserMock.Setup(x => x.IsDisposed).Returns(true);
+   
+    var result = await _viewer.CallJsGetScriptAsync("skripta", "CallJsGetScriptAsync");
+
+    Assert.Null(result);
+  }
+
+  [Fact]
+  public async Task CallJsGetScriptAsync_GetBrowserReturnsNull_ResultNull()
+  { 
+    _browserMock.Setup(x => x.IsDisposed).Returns(false);
+    _browserMock.Setup(x => x.GetBrowser()).Returns((IBrowser?)null);
+
+    var result = await _viewer.CallJsGetScriptAsync("skripta", "CallJsGetScriptAsync");
+
+    Assert.Null(result);
   }
 }
