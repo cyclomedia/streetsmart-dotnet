@@ -23,7 +23,7 @@ public class SvgParameterCollectionTests
   [InlineData(255, 255, 0 ,0,null, "#FF0000")]
   [InlineData(255, 0, 255, 0, null, "#00FF00")]
   [InlineData(255, 0, 0, 255, null, "#0000FF")]
-  public void GetFillObject_ReturnsExpectedResult(int a,int r, int g, int b,double? opacity,string expectedColorValue)
+  public void GetFillObject_OpacityNull_ReturnsExpectedResult(int a,int r, int g, int b,double? opacity,string expectedColorValue)
   {
     Color color = Color.FromArgb(a, r, g, b);
 
@@ -36,6 +36,38 @@ public class SvgParameterCollectionTests
     Assert.Single(result.SvgParameter);
     Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
     Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(color.R, resultRed);
+    Assert.Equal(color.G, resultGreen);
+    Assert.Equal(color.B, resultBlue);
+  }
+
+  [Theory]
+  [InlineData(0, 0, 0, 0, 5.0, "5" , "#000000")]                   
+  [InlineData(10, 0, 0, 0, 5.0, "5", "#000000")]                   
+  [InlineData(255, 0, 0, 0, 5.0, "5", "#000000")]                   
+  [InlineData(0, 128, 64, 32, 5.0, "5", "#804020")]                 
+  [InlineData(10, 128, 64, 32, 5.0, "5", "#804020")]                
+  [InlineData(255, 128, 64, 32, 5.0, "5", "#804020")]             
+  [InlineData(0, 255, 0, 0, 5.0, "5", "#FF0000")]                  
+  [InlineData(0, 0, 255, 0, 5.0, "5", "#00FF00")]                   
+  [InlineData(0, 0, 0, 255, 5.0, "5", "#0000FF")]                   
+  [InlineData(255, 255, 0, 0, 5.0, "5", "#FF0000")]                 
+  [InlineData(255, 0, 255, 0, 5.0, "5", "#00FF00")]                 
+  [InlineData(255, 0, 0, 255, 5.0, "5", "#0000FF")]                 
+  public void GetFillObject_OpacityHasValue_ReturnsExpectedResult(int a, int r, int g, int b, double? opacity, string expectedOpacityValue, string expectedColorValue)
+  {
+    Color color = Color.FromArgb(a, r, g, b);
+
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetFillObject(color, opacity);
+    var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Equal(FillType.Fill, result.SvgParameter[0].Name);
+    Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(FillType.FillOpacity, result.SvgParameter[1].Name);
+    Assert.Equal(expectedOpacityValue, result.SvgParameter[1].Value);
     Assert.Equal(color.R, resultRed);
     Assert.Equal(color.G, resultGreen);
     Assert.Equal(color.B, resultBlue);
@@ -67,6 +99,104 @@ public class SvgParameterCollectionTests
     Assert.Single(result.SvgParameter);
     Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
     Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(color.R, resultRed);
+    Assert.Equal(color.G, resultGreen);
+    Assert.Equal(color.B, resultBlue);
+  }
+
+  [Theory]
+  [InlineData(0, 0, 0, 0, 5.0, "5", 5.0, "5", "#000000")]
+  [InlineData(10, 0, 0, 0, 5.0, "5", 5.0, "5", "#000000")]
+  [InlineData(255, 0, 0, 0, 5.0, "5", 5.0, "5", "#000000")]
+  [InlineData(0, 128, 64, 32, 5.0, "5", 5.0, "5", "#804020")]
+  [InlineData(10, 128, 64, 32, 5.0, "5", 5.0, "5", "#804020")]
+  [InlineData(255, 128, 64, 32, 5.0, "5", 5.0, "5", "#804020")]
+  [InlineData(0, 255, 0, 0, 5.0, "5", 5.0, "5", "#FF0000")]
+  [InlineData(0, 0, 255, 0, 5.0, "5", 5.0, "5", "#00FF00")]
+  [InlineData(0, 0, 0, 255, 5.0, "5", 5.0, "5", "#0000FF")]
+  [InlineData(255, 255, 0, 0, 5.0, "5", 5.0, "5", "#FF0000")]
+  [InlineData(255, 0, 255, 0, 5.0, "5", 5.0, "5", "#00FF00")]
+  [InlineData(255, 0, 0, 255, 5.0, "5", 5.0, "5", "#0000FF")]
+  public void GetStrokeObject_WidthAndOpacityNotNull_ReturnsExpectedResult(int a, int r, int g, int b, double? width, string expectedWidth, double? opacity, string expectedOpacity, string expectedColorValue)
+  {
+    Color color = Color.FromArgb(a, r, g, b);
+
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, opacity);
+    var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
+    Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(StrokeType.StrokeWidth, result.SvgParameter[1].Name);
+    Assert.Equal(expectedWidth, result.SvgParameter[1].Value);
+    Assert.Equal(StrokeType.StrokeOpacity, result.SvgParameter[2].Name);
+    Assert.Equal(expectedOpacity, result.SvgParameter[2].Value);
+    Assert.Equal(color.R, resultRed);
+    Assert.Equal(color.G, resultGreen);
+    Assert.Equal(color.B, resultBlue);
+  }
+
+  [Theory]
+  [InlineData(0, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(10, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(255, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(0, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(10, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(255, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(0, 255, 0, 0, 5.0, "5", "#FF0000")]
+  [InlineData(0, 0, 255, 0, 5.0, "5", "#00FF00")]
+  [InlineData(0, 0, 0, 255, 5.0, "5", "#0000FF")]
+  [InlineData(255, 255, 0, 0, 5.0, "5", "#FF0000")]
+  [InlineData(255, 0, 255, 0, 5.0, "5", "#00FF00")]
+  [InlineData(255, 0, 0, 255, 5.0, "5", "#0000FF")]
+  public void GetStrokeObject_WidthNotNull_ReturnsExpectedResult(int a, int r, int g, int b, double? width, string expectedWidth, string expectedColorValue)
+  {
+    Color color = Color.FromArgb(a, r, g, b);
+
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, width, null);
+    var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
+    Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(StrokeType.StrokeWidth, result.SvgParameter[1].Name);
+    Assert.Equal(expectedWidth, result.SvgParameter[1].Value);
+    Assert.Equal(color.R, resultRed);
+    Assert.Equal(color.G, resultGreen);
+    Assert.Equal(color.B, resultBlue);
+  }
+
+  [Theory]
+  [InlineData(0, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(10, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(255, 0, 0, 0, 5.0, "5", "#000000")]
+  [InlineData(0, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(10, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(255, 128, 64, 32, 5.0, "5", "#804020")]
+  [InlineData(0, 255, 0, 0, 5.0, "5", "#FF0000")]
+  [InlineData(0, 0, 255, 0, 5.0, "5", "#00FF00")]
+  [InlineData(0, 0, 0, 255, 5.0, "5", "#0000FF")]
+  [InlineData(255, 255, 0, 0, 5.0, "5", "#FF0000")]
+  [InlineData(255, 0, 255, 0, 5.0, "5", "#00FF00")]
+  [InlineData(255, 0, 0, 255, 5.0, "5", "#0000FF")]
+  public void GetStrokeObject_OpacityNotNull_ReturnsExpectedResult(int a, int r, int g, int b, double? opacity, string expectedOpacity, string expectedColorValue)
+  {
+    Color color = Color.FromArgb(a, r, g, b);
+
+    // Act
+    var result = SvgParameterCollection<StrokeType>.GetStrokeObject(color, null,opacity);
+    var (resultRed, resultGreen, resultBlue) = HexToRgb(result.SvgParameter[0].Value);
+
+    // Assert
+    Assert.NotNull(result);
+    Assert.Equal(StrokeType.Stroke, result.SvgParameter[0].Name);
+    Assert.Equal(expectedColorValue, result.SvgParameter[0].Value);
+    Assert.Equal(StrokeType.StrokeOpacity, result.SvgParameter[1].Name);
+    Assert.Equal(expectedOpacity, result.SvgParameter[1].Value);
     Assert.Equal(color.R, resultRed);
     Assert.Equal(color.G, resultGreen);
     Assert.Equal(color.B, resultBlue);
