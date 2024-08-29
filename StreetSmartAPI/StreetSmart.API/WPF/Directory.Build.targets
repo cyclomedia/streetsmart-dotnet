@@ -1,9 +1,12 @@
 <Project>
-  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
-	<ItemGroup>
-		<Locales Include="$(MSBuildThisFileDirectory)\..\locales\*.pak" />
-	</ItemGroup>
-	<Target Name="CopyLocales" BeforeTargets="Build">
-		<Copy SourceFiles="@(Locales)" DestinationFolder="$(TargetDir)locales\" />
+	<Target Name="CopyLocales" AfterTargets="Build">
+		<Error Condition="!Exists('$(NuGetPackageRoot)chromiumembeddedframework.runtime\123.0.6\CEF\win-x64\locales')" Text="chromiumembeddedframework is missing - please check version number!" /> 
+		<ItemGroup>
+			<!-- this is WORKAROUND for having .pak files delivered properly to any application/library using the StreetSmart .NET API -->
+			<!-- this target is needed to ensure CefSharp runtime pak files are restored properly (even in other applications using .NET API nuget package) -->
+			<!-- please ensure the package version number is always upgraded, together with the package upgrade) -->
+			<LocalesSourceFiles Include="$(NuGetPackageRoot)chromiumembeddedframework.runtime\123.0.6\CEF\win-x64\locales\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(LocalesSourceFiles)" DestinationFolder="$(TargetDir)locales\" />
 	</Target>
 </Project>
