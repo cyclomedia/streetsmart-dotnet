@@ -12,7 +12,7 @@
 		<UseWPF>true</UseWPF>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.7.0.0</Version>
+		<Version>24.7.1.0-rc1</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
@@ -932,22 +932,6 @@
 			<PackagePath>\</PackagePath>
 		</None>
 		<None Include="Directory.build.targets" PackagePath="buildTransitive/StreetSmart.WPF.targets" Pack="true" />
-		<None Include="..\Common\locales\af.pak" Link="locales\af.pak" PackagePath="locales">
-			<Pack>true</Pack>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Common\locales\am.pak" Link="locales\am.pak" PackagePath="locales">
-			<Pack>true</Pack>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Common\locales\en-US.pak" Link="locales\en-US.pak" PackagePath="locales">
-			<Pack>true</Pack>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Common\locales\en-GB.pak" Link="locales\en-GB.pak" PackagePath="locales">
-			<Pack>true</Pack>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
 		<PackageReference Include="CefSharp.Wpf.NETCore" Version="123.0.60" />
