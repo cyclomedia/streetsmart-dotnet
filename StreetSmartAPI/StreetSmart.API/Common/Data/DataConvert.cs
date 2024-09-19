@@ -186,7 +186,7 @@ namespace StreetSmart.Common.Data
     {
       if (value is IList<object>)
       {
-        return (value as List<object>)?.ToArray() ?? [];
+        return (value as IList<object>)?.ToArray() ?? [];
       }
 
       return [];
