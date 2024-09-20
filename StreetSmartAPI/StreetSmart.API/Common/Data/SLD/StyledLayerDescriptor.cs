@@ -111,17 +111,10 @@ namespace StreetSmart.Common.Data.SLD
 
     private string SerializeToXml()
     {
-      XmlSerializer serializer = new XmlSerializer(typeof(StyledLayerDescriptor));
-      using (MemoryStream stream = new MemoryStream())
-      {
-        serializer.Serialize(stream, this);
-        stream.Flush();
-        stream.Position = 0;
-        using (TextReader textReader = new StreamReader(stream))
-        {
-          return textReader.ReadToEnd();
-        }
-      }
+      var serializer = new XmlSerializer(typeof(StyledLayerDescriptor));
+      using var writer = new Utf8StringWriter();
+      serializer.Serialize(writer, this);
+      return writer.ToString();
     }
 
     public string CustomSerialization()
@@ -150,6 +143,11 @@ namespace StreetSmart.Common.Data.SLD
         writer.WriteEndElement(); // StyledLayerDescriptor
       }
       return sb.ToString();
+    }
+
+    private class Utf8StringWriter : StringWriter
+    {
+      public override System.Text.Encoding Encoding => System.Text.Encoding.UTF8;
     }
   }
 }
