@@ -168,6 +168,14 @@ namespace StreetSmart.Common.Interfaces.API
     Task<IGeoJsonOverlay> AddOverlay(IGeoJsonOverlay overlay);
 
     /// <summary>
+    /// Update a GeoJSON overlay to the panorama viewer. SRS of API initialisation is used.
+    /// Use overload with sourceSrs parameter if provided GeoJSON is in a different coordinate system.
+    /// </summary>
+    /// <param name="overlay">The overlay to update</param>
+    /// <returns>the overlay object</returns>
+    Task<IGeoJsonOverlay> UpdateOverlay(IGeoJsonOverlay overlay);
+
+    /// <summary>
     /// Add a WFS Layer as overlay to the panorama viewer. Can be removed with removeOverlay
     /// </summary>
     /// <param name="overlay">The WFS layer to add</param>
