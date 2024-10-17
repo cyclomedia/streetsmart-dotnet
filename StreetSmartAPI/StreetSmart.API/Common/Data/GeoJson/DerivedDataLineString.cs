@@ -22,6 +22,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System.Dynamic;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -47,7 +48,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var coordinateStdev in coordinateStdevs)
       {
-        CoordinateStdev.Add(new Stdev(coordinateStdev as Dictionary<string, object>));
+        CoordinateStdev.Add(
+          new Stdev((coordinateStdev as ExpandoObject)?.ToDictionary(pair => pair.Key, pair => pair.Value)));
       }
     }
 
