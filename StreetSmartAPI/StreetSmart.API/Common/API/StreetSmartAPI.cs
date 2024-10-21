@@ -215,6 +215,17 @@ namespace StreetSmart.Common.API
       return overlay;
     }
 
+    public async Task<IGeoJsonOverlay> UpdateOverlay(IGeoJsonOverlay overlay)
+    {
+      if (!overlay?.GeoJson?.IsValidJson() ?? true)
+      {
+        throw new StreetSmartJsonException("Json is not valid");
+      }
+
+      overlay.FillInParameters(ToDictionary(await CallJsGetScriptAsync($"updateOverlay({overlay})")));
+      return overlay;
+    }
+
     public async Task<IWFSOverlay> AddWFSLayer(IWFSOverlay overlay)
     {
       int processId = GetProcessId;
