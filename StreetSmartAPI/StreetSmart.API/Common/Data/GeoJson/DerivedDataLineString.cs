@@ -16,12 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
+
+#if NETCOREAPP
+using System.Dynamic;
+using System.Linq;
+#endif
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -43,38 +47,44 @@ namespace StreetSmart.Common.Data.GeoJson
       DeltaZ = getStdValue(derivedData, "deltaZ");
       // ReSharper restore InconsistentNaming
 
-      CoordinateStdev = new List<IStdev>();
+      CoordinateStdev = new List<IStdev>(coordinateStdevs.Count);
 
       foreach (var coordinateStdev in coordinateStdevs)
       {
+#if NETCOREAPP
+        CoordinateStdev.Add(new Stdev((coordinateStdev as ExpandoObject)?.ToDictionary(pair => pair.Key, pair => pair.Value)));
+#else
         CoordinateStdev.Add(new Stdev(coordinateStdev as Dictionary<string, object>));
+#endif
       }
     }
 
     public DerivedDataLineString(IDerivedDataLineString derivedData)
       : base(derivedData)
     {
-      if (derivedData != null)
+      if (derivedData == null)
       {
-        if (derivedData.CoordinateStdev != null)
-        {
-          CoordinateStdev = new List<IStdev>();
-
-          foreach (IStdev stdev in derivedData.CoordinateStdev)
-          {
-            CoordinateStdev.Add(new Stdev(stdev));
-          }
-        }
-
-        TotalLength = new Property(derivedData.TotalLength);
-        SegmentLengths = GetStdValueList(derivedData.SegmentLengths);
-        SegmentsDeltaXY = GetStdValueList(derivedData.SegmentsDeltaXY);
-        SegmentsDeltaZ = GetStdValueList(derivedData.SegmentsDeltaZ);
-        SegmentsSlopePercentage = GetStdValueList(derivedData.SegmentsSlopePercentage);
-        SegmentsSlopeAngle = GetStdValueList(derivedData.SegmentsSlopeAngle);
-        DeltaXY = new Property(derivedData.DeltaXY);
-        DeltaZ = new Property(derivedData.DeltaZ);
+        return;
       }
+
+      if (derivedData.CoordinateStdev != null)
+      {
+        CoordinateStdev = new List<IStdev>(derivedData.CoordinateStdev.Count);
+
+        foreach (IStdev stdev in derivedData.CoordinateStdev)
+        {
+          CoordinateStdev.Add(new Stdev(stdev));
+        }
+      }
+
+      TotalLength = new Property(derivedData.TotalLength);
+      SegmentLengths = GetStdValueList(derivedData.SegmentLengths);
+      SegmentsDeltaXY = GetStdValueList(derivedData.SegmentsDeltaXY);
+      SegmentsDeltaZ = GetStdValueList(derivedData.SegmentsDeltaZ);
+      SegmentsSlopePercentage = GetStdValueList(derivedData.SegmentsSlopePercentage);
+      SegmentsSlopeAngle = GetStdValueList(derivedData.SegmentsSlopeAngle);
+      DeltaXY = new Property(derivedData.DeltaXY);
+      DeltaZ = new Property(derivedData.DeltaZ);
     }
 
     public IList<IStdev> CoordinateStdev { get; }
@@ -99,17 +109,16 @@ namespace StreetSmart.Common.Data.GeoJson
     private IList<IProperty> GetStdValueList(Dictionary<string, object> derivedData, string key)
     {
       var input = GetDictValue(derivedData, key);
-      List<IProperty> result = null;
-
-      if (GetValue(input, "value") is IList<object> value)
+      if (GetValue(input, "value") is not IList<object> value)
       {
-        var stdevstList = GetListValue(input, "stdev");
-        result = new List<IProperty>();
+        return null;
+      }
 
-        for (int i = 0; i < value.Count; i++)
-        {
-          result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
-        }
+      var stdevstList = GetListValue(input, "stdev");
+      var result = new List<IProperty>(value.Count);
+      for (int i = 0; i < value.Count; i++)
+      {
+        result.Add(new Property(value[i], stdevstList != null && i < stdevstList.Count ? stdevstList[i] : null));
       }
 
       return result;
@@ -117,16 +126,15 @@ namespace StreetSmart.Common.Data.GeoJson
 
     private IList<IProperty> GetStdValueList(IList<IProperty> properties)
     {
-      List<IProperty> result = null;
-
-      if (properties != null)
+      if (properties == null)
       {
-        result = new List<IProperty>();
+        return null;
+      }
 
-        foreach (IProperty property in properties)
-        {
-          result.Add(new Property(property));
-        }
+      var result = new List<IProperty>(properties.Count);
+      foreach (IProperty property in properties)
+      {
+        result.Add(new Property(property));
       }
 
       return result;
@@ -148,41 +156,40 @@ namespace StreetSmart.Common.Data.GeoJson
 
     private string GetValueString(IList<IProperty> propertyList, string propertyName)
     {
-      string result = string.Empty;
-
-      if (propertyList != null)
+      if (propertyList == null)
       {
-        CultureInfo ci = CultureInfo.InvariantCulture;
-        string value = "\"value\":[";
-        string stdev = "\"stdev\":[";
-
-        foreach (IProperty property in propertyList)
-        {
-          string valueStr = double.IsNaN(property?.Value ?? double.NaN) ? null : property?.Value?.ToString(ci);
-          string stdevStr = double.IsNaN(property?.Stdev ?? double.NaN) ? null : property?.Stdev?.ToString(ci);
-          valueStr = string.IsNullOrEmpty(valueStr) ? "null" : valueStr;
-          stdevStr = string.IsNullOrEmpty(stdevStr) ? "null" : stdevStr;
-          value = $"{value}{valueStr},";
-          stdev = $"{stdev}{stdevStr},";
-        }
-
-        if (propertyList.Count >= 1)
-        {
-          value = value.Substring(0, value.Length - 1);
-          stdev = stdev.Substring(0, stdev.Length - 1);
-        }
-
-        result = $"\"{propertyName}\":{{{value}],{stdev}]}},";
+        return string.Empty;
       }
 
-      return result;
-    }
+      CultureInfo ci = CultureInfo.InvariantCulture;
+      string value = "\"value\":[";
+      string stdev = "\"stdev\":[";
 
+      foreach (IProperty property in propertyList)
+      {
+        string valueStr = double.IsNaN(property?.Value ?? double.NaN) ? null : property?.Value?.ToString(ci);
+        string stdevStr = double.IsNaN(property?.Stdev ?? double.NaN) ? null : property?.Stdev?.ToString(ci);
+        valueStr = string.IsNullOrEmpty(valueStr) ? "null" : valueStr;
+        stdevStr = string.IsNullOrEmpty(stdevStr) ? "null" : stdevStr;
+        value = $"{value}{valueStr},";
+        stdev = $"{stdev}{stdevStr},";
+      }
+
+      if (propertyList.Count >= 1)
+      {
+        value = value.Substring(0, value.Length - 1);
+        stdev = stdev.Substring(0, stdev.Length - 1);
+      }
+
+      return $"\"{propertyName}\":{{{value}],{stdev}]}},";
+    }
 
     protected string GetValueString(IProperty property, string propertyName)
     {
       if (property == null)
+      {
         return string.Empty;
+      }
 
       CultureInfo ci = CultureInfo.InvariantCulture;
       var sb = new StringBuilder();
@@ -197,11 +204,15 @@ namespace StreetSmart.Common.Data.GeoJson
         {
           sb.Append($"\"value\":{value}");
           if (!string.IsNullOrEmpty(stdev))
+          {
             sb.Append(",");
+          }
         }
 
         if (!string.IsNullOrEmpty(stdev))
+        {
           sb.Append($"\"stdev\":{stdev}");
+        }
 
         sb.Append("},");
       }
@@ -212,7 +223,7 @@ namespace StreetSmart.Common.Data.GeoJson
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
-      StringBuilder sb = new StringBuilder();
+      StringBuilder sb = new();
 
       sb.Append("[");
 
@@ -223,33 +234,23 @@ namespace StreetSmart.Common.Data.GeoJson
         string stdevZ = stdev?.Z?.ToString(ci);
         bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
 
-        if (noStdev)
-        {
-          sb.Append("null,");
-        }
-        else
-        {
-          sb.Append($"{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},");
-        }
+        sb.Append(noStdev ? "null," : $"{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},");
       }
 
       if (sb.Length > 1)
       {
         sb.Length--;
       }
-      sb.Append("]");
 
-      sb.Append("{");
+      sb.Append("]{");
 
       string baseStr = base.ToString();
       if (baseStr.Length > 0)
       {
         sb.Append(baseStr.Substring(0, baseStr.Length - 1));
       }
-      string comma = (sb.Length > 1) ? "," : string.Empty;
 
-      sb.Append(comma);
-
+      sb.Append((sb.Length > 1) ? "," : string.Empty); // comma
       sb.Append(GetValueString(TotalLength, "totalLength"));
       sb.Append(GetValueString(SegmentLengths, "segmentLengths"));
       sb.Append(GetValueString(SegmentsDeltaXY, "segmentsDeltaXY"));
@@ -259,98 +260,105 @@ namespace StreetSmart.Common.Data.GeoJson
       sb.Append(GetValueString(DeltaXY, "deltaXY"));
       sb.Append(GetValueString(DeltaZ, "deltaZ"));
 
-      sb.Append($"\"coordinateStdevs\":{sb.ToString()}");
-      sb.Append("}");
+      sb.Append($"\"coordinateStdevs\":{sb}}}");
 
-      return $"{sb}";
+      return sb.ToString();
     }
 
     public bool Equals(DerivedDataLineString other)
     {
-      if (other == null) return false;
-
-      if ((CoordinateStdev == null) != (other.CoordinateStdev == null)) return false;
-      if ((SegmentLengths == null) != (other.SegmentLengths == null)) return false;
-      if ((SegmentsDeltaXY == null) != (other.SegmentsDeltaXY == null)) return false;
-      if ((SegmentsDeltaZ == null) != (other.SegmentsDeltaZ == null)) return false;
-      if ((SegmentsSlopePercentage == null) != (other.SegmentsSlopePercentage == null)) return false;
-      if ((SegmentsSlopeAngle == null) != (other.SegmentsSlopeAngle == null)) return false;
-      if ((TotalLength == null) != (other.TotalLength == null)) return false;
-      if ((DeltaXY == null) != (other.DeltaXY == null)) return false;
-
-      if (CoordinateStdev != null && other.CoordinateStdev != null)
-        if (CoordinateStdev.Count == other.CoordinateStdev.Count)
-          for (int i = 0; i < CoordinateStdev.Count; i++)
-          {
-            if (!CoordinateStdev[i].Equals(other.CoordinateStdev[i]))
-              return false;
-          }
-        else
-          return false;
-
-      if (SegmentLengths != null && other.SegmentLengths != null)
-        if (SegmentLengths.Count == other.SegmentLengths.Count)
-          for (int i = 0; i < SegmentLengths.Count; i++)
-          {
-            if (!SegmentLengths[i].Equals(other.SegmentLengths[i]))
-              return false;
-          }
-        else
-          return false;
-
-      if (SegmentsDeltaXY != null && other.SegmentsDeltaXY != null)
-        if (SegmentsDeltaXY.Count == other.SegmentsDeltaXY.Count)
-          for (int i = 0; i < SegmentsDeltaXY.Count; i++)
-          {
-            if (!SegmentsDeltaXY[i].Equals(other.SegmentsDeltaXY[i]))
-              return false;
-          }
-        else
-          return false;
-
-      if (SegmentsDeltaZ != null && other.SegmentsDeltaZ != null)
-        if (SegmentsDeltaZ.Count == other.SegmentsDeltaZ.Count)
-          for (int i = 0; i < SegmentsDeltaZ.Count; i++)
-          {
-            if (!SegmentsDeltaZ[i].Equals(other.SegmentsDeltaZ[i]))
-              return false;
-          }
-        else
-          return false;
-
-      if (SegmentsSlopePercentage != null && other.SegmentsSlopePercentage != null)
-        if (SegmentsSlopePercentage.Count == other.SegmentsSlopePercentage.Count)
-          for (int i = 0; i < SegmentsSlopePercentage.Count; i++)
-          {
-            if (!SegmentsSlopePercentage[i].Equals(other.SegmentsSlopePercentage[i])) 
-              return false;
-          }
-        else
-          return false;
-
-      if (SegmentsSlopeAngle != null && other.SegmentsSlopeAngle != null)
-        if (SegmentsSlopeAngle.Count == other.SegmentsSlopeAngle.Count)
-          for (int i = 0; i < SegmentsSlopeAngle.Count; i++)
-          {
-            if (!SegmentsSlopeAngle[i].Equals(other.SegmentsSlopeAngle[i]))
-              return false;
-          }
-        else
-          return false;
-
-      if(TotalLength != null && other.TotalLength != null)
+      if (other == null)
       {
-        if(!TotalLength.Equals(other.TotalLength)) return false;
+        return false;
+      }
+
+      if (!ListsEqual(CoordinateStdev, other.CoordinateStdev))
+      {
+        return false;
+      }
+
+      if (!ListsEqual(SegmentLengths, other.SegmentLengths))
+      {
+        return false;
+      }
+
+      if (!ListsEqual(SegmentsDeltaXY, other.SegmentsDeltaXY))
+      {
+        return false;
+      }
+
+      if (!ListsEqual(SegmentsDeltaZ, other.SegmentsDeltaZ))
+      {
+        return false;
+      }
+
+      if (!ListsEqual(SegmentsSlopePercentage, other.SegmentsSlopePercentage))
+      {
+        return false;
+      }
+
+      if (!ListsEqual(SegmentsSlopeAngle, other.SegmentsSlopeAngle))
+      {
+        return false;
+      }
+
+      if (TotalLength == null != (other.TotalLength == null))
+      {
+        return false;
+      }
+
+      if (DeltaXY == null != (other.DeltaXY == null))
+      {
+        return false;
+      }
+
+      if (TotalLength != null && other.TotalLength != null)
+      {
+        if (!TotalLength.Equals(other.TotalLength))
+        {
+          return false;
+        }
       }
 
       if (DeltaXY != null && other.DeltaXY != null)
       {
-        if (!DeltaXY.Equals(other.DeltaXY)) return false;
+        if (!DeltaXY.Equals(other.DeltaXY))
+        {
+          return false;
+        }
       }
 
-      return other.Unit == this.Unit &&
-             other.Precision == this.Precision &&
+      return other.Unit == Unit &&
+             other.Precision == Precision &&
              DeltaZ.Equals(other.DeltaZ);
+    }
+
+    private bool ListsEqual<T>(IList<T> a, IList<T> b)
+    {
+      if (a == null != (b == null))
+      {
+        return false;
+      }
+
+      if (a != null && b != null)
+      {
+        if (a.Count == b.Count)
+        {
+          for (int i = 0; i < a.Count; i++)
+          {
+            if (!a[i].Equals(b[i]))
+            {
+              return false;
+            }
+          }
+        }
+        else
+        {
+          return false;
+        }
+      }
+
+      return true;
     }
 
     public override bool Equals(object obj)
