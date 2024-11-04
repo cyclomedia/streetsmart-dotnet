@@ -18,9 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-#if NETCOREAPP
 using System.Dynamic;
-#endif
 using System.Linq;
 using System.Threading.Tasks;
 using StreetSmart.Common.Interfaces.API;
@@ -167,11 +165,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-#if NETCOREAPP
     public void OnLayerVisibilityChange(string name, ExpandoObject args)
-#else
-    public void OnLayerVisibilityChange(string name, Dictionary<string, object> args)
-#endif
     {
       if (Viewers.ContainsKey(name))
       {

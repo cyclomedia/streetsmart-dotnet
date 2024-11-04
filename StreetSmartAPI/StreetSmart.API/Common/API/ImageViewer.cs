@@ -18,9 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-#if NETCOREAPP
 using System.Dynamic;
-#endif
 using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
@@ -145,18 +143,13 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-#if NETCOREAPP
     public void OnLayerVisibilityChange(ExpandoObject args)
-#else
-    public void OnLayerVisibilityChange(Dictionary<string, object> args)
-#endif
-
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));
     }
 
-#endregion
+    #endregion
 
     #region Functions
 

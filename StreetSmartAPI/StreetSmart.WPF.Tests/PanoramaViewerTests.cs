@@ -9,9 +9,7 @@ using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-#if NETCOREAPP
 using System.Dynamic;
-#endif
 using System.Threading.Tasks;
 using Xunit;
 
@@ -555,11 +553,8 @@ public sealed class PanoramaViewerTests
     IElevationInfo? receivedEvent = null;
     object? sender = null;
     _viewer.ElevationChange += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", new { level = 5, groundLevel = 6 });
 
     // act
@@ -595,11 +590,8 @@ public sealed class PanoramaViewerTests
     IRecordingClickInfo? receivedEvent = null;
     object? sender = null;
     _viewer.RecordingClick += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", new { recording, eventData = new { shiftKey = false, altKey = false, ctrlKey = true } });
 
     // act
@@ -621,11 +613,8 @@ public sealed class PanoramaViewerTests
     IFeatureInfo? receivedEvent = null;
     object? sender = null;
     _viewer.FeatureClick += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", featureInfo);
 
     // act
@@ -644,11 +633,8 @@ public sealed class PanoramaViewerTests
     IDictionary<string, object>? receivedEvent = null;
     object? sender = null;
     _viewer.TileLoadError += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", detail);
 
     // act
@@ -667,11 +653,8 @@ public sealed class PanoramaViewerTests
     IOrientation? receivedEvent = null;
     object? sender = null;
     _viewer.ViewChange += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", orientation);
 
     // act
@@ -690,11 +673,8 @@ public sealed class PanoramaViewerTests
     IDepthInfo? receivedEvent = null;
     object? sender = null;
     _viewer.SurfaceCursorChange += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", depthInfo);
 
     // act
@@ -729,11 +709,8 @@ public sealed class PanoramaViewerTests
     ITimeTravelInfo? receivedEvent = null;
     object? sender = null;
     _viewer.TimeTravelChange += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", timeTravelInfo);
 
     // act
@@ -752,11 +729,8 @@ public sealed class PanoramaViewerTests
     IFeatureInfo? receivedEvent = null;
     object? sender = null;
     _viewer.FeatureSelectionChange += (s, e) => { receivedEvent = e.Value; sender = s; };
-#if NETCOREAPP
     var obj = new ExpandoObject();
-#else
-    var obj = new Dictionary<string, object>();
-#endif
+
     (obj as IDictionary<string, object>).Add("detail", featureInfo);
 
     // act

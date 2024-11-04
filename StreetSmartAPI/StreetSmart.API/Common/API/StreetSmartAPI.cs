@@ -18,9 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-#if NETCOREAPP
 using System.Dynamic;
-#endif
 using System.Linq;
 using System.Threading.Tasks;
 using CefSharp;
@@ -409,7 +407,7 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
     }
 
-    #endregion
+#endregion
 
     #region events ChromiumWebBrowser
 
@@ -425,40 +423,24 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-#if NETCOREAPP
     public void OnMeasurementChanged(ExpandoObject args, string viewerId)
-#else
-    public void OnMeasurementChanged(Dictionary<string, object> args, string viewerId)
-#endif
     {
-      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+      MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-#if NETCOREAPP
     public void OnMeasurementStarted(ExpandoObject args, string viewerId)
-#else
-    public void OnMeasurementStarted(Dictionary<string, object> args, string viewerId)
-#endif
     {
-      MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+      MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-#if NETCOREAPP
     public void OnMeasurementStopped(ExpandoObject args, string viewerId)
-#else
-    public void OnMeasurementStopped(Dictionary<string, object> args, string viewerId)
-#endif
     {
-      MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+      MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-#if NETCOREAPP
     public void OnMeasurementSaved(ExpandoObject args, string viewerId)
-#else
-    public void OnMeasurementSaved(Dictionary<string, object> args, string viewerId)
-#endif
     {
-      MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(args, true)));
+      MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
     public void OnViewerAdded(string id, string type, string name)
