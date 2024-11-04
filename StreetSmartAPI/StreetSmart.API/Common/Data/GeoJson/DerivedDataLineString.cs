@@ -22,11 +22,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-#if NETCOREAPP
-using System.Dynamic;
-using System.Linq;
-#endif
-
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
@@ -51,7 +46,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var coordinateStdev in coordinateStdevs)
       {
-        CoordinateStdev.Add(new Stdev((coordinateStdev as IDictionary<string, object>)));
+        CoordinateStdev.Add(new Stdev(coordinateStdev as IDictionary<string, object>));
       }
     }
 
