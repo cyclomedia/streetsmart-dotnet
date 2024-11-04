@@ -16,11 +16,11 @@
  * License along with this library.
  */
 
-using System.Windows;
 using StreetSmart.Common;
 using StreetSmart.Common.API;
 using StreetSmart.Common.Factories;
 using StreetSmart.Common.Handlers;
+using System.Windows;
 
 namespace StreetSmart.WPF
 {

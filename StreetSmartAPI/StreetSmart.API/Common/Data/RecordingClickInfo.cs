@@ -28,7 +28,7 @@ namespace StreetSmart.Common.Data
     private bool _shiftKey;
     private bool _altKey;
 
-    public RecordingClickInfo(Dictionary<string, object> recording, Dictionary<string, object> eventData)
+    public RecordingClickInfo(IDictionary<string, object> recording, Dictionary<string, object> eventData)
     {
       Recording = new Recording(recording);
       ShiftKey = ToBool(eventData, "shiftKey");

@@ -16,11 +16,10 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.DomElement;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-
-using StreetSmart.Common.Interfaces.DomElement;
 
 namespace StreetSmart.Common.Data.DomElement
 {

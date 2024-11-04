@@ -16,14 +16,9 @@
  * License along with this library.
  */
 
-using System;
 using StreetSmart.Common.Interfaces.API;
-
-#if NETCOREAPP
-  using System.Dynamic;
-#else
-  using System.Collections.Generic;
-#endif
+using System;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.API
 {
@@ -64,11 +59,7 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-#if NETCOREAPP
-    public void OnSwitchViewingDirection(string name, ExpandoObject args)
-#else
-    public void OnSwitchViewingDirection(string name, Dictionary<string, object> args)
-#endif
+    public void OnSwitchViewingDirection(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -76,11 +67,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-#if NETCOREAPP
-    public void OnFeatureClick(string name, ExpandoObject args)
-#else
-    public void OnFeatureClick(string name, Dictionary<string, object> args)
-#endif
+    public void OnFeatureClick(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -88,11 +75,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-#if NETCOREAPP
-    public void OnFeatureSelectionChange(string name, ExpandoObject args)
-#else
-    public void OnFeatureSelectionChange(string name, Dictionary<string, object> args)
-#endif
+    public void OnFeatureSelectionChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -100,11 +83,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-#if NETCOREAPP
-    public void OnImageChange(string name, ExpandoObject args)
-#else
-    public void OnImageChange(string name, Dictionary<string, object> args)
-#endif
+    public void OnImageChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -112,11 +91,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-#if NETCOREAPP
-    public void OnViewChange(string name, ExpandoObject args)
-#else
-    public void OnViewChange(string name,Dictionary<string, object> args)
-#endif
+    public void OnViewChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -124,12 +99,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-
-#if NETCOREAPP
-    public void OnViewLoadEnd(string name, ExpandoObject args)
-#else
-    public void OnViewLoadEnd(string name, Dictionary<string, object> args)
-#endif
+    public void OnViewLoadEnd(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -137,12 +107,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-
-#if NETCOREAPP
-    public void OnTimeTravelChange(string name, ExpandoObject args)
-#else
-    public void OnTimeTravelChange(string name, Dictionary<string, object> args)
-#endif
+    public void OnTimeTravelChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {

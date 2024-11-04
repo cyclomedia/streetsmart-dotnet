@@ -16,10 +16,10 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -30,7 +30,7 @@ namespace StreetSmart.Common.Data.GeoJson
       GetFeature(ToDictionary(feature), measurementProperties);
     }
 
-    public void GetFeature(Dictionary<string, object> feature, bool measurementProperties)
+    public void GetFeature(IDictionary<string, object> feature, bool measurementProperties)
     {
       var geometry = GetDictValue(feature, "geometry");
       var properties = GetDictValue(feature, "properties");
@@ -84,13 +84,13 @@ namespace StreetSmart.Common.Data.GeoJson
           switch (feature.Geometry.Type)
           {
             case GeometryType.Point:
-              Geometry = new Point((IPoint) feature.Geometry);
+              Geometry = new Point((IPoint)feature.Geometry);
               break;
             case GeometryType.LineString:
-              Geometry = new LineString((ILineString) feature.Geometry);
+              Geometry = new LineString((ILineString)feature.Geometry);
               break;
             case GeometryType.Polygon:
-              Geometry = new Polygon((IPolygon) feature.Geometry);
+              Geometry = new Polygon((IPolygon)feature.Geometry);
               break;
             case GeometryType.Unknown:
               Geometry = null;

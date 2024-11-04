@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System;
-
 using StreetSmart.Common.Interfaces.Events;
+using System;
 
 namespace StreetSmart.Common.Events
 {

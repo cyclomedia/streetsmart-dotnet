@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class ObliqueViewerEvent: ViewerEvent
+  internal class ObliqueViewerEvent : ViewerEvent
   {
     protected override string Events => "Events.obliqueViewer";
 

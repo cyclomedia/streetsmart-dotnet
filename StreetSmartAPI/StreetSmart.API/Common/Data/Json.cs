@@ -16,21 +16,20 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using StreetSmart.Common.Interfaces.Data;
-
 namespace StreetSmart.Common.Data
 {
-  internal class Json: Dictionary<string, string>, IJson
+  internal class Json : Dictionary<string, string>, IJson
   {
     public Json()
     {
     }
 
-    public Json(Dictionary<string, object> properties)
+    public Json(IDictionary<string, object> properties)
     {
       foreach (var property in properties)
       {

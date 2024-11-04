@@ -16,18 +16,17 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsForwardIntersection : Details, IDetailsForwardIntersection,IEquatable<DetailsForwardIntersection>
+  internal class DetailsForwardIntersection : Details, IDetailsForwardIntersection, IEquatable<DetailsForwardIntersection>
   {
-    public DetailsForwardIntersection(Dictionary<string, object> detailsForwardIntersection, MeasurementTools measurementTool)
+    public DetailsForwardIntersection(IDictionary<string, object> detailsForwardIntersection, MeasurementTools measurementTool)
     {
       double? positionX = ToNullDouble(detailsForwardIntersection, "PositionX");
       double? positionY = ToNullDouble(detailsForwardIntersection, "PositionY");

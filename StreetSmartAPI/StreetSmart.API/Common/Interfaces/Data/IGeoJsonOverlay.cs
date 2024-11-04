@@ -22,7 +22,7 @@ namespace StreetSmart.Common.Interfaces.Data
   /// Information about the overlay
   /// </summary>
   // ReSharper disable once UnusedMember.Global
-  public interface IGeoJsonOverlay: IOverlay
+  public interface IGeoJsonOverlay : IOverlay
   {
     /// <summary>
     /// GeoJSON object containing the layer data

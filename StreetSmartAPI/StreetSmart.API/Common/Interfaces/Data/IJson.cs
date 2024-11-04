@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.Data
   /// <summary>
   /// JSon object which contains the properties in a key and value pair format
   /// </summary>
-  public interface IJson: IDictionary<string, string>
+  public interface IJson : IDictionary<string, string>
   {
   }
 }

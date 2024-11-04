@@ -16,17 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class Resolution : DataConvert, IResolution,IEquatable<Resolution>
+  internal class Resolution : DataConvert, IResolution, IEquatable<Resolution>
   {
-    public Resolution(Dictionary<string, object> info)
+    public Resolution(IDictionary<string, object> info)
     {
       Dictionary<string, object> resolution = GetDictValue(info, "resolutionOfImage");
       Width = ToInt(resolution, "width");

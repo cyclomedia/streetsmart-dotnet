@@ -16,31 +16,21 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-#if NETCOREAPP
-using System.Dynamic;
-#endif
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class FeatureCollection: DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
+  internal class FeatureCollection : DataConvert, IFeatureCollection, IEquatable<IFeatureCollection>
   {
-#if NETCOREAPP
-    public FeatureCollection(ExpandoObject featureCollection, bool measurementProperties)
-    {
-      GetFeatures(ToDictionary(featureCollection), measurementProperties);
-    }
-#endif
-
-    public FeatureCollection(Dictionary<string, object> featureCollection, bool measurementProperties)
+    public FeatureCollection(IDictionary<string, object> featureCollection, bool measurementProperties)
     {
       GetFeatures(featureCollection, measurementProperties);
     }
 
-    private void GetFeatures(Dictionary<string, object> featureCollection, bool measurementProperties)
+    private void GetFeatures(IDictionary<string, object> featureCollection, bool measurementProperties)
     {
       var features = GetListValue(featureCollection, "features");
       var crs = GetDictValue(featureCollection, "crs");
@@ -123,8 +113,8 @@ namespace StreetSmart.Common.Data.GeoJson
       {
         return false;
       }
-      
-      if(!this.Type.Equals(other.Type))
+
+      if (!this.Type.Equals(other.Type))
       {
         return false;
       }

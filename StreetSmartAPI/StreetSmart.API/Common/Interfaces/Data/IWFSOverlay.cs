@@ -26,7 +26,7 @@ namespace StreetSmart.Common.Interfaces.Data
   // ReSharper disable once UnusedMember.Global
   // ReSharper disable once InconsistentNaming
   // ReSharper disable once IdentifierTypo
-  public interface IWFSOverlay: IOverlay
+  public interface IWFSOverlay : IOverlay
   {
     /// <summary>
     /// The url where the WFS is hosted

@@ -16,20 +16,17 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-#if NETCOREAPP
-using System.Dynamic;
-#endif
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
-using StreetSmart.Common.API.Events;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Orientation = StreetSmart.Common.Data.Orientation;
 
 namespace StreetSmart.Common.API
@@ -255,31 +252,18 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-
-#if NETCOREAPP
-    public void OnElevationChange(ExpandoObject args)
-#else
-    public void OnElevationChange(Dictionary<string, object> args)
-#endif
+    public void OnElevationChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ElevationChange?.Invoke(this, new EventArgs<ElevationInfo>(new ElevationInfo(detail)));
     }
 
-#if NETCOREAPP
-    public void OnImageChange(ExpandoObject args)
-#else
-    public void OnImageChange(Dictionary<string, object> args)
-#endif
+    public void OnImageChange(IDictionary<string, object> args)
     {
       ImageChange?.Invoke(this, EventArgs.Empty);
     }
 
-#if NETCOREAPP
-    public void OnRecordingClick(ExpandoObject args)
-#else
-    public void OnRecordingClick(Dictionary<string, object> args)
-#endif
+    public void OnRecordingClick(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       Dictionary<string, object> recording = GetDictValue(detail, "recording");
@@ -287,71 +271,43 @@ namespace StreetSmart.Common.API
       RecordingClick?.Invoke(this, new EventArgs<RecordingClickInfo>(new RecordingClickInfo(recording, eventData)));
     }
 
-#if NETCOREAPP
-    public void OnFeatureClick(ExpandoObject args)
-#else
-    public void OnFeatureClick(Dictionary<string, object> args)
-#endif
+    public void OnFeatureClick(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-#if NETCOREAPP
-    public void OnTileLoadError(ExpandoObject args)
-#else
-    public void OnTileLoadError(Dictionary<string, object> args)
-#endif
+    public void OnTileLoadError(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TileLoadError?.Invoke(this, new EventArgs<Dictionary<string, object>>
         (GetDictValue(detail, "request")));
     }
 
-#if NETCOREAPP
-    public void OnViewChange(ExpandoObject args)
-#else
-    public void OnViewChange(Dictionary<string, object> args)
-#endif
+    public void OnViewChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<Orientation>(new Orientation(detail)));
     }
 
-#if NETCOREAPP
-    public void OnSurfaceCursorChange(ExpandoObject args)
-#else
-    public void OnSurfaceCursorChange(Dictionary<string, object> args)
-#endif
+    public void OnSurfaceCursorChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SurfaceCursorChange?.Invoke(this, new EventArgs<IDepthInfo>(new DepthInfo(detail)));
     }
 
-#if NETCOREAPP
-    public void OnViewLoadEnd(ExpandoObject args)
-#else
-    public void OnViewLoadEnd(Dictionary<string, object> args)
-#endif
+    public void OnViewLoadEnd(IDictionary<string, object> args)
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-#if NETCOREAPP
-    public void OnTimeTravelChange(ExpandoObject args)
-#else
-    public void OnTimeTravelChange(Dictionary<string, object> args)
-#endif
+    public void OnTimeTravelChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));
     }
 
-#if NETCOREAPP
-    public void OnFeatureSelectionChange(ExpandoObject args)
-#else
-    public void OnFeatureSelectionChange(Dictionary<string, object> args)
-#endif
+    public void OnFeatureSelectionChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));

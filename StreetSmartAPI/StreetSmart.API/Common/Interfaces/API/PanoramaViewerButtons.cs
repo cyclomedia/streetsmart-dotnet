@@ -84,7 +84,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     [Description("StreetSmartApi.PanoramaViewerUi.buttons.ZOOM_OUT")]
     ZoomOut = 10,
-      
+
     /// <summary>
     /// save measurement button
     /// </summary>

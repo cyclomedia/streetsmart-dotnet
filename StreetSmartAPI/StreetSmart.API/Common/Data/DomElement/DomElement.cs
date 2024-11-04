@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System;
-
 using StreetSmart.Common.Interfaces.DomElement;
+using System;
 
 namespace StreetSmart.Common.Data.DomElement
 {

@@ -16,15 +16,14 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirectionOblique : ResultDirection, IResultDirectionOblique,IEquatable<ResultDirectionOblique>
+  internal class ResultDirectionOblique : ResultDirection, IResultDirectionOblique, IEquatable<ResultDirectionOblique>
   {
     public double CamX { get; }
 
@@ -81,7 +80,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public IRotation Angle { get; }
 
-    public ResultDirectionOblique(Dictionary<string, object> resultDirection)
+    public ResultDirectionOblique(IDictionary<string, object> resultDirection)
       : base(resultDirection)
     {
       CamX = ToDouble(resultDirection, "camX");
@@ -114,8 +113,8 @@ namespace StreetSmart.Common.Data.GeoJson
 
       object[] array = GetArrayValue(resultDirection, "pixelXY");
       PixelXY = new double[2];
-      PixelXY[0] = array.Length >= 1 ? (double) array[0] : 0.0;
-      PixelXY[1] = array.Length >= 2 ? (double) array[1] : 0.0;
+      PixelXY[0] = array.Length >= 1 ? (double)array[0] : 0.0;
+      PixelXY[1] = array.Length >= 2 ? (double)array[1] : 0.0;
 
       Year = ToInt(resultDirection, "year");
 
@@ -221,7 +220,7 @@ namespace StreetSmart.Common.Data.GeoJson
              Year.Equals(other.Year) &&
              (Angle == null && other.Angle == null || Angle != null && Angle.Equals(other.Angle));
     }
-    public override int GetHashCode() => (CamX,CamY,CamZ,FocalLength,ImageWidth,ImageHeight,PpX,PpY,P1,P2,Rotated,AvgFootprintHeight,RotationMatrix,Roll,Pitch,Heading,Width,Height,Du,Dv,K1,K2,F,Z,PixelXY,Year,Angle).GetHashCode();
+    public override int GetHashCode() => (CamX, CamY, CamZ, FocalLength, ImageWidth, ImageHeight, PpX, PpY, P1, P2, Rotated, AvgFootprintHeight, RotationMatrix, Roll, Pitch, Heading, Width, Height, Du, Dv, K1, K2, F, Z, PixelXY, Year, Angle).GetHashCode();
 
     private bool ArrayEquals(double[] arr1, double[] arr2)
     {

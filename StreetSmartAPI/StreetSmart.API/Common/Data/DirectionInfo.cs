@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -26,7 +25,7 @@ namespace StreetSmart.Common.Data
   {
     private int _direction;
 
-    public DirectionInfo(Dictionary<string, object> directionInfo)
+    public DirectionInfo(IDictionary<string, object> directionInfo)
     {
       Direction = ToInt(directionInfo, "direction");
     }

@@ -16,16 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Matrix : DataConvert, IMatrix, IEquatable<Matrix>
   {
-    public Matrix(Dictionary<string, object> matrixValues, int width, int height)
+    public Matrix(IDictionary<string, object> matrixValues, int width, int height)
     {
       Width = width;
       Height = height;
@@ -60,7 +60,7 @@ namespace StreetSmart.Common.Data.GeoJson
       CultureInfo ci = CultureInfo.InvariantCulture;
       string values = string.Empty;
 
-      for(int i = 0; i < Values.Count; i++)
+      for (int i = 0; i < Values.Count; i++)
       {
         values = $"{values}{i.ToDoubleQuote()}:{Values[i].ToString(ci)},";
       }
@@ -71,7 +71,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Matrix other)
     {
-      if(other == null) return false;
+      if (other == null) return false;
       if (Values.Count != other.Values.Count)
       {
         return false;

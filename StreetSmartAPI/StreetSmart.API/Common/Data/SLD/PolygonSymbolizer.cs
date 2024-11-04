@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System.Drawing;
 using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.SLD;
-
 namespace StreetSmart.Common.Data.SLD
 {
-  #pragma warning disable 1591
+#pragma warning disable 1591
   /// <exclude/>
   public class PolygonSymbolizer : Symbolizer, IPolygonSymbolizer
   {
@@ -41,12 +40,12 @@ namespace StreetSmart.Common.Data.SLD
     {
       if (fillColor != null)
       {
-        Fill = SvgParameterCollection<FillType>.GetFillObject((Color) fillColor, fillOpacity);
+        Fill = SvgParameterCollection<FillType>.GetFillObject((Color)fillColor, fillOpacity);
       }
 
       if (strokeColor != null)
       {
-        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, null);
+        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color)strokeColor, strokeWidth, null);
       }
     }
 
@@ -76,5 +75,5 @@ namespace StreetSmart.Common.Data.SLD
       }
     }
   }
-  #pragma warning restore 1591
+#pragma warning restore 1591
 }

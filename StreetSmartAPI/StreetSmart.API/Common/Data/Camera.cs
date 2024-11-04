@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -27,7 +26,7 @@ namespace StreetSmart.Common.Data
     private ICoordinate _position;
     private ICoordinate _target;
 
-    public Camera(Dictionary<string, object> camera)
+    public Camera(IDictionary<string, object> camera)
     {
       var position = GetDictValue(camera, "cameraPosition");
       var target = GetDictValue(camera, "cameraTarget");

@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
-using System;
-using System.Drawing;
-using System.Security;
-
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 using StreetSmart.Common.Interfaces.SLD;
+using System;
+using System.Drawing;
+using System.Security;
 
 namespace StreetSmart.Common.Factories
 {

@@ -16,19 +16,16 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-#if NETCOREAPP
-using System.Dynamic;
-#endif
-using System.Globalization;
-using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {
@@ -169,65 +166,41 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-#if NETCOREAPP
-    public void OnViewChange(ExpandoObject args)
-#else
-    public void OnViewChange(Dictionary<string, object> args)
-#endif
+    public void OnViewChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<ICamera>(new Camera(detail)));
     }
 
-#if NETCOREAPP
-    public void OnEdgesChanged(ExpandoObject args)
-#else
-    public void OnEdgesChanged(Dictionary<string, object> args)
-#endif
+    public void OnEdgesChanged(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       bool value = ToBool(detail, "value");
       EdgesChanged?.Invoke(this, new EventArgs<bool>(value));
     }
 
-#if NETCOREAPP
-    public void OnPointSizeChanged(ExpandoObject args)
-#else
-    public void OnPointSizeChanged(Dictionary<string, object> args)
-#endif
+    public void OnPointSizeChanged(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       PointSize value = (PointSize)ToEnum(typeof(PointSize), detail, "value");
-      PointSizeChanged?.Invoke(this, new EventArgs<PointSize> (value));
+      PointSizeChanged?.Invoke(this, new EventArgs<PointSize>(value));
     }
 
-#if NETCOREAPP
-    public void OnPointStyleChanged(ExpandoObject args)
-#else
-    public void OnPointStyleChanged(Dictionary<string, object> args)
-#endif
+    public void OnPointStyleChanged(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ColorizationMode value = (ColorizationMode)ToEnum(typeof(ColorizationMode), detail, "value");
       PointStyleChanged?.Invoke(this, new EventArgs<ColorizationMode>(value));
     }
 
-#if NETCOREAPP
-    public void OnPointBudgedChanged(ExpandoObject args)
-#else
-    public void OnPointBudgedChanged(Dictionary<string, object> args)
-#endif
+    public void OnPointBudgedChanged(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       Quality value = (Quality)ToEnum(typeof(Quality), detail, "value");
       PointBudgedChanged?.Invoke(this, new EventArgs<Quality>(value));
     }
 
-#if NETCOREAPP
-    public void OnBackGroundChanged(ExpandoObject args)
-#else
-    public void OnBackGroundChanged(Dictionary<string, object> args)
-#endif
+    public void OnBackGroundChanged(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       BackgroundPreset value = (BackgroundPreset)ToEnum(typeof(BackgroundPreset), detail, "value");

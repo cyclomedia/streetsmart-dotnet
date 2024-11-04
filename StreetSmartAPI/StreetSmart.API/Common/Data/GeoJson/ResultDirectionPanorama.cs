@@ -23,9 +23,9 @@ using System.Globalization;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class ResultDirectionPanorama : ResultDirection, IResultDirectionPanorama,IEquatable<ResultDirectionPanorama>
+  internal class ResultDirectionPanorama : ResultDirection, IResultDirectionPanorama, IEquatable<ResultDirectionPanorama>
   {
-    public ResultDirectionPanorama(Dictionary<string, object> resultDirection)
+    public ResultDirectionPanorama(IDictionary<string, object> resultDirection)
       : base(resultDirection)
     {
       RecordedAt = ToNullDateTime(resultDirection, "RecordedAt");
@@ -107,7 +107,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Equals(obj as ResultDirectionPanorama);
     }
-    public override int GetHashCode() => (Direction,GroundLevelOffset,Orientation,Position,CalculatedMethod,Resolution).GetHashCode();
+    public override int GetHashCode() => (Direction, GroundLevelOffset, Orientation, Position, CalculatedMethod, Resolution).GetHashCode();
 
     public override string ToString()
     {

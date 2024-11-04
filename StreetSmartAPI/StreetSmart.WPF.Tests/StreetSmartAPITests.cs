@@ -93,8 +93,8 @@ public class StreetSmartAPITests
   {
     // arrange
     var geoJsonOverlayMock = new Mock<IWFSOverlay>();
-    Dictionary<string, object>? val = null;
-    geoJsonOverlayMock.Setup(x => x.FillInParameters(It.IsAny<Dictionary<string, object>>())).Callback<Dictionary<string, object>>(x => val = x).Verifiable();
+    IDictionary<string, object>? val = null;
+    geoJsonOverlayMock.Setup(x => x.FillInParameters(It.IsAny<IDictionary<string, object>>())).Callback<IDictionary<string, object>>(x => val = x).Verifiable();
     geoJsonOverlayMock.SetupSet(x => x.Id = "4").Verifiable(Times.Once);
     _browserMock.Setup(x => x.IsDisposed).Returns(false);
     _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);

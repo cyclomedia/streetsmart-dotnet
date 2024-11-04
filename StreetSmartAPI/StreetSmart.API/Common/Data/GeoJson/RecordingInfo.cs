@@ -24,9 +24,9 @@ using System.Globalization;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class RecordingInfo : DataConvert, IRecordingInfo,IEquatable<RecordingInfo>
+  internal class RecordingInfo : DataConvert, IRecordingInfo, IEquatable<RecordingInfo>
   {
-    public RecordingInfo(Dictionary<string, object> recordingInfo)
+    public RecordingInfo(IDictionary<string, object> recordingInfo)
     {
       Id = ToString(recordingInfo, "id");
       var xyz = GetDictValue(recordingInfo, "xyz");
@@ -93,8 +93,8 @@ namespace StreetSmart.Common.Data.GeoJson
       return Equals(obj as RecordingInfo);
     }
 
-    public override int GetHashCode() => (Id,Position,SRS,Yaw,DepthStdev,RecordedAt,Resolution).GetHashCode();
-  
+    public override int GetHashCode() => (Id, Position, SRS, Yaw, DepthStdev, RecordedAt, Resolution).GetHashCode();
+
 
     public override string ToString()
     {

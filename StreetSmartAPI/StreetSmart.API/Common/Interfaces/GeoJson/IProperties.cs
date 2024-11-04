@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// GeoJson Feature
   /// </summary>
-  public interface IProperties: IDictionary<string, object>
+  public interface IProperties : IDictionary<string, object>
   {
   }
 }

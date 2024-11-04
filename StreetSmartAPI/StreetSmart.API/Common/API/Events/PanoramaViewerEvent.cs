@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class PanoramaViewerEvent: ViewerEvent
+  internal class PanoramaViewerEvent : ViewerEvent
   {
     protected override string Events => "Events.panoramaViewer";
 

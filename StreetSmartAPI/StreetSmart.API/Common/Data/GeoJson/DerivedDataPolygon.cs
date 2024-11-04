@@ -16,18 +16,18 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
   internal class DerivedDataPolygon : DerivedDataLineString, IDerivedDataPolygon, IEquatable<DerivedDataPolygon>
   {
-    public DerivedDataPolygon(Dictionary<string, object> derivedData)
+    public DerivedDataPolygon(IDictionary<string, object> derivedData)
       : base(derivedData)
     {
       var triangles = GetListValue(derivedData, "triangles");
@@ -95,7 +95,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DerivedDataPolygon other)
     {
-      
+
       if (other == null) return false;
 
       if ((Triangles == null) != (other.Triangles == null)) return false;

@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System.Drawing;
 using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.SLD;
-
 namespace StreetSmart.Common.Data.SLD
 {
-  #pragma warning disable 1591
+#pragma warning disable 1591
   /// <exclude/>
   public class Mark : NotifyPropertyChanged, IMark
   {
@@ -47,7 +46,7 @@ namespace StreetSmart.Common.Data.SLD
 
       if (strokeColor != null)
       {
-        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color) strokeColor, strokeWidth, strokeOpacity);
+        Stroke = SvgParameterCollection<StrokeType>.GetStrokeObject((Color)strokeColor, strokeWidth, strokeOpacity);
       }
     }
 
@@ -96,5 +95,5 @@ namespace StreetSmart.Common.Data.SLD
     }
   }
 
-  #pragma warning restore 1591
+#pragma warning restore 1591
 }

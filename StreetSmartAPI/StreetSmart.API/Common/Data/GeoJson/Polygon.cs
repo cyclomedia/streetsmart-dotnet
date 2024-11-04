@@ -16,25 +16,24 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Polygon : List<IList<ICoordinate>>, IPolygon, IEquatable<Polygon>
   {
-    public Polygon(Dictionary<string, object> polygon)
+    public Polygon(IDictionary<string, object> polygon)
     {
       DataConvert converter = new DataConvert();
       var coordinates = converter.GetListValue(polygon, "coordinates");
 
       try
       {
-        Type = (GeometryType) converter.ToEnum(typeof(GeometryType), polygon, "type");
+        Type = (GeometryType)converter.ToEnum(typeof(GeometryType), polygon, "type");
       }
       catch (ArgumentException)
       {
@@ -116,15 +115,15 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Polygon other)
     {
       if (other == null) return false;
-      if(this.Count != other.Count) return false;
+      if (this.Count != other.Count) return false;
 
-      for(int i = 0; i < this.Count; i++)
+      for (int i = 0; i < this.Count; i++)
       {
-        if(this[i].Count != other[i].Count) return false;
+        if (this[i].Count != other[i].Count) return false;
 
-        for(int j = 0; j < this[i].Count;j++)
+        for (int j = 0; j < this[i].Count; j++)
         {
-          if(!this[i][j].Equals(other[i][j]))
+          if (!this[i][j].Equals(other[i][j]))
           {
             return false;
           }

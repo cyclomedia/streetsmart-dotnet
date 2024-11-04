@@ -16,23 +16,23 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Point: Coordinate, IPoint, IEquatable<Point>
+  internal class Point : Coordinate, IPoint, IEquatable<Point>
   {
-    public Point(Dictionary<string, object> point)
+    public Point(IDictionary<string, object> point)
       : base(new DataConvert().GetListValue(point, "coordinates"))
     {
       try
       {
-        var p = new DataConvert().GetListValue(point,"coordinates");
-        Type = (GeometryType) ToEnum(typeof(GeometryType), point, "type");
+        var p = new DataConvert().GetListValue(point, "coordinates");
+        Type = (GeometryType)ToEnum(typeof(GeometryType), point, "type");
       }
       catch (ArgumentException)
       {

@@ -27,7 +27,7 @@ namespace StreetSmart.Common.Data
     private Unit _heightUnit;
     private double _groundLevel;
 
-    public ElevationInfo(Dictionary<string, object> elevationInfo)
+    public ElevationInfo(IDictionary<string, object> elevationInfo)
     {
       string unit = ToString(elevationInfo, "heightUnits");
 

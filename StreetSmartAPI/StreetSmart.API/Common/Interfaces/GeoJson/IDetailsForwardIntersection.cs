@@ -23,7 +23,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
   /// <summary>
   /// Smart click / Forward intersection Details
   /// </summary>
-  public interface IDetailsForwardIntersection: IDetails
+  public interface IDetailsForwardIntersection : IDetails
   {
     /// <summary>
     /// Position

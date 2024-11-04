@@ -16,17 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-using StreetSmart.Common.Interfaces.GeoJson;
-
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DetailsDepth: Details, IDetailsDepth,IEquatable<DetailsDepth>
+  internal class DetailsDepth : Details, IDetailsDepth, IEquatable<DetailsDepth>
   {
-    public DetailsDepth(Dictionary<string, object> details)
+    public DetailsDepth(IDictionary<string, object> details)
     {
       var position = GetDictValue(details, "position");
       var direction = GetDictValue(details, "direction");
@@ -63,21 +62,21 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DetailsDepth other)
     {
-        if (other == null) return false;
+      if (other == null) return false;
       return
             Position.Equals(other.Position) &&
             Direction.Equals(other.Direction) &&
             DepthInMeters.Equals(other.DepthInMeters) &&
             Depth.Equals(other.Depth) &&
             RecordingInfo.Equals(other.RecordingInfo);
-  }
+    }
 
-  public override bool Equals(object obj)
-  {
+    public override bool Equals(object obj)
+    {
       return Equals(obj as DetailsDepth);
     }
 
-    public override int GetHashCode() => (Position, Direction, DepthInMeters,Depth,RecordingInfo).GetHashCode();
+    public override int GetHashCode() => (Position, Direction, DepthInMeters, Depth, RecordingInfo).GetHashCode();
 
     public override string ToString()
     {

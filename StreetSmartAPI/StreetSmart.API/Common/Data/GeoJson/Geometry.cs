@@ -16,20 +16,20 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Geometry : DataConvert, IGeometry, IEquatable<Geometry>
   {
-    public Geometry(Dictionary<string, object> geometry)
+    public Geometry(IDictionary<string, object> geometry)
     {
       try
       {
-        Type = (GeometryType) ToEnum(typeof(GeometryType), geometry, "type");
+        Type = (GeometryType)ToEnum(typeof(GeometryType), geometry, "type");
       }
       catch (ArgumentException)
       {
@@ -39,7 +39,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public GeometryType Type { get; }
 
-    
+
 
     public override string ToString()
     {

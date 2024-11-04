@@ -16,17 +16,17 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint,IEquatable<DerivedDataPoint>
+  internal class DerivedDataPoint : DerivedData, IDerivedDataPoint, IEquatable<DerivedDataPoint>
   {
-    public DerivedDataPoint(Dictionary<string, object> derivedData)
+    public DerivedDataPoint(IDictionary<string, object> derivedData)
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
@@ -42,7 +42,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       if (GetValue(positionXY, "value") is IList<object> valueXY)
       {
-        double? stdevXY = ToNullDouble(positionXY,"stdev");
+        double? stdevXY = ToNullDouble(positionXY, "stdev");
         PositionXY = new PositionXY(valueXY, stdevXY);
       }
 

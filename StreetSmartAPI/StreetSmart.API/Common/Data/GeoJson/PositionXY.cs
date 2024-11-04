@@ -16,16 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class PositionXY: IPositionXY, IEquatable<PositionXY>
+  internal class PositionXY : IPositionXY, IEquatable<PositionXY>
   {
     public PositionXY(IList<object> value, double? stdev)
     {

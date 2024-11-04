@@ -16,12 +16,11 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Xml.Serialization;
-
-using StreetSmart.Common.Interfaces.SLD;
 
 namespace StreetSmart.Common.Data.SLD
 {

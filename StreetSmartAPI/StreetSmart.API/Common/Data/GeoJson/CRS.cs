@@ -16,17 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
   internal class CRS : DataConvert, ICRS, IEquatable<CRS>
   {
-    public CRS(Dictionary<string, object> crs)
+    public CRS(IDictionary<string, object> crs)
     {
       string type = ToString(crs, "type");
       var properties = GetDictValue(crs, "properties");

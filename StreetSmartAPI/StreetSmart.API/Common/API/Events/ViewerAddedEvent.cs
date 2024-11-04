@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class ViewerAddedEvent: StreetSmartApiEvent
+  internal class ViewerAddedEvent : StreetSmartApiEvent
   {
     private string TempType => $"temp{Type}";
 

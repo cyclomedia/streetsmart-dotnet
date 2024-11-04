@@ -16,18 +16,15 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-#if NETCOREAPP
-using System.Dynamic;
-#endif
-using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {
@@ -145,18 +142,13 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-#if NETCOREAPP
-    public void OnLayerVisibilityChange(ExpandoObject args)
-#else
-    public void OnLayerVisibilityChange(Dictionary<string, object> args)
-#endif
-
+    public void OnLayerVisibilityChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));
     }
 
-#endregion
+    #endregion
 
     #region Functions
 
