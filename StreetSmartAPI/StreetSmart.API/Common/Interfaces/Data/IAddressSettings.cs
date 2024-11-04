@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using System.Globalization;
-
 namespace StreetSmart.Common.Interfaces.Data
 {
   /// <summary>

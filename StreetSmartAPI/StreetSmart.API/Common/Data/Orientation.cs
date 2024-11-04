@@ -16,12 +16,11 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-
-using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
@@ -38,7 +37,7 @@ namespace StreetSmart.Common.Data
       HFov = hFov;
     }
 
-    public Orientation(Dictionary<string, object> orientation)
+    public Orientation(IDictionary<string, object> orientation)
     {
       Yaw = ToNullDouble(orientation, "yaw");
       Pitch = ToNullDouble(orientation, "pitch");
@@ -82,17 +81,17 @@ namespace StreetSmart.Common.Data
 
       if (Yaw != null)
       {
-        orientation.Add($"yaw:{((double) Yaw).ToString(ci)}");
+        orientation.Add($"yaw:{((double)Yaw).ToString(ci)}");
       }
 
       if (Pitch != null)
       {
-        orientation.Add($"pitch:{((double) Pitch).ToString(ci)}");
+        orientation.Add($"pitch:{((double)Pitch).ToString(ci)}");
       }
 
       if (HFov != null)
       {
-        orientation.Add($"hFov:{((double) HFov).ToString(ci)}");
+        orientation.Add($"hFov:{((double)HFov).ToString(ci)}");
       }
 
       string result = orientation.Aggregate(string.Empty, (current, part) => $"{current},{part}");

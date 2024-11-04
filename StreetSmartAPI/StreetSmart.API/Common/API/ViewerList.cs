@@ -16,17 +16,16 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {
-  internal abstract class ViewerList: APIBase
+  internal abstract class ViewerList : APIBase
   {
     #region Properties
 
@@ -108,7 +107,7 @@ namespace StreetSmart.Common.API
       int nrViewers = Viewers.Count;
       int i = -1;
 
-      while(++i < Viewers.Count || nrViewers != Viewers.Count)
+      while (++i < Viewers.Count || nrViewers != Viewers.Count)
       {
         if (nrViewers != Viewers.Count)
         {
@@ -165,7 +164,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnLayerVisibilityChange(string name, ExpandoObject args)
+    public void OnLayerVisibilityChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -189,7 +188,7 @@ namespace StreetSmart.Common.API
 
     public static PanoramaViewerList GetPanoramaViewerList(string apiId)
     {
-      return (PanoramaViewerList) ViewerLists[apiId][PanoramaViewerList.Type];
+      return (PanoramaViewerList)ViewerLists[apiId][PanoramaViewerList.Type];
     }
 
     public static void CreateViewerList(string apiId)

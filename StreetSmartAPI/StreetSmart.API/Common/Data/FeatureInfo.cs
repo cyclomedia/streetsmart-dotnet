@@ -27,7 +27,7 @@ namespace StreetSmart.Common.Data
     private string _layerId;
     private IJson _featureProperties;
 
-    public FeatureInfo(Dictionary<string, object> featureInfo)
+    public FeatureInfo(IDictionary<string, object> featureInfo)
     {
       LayerName = ToString(featureInfo, "layerName");
       LayerId = ToString(featureInfo, "layerId");

@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Threading.Tasks;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.Interfaces.API
 {

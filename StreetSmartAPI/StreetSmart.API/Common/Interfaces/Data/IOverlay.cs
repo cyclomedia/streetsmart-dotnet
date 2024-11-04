@@ -52,6 +52,6 @@ namespace StreetSmart.Common.Interfaces.Data
     bool Visible { get; set; }
 
 
-    void FillInParameters(Dictionary<string, object> overlay);
+    void FillInParameters(IDictionary<string, object> overlay);
   }
 }

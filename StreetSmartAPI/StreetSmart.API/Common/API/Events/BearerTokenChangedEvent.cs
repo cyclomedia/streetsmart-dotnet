@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class BearerTokenChangedEvent: StreetSmartApiEvent
+  internal class BearerTokenChangedEvent : StreetSmartApiEvent
   {
     public BearerTokenChangedEvent(StreetSmartAPI api, string type, string funcName)
       : base(api, type, funcName, "login")

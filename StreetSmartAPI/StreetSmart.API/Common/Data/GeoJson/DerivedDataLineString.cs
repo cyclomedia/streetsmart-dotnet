@@ -32,7 +32,7 @@ namespace StreetSmart.Common.Data.GeoJson
   // ReSharper disable once InconsistentNaming
   internal class DerivedDataLineString : DerivedData, IDerivedDataLineString, IEquatable<DerivedDataLineString>
   {
-    public DerivedDataLineString(Dictionary<string, object> derivedData)
+    public DerivedDataLineString(IDictionary<string, object> derivedData)
       : base(derivedData)
     {
       // ReSharper disable InconsistentNaming
@@ -52,9 +52,9 @@ namespace StreetSmart.Common.Data.GeoJson
       foreach (var coordinateStdev in coordinateStdevs)
       {
 #if NETCOREAPP
-        CoordinateStdev.Add(new Stdev((coordinateStdev as ExpandoObject)?.ToDictionary(pair => pair.Key, pair => pair.Value)));
+        CoordinateStdev.Add(new Stdev((coordinateStdev as IDictionary<string, object>)?.ToDictionary(pair => pair.Key, pair => pair.Value)));
 #else
-        CoordinateStdev.Add(new Stdev(coordinateStdev as Dictionary<string, object>));
+        CoordinateStdev.Add(new Stdev(coordinateStdev as IDictionary<string, object>));
 #endif
       }
     }
@@ -106,7 +106,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public IProperty DeltaZ { get; }
 
-    private IList<IProperty> GetStdValueList(Dictionary<string, object> derivedData, string key)
+    private IList<IProperty> GetStdValueList(IDictionary<string, object> derivedData, string key)
     {
       var input = GetDictValue(derivedData, key);
       if (GetValue(input, "value") is not IList<object> value)
@@ -140,7 +140,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
-    protected IProperty getStdValue(Dictionary<string, object> derivedData, string key)
+    protected IProperty getStdValue(IDictionary<string, object> derivedData, string key)
     {
       var input = GetDictValue(derivedData, key);
       IProperty result = null;

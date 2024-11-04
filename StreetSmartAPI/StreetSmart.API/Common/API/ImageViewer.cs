@@ -16,16 +16,15 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {
@@ -143,7 +142,7 @@ namespace StreetSmart.Common.API
 
     #region Callbacks viewer
 
-    public void OnLayerVisibilityChange(ExpandoObject args)
+    public void OnLayerVisibilityChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       LayerVisibilityChange?.Invoke(this, new EventArgs<ILayerInfo>(new LayerInfo(detail)));

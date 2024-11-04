@@ -45,7 +45,7 @@ namespace StreetSmart.Common.Data
       Visible = visible;
     }
 
-    public void FillInParameters(Dictionary<string, object> overlay)
+    public void FillInParameters(IDictionary<string, object> overlay)
     {
       Id = ToString(overlay, "id");
     }

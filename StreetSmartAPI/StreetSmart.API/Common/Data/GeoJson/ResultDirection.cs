@@ -16,12 +16,11 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -29,7 +28,7 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     private readonly string _matchImage;
 
-    public ResultDirection(Dictionary<string, object> resultDirection)
+    public ResultDirection(IDictionary<string, object> resultDirection)
     {
       Id = ToString(resultDirection, "Id");
       _matchImage = ToString(resultDirection, "MatchImage");

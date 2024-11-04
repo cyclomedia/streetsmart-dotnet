@@ -16,16 +16,15 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.GeoJson;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class Stdev : Coordinate, IStdev
   {
-    public Stdev(Dictionary<string, object> coordinateStdev)
-      :base(coordinateStdev)
+    public Stdev(IDictionary<string, object> coordinateStdev)
+      : base(coordinateStdev)
     {
     }
 

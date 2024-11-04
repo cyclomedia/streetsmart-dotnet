@@ -66,7 +66,7 @@ namespace StreetSmart.Common.Interfaces.API
     /// </summary>
     [Description("StreetSmartApi.PointCloudViewerUi.buttons.TOGGLE_AERIAL_STREET")]
     ToggleAerialStreet = 7,
-    
+
     /// <summary>
     /// save measurement button
     /// </summary>

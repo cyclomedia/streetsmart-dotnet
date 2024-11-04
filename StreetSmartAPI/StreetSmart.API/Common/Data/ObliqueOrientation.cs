@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -30,7 +29,7 @@ namespace StreetSmart.Common.Data
     private double _rotation;
     private string _srs;
 
-    public ObliqueOrientation(Dictionary<string, object> orientation)
+    public ObliqueOrientation(IDictionary<string, object> orientation)
     {
       Center = new ImageCoordinate(GetListValue(orientation, "center"));
       Extent = new Extent(GetListValue(orientation, "extent"));

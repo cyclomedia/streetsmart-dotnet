@@ -16,19 +16,19 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class PositionXYZ : Coordinate, IPositionXYZ,IEquatable<PositionXYZ>
+  internal class PositionXYZ : Coordinate, IPositionXYZ, IEquatable<PositionXYZ>
   {
-    public PositionXYZ(Dictionary<string, object> position)
+    public PositionXYZ(IDictionary<string, object> position)
       : base(position)
     {
       double? x = ToNullDouble(position, "x");

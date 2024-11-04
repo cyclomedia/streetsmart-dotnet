@@ -16,16 +16,15 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using StreetSmart.Common.API.Events;
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Events;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
-using System.Dynamic;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {
@@ -97,42 +96,42 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnSwitchViewingDirection(ExpandoObject args)
+    public void OnSwitchViewingDirection(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       SwitchViewingDir?.Invoke(this, new EventArgs<IDirectionInfo>(new DirectionInfo(detail)));
     }
 
-    public void OnFeatureClick(ExpandoObject args)
+    public void OnFeatureClick(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureClick?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnFeatureSelectionChange(ExpandoObject args)
+    public void OnFeatureSelectionChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       FeatureSelectionChange?.Invoke(this, new EventArgs<IFeatureInfo>(new FeatureInfo(detail)));
     }
 
-    public void OnImageChange(ExpandoObject args)
+    public void OnImageChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ImageChange?.Invoke(this, new EventArgs<ObliqueImageInfo>(new ObliqueImageInfo(detail)));
     }
 
-    public void OnViewChange(ExpandoObject args)
+    public void OnViewChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       ViewChange?.Invoke(this, new EventArgs<ObliqueOrientation>(new ObliqueOrientation(detail)));
     }
 
-    public void OnViewLoadEnd(ExpandoObject args)
+    public void OnViewLoadEnd(IDictionary<string, object> args)
     {
       ViewLoadEnd?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnTimeTravelChange(ExpandoObject args)
+    public void OnTimeTravelChange(IDictionary<string, object> args)
     {
       Dictionary<string, object> detail = GetDictValue(args, "detail");
       TimeTravelChange?.Invoke(this, new EventArgs<ITimeTravelInfo>(new TimeTravelInfo(detail)));

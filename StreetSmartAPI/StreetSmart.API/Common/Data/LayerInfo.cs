@@ -26,7 +26,7 @@ namespace StreetSmart.Common.Data
     private string _layerId;
     private bool _visible;
 
-    public LayerInfo(Dictionary<string, object> layerInfo)
+    public LayerInfo(IDictionary<string, object> layerInfo)
     {
       LayerId = ToString(layerInfo, "layerId");
       Visible = ToBool(layerInfo, "visibility");

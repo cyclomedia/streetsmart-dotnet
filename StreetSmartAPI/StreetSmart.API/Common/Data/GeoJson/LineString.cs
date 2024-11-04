@@ -16,25 +16,24 @@
  * License along with this library.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class LineString : List<ICoordinate>, ILineString, IEquatable<LineString>
   {
-    public LineString(Dictionary<string, object> lineString)
+    public LineString(IDictionary<string, object> lineString)
     {
       DataConvert converter = new DataConvert();
       var coordinates = converter.GetListValue(lineString, "coordinates");
 
       try
       {
-        Type = (GeometryType) converter.ToEnum(typeof(GeometryType), lineString, "type");
+        Type = (GeometryType)converter.ToEnum(typeof(GeometryType), lineString, "type");
       }
       catch (ArgumentException)
       {
@@ -77,14 +76,14 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (other == null) return false;
 
-      if(this.Count != other.Count) return false;
+      if (this.Count != other.Count) return false;
       for (int i = 0; i < this.Count; i++)
       {
-          if (!this[i].Equals(other[i]))
-          {
-            return false;
-          }
-        
+        if (!this[i].Equals(other[i]))
+        {
+          return false;
+        }
+
       }
       return Type.Equals(other.Type);
 

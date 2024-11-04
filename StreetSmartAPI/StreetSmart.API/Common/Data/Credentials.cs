@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Security;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Security;
 
 namespace StreetSmart.Common.Data
 {

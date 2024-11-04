@@ -16,18 +16,17 @@
  * License along with this library.
  */
 
-using System;
-using System.Threading.Tasks;
-
 using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.Events;
+using System;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.Interfaces.API
 {
   /// <summary>
   /// The vewer interface
   /// </summary>
-  public interface IImageViewer: IViewer
+  public interface IImageViewer : IViewer
   {
     #region Interface functions
 

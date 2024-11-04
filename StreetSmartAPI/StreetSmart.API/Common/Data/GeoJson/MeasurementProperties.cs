@@ -25,7 +25,7 @@ namespace StreetSmart.Common.Data.GeoJson
 {
   internal sealed class MeasurementProperties : Properties, IMeasurementProperties, IEquatable<MeasurementProperties>
   {
-    public MeasurementProperties(Dictionary<string, object> properties, GeometryType geometryType)
+    public MeasurementProperties(IDictionary<string, object> properties, GeometryType geometryType)
     {
       DataConvert converter = new();
       Id = converter.ToString(properties, "id");

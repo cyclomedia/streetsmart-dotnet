@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 
@@ -33,7 +32,7 @@ namespace StreetSmart.Common.Data
       return double.TryParse(value?.ToString(), out var outValue) ? outValue : 0.0;
     }
 
-    public double ToDouble(Dictionary<string, object> details, string value)
+    public double ToDouble(IDictionary<string, object> details, string value)
     {
       return ToDouble(GetValue(details, value));
     }
@@ -53,7 +52,7 @@ namespace StreetSmart.Common.Data
       return null;
     }
 
-    public double? ToNullDouble(Dictionary<string, object> details, string value)
+    public double? ToNullDouble(IDictionary<string, object> details, string value)
     {
       return ToNullDouble(GetValue(details, value));
     }
@@ -68,7 +67,7 @@ namespace StreetSmart.Common.Data
       return array.Length > nr ? ToInt(array[nr]) : 0;
     }
 
-    public int ToInt(Dictionary<string, object> details, string value)
+    public int ToInt(IDictionary<string, object> details, string value)
     {
       return ToInt(GetValue(details, value));
     }
@@ -78,7 +77,7 @@ namespace StreetSmart.Common.Data
       return int.TryParse(value?.ToString(), out var outValue) ? (int?)outValue : null;
     }
 
-    public int? ToNullInt(Dictionary<string, object> details, string value)
+    public int? ToNullInt(IDictionary<string, object> details, string value)
     {
       return ToNullInt(GetValue(details, value));
     }
@@ -88,7 +87,7 @@ namespace StreetSmart.Common.Data
       return value?.ToString();
     }
 
-    public string ToNullString(Dictionary<string, object> details, string value)
+    public string ToNullString(IDictionary<string, object> details, string value)
     {
       return ToNullString(GetValue(details, value));
     }
@@ -98,7 +97,7 @@ namespace StreetSmart.Common.Data
       return value?.ToString() ?? string.Empty;
     }
 
-    public string ToString(Dictionary<string, object> details, string value)
+    public string ToString(IDictionary<string, object> details, string value)
     {
       return ToString(GetValue(details, value));
     }
@@ -108,7 +107,7 @@ namespace StreetSmart.Common.Data
       return value == null ? null : (DateTime?)DateTime.Parse(value.ToString());
     }
 
-    public DateTime? ToNullDateTime(Dictionary<string, object> details, string value)
+    public DateTime? ToNullDateTime(IDictionary<string, object> details, string value)
     {
       return ToNullDateTime(GetValue(details, value));
     }
@@ -118,7 +117,7 @@ namespace StreetSmart.Common.Data
       return DateTime.Parse(value?.ToString());
     }
 
-    public DateTime ToDateTime(Dictionary<string, object> details, string value)
+    public DateTime ToDateTime(IDictionary<string, object> details, string value)
     {
       return ToDateTime(GetValue(details, value));
     }
@@ -128,12 +127,12 @@ namespace StreetSmart.Common.Data
       return Enum.Parse(type, ToString(value));
     }
 
-    public object ToEnum(Type type, Dictionary<string, object> details, string value)
+    public object ToEnum(Type type, IDictionary<string, object> details, string value)
     {
       return ToEnum(type, GetValue(details, value));
     }
 
-    public object ToNullEnum(Type type, Dictionary<string, object> details, string value)
+    public object ToNullEnum(Type type, IDictionary<string, object> details, string value)
     {
       var v = GetValue(details, value);
       return v == null ? null : ToEnum(type, v);
@@ -144,7 +143,7 @@ namespace StreetSmart.Common.Data
       return (bool)(value ?? false);
     }
 
-    public bool ToBool(Dictionary<string, object> details, string value)
+    public bool ToBool(IDictionary<string, object> details, string value)
     {
       return ToBool(GetValue(details, value));
     }
@@ -162,9 +161,9 @@ namespace StreetSmart.Common.Data
         {
           return objects;
         }
-        else if (value is ExpandoObject expandoObject)
+        else if (value is IDictionary<string, object> dict)
         {
-          return expandoObject.ToDictionary(pair => pair.Key, pair => pair.Value);
+          return dict.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
         else
         {
@@ -192,42 +191,32 @@ namespace StreetSmart.Common.Data
       return [];
     }
 
-    public object[] GetArrayValue(Dictionary<string, object> details, string value)
+    public object[] GetArrayValue(IDictionary<string, object> details, string value)
     {
       return ToArray(GetValue(details, value));
     }
 
-    public object GetValue(ExpandoObject details, string value)
-    {
-      return GetValue(ToDictionary(details), value);
-    }
-
-    public object GetValue(Dictionary<string, object> details, string value)
+    public object GetValue(IDictionary<string, object> details, string value)
     {
       return details?.ContainsKey(value) ?? false ? details[value] : null;
     }
 
-    public Dictionary<string, object> GetDictValue(ExpandoObject details, string value)
+    public Dictionary<string, object> GetDictValue(IDictionary<string, object> details, string value)
     {
       return ToDictionary(GetValue(details, value));
     }
 
-    public Dictionary<string, object> GetDictValue(Dictionary<string, object> details, string value)
-    {
-      return ToDictionary(GetValue(details, value));
-    }
-
-    public Dictionary<string, object> GetNullDictValue(Dictionary<string, object> details, string value)
+    public Dictionary<string, object> GetNullDictValue(IDictionary<string, object> details, string value)
     {
       return ToDictionary(GetValue(details, value), true);
     }
 
-    public IList<object> GetListValue(Dictionary<string, object> details, string value)
+    public IList<object> GetListValue(IDictionary<string, object> details, string value)
     {
       return ToList(GetValue(details, value), false);
     }
 
-    public IList<object> GetNullListValue(Dictionary<string, object> details, string value)
+    public IList<object> GetNullListValue(IDictionary<string, object> details, string value)
     {
       return ToList(GetValue(details, value), true);
     }

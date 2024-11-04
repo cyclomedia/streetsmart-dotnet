@@ -28,7 +28,7 @@ namespace StreetSmart.Common.Data
     private ICoordinate _xyz;
     private string _srs;
 
-    public DepthInfo(Dictionary<string, object> depthInfo)
+    public DepthInfo(IDictionary<string, object> depthInfo)
     {
       Depth = ToDouble(depthInfo, "depth");
       DepthInMeters = ToDouble(depthInfo, "depthInMeters");

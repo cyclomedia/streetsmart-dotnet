@@ -16,18 +16,16 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.RegularExpressions;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
-  internal class Properties: Dictionary<string, object>, IProperties, IEquatable<Properties>
+  internal class Properties : Dictionary<string, object>, IProperties, IEquatable<Properties>
   {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -35,7 +33,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
     }
 
-    public Properties(Dictionary<string, object> properties)
+    public Properties(IDictionary<string, object> properties)
     {
       foreach (var property in properties)
       {

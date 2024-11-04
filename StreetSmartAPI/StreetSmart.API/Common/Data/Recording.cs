@@ -16,9 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
-using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {
@@ -41,7 +41,7 @@ namespace StreetSmart.Common.Data
     private DateTime? _expiredAt;
     private int? _year;
 
-    public Recording(Dictionary<string, object> recording)
+    public Recording(IDictionary<string, object> recording)
     {
       var xyz = GetDictValue(recording, "xyz");
       double x = ToDouble(xyz, "0");

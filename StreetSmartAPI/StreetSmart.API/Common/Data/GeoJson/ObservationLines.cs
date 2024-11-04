@@ -16,17 +16,17 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class ObservationLines : DataConvert, IObservationLines, IEquatable<ObservationLines>
   {
-    public ObservationLines(Dictionary<string, object> observationLines)
+    public ObservationLines(IDictionary<string, object> observationLines)
     {
       ActiveObservation = ToInt(observationLines, "activeObservation");
       RecordingId = ToString(observationLines, "recordingId");

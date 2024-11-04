@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
-
-using StreetSmart.Common.Interfaces.Data;
 
 namespace StreetSmart.Common.Data
 {

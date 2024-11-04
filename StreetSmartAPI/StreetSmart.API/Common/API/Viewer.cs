@@ -16,12 +16,12 @@
  * License along with this library.
  */
 
-using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using StreetSmart.Common.Exceptions;
 using StreetSmart.Common.Interfaces.API;
 using StreetSmart.Common.Interfaces.Data;
+using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {

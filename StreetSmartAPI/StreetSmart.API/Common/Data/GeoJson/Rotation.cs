@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -27,30 +26,30 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     private readonly Matrix _rotation;
 
-    public Rotation(Dictionary<string, object> rotationValues)
+    public Rotation(IDictionary<string, object> rotationValues)
     {
       var rotation = GetDictValue(rotationValues, "m");
       var shape = GetArrayValue(rotation, "shape");
       var data = GetDictValue(rotation, "data");
 
-      int width = shape.Length >= 1 ? (int) shape[0] : 0;
-      int height = shape.Length >= 2 ? (int) shape[1] : 0;
+      int width = shape.Length >= 1 ? (int)shape[0] : 0;
+      int height = shape.Length >= 2 ? (int)shape[1] : 0;
 
       _rotation = new Matrix(data, width, height);
     }
 
     public Rotation(IRotation rotation)
     {
-      _rotation = new Matrix(((Rotation) rotation)._rotation);
+      _rotation = new Matrix(((Rotation)rotation)._rotation);
     }
 
-    public List<int> Shape => new List<int> {_rotation.Width, _rotation.Height};
+    public List<int> Shape => new List<int> { _rotation.Width, _rotation.Height };
 
     public IList<double> Data => _rotation.Values;
 
     public bool Equals(Rotation other)
     {
-      if(other == null)
+      if (other == null)
         return false;
       return _rotation.Equals(other._rotation);
     }

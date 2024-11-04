@@ -26,7 +26,7 @@ namespace StreetSmart.Common.Data
   {
     private DateTime _date;
 
-    public TimeTravelInfo(Dictionary<string, object> timeTravelInfo)
+    public TimeTravelInfo(IDictionary<string, object> timeTravelInfo)
     {
       Date = ToDateTime(timeTravelInfo, "date");
     }

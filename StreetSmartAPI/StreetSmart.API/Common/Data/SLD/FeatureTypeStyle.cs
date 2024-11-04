@@ -16,14 +16,13 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.SLD;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
-using StreetSmart.Common.Interfaces.SLD;
-
 namespace StreetSmart.Common.Data.SLD
 {
-  #pragma warning disable 1591
+#pragma warning disable 1591
   /// <exclude/>
   public class FeatureTypeStyle : NotifyPropertyChanged, IFeatureTypeStyle
   {
@@ -40,5 +39,5 @@ namespace StreetSmart.Common.Data.SLD
       }
     }
   }
-  #pragma warning restore 1591
+#pragma warning restore 1591
 }

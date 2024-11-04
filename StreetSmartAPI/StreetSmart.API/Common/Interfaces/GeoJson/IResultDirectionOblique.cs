@@ -16,8 +16,6 @@
  * License along with this library.
  */
 
-using StreetSmart.Common.Data.GeoJson;
-
 namespace StreetSmart.Common.Interfaces.GeoJson
 {
   /// <summary>

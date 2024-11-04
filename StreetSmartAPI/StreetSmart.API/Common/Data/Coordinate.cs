@@ -16,12 +16,11 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using StreetSmart.Common.Interfaces.Data;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data
 {
@@ -35,7 +34,7 @@ namespace StreetSmart.Common.Data
     {
     }
 
-    public Coordinate(Dictionary<string, object> coordinate)
+    public Coordinate(IDictionary<string, object> coordinate)
     {
       X = ToNullDouble(coordinate, "0");
       Y = ToNullDouble(coordinate, "1");

@@ -30,7 +30,7 @@ namespace StreetSmart.Common.Data
     private double _rotation;
     private string _srs;
 
-    public ObliqueImageInfo(Dictionary<string, object> obliqueImageInfo)
+    public ObliqueImageInfo(IDictionary<string, object> obliqueImageInfo)
     {
       Footprint = new Polygon(GetListValue(obliqueImageInfo, "footprint"));
       FootprintCentre = new Coordinate(GetListValue(obliqueImageInfo, "footprintCentre"));

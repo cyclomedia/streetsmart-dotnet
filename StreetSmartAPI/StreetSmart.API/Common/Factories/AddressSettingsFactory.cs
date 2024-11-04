@@ -16,10 +16,9 @@
  * License along with this library.
  */
 
-using System.Globalization;
-
 using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
+using System.Globalization;
 
 namespace StreetSmart.Common.Factories
 {

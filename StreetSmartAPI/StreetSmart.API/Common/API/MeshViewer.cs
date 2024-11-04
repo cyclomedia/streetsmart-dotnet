@@ -16,10 +16,10 @@
  * License along with this library.
  */
 
-using System;
-using System.Threading.Tasks;
 using StreetSmart.Common.Interfaces.API;
+using System;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace StreetSmart.Common.API
 {

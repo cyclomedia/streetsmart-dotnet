@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using CefSharp;
@@ -407,7 +406,7 @@ namespace StreetSmart.Common.API
       Browser.ExecuteScriptAsync(GetScript("stopMeasurementMode()"));
     }
 
-#endregion
+    #endregion
 
     #region events ChromiumWebBrowser
 
@@ -423,22 +422,22 @@ namespace StreetSmart.Common.API
 
     #region Callbacks StreetSmartAPI
 
-    public void OnMeasurementChanged(ExpandoObject args, string viewerId)
+    public void OnMeasurementChanged(IDictionary<string, object> args, string viewerId)
     {
       MeasurementChanged?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-    public void OnMeasurementStarted(ExpandoObject args, string viewerId)
+    public void OnMeasurementStarted(IDictionary<string, object> args, string viewerId)
     {
       MeasurementStarted?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-    public void OnMeasurementStopped(ExpandoObject args, string viewerId)
+    public void OnMeasurementStopped(IDictionary<string, object> args, string viewerId)
     {
       MeasurementStopped?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }
 
-    public void OnMeasurementSaved(ExpandoObject args, string viewerId)
+    public void OnMeasurementSaved(IDictionary<string, object> args, string viewerId)
     {
       MeasurementSaved?.Invoke(this, new EventArgs<IFeatureCollection>(new FeatureCollection(ToDictionary(args), true)));
     }

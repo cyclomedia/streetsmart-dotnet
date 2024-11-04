@@ -16,17 +16,17 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using StreetSmart.Common.Interfaces.GeoJson;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
   internal class MeasureDetails : DataConvert, IMeasureDetails, IEquatable<MeasureDetails>
   {
-    public MeasureDetails(Dictionary<string, object> measureDetails, MeasurementTools measurementTool)
+    public MeasureDetails(IDictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
       var details = GetDictValue(measureDetails, "details");
       var pointProblems = GetListValue(measureDetails, "pointProblems");

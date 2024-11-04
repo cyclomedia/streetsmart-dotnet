@@ -16,9 +16,8 @@
  * License along with this library.
  */
 
-using System.Collections.Generic;
-
 using StreetSmart.Common.Interfaces.Data;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.Data
 {
@@ -33,7 +32,7 @@ namespace StreetSmart.Common.Data
       Database = database;
     }
 
-    public AddressSettings(Dictionary<string, object> addressSettings)
+    public AddressSettings(IDictionary<string, object> addressSettings)
     {
       Locale = ToString(addressSettings, "locale");
       Database = ToString(addressSettings, "database");

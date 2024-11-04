@@ -16,9 +16,9 @@
  * License along with this library.
  */
 
-using System;
 using StreetSmart.Common.Interfaces.API;
-using System.Dynamic;
+using System;
+using System.Collections.Generic;
 
 namespace StreetSmart.Common.API
 {
@@ -57,7 +57,7 @@ namespace StreetSmart.Common.API
 
     #region Events from StreetSmartAPI
 
-    public void OnViewChange(string name, ExpandoObject args)
+    public void OnViewChange(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -65,7 +65,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnEdgesChanged(string name, ExpandoObject args)
+    public void OnEdgesChanged(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -73,7 +73,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnPointSizeChanged(string name, ExpandoObject args)
+    public void OnPointSizeChanged(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -81,7 +81,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnPointStyleChanged(string name, ExpandoObject args)
+    public void OnPointStyleChanged(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -89,7 +89,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnPointBudgedChanged(string name, ExpandoObject args)
+    public void OnPointBudgedChanged(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {
@@ -97,7 +97,7 @@ namespace StreetSmart.Common.API
       }
     }
 
-    public void OnBackGroundChanged(string name, ExpandoObject args)
+    public void OnBackGroundChanged(string name, IDictionary<string, object> args)
     {
       if (Viewers.ContainsKey(name))
       {

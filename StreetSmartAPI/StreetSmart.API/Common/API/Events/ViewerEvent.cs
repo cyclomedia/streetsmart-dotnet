@@ -18,7 +18,7 @@
 
 namespace StreetSmart.Common.API.Events
 {
-  internal class ViewerEvent: ApiEvent
+  internal class ViewerEvent : ApiEvent
   {
     private readonly Viewer _viewer;
 
