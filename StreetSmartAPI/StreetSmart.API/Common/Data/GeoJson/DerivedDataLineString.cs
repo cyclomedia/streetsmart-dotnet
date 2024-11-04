@@ -51,11 +51,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var coordinateStdev in coordinateStdevs)
       {
-#if NETCOREAPP
-        CoordinateStdev.Add(new Stdev((coordinateStdev as IDictionary<string, object>)?.ToDictionary(pair => pair.Key, pair => pair.Value)));
-#else
-        CoordinateStdev.Add(new Stdev(coordinateStdev as IDictionary<string, object>));
-#endif
+        CoordinateStdev.Add(new Stdev((coordinateStdev as IDictionary<string, object>)));
       }
     }
 
