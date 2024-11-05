@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StreetSmart.Common.Data;
 using StreetSmart.Common.Data.GeoJson;
-using StreetSmart.Common.Interfaces.GeoJson;
-using Xunit;
-using System.Reflection;
-using StreetSmart.Common.Data;
 using StreetSmart.Common.Interfaces.Data;
-using System.Runtime.InteropServices;
-using System.Windows.Markup;
+using StreetSmart.Common.Interfaces.GeoJson;
+using System;
+using System.Collections.Generic;
+using Xunit;
 
 namespace StreetSmart.WPF.Tests
 {
@@ -484,7 +481,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void FeatureCollection_Equals_SamePropertiesSameCRSDifferentFeatures_ReturnsFalse()
     {
-      var feature1 = new Feature(new LineString(new List<ICoordinate> { new Coordinate(1, 1), new Coordinate(2, 2) }));
+      var feature1 = new Feature(new LineString([new Coordinate(1, 1), new Coordinate(2, 2)]));
       feature1.Properties.Add("prop1", "value1");
 
       var feature2 = new Feature(new Polygon(new List<IList<ICoordinate>> { new List<ICoordinate> { new Coordinate(0.0, 0.0, 0.0), new Coordinate(0.0, 1.0, 0.0), new Coordinate(1.0, 1.0, 0.0), new Coordinate(0.0, 0.0, 0.0) } }));
@@ -536,7 +533,7 @@ namespace StreetSmart.WPF.Tests
     public void FeatureCollection_Equals_DifferentFeatures_ReturnsFalse()
     {
       var feature1 = new Feature(new Point(0, 0));
-      var feature2 = new Feature(new LineString(new List<ICoordinate> { new Coordinate(1, 1), new Coordinate(2, 2) }));
+      var feature2 = new Feature(new LineString([new Coordinate(1, 1), new Coordinate(2, 2)]));
 
       var featureCollection1 = new FeatureCollection(new Dictionary<string, object>(), true);
       featureCollection1.Features.Add(feature1);
@@ -567,17 +564,9 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void FeatureCollection_Equals_DifferentCoordinateOrderWithinFeature_ReturnsFalse()
     {
-      var feature1 = new Feature(new LineString(new List<ICoordinate>
-    {
-        new Coordinate(1, 1),
-        new Coordinate(2, 2)
-    }));
+      var feature1 = new Feature(new LineString([new Coordinate(1, 1), new Coordinate(2, 2)]));
 
-      var feature2 = new Feature(new LineString(new List<ICoordinate>
-    {
-        new Coordinate(2, 2),
-        new Coordinate(1, 1)
-    }));
+      var feature2 = new Feature(new LineString([new Coordinate(2, 2), new Coordinate(1, 1)]));
 
       var featureCollection1 = new FeatureCollection(new Dictionary<string, object>(), true);
       featureCollection1.Features.Add(feature1);
@@ -602,9 +591,9 @@ namespace StreetSmart.WPF.Tests
     {
       var element1 = new List<ICoordinate> { new Coordinate(0.0, 0.0, 0.0), new Coordinate(0.0, 1.0, 0.0), new Coordinate(1.0, 1.0, 0.0), new Coordinate(0.0, 0.0, 0.0) };
       var element2 = new List<ICoordinate> { new Coordinate(0.0, 0.0, 0.0), new Coordinate(0.0, 1.0, 0.0), new Coordinate(1.0, 1.0, 0.0), new Coordinate(0.0, 0.0, 0.0) };
-      var polygon1 = new Polygon(new List<IList<ICoordinate>> { element1,element2 });
+      var polygon1 = new Polygon(new List<IList<ICoordinate>> { element1, element2 });
       var polygon2 = new Polygon(new List<IList<ICoordinate>> { element1 });
-    
+
       Assert.False(polygon1.Equals(polygon2));
     }
 
@@ -1768,8 +1757,6 @@ namespace StreetSmart.WPF.Tests
     public void DerivedDataPolygon_WhenSecondObjectHasDifferentTriangleCount_ReturnsFalse()
     {
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
-      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
-
       var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
@@ -1793,8 +1780,6 @@ namespace StreetSmart.WPF.Tests
     public void DerivedDataPolygon_WhenSecondObjectHasNoTriangles_ReturnsFalse()
     {
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
-      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
-
       var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
@@ -1817,8 +1802,6 @@ namespace StreetSmart.WPF.Tests
     public void DerivedDataPolygon_WhenSecondObjectNull_ReturnsFalse()
     {
       var triangle1 = new { Vertex1 = "A", Vertex2 = "B", Vertex3 = "C" };
-      var triangle2 = new { Vertex1 = "D", Vertex2 = "E", Vertex3 = "F" };
-
       var data1 = new DerivedDataPolygon(new Dictionary<string, object>
         {
             { "unit", "m" },
@@ -2573,9 +2556,7 @@ namespace StreetSmart.WPF.Tests
     [Fact]
     public void ResultDirectionPanorama_Equals_ReturnsTrueForEqualObjects()
     {
-      var direction1 = new Direction(1.0, 2.0, 3.0);
       var orientation1 = new Property(45.0, 5.0);
-      var position1 = new PositionStdev(10.0, 20.0, 30.0, 1.0, 2.0, 3.0);
       var resolution1 = new Resolution(new Dictionary<string, object>());
       var obj1 = new ResultDirectionPanorama(new Dictionary<string, object>
             {

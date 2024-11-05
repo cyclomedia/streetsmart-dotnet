@@ -90,8 +90,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        CustomGeometryType =
-          (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
+        CustomGeometryType = (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {

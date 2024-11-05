@@ -1,10 +1,9 @@
-﻿using System.Drawing;
-using Xunit;
-using StreetSmart.Common.Data.SLD;
+﻿using StreetSmart.Common.Data.SLD;
 using StreetSmart.Common.Interfaces.SLD;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
+using Xunit;
 
 namespace StreetSmart.WPF.Tests;
 
@@ -37,7 +36,7 @@ public class SvgParameterCollectionTests
   [InlineData(255, 255, 0, 0, 5.0, "5", "#FF0000")]
   [InlineData(255, 0, 255, 0, 5.0, "5", "#00FF00")]
   [InlineData(255, 0, 0, 255, 5.0, "5", "#0000FF")]
-  public void GetFillObject_ReturnsExpectedResult(int a, int r, int g, int b, double? opacity, string expectedOpacityValue, string expectedColorValue)
+  public void GetFillObject_ReturnsExpectedResult(int a, int r, int g, int b, double? opacity, string? expectedOpacityValue, string expectedColorValue)
   {
     Color color = Color.FromArgb(a, r, g, b);
     List<object> expectedResult = [new { Name = FillType.Fill, Value = expectedColorValue }];
@@ -106,7 +105,7 @@ public class SvgParameterCollectionTests
   [InlineData(255, 255, 0, 0, null, null, 5.0, "5", "#FF0000")]
   [InlineData(255, 0, 255, 0, null, null, 5.0, "5", "#00FF00")]
   [InlineData(255, 0, 0, 255, null, null, 5.0, "5", "#0000FF")]
-  public void GetStrokeObject_ReturnsExpectedResult(int a, int r, int g, int b, double? width, string expectedWidth, double? opacity, string expectedOpacity, string expectedColorValue)
+  public void GetStrokeObject_ReturnsExpectedResult(int a, int r, int g, int b, double? width, string? expectedWidth, double? opacity, string? expectedOpacity, string expectedColorValue)
   {
     Color color = Color.FromArgb(a, r, g, b);
     List<object> expectedResult = [new { Name = StrokeType.Stroke, Value = expectedColorValue }];

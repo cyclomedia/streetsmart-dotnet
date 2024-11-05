@@ -31,7 +31,7 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       var triangles = GetListValue(derivedData, "triangles");
-      Area = getStdValue(derivedData, "area");
+      Area = GetStdValue(derivedData, "area");
 
       Triangles = new List<ITriangle>();
 

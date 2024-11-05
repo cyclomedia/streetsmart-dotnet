@@ -32,18 +32,17 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       // ReSharper disable InconsistentNaming
       var coordinateStdevs = GetListValue(derivedData, "coordinateStdevs");
-      TotalLength = getStdValue(derivedData, "totalLength");
+      TotalLength = GetStdValue(derivedData, "totalLength");
       SegmentLengths = GetStdValueList(derivedData, "segmentLengths");
       SegmentsDeltaXY = GetStdValueList(derivedData, "segmentsDeltaXY");
       SegmentsDeltaZ = GetStdValueList(derivedData, "segmentsDeltaZ");
       SegmentsSlopePercentage = GetStdValueList(derivedData, "segmentsSlopePercentage");
       SegmentsSlopeAngle = GetStdValueList(derivedData, "segmentsSlopeAngle");
-      DeltaXY = getStdValue(derivedData, "deltaXY");
-      DeltaZ = getStdValue(derivedData, "deltaZ");
+      DeltaXY = GetStdValue(derivedData, "deltaXY");
+      DeltaZ = GetStdValue(derivedData, "deltaZ");
       // ReSharper restore InconsistentNaming
 
       CoordinateStdev = new List<IStdev>(coordinateStdevs.Count);
-
       foreach (var coordinateStdev in coordinateStdevs)
       {
         CoordinateStdev.Add(new Stdev(coordinateStdev as IDictionary<string, object>));
@@ -115,7 +114,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
-    private IList<IProperty> GetStdValueList(IList<IProperty> properties)
+    private static IList<IProperty> GetStdValueList(IList<IProperty> properties)
     {
       if (properties == null)
       {
@@ -131,7 +130,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
-    protected IProperty getStdValue(IDictionary<string, object> derivedData, string key)
+    protected IProperty GetStdValue(IDictionary<string, object> derivedData, string key)
     {
       var input = GetDictValue(derivedData, key);
       IProperty result = null;
@@ -145,7 +144,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return result;
     }
 
-    private string GetValueString(IList<IProperty> propertyList, string propertyName)
+    private static string GetValueString(IList<IProperty> propertyList, string propertyName)
     {
       if (propertyList == null)
       {
@@ -175,7 +174,7 @@ namespace StreetSmart.Common.Data.GeoJson
       return $"\"{propertyName}\":{{{value}],{stdev}]}},";
     }
 
-    protected string GetValueString(IProperty property, string propertyName)
+    protected static string GetValueString(IProperty property, string propertyName)
     {
       if (property == null)
       {
@@ -208,37 +207,19 @@ namespace StreetSmart.Common.Data.GeoJson
         sb.Append("},");
       }
 
-      return $"{sb}";
+      return sb.ToString();
     }
 
     public override string ToString()
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       StringBuilder sb = new();
-
-      sb.Append("[");
-
-      foreach (IStdev stdev in CoordinateStdev)
-      {
-        string stdevX = stdev?.X?.ToString(ci);
-        string stdevY = stdev?.Y?.ToString(ci);
-        string stdevZ = stdev?.Z?.ToString(ci);
-        bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
-
-        sb.Append(noStdev ? "null," : $"{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},");
-      }
-
-      if (sb.Length > 1)
-      {
-        sb.Length--;
-      }
-
-      sb.Append("]{");
+      sb.Append("{");
 
       string baseStr = base.ToString();
       if (baseStr.Length > 0)
       {
-        sb.Append(baseStr.Substring(0, baseStr.Length - 1));
+        sb.Append(baseStr.Substring(1, baseStr.Length - 2));
       }
 
       sb.Append((sb.Length > 1) ? "," : string.Empty); // comma
@@ -250,8 +231,24 @@ namespace StreetSmart.Common.Data.GeoJson
       sb.Append(GetValueString(SegmentsSlopeAngle, "segmentsSlopeAngle"));
       sb.Append(GetValueString(DeltaXY, "deltaXY"));
       sb.Append(GetValueString(DeltaZ, "deltaZ"));
+      sb.Append("\"coordinateStdevs\":[");
 
-      sb.Append($"\"coordinateStdevs\":{sb}}}");
+      foreach (IStdev stdev in CoordinateStdev)
+      {
+        string stdevX = stdev?.X?.ToString(ci);
+        string stdevY = stdev?.Y?.ToString(ci);
+        string stdevZ = stdev?.Z?.ToString(ci);
+        bool noStdev = string.IsNullOrEmpty(stdevX) && string.IsNullOrEmpty(stdevY) && string.IsNullOrEmpty(stdevZ);
+
+        sb.Append(noStdev ? "null," : $"{{\"0\":{stdevX},\"1\":{stdevY},\"2\":{stdevZ}}},");
+      }
+
+      if (CoordinateStdev.Count >= 1)
+      {
+        sb.Length--;
+      }
+
+      sb.Append("]}");
 
       return sb.ToString();
     }

@@ -20,7 +20,6 @@ using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -70,14 +69,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      var sb = new StringBuilder();
-
-      sb.Append("{");
-      sb.Append($"\"unit\":\"{Unit.Description()}\",");
-      sb.Append($"\"precision\":{Precision}");
-      sb.Append("}");
-
-      return $"{sb}";
+      return $"{{\"unit\":\"{Unit.Description()}\",\"precision\":{Precision}}}";
     }
 
     public bool Equals(DerivedData other)
