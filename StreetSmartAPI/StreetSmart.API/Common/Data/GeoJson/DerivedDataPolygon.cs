@@ -83,7 +83,13 @@ namespace StreetSmart.Common.Data.GeoJson
         sb.Append("\"triangles\":null");
       }
 
-      sb.Append(GetValueString(Area, "area"));
+      var areaString = GetValueString(Area, "area");
+      if (!string.IsNullOrWhiteSpace(areaString))
+      {
+        sb.Append(',');
+      }
+
+      sb.Append(areaString);
       sb.Append('}');
 
       return sb.ToString();
