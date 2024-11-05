@@ -114,15 +114,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public IGeometry Geometry { get; set; }
 
     public IProperties Properties { get; private set; }
+
     public override string ToString()
     {
-      var sb = new StringBuilder();
-      sb.Append($"{{\"type\":\"{Type.Description()}\",");
-      sb.Append($"{Geometry},");
-      sb.Append($"{Properties}");
-      sb.Append("}");
-
-      return $"{sb}";
+      return $"{{\"type\":\"{Type.Description()}\",{Geometry},{Properties}}}";
     }
     public bool Equals(IFeature other)
     {
