@@ -53,7 +53,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Geometry other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Type.Equals(other.Type);
     }
 

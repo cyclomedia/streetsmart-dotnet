@@ -82,7 +82,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DetailsForwardIntersection other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return
           Position.Equals(other.Position) &&
           ResultDirections.Equals(other.ResultDirections);

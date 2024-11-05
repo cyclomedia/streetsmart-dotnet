@@ -63,15 +63,15 @@ namespace StreetSmart.Common.Data.GeoJson
       var sb = new StringBuilder();
 
       sb.Append("\"xyz\":{");
-      sb.Append($"\"0\":{(X?.ToString(ci) ?? "null")},");
-      sb.Append($"\"1\":{(Y?.ToString(ci) ?? "null")},");
-      sb.Append($"\"2\":{(Z?.ToString(ci) ?? "null")}");
+      sb.Append($"\"0\":{X?.ToString(ci) ?? "null"},");
+      sb.Append($"\"1\":{Y?.ToString(ci) ?? "null"},");
+      sb.Append($"\"2\":{Z?.ToString(ci) ?? "null"}");
       sb.Append("},");
 
       sb.Append("\"xyzStdev\":[");
-      sb.Append($"{(StdDev?.X?.ToString(ci) ?? "null")},");
-      sb.Append($"{(StdDev?.Y?.ToString(ci) ?? "null")},");
-      sb.Append($"{(StdDev?.Z?.ToString(ci) ?? "null")}");
+      sb.Append($"{StdDev?.X?.ToString(ci) ?? "null"},");
+      sb.Append($"{StdDev?.Y?.ToString(ci) ?? "null"},");
+      sb.Append($"{StdDev?.Z?.ToString(ci) ?? "null"}");
       sb.Append("]");
 
       return $"{sb}";
@@ -79,7 +79,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(PositionStdev other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return StdDev.Equals(other.StdDev) &&
              X.Equals(other.X) &&
              Y.Equals(other.Y) &&

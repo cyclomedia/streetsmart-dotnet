@@ -86,7 +86,10 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(CRS other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
       return Type.Equals(other.Type) && string.Equals(Properties, other.Properties, StringComparison.Ordinal);
     }

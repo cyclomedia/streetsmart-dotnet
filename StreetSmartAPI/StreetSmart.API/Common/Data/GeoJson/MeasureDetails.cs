@@ -176,16 +176,32 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(MeasureDetails other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
-      if ((PointProblems == null) != (other.PointProblems == null)) return false;
+      if (PointProblems == null != (other.PointProblems == null))
+      {
+        return false;
+      }
 
       if (PointProblems != null && other.PointProblems != null)
+      {
         if (PointProblems.Count == other.PointProblems.Count)
+        {
           for (int i = 0; i < PointProblems.Count; i++)
-          { if (!PointProblems[i].Equals(other.PointProblems[i])) return false; }
+          { if (!PointProblems[i].Equals(other.PointProblems[i]))
+            {
+              return false;
+            }
+          }
+        }
         else
+        {
           return false;
+        }
+      }
 
       return MeasureMethod.Equals(other.MeasureMethod) &&
              Details == other.Details &&

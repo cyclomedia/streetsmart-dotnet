@@ -120,9 +120,13 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DerivedDataPoint other)
     {
-      if (other == null) return false;
-      return other.Unit == this.Unit &&
-             other.Precision == this.Precision &&
+      if (other == null)
+      {
+        return false;
+      }
+
+      return other.Unit == Unit &&
+             other.Precision == Precision &&
              (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
              (Position?.Equals(other.Position) ?? other.Position == null) &&
              (PositionXY?.Equals(other.PositionXY) ?? other.PositionXY == null);

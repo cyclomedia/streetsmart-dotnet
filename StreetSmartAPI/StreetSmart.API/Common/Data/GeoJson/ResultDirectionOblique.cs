@@ -190,7 +190,10 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(ResultDirectionOblique other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
       return CamX.Equals(other.CamX) &&
              CamY.Equals(other.CamY) &&
@@ -225,15 +228,21 @@ namespace StreetSmart.Common.Data.GeoJson
     private bool ArrayEquals(double[] arr1, double[] arr2)
     {
       if (arr1 == null && arr2 == null)
+      {
         return true;
+      }
 
       if (arr1 == null || arr2 == null || arr1.Length != arr2.Length)
+      {
         return false;
+      }
 
       for (int i = 0; i < arr1.Length; i++)
       {
         if (!arr1[i].Equals(arr2[i]))
+        {
           return false;
+        }
       }
 
       return true;

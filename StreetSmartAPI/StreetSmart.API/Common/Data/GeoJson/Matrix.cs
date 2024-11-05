@@ -71,7 +71,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Matrix other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       if (Values.Count != other.Values.Count)
       {
         return false;
@@ -92,6 +96,6 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Equals(obj as Matrix);
     }
-    public override int GetHashCode() => (Values).GetHashCode();
+    public override int GetHashCode() => Values.GetHashCode();
   }
 }

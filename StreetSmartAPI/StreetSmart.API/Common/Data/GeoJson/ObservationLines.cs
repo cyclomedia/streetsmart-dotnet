@@ -87,7 +87,11 @@ namespace StreetSmart.Common.Data.GeoJson
     }
     public bool Equals(ObservationLines other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return ActiveObservation == other.ActiveObservation &&
              RecordingId == other.RecordingId &&
              Color.Equals(other.Color) &&

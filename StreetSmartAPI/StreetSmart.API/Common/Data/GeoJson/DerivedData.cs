@@ -74,7 +74,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DerivedData other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Unit.Equals(other.Unit) && Precision == other.Precision;
     }
 

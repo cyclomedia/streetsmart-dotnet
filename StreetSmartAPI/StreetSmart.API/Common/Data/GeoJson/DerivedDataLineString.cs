@@ -195,7 +195,7 @@ namespace StreetSmart.Common.Data.GeoJson
           sb.Append($"\"value\":{value}");
           if (!string.IsNullOrEmpty(stdev))
           {
-            sb.Append(",");
+            sb.Append(',');
           }
         }
 

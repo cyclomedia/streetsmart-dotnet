@@ -19,7 +19,6 @@
 using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -119,9 +118,14 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return $"{{\"type\":\"{Type.Description()}\",{Geometry},{Properties}}}";
     }
+
     public bool Equals(IFeature other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Type.Equals(other.Type) &&
              Geometry.Equals(other.Geometry) &&
              Properties.Equals(other.Properties);

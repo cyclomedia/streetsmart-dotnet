@@ -72,7 +72,11 @@ namespace StreetSmart.Common.Data.GeoJson
     }
     public bool Equals(Point other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Type.Equals(other.Type) &&
              X.Equals(other.X) &&
              Y.Equals(other.Y) &&

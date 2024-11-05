@@ -78,7 +78,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(PositionXY other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return X.Equals(other.X) &&
              Y.Equals(other.Y) &&
              Stdev.Equals(other.Stdev);

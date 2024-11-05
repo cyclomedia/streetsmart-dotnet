@@ -66,7 +66,9 @@ namespace StreetSmart.Common.Data.GeoJson
         string value = property.Value.ToString()?.Replace('\"', '\'');
 
         if (properties.Length > 0)
+        {
           properties.Append(",");
+        }
 
         properties.Append($"\"{property.Key}\":\"{value}\"");
       }
@@ -76,15 +78,28 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Properties other)
     {
-      if (other == null) return false;
-      if (this.Count != other.Count) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
+      if (Count != other.Count)
+      {
+        return false;
+      }
 
       foreach (var pair in this)
       {
         var key = pair.Key;
-        if (!other.TryGetValue(key, out var otherValue)) return false;
+        if (!other.TryGetValue(key, out var otherValue))
+        {
+          return false;
+        }
 
-        if (!Equals(pair.Value, otherValue)) return false;
+        if (!Equals(pair.Value, otherValue))
+        {
+          return false;
+        }
       }
 
       return true;
@@ -95,6 +110,6 @@ namespace StreetSmart.Common.Data.GeoJson
       return Equals(obj as Properties);
     }
 
-    public override int GetHashCode() => (this.Keys, this.Values).GetHashCode();
+    public override int GetHashCode() => (Keys, Values).GetHashCode();
   }
 }

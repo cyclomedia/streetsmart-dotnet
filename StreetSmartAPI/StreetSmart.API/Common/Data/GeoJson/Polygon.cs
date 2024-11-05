@@ -100,12 +100,18 @@ namespace StreetSmart.Common.Data.GeoJson
         foreach (ICoordinate coordinate in coordinateList)
         {
           if (coordinates.Length > 0)
+          {
             coordinates.Append(",");
+          }
+
           coordinates.Append(coordinate);
         }
 
         if (coordinatesList.Length > 0)
+        {
           coordinatesList.Append(",");
+        }
+
         coordinatesList.Append($"[{coordinates}]");
       }
 
@@ -114,12 +120,22 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Polygon other)
     {
-      if (other == null) return false;
-      if (this.Count != other.Count) return false;
-
-      for (int i = 0; i < this.Count; i++)
+      if (other == null)
       {
-        if (this[i].Count != other[i].Count) return false;
+        return false;
+      }
+
+      if (Count != other.Count)
+      {
+        return false;
+      }
+
+      for (int i = 0; i < Count; i++)
+      {
+        if (this[i].Count != other[i].Count)
+        {
+          return false;
+        }
 
         for (int j = 0; j < this[i].Count; j++)
         {

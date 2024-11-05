@@ -48,7 +48,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(DetailsSmartClick other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return
           Confidence.Equals(other.Confidence) &&
           Depth.Equals(other.Depth) &&

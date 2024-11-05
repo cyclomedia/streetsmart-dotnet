@@ -65,7 +65,10 @@ namespace StreetSmart.Common.Data.GeoJson
       foreach (ICoordinate coordinate in this)
       {
         if (coordinates.Length > 0)
+        {
           coordinates.Append(",");
+        }
+
         coordinates.Append(coordinate);
       }
 
@@ -74,10 +77,17 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(LineString other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
-      if (this.Count != other.Count) return false;
-      for (int i = 0; i < this.Count; i++)
+      if (Count != other.Count)
+      {
+        return false;
+      }
+
+      for (int i = 0; i < Count; i++)
       {
         if (!this[i].Equals(other[i]))
         {
