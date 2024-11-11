@@ -5,10 +5,11 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.12.0.4</Version>
+		<Version>24.12.0.6</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
+		<PackageIcon>cyclomedia.png</PackageIcon>
 		<PackageReleaseNotes>ReleaseNotes.txt</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -76,9 +77,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|x86'">
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Remove="cyclomedia.png" />
-	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\Common\API\APIBase.cs">
 			<Link>API\APIBase.cs</Link>
@@ -939,7 +937,7 @@
 			<Link>ReleaseNotes.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" />
+		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" Pack="true" PackagePath ="\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\..\LICENSE.md">
