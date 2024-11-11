@@ -66,12 +66,13 @@ namespace StreetSmart.Common.Data.GeoJson
       {
         if (sb.Length > 13)
         {
-          sb.Append(",");
+          sb.Append(',');
         }
+
         sb.Append($"\"stdev\":{Stdev?.ToString(ci)}");
       }
 
-      sb.Append("}");
+      sb.Append('}');
 
       return sb.Length > 14 ? $"{sb}," : string.Empty;
     }

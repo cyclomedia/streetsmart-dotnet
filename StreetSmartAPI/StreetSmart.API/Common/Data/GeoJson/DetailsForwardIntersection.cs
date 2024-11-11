@@ -104,8 +104,7 @@ namespace StreetSmart.Common.Data.GeoJson
       string resultDirectionsStr = $"{resultDirections.Substring(0, Math.Max(resultDirections.Length - 1, 1))}]";
 
       CultureInfo ci = CultureInfo.InvariantCulture;
-      return $"{{\"PositionX\":{Position?.X?.ToString(ci) ?? "null"},\"PositionY\":{Position?.Y?.ToString(ci) ?? "null"},\"PositionZ\":{Position?.Z?.ToString(ci) ?? "null"}," +
-             $"\"ResultDirections\":{{\"ResultDirection\":{resultDirectionsStr}}}}}";
+      return $"{{\"PositionX\":{Position?.X?.ToString(ci) ?? "null"},\"PositionY\":{Position?.Y?.ToString(ci) ?? "null"},\"PositionZ\":{Position?.Z?.ToString(ci) ?? "null"},\"ResultDirections\":{{\"ResultDirection\":{resultDirectionsStr}}}}}";
     }
   }
 }

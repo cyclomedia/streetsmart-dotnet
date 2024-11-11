@@ -24,7 +24,7 @@ using System.Collections.Generic;
 namespace StreetSmart.Common.Data.GeoJson
 {
   // ReSharper disable once InconsistentNaming
-  internal class DerivedData : DataConvert, IDerivedData, IEquatable<DerivedData>
+  internal abstract class DerivedData : DataConvert, IDerivedData, IEquatable<DerivedData>
   {
     public DerivedData(IDictionary<string, object> derivedData)
     {

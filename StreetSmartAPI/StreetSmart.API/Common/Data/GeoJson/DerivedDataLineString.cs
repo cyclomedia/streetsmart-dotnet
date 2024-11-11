@@ -300,25 +300,19 @@ namespace StreetSmart.Common.Data.GeoJson
         return false;
       }
 
-      if (TotalLength != null && other.TotalLength != null)
+      if (TotalLength != null && other.TotalLength != null && !TotalLength.Equals(other.TotalLength))
       {
-        if (!TotalLength.Equals(other.TotalLength))
-        {
-          return false;
-        }
+        return false;
       }
 
-      if (DeltaXY != null && other.DeltaXY != null)
+      if (DeltaXY != null && other.DeltaXY != null && !DeltaXY.Equals(other.DeltaXY))
       {
-        if (!DeltaXY.Equals(other.DeltaXY))
-        {
-          return false;
-        }
+        return false;
       }
 
       return other.Unit == Unit &&
              other.Precision == Precision &&
-             DeltaZ.Equals(other.DeltaZ);
+             (DeltaZ == null && other.DeltaZ == null || DeltaZ.Equals(other.DeltaZ));
     }
 
     private bool ListsEqual<T>(IList<T> a, IList<T> b)

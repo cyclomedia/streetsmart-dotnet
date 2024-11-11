@@ -20,7 +20,6 @@ using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -74,17 +73,9 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      var sb = new StringBuilder();
-
-      sb.Append("{");
-      sb.Append($"\"activeObservation\":{ActiveObservation.ToString().ToLowerInvariant()},");
-      sb.Append($"\"recordingId\":\"{RecordingId}\",");
-      sb.Append($"\"color\":{Color.ToJsColor()},");
-      sb.Append($"\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"");
-      sb.Append("}");
-
-      return $"{sb}";
+      return $"{{\"activeObservation\":{ActiveObservation},\"recordingId\":\"{RecordingId}\",\"color\":{Color.ToJsColor()},\"selectedMeasureMethod\":\"{SelectedMeasureMethod.Description()}\"}}";
     }
+
     public bool Equals(ObservationLines other)
     {
       if (other == null)

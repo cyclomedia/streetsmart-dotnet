@@ -60,19 +60,19 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      var coordinates = new StringBuilder();
+      var sb = new StringBuilder();
 
       foreach (ICoordinate coordinate in this)
       {
-        if (coordinates.Length > 0)
+        if (sb.Length > 0)
         {
-          coordinates.Append(",");
+          sb.Append(",");
         }
 
-        coordinates.Append(coordinate);
+        sb.Append(coordinate);
       }
 
-      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{coordinates}]}}";
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":[{sb}]}}";
     }
 
     public bool Equals(LineString other)
@@ -95,8 +95,8 @@ namespace StreetSmart.Common.Data.GeoJson
         }
 
       }
-      return Type.Equals(other.Type);
 
+      return Type.Equals(other.Type);
     }
 
     public override bool Equals(object obj)

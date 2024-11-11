@@ -59,12 +59,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var ring in coordinates)
       {
-        List<ICoordinate> coordinateList = new List<ICoordinate>();
-
-        foreach (var coordinate in ring)
-        {
-          coordinateList.Add(coordinate);
-        }
+        List<ICoordinate> coordinateList = [.. ring];
 
         Add(coordinateList);
       }

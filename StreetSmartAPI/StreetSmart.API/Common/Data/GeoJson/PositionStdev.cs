@@ -61,20 +61,9 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       CultureInfo ci = CultureInfo.InvariantCulture;
       var sb = new StringBuilder();
-
-      sb.Append("\"xyz\":{");
-      sb.Append($"\"0\":{X?.ToString(ci) ?? "null"},");
-      sb.Append($"\"1\":{Y?.ToString(ci) ?? "null"},");
-      sb.Append($"\"2\":{Z?.ToString(ci) ?? "null"}");
-      sb.Append("},");
-
-      sb.Append("\"xyzStdev\":[");
-      sb.Append($"{StdDev?.X?.ToString(ci) ?? "null"},");
-      sb.Append($"{StdDev?.Y?.ToString(ci) ?? "null"},");
-      sb.Append($"{StdDev?.Z?.ToString(ci) ?? "null"}");
-      sb.Append("]");
-
-      return $"{sb}";
+      sb.Append($"\"xyz\":{{\"0\":{X?.ToString(ci) ?? "null"},\"1\":{Y?.ToString(ci) ?? "null"},\"2\":{Z?.ToString(ci) ?? "null"}}},");
+      sb.Append($"\"xyzStdev\":[{StdDev?.X?.ToString(ci) ?? "null"},{StdDev?.Y?.ToString(ci) ?? "null"},{StdDev?.Z?.ToString(ci) ?? "null"}]");
+      return sb.ToString();
     }
 
     public bool Equals(PositionStdev other)

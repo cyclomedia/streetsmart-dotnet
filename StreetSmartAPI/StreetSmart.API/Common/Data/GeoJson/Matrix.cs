@@ -29,7 +29,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       Width = width;
       Height = height;
-      Values = new List<double>();
+      Values = new List<double>(width * height);
 
       for (int i = 0; i < width * height; i++)
       {
@@ -41,12 +41,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       Width = matrix.Width;
       Height = matrix.Height;
-      Values = new List<double>();
-
-      foreach (var t in matrix.Values)
-      {
-        Values.Add(t);
-      }
+      Values = [.. matrix.Values];
     }
 
     public int Width { get; }
