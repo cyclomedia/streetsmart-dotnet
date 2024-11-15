@@ -59,9 +59,9 @@ namespace StreetSmart.Common
     }
 
 #if WINFORMS
-        public DockStyle Dock { get => _browser.Dock; set => _browser.Dock = value; }
+    public DockStyle Dock { get => _browser.Dock; set => _browser.Dock = value; }
 
-        public Control Control() => _browser;
+    public Control Control() => _browser;
 #endif
   }
 }
