@@ -203,3 +203,4 @@ FakesAssemblies/
 /StreetSmartAPI/StreetSmart.WinForms.Tests.NET6/appsettings.User.json
 /StreetSmartAPI/StreetSmart.WinForms.Tests/appsettings.User.json
 /StreetSmartAPI/StreetSmart.API/WPF/locales
+/StreetSmartAPI/StreetSmart.API/WinForms/locales
