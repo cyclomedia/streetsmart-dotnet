@@ -95,7 +95,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(ResultDirectionPanorama other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Direction.Equals(other.Direction) &&
         GroundLevelOffset.Equals(other.GroundLevelOffset) &&
         Orientation.Stdev.Equals(other.Orientation.Stdev) &&

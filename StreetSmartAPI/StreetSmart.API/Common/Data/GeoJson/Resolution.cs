@@ -52,7 +52,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Resolution other)
     {
       if (other == null)
+      {
         return false;
+      }
+
       return Width.Equals(other.Width) &&
         Stdev.Equals(other.Stdev) && Error.Equals(other.Error);
     }

@@ -27,7 +27,7 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public Triangle(IList<object> points)
     {
-      Points = new List<int>();
+      Points = new List<int>(points.Count);
 
       foreach (var point in points)
       {
@@ -39,12 +39,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       if (triangle?.Points != null)
       {
-        Points = new List<int>();
-
-        foreach (var point in triangle.Points)
-        {
-          Points.Add(point);
-        }
+        Points = [.. triangle.Points];
       }
     }
 

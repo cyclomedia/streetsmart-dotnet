@@ -136,7 +136,7 @@ public class StreetSmartAPITests
   public async Task AddOverlay_ValidJson_ReturnsOverlay()
   {
     var expectedScript = "try{StreetSmartAPIEvents.onResult(StreetSmartApi.addOverlay({name:'myName',visible:true,id:'',color:'#f0f8ff',geojson:{\"type\":\"FeatureCollection\",\"features\":[]},sourceSrs:'mySrs'}), 'AddOverlay1');}catch(e){StreetSmartAPIEvents.onStreetSmartException(e.message, AddOverlay1);}";
-    var expectedGeoJsonOverlay = new GeoJsonOverlay("{\"type\":\"FeatureCollection\",\"features\":[]}", "myName", "mySrs", Color.AliceBlue) { Id="4"};
+    var expectedGeoJsonOverlay = new GeoJsonOverlay("{\"type\":\"FeatureCollection\",\"features\":[]}", "myName", "mySrs", Color.AliceBlue) { Id = "4" };
     var geoJsonOverlay = new GeoJsonOverlay("{\"type\":\"FeatureCollection\",\"features\":[]}", "myName", "mySrs", Color.AliceBlue);
     _browserMock.Setup(x => x.IsDisposed).Returns(false);
     _browserMock.Setup(x => x.GetBrowser()).Returns(_iBrowserMock.Object);

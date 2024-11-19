@@ -92,7 +92,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
       foreach (var feature in Features)
       {
-        if (featuresBuilder.Length > 0) featuresBuilder.Append(",");
+        if (featuresBuilder.Length > 0)
+        {
+          featuresBuilder.Append(",");
+        }
+
         featuresBuilder.Append(feature);
       }
       return $"{{\"type\":\"{Type.Description()}\",{CRS},\"features\": [{featuresBuilder}]}}";
@@ -104,23 +108,23 @@ namespace StreetSmart.Common.Data.GeoJson
         return true;
       }
 
-      if (other == null || other.Features.Count != this.Features.Count)
+      if (other == null || other.Features.Count != Features.Count)
       {
         return false;
       }
 
-      if (!this.CRS.Equals(other.CRS))
+      if (!CRS.Equals(other.CRS))
       {
         return false;
       }
 
-      if (!this.Type.Equals(other.Type))
+      if (!Type.Equals(other.Type))
       {
         return false;
       }
-      for (int i = 0; i < this.Features.Count; i++)
+      for (int i = 0; i < Features.Count; i++)
       {
-        if (!this.Features[i].Equals(other.Features[i]))
+        if (!Features[i].Equals(other.Features[i]))
         {
           return false;
         }

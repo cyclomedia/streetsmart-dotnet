@@ -20,7 +20,6 @@ using StreetSmart.Common.Interfaces.Data;
 using StreetSmart.Common.Interfaces.GeoJson;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StreetSmart.Common.Data.GeoJson
 {
@@ -59,20 +58,18 @@ namespace StreetSmart.Common.Data.GeoJson
     }
 
     public GeometryType Type { get; }
+
     public override string ToString()
     {
-      var sb = new StringBuilder();
-
-      sb.Append("\"geometry\":{");
-      sb.Append($"\"type\":\"{Type.Description()}\",");
-      sb.Append($"\"coordinates\":{base.ToString()}");
-      sb.Append("}");
-
-      return $"{sb}";
+      return $"\"geometry\":{{\"type\":\"{Type.Description()}\",\"coordinates\":{base.ToString()}}}";
     }
     public bool Equals(Point other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Type.Equals(other.Type) &&
              X.Equals(other.X) &&
              Y.Equals(other.Y) &&

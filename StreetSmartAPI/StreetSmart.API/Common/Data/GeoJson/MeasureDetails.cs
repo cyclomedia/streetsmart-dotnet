@@ -28,12 +28,6 @@ namespace StreetSmart.Common.Data.GeoJson
   {
     public MeasureDetails(IDictionary<string, object> measureDetails, MeasurementTools measurementTool)
     {
-      var details = GetDictValue(measureDetails, "details");
-      var pointProblems = GetListValue(measureDetails, "pointProblems");
-      string pointReliability = ToString(measureDetails, "pointReliability");
-
-      PointProblems = new List<PointProblems>();
-
       try
       {
         MeasureMethod = (MeasureMethod)ToEnum(typeof(MeasureMethod), measureDetails, "measureMethod");
@@ -43,6 +37,7 @@ namespace StreetSmart.Common.Data.GeoJson
         MeasureMethod = MeasureMethod.NotDefined;
       }
 
+      var details = GetDictValue(measureDetails, "details");
       switch (MeasureMethod)
       {
         case MeasureMethod.DepthMap:
@@ -60,6 +55,8 @@ namespace StreetSmart.Common.Data.GeoJson
           break;
       }
 
+      PointProblems = new List<PointProblems>();
+      var pointProblems = GetListValue(measureDetails, "pointProblems");
       foreach (var pointProblem in pointProblems)
       {
         switch (pointProblem?.ToString() ?? string.Empty)
@@ -82,6 +79,7 @@ namespace StreetSmart.Common.Data.GeoJson
         }
       }
 
+      string pointReliability = ToString(measureDetails, "pointReliability");
       switch (pointReliability)
       {
         case "RELIABLE":
@@ -101,45 +99,42 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public MeasureDetails(IMeasureDetails measureDetails, MeasurementTools measurementTool)
     {
-      if (measureDetails != null)
+      if (measureDetails == null)
       {
-        MeasureMethod = measureDetails.MeasureMethod;
-
-        switch (measureDetails.MeasureMethod)
-        {
-          case MeasureMethod.DepthMap:
-            Details = new DetailsDepth((IDetailsDepth)measureDetails.Details);
-            break;
-          case MeasureMethod.SmartClick:
-            Details = new DetailsSmartClick((IDetailsSmartClick)measureDetails.Details);
-            break;
-          case MeasureMethod.ForwardIntersection:
-            Details = new DetailsForwardIntersection((IDetailsForwardIntersection)measureDetails.Details, measurementTool);
-            break;
-          case MeasureMethod.AutoFocus:
-          case MeasureMethod.NotDefined:
-            Details = null;
-            break;
-        }
-
-        if (measureDetails.PointProblems != null)
-        {
-          PointProblems = new List<PointProblems>();
-
-          foreach (var pointProblem in measureDetails.PointProblems)
-          {
-            PointProblems.Add(pointProblem);
-          }
-        }
-
-        PointReliability = measureDetails.PointReliability;
+        return;
       }
+
+      MeasureMethod = measureDetails.MeasureMethod;
+
+      switch (measureDetails.MeasureMethod)
+      {
+        case MeasureMethod.DepthMap:
+          Details = new DetailsDepth((IDetailsDepth)measureDetails.Details);
+          break;
+        case MeasureMethod.SmartClick:
+          Details = new DetailsSmartClick((IDetailsSmartClick)measureDetails.Details);
+          break;
+        case MeasureMethod.ForwardIntersection:
+          Details = new DetailsForwardIntersection((IDetailsForwardIntersection)measureDetails.Details, measurementTool);
+          break;
+        case MeasureMethod.AutoFocus:
+        case MeasureMethod.NotDefined:
+          Details = null;
+          break;
+      }
+
+      if (measureDetails.PointProblems != null)
+      {
+        PointProblems = [.. measureDetails.PointProblems];
+      }
+
+      PointReliability = measureDetails.PointReliability;
     }
 
     public MeasureDetails()
     {
       MeasureMethod = MeasureMethod.unknown;
-      PointProblems = new List<PointProblems>();
+      PointProblems = [];
     }
 
     public MeasureMethod MeasureMethod { get; }
@@ -154,38 +149,42 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       var sb = new StringBuilder();
 
-      sb.Append("[");
-      if (PointProblems.Any())
-      {
-        sb.Append(string.Join(",", PointProblems.Select(problem => $"\"{problem.Description()}\"")));
-      }
-      sb.Append("]");
+      sb.Append('[');
+      sb.Append(string.Join(",", PointProblems.Select(problem => $"\"{problem.Description()}\"")));
+      sb.Append(']');
 
-      string measureDetails = Details == null
-          ? string.Empty
-          : $",\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details},\"pointProblems\":{sb},\"pointReliability\":\"{PointReliability.Description()}\"";
-
-      sb.Clear();
-      sb.Append("{");
-      sb.Append(measureDetails.TrimStart(','));
-      sb.Append("}");
-
-      return $"{sb}";
+      return $"{{\"measureMethod\":\"{MeasureMethod.Description()}\",\"details\":{Details?.ToString() ?? "{}"},\"pointProblems\":{sb},\"pointReliability\":\"{PointReliability.Description()}\"}}";
     }
-
 
     public bool Equals(MeasureDetails other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
-      if ((PointProblems == null) != (other.PointProblems == null)) return false;
+      if (PointProblems == null != (other.PointProblems == null))
+      {
+        return false;
+      }
 
       if (PointProblems != null && other.PointProblems != null)
+      {
         if (PointProblems.Count == other.PointProblems.Count)
+        {
           for (int i = 0; i < PointProblems.Count; i++)
-          { if (!PointProblems[i].Equals(other.PointProblems[i])) return false; }
+          {
+            if (!PointProblems[i].Equals(other.PointProblems[i]))
+            {
+              return false;
+            }
+          }
+        }
         else
+        {
           return false;
+        }
+      }
 
       return MeasureMethod.Equals(other.MeasureMethod) &&
              Details == other.Details &&

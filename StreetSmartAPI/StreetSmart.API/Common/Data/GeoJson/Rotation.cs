@@ -50,7 +50,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Rotation other)
     {
       if (other == null)
+      {
         return false;
+      }
+
       return _rotation.Equals(other._rotation);
     }
 
@@ -58,7 +61,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Equals(obj as Rotation);
     }
-    public override int GetHashCode() => (_rotation).GetHashCode();
+    public override int GetHashCode() => _rotation.GetHashCode();
 
     public override string ToString()
     {

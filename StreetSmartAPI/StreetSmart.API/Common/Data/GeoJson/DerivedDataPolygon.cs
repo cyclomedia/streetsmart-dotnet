@@ -31,13 +31,11 @@ namespace StreetSmart.Common.Data.GeoJson
       : base(derivedData)
     {
       var triangles = GetListValue(derivedData, "triangles");
-      Area = getStdValue(derivedData, "area");
-
-      Triangles = new List<ITriangle>();
-
+      Area = GetStdValue(derivedData, "area");
+      Triangles = new List<ITriangle>(triangles.Count);
       for (int i = 0; i < triangles.Count; i++)
       {
-        Triangles.Add(new Triangle(triangles[i] as IList<object> ?? new List<object>()));
+        Triangles.Add(new Triangle(triangles[i] as IList<object> ?? []));
       }
     }
 
@@ -66,54 +64,77 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public override string ToString()
     {
-      string baseStr = base.ToString();
-      string subStr = baseStr.TrimEnd(',');
-      string comma = subStr.Length >= 1 ? "," : string.Empty;
-
+      string baseSubStr = base.ToString().TrimEnd('}');
       var sb = new StringBuilder();
-      sb.Append(subStr);
-      sb.Append(comma);
-
+      sb.Append(baseSubStr);
+      if (baseSubStr.Length >= 1)
+      {
+        sb.Append(',');
+      }
+      
       if (Triangles.Count > 0)
       {
         sb.Append("\"triangles\":[");
         sb.Append(string.Join(",", Triangles.Select(t => t.ToString())));
-        sb.Append("]");
+        sb.Append(']');
       }
       else
       {
         sb.Append("\"triangles\":null");
       }
 
-      sb.Append(GetValueString(Area, "area"));
+      var areaString = GetValueString(Area, "area");
+      if (!string.IsNullOrWhiteSpace(areaString))
+      {
+        sb.Append(',');
+      }
 
-      sb.Insert(0, "{");
-      sb.Append("}");
+      sb.Append(areaString);
+      sb.Append('}');
 
-      return $"{sb}";
+      return sb.ToString();
     }
 
     public bool Equals(DerivedDataPolygon other)
     {
+      if (other == null)
+      {
+        return false;
+      }
 
-      if (other == null) return false;
-
-      if ((Triangles == null) != (other.Triangles == null)) return false;
+      if (Triangles == null != (other.Triangles == null))
+      {
+        return false;
+      }
 
       if (Triangles != null && other.Triangles != null)
+      {
         if (Triangles.Count == other.Triangles.Count)
+        {
           for (int i = 0; i < Triangles.Count; i++)
-          { if (!Triangles[i].Equals(other.Triangles[i])) return false; }
+          { if (!Triangles[i].Equals(other.Triangles[i]))
+            {
+              return false;
+            }
+          }
+        }
         else
+        {
           return false;
+        }
+      }
 
-      if ((Area == null) != (other.Area == null)) return false;
+      if (Area == null != (other.Area == null))
+      {
+        return false;
+      }
 
-      if (Area != null && other.Area != null)
-        if (!Area.Equals(other.Area)) return false;
+      if (Area != null && other.Area != null && !Area.Equals(other.Area))
+      {
+        return false;
+      }
 
-      return other.Unit.Equals(this.Unit) &&
-             other.Precision.Equals(this.Precision);
+      return other.Unit.Equals(Unit) && other.Precision.Equals(Precision);
     }
 
     public override bool Equals(object obj)

@@ -66,19 +66,24 @@ namespace StreetSmart.Common.Data.GeoJson
       {
         if (sb.Length > 13)
         {
-          sb.Append(",");
+          sb.Append(',');
         }
+
         sb.Append($"\"stdev\":{Stdev?.ToString(ci)}");
       }
 
-      sb.Append("}");
+      sb.Append('}');
 
       return sb.Length > 14 ? $"{sb}," : string.Empty;
     }
 
     public bool Equals(PositionXY other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return X.Equals(other.X) &&
              Y.Equals(other.Y) &&
              Stdev.Equals(other.Stdev);

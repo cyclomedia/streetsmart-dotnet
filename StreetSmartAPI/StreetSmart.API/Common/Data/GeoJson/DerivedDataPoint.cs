@@ -101,11 +101,6 @@ namespace StreetSmart.Common.Data.GeoJson
         derivedDataPoint.Append($"\"position\":{{{positionValue}}},");
       }
 
-      if (Position?.StdDev?.X != null && Position?.StdDev?.Y != null && Position?.StdDev?.Z != null)
-      {
-        derivedDataPoint.Append($"\"coordinateStdevs\":[{{\"0\":{Position.StdDev.X?.ToString(ci)},\"1\":{Position.StdDev.Y?.ToString(ci)},\"2\":{Position.StdDev.Z?.ToString(ci)}}}]");
-      }
-
       if (derivedDataPoint.Length > 0)
       {
         string comma = (sb.Length >= 2 && derivedDataPoint.Length >= 1) ? "," : string.Empty;
@@ -113,16 +108,20 @@ namespace StreetSmart.Common.Data.GeoJson
         sb.Append(derivedDataPoint);
       }
 
-      sb.Append("}");
+      sb.Append('}');
 
-      return $"{sb}";
+      return sb.ToString();
     }
 
     public bool Equals(DerivedDataPoint other)
     {
-      if (other == null) return false;
-      return other.Unit == this.Unit &&
-             other.Precision == this.Precision &&
+      if (other == null)
+      {
+        return false;
+      }
+
+      return other.Unit == Unit &&
+             other.Precision == Precision &&
              (PositionZ?.Equals(other.PositionZ) ?? other.PositionZ == null) &&
              (Position?.Equals(other.Position) ?? other.Position == null) &&
              (PositionXY?.Equals(other.PositionXY) ?? other.PositionXY == null);

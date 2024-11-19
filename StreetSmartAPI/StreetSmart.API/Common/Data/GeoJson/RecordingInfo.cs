@@ -78,7 +78,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(RecordingInfo other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return Id.Equals(other.Id) &&
                     Position.Equals(other.Position) &&
                     SRS.Equals(other.SRS) &&

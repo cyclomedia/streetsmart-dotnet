@@ -29,7 +29,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       Width = width;
       Height = height;
-      Values = new List<double>();
+      Values = new List<double>(width * height);
 
       for (int i = 0; i < width * height; i++)
       {
@@ -41,12 +41,7 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       Width = matrix.Width;
       Height = matrix.Height;
-      Values = new List<double>();
-
-      foreach (var t in matrix.Values)
-      {
-        Values.Add(t);
-      }
+      Values = [.. matrix.Values];
     }
 
     public int Width { get; }
@@ -71,7 +66,11 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(Matrix other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       if (Values.Count != other.Values.Count)
       {
         return false;
@@ -92,6 +91,6 @@ namespace StreetSmart.Common.Data.GeoJson
     {
       return Equals(obj as Matrix);
     }
-    public override int GetHashCode() => (Values).GetHashCode();
+    public override int GetHashCode() => Values.GetHashCode();
   }
 }

@@ -69,7 +69,10 @@ namespace StreetSmart.Common.Data.GeoJson
     public bool Equals(Property other)
     {
       if (other == null)
+      {
         return false;
+      }
+
       return Value.Equals(other.Value) && Stdev.Equals(other.Stdev);
     }
     public override bool Equals(object obj)

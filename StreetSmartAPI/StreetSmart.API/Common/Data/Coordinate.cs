@@ -129,7 +129,11 @@ namespace StreetSmart.Common.Data
 
     public bool Equals(Coordinate other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
+
       return X.Equals(other.X) &&
              Y.Equals(other.Y) &&
              Z.Equals(other.Z);

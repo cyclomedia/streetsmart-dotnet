@@ -90,8 +90,7 @@ namespace StreetSmart.Common.Data.GeoJson
 
       try
       {
-        CustomGeometryType =
-          (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
+        CustomGeometryType = (CustomGeometryType)converter.ToEnum(typeof(CustomGeometryType), properties, "customGeometryType");
       }
       catch (ArgumentException)
       {
@@ -270,7 +269,11 @@ namespace StreetSmart.Common.Data.GeoJson
       var pointsWithErrorsBuilder = new StringBuilder("[");
       foreach (var point in PointsWithErrors)
       {
-        if (pointsWithErrorsBuilder.Length > 1) pointsWithErrorsBuilder.Append(",");
+        if (pointsWithErrorsBuilder.Length > 1)
+        {
+          pointsWithErrorsBuilder.Append(",");
+        }
+
         pointsWithErrorsBuilder.Append(point);
       }
       pointsWithErrorsBuilder.Append("]");
@@ -279,7 +282,11 @@ namespace StreetSmart.Common.Data.GeoJson
       var measureDetailsBuilder = new StringBuilder("[");
       foreach (var detail in MeasureDetails)
       {
-        if (measureDetailsBuilder.Length > 1) measureDetailsBuilder.Append(",");
+        if (measureDetailsBuilder.Length > 1)
+        {
+          measureDetailsBuilder.Append(",");
+        }
+
         measureDetailsBuilder.Append(detail);
       }
       measureDetailsBuilder.Append("]");
@@ -303,30 +310,56 @@ namespace StreetSmart.Common.Data.GeoJson
 
     public bool Equals(MeasurementProperties other)
     {
-      if (other == null) return false;
+      if (other == null)
+      {
+        return false;
+      }
 
-      if ((MeasureDetails == null) != (other.MeasureDetails == null)) return false;
+      if (MeasureDetails == null != (other.MeasureDetails == null))
+      {
+        return false;
+      }
 
       if (MeasureDetails != null && other.MeasureDetails != null)
+      {
         if (MeasureDetails.Count == other.MeasureDetails.Count)
+        {
           for (int i = 0; i < MeasureDetails.Count; i++)
           {
-            if (!MeasureDetails[i].Equals(other.MeasureDetails[i])) return false;
+            if (!MeasureDetails[i].Equals(other.MeasureDetails[i]))
+            {
+              return false;
+            }
           }
+        }
         else
+        {
           return false;
+        }
+      }
 
-      if ((PointsWithErrors == null) != (other.PointsWithErrors == null)) return false;
+      if (PointsWithErrors == null != (other.PointsWithErrors == null))
+      {
+        return false;
+      }
 
       if (PointsWithErrors != null && other.PointsWithErrors != null)
+      {
         if (PointsWithErrors.Count == other.PointsWithErrors.Count)
+        {
           for (int i = 0; i < PointsWithErrors.Count; i++)
           {
             if (!PointsWithErrors[i].Equals(other.PointsWithErrors[i]))
+            {
               return false;
+            }
           }
+        }
         else
+        {
           return false;
+        }
+      }
 
       return Id == other.Id &&
              Name == other.Name &&
