@@ -38,7 +38,8 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj" />
-<DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WPF\StreetSmart.WPF.csproj" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\StreetSmartAPI\StreetSmart.API\WPF\StreetSmart.WPF.csproj" />
+    </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="StreetSmart.WinForms" isDocumented="True">&lt;summary&gt;
 This namespace contains the &lt;c&gt;StreetSmartGUI&lt;/c&gt; class for Winform applications.
@@ -141,17 +142,17 @@ This namespace contains the interfaces of the SLD generation classes
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="styles\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="styles\branding.css" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="CefSharp">
       <HintPath>..\StreetSmartAPI\StreetSmart.API\WinForms\bin\windows\Debug\net462\CefSharp.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.Core">
       <HintPath>..\StreetSmartAPI\StreetSmart.API\WinForms\bin\windows\Debug\net462\CefSharp.Core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\presentationStyle.css" />
   </ItemGroup>
 </Project>
