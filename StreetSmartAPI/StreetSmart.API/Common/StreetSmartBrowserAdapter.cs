@@ -1,12 +1,11 @@
-﻿#if WPF
-using CefSharp;
-using CefSharp.Wpf;
+﻿using CefSharp;
 using System;
+
+#if WPF
+using CefSharp.Wpf;
 using System.Windows.Threading;
 #else
-using CefSharp;
 using CefSharp.WinForms;
-using System;
 using System.Windows.Forms;
 #endif
 
@@ -30,19 +29,7 @@ namespace StreetSmart.Common
 
     public bool IsDisposed => _browser.IsDisposed;
 
-    public string Address
-    {
-      get => _browser.Address;
-#if WPF
-      set => _browser.Address = value;
-#endif
-    }
-
     public bool IsBrowserInitialized => _browser.IsBrowserInitialized;
-
-#if WPF
-    public Dispatcher Dispatcher => _browser.Dispatcher;
-#endif
 
     public event EventHandler<FrameLoadEndEventArgs> FrameLoadEnd;
 
@@ -58,7 +45,13 @@ namespace StreetSmart.Common
       _browser.CloseDevTools();
     }
 
-#if WINFORMS
+#if WPF
+    public string Address { get => _browser.Address; set => _browser.Address = value; }
+
+    public Dispatcher Dispatcher => _browser.Dispatcher;
+#elif WINFORMS
+    public string Address { get => _browser.Address; }
+
     public DockStyle Dock { get => _browser.Dock; set => _browser.Dock = value; }
 
     public Control Control() => _browser;
