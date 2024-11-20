@@ -11,30 +11,23 @@ namespace StreetSmart.Common
 {
   public interface IStreetSmartBrowser
   {
-    void ExecuteScriptAsync(string script);
-    IJavascriptObjectRepository JavascriptObjectRepository { get; }
-    bool IsDisposed { get; }
-    IBrowser GetBrowser();
-    string Address
-    {
-      get;
-#if WPF
-      set;
-#endif
-    }
-    bool IsBrowserInitialized { get; }
-#if WPF
-    Dispatcher Dispatcher { get; }
-#endif
     event EventHandler<FrameLoadEndEventArgs> FrameLoadEnd;
     IDownloadHandler DownloadHandler { get; set; }
     void ShowDevTools(IWindowInfo windowInfo = null, int inspectElementAtX = 0, int inspectElementAtY = 0);
     void CloseDevTools();
-#if WINFORMS
-        DockStyle Dock { get; set; }
+    void ExecuteScriptAsync(string script);
+    IJavascriptObjectRepository JavascriptObjectRepository { get; }
+    bool IsDisposed { get; }
+    IBrowser GetBrowser();
+    bool IsBrowserInitialized { get; }
 
-        Control Control();
+#if WPF
+    string Address { get; set; }
+    Dispatcher Dispatcher { get; }
+# elif WINFORMS
+    string Address { get; }
+    DockStyle Dock { get; set; }
+    Control Control();
 #endif
-
   }
 }
