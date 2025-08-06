@@ -942,16 +942,16 @@
 		<None Include="Directory.build.targets" PackagePath="buildTransitive/StreetSmart.WPF.targets" Pack="true" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
-		<PackageReference Include="CefSharp.Wpf.NETCore" Version="138.0.170" />
+		<PackageReference Include="CefSharp.Wpf.NETCore" Version="138.0.340" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.7" />
-		<PackageReference Include="System.Formats.Asn1" Version="9.0.7" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.8" />
+		<PackageReference Include="System.Formats.Asn1" Version="9.0.8" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.Wpf" Version="138.0.170" />
+		<PackageReference Include="CefSharp.Wpf" Version="138.0.340" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ValueTuple" Version="4.6.1" />
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
