@@ -108,10 +108,10 @@ namespace StreetSmart.WPF.Example
       Password = Resources.Password;
       ConfigurationUrl = "https://atlas.cyclomedia.com/configuration";
       WpfApi = new WpfApi();
-      WpfApi.PropertyChanged += onPropertyChanged;
+      WpfApi.PropertyChanged += OnPropertyChanged;
     }
 
-    private void onPropertyChanged(object sender, PropertyChangedEventArgs args)
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
     {
       if (args != null && args.PropertyName == "Api")
       {
