@@ -1,7 +1,7 @@
 ﻿Release notes:
 ==============
 
-Version 25.4.0
+Version 25.5.0
 ================
 - Updated to Street Smart API 25.4
 - Updated chefsharp to the latest version
