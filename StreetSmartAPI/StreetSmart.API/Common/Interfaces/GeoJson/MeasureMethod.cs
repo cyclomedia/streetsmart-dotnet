@@ -42,7 +42,7 @@ namespace StreetSmart.Common.Interfaces.GeoJson
     /// <summary>
     ///  Measure using depth map (in marketing terms: Measure Smart)
     /// </summary>
-    [Description("DepthMap")]
+    [Description("MeasureSmart")]
     DepthMap = 1,
 
     /// <summary>
