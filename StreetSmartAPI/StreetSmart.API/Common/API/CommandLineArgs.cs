@@ -24,5 +24,7 @@ namespace StreetSmart.Common.API
     public const string DisableGPUCache = "disable-gpu-shader-disk-cache";
 
     public const string AllowInsecureContent = "allow-running-insecure-content";
+
+    public const string DisablePopUpBlocking = "disable-popup-blocking";
   }
 }

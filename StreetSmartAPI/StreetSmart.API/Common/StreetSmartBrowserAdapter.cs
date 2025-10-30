@@ -35,6 +35,12 @@ namespace StreetSmart.Common
 
     public IDownloadHandler DownloadHandler { get => _browser.DownloadHandler; set => _browser.DownloadHandler = value; }
 
+    public ILifeSpanHandler LifeSpanHandler { get => _browser.LifeSpanHandler; set => _browser.LifeSpanHandler = value; }
+
+    public IRequestHandler RequestHandler { get => _browser.RequestHandler; set => _browser.RequestHandler = value; }
+
+    public IContextMenuHandler MenuHandler { get => _browser.MenuHandler; set => _browser.MenuHandler = value; }
+
     public void ShowDevTools(IWindowInfo windowInfo = null, int inspectElementAtX = 0, int inspectElementAtY = 0)
     {
       _browser.ShowDevTools(windowInfo, inspectElementAtX, inspectElementAtY);

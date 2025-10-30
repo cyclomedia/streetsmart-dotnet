@@ -549,6 +549,18 @@
 		<Compile Include="..\Common\Handlers\DownloadHandler.cs">
 			<Link>Handlers\DownloadHandler.cs</Link>
 		</Compile>
+    <Compile Include="..\Common\Handlers\RequestHandler.cs">
+      <Link>Handlers\RequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\ResourceRequestHandler.cs">
+      <Link>Handlers\ResourceRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\LifeSpanHandler.cs">
+      <Link>Handlers\LifeSpanHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\MenuHandler.cs">
+      <Link>Handlers\MenuHandler.cs</Link>
+    </Compile>
 		<Compile Include="..\Common\Interfaces\API\IAPISettings.cs">
 			<Link>Interfaces\API\IAPISettings.cs</Link>
 		</Compile>
@@ -964,24 +976,24 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="125.0.210" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="System.Formats.Asn1" Version="9.0.8" />
+		<PackageReference Include="System.Formats.Asn1" Version="9.0.10" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="125.0.210" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.WinForms" Version="125.0.210" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="CefSharp.WinForms" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="System.ValueTuple" Version="4.6.1" />
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>

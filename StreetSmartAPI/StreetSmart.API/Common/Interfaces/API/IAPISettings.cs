@@ -51,6 +51,11 @@ namespace StreetSmart.Common.Interfaces.API
     bool AllowInsecureContent { get; set; }
 
     /// <summary>
+    /// Disable blocking of the OAuth login popup
+    /// </summary>
+    bool DisablePopupBlocking { get; set; }
+
+    /// <summary>
     /// The path to the locales directory, if empty locales\ will be used.
     /// </summary>
     string LocalesDirPath { get; set; }

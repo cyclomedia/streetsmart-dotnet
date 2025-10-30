@@ -22,22 +22,42 @@ namespace StreetSmart.Common.Handlers
 {
   internal class CustomMenuHandler : IContextMenuHandler
   {
-    public void OnBeforeContextMenu(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model)
+    public void OnBeforeContextMenu(
+      IWebBrowser browserControl,
+      IBrowser browser,
+      IFrame frame,
+      IContextMenuParams parameters,
+      IMenuModel model)
     {
       // Clear the context menu
       model.Clear();
     }
 
-    public bool OnContextMenuCommand(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, CefMenuCommand commandId, CefEventFlags eventFlags)
+    public bool OnContextMenuCommand(
+      IWebBrowser browserControl,
+      IBrowser browser,
+      IFrame frame,
+      IContextMenuParams parameters,
+      CefMenuCommand commandId,
+      CefEventFlags eventFlags)
     {
       return false;
     }
 
-    public void OnContextMenuDismissed(IWebBrowser browserControl, IBrowser browser, IFrame frame)
+    public void OnContextMenuDismissed(
+      IWebBrowser browserControl,
+      IBrowser browser,
+      IFrame frame)
     {
     }
 
-    public bool RunContextMenu(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model, IRunContextMenuCallback callback)
+    public bool RunContextMenu(
+      IWebBrowser browserControl,
+      IBrowser browser,
+      IFrame frame,
+      IContextMenuParams parameters,
+      IMenuModel model,
+      IRunContextMenuCallback callback)
     {
       return false;
     }

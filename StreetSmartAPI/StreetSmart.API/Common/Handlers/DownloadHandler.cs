@@ -22,7 +22,11 @@ namespace StreetSmart.Common.Handlers
 {
   internal class DownloadHandler : IDownloadHandler
   {
-    public bool OnBeforeDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+    public bool OnBeforeDownload(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser,
+      DownloadItem downloadItem,
+      IBeforeDownloadCallback callback)
     {
       if (!callback.IsDisposed)
       {
@@ -36,11 +40,19 @@ namespace StreetSmart.Common.Handlers
       return false;
     }
 
-    public void OnDownloadUpdated(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
+    public void OnDownloadUpdated(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser,
+      DownloadItem downloadItem,
+      IDownloadItemCallback callback)
     {
     }
 
-    public bool CanDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, string url, string requestMethod)
+    public bool CanDownload(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser,
+      string url,
+      string requestMethod)
     {
       return true;
     }

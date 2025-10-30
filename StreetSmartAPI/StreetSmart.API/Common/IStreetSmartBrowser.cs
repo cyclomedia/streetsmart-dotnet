@@ -13,6 +13,9 @@ namespace StreetSmart.Common
   {
     event EventHandler<FrameLoadEndEventArgs> FrameLoadEnd;
     IDownloadHandler DownloadHandler { get; set; }
+    ILifeSpanHandler LifeSpanHandler { get; set; }
+    IRequestHandler RequestHandler { get; set; }
+    IContextMenuHandler MenuHandler { get; set; }
     void ShowDevTools(IWindowInfo windowInfo = null, int inspectElementAtX = 0, int inspectElementAtY = 0);
     void CloseDevTools();
     void ExecuteScriptAsync(string script);

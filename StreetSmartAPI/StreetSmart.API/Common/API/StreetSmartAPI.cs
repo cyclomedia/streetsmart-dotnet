@@ -508,6 +508,9 @@ namespace StreetSmart.Common.API
       ViewerList.RegisterJsObjects(ApiId, Browser);
       Browser.FrameLoadEnd += OnFrameLoadEnd;
       Browser.DownloadHandler = new DownloadHandler();
+      Browser.LifeSpanHandler = new LifeSpanHandler();
+      Browser.RequestHandler = new CustomRequestHandler();
+      Browser.MenuHandler = new CustomMenuHandler();
     }
 
     private void ReAssignMeasurementEvents()
