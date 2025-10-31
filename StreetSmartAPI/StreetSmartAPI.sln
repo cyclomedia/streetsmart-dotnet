@@ -9,18 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE.md = ..\LICENSE.md
 		..\README.md = ..\README.md
 		ReleaseNotes.txt = ReleaseNotes.txt
-		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms", "StreetSmart.API\WinForms\StreetSmart.WinForms.csproj", "{11D8CE67-DC5B-4FC9-871B-968B97B5C990}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF", "StreetSmart.API\WPF\StreetSmart.WPF.csproj", "{011EC44B-B881-4523-8E5A-F37D47A9EDD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Demo.NET6", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.NET6.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Demo", "StreetSmart.WinForms.Demo\StreetSmart.WinForms.Demo.csproj", "{F46B85C7-BE14-42EB-826A-54C579AB1F94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multiple.NET6", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.NET6.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WinForms.Multiple", "StreetSmart.WinForms.Multiple\StreetSmart.WinForms.Multiple.csproj", "{4CF1BFEB-42CD-49FD-8B2B-AF2AA4DE8BFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example.NET6", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.NET6.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.WPF.Example", "StreetSmart.WPF.Example\StreetSmart.WPF.Example.csproj", "{293D40C1-EECD-49CD-B6C7-32D21526FF4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreetSmart.Winforms.Example", "StreetSmart.Winforms.Example\StreetSmart.Winforms.Example.csproj", "{8CDAF4F6-74F2-4C64-8CD4-8F46643B2CC1}"
 EndProject

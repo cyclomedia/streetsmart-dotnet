@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-windows;net462</TargetFrameworks>
+		<TargetFrameworks>net8.0-windows;net6.0-windows;net462</TargetFrameworks>
 		<OutputType>Library</OutputType>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<PlatformName>windows</PlatformName>
-		<Version>24.12.0.12</Version>
+		<Version>25.7.0.0</Version>
 		<Authors>CycloMedia</Authors>
 		<Company>CycloMedia</Company>
 		<PackageIconUrl>cyclomedia.png</PackageIconUrl>
@@ -14,7 +14,7 @@
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Description>StreetSmart API for Windows forms</Description>
-		<Copyright>Copyright © CycloMedia 2016 - 2024</Copyright>
+		<Copyright>Copyright © CycloMedia 2016 - 2025</Copyright>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>StreetSmart.WinForms.snk</AssemblyOriginatorKeyFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -53,6 +53,12 @@
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<RootNamespace>StreetSmart.WinForms</RootNamespace>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|AnyCPU'">
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows|x86'">
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
@@ -63,6 +69,12 @@
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net462|x86'">
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows|AnyCPU'">
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows|x86'">
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
@@ -537,6 +549,18 @@
 		<Compile Include="..\Common\Handlers\DownloadHandler.cs">
 			<Link>Handlers\DownloadHandler.cs</Link>
 		</Compile>
+    <Compile Include="..\Common\Handlers\RequestHandler.cs">
+      <Link>Handlers\RequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\ResourceRequestHandler.cs">
+      <Link>Handlers\ResourceRequestHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\LifeSpanHandler.cs">
+      <Link>Handlers\LifeSpanHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Handlers\MenuHandler.cs">
+      <Link>Handlers\MenuHandler.cs</Link>
+    </Compile>
 		<Compile Include="..\Common\Interfaces\API\IAPISettings.cs">
 			<Link>Interfaces\API\IAPISettings.cs</Link>
 		</Compile>
@@ -937,7 +961,7 @@
 			<Link>ReleaseNotes.txt</Link>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" Pack="true" PackagePath ="\" />
+		<None Include="..\Common\cyclomedia.png" Link="cyclomedia.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\..\..\LICENSE.md">
@@ -951,19 +975,26 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="System.Formats.Asn1" Version="9.0.10" />
+	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
-		<PackageReference Include="CefSharp.Common.NETCore" Version="123.0.60" />
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="123.0.60" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-		<PackageReference Include="CefSharp.WinForms" Version="123.0.60" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="CefSharp.WinForms" Version="141.0.110" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="System.ValueTuple" Version="4.6.1" />
 		<PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
 	</ItemGroup>
 	<ItemGroup>

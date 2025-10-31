@@ -37,6 +37,7 @@ namespace StreetSmart.Common.API
   {
     public APISettings(string cachePath, string browserSubprocessPath, string localesDirPath, string resourcesDirPath)
     {
+      DisablePopupBlocking = true;
       LogSeverity = LogSeverity.Disable;
       CachePath = cachePath ?? CachePath;
       BrowserSubprocessPath = browserSubprocessPath ?? BrowserSubprocessPath;
@@ -91,6 +92,12 @@ namespace StreetSmart.Common.API
     {
       get => GetCommandLineArgs(CommandLineArgs.AllowInsecureContent);
       set => SetCommandLineArgs(value, CommandLineArgs.AllowInsecureContent);
+    }
+
+    public bool DisablePopupBlocking
+    {
+      get => GetCommandLineArgs(CommandLineArgs.DisablePopUpBlocking);
+      set => SetCommandLineArgs(value, CommandLineArgs.DisablePopUpBlocking);
     }
 
     public void SetDefaultBrowserSubprocessPath()

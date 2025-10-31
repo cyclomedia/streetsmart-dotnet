@@ -16,6 +16,9 @@
  * License along with this library.
  */
 
+using StreetSmart.Common.Factories;
+using System.Windows;
+
 namespace StreetSmart.WPF.Example
 {
   /// <summary>
@@ -23,5 +26,9 @@ namespace StreetSmart.WPF.Example
   /// </summary>
   public partial class App
   {
+    private void OnStartup(object sender, StartupEventArgs e)
+    {
+      StreetSmartAPIFactory.Initialize();
+    }
   }
 }

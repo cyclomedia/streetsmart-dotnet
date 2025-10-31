@@ -17,30 +17,46 @@
  */
 
 using CefSharp;
-using System.Collections.Generic;
 
 namespace StreetSmart.Common.Handlers
 {
-  internal class BrowserProcessHandler : IBrowserProcessHandler
+  public class LifeSpanHandler : ILifeSpanHandler
   {
-    public virtual void Dispose()
+    public bool OnBeforePopup(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser,
+      IFrame frame,
+      string targetUrl,
+      string targetFrameName,
+      WindowOpenDisposition targetDisposition,
+      bool userGesture,
+      IPopupFeatures popupFeatures,
+      IWindowInfo windowInfo,
+      IBrowserSettings browserSettings,
+      ref bool noJavascriptAccess,
+      out IWebBrowser newBrowser)
+    {
+      newBrowser = null;
+      return false;
+    }
+
+    public void OnAfterCreated(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser)
     {
     }
 
-    public virtual void OnContextInitialized()
+    public bool DoClose(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser)
     {
+      return false;
     }
 
-    public virtual void OnScheduleMessagePumpWork(
-      long delay)
+    public void OnBeforeClose(
+      IWebBrowser chromiumWebBrowser,
+      IBrowser browser)
     {
-    }
-
-    public bool OnAlreadyRunningAppRelaunch(
-      IReadOnlyDictionary<string, string> commandLine,
-      string currentDirectory)
-    {
-      return true;
     }
   }
 }

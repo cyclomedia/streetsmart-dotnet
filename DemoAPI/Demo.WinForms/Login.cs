@@ -24,16 +24,11 @@ namespace Demo.WinForms
 {
     public class Login
     {
-        private static readonly XmlSerializer XmlLogin;
+        private static readonly XmlSerializer XmlLogin = new(typeof(Login));
 
         private static Login _login = Load();
 
         private const string FileName = "Login.xml";
-
-        static Login()
-        {
-            XmlLogin = new XmlSerializer(typeof(Login));
-        }
 
         public string Username { get; set; }
 

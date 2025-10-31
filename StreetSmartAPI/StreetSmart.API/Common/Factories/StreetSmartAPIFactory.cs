@@ -42,7 +42,7 @@ namespace StreetSmart.Common.Factories
   {
     private static void InitializeCefSharp(CefSettings settings)
     {
-      if (settings != null && !Cef.IsInitialized)
+      if (settings != null && (Cef.IsInitialized != true))
       {
         Cef.Initialize(settings, true, browserProcessHandler: null);
       }

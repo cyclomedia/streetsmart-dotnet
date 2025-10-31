@@ -108,10 +108,10 @@ namespace StreetSmart.WPF.Example
       Password = Resources.Password;
       ConfigurationUrl = "https://atlas.cyclomedia.com/configuration";
       WpfApi = new WpfApi();
-      WpfApi.PropertyChanged += onPropertyChanged;
+      WpfApi.PropertyChanged += OnPropertyChanged;
     }
 
-    private void onPropertyChanged(object sender, PropertyChangedEventArgs args)
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
     {
       if (args != null && args.PropertyName == "Api")
       {
@@ -126,12 +126,18 @@ namespace StreetSmart.WPF.Example
 
     private async void ApiReady(object sender, EventArgs args)
     {
+//      Api.ShowDevTools();
+
       IAddressSettings addressSettings = AddressSettingsFactory.Create(Language, Database);
       IDomElement element = DomElementFactory.Create();
+
+//      _options = OptionsFactory.CreateOauth("hbr", "DAC6C8E5-77AB-4F04-AFA5-D2A94DE6713F", "abc", Srs, 
+//        Language, addressSettings, element, loginOauthSilentOnly: false);
       _options = string.IsNullOrEmpty(ConfigurationUrl)
         ? OptionsFactory.Create(Username, Password, Resources.ApiKey, Srs, Language, addressSettings, element)
         : OptionsFactory.Create(Username, Password, null, Resources.ApiKey, Srs, Language, ConfigurationUrl,
           addressSettings, element);
+
       await Api.Init(_options);
 
       IList<ViewerType> viewerTypes = new List<ViewerType> { ViewerType.Panorama };
