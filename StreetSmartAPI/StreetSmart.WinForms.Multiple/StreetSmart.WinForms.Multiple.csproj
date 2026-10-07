@@ -42,12 +42,12 @@
 		<ProjectReference Include="..\StreetSmart.API\WinForms\StreetSmart.WinForms.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="141.0.11" />
+		<PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="148.0.9" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="141.0.11" />
+		<PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="148.0.9" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="141.0.11" />
+		<PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="148.0.9" />
 	</ItemGroup>
 </Project>

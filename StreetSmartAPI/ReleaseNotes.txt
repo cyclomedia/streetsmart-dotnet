@@ -1,6 +1,11 @@
 ﻿Release notes:
 ==============
 
+Version 25.7.1
+================
+- Updated CefSharp to version 148.0.90 (CEF runtime 148.0.9) to resolve the moderate severity vulnerability GHSA-85jm-cwp2-mvpv / CVE-2026-48796 in CefSharp.Common
+
+
 Version 25.7.0
 ================
 - Updated to Street Smart API 25.4
